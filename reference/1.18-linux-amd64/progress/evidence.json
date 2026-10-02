@@ -17,10 +17,303 @@
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "8d552ae07177fc71cbfcfd68a495d67ba8e79c1a66c3ecbfe96991feae612f7a",
-    "config/1.18-linux-amd64/units.toml": "4881a839bdda0fb5d7f84044db25ed331ba222673e8ab729a352d710a659167f"
+    "config/1.18-linux-amd64/symbols.tsv": "5f33e9ad84159bcb72b6053095a8aecc2e43fbd94a3660103ae8cedfe066fd7a",
+    "config/1.18-linux-amd64/units.toml": "a1c0ba0477f6b1df1a2d08af9f4bc99f85da013ae022ecc245bf83972042cb2d"
   },
   "units": [
+    {
+      "unit": "daisy/video/Null/CColorConverter.cpp",
+      "object_sha256": "33a9ec1ca0fdaf46737f0d3cd05a2c51597de31c7d60184bb743ad156fdaa368",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 2742,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x5d8300",
+          "references": 6,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter28convert4BitTo16BitFlipMirrorEPKcPsiiiPKi",
+              "address": "0x5d8300",
+              "size": 229,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter18convert8BitTo16BitEPKcPsiiiPKi",
+              "address": "0x5d83f0",
+              "size": 180,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter28convert8BitTo16BitFlipMirrorEPKcPsiiiPKi",
+              "address": "0x5d84b0",
+              "size": 169,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter28convert1BitTo16BitFlipMirrorEPKcPsiii",
+              "address": "0x5d8560",
+              "size": 146,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter29convert16BitTo16BitFlipMirrorEPKsPsiii",
+              "address": "0x5d8600",
+              "size": 119,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter29convert24BitTo16BitFlipMirrorEPKcPsiii",
+              "address": "0x5d8680",
+              "size": 179,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter41convert24BitTo24BitFlipMirrorColorShuffleEPKcPciii",
+              "address": "0x5d8740",
+              "size": 164,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter31convert24BitTo16BitColorShuffleEPKcPsiii",
+              "address": "0x5d87f0",
+              "size": 165,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter35convert24BitTo16BitFlipColorShuffleEPKcPsiii",
+              "address": "0x5d88a0",
+              "size": 155,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter31convert32BitTo16BitColorShuffleEPKcPsiii",
+              "address": "0x5d8940",
+              "size": 169,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter41convert32BitTo16BitFlipMirrorColorShuffleEPKcPsiii",
+              "address": "0x5d89f0",
+              "size": 179,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter31convert16bitToA8R8G8B8andResizeEPKsPiiiii",
+              "address": "0x5d8ab0",
+              "size": 248,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter29convert32BitTo32BitFlipMirrorEPKiPiiii",
+              "address": "0x5d8bb0",
+              "size": 133,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter19convert32BitTo32BitEPKiPiiN2ox5video13ECOLOR_FORMATES7_",
+              "address": "0x5d8c40",
+              "size": 214,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video15CColorConverter19convert32BitTo32BitEiN2ox5video13ECOLOR_FORMATES4_",
+              "address": "0x5d8d20",
+              "size": 101,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5video15CColorConverter28convert4BitTo16BitFlipMirrorEPKcPsiiiPKi",
+              "address": "0x5d8d90",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c1f8",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c1f8",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__video__Null__CColorConverter.d",
+          "-c",
+          "src/daisy/video/Null/CColorConverter.cpp",
+          "-o",
+          "/out/daisy__video__Null__CColorConverter.o"
+        ],
+        "inputs": {
+          "src/daisy/video/Null/CColorConverter.cpp": "c68d0beb01d11377464f6b70f84d4c085cef27dab9d50c01ab671ed24311b3fb",
+          "src/daisy/video/Null/CColorConverter.h": "6101d0603c7c8e61bb3dcb4c7585f64b94250e2fe2bed8fed06c6b1d7b8c136c",
+          "src/ox/video/IVideoDriver.h": "7902574a531ce451183cb8788bee222d1abc759938170ff0094860c3a24aff74",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "057a212c154928473896ebe68e8c6e5a0bd045be1bfe04e7185dfa2748061689",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "a4c30c7c74a59f3d3d70a9a3953f663a3ee238c6a230f842a797abfa2bb09cb3",
+          "src/ox/video/ColorPacking.h": "bf8a315755f2aeb5c7f657f627b6ca85718322ef1e037be17ec2cd794a40035d"
+        },
+        "system_headers": 108,
+        "object_sha256": "33a9ec1ca0fdaf46737f0d3cd05a2c51597de31c7d60184bb743ad156fdaa368"
+      },
+      "fuzzy_target_sha256": "7b603f671f3671dc5b3d9660ef99a9cb989b73cdb1d01c3c6761bd89f480f21e",
+      "fuzzy_functions": [
+        {
+          "address": "0x5d8300",
+          "size": 229,
+          "symbol": "_ZN5daisy5video15CColorConverter28convert4BitTo16BitFlipMirrorEPKcPsiiiPKi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d83f0",
+          "size": 180,
+          "symbol": "_ZN5daisy5video15CColorConverter18convert8BitTo16BitEPKcPsiiiPKi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d84b0",
+          "size": 169,
+          "symbol": "_ZN5daisy5video15CColorConverter28convert8BitTo16BitFlipMirrorEPKcPsiiiPKi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8560",
+          "size": 146,
+          "symbol": "_ZN5daisy5video15CColorConverter28convert1BitTo16BitFlipMirrorEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8600",
+          "size": 119,
+          "symbol": "_ZN5daisy5video15CColorConverter29convert16BitTo16BitFlipMirrorEPKsPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8680",
+          "size": 179,
+          "symbol": "_ZN5daisy5video15CColorConverter29convert24BitTo16BitFlipMirrorEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8740",
+          "size": 164,
+          "symbol": "_ZN5daisy5video15CColorConverter41convert24BitTo24BitFlipMirrorColorShuffleEPKcPciii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d87f0",
+          "size": 165,
+          "symbol": "_ZN5daisy5video15CColorConverter31convert24BitTo16BitColorShuffleEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d88a0",
+          "size": 155,
+          "symbol": "_ZN5daisy5video15CColorConverter35convert24BitTo16BitFlipColorShuffleEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8940",
+          "size": 169,
+          "symbol": "_ZN5daisy5video15CColorConverter31convert32BitTo16BitColorShuffleEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d89f0",
+          "size": 179,
+          "symbol": "_ZN5daisy5video15CColorConverter41convert32BitTo16BitFlipMirrorColorShuffleEPKcPsiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8ab0",
+          "size": 248,
+          "symbol": "_ZN5daisy5video15CColorConverter31convert16bitToA8R8G8B8andResizeEPKsPiiiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8bb0",
+          "size": 133,
+          "symbol": "_ZN5daisy5video15CColorConverter29convert32BitTo32BitFlipMirrorEPKiPiiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8c40",
+          "size": 214,
+          "symbol": "_ZN5daisy5video15CColorConverter19convert32BitTo32BitEPKiPiiN2ox5video13ECOLOR_FORMATES7_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8d20",
+          "size": 101,
+          "symbol": "_ZN5daisy5video15CColorConverter19convert32BitTo32BitEiN2ox5video13ECOLOR_FORMATES4_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5d8d90",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5video15CColorConverter28convert4BitTo16BitFlipMirrorEPKcPsiiiPKi",
+          "percent": 100.0
+        }
+      ]
+    },
     {
       "unit": "ox/algo/CRegulator.cpp",
       "object_sha256": "246415c0a3bd5e00c2c4ef0e2124e0daf437db396b4e566bbe0f74c283d1cd6b",
@@ -70252,7 +70545,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "a3eed45caa285079ac3ad17eb9430930000d1b4c01f3739a53dc5b2e746b6979"
+    "report_sha256": "b73bd6c761e84ae63832059ded78947bfee76dd520edc44380e41836f3e2f34c"
   },
   "link": {
     "status": "unavailable",

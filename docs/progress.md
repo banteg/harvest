@@ -70,6 +70,13 @@ only when its
 source/header, compiler configuration, matcher, inventory, and unit list still agree with the
 checkout. This is not a signed attestation and should be reviewed like other generated evidence.
 
+The workflow's report self-comparison only exercises the official objdiff parser;
+it is not a before/after measurement or a recompilation proof. The bot compares
+the reports associated with its displayed base and head commits. Its "new
+matches" count includes both function rows and matched-data intervals, so it can
+exceed the number of new code functions. Compare code/data byte deltas and the
+reported commit range, not an older PR body's pre-integration project totals.
+
 After editing recovered code, headers, `units.toml`, `symbols.tsv`, compiler flags, dependencies,
 or measurement code, run:
 

@@ -2,6 +2,11 @@
 # known symbol places. Sections defining symbols from symbols.tsv are placed from them, and every
 # such symbol must agree; merged string and constant sections are checked by content per reference.
 
+["daisy/video/Null/CColorConverter.cpp"]
+".text" = 0x5d8300
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1f8
+
 ["ox/algo/CRegulator.cpp"]
 ".text" = 0x5dd200
 # std::ios_base::Init object of the iostream static initializer

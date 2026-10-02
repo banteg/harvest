@@ -95,6 +95,7 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 
 | Unit | Functions | Notes |
 | --- | ---: | --- |
+| `daisy/video/Null/CColorConverter.cpp` | 16/16 | exact; palette/packed image conversion, resizing and encoded 32-bit channel-layout conversion |
 | `ox/algo/CRegulator.cpp` | 34/34 | exact; scalar and three-axis PID-style regulators, anti-windup and speed regulation |
 | `ox/game/CGameState.cpp` | 10/10 | exact; state initialization, cached device subsystems and borrowed error messages |
 | `daisy/video/Software/CZBuffer.cpp` | 16/16 | exact; signed 16-bit software depth buffer, resizing and reference-counted factory |
@@ -134,6 +135,32 @@ Counts include inline methods and base-class destructors emitted as COMDAT copie
 brought in `CString` (Irrlicht's `string` plus Oxeye's methods), `TArray`, `CStringFunctions`,
 `SEvent`/`IEventReceiver` (network event only), `IOxDevice`, `INetworkDevice`/`SServerInfo`, and
 declarations of `CCriticalSection` and `CThread`.
+
+The complete `CColorConverter` unit matches its 2,742-byte `.text` at `0x5d8300`
+and one-byte `.bss` at `0x86c1f8`. Its 15 conversion routines and iostream static
+initializer contribute 2,588 unique function bytes. The namespace and signatures
+come from the Mac symbols; Linux FDE extents and exact loop bodies pin their
+addresses. Shared RGB packing helpers preserve Harvest's forced `0x8000` alpha
+bit, unlike the unmodified Irrlicht 0.7 helper.
+
+The two Harvest-specific 32-bit routines use a color-format descriptor containing
+four channel shifts, not an ordinary sequential format ID. The scalar helper
+returns the input unchanged for identical descriptors; the buffer helper also
+supports in-place conversion. Known row/pitch quirks are kept: non-flipped 8-bit
+palette reads add an extra pitch after the first row; 32-to-16 flip output starts
+at `(width + pitch) * height` shorts; the 32-to-32 flip ignores pitch. The resize
+routine expands five-bit components without filling their low bits and expands
+the one-bit alpha to bit 31 rather than to eight set alpha bits.
+
+`HARVEST_TEST_TOOLCHAIN=1 uv run pytest -q tests/test_color_converter.py` compiles
+and executes a checked-in native smoke covering all conversion routines. It
+checks odd-width packed palettes, unsigned 8-bit palette indices, monochrome
+bits, row orientation and pitch quirks, RGB shuffling, resizing, zero dimensions,
+and every pair of the 24 four-channel layouts (576 pairs) across six pixel
+patterns. Buffer and scalar results are checked against an independent shift
+model, with in-place and destination-guard checks. Missing opaque alpha and a
+wrong selected channel are required to fail. The matched object was also linked
+and exercised directly. The complete game was not executed.
 
 The complete `CRegulator` unit matches its 2,660-byte `.text` at `0x5dd200`,
 `.bss` at `0x86c210`, and both classes' vtables and RTTI. The scalar controller
