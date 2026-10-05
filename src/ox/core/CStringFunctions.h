@@ -33,6 +33,7 @@ public:
     }
 
     static CString<wchar_t> ansiToWide(const CString<char>& str);
+    //! Formats a time given in seconds as [h:]mm:ss.hh; hours are shown from one hour on with showHours.
     static CString<wchar_t> millisecondsToWide(float milliseconds, bool showHours);
 };
 
