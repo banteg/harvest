@@ -1708,14 +1708,11 @@ void CLuaFileValues::getLuaTableVars(lua_State* L, int table, const ox::core::CS
             continue;
         }
 
-        int dot = 0;
-        while (start + dot < it->Key.String.size() && it->Key.String[start + dot] != '.')
-            ++dot;
-
-        if (start + dot < it->Key.String.size())
+        int dot = it->Key.String.findNext('.', start);
+        if (dot != -1)
         {
-            ox::core::CString<char> subPrefix = it->Key.String.subString(0, start + dot + 1);
-            ox::core::CString<char> key = it->Key.String.subString(start, dot);
+            ox::core::CString<char> subPrefix = it->Key.String.subString(0, dot + 1);
+            ox::core::CString<char> key = it->Key.String.subString(start, dot - start);
             int number = strtol(key.c_str(), 0, 10);
             if (number != 0 || key == ox::core::CString<char>("0"))
                 lua_pushnumber(L, number);
