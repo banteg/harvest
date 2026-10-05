@@ -116,35 +116,18 @@ bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
         case ox::gui::EGET_MESSAGEBOX_YES:
             switch (id)
             {
+            case ID_CONFIRM_OVERWRITE:
+                createSaveGameBox();
+                return true;
             case ID_CONFIRM_DELETE:
                 Device->getFileSystem()->deleteFile(DeleteFilename.c_str());
                 loadSaveGames();
-                return true;
-            case ID_CONFIRM_OVERWRITE:
-                createSaveGameBox();
                 return true;
             }
             break;
         case ox::gui::EGET_ELEMENT_DRAWN:
             switch (id)
             {
-            case ID_PLANET_ICON:
-            case ID_PLANET_ICON + 1:
-            case ID_PLANET_ICON + 2:
-            {
-                int index = id - ID_PLANET_ICON;
-                if (index >= 0 && index < PLANET_ICON_COUNT && PlanetIcons[index])
-                {
-                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
-                    ox::core::CRect<int> clip = event.GUIEvent.Caller->getAbsoluteClippingRect();
-                    ox::core::CPosition2d<int> size = PlanetIcons[index]->getFrameSize(0);
-                    PlanetIcons[index]->draw(ox::core::CPosition2d<int>(
-                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.X / 2,
-                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Y / 2),
-                        &clip, ox::video::SColor(0xffffffff));
-                }
-                return true;
-            }
             case ID_MODE_ICON:
             case ID_MODE_ICON + 1:
             case ID_MODE_ICON + 2:
@@ -158,6 +141,23 @@ bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
                     ox::core::CRect<int> clip = event.GUIEvent.Caller->getAbsoluteClippingRect();
                     ox::core::CPosition2d<int> size = ModeIcons[index]->getFrameSize(0);
                     ModeIcons[index]->draw(ox::core::CPosition2d<int>(
+                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.X / 2,
+                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Y / 2),
+                        &clip, ox::video::SColor(0xffffffff));
+                }
+                return true;
+            }
+            case ID_PLANET_ICON:
+            case ID_PLANET_ICON + 1:
+            case ID_PLANET_ICON + 2:
+            {
+                int index = id - ID_PLANET_ICON;
+                if (index >= 0 && index < PLANET_ICON_COUNT && PlanetIcons[index])
+                {
+                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
+                    ox::core::CRect<int> clip = event.GUIEvent.Caller->getAbsoluteClippingRect();
+                    ox::core::CPosition2d<int> size = PlanetIcons[index]->getFrameSize(0);
+                    PlanetIcons[index]->draw(ox::core::CPosition2d<int>(
                         (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.X / 2,
                         (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Y / 2),
                         &clip, ox::video::SColor(0xffffffff));
@@ -215,7 +215,13 @@ void CSaveGameScreen::performListAction()
         if (!newSlot)
         {
             g_loadGameFilename = filename;
-            sendCustomEvent(ECE_START_GAME);
+            ox::event::SEvent startEvent;
+            startEvent.EventType = ox::event::EET_USER_EVENT;
+            startEvent.UserEvent.UserData1 = ECE_START_GAME;
+            startEvent.UserEvent.UserData2 = 0;
+            startEvent.UserEvent.UserData3 = 0;
+            startEvent.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(startEvent);
         }
     }
     else
@@ -308,10 +314,10 @@ void CSaveGameScreen::setVisible(bool visible, bool loading)
 
     if (ActionButton)
     {
-        if (!Loading)
-            ActionButton->setText(settings::gp_systemConfig->getLocalizedText(L"menu:save").c_str());
-        else
+        if (Loading)
             ActionButton->setText(settings::gp_systemConfig->getLocalizedText(L"menu:load").c_str());
+        else
+            ActionButton->setText(settings::gp_systemConfig->getLocalizedText(L"menu:save").c_str());
     }
 
     if (visible)
