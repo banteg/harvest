@@ -14,10 +14,18 @@
 namespace ox {
 namespace video {
 
+class IParticlePackage;
+class ISpritePackage;
+
 //! A live particle: its sprite, motion and lifetime.
 class IParticleState : public IUnknown
 {
 public:
+    IParticleState(IParticlePackage* package, ISpritePackage* spritePackage)
+        : Package(package), SpritePackage(spritePackage)
+    {
+    }
+
     virtual void remove() = 0;
     //! Moves the particle; false once it has died.
     virtual bool update(float frameDelta, core::CVector3d<float>& position) = 0;
@@ -25,7 +33,7 @@ public:
     virtual void render2DShadow(const core::CPosition2d<float>& position, float scale, float alpha) = 0;
     virtual void render3D(const core::CVector3d<float>& position) = 0;
     virtual const core::CVector3d<float>& getCurrentSpeed() = 0;
-    //! Bounces off a surface; true when the particle stops.
+    //! Bounces off a surface; false once the particle has died.
     virtual bool notifyBounce(core::CVector3d<float>& position, const core::CVector3d<float>& normal) = 0;
     virtual void addToSpeed(const core::CVector3d<float>& speed) = 0;
     virtual void setCurrentSpeed(const core::CVector3d<float>& speed) = 0;
@@ -37,6 +45,10 @@ public:
     virtual bool isGroundSprite() = 0;
     virtual float getWindModifier() const = 0;
     virtual int getParticleImportance() const = 0;
+
+protected:
+    IParticlePackage* Package;
+    ISpritePackage* SpritePackage;
 };
 
 } // end namespace video

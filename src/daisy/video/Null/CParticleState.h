@@ -70,8 +70,6 @@ private:
     //! Adds the parent's speed share of a spawned particle.
     void applyParentModifiers(CParticleState* parent);
 
-    ox::video::IParticlePackage* Package;
-    ox::video::ISpritePackage* SpritePackage;
     SParticleTypeInfo* Info;
     ox::video::ISpriteAnimationState* Animation;
     ox::core::CVector3d<float> Speed;

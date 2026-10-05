@@ -17,11 +17,11 @@ namespace video {
 
 CParticleState::CParticleState(ox::video::IParticlePackage* package, ox::video::ISpritePackage* spritePackage,
     SParticleTypeInfo* info)
-    : Package(package), SpritePackage(spritePackage), Info(info), Animation(0), BounceCount(0), Age(0),
+    : IParticleState(package, spritePackage), Info(info), Animation(0), BounceCount(0), Age(0),
       Rotation(0), LastPosition(-1000.0f, -1000.0f), PulseTimer(0), PulseTimeLeft(0), PulseInterval(0),
       NextPulseParticle(0), PulseCount(0), SoundPlayed(false)
 {
-    if (!spritePackage || !info)
+    if (!SpritePackage || !Info)
         return;
 
     if (info->AnimationNames.size() > 1)
@@ -469,7 +469,7 @@ float CParticleState::getWindModifier() const
 
 bool CParticleState::notifyBounce(ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& normal)
 {
-    float along = Speed.dotProduct(normal);
+    float along = normal.dotProduct(Speed);
     Speed = (Speed - normal * along) * 2.0f - Speed;
     Speed *= Info->Bounciness;
 
