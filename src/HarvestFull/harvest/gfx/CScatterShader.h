@@ -1,5 +1,4 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: only what recovered units use is declared.
 
 #ifndef HARVEST_GFX_CSCATTERSHADER_H
 #define HARVEST_GFX_CSCATTERSHADER_H
@@ -17,6 +16,14 @@ namespace video { class IVideoDriver; }
 namespace harvest {
 namespace gfx {
 
+//! Which shader a CScatterShader was set up with; the names are ours.
+enum EScatterShaderType
+{
+    ESST_NONE = 0,
+    ESST_GROUND = 1,
+    ESST_ATMOSPHERE = 2
+};
+
 //! The atmospheric scattering shader of a planet's ground or atmosphere.
 class CScatterShader : public ox::video::IShaderConstantSetCallBack
 {
@@ -26,13 +33,17 @@ public:
     virtual ~CScatterShader();
 
     void initAtmo();
-    void initGround(bool highQuality);
+    //! Without scattering the ground uses the simpler scatterGroundSCG shaders.
+    void initGround(bool scattering);
 
     virtual void OnSetConstants(ox::video::IMaterialRendererServices* services, int userData);
 
 private:
-    // Not recovered yet; keeps the Linux object size of 72 bytes, the virtual IUnknown base included.
-    char Unrecovered[72 - 8 - sizeof(ox::IUnknown)];
+    EScatterShaderType Type;
+    ox::video::IVideoDriver* Driver;
+    ox::scene::ICameraSceneNode* Camera;
+    ox::scene::IAnimatedMeshSceneNode* Node;
+    bool Scattering;
 };
 
 } // end namespace gfx

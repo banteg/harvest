@@ -8,13 +8,13 @@
 #define OX_SCENE_ISCENENODE_H
 
 #include "../IUnknown.h"
+#include "../core/CMatrix4.h"
 #include "../core/CString.h"
 #include "../core/CVector3d.h"
 #include "../video/SMaterial.h"
 
 namespace ox {
 namespace core {
-class CMatrix4;
 template <class T> class CAabbox3d;
 } // end namespace core
 namespace scene {
@@ -80,10 +80,17 @@ public:
         return AutomaticCullingEnabled;
     }
 
+    core::CMatrix4& getAbsoluteTransformation()
+    {
+        return AbsoluteTransformation;
+    }
+
 protected:
-    // Not recovered yet: the name, transformations, parent, children, animators, id, scene manager
+    core::CString<wchar_t> Name;
+    core::CMatrix4 AbsoluteTransformation;
+    // Not recovered yet: the relative transformation, parent, children, animators, id, scene manager
     // and triangle selector.
-    char Unrecovered[0xd0 - sizeof(IUnknown)];
+    char Unrecovered[0xd0 - sizeof(IUnknown) - sizeof(core::CString<wchar_t>) - sizeof(core::CMatrix4)];
     bool AutomaticCullingEnabled;
     bool DebugDataVisible;
     bool IsVisible;
