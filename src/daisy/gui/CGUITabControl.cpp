@@ -849,121 +849,125 @@ void CGUITabButtonRow::draw()
     if (HoverTab >= 0 && !frameRect.isPointInside(Environment->getMousePosition()))
         HoverTab = -1;
 
-    if (!Animations[ETBRA_TOP])
-        return;
-
-    const ox::video::SColor white(0xffffffff);
-    ox::core::CRect<int> hoverRect;
-    int x = frameRect.UpperLeftCorner.X;
-    int y = frameRect.UpperLeftCorner.Y;
-    int tabWidth = Animations[ETBRA_TAB_NORMAL]->getFrameSize(0).Width;
-    int tabBottom = Animations[ETBRA_TAB_NORMAL]->getFrameSize(0).Height + y;
-
-    // the tabs left of the active one, then from the right down to the active one, which overlaps both
-    bool ascending = true;
-    bool finished = false;
-    int left = 0;
-    int right = 0;
-    for (int i = 0; !finished && i < (int)Tabs.size();)
+    if (Animations[ETBRA_TOP])
     {
-        int index = i;
-        bool next = true;
-        if (ascending && i >= ActiveTab && ActiveTab >= 0)
+        const ox::video::SColor white(0xffffffff);
+        ox::core::CRect<int> hoverRect;
+        ox::core::CRect<int> rect = frameRect;
+        int tabWidth = Animations[ETBRA_TAB_NORMAL]->getFrameSize(0).Width;
+        int tabBottom = Animations[ETBRA_TAB_NORMAL]->getFrameSize(0).Height + frameRect.UpperLeftCorner.Y;
+
+        // the tabs left of the active one, then from the right down to the active one, which overlaps both
+        bool ascending = true;
+        bool done = false;
+        int left = 0;
+        int right = 0;
+        for (int i = 0; !done && i < (int)Tabs.size();)
         {
-            index = Tabs.size() - 1;
-            ascending = false;
-        }
-        if (!ascending)
-        {
-            next = false;
+            int index = i;
+            bool up = true;
+            if (ascending && i >= ActiveTab && ActiveTab >= 0)
+            {
+                index = Tabs.size() - 1;
+                ascending = false;
+            }
+            if (!ascending)
+            {
+                up = false;
+                done = index == ActiveTab;
+            }
+
+            int tabX = Tabs[index]->X + rect.UpperLeftCorner.X;
+            if (index != HoverTab)
+                Animations[ETBRA_TAB_NORMAL]->draw(ox::core::CPosition2d<int>(tabX, frameRect.UpperLeftCorner.Y),
+                    &AbsoluteClippingRect, white);
+            else
+            {
+                Animations[ETBRA_TAB_HIGHLIGHTED]->draw(ox::core::CPosition2d<int>(tabX,
+                    frameRect.UpperLeftCorner.Y), &AbsoluteClippingRect, white);
+                if (index == ActiveTab && Tabs[index]->Closable && Animations[ETBRA_CLOSE_NORMAL])
+                    Animations[ETBRA_CLOSE_NORMAL + HoverClose]->draw(ox::core::CPosition2d<int>(
+                        ClosePosition.X + tabX, ClosePosition.Y + frameRect.UpperLeftCorner.Y),
+                        &AbsoluteClippingRect, white);
+            }
+
+            ox::core::CRect<int> textRect(tabX + 6, frameRect.UpperLeftCorner.Y, tabX + tabWidth - 6, tabBottom);
+            if (index != HoverTab)
+            {
+                ox::core::CRect<int> clip(tabX + 6, frameRect.UpperLeftCorner.Y, tabX + tabWidth - 6, tabBottom);
+                clipAgainst(clip, AbsoluteClippingRect);
+                STabRowTabInfo* tab = Tabs[index];
+                TextFont->draw(tab->Caption.c_str(), textRect, tab->Highlighted ? HighlightColor : TextColor,
+                    ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, &clip);
+            }
+            else
+                hoverRect = textRect;
+
             if (index == ActiveTab)
-                finished = true;
+                left = tabX;
+            if (index == ActiveTab)
+                right = tabX + tabWidth;
+
+            i = up ? index + 1 : index - 1;
         }
 
-        int tabX = Tabs[index]->X + x;
-        if (index != HoverTab)
-            Animations[ETBRA_TAB_NORMAL]->draw(ox::core::CPosition2d<int>(tabX, y), &AbsoluteClippingRect, white);
-        else
+        // the hovered caption over everything, shaded unless it is the active tab
+        if (HoverTab >= 0)
         {
-            Animations[ETBRA_TAB_HIGHLIGHTED]->draw(ox::core::CPosition2d<int>(tabX, y), &AbsoluteClippingRect,
-                white);
-            if (index == ActiveTab && Tabs[index]->Closable && Animations[ETBRA_CLOSE_NORMAL])
-                Animations[ETBRA_CLOSE_NORMAL + HoverClose]->draw(ox::core::CPosition2d<int>(ClosePosition.X + tabX,
-                    ClosePosition.Y + y), &AbsoluteClippingRect, white);
-        }
-
-        ox::core::CRect<int> textRect(tabX + 6, y, tabX + tabWidth - 6, tabBottom);
-        if (index != HoverTab)
-        {
-            ox::core::CRect<int> clip(tabX + 6, y, tabX + tabWidth - 6, tabBottom);
+            ox::core::CRect<int> clip = hoverRect;
             clipAgainst(clip, AbsoluteClippingRect);
-            STabRowTabInfo* tab = Tabs[index];
-            TextFont->draw(tab->Caption.c_str(), textRect, tab->Highlighted ? HighlightColor : TextColor,
+            if (HoverTab != ActiveTab)
+            {
+                ox::core::CDimension2d<int> size = TextFont->getDimension(Tabs[HoverTab]->Caption.c_str());
+                ox::core::CRect<int> shade = hoverRect;
+                int space = shade.getWidth() - size.Width;
+                if (space > 0)
+                {
+                    space >>= 1;
+                    shade.UpperLeftCorner.X += space - 1;
+                    shade.LowerRightCorner.X -= space - 1;
+                    shade.UpperLeftCorner.Y += 3;
+                    shade.LowerRightCorner.Y -= 3;
+                }
+                clipAgainst(shade, clip);
+                driver->draw2DRectangle(ox::video::SColor(0x80000000), shade, 0);
+            }
+
+            STabRowTabInfo* tab = Tabs[HoverTab];
+            TextFont->draw(tab->Caption.c_str(), hoverRect, tab->Highlighted ? HighlightColor : TextColor,
                 ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, &clip);
         }
-        else
-            hoverRect = textRect;
 
-        if (index == ActiveTab)
-            left = tabX;
-        if (index == ActiveTab)
-            right = tabX + tabWidth;
-
-        i = next ? index + 1 : index - 1;
-    }
-
-    // the hovered caption over everything, shaded unless it is the active tab
-    if (HoverTab >= 0)
-    {
-        ox::core::CRect<int> clip = hoverRect;
-        clipAgainst(clip, AbsoluteClippingRect);
-        if (HoverTab != ActiveTab)
+        // the top edge left and right of the active tab
+        int width = Animations[ETBRA_TOP]->getFrameSize(0).Width;
+        int top = Rects[ETBRA_TOP].UpperLeftCorner.Y - Rects[ETBRA_TOP].LowerRightCorner.Y +
+            frameRect.LowerRightCorner.Y;
+        if (left > rect.UpperLeftCorner.X)
         {
-            ox::core::CDimension2d<int> size = TextFont->getDimension(Tabs[HoverTab]->Caption.c_str());
-            ox::core::CRect<int> shade = hoverRect;
-            int space = shade.getWidth() - size.Width;
-            if (space > 0)
-            {
-                space >>= 1;
-                shade.UpperLeftCorner.X += space - 1;
-                shade.LowerRightCorner.X -= space - 1;
-                shade.UpperLeftCorner.Y += 3;
-                shade.LowerRightCorner.Y -= 3;
-            }
-            clipAgainst(shade, clip);
-            driver->draw2DRectangle(ox::video::SColor(0x80000000), shade, 0);
+            rect.LowerRightCorner.X = left;
+            clipAgainst(rect, AbsoluteClippingRect);
+            for (int i = rect.UpperLeftCorner.X; i < rect.LowerRightCorner.X; i += width)
+                Animations[ETBRA_TOP]->draw(ox::core::CPosition2d<int>(i, top), &rect, white);
         }
 
-        STabRowTabInfo* tab = Tabs[HoverTab];
-        TextFont->draw(tab->Caption.c_str(), hoverRect, tab->Highlighted ? HighlightColor : TextColor,
-            ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, &clip);
-    }
+        rect = ox::core::CRect<int>(right, frameRect.UpperLeftCorner.Y, frameRect.LowerRightCorner.X,
+            frameRect.LowerRightCorner.Y);
+        clipAgainst(rect, AbsoluteClippingRect);
+        for (int i = rect.UpperLeftCorner.X; i < rect.LowerRightCorner.X; i += width)
+            Animations[ETBRA_TOP]->draw(ox::core::CPosition2d<int>(i, top), &rect, white);
 
-    // the top edge left and right of the active tab
-    int width = Animations[ETBRA_TOP]->getFrameSize(0).Width;
-    int top = Rects[ETBRA_TOP].UpperLeftCorner.Y - Rects[ETBRA_TOP].LowerRightCorner.Y + frameRect.LowerRightCorner.Y;
-    if (left > x)
-    {
-        ox::core::CRect<int> r(x, y, left, frameRect.LowerRightCorner.Y);
-        clipAgainst(r, AbsoluteClippingRect);
-        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
-            Animations[ETBRA_TOP]->draw(ox::core::CPosition2d<int>(i, top), &r, white);
-    }
-
-    ox::core::CRect<int> r(right, y, frameRect.LowerRightCorner.X, frameRect.LowerRightCorner.Y);
-    clipAgainst(r, AbsoluteClippingRect);
-    for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
-        Animations[ETBRA_TOP]->draw(ox::core::CPosition2d<int>(i, top), &r, white);
-
-    // the inner top edge below the row, clipped by the parent
-    if (Animations[ETBRA_TOP_INNER])
-    {
-        ox::core::CRect<int> inner(x, frameRect.LowerRightCorner.Y, frameRect.LowerRightCorner.X,
-            Rects[ETBRA_TOP_INNER].LowerRightCorner.Y + frameRect.LowerRightCorner.Y -
-                Rects[ETBRA_TOP_INNER].UpperLeftCorner.Y);
-        clipAgainst(inner, Parent->getAbsolutePosition());
-        for (int i = inner.UpperLeftCorner.X; i < inner.LowerRightCorner.X; i += Rects[ETBRA_TOP_INNER].getWidth())
-            Animations[ETBRA_TOP_INNER]->draw(ox::core::CPosition2d<int>(i, inner.UpperLeftCorner.Y), &inner, white);
+        // the inner top edge below the row, clipped by the parent
+        if (Animations[ETBRA_TOP_INNER])
+        {
+            rect = ox::core::CRect<int>(frameRect.UpperLeftCorner.X, frameRect.LowerRightCorner.Y,
+                frameRect.LowerRightCorner.X, Rects[ETBRA_TOP_INNER].LowerRightCorner.Y +
+                    frameRect.LowerRightCorner.Y - Rects[ETBRA_TOP_INNER].UpperLeftCorner.Y);
+            clipAgainst(rect, Parent->getAbsolutePosition());
+            int step = Rects[ETBRA_TOP_INNER].getWidth();
+            for (int i = rect.UpperLeftCorner.X; i < rect.LowerRightCorner.X; i += step)
+                Animations[ETBRA_TOP_INNER]->draw(ox::core::CPosition2d<int>(i, rect.UpperLeftCorner.Y), &rect,
+                    white);
+        }
     }
 }
 
