@@ -33,6 +33,7 @@ class IGUIStaticText;
 namespace video {
 class ISpriteAnimationState;
 class ISpritePackage;
+class ITexture;
 } // end namespace video
 } // end namespace ox
 
@@ -64,12 +65,12 @@ bool displayThreatLevelForGameMode(int gameMode);
 //! Whether the game timer is shown in a game mode.
 bool displayTimerForGameMode(int gameMode);
 
-//! A blip on the minimap.
+//! A blip on the minimap, at a world position; it shrinks to a small square while Time runs out.
 struct SMinimapMarker
 {
-    int X;
-    int Y;
-    int Time;
+    float X;
+    float Y;
+    float Time;
 };
 
 //! The game state of a running game.
@@ -298,9 +299,10 @@ private:
     bool m_2d0;
     ox::core::CRect<int> MinimapRect;
     ox::video::ISpriteAnimationState* MinimapDot;
-    ox::IUnknown* m_2f0;
-    bool m_2f8;
-    int m_2fc;
+    //! The minimap is drawn into this texture every two seconds when UseMinimapTexture is set.
+    ox::video::ITexture* MinimapTexture;
+    bool UseMinimapTexture;
+    float MinimapUpdateTime;
     std::list<SMinimapMarker> MinimapMarkers;
     int m_310;
     int m_314;

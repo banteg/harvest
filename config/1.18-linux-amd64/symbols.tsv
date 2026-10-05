@@ -1165,6 +1165,7 @@ address	size	symbol	evidence
 0x4a4e00	1244	_ZN7harvest6states10CPlayStateD2Ev	manual:base-destructor-before-D0-D1
 0x4a52e0	1255	_ZN7harvest6states10CPlayStateD0Ev	mac-vtable:_ZTVN7harvest6states10CPlayStateE:4
 0x4a57d0	1244	_ZN7harvest6states10CPlayStateD1Ev	mac-vtable:_ZTVN7harvest6states10CPlayStateE:3
+0x4a5cb0	6047	_ZN7harvest6states10CPlayState13renderMinimapEv	manual:Mac-symbol-and-Linux-calls
 0x4a7450	1554	_ZN7harvest6states10CPlayState19loadWaveListSpritesEv	manual:Mac-symbol-and-Linux-calls
 0x4a7a70	1603	_ZN7harvest6states10CPlayState21setCreativeListToggleEb	manual:Mac-symbol-and-Linux-calls
 0x4a80c0	19	_ZN7harvest6states10CPlayState18toggleCreativeListEv	manual:Mac-toggleCreativeList-reads-0x7a9

@@ -60,6 +60,7 @@
 #include "ox/video/IParticleState.h"
 #include "ox/video/ISpriteAnimationState.h"
 #include "ox/video/ISpritePackage.h"
+#include "ox/video/ITexture.h"
 #include "ox/video/IVideoDriver.h"
 
 namespace harvest {
@@ -123,7 +124,7 @@ CPlayState::CPlayState()
       m_130(false), m_131(false), PlacementOk(false), BuildSelection(0), RangeCircle(0), Selector(0),
       RecycleSelector(0), Beam180(6.0f), Beam1c8(2.0f), Beam210(6.0f), Beam258(6.0f), m_2a0(false), ThreatLevel(0),
       Scenario(0), GameSpeed(3), m_2c0(0), m_2c4(false), m_2c5(false), m_2c8(0), m_2d0(false), MinimapDot(0),
-      m_2f0(0), m_2f8(false), m_2fc(0), m_310(0), m_314(0), m_318(0), GameTime(0), m_320(false), m_321(false),
+      MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), m_310(0), m_314(0), m_318(0), GameTime(0), m_320(false), m_321(false),
       m_322(false), m_324(0), DenialTime(0), m_340(0), m_348(0), m_350(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
       MinimapHeight(0), RecycleButton(0), m_728(0), m_758(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
       m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
@@ -175,10 +176,10 @@ CPlayState::~CPlayState()
     delete InfoLines;
     delete AchievementsScreen;
 
-    if (m_2f0)
+    if (MinimapTexture)
     {
-        m_2f0->drop();
-        m_2f0 = 0;
+        MinimapTexture->drop();
+        MinimapTexture = 0;
     }
     if (MinimapDot)
         MinimapDot->remove();
@@ -1233,6 +1234,273 @@ void CPlayState::togglePause()
     GameSpeed = m_2c0;
     m_2c0 = speed;
     setGameSpeed(GameSpeed);
+}
+
+void CPlayState::renderMinimap()
+{
+    ox::core::CRect<int> top = TopBar->getAbsolutePosition();
+    if (ShowMinimap && GuiSprites[GS_MINIMAP_BACKGROUND])
+    {
+        // The frame around the minimap, the edges tiled between the corners.
+        ox::core::CPosition2d<int> cornerSize = GuiSprites[GS_MINIMAP_TOP_LEFT]->getFrameSize(0);
+        ox::core::CPosition2d<int> topLeft(top.LowerRightCorner.X - MinimapWidth, top.UpperLeftCorner.Y);
+        GuiSprites[GS_MINIMAP_TOP_LEFT]->draw(topLeft, 0, ox::video::SColor(0xffffffff));
+        ox::core::CPosition2d<int> topRight(top.LowerRightCorner.X - cornerSize.X, top.UpperLeftCorner.Y);
+        GuiSprites[GS_MINIMAP_TOP_RIGHT]->draw(topRight, 0, ox::video::SColor(0xffffffff));
+        ox::core::CRect<int> topEdge(cornerSize.X + topLeft.X, top.UpperLeftCorner.Y, topRight.X,
+            cornerSize.Y + top.UpperLeftCorner.Y);
+        ox::core::CPosition2d<int> tileSize = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0);
+        for (int x = topEdge.UpperLeftCorner.X; x < topEdge.LowerRightCorner.X; x += tileSize.X)
+            GuiSprites[GS_MINIMAP_TOP]->draw(ox::core::CPosition2d<int>(x, top.UpperLeftCorner.Y), &topEdge,
+                ox::video::SColor(0xffffffff));
+
+        cornerSize = GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->getFrameSize(0);
+        ox::core::CPosition2d<int> bottomLeft(top.LowerRightCorner.X - MinimapWidth,
+            MinimapHeight + top.UpperLeftCorner.Y - cornerSize.Y);
+        GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->draw(bottomLeft, 0, ox::video::SColor(0xffffffff));
+        ox::core::CPosition2d<int> bottomRight(top.LowerRightCorner.X - cornerSize.X, bottomLeft.Y);
+        GuiSprites[GS_MINIMAP_BOTTOM_RIGHT]->draw(bottomRight, 0, ox::video::SColor(0xffffffff));
+        ox::core::CRect<int> bottomEdge(cornerSize.X + bottomLeft.X, bottomLeft.Y, bottomRight.X,
+            cornerSize.Y + bottomLeft.Y);
+        tileSize = GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0);
+        for (int x = bottomEdge.UpperLeftCorner.X; x < bottomEdge.LowerRightCorner.X; x += tileSize.X)
+            GuiSprites[GS_MINIMAP_BOTTOM]->draw(ox::core::CPosition2d<int>(x, bottomLeft.Y), &bottomEdge,
+                ox::video::SColor(0xffffffff));
+
+        ox::core::CPosition2d<int> sideSize = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0);
+        ox::core::CRect<int> leftEdge(topLeft.X, topEdge.LowerRightCorner.Y, sideSize.X + topLeft.X, bottomLeft.Y);
+        GuiSprites[GS_MINIMAP_LEFT]->draw(leftEdge.UpperLeftCorner, &leftEdge, ox::video::SColor(0xffffffff));
+        ox::core::CRect<int> rightEdge(top.LowerRightCorner.X - sideSize.X, topEdge.LowerRightCorner.Y,
+            top.LowerRightCorner.X, bottomLeft.Y);
+        GuiSprites[GS_MINIMAP_RIGHT]->draw(rightEdge.UpperLeftCorner, &rightEdge, ox::video::SColor(0xffffffff));
+
+        tileSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
+        ox::core::CRect<int> background(leftEdge.LowerRightCorner.X, leftEdge.UpperLeftCorner.Y,
+            rightEdge.UpperLeftCorner.X, leftEdge.LowerRightCorner.Y);
+        for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += tileSize.X)
+            GuiSprites[GS_MINIMAP_BACKGROUND]->draw(ox::core::CPosition2d<int>(x, background.UpperLeftCorner.Y),
+                &background, ox::video::SColor(0xffffffff));
+
+        ox::core::CPosition2d<int> mineralsSize = GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0);
+        GuiSprites[GS_MINERALS_BACKGROUND]->draw(
+            ox::core::CPosition2d<int>(topLeft.X - mineralsSize.X, top.UpperLeftCorner.Y), 0,
+            ox::video::SColor(0xffffffff));
+    }
+    else if (GuiSprites[GS_TOP_RIGHT_BACKGROUND])
+    {
+        // The second planet has a bright ground, so the small minimap gets a dark backing.
+        if (game::gp_world->getPlanet() == 1)
+            Driver->draw2DRectangle(ox::video::SColor(0x80000000), MinimapRect, 0);
+        ox::core::CPosition2d<int> size = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
+        GuiSprites[GS_TOP_RIGHT_BACKGROUND]->draw(
+            ox::core::CPosition2d<int>(top.LowerRightCorner.X - size.X, top.UpperLeftCorner.Y), 0,
+            ox::video::SColor(0xffffffff));
+    }
+
+    if (displayThreatLevelForGameMode(GameMode) && GuiSprites[GS_THREAT_LEVEL_BACKGROUND])
+    {
+        GuiSprites[GS_THREAT_LEVEL_BACKGROUND]->draw(
+            ox::core::CPosition2d<int>(top.UpperLeftCorner.X + TimerWidth, top.UpperLeftCorner.Y), 0,
+            ox::video::SColor(0xffffffff));
+        float progress = ThreatLevel->getThreatLevelProgress();
+        if (GameMode == game::EGM_CREATIVE && LuaManager && LuaManager->isRunningMods())
+            progress = LuaManager->getThreatLevelProgress();
+        if (progress > 0)
+        {
+            ox::core::CPosition2d<int> size = GuiSprites[GS_PROGRESS_BAR]->getFrameSize(0);
+            ox::core::CPosition2d<int> position(top.UpperLeftCorner.X + TimerWidth + 13, top.UpperLeftCorner.Y + 4);
+            size.X = (int)(size.X * progress + 0.5f);
+            ox::core::CRect<int> clip(position, position + size);
+            GuiSprites[GS_PROGRESS_BAR]->draw(position, &clip, THREAT_TEXT_COLOR);
+        }
+    }
+
+    if (GameMode == game::EGM_CAMPAIGN && GuiSprites[GS_OBJECTIVES_BACKGROUND])
+    {
+        ox::core::CPosition2d<int> position(top.UpperLeftCorner.X + 8, top.UpperLeftCorner.Y + 19);
+        GuiSprites[GS_OBJECTIVES_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
+        if (Scenario && GuiSprites[GS_ICON_OBJECTIVE])
+        {
+            for (int i = 0; i < Scenario->getNumObjectives(); ++i)
+            {
+                ox::core::CPosition2d<int> icon(position.X + 20, position.Y + 30 + i * 20);
+                GuiSprites[GS_ICON_OBJECTIVE]->draw(icon, 0, ox::video::SColor(0xffffffff));
+                SmallFont->draw(Scenario->getObjective(i).c_str(),
+                    ox::core::CRect<int>(icon.X + 15, icon.Y - 6, icon.X + 215, icon.Y + 14),
+                    ox::video::SColor(0xc0ffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+            }
+        }
+    }
+
+    if (displayTimerForGameMode(GameMode) && GuiSprites[GS_TIME_BACKGROUND])
+    {
+        GuiSprites[GS_TIME_BACKGROUND]->draw(top.UpperLeftCorner, 0, ox::video::SColor(0xffffffff));
+        ox::core::CString<wchar_t> text;
+        if (GameMode == game::EGM_CREATIVE && LuaManager)
+            text = ox::core::CStringFunctions::millisecondsToWide(LuaManager->getTimerValue(), true);
+        else
+            text = ox::core::CStringFunctions::millisecondsToWide(GameTime, true);
+        ox::core::CPosition2d<int> size = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0);
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>(top.UpperLeftCorner.X + 30, top.UpperLeftCorner.Y, size.X + top.UpperLeftCorner.X,
+                top.UpperLeftCorner.Y + size.Y),
+            ox::video::SColor(0xffffffff), ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
+    }
+
+    if ((GameMode == game::EGM_RUSH || (GameMode == game::EGM_CREATIVE && LuaManager && LuaManager->isRushListVisible())) &&
+        GuiSprites[GS_DAMAGE_BAR_BACKGROUND])
+    {
+        ox::core::CPosition2d<int> size = GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0);
+        ox::core::CPosition2d<int> position(ScreenSize.Width - size.X, TopBar->getAbsolutePosition().LowerRightCorner.Y + 10);
+        GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
+        float damage = game::gp_statistics->getRushModeDamage();
+        if (GameMode == game::EGM_CREATIVE && LuaManager)
+            damage = LuaManager->getRushProgress() * 50000.0f;
+        if (damage > 0 && GuiSprites[GS_DAMAGE_BAR])
+        {
+            size = GuiSprites[GS_DAMAGE_BAR]->getFrameSize(0);
+            position.X += 40;
+            position.Y += 42;
+            ox::core::CRect<int> clip(position.X, (int)(size.Y * (damage / -50000.0f + 1.0f)) + position.Y,
+                size.X + position.X, position.Y + size.Y);
+            GuiSprites[GS_DAMAGE_BAR]->draw(position, &clip, ox::video::SColor(0xffffffff));
+        }
+    }
+
+    // Flash the credits while there are not enough of them.
+    if (DenialTime > 0 && (int)(DenialTime * 1000.0f) / 250 % 2 && m_340)
+    {
+        ox::core::CRect<int> area = m_340->getAbsolutePosition();
+        area.UpperLeftCorner.X -= 24;
+        area.LowerRightCorner.X += 28;
+        Driver->draw2DRectangle(ox::video::SColor(0x806060cc), area, 0);
+    }
+
+    if (!MinimapDot || (!MinimapTexture && UseMinimapTexture))
+        return;
+
+    const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
+    ox::core::CRect<int> area = MinimapRect;
+    float scaleX = (float)MinimapRect.getWidth() / field.getWidth();
+    float scaleY = (float)MinimapRect.getHeight() / field.getHeight();
+    if (MinimapUpdateTime <= 0 || !UseMinimapTexture)
+    {
+        MinimapUpdateTime = 2.0f;
+        if (UseMinimapTexture)
+            area = ox::core::CRect<int>(0, 0, MinimapRect.getWidth(), MinimapRect.getHeight());
+
+        int selectedType = -1;
+        if (SelectedEntity)
+            selectedType = SelectedEntity->getEntityType();
+        if (UseMinimapTexture)
+            Driver->setRenderTarget(MinimapTexture, true, true, ox::video::SColor(0));
+
+        const std::list<ox::entity::COxEntity*>& buildings = entity::gp_entityManager->getEntityList(0);
+        for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
+        {
+            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            if (!field.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y)))
+                continue;
+
+            // The selected building's kind stands out; minerals are cyan.
+            ox::video::SColor color(0xffffffff);
+            if ((*it)->getEntityType() != selectedType)
+                color = (*it)->getEntityType() == 5 ? ox::video::SColor(0xff20c0c0) :
+                    ox::video::SColor(selectedType < 0 ? 0xff20ff20 : 0x4020ff20);
+            MinimapDot->draw(ox::core::CPosition2d<int>((int)((position.X - field.UpperLeftCorner.X) * scaleX) +
+                                                            area.UpperLeftCorner.X,
+                                 (int)((position.Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y),
+                &area, color);
+        }
+
+        const std::list<ox::entity::COxEntity*>& aliens = entity::gp_entityManager->getEntityList(1);
+        for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != aliens.end(); ++it)
+        {
+            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            if (!field.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y)))
+                continue;
+
+            MinimapDot->draw(ox::core::CPosition2d<int>((int)((position.X - field.UpperLeftCorner.X) * scaleX) +
+                                                            area.UpperLeftCorner.X,
+                                 (int)((position.Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y),
+                &area, ox::video::SColor(0xffff2020));
+        }
+
+        if (UseMinimapTexture)
+            Driver->setRenderTarget(0, false, false, ox::video::SColor(0));
+    }
+
+    if (UseMinimapTexture)
+        Driver->draw2DImage(MinimapTexture, MinimapRect.UpperLeftCorner,
+            ox::core::CRect<int>(0, 0, MinimapRect.getWidth(), MinimapRect.getHeight()), &MinimapRect,
+            (ox::video::SColor*)0, true);
+
+    for (std::list<SMinimapMarker>::iterator it = MinimapMarkers.begin(); it != MinimapMarkers.end(); ++it)
+    {
+        int x = (int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X;
+        int y = (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y;
+        ox::core::CRect<int> box;
+        if (it->Time > 4.0f)
+        {
+            int size = (int)((it->Time - 4.0f) * 100.0f) + 6;
+            box.UpperLeftCorner = ox::core::CPosition2d<int>(x - size / 2, y - size / 2);
+            box.LowerRightCorner = box.UpperLeftCorner + ox::core::CPosition2d<int>(size, size);
+        }
+        else
+            box = ox::core::CRect<int>(x - 3, y - 3, x + 4, y + 4);
+
+        // Clip the square to the minimap and skip the edges that were cut.
+        bool left = true;
+        if (box.UpperLeftCorner.X < area.UpperLeftCorner.X)
+        {
+            box.UpperLeftCorner.X = area.UpperLeftCorner.X;
+            left = false;
+        }
+        bool top = true;
+        if (box.UpperLeftCorner.Y < area.UpperLeftCorner.Y)
+        {
+            box.UpperLeftCorner.Y = area.UpperLeftCorner.Y;
+            top = false;
+        }
+        bool right = true;
+        if (box.LowerRightCorner.X >= area.LowerRightCorner.X)
+        {
+            box.LowerRightCorner.X = area.LowerRightCorner.X - 1;
+            right = false;
+        }
+        bool bottom = true;
+        if (box.LowerRightCorner.Y >= area.LowerRightCorner.Y)
+        {
+            box.LowerRightCorner.Y = area.LowerRightCorner.Y - 1;
+            bottom = false;
+        }
+        if (top)
+            Driver->draw2DLine(box.UpperLeftCorner,
+                ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+        if (left)
+            Driver->draw2DLine(box.UpperLeftCorner,
+                ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
+        if (right)
+            Driver->draw2DLine(box.LowerRightCorner,
+                ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+        if (bottom)
+            Driver->draw2DLine(box.LowerRightCorner,
+                ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
+    }
+
+    // The part of the world on screen.
+    ox::core::CPosition2d<int> view((int)((ViewPosition.X - field.UpperLeftCorner.X) * scaleX + 0.5f) +
+                                        MinimapRect.UpperLeftCorner.X,
+        (int)((ViewPosition.Y - field.UpperLeftCorner.Y) * scaleY + 0.5f) + MinimapRect.UpperLeftCorner.Y);
+    ox::core::CDimension2d<int> viewSize = getViewSize();
+    viewSize.Width = (int)(viewSize.Width * scaleX) - 1;
+    viewSize.Height = (int)(viewSize.Height * scaleY) - 1;
+    Driver->draw2DLine(view, ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y), ox::video::SColor(0xc0ffffff));
+    Driver->draw2DLine(view, ox::core::CPosition2d<int>(view.X, view.Y + viewSize.Height), ox::video::SColor(0xc0ffffff));
+    Driver->draw2DLine(ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y + viewSize.Height),
+        ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y), ox::video::SColor(0xc0ffffff));
+    Driver->draw2DLine(ox::core::CPosition2d<int>(view.X, view.Y + viewSize.Height),
+        ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y + viewSize.Height), ox::video::SColor(0xc0ffffff));
 }
 
 void CPlayState::renderWaveButton(ox::gui::IGUIElement* button, int numAliens, int firstAlien, bool* aliens,
