@@ -232,37 +232,39 @@ ox::core::CRect<float> CWorld::expandWorld(int direction, float boundary, bool p
                         (cell.UpperLeftCorner.Y + cell.LowerRightCorner.Y) * .5f),
                     ox::core::CPosition2d<float>(512, 512)) * .001953125f;
                 int minerals = (int)(30 - (distance * 4 + distance * .5f * distance));
-                // The native bonus applies to the inclusive range -24..-16.
-                if ((unsigned int)(minerals + 24) < 9 || minerals > 20) minerals = 20;
-                if (minerals < 2) minerals = 2;
+                if (minerals >= -24 && minerals <= -16) minerals = 20;
+                minerals = ox::core::clamp(minerals, 2, 20);
                 entity::CMineralsEntity::fillAreaWithMinerals(cell, minerals, this);
             }
-    if (GameMode == 0 && (TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048))
+    if (GameMode == 0)
     {
-        ox::event::SEvent event;
-        event.EventType = ox::event::EET_USER_EVENT;
-        event.UserEvent.UserData1 = 22;
-        event.UserEvent.UserData2 = 27;
-        event.UserEvent.UserData3 = 0;
-        event.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(event);
-    }
-    if (TargetGameField.getWidth() * TargetGameField.getHeight() >= 10485760)
-    {
-        ox::event::SEvent event;
-        event.EventType = ox::event::EET_USER_EVENT;
-        event.UserEvent.UserData1 = 21;
-        event.UserEvent.UserData2 = 15;
-        event.UserEvent.UserData3 = 0;
-        event.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(event);
-        ox::event::SEvent secondEvent;
-        secondEvent.EventType = ox::event::EET_USER_EVENT;
-        secondEvent.UserEvent.UserData1 = 21;
-        secondEvent.UserEvent.UserData2 = 16;
-        secondEvent.UserEvent.UserData3 = 0;
-        secondEvent.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(secondEvent);
+        if (TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048)
+        {
+            ox::event::SEvent event;
+            event.EventType = ox::event::EET_USER_EVENT;
+            event.UserEvent.UserData1 = 22;
+            event.UserEvent.UserData2 = 27;
+            event.UserEvent.UserData3 = 0;
+            event.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(event);
+        }
+        if (TargetGameField.getWidth() * TargetGameField.getHeight() >= 10485760)
+        {
+            ox::event::SEvent event;
+            event.EventType = ox::event::EET_USER_EVENT;
+            event.UserEvent.UserData1 = 21;
+            event.UserEvent.UserData2 = 15;
+            event.UserEvent.UserData3 = 0;
+            event.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(event);
+            ox::event::SEvent secondEvent;
+            secondEvent.EventType = ox::event::EET_USER_EVENT;
+            secondEvent.UserEvent.UserData1 = 21;
+            secondEvent.UserEvent.UserData2 = 16;
+            secondEvent.UserEvent.UserData3 = 0;
+            secondEvent.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(secondEvent);
+        }
     }
     if (gp_luaManager) gp_luaManager->hookMapExpanded(addedArea.UpperLeftCorner.X, addedArea.UpperLeftCorner.Y,
         addedArea.LowerRightCorner.X, addedArea.LowerRightCorner.Y);
