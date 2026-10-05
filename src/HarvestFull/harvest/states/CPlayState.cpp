@@ -832,7 +832,7 @@ bool CPlayState::initializeNewGame()
     eraseGameObjects();
     StartTime = time(0);
     int random = ox::algo::CRand::rand();
-    RandomValue = (random & 0xffffff) | ((random >> 8) + (random >> 16) + random) << 24;
+    RandomValue = (random & 0xffffff) | (((random & 0xff00) >> 8) + ((random & 0xff0000) >> 16) + random) << 24;
     if (settings::gp_profileManager && settings::gp_profileManager->getCurrentProfile())
     {
         Profile = settings::gp_profileManager->getCurrentProfile();
@@ -930,8 +930,9 @@ bool CPlayState::initializeNewGame()
             LuaManager->initLuaByScriptList();
             LuaManager->hookNewGame();
             ox::TArray<ox::core::CString<char> >& errors = LuaManager->getCompilerErrors();
-            for (unsigned int i = 0; i < errors.size(); ++i)
-                addInfoLine(ox::core::CString<wchar_t>(errors[i].c_str()));
+            if (!errors.empty())
+                for (unsigned int i = 0; i < errors.size(); ++i)
+                    addInfoLine(ox::core::CString<wchar_t>(errors[i].c_str()));
         }
     }
     return true;
