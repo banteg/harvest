@@ -11,7 +11,7 @@
 namespace ox {
 namespace gui {
 
-//! A context menu with items and sub menus.
+//! A context menu, or a menu bar through daisy::gui::CGUIMenu.
 class IGUIContextMenu : public IGUIElement
 {
 public:
@@ -21,20 +21,19 @@ public:
     }
 
     virtual int getItemCount() const = 0;
-    //! Adds an item and returns its index; a null text adds a separator.
-    virtual int addItem(wchar_t* text, int commandId = -1, bool enabled = true, bool hasSubMenu = false) = 0;
+    //! Adds an item; hasSubMenu creates a sub menu for it. Returns the index of the item.
+    virtual int addItem(wchar_t* text, int commandId, bool enabled, bool hasSubMenu) = 0;
     virtual void addSeparator() = 0;
-    virtual const wchar_t* getItemText(int idx) = 0;
-    virtual void setItemText(int idx, const wchar_t* text) = 0;
-    virtual bool isItemEnabled(int idx) = 0;
-    virtual void setItemEnabled(int idx, bool enabled) = 0;
-    virtual void removeItem(int idx) = 0;
+    virtual const wchar_t* getItemText(int index) = 0;
+    virtual void setItemText(int index, const wchar_t* text) = 0;
+    virtual bool isItemEnabled(int index) = 0;
+    virtual void setItemEnabled(int index, bool enabled) = 0;
+    virtual void removeItem(int index) = 0;
     virtual void removeAllItems() = 0;
-    //! The highlighted item, or -1.
     virtual int getSelectedItem() = 0;
-    virtual int getItemCommandId(int idx) = 0;
-    virtual void setItemCommandId(int idx, int id) = 0;
-    virtual IGUIContextMenu* getSubMenu(int idx) = 0;
+    virtual int getItemCommandId(int index) = 0;
+    virtual void setItemCommandId(int index, int id) = 0;
+    virtual IGUIContextMenu* getSubMenu(int index) = 0;
 };
 
 } // end namespace gui

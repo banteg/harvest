@@ -9,7 +9,7 @@
 #include "daisy/os.h"
 #include "ox/core/CStringConversions.h"
 #include "ox/gui/IGUIButton.h"
-#include "ox/gui/IGUIElementInlines.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUISkin.h"

@@ -17,6 +17,11 @@ class IGUIFont;
 class IGUIListBox : public IGUIElement
 {
 public:
+    IGUIListBox(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual int getItemCount() = 0;
     virtual IGUIElement* getListItem(int index) = 0;
     //! The element holding the items; elements added to it become items.
@@ -35,9 +40,6 @@ public:
     virtual bool selectionWasDoubleClicked() = 0;
     virtual IGUIElement* getScrollBar() = 0;
     virtual void setIconFont(IGUIFont* font) = 0;
-
-    //! Receives the events of the list items.
-    event::IEventReceiver* EventReceiver;
 };
 
 } // end namespace gui

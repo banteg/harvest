@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUISkin.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
-// Mac 1.18 vtable of daisy::gui::CGUISkin; the size enumerators are not recovered yet.
+// Mac 1.18 vtable of daisy::gui::CGUISkin; the color and size enumerators are not recovered yet.
 
 #ifndef OX_GUI_IGUISKIN_H
 #define OX_GUI_IGUISKIN_H
@@ -15,7 +15,7 @@ namespace gui {
 
 class IGUIFont;
 
-//! Skin colors; the first ones are Irrlicht 0.7's.
+//! Default colors, numbered as in Irrlicht 0.7; Oxeye's additions after EGDC_WINDOW are not named yet.
 enum EGUI_DEFAULT_COLOR
 {
     EGDC_3D_DARK_SHADOW = 0,
@@ -35,9 +35,12 @@ enum EGUI_DEFAULT_COLOR
     EGDC_TOOLTIP,
     EGDC_SCROLLBAR,
     EGDC_WINDOW
-    // Oxeye's skin has further colors (the game sets color 17); they are not recovered yet.
 };
-enum EGUI_DEFAULT_SIZE {};
+//! Default sizes. Partial: only the values recovered code uses, numbered as in Irrlicht 0.7.
+enum EGUI_DEFAULT_SIZE
+{
+    EGDS_SCROLLBAR_SIZE = 0
+};
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT
 {

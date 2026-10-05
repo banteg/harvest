@@ -34,6 +34,8 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
+    // The constructor and the virtuals declared after remove() are defined inline in IGUIElementInline.h,
+    // which only the element implementations include.
     IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
 
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
@@ -173,9 +175,13 @@ public:
     virtual core::CDimension2d<int> getPreferredSize();
 
     IGUIElement* getParent() { return Parent; }
+
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
-    core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+    const core::CRect<int>& getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+
+    //! Returns the topmost visible element at the point, searching the children from back to front.
+    IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point);
 
 protected:
     std::list<IGUIElement*> Children;
@@ -200,10 +206,8 @@ protected:
 public:
     //! Layout hints read by the IGUILayout sorters, such as "center br" or "tab".
     const char* LayoutFlags;
-
-protected:
-    //! Gets the events before the parent does.
-    event::IEventReceiver* EventParent;
+    //! Receives the events of this element before its parent does.
+    event::IEventReceiver* EventReceiver;
 };
 
 } // end namespace gui

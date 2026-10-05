@@ -18,7 +18,7 @@ class IGUIElement;
 //! GUI events, in SEvent::GUIEvent.EventType.
 enum EGUI_EVENT_TYPE
 {
-    //! The element lost the focus.
+    //! An element lost the focus.
     EGET_ELEMENT_FOCUS_LOST = 0,
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
@@ -31,6 +31,10 @@ enum EGUI_EVENT_TYPE
     EGET_LISTBOX_CHANGED = 10,
     //! The selected list box item was selected again.
     EGET_LISTBOX_SELECTED_AGAIN = 12,
+    //! A file open dialog selected a file.
+    EGET_FILE_SELECTED = 13,
+    //! A file open dialog was cancelled.
+    EGET_FILE_CHOOSE_DIALOG_CANCELLED = 14,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! The no button of a message box was pressed.
