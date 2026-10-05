@@ -84,31 +84,6 @@ inline void CUnicodeFont::loadCharacter(SUnicodeChar* character)
         character->Size = character->Animation->getFrameSize(0);
 }
 
-//! Whether text starts with a color code.
-static bool isColorCode(const wchar_t* text)
-{
-    if (text[0] != L'#')
-        return false;
-
-    switch (text[1])
-    {
-    case L'0':
-    case L'1':
-    case L'2':
-    case L'3':
-    case L'4':
-    case L'5':
-    case L'6':
-    case L'7':
-    case L'8':
-    case L'9':
-    case L'o':
-        return true;
-    default:
-        return false;
-    }
-}
-
 void CUnicodeFont::draw(const wchar_t* text, const ox::core::CRect<int>& position, ox::video::SColor color,
     ox::gui::EFontHorizontalAlign horizontal, ox::gui::EFontVerticalAlign vertical, const ox::core::CRect<int>* clip)
 {
@@ -175,10 +150,24 @@ ox::core::CDimension2d<int> CUnicodeFont::getDimension(const wchar_t* text)
 
     while (*text)
     {
-        if (isColorCode(text))
+        if (*text == L'#')
         {
-            text += 2;
-            continue;
+            switch (text[1])
+            {
+            case L'0':
+            case L'1':
+            case L'2':
+            case L'3':
+            case L'4':
+            case L'5':
+            case L'6':
+            case L'7':
+            case L'8':
+            case L'9':
+            case L'o':
+                text += 2;
+                continue;
+            }
         }
 
         SUnicodeChar* character = findCharacter(*text);
@@ -203,10 +192,24 @@ int CUnicodeFont::getCharacterFromPos(const wchar_t* text, int x)
 
     while (*text)
     {
-        if (isColorCode(text))
+        if (*text == L'#')
         {
-            text += 2;
-            continue;
+            switch (text[1])
+            {
+            case L'0':
+            case L'1':
+            case L'2':
+            case L'3':
+            case L'4':
+            case L'5':
+            case L'6':
+            case L'7':
+            case L'8':
+            case L'9':
+            case L'o':
+                text += 2;
+                continue;
+            }
         }
 
         SUnicodeChar* character = findCharacter(*text);
