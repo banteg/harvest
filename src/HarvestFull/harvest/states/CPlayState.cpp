@@ -4208,11 +4208,11 @@ void CPlayState::render()
 
     if (GameOver)
     {
+        // The screen fades to black.
         int alpha = (int)((GameOverTime / -15.0f + 1.0f) * 255.0f);
-        ox::video::SColor color(0xff000000);
-        if (alpha <= 255)
-            color = ox::video::SColor(alpha >= 0 ? alpha << 24 : 0);
-        Driver->draw2DRectangle(color, ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
+        alpha = ox::core::min_(ox::core::max_(alpha, 0), 255);
+        Driver->draw2DRectangle(ox::video::SColor(alpha, 0, 0, 0),
+            ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
         ox::core::CString<wchar_t> text(L"--- ");
         if (GameWon)
             text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:victorySplash"));
