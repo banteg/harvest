@@ -1,5 +1,7 @@
 # Harvest: Massive Encounter — matching decompilation
 
+[![1.18](https://decomp.dev/banteg/harvest.svg?mode=shield&measure=code&label=1.18)](https://decomp.dev/banteg/harvest)
+
 Matching decompilation of Harvest: Massive Encounter 1.18 (Oxeye Game Studio, 2012).
 
 The target is the Linux amd64 build (`1.18-linux-amd64`), compiled with GCC 4.4.3 from Ubuntu 10.04.
