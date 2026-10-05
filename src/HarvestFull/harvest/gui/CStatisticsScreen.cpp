@@ -184,14 +184,14 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
                 if (Sprites[SPRITE_TOP])
                 {
                     Sprites[SPRITE_TOP]->draw(position, 0, ox::video::SColor(0xffffffff));
-                    position.Y += SpriteSizes[SPRITE_TOP].Y;
+                    position.Y += SpriteSizes[SPRITE_TOP].Height;
                 }
                 if (GraphType != GRAPH_OVERALL)
                 {
                     if (Sprites[SPRITE_DIAGRAM_BACKGROUND])
                     {
                         Sprites[SPRITE_DIAGRAM_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
-                        position.Y += SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Y;
+                        position.Y += SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Height;
                     }
                 }
                 else
@@ -199,7 +199,7 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
                     if (Sprites[SPRITE_OVERALL_BACKGROUND])
                     {
                         Sprites[SPRITE_OVERALL_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
-                        position.Y += SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Y;
+                        position.Y += SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Height;
                     }
                     if (Sprites[SPRITE_SCORE])
                         Sprites[SPRITE_SCORE]->draw(ox::core::CPosition2d<int>(origin.X + 222, origin.Y + 85), 0,
@@ -214,8 +214,8 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
                     int mode = g_scenarioResultGameMode;
                     if (Sprites[SPRITE_MODE_ICON + mode])
                         Sprites[SPRITE_MODE_ICON + mode]->draw(
-                            ox::core::CPosition2d<int>(origin.X + (86 - SpriteSizes[SPRITE_MODE_ICON + mode].X) / 2 + 83,
-                                origin.Y + (41 - SpriteSizes[SPRITE_MODE_ICON + mode].Y) / 2 + 65),
+                            ox::core::CPosition2d<int>(origin.X + (86 - SpriteSizes[SPRITE_MODE_ICON + mode].Width) / 2 + 83,
+                                origin.Y + (41 - SpriteSizes[SPRITE_MODE_ICON + mode].Height) / 2 + 65),
                             0, ox::video::SColor(0xffffffff));
                 }
                 if (Sprites[SPRITE_BOTTOM])
@@ -299,8 +299,8 @@ void CStatisticsScreen::setVisible(bool visible)
             Window = GUIEnvironment->addModalScreen();
             ox::gui::IGUILayout* layout = (ox::gui::IGUILayout*)GUIEnvironment->addLayoutGroup(
                 ox::core::CRect<int>(0, 0, 800, 600), Window);
-            ox::core::CRect<int> rect(0, 0, SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].X,
-                SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Y + SpriteSizes[SPRITE_TOP].Y + SpriteSizes[SPRITE_BOTTOM].Y);
+            ox::core::CRect<int> rect(0, 0, SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Width,
+                SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Height + SpriteSizes[SPRITE_TOP].Height + SpriteSizes[SPRITE_BOTTOM].Height);
             Frame = GUIEnvironment->addLayoutGroup(rect, layout);
             Frame->setReportOnDraw(true);
             Frame->setID(ID_WINDOW);
@@ -321,7 +321,7 @@ void CStatisticsScreen::setVisible(bool visible)
                     settings::gp_systemConfig->getLocalizedText(STAT_SELECTION_BUTTON_POPUPS[i]).c_str(), &popupColor);
             }
 
-            rect.LowerRightCorner.Y -= SpriteSizes[SPRITE_BOTTOM].Y;
+            rect.LowerRightCorner.Y -= SpriteSizes[SPRITE_BOTTOM].Height;
             InfoPanel = GUIEnvironment->addLayoutGroup(rect, Frame);
             ox::gui::IGUIStaticText* text = GUIEnvironment->addStaticText(level.c_str(),
                 ox::core::CRect<int>(264, 63, 417, 108), false, false, InfoPanel, -1, 0);
@@ -499,14 +499,14 @@ void CStatisticsScreen::renderGraph(const ox::core::CPosition2d<int>& position, 
 {
     if (clip.LowerRightCorner.X < position.X)
         return;
-    ox::core::CRect<int> rect(position.X, position.Y, position.X + SpriteSizes[SPRITE_DIAGRAM_BAR].X,
-        position.Y + SpriteSizes[SPRITE_DIAGRAM_BAR].Y);
+    ox::core::CRect<int> rect(position.X, position.Y, position.X + SpriteSizes[SPRITE_DIAGRAM_BAR].Width,
+        position.Y + SpriteSizes[SPRITE_DIAGRAM_BAR].Height);
     while (rect.UpperLeftCorner.X < clip.LowerRightCorner.X)
     {
         if (rect.isRectCollided(clip))
             Sprites[SPRITE_DIAGRAM_BAR]->draw(rect.UpperLeftCorner, &clip, color);
-        rect.UpperLeftCorner.X += SpriteSizes[SPRITE_DIAGRAM_BAR].X;
-        rect.LowerRightCorner.X += SpriteSizes[SPRITE_DIAGRAM_BAR].X;
+        rect.UpperLeftCorner.X += SpriteSizes[SPRITE_DIAGRAM_BAR].Width;
+        rect.LowerRightCorner.X += SpriteSizes[SPRITE_DIAGRAM_BAR].Width;
     }
 }
 
@@ -556,7 +556,11 @@ void CStatisticsScreen::loadSprites()
         {
             Sprites[i] = package->addNewAnimationState(STAT_SPRITE_NAMES[i]);
             if (Sprites[i])
-                SpriteSizes[i] = Sprites[i]->getFrameSize(0);
+            {
+                ox::core::CPosition2d<int> size = Sprites[i]->getFrameSize(0);
+                SpriteSizes[i].Width = size.X;
+                SpriteSizes[i].Height = size.Y;
+            }
         }
     }
     SpritesLoaded = true;

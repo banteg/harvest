@@ -120,7 +120,7 @@ private:
     ox::core::CDimension2d<int> AxisLabelSizes[6];
     ox::core::CRect<int> AxisLabelRects[6];
     ox::video::ISpriteAnimationState* Sprites[SPRITE_COUNT];
-    ox::core::CPosition2d<int> SpriteSizes[SPRITE_COUNT];
+    ox::core::CDimension2d<int> SpriteSizes[SPRITE_COUNT];
     ox::gui::IGUIElement* Window;
     ox::gui::IGUIElement* Frame;
     ox::gui::IGUIButton* GraphButtons[GRAPH_COUNT + 1];
