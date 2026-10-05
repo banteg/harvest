@@ -71,6 +71,7 @@ public:
 
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
+    core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
 
 protected:
     std::list<IGUIElement*> Children;

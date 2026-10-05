@@ -103,7 +103,12 @@ private:
     ox::core::CRect<float> VisibleGameField;
     ox::core::CRect<float> ActualGameField;
     ox::core::CRect<float> TargetGameField;
+
+public:
+    //! Cleared directly by CPlayState when a script ends the initial world.
     bool InitialWorld;
+
+private:
     ox::core::CDimension2d<float> ViewSize;
 
 public:

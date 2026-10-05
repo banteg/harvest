@@ -12,7 +12,11 @@ enum EKEY_CODE
 {
     KEY_BACK = 0x08,
     KEY_TAB = 0x09,
+    KEY_RETURN = 0x0D,
+    KEY_SHIFT = 0x10,
+    KEY_CONTROL = 0x11,
     KEY_ESCAPE = 0x1B,
+    KEY_SPACE = 0x20,
     KEY_LEFT = 0x25,
     KEY_UP = 0x26,
     KEY_RIGHT = 0x27,
@@ -26,6 +30,7 @@ enum EKEY_CODE
     KEY_KEY_C = 0x43,
     KEY_KEY_D = 0x44,
     KEY_KEY_E = 0x45,
+    KEY_KEY_F = 0x46,
     KEY_KEY_G = 0x47,
     KEY_KEY_H = 0x48,
     KEY_KEY_I = 0x49,
@@ -43,7 +48,11 @@ enum EKEY_CODE
     KEY_ADD = 0x6B,
     KEY_SUBTRACT = 0x6D,
     KEY_F2 = 0x71,
-    KEY_F3 = 0x72
+    KEY_F3 = 0x72,
+    KEY_F5 = 0x74,
+    KEY_F7 = 0x76,
+    KEY_LSHIFT = 0xA0,
+    KEY_RSHIFT = 0xA1
 };
 
 } // end namespace ox

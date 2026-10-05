@@ -47,7 +47,14 @@ public:
 
 private:
     // Not recovered yet; keeps the Linux object size of 192 bytes.
-    char Unrecovered[192 - sizeof(ox::event::IEventReceiver)];
+    char Unrecovered[0x48 - sizeof(ox::event::IEventReceiver)];
+
+public:
+    //! Set directly by CPlayState: the screen closes once the dialogue ends.
+    bool CloseWhenDone;
+
+private:
+    char Unrecovered2[192 - 0x49];
 };
 
 } // end namespace gui

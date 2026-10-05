@@ -29,6 +29,8 @@ enum EGUI_EVENT_TYPE
     EGET_LISTBOX_SELECTED_AGAIN = 12,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
+    //! Enter was pressed in an edit box.
+    EGET_EDITBOX_ENTER = 19,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
@@ -47,6 +49,8 @@ enum EEVENT_TYPE
     EET_MOUSE_INPUT_EVENT = 1,
     //! A keyboard input event, in SEvent::KeyInput.
     EET_KEY_INPUT_EVENT = 2,
+    //! A joystick button event, in SEvent::JoystickEvent.
+    EET_JOYSTICK_INPUT_EVENT = 3,
     //! A network device event.
     EET_NETWORK_EVENT = 5,
     //! A device event, in SEvent::DeviceEvent.
@@ -59,8 +63,14 @@ enum EEVENT_TYPE
 enum EMOUSE_INPUT_EVENT
 {
     EMIE_LMOUSE_PRESSED_DOWN = 0,
-    EMIE_LMOUSE_LEFT_UP = 3,
-    EMIE_MOUSE_MOVED = 6
+    EMIE_RMOUSE_PRESSED_DOWN,
+    EMIE_MMOUSE_PRESSED_DOWN,
+    EMIE_LMOUSE_LEFT_UP,
+    EMIE_RMOUSE_LEFT_UP,
+    EMIE_MMOUSE_LEFT_UP,
+    EMIE_MOUSE_MOVED,
+    //! The wheel or trackpad scrolled by MouseInput.ScrollX and ScrollY.
+    EMIE_MOUSE_WHEEL
 };
 
 //! Keyboard input events, in SEvent::KeyInput.Event.
@@ -107,9 +117,15 @@ struct SEvent
         {
             int X;
             int Y;
-            float Wheel;
-            // Not recovered yet.
-            int Reserved[2];
+            union
+            {
+                float Wheel;
+                //! The number of successive clicks, 2 for a double click.
+                int Clicks;
+            };
+            //! The scroll amounts of the wheel or trackpad.
+            float ScrollY;
+            float ScrollX;
             EMOUSE_INPUT_EVENT Event;
         } MouseInput;
 
@@ -126,6 +142,14 @@ struct SEvent
         {
             EDEVICE_EVENT_TYPE Type;
         } DeviceEvent;
+
+        struct
+        {
+            //! 0 when the button was pressed, 1 when it was released.
+            int Type;
+            int Joystick;
+            int Button;
+        } JoystickEvent;
 
         struct
         {

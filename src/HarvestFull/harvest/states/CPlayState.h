@@ -238,7 +238,7 @@ private:
 
     //! The state updateState returns: 0 to stay, 3 for the main menu.
     int NextState;
-    bool m_054;
+    bool MiddleMouseScrolling;
     ox::core::CDimension2d<int> ScreenSize;
     ox::core::CDimension2d<float> ScreenSizeF;
     CLoadingScreen* LoadingScreen;
@@ -269,11 +269,11 @@ private:
     //! Where the last building was placed; the next one is kept within a link's reach of it.
     ox::core::CPosition2d<float> LastPlacement;
     bool HasLastPlacement;
-    bool m_111;
+    bool DraggingFromSelection;
     int AlienSelection;
     ox::TArray<ox::entity::SEntityReference*> MultiSelection;
-    bool m_130;
-    bool m_131;
+    bool SelectionClickPending;
+    bool RectangleSelecting;
     bool PlacementOk;
     //! Set when the cursor moved over the world, so the placement must be updated.
     bool CursorMoved;
@@ -299,7 +299,7 @@ private:
     float GameOverTime;
     //! The credits when the game ended.
     int Minerals;
-    bool m_2d0;
+    bool MinimapDragging;
     ox::core::CRect<int> MinimapRect;
     ox::video::ISpriteAnimationState* MinimapDot;
     //! The minimap is drawn into this texture every two seconds when UseMinimapTexture is set.
@@ -315,7 +315,7 @@ private:
     bool LevelRecordShown;
     bool MineralsRecordShown;
     float RecordCheckTime;
-    bool m_328;
+    bool BuildingAttacked;
     //! Counts down while the not-enough-credits warning flashes.
     float DenialTime;
     float MusicTime;
@@ -385,7 +385,8 @@ private:
     //! Milliseconds the last updateState took.
     int UpdateDuration;
     int RenderDuration;
-    void* m_838;
+    //! The message box offering the full game, with the buy (0x4da) and close (0x4db) buttons.
+    ox::gui::IGUIElement* BuyMessageBox;
     game::CLuaManager* LuaManager;
 };
 

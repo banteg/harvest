@@ -23,6 +23,8 @@ public:
     virtual bool OnEvent(const ox::event::SEvent& event);
     bool isVisible();
     void setVisible(bool visible, bool save);
+    const char* getSelectedSaveFilename();
+    const wchar_t* getSelectedSaveDescription();
 
 private:
     // Not recovered yet; keeps the Linux object size of 232 bytes.
