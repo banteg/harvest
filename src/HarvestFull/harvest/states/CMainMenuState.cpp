@@ -902,13 +902,12 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                 case ID_FIRST_GAME_MODE + 3:
                 case ID_FIRST_GAME_MODE + 4:
                     {
-                        ox::video::ISpriteAnimationState* sprite =
-                            Sprites[id - ID_FIRST_GAME_MODE + SPRITE_MODE_NORMAL];
+                        int sprite = id - ID_FIRST_GAME_MODE + SPRITE_MODE_NORMAL;
                         ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
-                        if (sprite)
+                        if (Sprites[sprite])
                         {
-                            ox::core::CPosition2d<int> size = sprite->getFrameSize(0);
-                            sprite->draw(ox::core::CPosition2d<int>(
+                            ox::core::CPosition2d<int> size = Sprites[sprite]->getFrameSize(0);
+                            Sprites[sprite]->draw(ox::core::CPosition2d<int>(
                                 rect.UpperLeftCorner.X + (rect.getWidth() - size.X) / 2,
                                 rect.UpperLeftCorner.Y + (rect.getHeight() - size.Y) / 2), 0,
                                 ox::video::SColor(0xffffffff));
@@ -920,9 +919,9 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                         Sprites[SPRITE_MODE_SELECTOR])
                     {
                         ox::core::CRect<int> rect = GameModeButtons[HoveredGameMode]->getAbsolutePosition();
-                        Sprites[SPRITE_MODE_SELECTOR]->draw(ox::core::CPosition2d<int>(
-                            (rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
-                            (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2), 0, ox::video::SColor(0xffffffff));
+                        ox::core::CPosition2d<int> center((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
+                            (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
+                        Sprites[SPRITE_MODE_SELECTOR]->draw(center, 0, ox::video::SColor(0xffffffff));
                     }
                     if (Sprites[SPRITE_CONSOLE_TILE])
                     {
@@ -941,8 +940,10 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                     return true;
                 case ID_GAME_MODE_INFO:
                 case ID_SHADED_PANEL:
-                    Driver->draw2DRectangle(ox::video::SColor(0x80000000),
-                        event.GUIEvent.Caller->getAbsolutePosition(), 0);
+                    {
+                        ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
+                        Driver->draw2DRectangle(ox::video::SColor(0x80000000), rect, 0);
+                    }
                     return true;
                 }
                 break;
@@ -960,28 +961,23 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                     if (!planet)
                         return false;
 
-                    switch (SelectedPlanet)
+                    if (SelectedPlanet >= 0 && SelectedPlanet < PLANET_COUNT)
                     {
-                    case 0:
-                    case 1:
-                    case 2:
+                        int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+                        if ((score < 46 && SelectedPlanet == 1) || (score < 84 && SelectedPlanet == 2))
                         {
-                            int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
-                            if ((score < 46 && SelectedPlanet == 1) || (score < 84 && SelectedPlanet == 2))
-                            {
-                                AudioDriver->playSound("BtnDenial.ogg", 1.0f, 0.0f, 1.0f);
-                                createLockedPlanetMessageBox(SelectedPlanet);
-                                return false;
-                            }
-                            enterGameModeSelectMode(SelectedPlanet);
+                            AudioDriver->playSound("BtnDenial.ogg", 1.0f, 0.0f, 1.0f);
+                            createLockedPlanetMessageBox(SelectedPlanet);
+                            return false;
                         }
-                        break;
-                    case 3:
+                        enterGameModeSelectMode(SelectedPlanet);
+                    }
+                    else if (SelectedPlanet == PLANET_COUNT)
+                    {
                         PlanetHovered = false;
                         Mode = MODE_GAME_MODE_SELECT;
                         GUIEnvironment->addMessageBox(L"", L"Would you like to start the WICKED AWESOME GAME?", true,
                             ox::gui::EMBF_YES | ox::gui::EMBF_NO, 0, ID_SHUTTLE_RACE_BOX);
-                        break;
                     }
 
                     CameraPositionTarget = planet->getAbsolutePosition() + ox::core::CVector3d<float>(13.0f, 0.0f, -10.0f);
@@ -1052,17 +1048,20 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                     {
                         PlanetHovered = true;
                         SelectedPlanet = PLANET_COUNT;
-                        hidePopupPlanet();
+                        if (PopupPlanet)
+                        {
+                            PopupPlanet->remove();
+                            PopupPlanet = 0;
+                        }
                     }
                 }
                 else if (Mode == MODE_GAME_MODE_SELECT && SelectedPlanet >= 0 && SelectedPlanet < PLANET_COUNT)
                 {
                     for (int i = 0; i < GAME_MODE_COUNT; ++i)
                     {
-                        if (i == HoveredGameMode || !GameModeButtons[i] ||
-                            !GameModeButtons[i]->getAbsolutePosition().isPointInside(mouse))
-                            continue;
-
+                        if (i != HoveredGameMode && GameModeButtons[i] &&
+                            GameModeButtons[i]->getAbsolutePosition().isPointInside(mouse))
+                        {
                         HoveredGameMode = i;
                         if (GameModeTitle)
                         {
@@ -1112,6 +1111,7 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                             GameModeStats[3]->activateProgressiveReveal(0);
                         }
                         return false;
+                        }
                     }
                 }
             }
