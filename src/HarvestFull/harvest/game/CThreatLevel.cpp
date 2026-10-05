@@ -418,8 +418,8 @@ void CThreatLevelLogic::spawnAliensInArea(const ox::core::CRect<float>& area1,
         break;
 
     case 2:
-        aliens[8] = (count & 1) ? ox::core::clamp((count - 25) / 8, 0, 500) : 0;
         aliens[1] = ox::core::clamp((count - 20) / 3, 0, 100);
+        aliens[8] = (count & 1) ? ox::core::clamp((count - 25) / 8, 0, 500) : 0;
         aliens[4] = ox::core::clamp((count - 38) / 4, 0, 1000);
         aliens[6] = (count > 50 && count % 3 == 0) ? count / 25 : 0;
 
