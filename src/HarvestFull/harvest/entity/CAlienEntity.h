@@ -64,6 +64,7 @@ class CAlienEntity : public CEntity
 public:
     CAlienEntity(float x, float y, int alienType);
     virtual ~CAlienEntity();
+    CAlienLuaInfo* getLuaInfo() { return LuaInfo; }
 
     virtual void writeEntityData(ox::io::IWriteFile* file);
     virtual void readEntityData(ox::io::IReadFile* file, int version);

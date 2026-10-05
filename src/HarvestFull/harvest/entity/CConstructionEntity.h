@@ -4,6 +4,7 @@
 #define HARVEST_ENTITY_CCONSTRUCTIONENTITY_H
 
 #include "CBuildingEntity.h"
+#include "ox/core/CBasic.h"
 
 namespace harvest {
 namespace entity {
@@ -39,6 +40,14 @@ public:
     virtual void handleDoubleClickSelection();
 
     const char* getBuildingId();
+    //! Sets how far the construction is, from 0 to 1; a finished site still needs its last spark.
+    void setProgress(float progress)
+    {
+        if (progress >= 1.0f)
+            Sparks = SparksNeeded;
+        else
+            Sparks = ox::core::max_(ox::core::min_((int)(SparksNeeded * progress), SparksNeeded - 1), 0);
+    }
 
 private:
     //! Takes the entity type, costs, name and sprite from the buildable item.

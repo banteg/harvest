@@ -16,7 +16,8 @@ class CEntity;
 struct SBuildingInfoItem
 {
     ox::core::CString<char> EntityId;
-    unsigned char Unrecovered1[4];
+    //! Whether the player may build it; scripts switch it with setBuildingEnabled.
+    bool Enabled;
     int EntityType;
     ox::core::CString<wchar_t> Name;
     unsigned char Unrecovered2[0x10];
@@ -42,6 +43,10 @@ public:
     SBuildingInfoItem* getBuildingInfo(int index);
     //! The building id ("SPARKPRODUCER", a creative building's name) of an item.
     const char* getEntityId(int index);
+    SBuildingInfoItem* getBuildingInfoByEntityId(const char* entityId);
+    int getEntityType(int index);
+    void addSpecialUpgrade(const char* entityId, const char* upgradeId, const char* name, int cost,
+        int count, float value, const char* description);
 };
 
 extern CBuildableItems* gp_buildableItems;

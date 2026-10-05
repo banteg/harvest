@@ -14,6 +14,7 @@ class CPerimeterBombExplosion : public CEntity
 {
 public:
     CPerimeterBombExplosion(float x, float y);
+    void setFuse(float fuse) { Fuse = fuse; }
     virtual ~CPerimeterBombExplosion();
 
     virtual void writeEntityData(ox::io::IWriteFile* file);

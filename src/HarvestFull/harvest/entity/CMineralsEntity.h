@@ -47,6 +47,7 @@ public:
     int getHoggerId();
     //! Sets the minerals left and resizes the deposit to match.
     void setRemainingMinerals(int amount);
+    int getRemainingMinerals() { return Minerals.getValue(); }
 
     //! Scatters count deposits over an area in clusters of up to six.
     static void fillAreaWithMinerals(const ox::core::CRect<float>& area, int count, game::CWorld* world);

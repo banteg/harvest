@@ -53,6 +53,7 @@ public:
     virtual int updateLogic(float frameDelta);
     virtual void updateSprite(float frameDelta);
     const char* getBuildingId();
+    CCreativeLuaState* getCreativeLuaState() { return CreativeLuaState; }
     virtual int onSpark(CSparkEntity* spark);
     virtual bool wantsSpark();
     virtual void render(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort);

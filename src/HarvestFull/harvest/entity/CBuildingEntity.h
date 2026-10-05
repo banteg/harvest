@@ -52,6 +52,7 @@ public:
     static const char* getDeathParticleName(int entityType);
     //! The building id: the construction site, a creative building's own or the buildable item's.
     const char* getBuildingType();
+    CBuildingLuaInfo* getLuaInfo() { return LuaInfo; }
 
 protected:
     CBuildingLuaInfo* LuaInfo;

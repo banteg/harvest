@@ -36,6 +36,8 @@ public:
         ox::TArray<SLuaFilePair>& values);
     static void writeLuaFilePair(ox::io::IWriteFile* file, SLuaFilePair& pair);
     static void readLuaFilePair(ox::io::IReadFile* file, SLuaFilePair& pair, int version);
+    static void readLuaAttribute(ox::io::IReadFile* file, SLuaAttribute& attribute, int version);
+    static void writeLuaAttribute(ox::io::IWriteFile* file, SLuaAttribute& attribute);
 };
 
 } // end namespace game

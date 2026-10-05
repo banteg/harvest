@@ -207,3 +207,8 @@
 ".bss" = 0x86b914
 # Comparison jump table followed by the three character portrait pointers.
 ".rodata" = 0x5f6000
+
+["HarvestFull/harvest/game/CLuaManager.cpp"]
+".text" = 0x4431c0
+# s_availableLuaScriptFiles, gp_luaState, gp_luaManager, iostream and game-header statics.
+".bss" = 0x86b8e0

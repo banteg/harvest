@@ -417,6 +417,27 @@ public:
         return true;
     }
 
+    //! Replaces all characters of a special type with another one
+    void replace(T toReplace, T replaceWith)
+    {
+        for (int i = 0; i < used; ++i)
+            if (array[i] == toReplace)
+                array[i] = replaceWith;
+    }
+
+    //! Returns true if the string ends with other, terminators compared. The name is provisional:
+    //! every copy is inlined.
+    bool endsWith(const CString<T>& other) const
+    {
+        int offset = used - other.used;
+        if (offset < 0)
+            return false;
+        for (int i = 0; i < other.used; ++i)
+            if (array[offset + i] != other.array[i])
+                return false;
+        return true;
+    }
+
     //! Returns a substring
     CString<T> subString(int begin, int length) const
     {

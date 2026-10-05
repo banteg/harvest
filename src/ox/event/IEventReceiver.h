@@ -93,6 +93,8 @@ public:
 
     void addSubscriber(IEventReceiver* receiver);
     void removeSubscriber(IEventReceiver* receiver);
+    //! Sends the event to the subscribers on the next update.
+    void postDelayedEvent(const SEvent& event);
 };
 
 //! The subscriber list that game events are posted to.

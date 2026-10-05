@@ -10,6 +10,7 @@
 #include "../core/CDimension2d.h"
 #include "../core/CPosition2d.h"
 #include "../core/CRect.h"
+#include "../core/CVector2d.h"
 #include "../core/CVector3d.h"
 #include "SColor.h"
 
@@ -23,6 +24,10 @@ class CMatrix4;
 template <class T> class CTriangle3d;
 template <class T> class CAabbox3d;
 } // end namespace core
+
+namespace scene {
+class IMeshBuffer;
+} // end namespace scene
 
 namespace video {
 
@@ -126,6 +131,21 @@ public:
         SColor color) = 0;
     virtual void draw2DLineFloat(const core::CPosition2d<float>& start, const core::CPosition2d<float>& end,
         SColor color) = 0;
+    virtual void draw2DBezier(const core::CVector2d<float>& start, const core::CVector2d<float>& control1,
+        const core::CVector2d<float>& control2, const core::CVector2d<float>& end, float step,
+        SColor color) = 0;
+    virtual void draw2DHermite(const core::CVector2d<float>& start, const core::CVector2d<float>& tangent1,
+        const core::CVector2d<float>& end, const core::CVector2d<float>& tangent2, float step,
+        SColor color) = 0;
+    virtual void drawStencilShadowVolume(const core::CVector3d<float>* triangles, int count,
+        bool zfail) = 0;
+    virtual void drawStencilShadow(bool clearStencilBuffer, SColor leftUpEdge, SColor rightUpEdge,
+        SColor leftDownEdge, SColor rightDownEdge) = 0;
+    virtual void drawMeshBuffer(scene::IMeshBuffer* meshBuffer) = 0;
+    virtual void setFog(SColor color, bool linearFog, float start, float end, float density,
+        bool pixelFog, bool rangeFog) = 0;
+    //! The size of the screen or render window.
+    virtual core::CDimension2d<int> getScreenSize() = 0;
 };
 
 } // end namespace video

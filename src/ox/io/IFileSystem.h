@@ -37,7 +37,7 @@ public:
     virtual const char* getDirectoryFromAlias(const char* alias) = 0;
     virtual IFilePath* resolveAliases(const char* filename) = 0;
     virtual bool createDirectory(const char* directory) = 0;
-    virtual IFileList* createFileList(const char* directory, const char* filter, EFileList mode) = 0;
+    virtual IFileList* createFileList(const char* filter, const char* directory, EFileList mode) = 0;
     virtual bool existFile(const char* filename, bool ignoreArchives) = 0;
 };
 
