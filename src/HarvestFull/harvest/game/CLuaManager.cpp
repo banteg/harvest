@@ -2277,30 +2277,28 @@ void CLuaManager::renderGuiObjects(ox::video::IVideoDriver* driver, ox::gui::IGU
 {
     for (unsigned int i = 0; i < GuiObjects.size(); ++i)
     {
-        SLuaGuiObject* object = GuiObjects[i];
-        switch (object->Type)
+        switch (GuiObjects[i]->Type)
         {
-        case 2:
-            driver->draw2DRectangle(object->Color, ox::core::CRect<int>(object->X, object->Y,
-                object->X + object->Extent1, object->Y + object->Extent2), 0);
-            break;
-        case 1:
-            driver->draw2DLine(ox::core::CPosition2d<int>(object->X, object->Y),
-                ox::core::CPosition2d<int>(object->Extent1, object->Extent2), object->Color);
-            break;
         case 0:
         {
-            int x = object->X;
-            int y = object->Y;
-            ox::core::CDimension2d<int> size = font->getDimension(object->Text.c_str());
+            ox::core::CPosition2d<int> position(GuiObjects[i]->X, GuiObjects[i]->Y);
+            ox::core::CDimension2d<int> size = font->getDimension(GuiObjects[i]->Text.c_str());
             if (GuiObjects[i]->Extent1 == 1)
-                x -= size.Width / 2;
+                position.X -= size.Width / 2;
             else if (GuiObjects[i]->Extent1 == 2)
-                x -= size.Width;
-            font->draw(GuiObjects[i]->Text.c_str(), ox::core::CRect<int>(x, y, x + size.Width, y + size.Height),
+                position.X -= size.Width;
+            font->draw(GuiObjects[i]->Text.c_str(), ox::core::CRect<int>(position, size),
                 GuiObjects[i]->Color, (ox::gui::EFontHorizontalAlign)0, (ox::gui::EFontVerticalAlign)0, 0);
             break;
         }
+        case 1:
+            driver->draw2DLine(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
+                ox::core::CPosition2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2), GuiObjects[i]->Color);
+            break;
+        case 2:
+            driver->draw2DRectangle(GuiObjects[i]->Color, ox::core::CRect<int>(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
+                ox::core::CDimension2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2)), 0);
+            break;
         }
         delete GuiObjects[i];
     }
