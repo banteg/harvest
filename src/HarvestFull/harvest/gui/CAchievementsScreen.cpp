@@ -356,16 +356,10 @@ bool CAchievementsScreen::OnEvent(const ox::event::SEvent& event)
 
 void CAchievementsScreen::setVisible(bool visible)
 {
-    if (!visible)
+    if (visible)
     {
         if (Window)
-        {
-            Window->remove();
-            Window = 0;
-        }
-    }
-    else if (!Window)
-    {
+            return;
         Window = GUIEnvironment->addModalScreen();
         Frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 600, 500), Window, -1);
         ox::video::ISpritePackage* sprites =
@@ -374,12 +368,11 @@ void CAchievementsScreen::setVisible(bool visible)
             if (!MainAwards[i])
                 MainAwards[i] = sprites->addNewAnimationState(
                     settings::CHarvestProfile::getAchievementSpriteName(i, 0));
-        for (int i = settings::ACHIEVEMENT_MAIN_COUNT;
-             i < settings::ACHIEVEMENT_MAIN_COUNT + settings::ACHIEVEMENT_MINI_COUNT; ++i)
+        for (int i = 0; i < settings::ACHIEVEMENT_MINI_COUNT; ++i)
             for (int planet = 0; planet < 3; ++planet)
-                if (!MiniAwards[(i - settings::ACHIEVEMENT_MAIN_COUNT) * 3 + planet])
-                    MiniAwards[(i - settings::ACHIEVEMENT_MAIN_COUNT) * 3 + planet] =
-                        sprites->addNewAnimationState(settings::CHarvestProfile::getAchievementSpriteName(i, planet));
+                if (!MiniAwards[i * 3 + planet])
+                    MiniAwards[i * 3 + planet] = sprites->addNewAnimationState(
+                        settings::CHarvestProfile::getAchievementSpriteName(i + settings::ACHIEVEMENT_MAIN_COUNT, planet));
 
         int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
         ox::core::CString<wchar_t> title = settings::gp_systemConfig->getLocalizedText(
@@ -412,21 +405,20 @@ void CAchievementsScreen::setVisible(bool visible)
             AwardAreas[index]->setHoverItem(getAwardPopup(index, -1));
             Achieved[index] = settings::gp_profileManager->getCurrentProfile()->hasMainAchievement(index);
         }
-        for (int i = settings::ACHIEVEMENT_MAIN_COUNT;
-             i < settings::ACHIEVEMENT_MAIN_COUNT + settings::ACHIEVEMENT_MINI_COUNT; ++i)
+        for (int i = 0; i < settings::ACHIEVEMENT_MINI_COUNT; ++i)
         {
             for (int planet = 0; planet < 3; ++planet, ++index)
             {
                 ox::core::CPosition2d<int> size(48, 48);
-                if (MiniAwards[(i - settings::ACHIEVEMENT_MAIN_COUNT) * 3 + planet])
-                    size = MiniAwards[(i - settings::ACHIEVEMENT_MAIN_COUNT) * 3 + planet]->getFrameSize(0);
+                if (MiniAwards[i * 3 + planet])
+                    size = MiniAwards[i * 3 + planet]->getFrameSize(0);
                 int y = AWARD_POS_Y[index] - size.Y / 2;
                 int x = AWARD_POS_X[index] - size.X / 2;
                 if (y > 340)
                     y -= 40;
                 AwardAreas[index] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(x, y, x + size.X, y + size.Y), awards);
-                AwardAreas[index]->setHoverItem(getAwardPopup(i, planet));
-                Achieved[index] = settings::gp_profileManager->getCurrentProfile()->hasMiniAchievement(i, planet);
+                AwardAreas[index]->setHoverItem(getAwardPopup(i + settings::ACHIEVEMENT_MAIN_COUNT, planet));
+                Achieved[index] = settings::gp_profileManager->getCurrentProfile()->hasMiniAchievement(i + settings::ACHIEVEMENT_MAIN_COUNT, planet);
             }
         }
 
@@ -435,6 +427,11 @@ void CAchievementsScreen::setVisible(bool visible)
         Frame->centerOnParent();
         if (!Selector[0])
             Selector[0] = sprites->addNewAnimationState("ModeBtnSmallSelector");
+    }
+    else if (Window)
+    {
+        Window->remove();
+        Window = 0;
     }
 }
 
