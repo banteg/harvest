@@ -2235,9 +2235,8 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 {
                     // A click skips the end of the game.
                     GameOverTime = 0.1f;
-                    return false;
                 }
-                if (Action == 0)
+                else if (Action == 0)
                 {
                     LastPlacement = world;
                     HasLastPlacement = false;
@@ -2321,20 +2320,15 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 return true;
             }
         case ox::event::EMIE_RMOUSE_PRESSED_DOWN:
-            switch (Action)
+            if (Action == 0)
             {
-            case 0:
                 if (SelectedEntity)
                     SelectedEntity->handleRightClickAction(world);
                 else if (LuaManager)
                     LuaManager->hookMouseClick(world, 1, true);
-                break;
-            case 1:
-            case 2:
-            case 3:
-                setNoneAction(true);
-                break;
             }
+            else if (Action >= 1 && Action <= 3)
+                setNoneAction(true);
             return false;
         case ox::event::EMIE_MMOUSE_PRESSED_DOWN:
         {
@@ -2459,10 +2453,10 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                             area.LowerRightCorner.Y += 50;
                             if (!area.isPointInside(mouse))
                             {
-                                if (i)
-                                    setCreativeListToggle(false);
-                                else
+                                if (i == LIST_WAVES)
                                     setWaveListToggle(false);
+                                else
+                                    setCreativeListToggle(false);
                             }
                         }
                     }
