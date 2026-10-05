@@ -31,11 +31,12 @@ public:
     void setAttribute(const wchar_t* name, int value);
     void setAttribute(const wchar_t* name, float value);
     void setAttributeAsBase64(const core::CString<wchar_t>& name, const core::CString<wchar_t>& value);
+    TArray<CConfigBlock*>& getBlocks();
+    CConfigBlock* getBlock(const core::CString<wchar_t>& name);
 
 private:
     io::IFileSystem* FileSystem;
-    // The parsed blocks; their type is not recovered yet.
-    TArray<void*> Blocks;
+    TArray<CConfigBlock*> Blocks;
 };
 
 } // end namespace game
