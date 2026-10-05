@@ -18,6 +18,11 @@ namespace gui {
 class IGUIImage : public IGUIElement
 {
 public:
+    IGUIImage(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual void setImage(video::ITexture* image) = 0;
     virtual void setAnimation(const char* animation, video::ISpritePackage* package) = 0;
     virtual void setOverrideColor(video::SColor color) = 0;

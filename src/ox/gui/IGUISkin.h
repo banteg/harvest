@@ -15,7 +15,7 @@ namespace gui {
 
 class IGUIFont;
 
-//! The default colors, as in Irrlicht 0.7 with one Oxeye addition.
+//! The default colors, as in Irrlicht 0.7 with Oxeye's additions.
 enum EGUI_DEFAULT_COLOR
 {
     EGDC_3D_DARK_SHADOW = 0,

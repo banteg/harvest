@@ -53,7 +53,7 @@ public:
     virtual void sortHorizontally(int spacing);
     //! Places the children in rows broken at "br" hints, aligned by their other hints.
     virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
-    //! The rectangle the children are sorted in, relative to the element.
+    //! The rectangle inside the frame that children are placed in.
     virtual core::CRect<int> getContentArea();
     virtual void updateChildrenForContentArea();
 };
