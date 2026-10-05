@@ -105,6 +105,7 @@ private:
     bool SummaryMode;
     int GameMode;
     int Planet;
+    //! Cleared by the constructor; nothing in this unit reads it.
     int Unknown38;
     int SortMode;
     ox::core::CString<wchar_t> NameFilter;

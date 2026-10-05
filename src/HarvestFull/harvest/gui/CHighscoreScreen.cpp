@@ -219,14 +219,17 @@ void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
                 {
                     SummaryPages[SummaryCategory].Entries[i][j][k].Name = createUCS2FromBase64UTF2(columns[0]);
                     SummaryPages[SummaryCategory].Entries[i][j][k].Group = createUCS2FromBase64UTF2(columns[1]);
-                    SummaryPages[SummaryCategory].Entries[i][j][k].Score = ox::core::CString<wchar_t>(columns[2].c_str());
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Score =
+                        ox::core::CString<wchar_t>(columns[2].c_str());
                 }
                 else if (SummaryCategory == 2 && columns.size() == 2)
                 {
                     // the groups summary names only the group
                     SummaryPages[SummaryCategory].Entries[i][j][k].Name = createUCS2FromBase64UTF2(columns[0]);
-                    SummaryPages[SummaryCategory].Entries[i][j][k].Group = SummaryPages[SummaryCategory].Entries[i][j][k].Name;
-                    SummaryPages[SummaryCategory].Entries[i][j][k].Score = ox::core::CString<wchar_t>(columns[1].c_str());
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Group =
+                        SummaryPages[SummaryCategory].Entries[i][j][k].Name;
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Score =
+                        ox::core::CString<wchar_t>(columns[1].c_str());
                 }
             }
         }
@@ -455,7 +458,8 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                     settings::gp_systemConfig->getLocalizedText(L"highscores:filterName").c_str(), "br center",
                     popup, 0, -1);
                 FilterEditBox =
-                    GUIEnvironment->addEditBox(NameFilter.c_str(), ox::core::CRect<int>(0, 0, 200, 20), true, popup, -1);
+                    GUIEnvironment->addEditBox(NameFilter.c_str(), ox::core::CRect<int>(0, 0, 200, 20), true, popup,
+                        -1);
                 FilterEditBox->LayoutFlags = "br left";
                 FilterEditBox->setMax(20);
                 FilterEditBox->setAssociatedButton(ID_POPUP_NAME);
@@ -870,8 +874,8 @@ void CHighscoreScreen::setVisible(bool visible)
             StatusText = 0;
 
             int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin * 2 + 5;
-            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background, ID_BACK,
-                settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
+            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background,
+                ID_BACK, settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
             back->LayoutFlags = "br";
             back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
             back->centerOnParent();
