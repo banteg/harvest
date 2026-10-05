@@ -24,7 +24,7 @@ class CGUIButton : public ox::gui::IGUIButton
 public:
     //! constructor; a text starting with character 0x103 makes a window close button
     CGUIButton(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
-        ox::core::CRect<int> rectangle, bool noclip, const wchar_t* text);
+        ox::core::CRect<int> rectangle, bool noclip = false, const wchar_t* text = 0);
 
     //! destructor
     virtual ~CGUIButton();
