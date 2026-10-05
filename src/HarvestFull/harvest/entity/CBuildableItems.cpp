@@ -273,7 +273,8 @@ void CBuildableItems::setItemButtonLayout(int index, ox::gui::IGUILayout* layout
 void CBuildableItems::renderButtonLayouts(const ox::core::CPosition2d<int>& mouse, int selected,
     ox::core::CRect<int> clip)
 {
-    bool mouseInside = clip.isPointInside(mouse);
+    bool mouseInside = clip.UpperLeftCorner.X <= mouse.X && clip.UpperLeftCorner.Y <= mouse.Y &&
+        clip.LowerRightCorner.X > mouse.X && clip.LowerRightCorner.Y > mouse.Y;
     for (int i = 0; i < (int)Items.size(); ++i)
     {
         SBuildingInfoItem* item = Items[i];
@@ -300,29 +301,38 @@ int CBuildableItems::changeConstructionSelection(int index, bool forward)
 {
     if (forward)
     {
-        for (int i = index + 1;; ++i)
+        ++index;
+        int count = Items.size();
+        for (;; ++index)
         {
-            if (i >= (int)Items.size())
-                i = 0;
-            if (Items[i]->ButtonLayout && Items[i]->Enabled)
-                return i;
+            if (index >= count)
+                index = 0;
+            if (Items[index]->ButtonLayout && Items[index]->Enabled)
+                return index;
         }
     }
-    for (int i = index - 1;; --i)
+    --index;
+    while (true)
     {
-        if (i < 0)
-            i = Items.size() - 1;
-        if (Items[i]->ButtonLayout && Items[i]->Enabled)
-            return i;
+        if (index < 0)
+            index = Items.size() - 1;
+        else
+        {
+            if (Items[index]->ButtonLayout && Items[index]->Enabled)
+                return index;
+            --index;
+        }
     }
 }
 
 void CBuildableItems::addSpecialUpgrade(const char* entityId, const char* name, const char* description,
     int mineralCost, int sparkCost, float collisionSize, const char* sprite)
 {
+    ox::core::CString<wchar_t> wideName = name;
+    ox::core::CString<wchar_t> wideDescription = description;
     addBuilding(0, "$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat", entityId, false, 16, sprite,
-        "BoxSparkProducer", ox::core::CString<wchar_t>(name).c_str(), ox::core::CString<wchar_t>(description).c_str(),
-        mineralCost, sparkCost, collisionSize, "", sprite);
+        "BoxSparkProducer", wideName.c_str(), wideDescription.c_str(), mineralCost, sparkCost, collisionSize, "",
+        sprite);
 }
 
 int CBuildableItems::getIndexForEntityType(int entityType)
