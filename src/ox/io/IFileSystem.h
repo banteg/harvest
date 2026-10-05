@@ -1,5 +1,5 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Only the virtual prefix needed by CHelpIO is declared here. Linux inserts a
+// The virtual order follows the Mac 1.18 vtable of daisy::io::CFileSystem; Linux inserts a
 // path-cache-clearing virtual before getDirectoryFromAlias, unlike the Mac build.
 
 #ifndef OX_IO_IFILESYSTEM_H
@@ -15,6 +15,9 @@ namespace io {
 
 class IFilePath;
 class IFileList;
+class IXMLReader;
+class IXMLWriter;
+class IZipReader;
 // Only the enum's ABI type is needed here; its enumerators are not recovered yet.
 enum EFileList {};
 
@@ -39,6 +42,15 @@ public:
     virtual bool createDirectory(const char* directory) = 0;
     virtual IFileList* createFileList(const char* filter, const char* directory, EFileList mode) = 0;
     virtual bool existFile(const char* filename, bool ignoreArchives) = 0;
+    virtual IXMLReader* createXMLReader(const char* filename) = 0;
+    virtual IXMLReader* createXMLReader(IReadFile* file) = 0;
+    virtual IXMLWriter* createXMLWriter(const char* filename) = 0;
+    virtual IXMLWriter* createXMLWriter(IWriteFile* file) = 0;
+    virtual bool deleteFile(const char* filename) = 0;
+    virtual bool renameFile(const char* filename, const char* newName) = 0;
+    virtual bool changeWorkingDirectoryTo(const char* directory) = 0;
+    virtual const char* getZipInPath(const char* filename) = 0;
+    virtual IZipReader* getZipReader(const char* filename) = 0;
 };
 
 } // end namespace io
