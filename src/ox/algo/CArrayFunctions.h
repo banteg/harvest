@@ -66,9 +66,9 @@ template <class I, class T>
 int binarySearchPos(I begin, I end, const T& value)
 {
     I it = std::lower_bound(begin, end, value);
-    if (it != end && !(value < *it))
-        return it - begin;
-    return -1;
+    if (it == end || value < *it)
+        return -1;
+    return it - begin;
 }
 
 //! Sorts [begin, end) by operator<.

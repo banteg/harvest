@@ -8,6 +8,7 @@
 #include <vector>
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUILayout.h"
+#include "ox/gui/IGUILayoutInline.h"
 #include "ox/gui/IGUIHoverParent.h"
 #include "ox/core/CString.h"
 

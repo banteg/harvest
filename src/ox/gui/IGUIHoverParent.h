@@ -5,6 +5,7 @@
 #define OX_GUI_IGUIHOVERPARENT_H
 
 #include "IGUIElement.h"
+#include "IGUIElementInline.h"
 #include "IGUIEnvironment.h"
 
 namespace ox {

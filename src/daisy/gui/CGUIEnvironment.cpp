@@ -571,13 +571,12 @@ IGUIStaticText* CGUIEnvironment::addStaticText(const wchar_t* text, int width, I
             return 0;
     }
 
-    if (!parent)
-        parent = this;
-    if (!style)
-        style = L"";
+    IGUIElement* textParent = parent ? parent : this;
+    const wchar_t* textStyle = style ? style : L"";
 
-    int height = IGUIStaticText::getMultilineHeight(ox::core::CString<wchar_t>(text), font, width, style);
-    IGUIStaticText* staticText = addStaticText(text, CRect<int>(0, 0, width, height), false, true, parent, id, style);
+    int height = IGUIStaticText::getMultilineHeight(ox::core::CString<wchar_t>(text), font, width, textStyle);
+    IGUIStaticText* staticText = addStaticText(text, CRect<int>(0, 0, width, height), false, true, textParent, id,
+        textStyle);
     staticText->setOverrideFont(font);
     return staticText;
 }
@@ -592,8 +591,8 @@ IGUIStaticText* CGUIEnvironment::addStaticText(const wchar_t* text, const char* 
             return 0;
     }
 
-    IGUIStaticText* staticText = addStaticText(text, CRect<int>(0, 0, 10, 15), false, false, parent ? parent : this,
-        id, 0);
+    IGUIElement* textParent = parent ? parent : this;
+    IGUIStaticText* staticText = addStaticText(text, CRect<int>(0, 0, 10, 15), false, false, textParent, id, 0);
     staticText->LayoutFlags = layout;
     staticText->setOverrideFont(font);
     return staticText;

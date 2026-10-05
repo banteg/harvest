@@ -5,6 +5,7 @@
 #define DAISY_GUI_CGUISTATICTEXT_H
 
 #include "ox/gui/IGUIStaticText.h"
+#include "ox/gui/IGUIStaticTextInline.h"
 
 namespace ox {
 class IOSOperator;

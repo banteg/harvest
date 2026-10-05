@@ -5,6 +5,7 @@
 #define OX_GUI_IGUIHOVERITEM_H
 
 #include "IGUIElement.h"
+#include "IGUIElementInline.h"
 
 namespace ox {
 namespace gui {

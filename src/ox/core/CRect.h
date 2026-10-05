@@ -51,8 +51,8 @@ public:
 
     bool isPointInside(const CPosition2d<T>& position) const
     {
-        return position.X >= UpperLeftCorner.X && position.Y >= UpperLeftCorner.Y &&
-            position.X < LowerRightCorner.X && position.Y < LowerRightCorner.Y;
+        return UpperLeftCorner.X <= position.X && UpperLeftCorner.Y <= position.Y &&
+            LowerRightCorner.X > position.X && LowerRightCorner.Y > position.Y;
     }
 
     bool isRectCollided(const CRect<T>& other) const
