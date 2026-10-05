@@ -432,3 +432,7 @@
 ["daisy/gui/CGUICheckBox.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c1bc
+
+["daisy/gui/CGUIClickArea.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1c0

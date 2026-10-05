@@ -19,6 +19,7 @@ public:
     {
     }
 
+    virtual core::CRect<int> getParentAbsoluteClippingRect(bool clip);
     virtual void sortFlow(int spacingX, int spacingY, bool resize, bool sortHidden);
     virtual void sortVertically(int spacing, bool resize);
     virtual void sortHorizontally(int spacing);
