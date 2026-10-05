@@ -264,10 +264,15 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
     AnimationCount = ox::io::CHelpIO::readInt(file);
     HeaderSize = SPRITE_PACKAGE_HEADER_SIZE;
     TextureDataSize = TextureSize * TextureSize;
-    if (TextureFormat == 1)
-        TextureDataSize *= 4;
-    else if (TextureFormat == 0)
+    switch (TextureFormat)
+    {
+    case 0:
         TextureDataSize *= 3;
+        break;
+    case 1:
+        TextureDataSize *= 4;
+        break;
+    }
 
     for (int i = 0; i < TextureCount; ++i)
     {
@@ -319,12 +324,22 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
         animation.Id = atoi(animation.Name.c_str());
 
         int count = ox::io::CHelpIO::readInt(file);
+        int value;
         for (int j = 0; j < count; ++j)
-            animation.Frames.push_back(ox::io::CHelpIO::readInt(file));
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Frames.push_back(value);
+        }
         for (int j = 0; j < count; ++j)
-            animation.Jumps.push_back(ox::io::CHelpIO::readInt(file));
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Jumps.push_back(value);
+        }
         for (int j = 0; j < count; ++j)
-            animation.Durations.push_back(ox::io::CHelpIO::readInt(file));
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Durations.push_back(value);
+        }
 
         Animations.push_back(animation);
         AnimationNames.push_back(animation.Name);
