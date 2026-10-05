@@ -224,15 +224,8 @@ int CSparkMoverEntity::onSpark(CSparkEntity* spark)
 
     if (Heat < 0)
         Heat = 0;
-    else if (Heat > 1.0f)
-        goto overheated;
 
-    if (isAlienWaypointed())
-    {
-overheated:
-        Heat = ox::core::max_(Heat - 1.0f / 60.0f, 0.0f);
-    }
-    else
+    if (Heat <= 1.0f && !isAlienWaypointed())
     {
         Heat += 1.0f / 30.0f;
         PeakHeat = ox::core::max_(PeakHeat, Heat);
@@ -260,6 +253,8 @@ overheated:
         if (target > 0)
             return target;
     }
+    else
+        Heat = ox::core::max_(Heat - 1.0f / 60.0f, 0.0f);
 
     // the spark dies here
     gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0,
@@ -283,11 +278,16 @@ int CSparkMoverEntity::selectRequiredSparkTarget()
         int current = SparkIndex % SparkTargets.size();
         entity = (CEntity*)SparkTargets[current];
         if (current == start)
-            return 0;
+        {
+            entity = 0;
+            break;
+        }
         ++SparkIndex;
     }
 
-    return entity->getId();
+    if (entity)
+        return entity->getId();
+    return 0;
 }
 
 bool CSparkMoverEntity::acceptsSparkFrom(int id)
@@ -370,15 +370,13 @@ void CSparkMoverEntity::setSparkTargetId(int id, bool alien)
 
 void CSparkMoverEntity::clearWaypointsForward()
 {
-    CSparkMoverEntity* mover = this;
-    while (mover->isWaypointed() && !mover->AlienWaypoint)
+    if (isWaypointed() && !AlienWaypoint)
     {
-        ox::entity::COxEntity* next = gp_entityManager->locateEntity(mover->Waypoint.Id, 0);
-        mover->Waypoint.Id = -1;
-        mover->Waypoint.Entity = 0;
-        if (!next || next->getEntityType() != 1)
-            return;
-        mover = (CSparkMoverEntity*)next;
+        ox::entity::COxEntity* next = gp_entityManager->locateEntity(Waypoint.Id, 0);
+        Waypoint.Id = -1;
+        Waypoint.Entity = 0;
+        if (next && next->getEntityType() == 1)
+            ((CSparkMoverEntity*)next)->clearWaypointsForward();
     }
 }
 

@@ -24,23 +24,23 @@ CMissileTurretEntity::CMissileTurretEntity(int type, float x, float y)
       Kills(0), BurstCount(0), BurstTime(0), IdleTime(12.0f), Launching(false), TargetPosition(0, 0),
       TargetId(-1)
 {
-    if (Type == 13)
+    switch (Type)
     {
-        Sprites[0] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("Eagle"));
-        Sprites[1] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("EagleOpening"));
-        Sprites[2] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("EagleClosing"));
-    }
-    else if (Type == 14)
-    {
-        Sprites[0] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("Tempest"));
-        Sprites[1] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("TempestOpening"));
-        Sprites[2] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("TempestClosing"));
-    }
-    else
-    {
+    default:
         Sprites[0] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("MissileTower"));
         Sprites[1] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("MissileTowerOpening"));
         Sprites[2] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("MissileTowerClosing"));
+        break;
+    case 13:
+        Sprites[0] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("Eagle"));
+        Sprites[1] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("EagleOpening"));
+        Sprites[2] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("EagleClosing"));
+        break;
+    case 14:
+        Sprites[0] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("Tempest"));
+        Sprites[1] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("TempestOpening"));
+        Sprites[2] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("TempestClosing"));
+        break;
     }
 }
 
@@ -177,128 +177,83 @@ CAlienEntity* CMissileTurretEntity::findPriorityAlien(const ox::core::CVector3d<
 
 int CMissileTurretEntity::updateLogic(float frameDelta)
 {
-    if (Sparks >= getRequiredSparks() && !Launching && SpriteIndex != 1)
+    if (Sparks >= getRequiredSparks())
     {
-        ReloadTime -= frameDelta;
-        if (ReloadTime <= 0)
+        if (!Launching && SpriteIndex != 1)
         {
-            CAlienEntity* alien = findPriorityAlien();
-            if (!alien)
-                ReloadTime += 2.0f;
-            else
+            ReloadTime -= frameDelta;
+            if (ReloadTime <= 0)
             {
-                if (Type == 14)
-                {
-                    const ox::core::CVector3d<float>& target = alien->getPosition();
-                    TargetPosition.X = target.X;
-                    TargetPosition.Y = target.Y;
-                    BurstTime = 0;
-                    BurstCount = 4;
-                    SpriteIndex = 1;
-                    Sprites[1]->reset();
-                }
-                else if (Type == 13)
-                {
-                    const ox::core::CVector3d<float>& target = alien->getPosition();
-                    TargetPosition.X = target.X;
-                    TargetPosition.Y = target.Y;
-                    TargetId = alien->getId();
-                    SpriteIndex = 1;
-                    Sprites[1]->reset();
-                    BurstTime = 0;
-                    BurstCount = 3;
-                }
+                CAlienEntity* alien = findPriorityAlien();
+                if (!alien)
+                    ReloadTime += 2.0f;
                 else
                 {
-                    // These draws are present in both originals even though their results are unused.
-                    ox::algo::CRand::rand();
-                    ox::algo::CRand::rand();
-                    ox::algo::CRand::rand();
-                    ox::algo::CRand::rand();
-                    const ox::core::CVector3d<float>& target = alien->getPosition();
-                    TargetPosition.X = target.X;
-                    TargetPosition.Y = target.Y;
-                    float dx = alien->getMovementTarget().X - TargetPosition.X;
-                    float dy = alien->getMovementTarget().Y - TargetPosition.Y;
-                    float ax = ox::core::abs_(dx);
-                    float ay = ox::core::abs_(dy);
-                    if (ax != 0 || ay != 0)
+                    if (Type == 14)
                     {
-                        float length = ax > ay ? ax - ay + ay * 1.5f : ay - ax + ax * 1.5f;
-                        float lead = ox::core::max_(1.2f, length / 500.0f * 3.5f) * 10.0f;
-                        float magnitude = float(sqrt(double(dx * dx + dy * dy)));
-                        TargetPosition.X += dx / magnitude * lead;
-                        TargetPosition.Y += dy / magnitude * lead;
+                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        TargetPosition.X = target.X;
+                        TargetPosition.Y = target.Y;
+                        BurstTime = 0;
+                        BurstCount = 4;
+                        SpriteIndex = 1;
+                        Sprites[1]->reset();
                     }
-                    SpriteIndex = 1;
-                    Sprites[1]->reset();
+                    else if (Type == 13)
+                    {
+                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        TargetPosition.X = target.X;
+                        TargetPosition.Y = target.Y;
+                        TargetId = alien->getId();
+                        SpriteIndex = 1;
+                        Sprites[1]->reset();
+                        BurstTime = 0;
+                        BurstCount = 3;
+                    }
+                    else
+                    {
+                        // These draws are present in both originals even though their results are unused.
+                        ox::algo::CRand::rand();
+                        ox::algo::CRand::rand();
+                        ox::algo::CRand::rand();
+                        ox::algo::CRand::rand();
+                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        TargetPosition.X = target.X;
+                        TargetPosition.Y = target.Y;
+                        ox::core::CVector2d<float> direction(alien->getMovementTarget().X - TargetPosition.X,
+                            alien->getMovementTarget().Y - TargetPosition.Y);
+                        float dx = direction.X;
+                        float dy = direction.Y;
+                        float ax = ox::core::abs_(dx);
+                        float ay = ox::core::abs_(dy);
+                        if (ax != 0 || ay != 0)
+                        {
+                            float length = ax > ay ? ay * 1.5f + (ax - ay) : ax * 1.5f + (ay - ax);
+                            float magnitude = ox::core::CVector2d<float>(dx, dy).getLength();
+                            float lead = ox::core::max_(1.2f, length / 500.0f * 3.5f) * 10.0f;
+                            TargetPosition.X += dx / magnitude * lead;
+                            TargetPosition.Y += dy / magnitude * lead;
+                        }
+                        SpriteIndex = 1;
+                        Sprites[1]->reset();
+                    }
+                    float reload;
+                    if (Type == 14)
+                        reload = 20.0f;
+                    else if (Type == 13)
+                        reload = 30.0f;
+                    else
+                        reload = 12.0f;
+                    ReloadTime += reload;
                 }
-                ReloadTime += Type == 14 ? 20.0f : Type == 13 ? 30.0f : 12.0f;
             }
         }
     }
     if (Launching)
     {
-        if (Type == 13)
+        switch (Type)
         {
-            if (BurstTime <= 0)
-            {
-                if (BurstCount == 0)
-                {
-                    Launching = false;
-                    Sparks = 0;
-                    SpriteIndex = 2;
-                    Sprites[2]->reset();
-                }
-                else
-                {
-                    --BurstCount;
-                    BurstTime += 0.3f;
-                    gp_entityManager->appendEntity(new CMissileEntity(Position.X, Position.Y,
-                        TargetPosition, Id, 2, TargetId), 3);
-                    gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 5.0f,
-                        0, "EagleLaunch"), 4);
-                    if (game::gp_luaManager)
-                        game::gp_luaManager->hookMissileLaunched(2, this, TargetId,
-                            TargetPosition.X, TargetPosition.Y);
-                }
-            }
-            else
-                BurstTime -= frameDelta;
-        }
-        else if (Type == 14)
-        {
-            if (BurstTime <= 0)
-            {
-                if (BurstCount == 0)
-                {
-                    Launching = false;
-                    Sparks = 0;
-                    SpriteIndex = 2;
-                    Sprites[2]->reset();
-                }
-                else
-                {
-                    --BurstCount;
-                    BurstTime += 0.2f;
-                    int x = ox::algo::CRand::rand();
-                    int y = ox::algo::CRand::rand();
-                    ox::core::CPosition2d<float> target(TargetPosition.X + float(x % 200 - 100),
-                        TargetPosition.Y + float(y % 200 - 100));
-                    gp_entityManager->appendEntity(new CMissileEntity(Position.X, Position.Y,
-                        target, Id, 1, -1), 3);
-                    gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y + 1.0f,
-                        5.0f, 0, "MirvLaunch"), 4);
-                    if (game::gp_luaManager)
-                        game::gp_luaManager->hookMissileLaunched(1, this, -1,
-                            TargetPosition.X, TargetPosition.Y);
-                }
-            }
-            else
-                BurstTime -= frameDelta;
-        }
-        else if (Type == 8)
-        {
+        case 8:
             gp_entityManager->appendEntity(new CMissileEntity(Position.X, Position.Y + 1.0f,
                 TargetPosition, Id, 0, -1), 3);
             if (game::gp_luaManager)
@@ -307,6 +262,57 @@ int CMissileTurretEntity::updateLogic(float frameDelta)
             Launching = false;
             SpriteIndex = 2;
             Sprites[2]->reset();
+            break;
+        case 13:
+            if (BurstTime > 0)
+                BurstTime -= frameDelta;
+            else if (BurstCount == 0)
+            {
+                Launching = false;
+                Sparks = 0;
+                SpriteIndex = 2;
+                Sprites[2]->reset();
+            }
+            else
+            {
+                --BurstCount;
+                BurstTime += 0.3f;
+                gp_entityManager->appendEntity(new CMissileEntity(Position.X, Position.Y,
+                    TargetPosition, Id, 2, TargetId), 3);
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 5.0f,
+                    0, "EagleLaunch"), 4);
+                if (game::gp_luaManager)
+                    game::gp_luaManager->hookMissileLaunched(2, this, TargetId,
+                        TargetPosition.X, TargetPosition.Y);
+            }
+            break;
+        case 14:
+            if (BurstTime > 0)
+                BurstTime -= frameDelta;
+            else if (BurstCount == 0)
+            {
+                Launching = false;
+                Sparks = 0;
+                SpriteIndex = 2;
+                Sprites[2]->reset();
+            }
+            else
+            {
+                --BurstCount;
+                BurstTime += 0.2f;
+                int x = ox::algo::CRand::rand();
+                int y = ox::algo::CRand::rand();
+                ox::core::CPosition2d<float> target(TargetPosition.X + float(x % 200 - 100),
+                    TargetPosition.Y + float(y % 200 - 100));
+                gp_entityManager->appendEntity(new CMissileEntity(Position.X, Position.Y,
+                    target, Id, 1, -1), 3);
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y + 1.0f,
+                    5.0f, 0, "MirvLaunch"), 4);
+                if (game::gp_luaManager)
+                    game::gp_luaManager->hookMissileLaunched(1, this, -1,
+                        TargetPosition.X, TargetPosition.Y);
+            }
+            break;
         }
     }
     if (Sparks >= getRequiredSparks())
@@ -318,7 +324,7 @@ int CMissileTurretEntity::updateLogic(float frameDelta)
     {
         IdleTime += frameDelta;
         int brightness = int(255.0f - IdleTime * IdleTime);
-        brightness = ox::core::min_(255, ox::core::max_(128, brightness));
+        brightness = ox::core::clamp(brightness, 128, 255);
         Color = ox::video::SColor(255, brightness, brightness, brightness);
     }
     return 0;
@@ -446,21 +452,28 @@ void CMissileEntity::initializeMissileType()
 {
     if (Particle)
         Particle->remove();
-    if (MissileType == 1)
+    switch (MissileType)
     {
+    default:
         if (gp_particlePackage)
-            Particle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("Mirv"));
-        Speed.Z = 200.0f;
-    }
-    else if (MissileType == 2)
-    {
+            Particle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("Missile"));
+        break;
+    case 2:
         if (gp_particlePackage)
+        {
             Particle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("Eagle"));
-        Speed.Z = 300.0f;
-        Position.Z = 15.0f;
+            Speed.Z = 300.0f;
+            Position.Z = 15.0f;
+        }
+        break;
+    case 1:
+        if (gp_particlePackage)
+        {
+            Particle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("Mirv"));
+            Speed.Z = 200.0f;
+        }
+        break;
     }
-    else if (gp_particlePackage)
-        Particle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("Missile"));
 }
 
 void CMissileEntity::setSpeed(float x, float y, float z)
@@ -543,6 +556,8 @@ int CMissileEntity::updateLogic(float frameDelta)
     }
     else
     {
+        float dx = TargetPosition.X - Position.X;
+        float dy = TargetPosition.Y - Position.Y;
         if (MissileType == 0 && Position.Z < 5.0f)
         {
             const std::list<ox::entity::COxEntity*>& entities = gp_entityManager->getEntityList(1);
@@ -564,19 +579,25 @@ int CMissileEntity::updateLogic(float frameDelta)
                 }
             }
             if (!aliens.empty())
+            {
                 std::sort(aliens.begin(), aliens.end(), SAlienDistanceSorter());
-            int kills = 0;
-            for (unsigned int i = 0; i < 7 && i < aliens.size(); ++i)
-            {
-                float falloff = float(100.0 - sqrt(double(aliens[i].SquaredDistance)));
-                float damage = falloff * falloff * falloff / 1000000.0f * 120.0f;
-                kills += aliens[i].Alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 3.0f, 1);
-            }
-            if (kills > 0 && OwnerId >= 0)
-            {
-                ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
-                if (owner && owner->getEntityType() == 8)
-                    static_cast<CMissileTurretEntity*>(owner)->addKillCount(kills);
+                int kills = 0;
+                for (unsigned int i = 0; i < 7; ++i)
+                {
+                    if (i >= aliens.size())
+                        break;
+                    float falloff = float(100.0 - sqrt(double(aliens[i].SquaredDistance)));
+                    float damage = falloff * falloff * falloff / 1000000.0f * 120.0f;
+                    if (aliens[i].Alien->dealDamage(damage,
+                            ox::core::CPosition2d<float>(Position.X, Position.Y), 3.0f, 1))
+                        ++kills;
+                }
+                if (kills > 0 && OwnerId >= 0)
+                {
+                    ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
+                    if (owner && owner->getEntityType() == 8)
+                        static_cast<CMissileTurretEntity*>(owner)->addKillCount(kills);
+                }
             }
             gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f,
                 0, "MissleExplosion"), 4);
@@ -608,8 +629,6 @@ int CMissileEntity::updateLogic(float frameDelta)
                 0, "MirvExplosion"), 4);
             return 1;
         }
-        float dx = TargetPosition.X - Position.X;
-        float dy = TargetPosition.Y - Position.Y;
         TargetPosition.Z = sqrtf(dx * dx + dy * dy) * 0.5f;
         if (MissileType == 1)
             updateSpeed(ox::core::CVector3d<float>(dx, dy, TargetPosition.Z - Position.Z),

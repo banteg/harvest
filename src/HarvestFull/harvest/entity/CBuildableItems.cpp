@@ -281,26 +281,24 @@ int CBuildableItems::changeConstructionSelection(int index, bool forward)
     {
         ++index;
         int count = Items.size();
-        for (;; ++index)
+        while (!(index < count && Items[index]->ButtonLayout && Items[index]->Enabled))
         {
             if (index >= count)
                 index = 0;
-            if (Items[index]->ButtonLayout && Items[index]->Enabled)
-                return index;
+            else
+                ++index;
         }
+        return index;
     }
     --index;
-    while (true)
+    while (!(index >= 0 && Items[index]->ButtonLayout && Items[index]->Enabled))
     {
         if (index < 0)
             index = Items.size() - 1;
         else
-        {
-            if (Items[index]->ButtonLayout && Items[index]->Enabled)
-                return index;
             --index;
-        }
     }
+    return index;
 }
 
 void CBuildableItems::addSpecialUpgrade(const char* entityId, const char* name, const char* description,

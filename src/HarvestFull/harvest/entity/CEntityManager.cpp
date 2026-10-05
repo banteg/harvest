@@ -192,10 +192,13 @@ CEntity* CEntityManager::findClickableEntity(const ox::core::CPosition2d<float>&
 bool CEntityManager::isBuildingPlacementOk(ox::core::CPosition2d<float>& position, float collisionSize)
 {
     int attempts = 0;
-    while (true)
+    bool placementOk;
+    do
     {
-        std::list<ox::entity::COxEntity*>::iterator it = EntityLists[0].begin();
-        for (; it != EntityLists[0].end(); ++it)
+        ++attempts;
+        placementOk = true;
+        for (std::list<ox::entity::COxEntity*>::iterator it = EntityLists[0].begin();
+            it != EntityLists[0].end(); ++it)
         {
             CEntity* entity = (CEntity*)*it;
             if (!PLACEMENT_OBSTACLES[entity->getEntityType()] && entity->getEntityType() != 5) continue;
@@ -209,12 +212,13 @@ bool CEntityManager::isBuildingPlacementOk(ox::core::CPosition2d<float>& positio
                     ox::core::CPosition2d<float>(currentCoordinates.X, currentCoordinates.Y), position);
                 position.X = entity->getPosition().X + cos((double)angle) * (radius + 1.0f);
                 position.Y = entity->getPosition().Y + sin((double)angle) * (radius + 1.0f);
+                placementOk = false;
                 break;
             }
         }
-        if (it == EntityLists[0].end()) return true;
-        if (++attempts > 2 || !game::gp_world->mayPlaceObjectHere(position, false)) return false;
     }
+    while (!placementOk && attempts <= 2 && game::gp_world->mayPlaceObjectHere(position, false));
+    return placementOk;
 }
 
 CEntity* CEntityManager::findRandomEntityInRange(const ox::core::CPosition2d<float>& position,
@@ -410,7 +414,10 @@ int CFindClickableBuilding::testEntity(ox::entity::COxEntity* entity, ox::entity
 bool CFindRandomEntityInRange::testEntity(ox::entity::COxEntity* entity)
 {
     int entityType = EntityType;
-    if (entityType >= 0 && entityType != entity->getEntityType()) return false;
+    if (entityType >= 0)
+    {
+        if (entity->getEntityType() != entityType) return false;
+    }
     float distance = ox::core::CMath::getSquaredDistance(
         ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), Position);
     if (distance <= SquaredRange) return true;
@@ -453,7 +460,9 @@ bool CFindRangeLineBuildings::testEntity(ox::entity::COxEntity* entity)
     }
     float distance = ox::core::CMath::getSquaredDistance(
         ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), Position);
-    return distance <= (type == 5 ? 10000.0f : 22500.0f);
+    if (type == 5)
+        return distance <= 10000.0f;
+    return distance <= 22500.0f;
 }
 
 } // end namespace entity
