@@ -17,6 +17,8 @@ enum ECUSTOM_EVENT
     ECE_SCROLL_SPEED_CHANGED = 3,
     //! The in-game menu was closed to continue the game.
     ECE_CONTINUE_GAME = 4,
+    //! A new profile was created on the profile screen.
+    ECE_PROFILE_CREATED = 6,
     //! The first attack of a threat level has been spawned.
     ECE_ATTACK_STARTED = 7,
     //! Leave the game for the new game selection.

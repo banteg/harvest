@@ -396,14 +396,14 @@ void CAchievementsScreen::setVisible(bool visible)
         int index;
         for (index = 0; index < settings::ACHIEVEMENT_MAIN_COUNT; ++index)
         {
-            ox::core::CPosition2d<int> size(60, 60);
+            ox::core::CDimension2d<int> size(60, 60);
             if (MainAwards[index])
                 size = MainAwards[index]->getFrameSize(0);
-            int y = AWARD_POS_Y[index] - size.Y / 2;
-            int x = AWARD_POS_X[index] - size.X / 2;
+            int y = AWARD_POS_Y[index] - size.Height / 2;
+            int x = AWARD_POS_X[index] - size.Width / 2;
             if (y > 340)
                 y -= 40;
-            AwardAreas[index] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(x, y, x + size.X, y + size.Y), awards);
+            AwardAreas[index] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(x, y, x + size.Width, y + size.Height), awards);
             AwardAreas[index]->setHoverItem(getAwardPopup(index, -1));
             Achieved[index] = settings::gp_profileManager->getCurrentProfile()->hasMainAchievement(index);
         }
@@ -411,14 +411,14 @@ void CAchievementsScreen::setVisible(bool visible)
         {
             for (int planet = 0; planet < 3; ++planet, ++index)
             {
-                ox::core::CPosition2d<int> size(48, 48);
+                ox::core::CDimension2d<int> size(48, 48);
                 if (MiniAwards[i * 3 + planet])
                     size = MiniAwards[i * 3 + planet]->getFrameSize(0);
-                int y = AWARD_POS_Y[index] - size.Y / 2;
-                int x = AWARD_POS_X[index] - size.X / 2;
+                int y = AWARD_POS_Y[index] - size.Height / 2;
+                int x = AWARD_POS_X[index] - size.Width / 2;
                 if (y > 340)
                     y -= 40;
-                AwardAreas[index] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(x, y, x + size.X, y + size.Y), awards);
+                AwardAreas[index] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(x, y, x + size.Width, y + size.Height), awards);
                 AwardAreas[index]->setHoverItem(getAwardPopup(i + settings::ACHIEVEMENT_MAIN_COUNT, planet));
                 Achieved[index] = settings::gp_profileManager->getCurrentProfile()->hasMiniAchievement(i + settings::ACHIEVEMENT_MAIN_COUNT, planet);
             }

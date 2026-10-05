@@ -62,7 +62,7 @@ template <class T>
 void splitString(TArray<CString<T> >& parts, const CString<T>& str, const CString<T>& separator)
 {
     CString<T> rest = str;
-    int separatorSize = separator.size();
+    int separatorLength = separator.size();
     do
     {
         int position = rest.findNext(separator.c_str(), 0);
@@ -72,7 +72,7 @@ void splitString(TArray<CString<T> >& parts, const CString<T>& str, const CStrin
             break;
         }
         parts.push_back(rest.subString(0, position));
-        rest = rest.subStringToEnd(position + separatorSize);
+        rest = rest.subStringToEnd(position + separatorLength);
     } while (rest.size() > 0);
 }
 

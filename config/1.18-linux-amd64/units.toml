@@ -257,6 +257,16 @@
 # OnEvent's jump tables and the sprite and localization key tables.
 ".rodata" = 0x5ff7e0
 
+["HarvestFull/harvest/settings/CHarvestProfile.cpp"]
+# iostream initializer and the game-header statics.
+".bss" = 0x86bc54
+# Rating levels, attribute name tables and switch tables.
+".rodata" = 0x606480
+
+["HarvestFull/harvest/settings/CProfileManager.cpp"]
+# gp_profileManager, the iostream initializer and the world grid offset.
+".bss" = 0x86bc60
+
 ["HarvestFull/harvest/gui/CSettingsScreen.cpp"]
 # iostream initializer and the world grid offset.
 ".bss" = 0x86baa8
@@ -277,3 +287,23 @@
 ".bss" = 0x86b994
 # The award tables.
 ".rodata" = 0x5fdf00
+
+["HarvestFull/harvest/gui/CPriorityScreen.cpp"]
+# iostream initializer, the game-header statics and ALIEN_COLORS.
+".bss" = 0x86ba40
+# PRIORITY_KEY_NAMES
+".rodata" = 0x601220
+
+["HarvestFull/harvest/states/CShuttleRaceState.cpp"]
+# iostream initializer, the game-header statics and LAP_CHECKPOINTS.
+".bss" = 0x86bf40
+
+["HarvestFull/harvest/entity/CBuildableItems.cpp"]
+# gp_buildableItems, the iostream initializer and the game-header statics.
+".bss" = 0x86b620
+
+["HarvestFull/harvest/gui/CProfileScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86ba98
+# OnEvent button jump table.
+".rodata" = 0x601a68

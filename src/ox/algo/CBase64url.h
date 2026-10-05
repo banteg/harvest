@@ -9,8 +9,8 @@ class CBase64url
 {
 public:
     static void encode(core::CString<char>& result, io::IReadFile* file);
-    //! Writes the bytes encoded in text to file.
-    static void decode(io::IWriteFile* file, const core::CString<char>& text);
+    //! Writes the data that text encodes to file.
+    static bool decode(io::IWriteFile* file, const core::CString<char>& text);
 };
 } }
 #endif

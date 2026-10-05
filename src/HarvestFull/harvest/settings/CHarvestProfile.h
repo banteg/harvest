@@ -1,11 +1,17 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: only what recovered units use is declared.
+// Method names are from the Mac symbols; member names are ours. The Linux build has no Steam
+// achievement reporting.
 
 #ifndef HARVEST_SETTINGS_CHARVESTPROFILE_H
 #define HARVEST_SETTINGS_CHARVESTPROFILE_H
 
 #include "ox/Keycodes.h"
 #include "ox/core/CString.h"
+
+namespace ox {
+namespace io { class IFileSystem; }
+namespace game { class CConfiguration; }
+} // end namespace ox
 
 namespace harvest {
 namespace settings {
@@ -170,18 +176,55 @@ static const wchar_t* const ACHIEVEMENT_DESCS[] =
     L"achievementDescs:firstDamage"
 };
 
-//! A player profile: settings, key bindings, scores and achievements.
+const int ACHIEVEMENT_COUNT = ACHIEVEMENT_MAIN_COUNT + ACHIEVEMENT_MINI_COUNT;
+
+//! The achievement score each rating starts at.
+const int ACHIEVEMENT_RATING_LEVELS[] =
+{
+    0, 1, 4, 7, 11, 16, 22, 29, 37, 46, 57, 70, 84, 100, 116, 131, 149
+};
+
+//! Achievement flags: the achievement is complete, or done on a planet.
+enum EAchievementFlags
+{
+    EAF_COMPLETE = 0x1,
+    EAF_PLANET_1 = 0x2,
+    EAF_PLANET_2 = 0x4,
+    EAF_PLANET_3 = 0x8
+};
+
+//! A player profile: its name, local high scores, achievements and key mapping.
 class CHarvestProfile
 {
 public:
+    CHarvestProfile();
     virtual ~CHarvestProfile();
 
-    //! Binds the key to the command. Returns false if the key cannot be bound. Mac has the key type
-    //! as ox::input::EKEY_CODE.
-    bool makeKeyMapping(ox::EKEY_CODE key, EKeyCommands command);
-    //! The key bound to the command, or 0.
-    int getKeyForCommand(EKeyCommands command);
-
+    bool openProfile(ox::io::IFileSystem* fileSystem, const ox::core::CString<char>& filename);
+    bool verifyAttributes();
+    const wchar_t* getPriorityAttributeName(int weapon);
+    void parseLocalAchievementsString();
+    void parseKeyMappingString();
+    bool createNewProfile(const ox::core::CString<wchar_t>& name, ox::io::IFileSystem* fileSystem,
+        const ox::core::CString<char>& filename);
+    void writeProfile();
+    void createLocalAchievementsString();
+    void createKeyMappingString();
+    ox::core::CString<wchar_t> getPlayerName();
+    ox::core::CString<wchar_t> returnStringAttribute(const wchar_t* name);
+    ox::core::CString<wchar_t> getPlayerGroup();
+    ox::core::CString<char> getFilename();
+    ox::core::CString<wchar_t> getAttackPriority(int weapon);
+    bool getAttackRangeMatters(int weapon);
+    void setAttackPriority(int weapon, const ox::core::CString<wchar_t>& priorities);
+    void setAttackRangeMatters(int weapon, bool matters);
+    void setPlayerName(const ox::core::CString<wchar_t>& name);
+    void setStringAttribute(const wchar_t* name, const ox::core::CString<wchar_t>& value);
+    void setPlayerGroup(const ox::core::CString<wchar_t>& group);
+    int getLocalScore(int type, int level, int planet);
+    void updateLocalScore(int type, int level, int planet, int score);
+    bool notifyMainAchievement(int achievement, int planet);
+    bool notifyMiniAchievement(int achievement, int planet);
     int getAchievementScore();
     //! The ACHIEVEMENT_RATING_NAMES index that the score earns.
     int getAchievementRating(int score);
@@ -192,8 +235,24 @@ public:
     static ox::core::CString<char> getAchievementSpriteName(int achievement, int planet);
     //! True for the main achievements that are earned once on each planet.
     static bool isMultiPlanetAchievement(int achievement);
-    //! The highscore group the player belongs to, or an empty string.
-    ox::core::CString<wchar_t> getPlayerGroup();
+    //! Binds the key to the command. Returns false if the key was unbound. Mac has the key type
+    //! as ox::input::EKEY_CODE.
+    bool makeKeyMapping(ox::EKEY_CODE key, EKeyCommands command);
+    EKeyCommands getCommandForKey(ox::EKEY_CODE key);
+    //! The key bound to the command, or 0.
+    int getKeyForCommand(EKeyCommands command);
+
+private:
+    ox::core::CString<char> Filename;
+    ox::game::CConfiguration* Config;
+    //! Set once the local scores are read; nothing sets it in 1.18.
+    bool LocalScoresRead;
+    //! Indexed by score type (levels, minerals, times), planet and level.
+    int LocalScores[3][3][5];
+    //! EAchievementFlags of each achievement.
+    unsigned char Achievements[ACHIEVEMENT_COUNT];
+    //! The command of each key code.
+    EKeyCommands KeyMapping[255];
 };
 
 } // end namespace settings

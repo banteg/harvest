@@ -255,8 +255,8 @@ void CIntroState::render()
 
     if (Phase == 2 && Sprites[SPRITE_OXEYE_SPLASH] && FadeState != 0)
     {
-        ox::core::CPosition2d<int> position((ScreenSize.Width - SpriteSizes[SPRITE_OXEYE_SPLASH].X) / 2,
-            (ScreenSize.Height - SpriteSizes[SPRITE_OXEYE_SPLASH].Y) / 2);
+        ox::core::CPosition2d<int> position((ScreenSize.Width - SpriteSizes[SPRITE_OXEYE_SPLASH].Width) / 2,
+            (ScreenSize.Height - SpriteSizes[SPRITE_OXEYE_SPLASH].Height) / 2);
         if (position.Y < -66)
             position.Y = -66;
         Sprites[SPRITE_OXEYE_SPLASH]->draw(position, 0, ox::video::SColor(0xffffffff));
