@@ -9,12 +9,16 @@ namespace ox { class IOxDevice; }
 namespace harvest {
 namespace settings {
 
+class CHarvestProfile;
+
 //! The player profiles.
 class CProfileManager
 {
 public:
     CProfileManager(ox::IOxDevice* device);
     virtual ~CProfileManager();
+
+    CHarvestProfile* getCurrentProfile();
 
 private:
     // Not recovered yet; keeps the Linux object size of 56 bytes.

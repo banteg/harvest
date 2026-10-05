@@ -22,7 +22,9 @@ enum EGUI_EVENT_TYPE
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! An element that reports drawing has been drawn.
-    EGET_ELEMENT_DRAWN = 26
+    EGET_ELEMENT_DRAWN = 26,
+    //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
+    EGET_MODAL_SCREEN_BLOCKED = 30
 };
 
 } // end namespace gui
@@ -48,7 +50,9 @@ enum EEVENT_TYPE
 //! Mouse input events, in SEvent::MouseInput.Event.
 enum EMOUSE_INPUT_EVENT
 {
-    EMIE_LMOUSE_LEFT_UP = 3
+    EMIE_LMOUSE_PRESSED_DOWN = 0,
+    EMIE_LMOUSE_LEFT_UP = 3,
+    EMIE_MOUSE_MOVED = 6
 };
 
 //! Keyboard input events, in SEvent::KeyInput.Event.

@@ -258,3 +258,9 @@
 ["HarvestFull/harvest/gui/CGuiInfoLines.cpp"]
 # iostream initializer and the world grid offset.
 ".bss" = 0x86b9a4
+
+["HarvestFull/harvest/gui/CAchievementsScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b994
+# The award tables.
+".rodata" = 0x5fdf00
