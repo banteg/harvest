@@ -102,10 +102,11 @@ ox::core::CPosition2d<int> CSpriteAnimationImageBundle::getOriginalOffset()
 
 ox::core::CDimension2d<int> CSpriteAnimationImageBundle::getSize()
 {
-    return ox::core::CDimension2d<int>(
-        RenderData[0].SourceRect.getWidth() * (Columns - 1) + RenderData[Columns - 1].SourceRect.getWidth(),
-        RenderData[0].SourceRect.getHeight() * (RenderData.size() / Columns - 1)
-            + RenderData[RenderData.size() - 1].SourceRect.getHeight());
+    int width = RenderData[0].SourceRect.getWidth() * (Columns - 1);
+    int height = RenderData[0].SourceRect.getHeight() * (RenderData.size() / Columns - 1)
+        + RenderData[RenderData.size() - 1].SourceRect.getHeight();
+    width += RenderData[Columns - 1].SourceRect.getWidth();
+    return ox::core::CDimension2d<int>(width, height);
 }
 
 ox::core::CDimension2d<int> CSpriteAnimationImageBundle::getOriginalSize()
