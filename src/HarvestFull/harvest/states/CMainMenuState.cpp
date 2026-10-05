@@ -86,6 +86,15 @@ static const char* const SKYBOX_TEXTURES[] =
     "$GAME_RESOURCES$/harvestClientData/gfx/skyboxFloor.jpg"
 };
 
+static const wchar_t* const PLANET_NAMES[] = { L"Hephaestus", L"Poseidon", L"Ares" };
+static const char* const PLANET_ICONS[] = { "PlanetIcon1", "PlanetIcon2", "PlanetIcon3" };
+static const wchar_t* const PLANET_DESCRIPTIONS[] =
+{
+    L"planetdescription:hephaestus",
+    L"planetdescription:poseidon",
+    L"planetdescription:ares"
+};
+
 static const ox::core::CVector3d<float> SUN_POSITION(800.0f, 0.0f, 0.0f);
 static const ox::core::CDimension2d<float> SUN_OUTER_FLARE_SIZE(500.0f, 500.0f);
 static const ox::core::CDimension2d<float> SUN_INNER_FLARE_SIZE(20.0f, 20.0f);
@@ -384,21 +393,21 @@ int CMainMenuState::secondInit()
         return 2;
     case 10:
         {
-            Driver->setAmbientLight(ox::video::SColorf(32 / 255.0f, 32 / 255.0f, 32 / 255.0f, 0.0f));
+            Driver->setAmbientLight(ox::video::SColorf(ox::video::SColor(0, 32, 32, 32)));
             ox::scene::ILightSceneNode* light = SceneManager->addLightSceneNode(0, SUN_POSITION,
                 ox::video::SColorf(1.0f, 1.0f, 1.0f, 1.0f), 100.0f);
             light->getLightData().Radius = 7500.0f;
-            light->getLightData().DiffuseColor = ox::video::SColorf(117 / 255.0f, 117 / 255.0f, 117 / 255.0f, 0.0f);
+            light->getLightData().DiffuseColor = ox::video::SColorf(ox::video::SColor(0, 117, 117, 117));
 
             int shaderLevel = settings::gp_systemConfig->getShaderLevel();
             if (shaderLevel != settings::ESL_NONE)
                 for (int i = 0; i < PLANET_COUNT * 2; ++i)
                 {
                     // Low shaders leave the atmospheres out.
-                    if (shaderLevel == settings::ESL_LOW && i % 2 == 1)
+                    if (shaderLevel == settings::ESL_LOW && i % 2)
                         continue;
                     Shaders[i] = new gfx::CScatterShader(Driver, Camera, PlanetNodes[i]);
-                    if (i % 2 == 1)
+                    if (i % 2)
                         Shaders[i]->initAtmo();
                     else
                         Shaders[i]->initGround(shaderLevel == settings::ESL_HIGH);
@@ -515,9 +524,8 @@ void CMainMenuState::realignGui()
     if (Sprites[SPRITE_CONSOLE])
     {
         ox::core::CPosition2d<int> size = Sprites[SPRITE_CONSOLE]->getFrameSize(0);
-        int x = (ScreenSize.Width - size.X) / 2;
-        int y = ScreenSize.Height - 150;
-        ButtonGroupRect = ox::core::CRect<int>(x, y, x + size.X, y + size.Y);
+        ox::core::CPosition2d<int> position((ScreenSize.Width - size.X) / 2, ScreenSize.Height - 150);
+        ButtonGroupRect = ox::core::CRect<int>(position, position + size);
         ButtonGroup->setRelativePosition(ButtonGroupRect);
     }
 
@@ -694,6 +702,44 @@ bool CMainMenuState::allowPlanetSelection()
     return true;
 }
 
+void CMainMenuState::fillLayoutWithPlanetInfo(ox::gui::IGUILayout* layout, int planet, bool popup)
+{
+
+    ox::gui::IGUIStaticText* name = GUIEnvironment->addStaticText(PLANET_NAMES[planet],
+        ox::core::CRect<int>(0, 0, 200, 30), false, true, layout, -1, L"");
+    name->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt"));
+    name->setParagraphIcon(PLANET_ICONS[planet],
+        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true), true);
+    if (popup)
+        name->activateProgressiveReveal(0);
+
+    ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(PLANET_DESCRIPTIONS[planet]);
+    ox::gui::IGUIStaticText* description =
+        GUIEnvironment->addStaticText(text.c_str(), 200, layout, SmallFont, -1, L"");
+    description->LayoutFlags = "br";
+    if (popup)
+        description->activateProgressiveReveal(0);
+
+    if (planet > 0)
+    {
+        text = settings::gp_systemConfig->getLocalizedText(L"planetdescription:experienced");
+        ox::gui::IGUIStaticText* experienced =
+            GUIEnvironment->addStaticText(text.c_str(), 200, layout, SmallFont, -1, L"");
+        experienced->setOverrideColor(ox::video::SColor(0xffffa8a8));
+        experienced->LayoutFlags = "br";
+        if (popup)
+            experienced->activateProgressiveReveal(0);
+    }
+
+    layout->sortRiver(true, 5, 5, false);
+
+    if (popup && AudioDriver)
+    {
+        const char* hoverSounds[] = { "PlanetHover1.ogg", "PlanetHover2.ogg", "PlanetHover3.ogg" };
+        AudioDriver->playVoice(hoverSounds[planet]);
+    }
+}
+
 void CMainMenuState::updatePopupPlanet(bool recreate, const ox::core::CPosition2d<int>& position)
 {
     if (PopupPlanet && recreate)
@@ -711,7 +757,7 @@ void CMainMenuState::updatePopupPlanet(bool recreate, const ox::core::CPosition2
     }
 
     ox::core::CRect<int> rect = PopupPlanet->getRelativePosition();
-    PopupPlanet->moveTo(ox::core::CPosition2d<int>(position.X - rect.getWidth() / 2, position.Y - rect.getHeight()));
+    PopupPlanet->moveTo(position - ox::core::CPosition2d<int>(rect.getWidth() / 2, rect.getHeight()));
     PopupPlanet->setVisible(true);
 }
 
@@ -1145,11 +1191,11 @@ void CMainMenuState::hidePopupPlanet()
 
 void CMainMenuState::createLockedPlanetMessageBox(int planet)
 {
-    int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
-    int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
     int requiredScore = 46;
     if (planet == 2)
         requiredScore = 84;
+    int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+    int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
 
     ox::core::CString<wchar_t> text = L"#1";
     text += settings::gp_systemConfig->getLocalizedText(L"menu:planetLockedInfo");
@@ -1311,9 +1357,10 @@ void CMainMenuState::render()
     SceneManager->drawAll();
 
     if (Mode == MODE_NEUTRAL && Sprites[SPRITE_LOGO])
-        Sprites[SPRITE_LOGO]->draw(
-            ox::core::CPosition2d<int>(ScreenSize.Width / 2, (ScreenSize.Height - 600) / 2 + 30), 0,
-            ox::video::SColor(0xffffffff));
+    {
+        ox::core::CPosition2d<int> position(ScreenSize.Width / 2, (ScreenSize.Height - 600) / 2 + 30);
+        Sprites[SPRITE_LOGO]->draw(position, 0, ox::video::SColor(0xffffffff));
+    }
 
     GUIEnvironment->drawAll();
 
@@ -1322,50 +1369,6 @@ void CMainMenuState::render()
             ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
 
     Driver->endScene();
-}
-
-void CMainMenuState::fillLayoutWithPlanetInfo(ox::gui::IGUILayout* layout, int planet, bool popup)
-{
-    static const wchar_t* const names[] = { L"Hephaestus", L"Poseidon", L"Ares" };
-    static const char* const icons[] = { "PlanetIcon1", "PlanetIcon2", "PlanetIcon3" };
-    static const wchar_t* const descriptions[] =
-    {
-        L"planetdescription:hephaestus",
-        L"planetdescription:poseidon",
-        L"planetdescription:ares"
-    };
-    const char* const hoverSounds[] = { "PlanetHover1.ogg", "PlanetHover2.ogg", "PlanetHover3.ogg" };
-
-    ox::gui::IGUIStaticText* name = GUIEnvironment->addStaticText(names[planet],
-        ox::core::CRect<int>(0, 0, 200, 30), false, true, layout, -1, L"");
-    name->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt"));
-    name->setParagraphIcon(icons[planet],
-        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true), true);
-    if (popup)
-        name->activateProgressiveReveal(0);
-
-    ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(descriptions[planet]);
-    ox::gui::IGUIStaticText* description =
-        GUIEnvironment->addStaticText(text.c_str(), 200, layout, SmallFont, -1, L"");
-    description->LayoutFlags = "br";
-    if (popup)
-        description->activateProgressiveReveal(0);
-
-    if (planet > 0)
-    {
-        text = settings::gp_systemConfig->getLocalizedText(L"planetdescription:experienced");
-        ox::gui::IGUIStaticText* experienced =
-            GUIEnvironment->addStaticText(text.c_str(), 200, layout, SmallFont, -1, L"");
-        experienced->setOverrideColor(ox::video::SColor(0xffffa8a8));
-        experienced->LayoutFlags = "br";
-        if (popup)
-            experienced->activateProgressiveReveal(0);
-    }
-
-    layout->sortRiver(true, 5, 5, false);
-
-    if (popup && AudioDriver)
-        AudioDriver->playVoice(hoverSounds[planet]);
 }
 
 void CMainMenuState::createDemoMessageBox()

@@ -7,6 +7,7 @@
 #define OX_VIDEO_SLIGHT_H
 
 #include "../core/CVector3d.h"
+#include "SColor.h"
 
 namespace ox {
 namespace video {
@@ -20,6 +21,15 @@ public:
 
     SColorf(float r, float g, float b, float a = 1.0f)
         : r(r), g(g), b(b), a(a) {}
+
+    SColorf(SColor c)
+    {
+        const float inv = 1.0f / 255.0f;
+        r = c.getRed() * inv;
+        g = c.getGreen() * inv;
+        b = c.getBlue() * inv;
+        a = c.getAlpha() * inv;
+    }
 
     float r;
     float g;
