@@ -728,8 +728,9 @@ bool CPlayState::readStateFromFile(const char* filename)
         data = new unsigned char[compressedSize];
         file->read(data, compressedSize);
         file->drop();
+        int i = 0;
         unsigned int scramble = 0x4f2c7b19;
-        for (int i = 0; i < compressedSize; ++i)
+        for (; i < compressedSize; ++i)
         {
             switch (i & 3)
             {
@@ -743,9 +744,14 @@ bool CPlayState::readStateFromFile(const char* filename)
                 data[i] ^= (scramble & 0xff00) >> 8;
                 break;
             case 3:
+            {
                 data[i] ^= scramble & 0xff;
-                scramble = scramble << 31 | scramble >> 1;
+                // The key rotates right by one bit after every four bytes.
+                unsigned int low = scramble & 1;
+                scramble >>= 1;
+                scramble |= low << 31;
                 break;
+            }
             }
         }
     }
