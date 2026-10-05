@@ -101,7 +101,12 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
             }
             break;
         case ox::gui::EGET_MESSAGEBOX_YES:
-            if (id == ID_CONFIRM_DELETE)
+            switch (id)
+            {
+            case ID_NAME_TAKEN:
+                saveProfile(true);
+                return true;
+            case ID_CONFIRM_DELETE:
             {
                 deleteCurrentProfile();
                 ox::gui::IGUIListBox* list = (ox::gui::IGUIListBox*)Window->getElementFromId(ID_PROFILE_LIST, true);
@@ -114,10 +119,6 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                 }
                 return true;
             }
-            else if (id == ID_NAME_TAKEN)
-            {
-                saveProfile(true);
-                return true;
             }
             break;
         default:
