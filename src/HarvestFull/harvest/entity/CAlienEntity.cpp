@@ -1179,7 +1179,8 @@ void CAlienEntity::updateMagnetoMovement(float frameDelta, ox::core::CVector3d<f
                 gp_entityManager->appendEntity(new CParticleEntity(Target.Entity->getPosition().X,
                     Target.Entity->getPosition().Y, 1.0f, 0, "BrainBuildingTarget"), 4);
                 const std::list<ox::entity::COxEntity*>& aliens = gp_entityManager->getEntityList(1);
-                for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); aliens.end() != it; it++)
+                std::list<ox::entity::COxEntity*>::const_iterator end = aliens.end();
+                for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != end; it++)
                 {
                     if (((CEntity*)*it)->getEntityType() != 6)
                         continue;
