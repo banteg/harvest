@@ -7,6 +7,7 @@
 #include "CGUIListBox.h"
 #include "CGUIScrollBar.h"
 #include "ox/algo/CArrayFunctions.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUILayout.h"

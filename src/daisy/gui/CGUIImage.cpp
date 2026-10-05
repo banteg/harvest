@@ -4,6 +4,7 @@
 // Oxeye adds sprite animations and an override color.
 
 #include "CGUIImage.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/video/ISpriteAnimationState.h"

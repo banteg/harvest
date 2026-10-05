@@ -7,6 +7,7 @@
 #include "CGUIFileOpenDialog.h"
 #include "ox/core/CStringConversions.h"
 #include "ox/gui/IGUIButton.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUILayout.h"
 #include "ox/gui/IGUIListBox.h"

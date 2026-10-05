@@ -3,6 +3,7 @@
 // See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
 
 #include "CGUIInOutFader.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/video/IVideoDriver.h"
 #include "daisy/os.h"

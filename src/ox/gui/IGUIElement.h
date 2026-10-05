@@ -32,18 +32,8 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
-    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
-        : Parent(parent), RelativeRect(rectangle), RelativeSizeChanged(false), IsVisible(true), IsEnabled(true),
-          IsFixed(false), IsInvisible(false), NoClip(false), ReportOnDraw(0), ID(id), Type(0),
-          Environment(environment), HoverItem(0), LayoutFlags(0), EventReceiver(0)
-    {
-        AbsoluteRect = RelativeRect;
-        AbsoluteClippingRect = RelativeRect;
-        updateAbsolutePosition();
-
-        if (Parent)
-            Parent->addChild(this);
-    }
+    //! Defined inline in IGUIElementInline.h, which only the element implementations include.
+    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
 
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
     // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
