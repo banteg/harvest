@@ -114,8 +114,6 @@ CAlienEntity::CAlienEntity(float x, float y, int alienType)
     SpawnCooldown = (ox::algo::CRand::rand() % 2000) * 0.001f;
 }
 
-CAlienLuaInfo::CAlienLuaInfo(lua_State* L) : Entity(0) {}
-
 void CAlienEntity::replaceWithJammerSprite()
 {
     if (Sprites[0])
@@ -1408,6 +1406,16 @@ bool CAlienEntity::dealDamage(float& damage, const ox::core::CPosition2d<float>&
     return killed;
 }
 
+int CAlienEntity::onSpark(CSparkEntity* spark)
+{
+    return 0;
+}
+
+bool CAlienEntity::wantsSpark()
+{
+    return false;
+}
+
 void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort)
 {
     if (AlienType == 2)
@@ -1568,6 +1576,10 @@ void CAlienEntity::readEntityData(ox::io::IReadFile* file, int version)
     SpawnCooldown = 0;
 }
 
+CAlienLuaInfo::CAlienLuaInfo(lua_State* L) : Entity(0) {}
+
+CAlienLuaInfo::~CAlienLuaInfo() {}
+
 int CAlienLuaInfo::getId(lua_State* L)
 {
     lua_pushnumber(L, Entity->getId());
@@ -1653,10 +1665,6 @@ int CAlienLuaInfo::setTargetBuilding(lua_State* L)
     return 0;
 }
 
-CAlienLuaInfo::~CAlienLuaInfo() {}
-
-void CAlienEntity::renderGroundLayer(const ox::core::CPosition2d<float>& camera,
-    const ox::core::CRect<int>& viewPort) {}
 
 } // end namespace entity
 } // end namespace harvest
