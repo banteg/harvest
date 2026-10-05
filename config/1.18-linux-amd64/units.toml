@@ -234,3 +234,8 @@
 ".bss" = 0x86ba30
 # OnEvent's button jump table.
 ".rodata" = 0x5ffd00
+
+["HarvestFull/harvest/gui/CMenuInfoDialog.cpp"]
+".text" = 0x473c00
+# iostream initializer and the world grid offset.
+".bss" = 0x86ba38

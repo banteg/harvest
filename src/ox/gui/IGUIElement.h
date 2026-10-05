@@ -61,6 +61,8 @@ public:
     virtual void setHoverItem(IGUIElement* item);
     virtual core::CDimension2d<int> getPreferredSize();
 
+    core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
+
 protected:
     std::list<IGUIElement*> Children;
     IGUIElement* Parent;
