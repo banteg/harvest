@@ -74,10 +74,10 @@ bool CHarvestProfile::verifyAttributes()
     ox::core::CString<wchar_t> value;
     Config->getAttribute(ox::core::CString<wchar_t>(L"profile:name"), value);
     if (value.size() > 16)
-        Config->setAttribute(ox::core::CString<wchar_t>(L"profile:name"), value.subString(0, 16));
+        Config->setAttribute(L"profile:name", value.subString(0, 16));
     Config->getAttribute(ox::core::CString<wchar_t>(L"profile:group"), value);
     if (value.size() > 16)
-        Config->setAttribute(ox::core::CString<wchar_t>(L"profile:group"), value.subString(0, 16));
+        Config->setAttribute(L"profile:group", value.subString(0, 16));
 
     for (int i = 0; i < 5; ++i)
     {
@@ -179,12 +179,8 @@ void CHarvestProfile::parseKeyMappingString()
         int size = data->getSize();
         ox::io::CMemReadFile* file = new ox::io::CMemReadFile(buffer, size, false);
         ox::io::CHelpIO::readInt(file);
-        for (int i = 0; i < 255; ++i)
-        {
-            if (file->getRemainingSize() <= 0)
-                break;
+        for (int i = 0; i < 255 && file->getRemainingSize() > 0; ++i)
             KeyMapping[i] = (EKeyCommands)ox::io::CHelpIO::readByte(file);
-        }
         delete file;
     }
     delete data;
@@ -224,8 +220,10 @@ void CHarvestProfile::createLocalAchievementsString()
     delete file;
     delete data;
     if (Config)
-        Config->setAttribute(ox::core::CString<wchar_t>(L"localscores:achievements"),
-            ox::core::CString<wchar_t>(encoded.c_str()));
+    {
+        ox::core::CString<wchar_t> value = encoded.c_str();
+        Config->setAttribute(ox::core::CString<wchar_t>(L"localscores:achievements"), value);
+    }
 }
 
 void CHarvestProfile::createKeyMappingString()
@@ -242,8 +240,10 @@ void CHarvestProfile::createKeyMappingString()
     delete file;
     delete data;
     if (Config)
-        Config->setAttribute(ox::core::CString<wchar_t>(L"settings:keyboard"),
-            ox::core::CString<wchar_t>(encoded.c_str()));
+    {
+        ox::core::CString<wchar_t> value = encoded.c_str();
+        Config->setAttribute(ox::core::CString<wchar_t>(L"settings:keyboard"), value);
+    }
 }
 
 ox::core::CString<wchar_t> CHarvestProfile::getPlayerName()
@@ -322,12 +322,8 @@ int CHarvestProfile::getLocalScore(int type, int mode, int planet)
                 ox::core::CString<wchar_t> value = returnStringAttribute(name.c_str());
                 ox::TArray<ox::core::CString<wchar_t> > scores;
                 ox::core::splitString(scores, value, ox::core::CString<wchar_t>(L","));
-                for (unsigned int m = 0; m < scores.size(); ++m)
-                {
-                    if (m >= 5)
-                        break;
+                for (unsigned int m = 0; m < scores.size() && m < 5; ++m)
                     LocalScores[i][p][m] = wcstol(scores[m].c_str(), 0, 10);
-                }
             }
         }
     }
