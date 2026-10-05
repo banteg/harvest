@@ -545,15 +545,11 @@ int harvest_showInfoMessage(lua_State* L)
         SInfoLineMessage message;
         message.Text = lua_tostring(L, 1);
         if (top >= 2)
-        {
             message.Name = lua_tostring(L, 2);
-            if (top >= 3)
-            {
-                message.Portrait = lua_tostring(L, 3);
-                if (top >= 4)
-                    message.Sound = lua_tostring(L, 4);
-            }
-        }
+        if (top >= 3)
+            message.Portrait = lua_tostring(L, 3);
+        if (top >= 4)
+            message.Sound = lua_tostring(L, 4);
         ox::event::SEvent event;
         event.EventType = ox::event::EET_USER_EVENT;
         event.UserEvent.UserData1 = 32;
