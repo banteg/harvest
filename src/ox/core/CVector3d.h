@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/vector3d.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::core namespace; not the original source. Partial: rotateYZBy and
-// the interpolation are not recovered yet; the rotations use a float-precision degree factor.
+// Recovered for Harvest's ox::core namespace; not the original source. Partial: the rotations and
+// interpolation are not recovered yet.
 
 #ifndef OX_CORE_CVECTOR3D_H
 #define OX_CORE_CVECTOR3D_H
@@ -96,32 +96,6 @@ public:
     CVector3d<T> crossProduct(const CVector3d<T>& p) const
     {
         return CVector3d<T>(Y * p.Z - Z * p.Y, Z * p.X - X * p.Z, X * p.Y - Y * p.X);
-    }
-
-    //! Rotates around the Y axis through center; takes degrees.
-    void rotateXZBy(double degrees, const CVector3d<T>& center = CVector3d<T>())
-    {
-        degrees *= 0.017453290522098541;
-        T cs = (T)cos(degrees);
-        T sn = (T)sin(degrees);
-        X -= center.X;
-        Z -= center.Z;
-        set(X * cs - Z * sn, Y, X * sn + Z * cs);
-        X += center.X;
-        Z += center.Z;
-    }
-
-    //! Rotates around the Z axis through center; takes degrees.
-    void rotateXYBy(double degrees, const CVector3d<T>& center = CVector3d<T>())
-    {
-        degrees *= 0.017453290522098541;
-        T cs = (T)cos(degrees);
-        T sn = (T)sin(degrees);
-        X -= center.X;
-        Y -= center.Y;
-        set(X * cs - Y * sn, X * sn + Y * cs, Z);
-        X += center.X;
-        Y += center.Y;
     }
 
     // member variables

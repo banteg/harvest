@@ -15,6 +15,36 @@
 namespace daisy {
 namespace video {
 
+// Irrlicht's vector3d rotations, which ox::core::CVector3d does not declare here.
+
+//! Rotates around the Y axis through center; takes degrees.
+static inline void rotateXZBy(ox::core::CVector3d<float>& v, double degrees,
+    const ox::core::CVector3d<float>& center = ox::core::CVector3d<float>())
+{
+    degrees *= 0.017453290522098541;
+    float cs = (float)cos(degrees);
+    float sn = (float)sin(degrees);
+    v.X -= center.X;
+    v.Z -= center.Z;
+    v.set(v.X * cs - v.Z * sn, v.Y, v.X * sn + v.Z * cs);
+    v.X += center.X;
+    v.Z += center.Z;
+}
+
+//! Rotates around the Z axis through center; takes degrees.
+static inline void rotateXYBy(ox::core::CVector3d<float>& v, double degrees,
+    const ox::core::CVector3d<float>& center = ox::core::CVector3d<float>())
+{
+    degrees *= 0.017453290522098541;
+    float cs = (float)cos(degrees);
+    float sn = (float)sin(degrees);
+    v.X -= center.X;
+    v.Y -= center.Y;
+    v.set(v.X * cs - v.Y * sn, v.X * sn + v.Y * cs, v.Z);
+    v.X += center.X;
+    v.Y += center.Y;
+}
+
 CParticleState::CParticleState(ox::video::IParticlePackage* package, ox::video::ISpritePackage* spritePackage,
     SParticleTypeInfo* info)
     : IParticleState(package, spritePackage), Info(info), Animation(0), BounceCount(0), Age(0),
@@ -49,8 +79,8 @@ CParticleState::CParticleState(ox::video::IParticlePackage* package, ox::video::
             elevation += ox::algo::CRand::rand() % (Info->MinElevation - Info->MaxElevation);
 
         Speed.set((float)speed, 0, 0);
-        Speed.rotateXZBy(elevation);
-        Speed.rotateXYBy(direction);
+        rotateXZBy(Speed, elevation);
+        rotateXYBy(Speed, direction);
     }
 
     LifeTime = (float)Info->MinLifeTime;
