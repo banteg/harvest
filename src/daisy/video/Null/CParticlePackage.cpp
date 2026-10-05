@@ -76,7 +76,7 @@ bool CParticlePackage::load(ox::io::IReadFile* file)
     {
         ox::core::CString<char> name;
         ox::io::CHelpIO::readString(file, name);
-        SParticleTypeInfo* info = new SParticleTypeInfo();
+        SParticleTypeInfo* info = new SParticleTypeInfo;
         info->Name = name;
         readParticleInfo(info, file, version);
         TypeInfos.push_back(info);
@@ -168,14 +168,7 @@ void CParticlePackage::readParticleInfo(SParticleTypeInfo* info, ox::io::IReadFi
     info->StartScale = ox::io::CHelpIO::readFloat(file);
     info->EndScale = ox::io::CHelpIO::readFloat(file);
 
-    if (version < 4)
-    {
-        ox::core::CString<char> name;
-        ox::io::CHelpIO::readString(file, name);
-        if (name.size() > 0)
-            info->OnDieParticles.push_back(name);
-    }
-    else
+    if (version >= 4)
     {
         int count = ox::io::CHelpIO::readInt(file);
         for (int i = 0; i < count; ++i)
@@ -184,6 +177,13 @@ void CParticlePackage::readParticleInfo(SParticleTypeInfo* info, ox::io::IReadFi
             ox::io::CHelpIO::readString(file, name);
             info->OnDieParticles.push_back(name);
         }
+    }
+    else
+    {
+        ox::core::CString<char> name;
+        ox::io::CHelpIO::readString(file, name);
+        if (name.size() > 0)
+            info->OnDieParticles.push_back(name);
     }
 
     info->RotationSpeed = (float)ox::io::CHelpIO::readInt(file);
