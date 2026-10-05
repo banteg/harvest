@@ -1217,16 +1217,18 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             const std::list<ox::entity::COxEntity*>& aliens = gp_entityManager->getEntityList(1);
             for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != aliens.end(); it++)
             {
-                CAlienEntity* alien = (CAlienEntity*)*it;
-                if (alien->getEntityType() == 6 && alien->AlienType != 8)
+                if ((*it)->getEntityType() == 6)
                 {
-                    float distance = ox::core::CMath::getSquaredDistance(
-                        ox::core::CPosition2d<float>(Position.X, Position.Y),
-                        ox::core::CPosition2d<float>(alien->getPosition().X, alien->getPosition().Y));
-                    if (distance < 2500.0f)
+                    CAlienEntity* alien = (CAlienEntity*)*it;
+                    if (alien->AlienType != 8)
                     {
-                        float damage = (distance / -2500.0f + 1.0f) * 15.0f;
-                        alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 8.0f, 5);
+                        float distance = ox::core::CMath::getSquaredDistance(
+                            ox::core::CPosition2d<float>(Position.X, Position.Y), position2d(alien->getPosition()));
+                        if (distance < 2500.0f)
+                        {
+                            float damage = (distance / -2500.0f + 1.0f) * 15.0f;
+                            alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 8.0f, 5);
+                        }
                     }
                 }
             }
@@ -1234,17 +1236,22 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
             for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
             {
-                if ((*it)->getEntityType() != 5 &&
-                    ox::core::CMath::getSquaredDistance(ox::core::CPosition2d<float>(Position.X, Position.Y),
-                        ox::core::CPosition2d<float>((*it)->getPosition().X, (*it)->getPosition().Y)) < 900.0f)
+                if ((*it)->getEntityType() != 5)
                 {
-                    (*it)->killEntity();
-                    placeBuildingParticle(*it);
-                    killed = true;
+                    float distance = ox::core::CMath::getSquaredDistance(ox::core::CPosition2d<float>(Position.X, Position.Y),
+                        position2d((*it)->getPosition()));
+                    if (distance < 900.0f)
+                    {
+                        (*it)->killEntity();
+                        placeBuildingParticle(*it);
+                        killed = true;
+                    }
                 }
             }
-            gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0,
-                killed ? "MegaLandKill" : "MegaLand"), 4);
+            if (killed)
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0, "MegaLandKill"), 4);
+            else
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0, "MegaLand"), 4);
         }
         else
         {
@@ -1264,8 +1271,9 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             speed = length / 115.0f * 100.0f;
         else
         {
-            ox::core::CPosition2d<float> position(movement.X * 115.0f + Position.X,
-                movement.Y * 115.0f + Position.Y);
+            ox::core::CPosition2d<float> position;
+            position.X = movement.X * 115.0f + Position.X;
+            position.Y = movement.Y * 115.0f + Position.Y;
             if (game::gp_world->mayMoveHere(position))
                 speed = 100.0f;
             else
@@ -1284,17 +1292,20 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
                     {
                         ox::core::CVector2d<float> original = movement;
                         const float ATTEMPT_ANGLES_DEGREES[] = { -20, 20, -45, 45, -90, 90, -135, 135, 180 };
-                        int i;
-                        for (i = 0; i < 9; ++i)
+                        bool found = false;
+                        for (int i = 0; i < 9; ++i)
                         {
                             movement = original;
                             movement.rotateBy(ATTEMPT_ANGLES_DEGREES[i]);
                             position.X = movement.X * 115.0f + Position.X;
                             position.Y = movement.Y * 115.0f + Position.Y;
                             if (game::gp_world->mayMoveHere(position))
+                            {
+                                found = true;
                                 break;
+                            }
                         }
-                        if (i == 9)
+                        if (!found)
                         {
                             movement.X = 0;
                             movement.Y = 0;
