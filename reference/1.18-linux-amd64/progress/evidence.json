@@ -7357,166 +7357,20 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CThreatLevel.cpp",
-      "object_sha256": "196e42c5aca9d12600455d5a693f48455d8a24202ad93a8fce5c4ea11303ce7f",
+      "object_sha256": "c1b1bc70ec32037297833c9fd28a2cbdb2a23b926955ba6ac43cd345f14cab31",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 16009,
+          "size": 15977,
           "placement": "explicit",
           "exact": false,
           "address": "0x45bf40",
           "first_difference": 198,
-          "differing_bytes": 5250,
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN7harvest4game17CThreatLevelLogic21initAttackSectionAreaEiiiRN2ox4core5CRectIfEE",
-              "known": "0x45cf00",
-              "placed": "0x45cf20"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelNormal6updateEf",
-              "known": "0x45d150",
-              "placed": "0x45d170"
-            },
-            {
-              "symbol": "_ZN7harvest4game17CThreatLevelLogic20initAttackBorderAreaEiRN2ox4core5CRectIfEE",
-              "known": "0x45d320",
-              "placed": "0x45d340"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWave6updateEf",
-              "known": "0x45d420",
-              "placed": "0x45d440"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelRush6updateEf",
-              "known": "0x45d590",
-              "placed": "0x45d5b0"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelInsane6updateEf",
-              "known": "0x45d6f0",
-              "placed": "0x45d710"
-            },
-            {
-              "symbol": "_ZN7harvest4game17CThreatLevelLogicC1Ev",
-              "known": "0x45d870",
-              "placed": "0x45d890"
-            },
-            {
-              "symbol": "_ZN7harvest4game17CThreatLevelLogicC2Ev",
-              "known": "0x45d910",
-              "placed": "0x45d930"
-            },
-            {
-              "symbol": "_ZN7harvest4game20CThreatLevelCreativeC1Ev",
-              "known": "0x45d9b0",
-              "placed": "0x45d9d0"
-            },
-            {
-              "symbol": "_ZN7harvest4game20CThreatLevelCreativeC2Ev",
-              "known": "0x45d9d0",
-              "placed": "0x45d9f0"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelRushC1Ev",
-              "known": "0x45d9f0",
-              "placed": "0x45da10"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelRushC2Ev",
-              "known": "0x45da10",
-              "placed": "0x45da30"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelInsaneC1Ev",
-              "known": "0x45da30",
-              "placed": "0x45da50"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelInsaneC2Ev",
-              "known": "0x45da50",
-              "placed": "0x45da70"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelNormalC1Ev",
-              "known": "0x45da70",
-              "placed": "0x45da90"
-            },
-            {
-              "symbol": "_ZN7harvest4game18CThreatLevelNormalC2Ev",
-              "known": "0x45da90",
-              "placed": "0x45dab0"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWaveD1Ev",
-              "known": "0x45dab0",
-              "placed": "0x45dad0"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWaveD2Ev",
-              "known": "0x45db90",
-              "placed": "0x45dbb0"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWaveD0Ev",
-              "known": "0x45dc70",
-              "placed": "0x45dc90"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWave20readGameModeSpecificEPN2ox2io9IReadFileEi",
-              "known": "0x45ea50",
-              "placed": "0x45ea80"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWaveC1Ev",
-              "known": "0x45eb40",
-              "placed": "0x45eb70"
-            },
-            {
-              "symbol": "_ZN7harvest4game12CThreatLevel22createLogicForGameModeEv",
-              "known": "0x45ecb0",
-              "placed": "0x45ece0"
-            },
-            {
-              "symbol": "_ZN7harvest4game12CThreatLevel4readEPN2ox2io9IReadFileEi",
-              "known": "0x45edc0",
-              "placed": "0x45edf0"
-            },
-            {
-              "symbol": "_ZN7harvest4game12CThreatLevelC1Ei",
-              "known": "0x45ee50",
-              "placed": "0x45ee80"
-            },
-            {
-              "symbol": "_ZN7harvest4game12CThreatLevelC2Ei",
-              "known": "0x45ee70",
-              "placed": "0x45eea0"
-            },
-            {
-              "symbol": "_ZN7harvest4game16CThreatLevelWaveC2Ev",
-              "known": "0x45ee90",
-              "placed": "0x45eec0"
-            },
-            {
-              "symbol": "_ZN7harvest4game12CThreatLevel19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-              "known": "0x45fcf0",
-              "placed": "0x45fd10"
-            }
-          ],
+          "differing_bytes": 920,
           "bad_references": [
             {
-              "offset": 3180,
-              "type": 2,
-              "symbol": "_ZN2ox4algo5CRand4randEv",
-              "addend": -4,
-              "destination": "0x5dd110",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3198,
+              "offset": 3118,
               "type": 2,
               "symbol": "_ZN7harvest4game17CThreatLevelLogic10spawnAlienERKN2ox4core5CRectIfEEi",
               "addend": -4,
@@ -7525,7 +7379,7 @@
               "matches": false
             },
             {
-              "offset": 3222,
+              "offset": 3142,
               "type": 2,
               "symbol": "_ZN2ox5event17gp_subscriberListE",
               "addend": -4,
@@ -7534,729 +7388,12 @@
               "matches": false
             },
             {
-              "offset": 3287,
+              "offset": 3207,
               "type": 2,
               "symbol": "_ZN7harvest4game17CThreatLevelLogic10spawnAlienERKN2ox4core5CRectIfEEi",
               "addend": -4,
               "destination": "0x45c8d0",
               "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7861,
-              "type": 2,
-              "symbol": ".LC2",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x3145fa23+0x4",
-              "matches": false
-            },
-            {
-              "offset": 7868,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0xba006228+0x4",
-              "matches": false
-            },
-            {
-              "offset": 7937,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7954,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x8b4a0062+0x4",
-              "matches": false
-            },
-            {
-              "offset": 8424,
-              "type": 2,
-              "symbol": ".LC21",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x19ec0729+0xc",
-              "matches": false
-            },
-            {
-              "offset": 8431,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 16,
-              "reason": "unmapped or truncated range: 0x5f8634b8+0xc",
-              "matches": false
-            },
-            {
-              "offset": 9165,
-              "type": 2,
-              "symbol": ".LC24",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x3145fc94+0x8",
-              "matches": false
-            },
-            {
-              "offset": 9172,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 36,
-              "reason": "unmapped or truncated range: 0xbf005f86+0x8",
-              "matches": false
-            },
-            {
-              "offset": 9250,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9255,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 36,
-              "reason": "unmapped or truncated range: 0xa0+0x8",
-              "matches": false
-            },
-            {
-              "offset": 9437,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9449,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9466,
-              "type": 11,
-              "symbol": ".rodata",
-              "addend": 2048,
-              "destination": "0x5f7d00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9471,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9618,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9870,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9969,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10014,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10117,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10166,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10265,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10307,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10405,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10459,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10568,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10629,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10749,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10797,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10917,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10955,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10963,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10979,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10987,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11003,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11011,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11027,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11035,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11051,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11059,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 12822,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 12827,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 216,
-              "reason": "unmapped or truncated range: 0x8760b9ff+0x44",
-              "matches": false
-            },
-            {
-              "offset": 13464,
-              "type": 2,
-              "symbol": ".LC24",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x19d88ec9+0x8",
-              "matches": false
-            },
-            {
-              "offset": 13483,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 36,
-              "reason": "unmapped or truncated range: 0x5f8648b8+0x8",
-              "matches": false
-            },
-            {
-              "offset": 13857,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14030,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14036,
-              "type": 2,
-              "symbol": ".LC28",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x764b2213+0x10",
-              "matches": false
-            },
-            {
-              "offset": 14043,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 44,
-              "reason": "unmapped or truncated range: 0x904f158b+0x10",
-              "matches": false
-            },
-            {
-              "offset": 14120,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14137,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 44,
-              "reason": "unmapped or truncated range: 0x8bfffa7a+0x10",
-              "matches": false
-            },
-            {
-              "offset": 14298,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14523,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14629,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14686,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14797,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14852,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14965,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15022,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15110,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15128,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15206,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15326,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15384,
-              "type": 11,
-              "symbol": ".rodata.str4.8",
-              "addend": 88,
-              "reason": "unmapped or truncated range: 0x1b8+0x80",
-              "matches": false
-            },
-            {
-              "offset": 15397,
-              "type": 2,
-              "symbol": ".LC26",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x1ebd837e+0x80",
-              "matches": false
-            },
-            {
-              "offset": 15404,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 88,
-              "reason": "unmapped or truncated range: 0xfb840f+0x80",
-              "matches": false
-            },
-            {
-              "offset": 15456,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15461,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 88,
-              "reason": "unmapped or truncated range: 0x538902e7+0x80",
-              "matches": false
-            },
-            {
-              "offset": 15516,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15542,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15633,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15698,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15733,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15741,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15757,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15765,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15781,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15789,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15805,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15813,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15874,
-              "type": 2,
-              "symbol": ".LC29",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x19d07e3b+0x50",
-              "matches": false
-            },
-            {
-              "offset": 15881,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 288,
-              "reason": "unmapped or truncated range: 0x5f87a8b8+0x50",
-              "matches": false
-            },
-            {
-              "offset": 15939,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15949,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 288,
-              "reason": "unmapped or truncated range: 0x87a8b908+0x50",
               "matches": false
             }
           ],
@@ -8649,8 +7786,8 @@
             {
               "symbol": "_ZN7harvest4game17CThreatLevelLogic17spawnAliensInAreaERKN2ox4core5CRectIfEES7_ii",
               "address": "0x45ca00",
-              "size": 1303,
-              "fde": false,
+              "size": 1276,
+              "fde": true,
               "global": true,
               "exact": false
             },
@@ -8809,10 +7946,10 @@
             {
               "symbol": "_ZN7harvest4game16CThreatLevelWave15updateWaveNamesEv",
               "address": "0x45dd50",
-              "size": 3335,
-              "fde": false,
+              "size": 3319,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game16CThreatLevelWave20readGameModeSpecificEPN2ox2io9IReadFileEi",
@@ -8873,10 +8010,10 @@
             {
               "symbol": "_ZN7harvest4game16CThreatLevelWave19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
               "address": "0x45f000",
-              "size": 3289,
-              "fde": false,
+              "size": 3298,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game12CThreatLevel19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
@@ -8884,7 +8021,7 @@
               "size": 185,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             }
           ],
           "data_ranges": [
@@ -9089,6 +8226,21 @@
               "kind": "merged string"
             },
             {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
               "address": "0x5f8628",
               "size": 12,
               "kind": "merged string"
@@ -9111,6 +8263,16 @@
             {
               "address": "0x5f8688",
               "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8634",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8634",
+              "size": 12,
               "kind": "merged string"
             },
             {
@@ -9144,6 +8306,26 @@
               "kind": "merged string"
             },
             {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8760",
+              "size": 68,
+              "kind": "merged string"
+            },
+            {
               "address": "0x5f8760",
               "size": 68,
               "kind": "merged string"
@@ -9166,6 +8348,66 @@
             {
               "address": "0x5f8648",
               "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8640",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8640",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8640",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f86e0",
+              "size": 128,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f86e0",
+              "size": 128,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f86e0",
+              "size": 128,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f86e0",
+              "size": 128,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f87a8",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f87a8",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f87a8",
+              "size": 80,
               "kind": "merged string"
             },
             {
@@ -9545,11 +8787,16 @@
           "name": ".gcc_except_table",
           "size": 418,
           "placement": "exception frames",
-          "exact": false,
+          "exact": true,
           "address": "0x65b7f2",
-          "first_difference": 199,
-          "differing_bytes": 28,
-          "references": 0
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x65b7f2",
+              "size": 418,
+              "kind": "section"
+            }
+          ]
         },
         {
           "name": ".rodata._ZTVN7harvest4game20CThreatLevelCreativeE",
@@ -9887,7 +9134,7 @@
           "/out/HarvestFull__harvest__game__CThreatLevel.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CThreatLevel.cpp": "5aa1ce9be21713b24f910cef2121c6cecd89b7305797e8abf054ad0de7e587d4",
+          "src/HarvestFull/harvest/game/CThreatLevel.cpp": "9dd23356efbec9e9af9f9d28136dbac9a224a4be1ea224235eebd7f09711dd01",
           "src/HarvestFull/harvest/game/CThreatLevel.h": "91ca60fdda8a94c199c422c879133979c296a2f81a1ac70c76c3e531df132528",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
@@ -9937,9 +9184,9 @@
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
         },
         "system_headers": 150,
-        "object_sha256": "196e42c5aca9d12600455d5a693f48455d8a24202ad93a8fce5c4ea11303ce7f"
+        "object_sha256": "c1b1bc70ec32037297833c9fd28a2cbdb2a23b926955ba6ac43cd345f14cab31"
       },
-      "fuzzy_target_sha256": "da24fc0fbfbed17b5d0458c1ea8a50628d5e2d5c6a55616a823c4fff6aace071",
+      "fuzzy_target_sha256": "7f1da3bd604448fb077febb514d2a7c474c76bbcd209984edc9cbc4cd99b7c8a",
       "fuzzy_functions": [
         {
           "address": "0x45bf40",
@@ -10233,7 +9480,7 @@
           "address": "0x45ca00",
           "size": 1276,
           "symbol": "_ZN7harvest4game17CThreatLevelLogic17spawnAliensInAreaERKN2ox4core5CRectIfEES7_ii",
-          "percent": 39.60857
+          "percent": 87.37143
         },
         {
           "address": "0x45cf00",
@@ -10353,7 +9600,7 @@
           "address": "0x45dd50",
           "size": 3319,
           "symbol": "_ZN7harvest4game16CThreatLevelWave15updateWaveNamesEv",
-          "percent": 99.1773
+          "percent": 99.80867
         },
         {
           "address": "0x45ea50",
@@ -10401,13 +9648,13 @@
           "address": "0x45f000",
           "size": 3298,
           "symbol": "_ZN7harvest4game16CThreatLevelWave19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-          "percent": 98.89989
+          "percent": 99.854485
         },
         {
           "address": "0x45fcf0",
           "size": 185,
           "symbol": "_ZN7harvest4game12CThreatLevel19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-          "percent": 97.94643
+          "percent": 99.64286
         },
         {
           "address": "0x45fdb0",
@@ -65239,179 +64486,110 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CWorld.cpp",
-      "object_sha256": "a00322c995575e6895ef45def508806857797145c0dd4ada7e1f9199ff3a7f55",
+      "object_sha256": "81d5be0a77ab47f57420a1c458e2f5b104a443d04997cf7e3a856ee43435e77d",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 17905,
+          "size": 17889,
           "placement": "explicit",
           "exact": false,
           "address": "0x45fdd0",
-          "first_difference": 522,
-          "differing_bytes": 5508,
+          "first_difference": 305,
+          "differing_bytes": 3603,
           "misplaced_symbols": [
-            {
-              "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
-              "known": "0x45fe60",
-              "placed": "0x45fe20"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld27hasWorldExpandedAtLeastOnceEv",
-              "known": "0x45fe20",
-              "placed": "0x45fe30"
-            },
-            {
-              "symbol": "_ZNK7harvest4game6CWorld30worldChangesSizeInThisGameModeEv",
-              "known": "0x460200",
-              "placed": "0x45fe70"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld16constrainViewPosERN2ox4core11CPosition2dIfEE",
-              "known": "0x460140",
-              "placed": "0x45fe90"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld24checkCollisionWithDoodadEPKNS0_7SDoodadERKN2ox4core11CPosition2dIfEE",
-              "known": "0x45fe70",
-              "placed": "0x45ff50"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld11mayMoveHereERKN2ox4core11CPosition2dIfEE",
-              "known": "0x45fee0",
-              "placed": "0x45ffc0"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld18mayPlaceObjectHereERKN2ox4core11CPosition2dIfEEb",
-              "known": "0x45ffd0",
-              "placed": "0x4600c0"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld16renderBackgroundERKN2ox4core11CPosition2dIfEEPNS2_3gui8IGUIFontEPNS3_5CRectIiEE",
-              "known": "0x460220",
-              "placed": "0x460230"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld16renderEdgeShadesERKN2ox4core11CPosition2dIfEE",
-              "known": "0x4604a0",
-              "placed": "0x4604b0"
-            },
-            {
-              "symbol": "_GLOBAL__I__ZN7harvest4game8gp_worldE",
-              "known": "0x4607b0",
-              "placed": "0x4607c0"
-            },
             {
               "symbol": "_ZNK7harvest4game6CWorld9applyWindERKN2ox4core9CVector3dIfEERNS3_9CVector2dIfEEf",
               "known": "0x460d80",
-              "placed": "0x460830"
+              "placed": "0x460d90"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld5writeEPN2ox2io10IWriteFileE",
               "known": "0x460ec0",
-              "placed": "0x460970"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld19findRendezvousPointERKN2ox4core11CPosition2dIfEERKNS3_9CVector2dIfEE",
-              "known": "0x4609c0",
-              "placed": "0x460ad0"
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld19getCollisionTangentERKN2ox4core11CPosition2dIfEE",
-              "known": "0x460820",
-              "placed": "0x460eb0"
+              "placed": "0x460ed0"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld12createDoodadERKN2ox4core11CPosition2dIfEEi",
               "known": "0x461020",
-              "placed": "0x461070"
+              "placed": "0x461030"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld18recreateDoodadGridEv",
               "known": "0x461120",
-              "placed": "0x461170"
+              "placed": "0x461130"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld12placeDoodadsERKN2ox4core5CRectIfEEi",
               "known": "0x461410",
-              "placed": "0x461460"
+              "placed": "0x461420"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
               "known": "0x4616a0",
-              "placed": "0x4616f0"
+              "placed": "0x4616b0"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld22expandWorldFromCurrentEib",
               "known": "0x461da0",
-              "placed": "0x461db0"
+              "placed": "0x461d70"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld17initializeNewGameEPNS0_9IScenarioE",
               "known": "0x461ea0",
-              "placed": "0x461eb0"
+              "placed": "0x461e70"
             },
             {
               "symbol": "_ZN7harvest4game6CWorldC1Eii",
               "known": "0x462080",
-              "placed": "0x462090"
+              "placed": "0x462050"
             },
             {
               "symbol": "_ZN7harvest4game6CWorldC2Eii",
               "known": "0x462270",
-              "placed": "0x462280"
+              "placed": "0x462240"
             },
             {
               "symbol": "_ZN7harvest4game6CWorldD0Ev",
               "known": "0x462460",
-              "placed": "0x462470"
+              "placed": "0x462430"
             },
             {
               "symbol": "_ZN7harvest4game6CWorldD2Ev",
               "known": "0x462640",
-              "placed": "0x462650"
+              "placed": "0x462610"
             },
             {
               "symbol": "_ZN7harvest4game6CWorldD1Ev",
               "known": "0x462820",
-              "placed": "0x462830"
+              "placed": "0x4627f0"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld6updateEfRKN2ox4core5CRectIfEE",
               "known": "0x462a00",
-              "placed": "0x462a10"
+              "placed": "0x4629d0"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld15initializeWorldEPN2ox5video12IVideoDriverERKNS2_4core12CDimension2dIiEE",
               "known": "0x4635c0",
-              "placed": "0x4635b0"
+              "placed": "0x4635a0"
             },
             {
               "symbol": "_ZN7harvest4game6CWorld17readAndInitializeEPN2ox2io9IReadFileEiPNS2_5video12IVideoDriverERKNS2_4core12CDimension2dIiEE",
               "known": "0x464220",
-              "placed": "0x464210"
+              "placed": "0x464200"
             }
           ],
           "bad_references": [
             {
-              "offset": 611,
+              "offset": 3221,
               "type": 2,
-              "symbol": ".LC3",
+              "symbol": ".LC2",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x3e5df0b6+0x4",
+              "reason": "unmapped or truncated range: 0x1039d4c2+0x4",
               "matches": false
             },
             {
-              "offset": 710,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld24checkCollisionWithDoodadEPKNS0_7SDoodadERKN2ox4core11CPosition2dIfEE",
-              "addend": -4,
-              "destination": "0x45fe70",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1034,
+              "offset": 3355,
               "type": 2,
               "symbol": "_ZN7harvest4game6CWorld24checkCollisionWithDoodadEPKNS0_7SDoodadERKN2ox4core11CPosition2dIfEE",
               "addend": -4,
@@ -65420,24 +64598,7 @@
               "matches": false
             },
             {
-              "offset": 3511,
-              "type": 2,
-              "symbol": ".LC3",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x5955fe3c+0x4",
-              "matches": false
-            },
-            {
-              "offset": 3625,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld24checkCollisionWithDoodadEPKNS0_7SDoodadERKN2ox4core11CPosition2dIfEE",
-              "addend": -4,
-              "destination": "0x45fe70",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3736,
+              "offset": 3371,
               "type": 2,
               "symbol": "_ZN2ox4core5CMath10getAngleIYERKNS0_11CPosition2dIfEES5_",
               "addend": -4,
@@ -65446,249 +64607,191 @@
               "matches": false
             },
             {
-              "offset": 3755,
+              "offset": 3390,
               "type": 2,
-              "symbol": ".LC23",
+              "symbol": ".LC20",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x1055fe6f+0x4",
+              "reason": "unmapped or truncated range: -0x7471f4ee+0x4",
               "matches": false
             },
             {
-              "offset": 3783,
+              "offset": 3418,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x5a5513cb+0x10",
+              "reason": "unmapped or truncated range: 0x206a5fb9+0x10",
               "matches": false
             },
             {
-              "offset": 3809,
+              "offset": 3444,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x100f1fb4+0x10",
+              "reason": "unmapped or truncated range: -0x78aa248a+0x10",
               "matches": false
             },
             {
-              "offset": 3829,
+              "offset": 3468,
               "type": 2,
-              "symbol": ".LC29",
+              "symbol": ".LC22",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x3e61e455+0x8",
+              "reason": "unmapped or truncated range: -0x7c2eac78+0x8",
               "matches": false
             },
             {
-              "offset": 3837,
+              "offset": 3488,
               "type": 2,
               "symbol": ".LC30",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x44d153c5+0x8",
-              "matches": false
-            },
-            {
-              "offset": 3857,
-              "type": 2,
-              "symbol": ".LC33",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x5a55729e+0x4",
-              "matches": false
-            },
-            {
-              "offset": 3865,
-              "type": 2,
-              "symbol": ".LC34",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x1155ffa5+0x4",
-              "matches": false
-            },
-            {
-              "offset": 3987,
-              "type": 2,
-              "symbol": ".LC12",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x79b4e39a+0x4",
-              "matches": false
-            },
-            {
-              "offset": 4022,
-              "type": 2,
-              "symbol": ".LC24",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x2f8be3c5+0x10",
-              "matches": false
-            },
-            {
-              "offset": 4048,
-              "type": 2,
-              "symbol": ".LC24",
               "addend": -4,
               "reason": "merged constant",
               "matches": false
             },
             {
-              "offset": 4064,
+              "offset": 3496,
               "type": 2,
               "symbol": ".LC31",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0xfa38703+0x8",
+              "reason": "unmapped or truncated range: 0x249a96c4+0x4",
               "matches": false
             },
             {
-              "offset": 4072,
-              "type": 2,
-              "symbol": ".LC32",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x54bc0cc5+0x8",
-              "matches": false
-            },
-            {
-              "offset": 4092,
-              "type": 2,
-              "symbol": ".LC25",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x79bee30+0x8",
-              "matches": false
-            },
-            {
-              "offset": 4115,
-              "type": 2,
-              "symbol": ".LC13",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x1055ffe2+0x4",
-              "matches": false
-            },
-            {
-              "offset": 4126,
+              "offset": 3699,
               "type": 2,
               "symbol": ".LC12",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x2f8be35d+0x4",
+              "reason": "unmapped or truncated range: 0x206a50d2+0x4",
               "matches": false
             },
             {
-              "offset": 4150,
+              "offset": 3734,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x10460cf8+0x10",
+              "reason": "unmapped or truncated range: -0x378be492+0x10",
               "matches": false
             },
             {
-              "offset": 4176,
+              "offset": 3760,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x10460d11+0x10",
+              "reason": "unmapped or truncated range: 0x25561c76+0x10",
               "matches": false
             },
             {
-              "offset": 4192,
-              "type": 2,
-              "symbol": ".LC27",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x248a986c+0x8",
-              "matches": false
-            },
-            {
-              "offset": 4200,
+              "offset": 3780,
               "type": 2,
               "symbol": ".LC28",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x358be3c4+0x8",
+              "reason": "merged constant",
               "matches": false
             },
             {
-              "offset": 4219,
+              "offset": 3788,
               "type": 2,
-              "symbol": ".LC14",
+              "symbol": ".LC29",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0xc99ce6d+0x4",
+              "reason": "unmapped or truncated range: 0x77462597+0x8",
               "matches": false
             },
             {
-              "offset": 4238,
+              "offset": 3803,
               "type": 2,
               "symbol": ".LC13",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x57550d6a+0x4",
+              "reason": "unmapped or truncated range: 0x44d15503+0x4",
               "matches": false
             },
             {
-              "offset": 4266,
-              "type": 2,
-              "symbol": ".LC24",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x7851c582+0x10",
-              "matches": false
-            },
-            {
-              "offset": 4292,
-              "type": 2,
-              "symbol": ".LC24",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x421c96d1+0x10",
-              "matches": false
-            },
-            {
-              "offset": 4486,
-              "type": 2,
-              "symbol": ".LC3",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x5955fca2+0x4",
-              "matches": false
-            },
-            {
-              "offset": 4592,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld24checkCollisionWithDoodadEPKNS0_7SDoodadERKN2ox4core11CPosition2dIfEE",
-              "addend": -4,
-              "destination": "0x45fe70",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4632,
-              "type": 2,
-              "symbol": ".LC2",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x1969b871+0x4",
-              "matches": false
-            },
-            {
-              "offset": 4649,
-              "type": 2,
-              "symbol": ".LC14",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x5d87cbc2+0x4",
-              "matches": false
-            },
-            {
-              "offset": 4657,
+              "offset": 3814,
               "type": 2,
               "symbol": ".LC12",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x3c5ab4ca+0x4",
+              "reason": "unmapped or truncated range: 0xbbcd6e8+0x4",
               "matches": false
             },
             {
-              "offset": 4736,
+              "offset": 3838,
               "type": 2,
-              "symbol": "atanf",
+              "symbol": ".LC21",
               "addend": -4,
-              "destination": "0x4079c8",
-              "reason": "different destination",
+              "reason": "unmapped or truncated range: -0x378be42a+0x10",
               "matches": false
             },
             {
-              "offset": 4760,
+              "offset": 3864,
+              "type": 2,
+              "symbol": ".LC21",
+              "addend": -4,
+              "reason": "merged constant",
+              "matches": false
+            },
+            {
+              "offset": 3880,
+              "type": 2,
+              "symbol": ".LC24",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x7f9ae305+0x8",
+              "matches": false
+            },
+            {
+              "offset": 3888,
+              "type": 2,
+              "symbol": ".LC25",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x6eb4c4ed+0x8",
+              "matches": false
+            },
+            {
+              "offset": 3907,
+              "type": 2,
+              "symbol": ".LC14",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x564b3b26+0x4",
+              "matches": false
+            },
+            {
+              "offset": 3926,
               "type": 2,
               "symbol": ".LC13",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x484609de+0x4",
+              "reason": "unmapped or truncated range: 0xf561d39+0x4",
               "matches": false
             },
             {
-              "offset": 6407,
+              "offset": 3954,
+              "type": 2,
+              "symbol": ".LC21",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x378be3b6+0x10",
+              "matches": false
+            },
+            {
+              "offset": 3980,
+              "type": 2,
+              "symbol": ".LC21",
+              "addend": -4,
+              "reason": "merged constant",
+              "matches": false
+            },
+            {
+              "offset": 4004,
+              "type": 2,
+              "symbol": ".LC26",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x2eac9e77+0x8",
+              "matches": false
+            },
+            {
+              "offset": 4012,
+              "type": 2,
+              "symbol": ".LC27",
+              "addend": -4,
+              "reason": "merged constant",
+              "matches": false
+            },
+            {
+              "offset": 6343,
               "type": 2,
               "symbol": "_ZN2ox4algo5CRand7nextIntEi",
               "addend": -4,
@@ -65697,124 +64800,39 @@
               "matches": false
             },
             {
-              "offset": 6711,
-              "type": 2,
-              "symbol": ".LC1",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x445727ae+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6769,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity15CMineralsEntity20fillAreaWithMineralsERKN2ox4core5CRectIfEEiPNS_4game6CWorldE",
-              "addend": -4,
-              "destination": "0x435a70",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6895,
-              "type": 2,
-              "symbol": ".LC1",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0xc562866+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6924,
-              "type": 2,
-              "symbol": "_ZN2ox4core5CMath19getEstimateDistanceERKNS0_11CPosition2dIfEES5_",
-              "addend": -4,
-              "destination": "0x5e0110",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6932,
-              "type": 2,
-              "symbol": ".LC35",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x7ca1a0db+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6940,
-              "type": 2,
-              "symbol": ".LC1",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0xf5b1723+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6948,
-              "type": 2,
-              "symbol": ".LC36",
-              "addend": -4,
-              "reason": "merged constant",
-              "matches": false
-            },
-            {
-              "offset": 6977,
+              "offset": 6856,
               "type": 2,
               "symbol": ".LC37",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x206a5cd5+0x4",
+              "reason": "unmapped or truncated range: -0x2c61d781+0x4",
               "matches": false
             },
             {
-              "offset": 7078,
+              "offset": 7274,
               "type": 2,
               "symbol": ".LC5",
               "addend": -4,
-              "reason": "merged constant",
+              "reason": "unmapped or truncated range: -0x279559c1+0x4",
               "matches": false
             },
             {
-              "offset": 7253,
+              "offset": 7401,
               "type": 2,
               "symbol": ".LC0",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x11560cdd+0x4",
+              "reason": "unmapped or truncated range: 0x4b562aa0+0x4",
               "matches": false
             },
             {
-              "offset": 7266,
-              "type": 2,
-              "symbol": "_ZN2ox5event17gp_subscriberListE",
-              "addend": -4,
-              "destination": "0x874258",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7366,
+              "offset": 7418,
               "type": 2,
               "symbol": ".LC38",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0xca1c162+0x4",
+              "reason": "unmapped or truncated range: -0x1685e33+0x4",
               "matches": false
             },
             {
-              "offset": 7375,
-              "type": 2,
-              "symbol": "_ZN7harvest4game13gp_luaManagerE",
-              "addend": -4,
-              "destination": "0x86b900",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7409,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager15hookMapExpandedEffff",
-              "addend": -4,
-              "destination": "0x444340",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7481,
+              "offset": 7431,
               "type": 2,
               "symbol": "_ZN2ox5event17gp_subscriberListE",
               "addend": -4,
@@ -65823,7 +64841,7 @@
               "matches": false
             },
             {
-              "offset": 7545,
+              "offset": 7489,
               "type": 2,
               "symbol": "_ZN2ox5event17gp_subscriberListE",
               "addend": -4,
@@ -65832,91 +64850,39 @@
               "matches": false
             },
             {
-              "offset": 7618,
-              "type": 2,
-              "symbol": ".LC0",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x16a8e5b3+0x4",
-              "matches": false
-            },
-            {
-              "offset": 7689,
+              "offset": 7605,
               "type": 2,
               "symbol": ".LC5",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x6ba8d480+0x4",
+              "reason": "unmapped or truncated range: 0x103953c7+0x4",
               "matches": false
             },
             {
-              "offset": 7834,
+              "offset": 7750,
               "type": 2,
               "symbol": ".LC5",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x10394c6c+0x4",
+              "reason": "unmapped or truncated range: 0x56562bfd+0x4",
               "matches": false
             },
             {
-              "offset": 8040,
+              "offset": 7956,
               "type": 2,
               "symbol": ".LC5",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x246a70fc+0x4",
+              "reason": "unmapped or truncated range: 0x11560ffc+0x4",
               "matches": false
             },
             {
-              "offset": 11774,
+              "offset": 12212,
               "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
+              "symbol": ".LC32",
               "addend": -4,
-              "destination": "0x4616a0",
-              "reason": "different destination",
+              "reason": "unmapped or truncated range: -0xcb9d246+0x4",
               "matches": false
             },
             {
-              "offset": 11813,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
-              "addend": -4,
-              "destination": "0x4616a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11851,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
-              "addend": -4,
-              "destination": "0x4616a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11889,
-              "type": 2,
-              "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
-              "addend": -4,
-              "destination": "0x4616a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 12018,
-              "type": 2,
-              "symbol": ".LC59",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x2002cb6+0x4",
-              "matches": false
-            },
-            {
-              "offset": 12236,
-              "type": 2,
-              "symbol": ".LC20",
-              "addend": -4,
-              "reason": "merged constant",
-              "matches": false
-            },
-            {
-              "offset": 12476,
+              "offset": 12452,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -65925,7 +64891,7 @@
               "matches": false
             },
             {
-              "offset": 12510,
+              "offset": 12486,
               "type": 2,
               "symbol": "memmove",
               "addend": -4,
@@ -65934,7 +64900,7 @@
               "matches": false
             },
             {
-              "offset": 12595,
+              "offset": 12571,
               "type": 2,
               "symbol": "_ZN2ox4algo5CRand4randEv",
               "addend": -4,
@@ -65943,31 +64909,31 @@
               "matches": false
             },
             {
-              "offset": 12657,
+              "offset": 12633,
               "type": 2,
               "symbol": ".LC35",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x5ddfe8bb+0x4",
+              "reason": "unmapped or truncated range: 0x248a3f6c+0x4",
               "matches": false
             },
             {
-              "offset": 12669,
+              "offset": 12645,
               "type": 2,
-              "symbol": ".LC1",
+              "symbol": ".LC3",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x86ef02+0x4",
+              "reason": "merged constant",
               "matches": false
             },
             {
-              "offset": 12677,
+              "offset": 12653,
               "type": 2,
               "symbol": ".LC56",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x6f8082e+0x4",
+              "reason": "unmapped or truncated range: 0x1039f89b+0x4",
               "matches": false
             },
             {
-              "offset": 12698,
+              "offset": 12674,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -65976,7 +64942,7 @@
               "matches": false
             },
             {
-              "offset": 12792,
+              "offset": 12768,
               "type": 2,
               "symbol": "_ZN2ox4algo5CRand4randEv",
               "addend": -4,
@@ -65985,15 +64951,15 @@
               "matches": false
             },
             {
-              "offset": 12829,
+              "offset": 12805,
               "type": 2,
               "symbol": ".LC10",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x5b2ec010+0x4",
+              "reason": "unmapped or truncated range: 0x1039f233+0x4",
               "matches": false
             },
             {
-              "offset": 12867,
+              "offset": 12843,
               "type": 2,
               "symbol": "_ZN2ox4algo5CRand4randEv",
               "addend": -4,
@@ -66002,7 +64968,7 @@
               "matches": false
             },
             {
-              "offset": 12914,
+              "offset": 12890,
               "type": 2,
               "symbol": "_ZN2ox4algo5CRand4randEv",
               "addend": -4,
@@ -66011,57 +64977,15 @@
               "matches": false
             },
             {
-              "offset": 12929,
+              "offset": 12905,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x2a1cdf54+0x10",
+              "reason": "unmapped or truncated range: -0x746d070a+0x10",
               "matches": false
             },
             {
-              "offset": 13031,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity7CEntity18gp_particlePackageE",
-              "addend": -4,
-              "destination": "0x86b690",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 13058,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x10244411+0xb",
-              "matches": false
-            },
-            {
-              "offset": 13107,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 13112,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x75003880+0xb",
-              "matches": false
-            },
-            {
-              "offset": 13156,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x10ebc931+0xb",
-              "matches": false
-            },
-            {
-              "offset": 13179,
+              "offset": 13007,
               "type": 2,
               "symbol": "_ZN7harvest6entity7CEntity18gp_particlePackageE",
               "addend": -4,
@@ -66070,48 +64994,31 @@
               "matches": false
             },
             {
-              "offset": 13208,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
+              "offset": 13034,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x84+0xb",
               "matches": false
             },
             {
-              "offset": 13329,
-              "type": 2,
-              "symbol": ".LC41",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x277bbe4+0x8",
-              "matches": false
-            },
-            {
-              "offset": 13347,
-              "type": 2,
-              "symbol": ".LC45",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x8905ff6+0x4",
-              "matches": false
-            },
-            {
-              "offset": 13467,
+              "offset": 13435,
               "type": 2,
               "symbol": ".LC46",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x3fd2ff2c+0x4",
+              "reason": "unmapped or truncated range: 0x324b8b8e+0x4",
               "matches": false
             },
             {
-              "offset": 13481,
+              "offset": 13449,
               "type": 2,
-              "symbol": ".LC24",
+              "symbol": ".LC21",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x32ec516f+0x10",
+              "reason": "unmapped or truncated range: 0x504b429c+0x10",
               "matches": false
             },
             {
-              "offset": 13548,
+              "offset": 13516,
               "type": 2,
               "symbol": "sincosf",
               "addend": -4,
@@ -66120,65 +65027,47 @@
               "matches": false
             },
             {
-              "offset": 13577,
+              "offset": 13545,
               "type": 2,
               "symbol": ".LC54",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x54cf7aed+0x4",
-              "matches": false
-            },
-            {
-              "offset": 13585,
-              "type": 2,
-              "symbol": ".LC55",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0xbb9d2e9+0x4",
-              "matches": false
-            },
-            {
-              "offset": 13774,
-              "type": 2,
-              "symbol": "_ZN7harvest4game13gp_luaManagerE",
-              "addend": -4,
-              "destination": "0x86b900",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 13788,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager22getMinimumWorldBordersEv",
-              "addend": -4,
-              "destination": "0x443a00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 13885,
-              "type": 2,
-              "symbol": ".LC42",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x168d80ee+0x8",
-              "matches": false
-            },
-            {
-              "offset": 13908,
-              "type": 2,
-              "symbol": ".LC43",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x10395e92+0x8",
-              "matches": false
-            },
-            {
-              "offset": 13948,
-              "type": 2,
-              "symbol": ".LC25",
               "addend": -4,
               "reason": "merged constant",
               "matches": false
             },
             {
-              "offset": 14005,
+              "offset": 13553,
+              "type": 2,
+              "symbol": ".LC55",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x595625f5+0x4",
+              "matches": false
+            },
+            {
+              "offset": 13773,
+              "type": 2,
+              "symbol": ".LC42",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x10393819+0x8",
+              "matches": false
+            },
+            {
+              "offset": 13796,
+              "type": 2,
+              "symbol": ".LC43",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0xcb183b9+0x8",
+              "matches": false
+            },
+            {
+              "offset": 13836,
+              "type": 2,
+              "symbol": ".LC22",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x4c744318+0x8",
+              "matches": false
+            },
+            {
+              "offset": 13893,
               "type": 2,
               "symbol": "sqrt",
               "addend": -4,
@@ -66187,7 +65076,7 @@
               "matches": false
             },
             {
-              "offset": 14039,
+              "offset": 13927,
               "type": 2,
               "symbol": "atan",
               "addend": -4,
@@ -66196,47 +65085,65 @@
               "matches": false
             },
             {
-              "offset": 14053,
+              "offset": 13941,
               "type": 2,
               "symbol": ".LC44",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x4a56449c+0x8",
+              "reason": "unmapped or truncated range: 0x5c56273b+0x8",
               "matches": false
             },
             {
-              "offset": 14084,
+              "offset": 13972,
               "type": 2,
               "symbol": ".LC42",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x59f44ba+0x8",
+              "reason": "unmapped or truncated range: 0x44751ca8+0x8",
               "matches": false
             },
             {
-              "offset": 14144,
+              "offset": 13987,
+              "type": 2,
+              "symbol": "_ZN7harvest4game13gp_luaManagerE",
+              "addend": -4,
+              "destination": "0x86b900",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 14001,
+              "type": 2,
+              "symbol": "_ZN7harvest4game11CLuaManager22getMinimumWorldBordersEv",
+              "addend": -4,
+              "destination": "0x443a00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 14120,
               "type": 2,
               "symbol": ".LC42",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x2e557928+0x8",
+              "reason": "unmapped or truncated range: -0x375dbae2+0x8",
               "matches": false
             },
             {
-              "offset": 14229,
+              "offset": 14205,
               "type": 2,
               "symbol": ".LC43",
               "addend": -4,
-              "reason": "unmapped or truncated range: -0x7671caa7+0x8",
+              "reason": "unmapped or truncated range: 0x10562880+0x8",
               "matches": false
             },
             {
-              "offset": 14242,
+              "offset": 14218,
               "type": 2,
               "symbol": ".LC43",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x484ef5e9+0x8",
+              "reason": "unmapped or truncated range: -0x3e91bb0c+0x8",
               "matches": false
             },
             {
-              "offset": 14275,
+              "offset": 14251,
               "type": 2,
               "symbol": "_ZNSt6vectorIPN7harvest4game9SWindPuffESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
@@ -66245,7 +65152,7 @@
               "matches": false
             },
             {
-              "offset": 14291,
+              "offset": 14267,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -66254,7 +65161,7 @@
               "matches": false
             },
             {
-              "offset": 14299,
+              "offset": 14275,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -66263,7 +65170,7 @@
               "matches": false
             }
           ],
-          "references": 388,
+          "references": 389,
           "functions": [
             {
               "symbol": "_ZN7harvest4game6CWorld14changeViewSizeERKN2ox4core12CDimension2dIiEE",
@@ -66298,14 +65205,6 @@
               "exact": true
             },
             {
-              "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
-              "address": "0x45fe60",
-              "size": 5,
-              "fde": true,
-              "global": true,
-              "exact": true
-            },
-            {
               "symbol": "_ZN7harvest4game6CWorld27hasWorldExpandedAtLeastOnceEv",
               "address": "0x45fe20",
               "size": 53,
@@ -66314,17 +65213,9 @@
               "exact": true
             },
             {
-              "symbol": "_ZNK7harvest4game6CWorld30worldChangesSizeInThisGameModeEv",
-              "address": "0x460200",
-              "size": 28,
-              "fde": true,
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld16constrainViewPosERN2ox4core11CPosition2dIfEE",
-              "address": "0x460140",
-              "size": 177,
+              "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
+              "address": "0x45fe60",
+              "size": 5,
               "fde": true,
               "global": true,
               "exact": true
@@ -66340,8 +65231,8 @@
             {
               "symbol": "_ZN7harvest4game6CWorld11mayMoveHereERKN2ox4core11CPosition2dIfEE",
               "address": "0x45fee0",
-              "size": 254,
-              "fde": false,
+              "size": 238,
+              "fde": true,
               "global": true,
               "exact": false
             },
@@ -66352,6 +65243,22 @@
               "fde": true,
               "global": true,
               "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest4game6CWorld16constrainViewPosERN2ox4core11CPosition2dIfEE",
+              "address": "0x460140",
+              "size": 177,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZNK7harvest4game6CWorld30worldChangesSizeInThisGameModeEv",
+              "address": "0x460200",
+              "size": 28,
+              "fde": true,
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game6CWorld16renderBackgroundERKN2ox4core11CPosition2dIfEEPNS2_3gui8IGUIFontEPNS3_5CRectIiEE",
@@ -66378,6 +65285,22 @@
               "exact": true
             },
             {
+              "symbol": "_ZN7harvest4game6CWorld19getCollisionTangentERKN2ox4core11CPosition2dIfEE",
+              "address": "0x460820",
+              "size": 414,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game6CWorld19findRendezvousPointERKN2ox4core11CPosition2dIfEERKNS3_9CVector2dIfEE",
+              "address": "0x4609c0",
+              "size": 965,
+              "fde": false,
+              "global": true,
+              "exact": false
+            },
+            {
               "symbol": "_ZNK7harvest4game6CWorld9applyWindERKN2ox4core9CVector3dIfEERNS3_9CVector2dIfEEf",
               "address": "0x460d80",
               "size": 311,
@@ -66392,22 +65315,6 @@
               "fde": true,
               "global": true,
               "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld19findRendezvousPointERKN2ox4core11CPosition2dIfEERKNS3_9CVector2dIfEE",
-              "address": "0x4609c0",
-              "size": 982,
-              "fde": false,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN7harvest4game6CWorld19getCollisionTangentERKN2ox4core11CPosition2dIfEE",
-              "address": "0x460820",
-              "size": 446,
-              "fde": false,
-              "global": true,
-              "exact": false
             },
             {
               "symbol": "_ZN7harvest4game6CWorld12createDoodadERKN2ox4core11CPosition2dIfEEi",
@@ -66436,7 +65343,7 @@
             {
               "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
               "address": "0x4616a0",
-              "size": 1722,
+              "size": 1718,
               "fde": false,
               "global": true,
               "exact": false
@@ -66500,7 +65407,7 @@
             {
               "symbol": "_ZN7harvest4game6CWorld6updateEfRKN2ox4core5CRectIfEE",
               "address": "0x462a00",
-              "size": 2975,
+              "size": 3015,
               "fde": false,
               "global": true,
               "exact": false
@@ -66534,22 +65441,27 @@
               "kind": "merged constant"
             },
             {
-              "address": "0x5f0464",
-              "size": 4,
-              "kind": "merged constant"
-            },
-            {
-              "address": "0x5f0464",
-              "size": 4,
-              "kind": "merged constant"
-            },
-            {
               "address": "0x5f03cc",
               "size": 4,
               "kind": "merged constant"
             },
             {
               "address": "0x5f948c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f948c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
               "size": 4,
               "kind": "merged constant"
             },
@@ -66649,6 +65561,31 @@
               "kind": "merged constant"
             },
             {
+              "address": "0x5f948c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03cc",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9498",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f2d0c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
               "address": "0x5f0468",
               "size": 4,
               "kind": "merged constant"
@@ -66685,6 +65622,41 @@
             },
             {
               "address": "0x5f7c20",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f3208",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f241c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9488",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94ac",
               "size": 4,
               "kind": "merged constant"
             },
@@ -66735,6 +65707,31 @@
             },
             {
               "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03e4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9294",
+              "size": 11,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9294",
+              "size": 11,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f94f0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0474",
               "size": 4,
               "kind": "merged constant"
             },
@@ -67099,8 +66096,8 @@
           "placement": "exception frames",
           "exact": false,
           "address": "0x65b994",
-          "first_difference": 79,
-          "differing_bytes": 8,
+          "first_difference": 88,
+          "differing_bytes": 3,
           "references": 0
         },
         {
@@ -67229,7 +66226,7 @@
           "/out/HarvestFull__harvest__game__CWorld.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CWorld.cpp": "7d7206458b83b17855081204d3c96c786ca7e4a46de237d74f6cde2c85093cf8",
+          "src/HarvestFull/harvest/game/CWorld.cpp": "17ca9911e5689f33061c98f35332989a706eb250cd7acb979ec714bc8340ea2d",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -67282,9 +66279,9 @@
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
         },
         "system_headers": 129,
-        "object_sha256": "a00322c995575e6895ef45def508806857797145c0dd4ada7e1f9199ff3a7f55"
+        "object_sha256": "81d5be0a77ab47f57420a1c458e2f5b104a443d04997cf7e3a856ee43435e77d"
       },
-      "fuzzy_target_sha256": "19c1a0fd14fc994ec136600f2706df81ff46df80647b887eca9a257b3fd433be",
+      "fuzzy_target_sha256": "26bbd4921c26b68b4ce291a9929b4f215634c06bd4af8e66483833657d4014e0",
       "fuzzy_functions": [
         {
           "address": "0x45fdd0",
@@ -67311,27 +66308,15 @@
           "percent": 100.0
         },
         {
-          "address": "0x45fe60",
-          "size": 5,
-          "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
-          "percent": 100.0
-        },
-        {
           "address": "0x45fe20",
           "size": 53,
           "symbol": "_ZN7harvest4game6CWorld27hasWorldExpandedAtLeastOnceEv",
           "percent": 100.0
         },
         {
-          "address": "0x460200",
-          "size": 28,
-          "symbol": "_ZNK7harvest4game6CWorld30worldChangesSizeInThisGameModeEv",
-          "percent": 100.0
-        },
-        {
-          "address": "0x460140",
-          "size": 177,
-          "symbol": "_ZN7harvest4game6CWorld16constrainViewPosERN2ox4core11CPosition2dIfEE",
+          "address": "0x45fe60",
+          "size": 5,
+          "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
           "percent": 100.0
         },
         {
@@ -67344,13 +66329,25 @@
           "address": "0x45fee0",
           "size": 238,
           "symbol": "_ZN7harvest4game6CWorld11mayMoveHereERKN2ox4core11CPosition2dIfEE",
-          "percent": 87.542854
+          "percent": 97.97143
         },
         {
           "address": "0x45ffd0",
           "size": 363,
           "symbol": "_ZN7harvest4game6CWorld18mayPlaceObjectHereERKN2ox4core11CPosition2dIfEEb",
-          "percent": 90.27059
+          "percent": 98.329414
+        },
+        {
+          "address": "0x460140",
+          "size": 177,
+          "symbol": "_ZN7harvest4game6CWorld16constrainViewPosERN2ox4core11CPosition2dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x460200",
+          "size": 28,
+          "symbol": "_ZNK7harvest4game6CWorld30worldChangesSizeInThisGameModeEv",
+          "percent": 100.0
         },
         {
           "address": "0x460220",
@@ -67371,6 +66368,18 @@
           "percent": 100.0
         },
         {
+          "address": "0x460820",
+          "size": 414,
+          "symbol": "_ZN7harvest4game6CWorld19getCollisionTangentERKN2ox4core11CPosition2dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4609c0",
+          "size": 949,
+          "symbol": "_ZN7harvest4game6CWorld19findRendezvousPointERKN2ox4core11CPosition2dIfEERKNS3_9CVector2dIfEE",
+          "percent": 98.8211
+        },
+        {
           "address": "0x460d80",
           "size": 311,
           "symbol": "_ZNK7harvest4game6CWorld9applyWindERKN2ox4core9CVector3dIfEERNS3_9CVector2dIfEEf",
@@ -67381,18 +66390,6 @@
           "size": 351,
           "symbol": "_ZN7harvest4game6CWorld5writeEPN2ox2io10IWriteFileE",
           "percent": 100.0
-        },
-        {
-          "address": "0x4609c0",
-          "size": 949,
-          "symbol": "_ZN7harvest4game6CWorld19findRendezvousPointERKN2ox4core11CPosition2dIfEERKNS3_9CVector2dIfEE",
-          "percent": 27.192661
-        },
-        {
-          "address": "0x460820",
-          "size": 414,
-          "symbol": "_ZN7harvest4game6CWorld19getCollisionTangentERKN2ox4core11CPosition2dIfEE",
-          "percent": 57.137615
         },
         {
           "address": "0x461020",
@@ -67416,7 +66413,7 @@
           "address": "0x4616a0",
           "size": 1777,
           "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
-          "percent": 54.943283
+          "percent": 79.414925
         },
         {
           "address": "0x461da0",
@@ -67464,7 +66461,7 @@
           "address": "0x462a00",
           "size": 3007,
           "symbol": "_ZN7harvest4game6CWorld6updateEfRKN2ox4core5CRectIfEE",
-          "percent": 75.99054
+          "percent": 84.53943
         },
         {
           "address": "0x4635c0",
@@ -67518,239 +66515,25 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CStatistics.cpp",
-      "object_sha256": "0cbf3b16f59bcff323e9d4c30135e52e45c0f7267a9718fd86378c52c7ac60df",
+      "object_sha256": "1cce1b420d730363e164c9b26d518a3d4a117a2caefcf652425db1f3b6447569",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 7029,
+          "size": 7030,
           "placement": "explicit",
           "exact": false,
           "address": "0x45a040",
-          "first_difference": 704,
-          "differing_bytes": 807,
           "misplaced_symbols": [
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
-              "known": "0x45a9d0",
-              "placed": "0x45a1c0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsC2Ev",
-              "known": "0x45b8a0",
-              "placed": "0x45a430"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics19modifyGameStatValueEii",
-              "known": "0x45a1c0",
-              "placed": "0x45a5b0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics21reportAlienStatChangeEiif",
-              "known": "0x45a1e0",
-              "placed": "0x45a5d0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics5writeEPN2ox2io10IWriteFileE",
-              "known": "0x45a2a0",
-              "placed": "0x45a690"
-            },
             {
               "symbol": "_ZN7harvest4game14CHighscoreInfoC2Ev",
               "known": "0x45a710",
-              "placed": "0x45a920"
+              "placed": "0x45a600"
             },
             {
               "symbol": "_ZN7harvest4game14CHighscoreInfoC1Ev",
               "known": "0x45a600",
-              "placed": "0x45aa30"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoD0Ev",
-              "known": "0x45a820",
-              "placed": "0x45ab40"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoD1Ev",
-              "known": "0x45a8b0",
-              "placed": "0x45abd0"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoD2Ev",
-              "known": "0x45a940",
-              "placed": "0x45ac60"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoC2EPKwS3_iiiiiif",
-              "known": "0x45aec0",
-              "placed": "0x45acf0"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoC1EPKwS3_iiiiiif",
-              "known": "0x45ac40",
-              "placed": "0x45af70"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics20reportNewThreatLevelEif",
-              "known": "0x45b140",
-              "placed": "0x45b1f0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics6addLogEfii",
-              "known": "0x45b310",
-              "placed": "0x45b3c0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatistics4readEPN2ox2io9IReadFileEi",
-              "known": "0x45b380",
-              "placed": "0x45b430"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsD0Ev",
-              "known": "0x45a530",
-              "placed": "0x45b7d0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsD1Ev",
-              "known": "0x45ba20",
-              "placed": "0x45b8a0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsD2Ev",
-              "known": "0x45baf0",
-              "placed": "0x45b970"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsC1Ev",
-              "known": "0x45b720",
-              "placed": "0x45ba40"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 1494,
-              "type": 2,
-              "symbol": ".LC3",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x115595f2+0x4",
-              "matches": false
-            },
-            {
-              "offset": 3393,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3526,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3593,
-              "type": 2,
-              "symbol": "_ZN2ox4core10CHiddenIntC1Ei",
-              "addend": -4,
-              "destination": "0x5dff00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3609,
-              "type": 2,
-              "symbol": "_ZN2ox4core10CHiddenIntC1Ei",
-              "addend": -4,
-              "destination": "0x5dff00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3652,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3667,
-              "type": 2,
-              "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
-              "addend": -4,
-              "destination": "0x45a9d0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4035,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4176,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4241,
-              "type": 2,
-              "symbol": "_ZN2ox4core10CHiddenIntC1Ei",
-              "addend": -4,
-              "destination": "0x5dff00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4257,
-              "type": 2,
-              "symbol": "_ZN2ox4core10CHiddenIntC1Ei",
-              "addend": -4,
-              "destination": "0x5dff00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4300,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4315,
-              "type": 2,
-              "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
-              "addend": -4,
-              "destination": "0x45a9d0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1507,
-              "type": 2,
-              "symbol": "_ZN2ox4core10CHiddenInt11modifyValueEi",
-              "addend": -4,
-              "destination": "0x5dfd10",
-              "reason": "different destination",
-              "matches": false
+              "placed": "0x45a710"
             }
           ],
           "references": 207,
@@ -67900,22 +66683,6 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
-              "address": "0x45a9d0",
-              "size": 623,
-              "fde": true,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsC2Ev",
-              "address": "0x45b8a0",
-              "size": 373,
-              "fde": true,
-              "global": true,
-              "exact": true
-            },
-            {
               "symbol": "_ZN7harvest4game11CStatistics19modifyGameStatValueEii",
               "address": "0x45a1c0",
               "size": 19,
@@ -67926,10 +66693,10 @@
             {
               "symbol": "_ZN7harvest4game11CStatistics21reportAlienStatChangeEiif",
               "address": "0x45a1e0",
-              "size": 122,
-              "fde": false,
+              "size": 118,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game11CStatistics20modifyLevelStatValueEif",
@@ -67937,12 +66704,20 @@
               "size": 61,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game11CStatistics5writeEPN2ox2io10IWriteFileE",
               "address": "0x45a2a0",
               "size": 656,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game11CStatisticsD0Ev",
+              "address": "0x45a530",
+              "size": 196,
               "fde": true,
               "global": true,
               "exact": true
@@ -67988,12 +66763,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoC2EPKwS3_iiiiiif",
-              "address": "0x45aec0",
-              "size": 626,
+              "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
+              "address": "0x45a9d0",
+              "size": 623,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game14CHighscoreInfoC1EPKwS3_iiiiiif",
@@ -68001,7 +66776,15 @@
               "size": 626,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game14CHighscoreInfoC2EPKwS3_iiiiiif",
+              "address": "0x45aec0",
+              "size": 626,
+              "fde": true,
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game11CStatistics20reportNewThreatLevelEif",
@@ -68028,9 +66811,17 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest4game11CStatisticsD0Ev",
-              "address": "0x45a530",
-              "size": 196,
+              "symbol": "_ZN7harvest4game11CStatisticsC1Ev",
+              "address": "0x45b720",
+              "size": 373,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game11CStatisticsC2Ev",
+              "address": "0x45b8a0",
+              "size": 373,
               "fde": true,
               "global": true,
               "exact": true
@@ -68050,24 +66841,21 @@
               "fde": true,
               "global": true,
               "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game11CStatisticsC1Ev",
-              "address": "0x45b720",
-              "size": 373,
-              "fde": true,
-              "global": true,
-              "exact": true
             }
           ],
           "data_ranges": [
             {
-              "address": "0x5f03e4",
+              "address": "0x5f0464",
               "size": 4,
               "kind": "merged constant"
             },
             {
               "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03e4",
               "size": 4,
               "kind": "merged constant"
             },
@@ -68270,7 +67058,7 @@
           "/out/HarvestFull__harvest__game__CStatistics.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CStatistics.cpp": "22bd946ffff23fc35b2e62e72ffb5290b285b65a4f884679775ca5c4368936cf",
+          "src/HarvestFull/harvest/game/CStatistics.cpp": "4faae99f115580534c569f9c972bc58fd57e1f0679bc866eebea6e3d77c8304f",
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
@@ -68305,9 +67093,9 @@
           "src/ox/algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a"
         },
         "system_headers": 121,
-        "object_sha256": "0cbf3b16f59bcff323e9d4c30135e52e45c0f7267a9718fd86378c52c7ac60df"
+        "object_sha256": "1cce1b420d730363e164c9b26d518a3d4a117a2caefcf652425db1f3b6447569"
       },
-      "fuzzy_target_sha256": "724a5093b173f0ddc8d26a65a0742b0c3d9ec8fdd4089799aaa8cfcd84031a24",
+      "fuzzy_target_sha256": "9765ebd48cd0df51c9ee5c5f653f5658fdd22d30753d3599912ba445847a8491",
       "fuzzy_functions": [
         {
           "address": "0x45a040",
@@ -68418,18 +67206,6 @@
           "percent": 100.0
         },
         {
-          "address": "0x45a9d0",
-          "size": 623,
-          "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
-          "percent": 98.196724
-        },
-        {
-          "address": "0x45b8a0",
-          "size": 373,
-          "symbol": "_ZN7harvest4game11CStatisticsC2Ev",
-          "percent": 100.0
-        },
-        {
           "address": "0x45a1c0",
           "size": 19,
           "symbol": "_ZN7harvest4game11CStatistics19modifyGameStatValueEii",
@@ -68439,18 +67215,24 @@
           "address": "0x45a1e0",
           "size": 118,
           "symbol": "_ZN7harvest4game11CStatistics21reportAlienStatChangeEiif",
-          "percent": 50.741936
+          "percent": 100.0
         },
         {
           "address": "0x45a260",
           "size": 61,
           "symbol": "_ZN7harvest4game11CStatistics20modifyLevelStatValueEif",
-          "percent": 59.666668
+          "percent": 100.0
         },
         {
           "address": "0x45a2a0",
           "size": 656,
           "symbol": "_ZN7harvest4game11CStatistics5writeEPN2ox2io10IWriteFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x45a530",
+          "size": 196,
+          "symbol": "_ZN7harvest4game11CStatisticsD0Ev",
           "percent": 100.0
         },
         {
@@ -68484,16 +67266,22 @@
           "percent": 100.0
         },
         {
-          "address": "0x45aec0",
-          "size": 626,
-          "symbol": "_ZN7harvest4game14CHighscoreInfoC2EPKwS3_iiiiiif",
-          "percent": 96.310974
+          "address": "0x45a9d0",
+          "size": 623,
+          "symbol": "_ZN7harvest4game14CHighscoreInfo21createHighscoreStringEv",
+          "percent": 100.0
         },
         {
           "address": "0x45ac40",
           "size": 626,
           "symbol": "_ZN7harvest4game14CHighscoreInfoC1EPKwS3_iiiiiif",
-          "percent": 96.319016
+          "percent": 100.0
+        },
+        {
+          "address": "0x45aec0",
+          "size": 626,
+          "symbol": "_ZN7harvest4game14CHighscoreInfoC2EPKwS3_iiiiiif",
+          "percent": 100.0
         },
         {
           "address": "0x45b140",
@@ -68514,9 +67302,15 @@
           "percent": 100.0
         },
         {
-          "address": "0x45a530",
-          "size": 196,
-          "symbol": "_ZN7harvest4game11CStatisticsD0Ev",
+          "address": "0x45b720",
+          "size": 373,
+          "symbol": "_ZN7harvest4game11CStatisticsC1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x45b8a0",
+          "size": 373,
+          "symbol": "_ZN7harvest4game11CStatisticsC2Ev",
           "percent": 100.0
         },
         {
@@ -68529,12 +67323,6 @@
           "address": "0x45baf0",
           "size": 198,
           "symbol": "_ZN7harvest4game11CStatisticsD2Ev",
-          "percent": 100.0
-        },
-        {
-          "address": "0x45b720",
-          "size": 373,
-          "symbol": "_ZN7harvest4game11CStatisticsC1Ev",
           "percent": 100.0
         },
         {
@@ -68697,17 +67485,17 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CScenario.cpp",
-      "object_sha256": "dbd8448149fbb562481d3f80f5df3af9956771161946ceece598b5c79ae7c1ab",
+      "object_sha256": "b247a2543d0f1d278a85278727c454d11bf3a8b5f4b132280b227620cfc5fd44",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 22341,
+          "size": 22357,
           "placement": "explicit",
           "exact": false,
           "address": "0x453ce0",
-          "first_difference": 7670,
-          "differing_bytes": 2179,
+          "first_difference": 20039,
+          "differing_bytes": 1924,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest4game22CHarvestEventCondition14comparisonTestEiii",
@@ -68743,107 +67531,11 @@
               "symbol": "_ZN7harvest4game9CScenario16getNumObjectivesEv",
               "known": "0x453d80",
               "placed": "0x453de0"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenarioD0Ev",
-              "known": "0x455c20",
-              "placed": "0x455c10"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenarioD1Ev",
-              "known": "0x455d60",
-              "placed": "0x455d50"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenarioD2Ev",
-              "known": "0x455e90",
-              "placed": "0x455e80"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenarioC1Ev",
-              "known": "0x455fc0",
-              "placed": "0x455fb0"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenarioC2Ev",
-              "known": "0x456710",
-              "placed": "0x456700"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario20getCharacterInfoLineEfPN2ox5event14IEventReceiverEPKwiPKc",
-              "known": "0x456e70",
-              "placed": "0x456e60"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario8addEventEPNS0_13CHarvestEventE",
-              "known": "0x457310",
-              "placed": "0x457300"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario26notifyDropshipGoingToSpaceEPN2ox5event14IEventReceiverE",
-              "known": "0x457360",
-              "placed": "0x457350"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario18getCharacterDialogEPKwiPcf",
-              "known": "0x457c60",
-              "placed": "0x457c50"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario20notifyDropshipLandedEPN2ox5event14IEventReceiverE",
-              "known": "0x458020",
-              "placed": "0x458010"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario29notifyDropshipKilledAllAliensEPN2ox5event14IEventReceiverE",
-              "known": "0x458660",
-              "placed": "0x458650"
-            },
-            {
-              "symbol": "_ZN7harvest4game9CScenario20createScenarioEventsEPN2ox5event14IEventReceiverE",
-              "known": "0x458890",
-              "placed": "0x458880"
             }
           ],
           "bad_references": [
             {
-              "offset": 7773,
-              "type": 2,
-              "symbol": "_ZNSt15_List_node_base6unhookEv",
-              "addend": -4,
-              "destination": "0x407478",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7781,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7955,
-              "type": 2,
-              "symbol": "_ZNSt15_List_node_base6unhookEv",
-              "addend": -4,
-              "destination": "0x407478",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7963,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 20032,
+              "offset": 20048,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -68852,7 +67544,7 @@
               "matches": false
             },
             {
-              "offset": 20042,
+              "offset": 20058,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -68861,7 +67553,7 @@
               "matches": false
             },
             {
-              "offset": 20049,
+              "offset": 20065,
               "type": 2,
               "symbol": ".LC440",
               "addend": -4,
@@ -68869,7 +67561,7 @@
               "matches": false
             },
             {
-              "offset": 20059,
+              "offset": 20075,
               "type": 11,
               "symbol": "_ZTVN7harvest3gui17CDialogueItemInfoE",
               "addend": 16,
@@ -68878,7 +67570,7 @@
               "matches": false
             },
             {
-              "offset": 20098,
+              "offset": 20114,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -68886,7 +67578,7 @@
               "matches": false
             },
             {
-              "offset": 20142,
+              "offset": 20158,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -68895,7 +67587,7 @@
               "matches": false
             },
             {
-              "offset": 20148,
+              "offset": 20164,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -68903,7 +67595,7 @@
               "matches": false
             },
             {
-              "offset": 20189,
+              "offset": 20205,
               "type": 2,
               "symbol": ".LC441",
               "addend": -4,
@@ -68911,7 +67603,7 @@
               "matches": false
             },
             {
-              "offset": 20231,
+              "offset": 20247,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2224,
@@ -68919,7 +67611,7 @@
               "matches": false
             },
             {
-              "offset": 20280,
+              "offset": 20296,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -68928,7 +67620,7 @@
               "matches": false
             },
             {
-              "offset": 20289,
+              "offset": 20305,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2224,
@@ -68936,7 +67628,7 @@
               "matches": false
             },
             {
-              "offset": 20351,
+              "offset": 20367,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -68945,7 +67637,7 @@
               "matches": false
             },
             {
-              "offset": 20390,
+              "offset": 20406,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -68954,7 +67646,7 @@
               "matches": false
             },
             {
-              "offset": 20418,
+              "offset": 20434,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -68963,7 +67655,7 @@
               "matches": false
             },
             {
-              "offset": 20444,
+              "offset": 20460,
               "type": 11,
               "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
               "addend": 16,
@@ -68972,7 +67664,7 @@
               "matches": false
             },
             {
-              "offset": 20460,
+              "offset": 20476,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -68981,7 +67673,7 @@
               "matches": false
             },
             {
-              "offset": 20483,
+              "offset": 20499,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -68990,7 +67682,7 @@
               "matches": false
             },
             {
-              "offset": 20493,
+              "offset": 20509,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -68999,7 +67691,7 @@
               "matches": false
             },
             {
-              "offset": 20503,
+              "offset": 20519,
               "type": 11,
               "symbol": "_ZTVN7harvest3gui17CDialogueItemInfoE",
               "addend": 16,
@@ -69008,7 +67700,7 @@
               "matches": false
             },
             {
-              "offset": 20542,
+              "offset": 20558,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -69016,7 +67708,7 @@
               "matches": false
             },
             {
-              "offset": 20592,
+              "offset": 20608,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69025,7 +67717,7 @@
               "matches": false
             },
             {
-              "offset": 20601,
+              "offset": 20617,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -69033,7 +67725,7 @@
               "matches": false
             },
             {
-              "offset": 20630,
+              "offset": 20646,
               "type": 2,
               "symbol": ".LC443",
               "addend": -4,
@@ -69041,7 +67733,7 @@
               "matches": false
             },
             {
-              "offset": 20672,
+              "offset": 20688,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2416,
@@ -69049,7 +67741,7 @@
               "matches": false
             },
             {
-              "offset": 20729,
+              "offset": 20745,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2416,
@@ -69057,7 +67749,7 @@
               "matches": false
             },
             {
-              "offset": 20783,
+              "offset": 20799,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69066,7 +67758,7 @@
               "matches": false
             },
             {
-              "offset": 20822,
+              "offset": 20838,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69075,7 +67767,7 @@
               "matches": false
             },
             {
-              "offset": 20850,
+              "offset": 20866,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69084,7 +67776,7 @@
               "matches": false
             },
             {
-              "offset": 20876,
+              "offset": 20892,
               "type": 11,
               "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
               "addend": 16,
@@ -69093,7 +67785,7 @@
               "matches": false
             },
             {
-              "offset": 20892,
+              "offset": 20908,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69102,7 +67794,7 @@
               "matches": false
             },
             {
-              "offset": 20915,
+              "offset": 20931,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -69111,7 +67803,7 @@
               "matches": false
             },
             {
-              "offset": 20925,
+              "offset": 20941,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69120,7 +67812,7 @@
               "matches": false
             },
             {
-              "offset": 20935,
+              "offset": 20951,
               "type": 11,
               "symbol": "_ZTVN7harvest3gui17CDialogueItemInfoE",
               "addend": 16,
@@ -69129,7 +67821,7 @@
               "matches": false
             },
             {
-              "offset": 20974,
+              "offset": 20990,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -69137,7 +67829,7 @@
               "matches": false
             },
             {
-              "offset": 21022,
+              "offset": 21038,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69146,7 +67838,7 @@
               "matches": false
             },
             {
-              "offset": 21031,
+              "offset": 21047,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -69154,7 +67846,7 @@
               "matches": false
             },
             {
-              "offset": 21061,
+              "offset": 21077,
               "type": 2,
               "symbol": ".LC445",
               "addend": -4,
@@ -69162,7 +67854,7 @@
               "matches": false
             },
             {
-              "offset": 21103,
+              "offset": 21119,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2608,
@@ -69170,7 +67862,7 @@
               "matches": false
             },
             {
-              "offset": 21159,
+              "offset": 21175,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2608,
@@ -69178,7 +67870,7 @@
               "matches": false
             },
             {
-              "offset": 21215,
+              "offset": 21231,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69187,7 +67879,7 @@
               "matches": false
             },
             {
-              "offset": 21254,
+              "offset": 21270,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69196,7 +67888,7 @@
               "matches": false
             },
             {
-              "offset": 21282,
+              "offset": 21298,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69205,7 +67897,7 @@
               "matches": false
             },
             {
-              "offset": 21308,
+              "offset": 21324,
               "type": 11,
               "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
               "addend": 16,
@@ -69214,7 +67906,7 @@
               "matches": false
             },
             {
-              "offset": 21324,
+              "offset": 21340,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69223,7 +67915,7 @@
               "matches": false
             },
             {
-              "offset": 21347,
+              "offset": 21363,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -69232,7 +67924,7 @@
               "matches": false
             },
             {
-              "offset": 21357,
+              "offset": 21373,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69241,7 +67933,7 @@
               "matches": false
             },
             {
-              "offset": 21367,
+              "offset": 21383,
               "type": 11,
               "symbol": "_ZTVN7harvest3gui17CDialogueItemInfoE",
               "addend": 16,
@@ -69250,7 +67942,7 @@
               "matches": false
             },
             {
-              "offset": 21405,
+              "offset": 21421,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 12,
@@ -69258,7 +67950,7 @@
               "matches": false
             },
             {
-              "offset": 21454,
+              "offset": 21470,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69267,7 +67959,7 @@
               "matches": false
             },
             {
-              "offset": 21496,
+              "offset": 21512,
               "type": 2,
               "symbol": ".LC446",
               "addend": -4,
@@ -69275,7 +67967,7 @@
               "matches": false
             },
             {
-              "offset": 21522,
+              "offset": 21538,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2808,
@@ -69283,7 +67975,7 @@
               "matches": false
             },
             {
-              "offset": 21584,
+              "offset": 21600,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69292,7 +67984,7 @@
               "matches": false
             },
             {
-              "offset": 21593,
+              "offset": 21609,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2808,
@@ -69300,7 +67992,7 @@
               "matches": false
             },
             {
-              "offset": 21647,
+              "offset": 21663,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69309,7 +68001,7 @@
               "matches": false
             },
             {
-              "offset": 21686,
+              "offset": 21702,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -69318,7 +68010,7 @@
               "matches": false
             },
             {
-              "offset": 21714,
+              "offset": 21730,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69327,7 +68019,7 @@
               "matches": false
             },
             {
-              "offset": 21740,
+              "offset": 21756,
               "type": 11,
               "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
               "addend": 16,
@@ -69336,25 +68028,7 @@
               "matches": false
             },
             {
-              "offset": 21756,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21777,
-              "type": 2,
-              "symbol": "_ZNSt15_List_node_base4hookEPS_",
-              "addend": -4,
-              "destination": "0x407cf8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21787,
+              "offset": 21772,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69364,74 +68038,6 @@
             },
             {
               "offset": 21793,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 331,
-              "reason": "unmapped or truncated range: 0x3843+0x1",
-              "matches": false
-            },
-            {
-              "offset": 21804,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 2984,
-              "reason": "unmapped or truncated range: 0x43c70000+0x80",
-              "matches": false
-            },
-            {
-              "offset": 21812,
-              "type": 2,
-              "symbol": ".LC406",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x20bb85d8+0x4",
-              "matches": false
-            },
-            {
-              "offset": 21820,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 12,
-              "reason": "unmapped or truncated range: 0x20bf3843+0x4",
-              "matches": false
-            },
-            {
-              "offset": 21831,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CDialogueItemInfoC1EPKwS3_PKcS5_fb",
-              "addend": -4,
-              "destination": "0x459b00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21841,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21867,
-              "type": 11,
-              "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
-              "addend": 16,
-              "destination": "0x5f73e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21883,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21904,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -69440,7 +68046,75 @@
               "matches": false
             },
             {
-              "offset": 21914,
+              "offset": 21803,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21809,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 331,
+              "reason": "unmapped or truncated range: 0x3843+0x1",
+              "matches": false
+            },
+            {
+              "offset": 21820,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 2984,
+              "reason": "unmapped or truncated range: 0x43c70000+0x80",
+              "matches": false
+            },
+            {
+              "offset": 21828,
+              "type": 2,
+              "symbol": ".LC406",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x20bb85d8+0x4",
+              "matches": false
+            },
+            {
+              "offset": 21836,
+              "type": 10,
+              "symbol": ".rodata.str4.4",
+              "addend": 12,
+              "reason": "unmapped or truncated range: 0x20bf3843+0x4",
+              "matches": false
+            },
+            {
+              "offset": 21847,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CDialogueItemInfoC1EPKwS3_PKcS5_fb",
+              "addend": -4,
+              "destination": "0x459b00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21857,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21883,
+              "type": 11,
+              "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
+              "addend": 16,
+              "destination": "0x5f73e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21899,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -69450,74 +68124,6 @@
             },
             {
               "offset": 21920,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 331,
-              "reason": "unmapped or truncated range: 0x622e31b8+0x1",
-              "matches": false
-            },
-            {
-              "offset": 21928,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 3112,
-              "reason": "unmapped or truncated range: 0x5f6c70ba+0x68",
-              "matches": false
-            },
-            {
-              "offset": 21936,
-              "type": 2,
-              "symbol": ".LC406",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x19d6e9a9+0x4",
-              "matches": false
-            },
-            {
-              "offset": 21944,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 12,
-              "reason": "unmapped or truncated range: 0x622838be+0x4",
-              "matches": false
-            },
-            {
-              "offset": 21955,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CDialogueItemInfoC1EPKwS3_PKcS5_fb",
-              "addend": -4,
-              "destination": "0x459b00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21965,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 21991,
-              "type": 11,
-              "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
-              "addend": 16,
-              "destination": "0x5f73e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22007,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22028,
               "type": 2,
               "symbol": "_ZNSt15_List_node_base4hookEPS_",
               "addend": -4,
@@ -69526,7 +68132,93 @@
               "matches": false
             },
             {
-              "offset": 22108,
+              "offset": 21930,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21936,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 331,
+              "reason": "unmapped or truncated range: 0x622e31b8+0x1",
+              "matches": false
+            },
+            {
+              "offset": 21944,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 3112,
+              "reason": "unmapped or truncated range: 0x5f6c70ba+0x68",
+              "matches": false
+            },
+            {
+              "offset": 21952,
+              "type": 2,
+              "symbol": ".LC406",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x19d6e9a9+0x4",
+              "matches": false
+            },
+            {
+              "offset": 21960,
+              "type": 10,
+              "symbol": ".rodata.str4.4",
+              "addend": 12,
+              "reason": "unmapped or truncated range: 0x622838be+0x4",
+              "matches": false
+            },
+            {
+              "offset": 21971,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CDialogueItemInfoC1EPKwS3_PKcS5_fb",
+              "addend": -4,
+              "destination": "0x459b00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21981,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 22007,
+              "type": 11,
+              "symbol": "_ZTVN7harvest4game17CAddDialogueEventE",
+              "addend": 16,
+              "destination": "0x5f73e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 22023,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 22044,
+              "type": 2,
+              "symbol": "_ZNSt15_List_node_base4hookEPS_",
+              "addend": -4,
+              "destination": "0x407cf8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 22124,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -69535,7 +68227,7 @@
               "matches": false
             },
             {
-              "offset": 22116,
+              "offset": 22132,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -69544,7 +68236,7 @@
               "matches": false
             },
             {
-              "offset": 22133,
+              "offset": 22149,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -69553,7 +68245,7 @@
               "matches": false
             },
             {
-              "offset": 22142,
+              "offset": 22158,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -69562,7 +68254,7 @@
               "matches": false
             },
             {
-              "offset": 22152,
+              "offset": 22168,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -69571,7 +68263,7 @@
               "matches": false
             },
             {
-              "offset": 22193,
+              "offset": 22209,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -69580,7 +68272,7 @@
               "matches": false
             },
             {
-              "offset": 22201,
+              "offset": 22217,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -69589,7 +68281,7 @@
               "matches": false
             },
             {
-              "offset": 22218,
+              "offset": 22234,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -69598,7 +68290,7 @@
               "matches": false
             },
             {
-              "offset": 22226,
+              "offset": 22242,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -69607,7 +68299,7 @@
               "matches": false
             },
             {
-              "offset": 22235,
+              "offset": 22251,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -69725,10 +68417,10 @@
             {
               "symbol": "_ZN7harvest4game9CScenario6updateEf",
               "address": "0x455ac0",
-              "size": 321,
-              "fde": false,
+              "size": 340,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game9CScenarioD0Ev",
@@ -73682,7 +72374,7 @@
           "/out/HarvestFull__harvest__game__CScenario.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CScenario.cpp": "a9f32c9d7ad9aeac9c5af600463bfddc9ccebccf6565e3a477619b7e6a696be4",
+          "src/HarvestFull/harvest/game/CScenario.cpp": "ee54f9e22125acdf1618e439f48b8260ae80675db6a74f93997242e9dfb2afab",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -73728,9 +72420,9 @@
           "src/HarvestFull/harvest/entity/CMineralsEntity.h": "f529ffc5b568db5d56a082e777db82bb4ca3b95bf50cd0ce796a2d5ec1bfd816"
         },
         "system_headers": 131,
-        "object_sha256": "dbd8448149fbb562481d3f80f5df3af9956771161946ceece598b5c79ae7c1ab"
+        "object_sha256": "b247a2543d0f1d278a85278727c454d11bf3a8b5f4b132280b227620cfc5fd44"
       },
-      "fuzzy_target_sha256": "88731d0d163936d13b05799b9571d3e9888d5c8787274b18c9caaec42808fb72",
+      "fuzzy_target_sha256": "5e698fafc472c5fdadfc8592470c1dee228441db69873c501188eb23df5f8ca8",
       "fuzzy_functions": [
         {
           "address": "0x453d90",
@@ -73814,7 +72506,7 @@
           "address": "0x455ac0",
           "size": 340,
           "symbol": "_ZN7harvest4game9CScenario6updateEf",
-          "percent": 46.447918
+          "percent": 100.0
         },
         {
           "address": "0x455c20",
@@ -144828,7 +143520,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "398ed1edec6429c3a6d1e0c06f67435660b13e24daaf66997802c7f4338e18c3"
+    "report_sha256": "ba0fee86a67a36d85b61c13ea56668ac372faa56f860dafe225172b76b8c4c06"
   },
   "link": {
     "status": "unavailable",
