@@ -5,6 +5,7 @@
 
 #include "CGUIContextMenu.h"
 #include "GUIIcons.h"
+#include "ox/gui/IGUIElementInlines.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUISkin.h"
