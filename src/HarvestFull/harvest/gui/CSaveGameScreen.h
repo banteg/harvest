@@ -34,6 +34,18 @@ struct SSaveListItem
     //! The file name without the directory.
     ox::core::CString<wchar_t> Name;
     settings::SSavestateHeader Header;
+
+    ~SSaveListItem()
+    {
+    }
+
+    SSaveListItem& operator=(const SSaveListItem& other)
+    {
+        Filename = other.Filename;
+        Name = other.Name;
+        Header = other.Header;
+        return *this;
+    }
 };
 
 //! Sorts the newest save game first.

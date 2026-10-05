@@ -216,13 +216,7 @@ void CSaveGameScreen::performListAction()
         if (!newSlot)
         {
             g_loadGameFilename = filename;
-            ox::event::SEvent startEvent;
-            startEvent.EventType = ox::event::EET_USER_EVENT;
-            startEvent.UserEvent.UserData1 = ECE_START_GAME;
-            startEvent.UserEvent.UserData2 = 0;
-            startEvent.UserEvent.UserData3 = 0;
-            startEvent.UserEvent.UserPointer = 0;
-            ox::event::gp_subscriberList->OnEvent(startEvent);
+            sendCustomEvent(ECE_START_GAME);
         }
         return;
     }
