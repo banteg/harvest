@@ -134,8 +134,14 @@ void CGUIListBox::sortItems(bool scrollToEnd)
     ListParent->sortVertically(ItemSpacing, false);
     recalculateItemHeight();
 
-    if (scrollToEnd && ScrollBar->getMax() > 0 && !ScrollBar->isDragging())
-        ScrollBar->setPos(ScrollBar->getMax());
+    if (scrollToEnd)
+    {
+        if (ScrollBar->getMax() > 0)
+        {
+            if (!ScrollBar->isDragging())
+                ScrollBar->setPos(ScrollBar->getMax());
+        }
+    }
 }
 
 //! clears the list
