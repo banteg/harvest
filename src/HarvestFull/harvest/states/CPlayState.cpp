@@ -4138,14 +4138,14 @@ void CPlayState::render()
         float offsetX = viewPort.UpperLeftCorner.X - ViewPosition.X;
         float cornerX = LastPlacement.X + offsetX;
         ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
-        int x1 = (int)cornerX;
-        int y1 = (int)cornerY;
-        int x2 = (int)(mouse.X + offsetX);
-        int y2 = (int)(mouse.Y + offsetY);
-        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y1), ox::core::CPosition2d<int>(x2, y1), RANGE_LINE_COLOR);
-        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y1), ox::core::CPosition2d<int>(x1, y2), RANGE_LINE_COLOR);
-        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y2), ox::core::CPosition2d<int>(x2, y2), RANGE_LINE_COLOR);
-        Driver->draw2DLine(ox::core::CPosition2d<int>(x2, y1), ox::core::CPosition2d<int>(x2, y2), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)cornerY),
+            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)cornerY), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)cornerY),
+            ox::core::CPosition2d<int>((int)cornerX, (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)(mouse.Y + offsetY)),
+            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)cornerY),
+            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
     }
 
     if (game::gp_world)
