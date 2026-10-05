@@ -1,13 +1,15 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUIEnvironment.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::gui namespace; not the original source. Partial: the virtual order
-// follows the Mac 1.18 vtable of daisy::gui::CGUIEnvironment up to getMousePosition.
+// follows the Mac 1.18 vtable of daisy::gui::CGUIEnvironment up to addMessageBox.
 
 #ifndef OX_GUI_IGUIENVIRONMENT_H
 #define OX_GUI_IGUIENVIRONMENT_H
 
 #include "../IUnknown.h"
 #include "../core/CPosition2d.h"
+#include "../core/CRect.h"
+#include "../video/SColor.h"
 #include "../event/IEventReceiver.h"
 
 namespace ox {
@@ -36,6 +38,22 @@ public:
     virtual IGUIFont* getFont(const char* filename) = 0;
     virtual IGUIFont* getBuiltInFont() = 0;
     virtual const core::CPosition2d<int>& getMousePosition() = 0;
+    virtual IGUIElement* getRootGUIElement() = 0;
+    virtual IGUIElement* getHoverParentElement() = 0;
+    virtual IGUIElement* addModalScreen() = 0;
+    virtual IGUIElement* addButton(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
+        const wchar_t* text) = 0;
+    virtual IGUIElement* addTextButton(const wchar_t* text, const char* sprite, char* hoverSprite,
+        IGUIFont* font, video::SColor color, IGUIElement* parent, int id) = 0;
+    virtual IGUIElement* addWindow(const core::CRect<int>& rectangle, bool modal, const wchar_t* text,
+        IGUIElement* parent, int id) = 0;
+    virtual IGUIElement* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
+    virtual IGUIElement* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
+        unsigned int flags, bool detached, bool visible) = 0;
+    virtual IGUIElement* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
+    virtual void addHoverDescription(IGUIElement* element, const wchar_t* text, video::SColor* color) = 0;
+    virtual IGUIElement* addMessageBox(const wchar_t* caption, const wchar_t* text, bool modal, int flags,
+        IGUIElement* parent, int id) = 0;
 };
 
 } // end namespace gui

@@ -1,20 +1,40 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IEventReceiver.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::event namespace; not the original source. Partial: only the network
-// and user events are recovered.
+// Recovered for Harvest's ox::event namespace; not the original source. Partial: only the GUI, mouse,
+// key, network and user events are recovered, the mouse and key ones only as far as they are read.
 
 #ifndef OX_EVENT_IEVENTRECEIVER_H
 #define OX_EVENT_IEVENTRECEIVER_H
 
 namespace ox {
+namespace gui { class IGUIElement; }
 namespace event {
 
 enum EEVENT_TYPE
 {
+    //! An event of the GUI, in SEvent::GUIEvent.
+    EET_GUI_EVENT = 0,
+    //! A mouse input event, in SEvent::MouseInput.
+    EET_MOUSE_INPUT_EVENT = 1,
+    //! A keyboard input event, in SEvent::KeyInput.
+    EET_KEY_INPUT_EVENT = 2,
     //! A network device event.
     EET_NETWORK_EVENT = 5,
     //! A game-defined event, in SEvent::UserEvent.
     EET_USER_EVENT = 7
+};
+
+//! Mouse input events, in SEvent::MouseInput.Event.
+enum EMOUSE_INPUT_EVENT
+{
+    EMIE_LMOUSE_LEFT_UP = 3
+};
+
+//! Keyboard input events, in SEvent::KeyInput.Event.
+enum EKEY_INPUT_EVENT
+{
+    EKIE_KEY_PRESSED_DOWN = 0,
+    EKIE_KEY_LEFT_UP = 1
 };
 
 //! Network device events, in SEvent::NetworkEvent.Type.
@@ -35,6 +55,29 @@ struct SEvent
     EEVENT_TYPE EventType;
     union
     {
+        struct
+        {
+            gui::IGUIElement* Caller;
+            int EventType;
+        } GUIEvent;
+
+        struct
+        {
+            int X;
+            int Y;
+            float Wheel;
+            // Not recovered yet.
+            int Reserved[2];
+            EMOUSE_INPUT_EVENT Event;
+        } MouseInput;
+
+        struct
+        {
+            wchar_t Char;
+            int Key;
+            EKEY_INPUT_EVENT Event;
+        } KeyInput;
+
         struct
         {
             int Type;

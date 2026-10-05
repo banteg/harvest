@@ -217,3 +217,13 @@
 ".text" = 0x491d50
 # iostream initializer and the game-header statics; gp_systemConfig lives in an earlier object.
 ".bss" = 0x86bc94
+
+["HarvestFull/harvest/states/CIntroState.cpp"]
+".text" = 0x495db0
+# g_myRegKey, the iostream initializer, game-header statics and the splash layer positions.
+".bss" = 0x86bca0
+
+["HarvestFull/harvest/states/CLoadingScreen.cpp"]
+".text" = 0x496e80
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86bd48
