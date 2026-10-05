@@ -3991,7 +3991,7 @@ void CPlayState::render()
     if (game::gp_world)
         game::gp_world->renderBackground(ViewPosition, BoldFont, 0);
 
-    ox::core::CRect<int> viewPort(0, 0, ScreenSize.Width, ScreenSize.Height);
+    ox::core::CRect<int> viewPort(ox::core::CPosition2d<int>(0, 0), ScreenSize);
     if (ShowAllRanges && RangeCircle)
     {
         const std::list<ox::entity::COxEntity*>& entities = entity::gp_entityManager->getEntityList(0);
@@ -4212,14 +4212,14 @@ void CPlayState::render()
         int alpha = (int)((GameOverTime / -15.0f + 1.0f) * 255.0f);
         alpha = ox::core::clamp(alpha, 0, 255);
         Driver->draw2DRectangle(ox::video::SColor(alpha, 0, 0, 0),
-            ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
+            ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), ScreenSize), 0);
         ox::core::CString<wchar_t> text(L"--- ");
         if (GameWon)
             text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:victorySplash"));
         else
             text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:gameoverSplash"));
         text.append(ox::core::CString<wchar_t>(L" ---"));
-        BoldFont->draw(text.c_str(), ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height),
+        BoldFont->draw(text.c_str(), ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), ScreenSize),
             WHITE_TEXT_COLOR, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
     }
     else if (GameSpeed == 0)
@@ -4227,7 +4227,7 @@ void CPlayState::render()
         ox::core::CString<wchar_t> text(L"--- ");
         text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:pausedSplash"));
         text.append(ox::core::CString<wchar_t>(L" ---"));
-        BoldFont->draw(text.c_str(), ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height),
+        BoldFont->draw(text.c_str(), ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), ScreenSize),
             WHITE_TEXT_COLOR, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
     }
 
