@@ -325,8 +325,8 @@ int CPlayState::secondInit()
         Beam210.Beam = IngamePackage->addNewAnimationState("RangeLine");
         Beam258.Beam = IngamePackage->addNewAnimationState("RangeLine");
         Beam180.Color = RANGE_LINE_COLOR;
-        Beam1c8.Color = ox::video::SColor(0x80ffffff);
         Beam210.Color = MINING_LINE_COLOR;
+        Beam1c8.Color = ox::video::SColor(0x80ffffff);
         break;
     case 10:
         GuiSprites[GS_TOP_RIGHT_BACKGROUND] = IngamePackage->addNewAnimationState("GuiTopRightBackground");
@@ -577,9 +577,9 @@ int CPlayState::secondInit()
         break;
     case 20:
         for (int i = 0; i < WAVE_COUNT; ++i)
-            if (ThreatLevel && game::gp_world &&
-                game::CThreatLevel::alienOccursOnPlanet(game::gp_world->getPlanet(), i))
-                m_488[i] = IngamePackage->addNewAnimationState(ALIEN_SPRITE_NAMES[i]);
+            if (ThreatLevel && game::gp_world)
+                if (game::CThreatLevel::alienOccursOnPlanet(game::gp_world->getPlanet(), i))
+                    m_488[i] = IngamePackage->addNewAnimationState(ALIEN_SPRITE_NAMES[i]);
         break;
     case 21:
         UseMinimapTexture = false;
@@ -588,7 +588,9 @@ int CPlayState::secondInit()
         playPlanetMusic();
         break;
     // Idle steps, which give the loading screen time to show.
-    case 5: case 18: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30: case 31:
+    case 5:
+        return 2;
+    case 18: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30: case 31:
     case 32: case 33: case 34:
         break;
     default:
