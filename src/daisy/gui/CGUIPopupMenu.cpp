@@ -21,13 +21,13 @@ CGUIPopupMenu::CGUIPopupMenu(ox::gui::IGUIEnvironment* environment, ox::gui::IGU
     : IGUIPopupMenu(environment, parent, id, ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), parent->getRelativePosition().LowerRightCorner)),
       Selected(-1), Width(width), Title(0), Font(font), SelectionParent(parent)
 {
-    Frame = Environment->addFrame(ox::core::CRect<int>(position.X, position.Y, position.X + width,
-        position.Y + INITIAL_FRAME_HEIGHT), this, -1);
+    Frame = environment->addFrame(ox::core::CRect<int>(position,
+        ox::core::CDimension2d<int>(width, INITIAL_FRAME_HEIGHT)), this, -1);
 
     if (titleFont && text)
     {
         ox::core::CDimension2d<int> dim = titleFont->getDimension(text);
-        Title = Environment->addStaticText(text, ox::core::CRect<int>(0, 0, Width, dim.Height), false, false,
+        Title = environment->addStaticText(text, ox::core::CRect<int>(0, 0, Width, dim.Height), false, false,
             Frame, -1, L"");
         Title->setOverrideFont(titleFont);
     }
