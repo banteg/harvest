@@ -390,8 +390,8 @@ void CShuttleRaceState::render()
                 ox::core::CPosition2d<float> position(
                     entity::LAP_CHECKPOINTS[j].X - ViewPositions[i].X + viewPort.UpperLeftCorner.X,
                     entity::LAP_CHECKPOINTS[j].Y - ViewPositions[i].Y + viewPort.UpperLeftCorner.Y);
-                ox::video::SColor color = j == Shuttles[i]->getNextCheckPoint() ? ox::video::SColor(0xffffffff)
-                                                                               : ox::video::SColor(0xff40cc40);
+                ox::video::SColor color = j != Shuttles[i]->getNextCheckPoint() ? ox::video::SColor(0xff40cc40)
+                                                                               : ox::video::SColor(0xffffffff);
                 Sprites[SPRITE_CHECKPOINT]->drawScaled(position, 250.0f / 255.0f, color);
             }
 
@@ -428,12 +428,12 @@ void CShuttleRaceState::render()
             {
                 if (!Shuttles[j])
                     continue;
-                const ox::core::CVector3d<float>& position = Shuttles[j]->getPosition();
+                ox::core::CVector3d<float> position = Shuttles[j]->getPosition();
                 ox::core::CString<wchar_t> name(L"P");
                 name.append(j + 1);
                 int x = (int)(position.X - ViewPositions[i].X) + viewPort.UpperLeftCorner.X;
                 int y = (int)(position.Y - ViewPositions[i].Y) + viewPort.UpperLeftCorner.Y;
-                Font->draw(name.c_str(), ox::core::CRect<int>(x - 50, y - 30, x + 50, y - 10),
+                Font->draw(name.c_str(), ox::core::CRect<int>(ox::core::CPosition2d<int>(x - 50, y - 30), ox::core::CDimension2d<int>(100, 20)),
                     ox::video::SColor(0xffffffff), ox::gui::EFHA_CENTER, ox::gui::EFVA_TOP, 0);
             }
         }
@@ -446,10 +446,10 @@ void CShuttleRaceState::render()
                 text = L"Position: ";
                 text.append(Shuttles[i]->getCurrentPlacing());
             }
-            else if (i != 0)
-                text = L"Up, Left, Right or Gamepad 2";
-            else
+            else if (i == 0)
                 text = L"W, A, D or Gamepad 1";
+            else
+                text = L"Up, Left, Right or Gamepad 2";
             LargeFont->draw(text.c_str(),
                 ox::core::CRect<int>(viewPort.UpperLeftCorner.X + 10, ScreenSize.Height - 74, ScreenSize.Width / 2,
                     ScreenSize.Height),
@@ -468,14 +468,14 @@ void CShuttleRaceState::render()
         }
 
         // The line between the two views.
-        if (i != 0)
-            Driver->draw2DLine(viewPort.UpperLeftCorner,
-                ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.LowerRightCorner.Y),
-                ox::video::SColor(0xff000000));
-        else
+        if (i == 0)
             Driver->draw2DLine(
                 ox::core::CPosition2d<int>(viewPort.LowerRightCorner.X - 1, viewPort.UpperLeftCorner.Y),
                 ox::core::CPosition2d<int>(viewPort.LowerRightCorner.X - 1, viewPort.LowerRightCorner.Y),
+                ox::video::SColor(0xff000000));
+        else
+            Driver->draw2DLine(ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.UpperLeftCorner.Y),
+                ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.LowerRightCorner.Y),
                 ox::video::SColor(0xff000000));
     }
 
