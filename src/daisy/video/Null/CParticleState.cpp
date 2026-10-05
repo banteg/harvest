@@ -287,24 +287,23 @@ void CParticleState::createOnDieParticle(ox::core::CVector3d<float>& position)
 
 void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance, float frameDelta)
 {
-    const SParticleFunction* function = instance.Function;
-    switch (function->Type)
+    switch (instance.Function->Type)
     {
     case EPFT_CONSTANT:
         instance.Value = 1.0f;
         break;
     case EPFT_LINEAR:
         instance.Time += frameDelta;
-        instance.Value = instance.Time * function->Frequency + function->Phase;
+        instance.Value = instance.Time * instance.Function->Frequency + instance.Function->Phase;
         break;
     case EPFT_SINE:
         instance.Time += frameDelta;
-        instance.Value = sinf(instance.Time * function->Frequency + function->Phase);
+        instance.Value = sinf(instance.Time * instance.Function->Frequency + instance.Function->Phase);
         break;
     case EPFT_TRIANGLE:
     {
         instance.Time += frameDelta;
-        float x = instance.Time * function->Frequency + function->Phase;
+        float x = instance.Time * instance.Function->Frequency + instance.Function->Phase;
         x -= (float)((int)x & ~1);
         if (x < 0.5f)
             instance.Value = x * 2;
@@ -317,7 +316,7 @@ void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance,
     case EPFT_SQUARE:
     {
         instance.Time += frameDelta;
-        float x = instance.Time * function->Frequency + function->Phase;
+        float x = instance.Time * instance.Function->Frequency + instance.Function->Phase;
         if (x - (float)(int)x < 0.5f)
             instance.Value = 1.0f;
         else
@@ -326,15 +325,16 @@ void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance,
     }
     case EPFT_STEP:
     {
-        float previous = instance.Time * function->Frequency + function->Phase;
+        float previous = instance.Time * instance.Function->Frequency + instance.Function->Phase;
         instance.Time += frameDelta;
-        int current = (int)(instance.Time * function->Frequency + function->Phase);
-        if (current != (int)previous || previous == 0.0f)
+        int current = (int)(instance.Time * instance.Function->Frequency + instance.Function->Phase);
+        int last = (int)previous;
+        if (current != last || previous == 0.0f)
         {
-            if (current & 1)
-                instance.Value = -1.0f / frameDelta;
-            else
+            if ((current & 1) == 0)
                 instance.Value = 1.0f / frameDelta;
+            else
+                instance.Value = -1.0f / frameDelta;
         }
         else
             instance.Value = 0.0f;
@@ -342,11 +342,11 @@ void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance,
     }
     case EPFT_EXP:
         instance.Time += frameDelta;
-        instance.Value = (float)exp(instance.Time * function->Frequency + function->Phase);
+        instance.Value = (float)exp(instance.Time * instance.Function->Frequency + instance.Function->Phase);
         break;
     case EPFT_INVERSE_EXP:
         instance.Time += frameDelta;
-        instance.Value = (float)(1.0 / exp(instance.Time * function->Frequency + function->Phase));
+        instance.Value = (float)(1.0 / exp(instance.Time * instance.Function->Frequency + instance.Function->Phase));
         break;
     }
 
