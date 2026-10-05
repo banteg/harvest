@@ -183,19 +183,25 @@ int harvest_findBuildings(lua_State* L)
         inRect = false;
     }
 
-    if (!entity::gp_entityManager)
-        return 0;
-
-    const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
-    std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
-    lua_newtable(L);
-    int index = 1;
-    for (; it != list.end(); ++it)
+    int result = 0;
+    if (entity::gp_entityManager)
     {
-        if (((entity::CEntity*)*it)->getEntityType() != 5)
+        const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
+        std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
+        lua_newtable(L);
+        int index = 1;
+        for (; it != list.end(); ++it)
         {
-            if (type < 0 || (type == ((entity::CEntity*)*it)->getEntityType() &&
-                (type != 16 || buildingId == ox::core::CString<char>(((entity::CCreativeEntity*)*it)->getBuildingId()))))
+            if (((entity::CEntity*)*it)->getEntityType() == 5)
+                continue;
+            bool match = true;
+            if (type >= 0)
+            {
+                match = type == ((entity::CEntity*)*it)->getEntityType();
+                if (match && type == 16)
+                    match = buildingId == ox::core::CString<char>(((entity::CCreativeEntity*)*it)->getBuildingId());
+            }
+            if (match)
             {
                 if (inRect)
                 {
@@ -217,8 +223,9 @@ int harvest_findBuildings(lua_State* L)
                 ++index;
             }
         }
+        result = 1;
     }
-    return 1;
+    return result;
 }
 
 int harvest_findAliens(lua_State* L)
