@@ -1,6 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 
 #include "CGUIClickArea.h"
+#include "ox/gui/IGUIElementInline.h"
 // The object has an iostream initializer; the original including header is unidentified.
 #include <iostream>
 

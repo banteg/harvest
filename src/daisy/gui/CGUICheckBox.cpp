@@ -4,6 +4,7 @@
 // Oxeye adds sprite animations, a highlighted state and the text font and color.
 
 #include "CGUICheckBox.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUISkin.h"

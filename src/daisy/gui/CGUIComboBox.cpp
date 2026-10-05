@@ -5,6 +5,7 @@
 // changes to the parent and opens up to ten list rows on the root element.
 
 #include "CGUIComboBox.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "CGUIListBox.h"
 #include "ox/gui/IGUIButton.h"
 #include "ox/gui/IGUIEnvironment.h"

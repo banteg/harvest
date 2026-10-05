@@ -33,6 +33,19 @@ public:
     virtual void activateOffsetScrollingToEnsureVisibleText() = 0;
     //! Shrinks the element to the size of its text.
     virtual void packSize() = 0;
+
+    //! Breaks text into lines no wider than width; lines after the first start with indent.
+    static void breakText(const core::CString<wchar_t>& text, IGUIFont* font,
+        std::vector<core::CString<wchar_t> >& lines, int width, const wchar_t* indent);
+
+    //! The height of text broken into lines no wider than width.
+    static int getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
+        const wchar_t* indent)
+    {
+        std::vector<core::CString<wchar_t> > lines;
+        breakText(text, font, lines, width, indent);
+        return lines.size() * font->getDimension(L"A").Height;
+    }
 };
 
 } // end namespace gui

@@ -36,18 +36,9 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
-    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
-        : Parent(parent), RelativeRect(rectangle), RelativeSizeChanged(false), IsVisible(true), IsEnabled(true),
-          IsFixed(false), IsInvisible(false), NoClip(false), ReportOnDraw(0), ID(id), Type(0),
-          Environment(environment), HoverItem(0), LayoutFlags(0), EventReceiver(0)
-    {
-        AbsoluteRect = RelativeRect;
-        AbsoluteClippingRect = AbsoluteRect;
-        updateAbsolutePosition();
-
-        if (Parent)
-            Parent->addChild(this);
-    }
+    // The constructor and the virtuals declared after remove() are defined inline in IGUIElementInline.h,
+    // which only the element implementations include.
+    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
 
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
     // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
@@ -155,6 +146,7 @@ public:
 
     //! Removes this element from its parent.
     virtual void remove();
+
     virtual void draw();
     virtual void move(core::CPosition2d<int> offset);
     virtual void moveTo(core::CPosition2d<int> position);
@@ -184,9 +176,14 @@ public:
     virtual void setHoverItem(IGUIElement* item);
     virtual core::CDimension2d<int> getPreferredSize();
 
+    IGUIElement* getParent() { return Parent; }
+
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
-    core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+    const core::CRect<int>& getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+
+    //! Returns the topmost visible element at the point, searching the children from back to front.
+    IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point);
 
 protected:
     std::list<IGUIElement*> Children;
@@ -211,224 +208,9 @@ protected:
 public:
     //! Layout hints read by the IGUILayout sorters, such as "center br" or "tab".
     const char* LayoutFlags;
-    //! Receives the events of a list box's items.
+    //! Receives the events of this element before its parent does.
     event::IEventReceiver* EventReceiver;
 };
-
-inline void IGUIElement::draw()
-{
-    if (!IsVisible)
-        return;
-
-    if (ReportOnDraw == 1)
-    {
-        event::SEvent e;
-        e.EventType = event::EET_GUI_EVENT;
-        e.GUIEvent.Caller = this;
-        e.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
-        OnEvent(e);
-    }
-
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-    {
-        if ((*it)->AbsoluteRect.isRectCollided((*it)->AbsoluteClippingRect) || !(*it)->isFixed())
-            (*it)->draw();
-    }
-
-    if (ReportOnDraw == 2)
-    {
-        event::SEvent e;
-        e.EventType = event::EET_GUI_EVENT;
-        e.GUIEvent.Caller = this;
-        e.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
-        OnEvent(e);
-    }
-}
-
-inline void IGUIElement::move(core::CPosition2d<int> offset)
-{
-    RelativeRect.UpperLeftCorner += offset;
-    RelativeRect.LowerRightCorner += offset;
-    updateAbsolutePosition();
-}
-
-inline void IGUIElement::moveTo(core::CPosition2d<int> position)
-{
-    setRelativePosition(core::CRect<int>(position.X, position.Y,
-        RelativeRect.LowerRightCorner.X + position.X - RelativeRect.UpperLeftCorner.X,
-        RelativeRect.LowerRightCorner.Y + position.Y - RelativeRect.UpperLeftCorner.Y));
-}
-
-inline void IGUIElement::centerOnRect(const core::CRect<int>& rect)
-{
-    core::CPosition2d<int> position((rect.getWidth() - RelativeRect.getWidth()) / 2,
-        (rect.getHeight() - RelativeRect.getHeight()) / 2);
-    moveTo(position);
-}
-
-inline void IGUIElement::centerOnParent()
-{
-    centerOnRect(Parent->getRelativePosition());
-}
-
-inline bool IGUIElement::isVisible()
-{
-    return IsVisible;
-}
-
-inline void IGUIElement::setVisible(bool visible)
-{
-    IsVisible = visible;
-}
-
-inline bool IGUIElement::isEnabled()
-{
-    return IsEnabled;
-}
-
-inline void IGUIElement::setEnabled(bool enabled)
-{
-    IsEnabled = enabled;
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-        (*it)->setEnabled(enabled);
-}
-
-inline bool IGUIElement::isFixed()
-{
-    return IsFixed;
-}
-
-inline void IGUIElement::setFixed(bool fixed)
-{
-    IsFixed = fixed;
-}
-
-inline bool IGUIElement::isInvisible()
-{
-    return IsInvisible;
-}
-
-inline void IGUIElement::setInvisible(bool invisible)
-{
-    IsInvisible = invisible;
-}
-
-inline bool IGUIElement::doesReportOnDraw()
-{
-    return ReportOnDraw != 0;
-}
-
-inline void IGUIElement::setReportOnDraw(int report)
-{
-    ReportOnDraw = report;
-}
-
-inline void IGUIElement::setText(const wchar_t* text)
-{
-    Text = text;
-}
-
-inline const wchar_t* IGUIElement::getText() const
-{
-    return Text.c_str();
-}
-
-inline int IGUIElement::getID()
-{
-    return ID;
-}
-
-inline void IGUIElement::setID(int id)
-{
-    ID = id;
-}
-
-inline int IGUIElement::getType()
-{
-    return Type;
-}
-
-//! Offers the event to the event receiver, then to the parent.
-inline bool IGUIElement::OnEvent(const event::SEvent& event)
-{
-    if (EventReceiver && EventReceiver->OnEvent(event))
-        return true;
-
-    if (Parent)
-        return Parent->OnEvent(event);
-
-    return true;
-}
-
-inline bool IGUIElement::OnEventInNonFocusState(const event::SEvent& event)
-{
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-        if ((*it)->OnEventInNonFocusState(event))
-            return true;
-
-    return false;
-}
-
-inline bool IGUIElement::bringToFront(IGUIElement* element)
-{
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-    {
-        if (element == (*it))
-        {
-            Children.erase(it);
-            Children.push_back(element);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-inline const std::list<IGUIElement*>& IGUIElement::getChildren()
-{
-    return Children;
-}
-
-inline IGUIElement* IGUIElement::getElementFromId(int id, bool searchChildren)
-{
-    IGUIElement* element = 0;
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-    {
-        if ((*it)->getID() == id)
-            return (*it);
-
-        if (searchChildren)
-            element = (*it)->getElementFromId(id, true);
-
-        if (element)
-            return element;
-    }
-
-    return element;
-}
-
-inline IGUIElement* IGUIElement::getHoverItem()
-{
-    return HoverItem;
-}
-
-//! Sets the element shown while the mouse is over this one; it starts hidden and unclipped.
-inline void IGUIElement::setHoverItem(IGUIElement* item)
-{
-    HoverItem = item;
-    if (HoverItem)
-    {
-        HoverItem->setVisible(false);
-        HoverItem->setFixed(true);
-        HoverItem->NoClip = true;
-        HoverItem->updateAbsolutePosition();
-    }
-}
-
-inline core::CDimension2d<int> IGUIElement::getPreferredSize()
-{
-    return core::CDimension2d<int>(RelativeRect.getWidth(), RelativeRect.getHeight());
-}
 
 } // end namespace gui
 } // end namespace ox
