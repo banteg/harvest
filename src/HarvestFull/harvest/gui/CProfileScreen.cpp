@@ -32,7 +32,9 @@ CProfileScreen::~CProfileScreen()
 
 bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
 {
-    if (event.EventType == ox::event::EET_GUI_EVENT)
+    switch (event.EventType)
+    {
+    case ox::event::EET_GUI_EVENT:
     {
         int id = event.GUIEvent.Caller->getID();
         switch (event.GUIEvent.EventType)
@@ -85,7 +87,8 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                 if (selected != SelectedIndex)
                 {
                     SelectedIndex = selected;
-                    settings::gp_profileManager->openProfileByName(list->getListItem(selected)->getText());
+                    ox::core::CString<wchar_t> name = list->getListItem(selected)->getText();
+                    settings::gp_profileManager->openProfileByName(name);
                 }
                 return true;
             }
@@ -98,11 +101,6 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
             }
             break;
         case ox::gui::EGET_MESSAGEBOX_YES:
-            if (id == ID_NAME_TAKEN)
-            {
-                saveProfile(true);
-                return true;
-            }
             if (id == ID_CONFIRM_DELETE)
             {
                 deleteCurrentProfile();
@@ -111,20 +109,34 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                 if (selected != SelectedIndex)
                 {
                     SelectedIndex = selected;
-                    settings::gp_profileManager->openProfileByName(list->getListItem(selected)->getText());
+                    ox::core::CString<wchar_t> name = list->getListItem(selected)->getText();
+                    settings::gp_profileManager->openProfileByName(name);
                 }
+                return true;
+            }
+            else if (id == ID_NAME_TAKEN)
+            {
+                saveProfile(true);
                 return true;
             }
             break;
         default:
             break;
         }
+        break;
     }
-    else if (event.EventType == ox::event::EET_MOUSE_INPUT_EVENT)
-    {
-        if (event.MouseInput.Event == ox::event::EMIE_LMOUSE_PRESSED_DOWN
-            || event.MouseInput.Event == ox::event::EMIE_LMOUSE_LEFT_UP)
+    case ox::event::EET_MOUSE_INPUT_EVENT:
+        switch (event.MouseInput.Event)
+        {
+        case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
+        case ox::event::EMIE_LMOUSE_LEFT_UP:
             return true;
+        default:
+            break;
+        }
+        break;
+    default:
+        break;
     }
     return false;
 }
@@ -217,10 +229,10 @@ bool CProfileScreen::saveProfile(bool overwrite)
         {
             if (it == profiles.end())
             {
-                if (!EditMode)
-                    settings::gp_profileManager->createProfile(name);
-                else
+                if (EditMode)
                     settings::gp_profileManager->getCurrentProfile()->setPlayerName(name);
+                else
+                    settings::gp_profileManager->createProfile(name);
                 settings::gp_profileManager->getCurrentProfile()->setPlayerGroup(group);
                 settings::gp_profileManager->writeCurrentProfile();
                 createProfileListWindow();
@@ -329,10 +341,10 @@ void CProfileScreen::deleteCurrentProfile()
     ox::core::CString<wchar_t> selected = profiles[0]->Name;
     settings::gp_profileManager->openProfile(profiles[0]->Filename);
     list->clear();
-    for (unsigned int i = 0; i < profiles.size(); ++i)
+    for (ox::TArray<settings::SProfileName*>::iterator it = profiles.begin(); it != profiles.end(); ++it)
     {
-        list->addTextItem(profiles[i]->Name.c_str(), 0, ox::video::SColor(0xffffffff), true, true);
-        if (profiles[i]->Name == selected)
+        list->addTextItem((*it)->Name.c_str(), 0, ox::video::SColor(0xffffffff), true, true);
+        if ((*it)->Name == selected)
             list->setSelected(list->getItemCount() - 1);
     }
 }
@@ -346,17 +358,15 @@ bool CProfileScreen::isVisible()
 
 void CProfileScreen::stripIllegalCharacters(ox::core::CString<wchar_t>& text)
 {
-    for (int i = 0; i < text.size() + 1; ++i)
-    {
-        if (text[i] == L';')
-            text[i] = L'_';
-    }
-    int start = 0;
-    while (text[start] == L' ')
+    text.replace(L';', L'_');
+    int start = -1;
+    do
         ++start;
-    int end = text.size() - 1;
-    while (text[end] == L' ')
+    while (text[start] == L' ');
+    int end = text.size();
+    do
         --end;
+    while (text[end] == L' ');
     text = text.subString(start, end - start + 1);
 }
 

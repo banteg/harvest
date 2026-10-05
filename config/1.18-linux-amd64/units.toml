@@ -281,3 +281,9 @@
 ".bss" = 0x86b994
 # The award tables.
 ".rodata" = 0x5fdf00
+
+["HarvestFull/harvest/gui/CProfileScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86ba98
+# OnEvent button jump table.
+".rodata" = 0x601a68
