@@ -250,3 +250,7 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/states/CShuttleRaceState.cpp"]
+# iostream initializer, the game-header statics and LAP_CHECKPOINTS.
+".bss" = 0x86bf40

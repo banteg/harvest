@@ -16,22 +16,6 @@
 namespace harvest {
 namespace entity {
 
-static const ox::core::CPosition2d<float> LAP_CHECKPOINTS[14] = {
-    ox::core::CPosition2d<float>(500.0f, 1580.0f),
-    ox::core::CPosition2d<float>(929.0f, 1629.0f),
-    ox::core::CPosition2d<float>(1331.0f, 1016.0f),
-    ox::core::CPosition2d<float>(1125.0f, 730.0f),
-    ox::core::CPosition2d<float>(904.0f, 379.0f),
-    ox::core::CPosition2d<float>(400.0f, 334.0f),
-    ox::core::CPosition2d<float>(140.0f, -81.0f),
-    ox::core::CPosition2d<float>(90.0f, -575.0f),
-    ox::core::CPosition2d<float>(-600.0f, -540.0f),
-    ox::core::CPosition2d<float>(-620.0f, -164.0f),
-    ox::core::CPosition2d<float>(-654.0f, 294.0f),
-    ox::core::CPosition2d<float>(-828.0f, 809.0f),
-    ox::core::CPosition2d<float>(-583.0f, 1360.0f),
-    ox::core::CPosition2d<float>(50.0f, 1563.0f),
-};
 bool g_checkPointsInited = false;
 ox::core::CPosition2d<float> g_bestEndTargets[14] = {
     ox::core::CPosition2d<float>(500.0f, 1580.0f),
