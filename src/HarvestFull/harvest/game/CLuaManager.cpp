@@ -2359,9 +2359,12 @@ const ox::core::CRect<float>& CLuaManager::getMinimumWorldBorders()
 
 void CLuaManager::removeSpriteState(int index)
 {
-    if (index < 0 || index >= (int)SpriteStates.size() || !SpriteStates[index])
+    if (index < 0 || index >= (int)SpriteStates.size())
         return;
-    SpriteStates[index]->remove();
+    ox::video::ISpriteAnimationState* state = SpriteStates[index];
+    if (!state)
+        return;
+    state->remove();
     SpriteStates[index] = 0;
     if (FreeSpriteState > index)
         FreeSpriteState = index;
