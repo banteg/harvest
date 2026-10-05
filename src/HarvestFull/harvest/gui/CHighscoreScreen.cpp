@@ -295,10 +295,8 @@ void CHighscoreScreen::createSummaryPage()
 
     const int PLAYET_Y_POS[4] = {77, 114, 151, 40};
     ox::gui::IGUIFont* font = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/smallFont.fnt");
-    int x = 131;
     for (int i = 0; i < 4; ++i)
     {
-        int y = 52;
         for (int j = 0; j < 2; ++j)
         {
             for (int k = 0; k < 4; ++k)
@@ -306,8 +304,10 @@ void CHighscoreScreen::createSummaryPage()
                 PromoteButtons[i][j][k] = 0;
                 if (SummaryPages[ShownSummaryCategory].Entries[i][j][k].Name.size() > 0)
                 {
+                    int x = 131 + i * 157;
+                    int y = 22 + j * 195;
                     ox::gui::IGUIButton* button = GUIEnvironment->addButton(
-                        ox::core::CRect<int>(x, y + PLAYET_Y_POS[k] - 30, x + 50, y + PLAYET_Y_POS[k]), SummaryFrame,
+                        ox::core::CRect<int>(x, y + PLAYET_Y_POS[k], x + 50, y + PLAYET_Y_POS[k] + 30), SummaryFrame,
                         ID_PROMOTE + i * 8 + j * 4 + k, 0);
                     button->setAnimations(
                         Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true),
@@ -326,9 +326,7 @@ void CHighscoreScreen::createSummaryPage()
                     label->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_TOP);
                 }
             }
-            y += 195;
         }
-        x += 157;
     }
     SummaryFrame->setVisible(true);
     ListFrame->setVisible(false);
