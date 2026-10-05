@@ -1403,10 +1403,9 @@ int harvest_drawText(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = ox::video::SColor(255, red, green, blue);
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1427,10 +1426,9 @@ int harvest_drawLine(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = (blue & 0xff) | ((green & 0xff) << 8) | ((red & 0xff) << 16) | 0xff000000;
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1451,10 +1449,9 @@ int harvest_drawRectangle(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = ox::video::SColor(255, red, green, blue);
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
