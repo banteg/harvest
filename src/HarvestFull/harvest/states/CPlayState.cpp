@@ -4040,15 +4040,15 @@ void CPlayState::render()
         {
             if (PlacementOk)
                 renderRangeCircle(PlacementPosition, 150.0f, RANGE_CIRCLE_COLOR, viewPort);
-            if (entityType == 7)
-                renderRangeCircle(PlacementPosition, 200.0f, LASER_CIRCLE_COLOR, viewPort);
-            else if (entityType == 4)
+            if (entityType == 4)
                 renderRangeCircle(PlacementPosition, 100.0f, MINING_CIRCLE_COLOR, viewPort);
+            else if (entityType == 7)
+                renderRangeCircle(PlacementPosition, 200.0f, LASER_CIRCLE_COLOR, viewPort);
         }
         if (PlacementOk && BuildableItems.getPreviewSprite(BuildSelection))
         {
-            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + PlacementPosition.X - ViewPosition.X,
-                viewPort.UpperLeftCorner.Y + PlacementPosition.Y - ViewPosition.Y);
+            ox::core::CPosition2d<float> position(PlacementPosition.X - ViewPosition.X + viewPort.UpperLeftCorner.X,
+                PlacementPosition.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y);
             BuildableItems.getPreviewSprite(BuildSelection)->drawScaled(position, 1.0f,
                 ox::video::SColor(0x80ffffff));
         }
@@ -4058,8 +4058,8 @@ void CPlayState::render()
         if ((unsigned int)AlienSelection < WAVE_COUNT && m_488[AlienSelection])
         {
             ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
-            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + mouse.X - ViewPosition.X,
-                viewPort.UpperLeftCorner.Y + mouse.Y - ViewPosition.Y);
+            ox::core::CPosition2d<float> position(mouse.X - ViewPosition.X + viewPort.UpperLeftCorner.X,
+                mouse.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y);
             m_488[AlienSelection]->drawScaled(position, 1.0f, ox::video::SColor(0x80ffffff));
         }
     }
