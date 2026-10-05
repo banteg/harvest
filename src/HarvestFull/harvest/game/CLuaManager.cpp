@@ -2388,11 +2388,13 @@ SLuaEntityActionButton* CLuaManager::getNextEntityActionButton(const char* entit
     unsigned int i = 0;
     if (previous)
     {
-        while (i < EntityActionButtons.size())
+        for (; i < EntityActionButtons.size(); ++i)
         {
-            ++i;
-            if (&EntityActionButtons[i - 1] == previous)
+            if (&EntityActionButtons[i] == previous)
+            {
+                ++i;
                 break;
+            }
         }
     }
     for (; i < EntityActionButtons.size(); ++i)
