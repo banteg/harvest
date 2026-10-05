@@ -9,6 +9,7 @@
 #include "IGUIElement.h"
 #include "IGUIFont.h"
 #include "../video/SColor.h"
+#include "../TArray.h"
 
 namespace ox {
 namespace video { class ISpritePackage; }
@@ -18,6 +19,12 @@ namespace gui {
 class IGUIStaticText : public IGUIElement
 {
 public:
+    IGUIStaticText(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+        Type = EGUIET_STATIC_TEXT;
+    }
+
     virtual void setOverrideFont(IGUIFont* font) = 0;
     virtual void setOverrideColor(video::SColor color) = 0;
     virtual video::SColor getOverrideColor() = 0;
@@ -36,13 +43,13 @@ public:
 
     //! Breaks text into lines no wider than width; lines after the first start with indent.
     static void breakText(const core::CString<wchar_t>& text, IGUIFont* font,
-        std::vector<core::CString<wchar_t> >& lines, int width, const wchar_t* indent);
+        TArray<core::CString<wchar_t> >& lines, int width, const wchar_t* indent);
 
     //! The height of text broken into lines no wider than width.
     static int getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
         const wchar_t* indent)
     {
-        std::vector<core::CString<wchar_t> > lines;
+        TArray<core::CString<wchar_t> > lines;
         breakText(text, font, lines, width, indent);
         return lines.size() * font->getDimension(L"A").Height;
     }

@@ -49,6 +49,10 @@ enum EGUI_EVENT_TYPE
     EGET_EDITBOX_ENTER = 19,
     //! The text of an edit box changed.
     EGET_EDITBOX_CHANGED = 20,
+    //! The active tab of a tab control or tab button row changed.
+    EGET_TAB_CHANGED = 21,
+    //! The close button of a tab button row's active tab was clicked; the tab is removed.
+    EGET_TAB_CLOSED = 22,
     //! A context menu item was clicked; IGUIContextMenu::getSelectedItem returns it.
     EGET_MENU_ITEM_SELECTED = 23,
     //! An element that reports drawing has been drawn.
@@ -142,6 +146,8 @@ struct SEvent
         {
             gui::IGUIElement* Caller;
             gui::EGUI_EVENT_TYPE EventType;
+            //! The index of the closed tab, with EGET_TAB_CLOSED.
+            int Index;
         } GUIEvent;
 
         struct

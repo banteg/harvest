@@ -19,14 +19,20 @@ public:
     {
     }
 
+    //! Without clipping, the children are clipped by the content area instead of the clipping rectangle.
     virtual core::CRect<int> getParentAbsoluteClippingRect(bool clip);
-    virtual void sortFlow(int spacingX, int spacingY, bool resize, bool sortHidden);
-    virtual void sortVertically(int spacing, bool resize);
+    //! Places the children in rows, from the right when rightToLeft; resize widens the element to fit.
+    virtual void sortFlow(int spacingX, int spacingY, bool rightToLeft, bool resize);
+    //! Stacks the children, horizontally centered when center is set.
+    virtual void sortVertically(int spacing, bool center);
+    //! Places the children side by side, vertically centered.
     virtual void sortHorizontally(int spacing);
-    //! Places the children in rows broken at "br" hints, aligned by their other hints.
-    virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
-    //! The rectangle inside the frame that children are placed in.
+    //! Places the children in rows broken at "br" hints, aligned by their other hints; "tab" hints line up
+    //! in columns. Children without hints count as "tab" when tabUnflagged is set.
+    virtual void sortRiver(bool resize, int spacingX, int spacingY, bool tabUnflagged);
+    //! The area of the children, relative to the element.
     virtual core::CRect<int> getContentArea();
+    //! Moves the movable children by the content area's offset.
     virtual void updateChildrenForContentArea();
 };
 

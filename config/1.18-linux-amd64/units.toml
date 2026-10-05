@@ -435,6 +435,18 @@
 # processKey key switch jump table.
 ".rodata" = 0x61faa0
 
+["daisy/gui/CGUIToolBar.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0c0
+
+["daisy/gui/CGUIStaticText.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0b8
+
+["daisy/gui/CGUITabControl.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0bc
+
 ["daisy/gui/CGUIImage.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c08c
