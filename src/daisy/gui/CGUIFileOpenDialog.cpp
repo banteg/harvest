@@ -132,7 +132,7 @@ bool CGUIFileOpenDialog::OnEvent(const ox::event::SEvent& event)
             {
                 int selected = FileBox->getSelected();
                 FileName = ox::core::CStringFunctions::ansiToWide(FileList->getFullFileName(selected));
-                if (FileName.size())
+                if (FileName.size() > 0)
                 {
                     sendSelectedEvent();
                     remove();
