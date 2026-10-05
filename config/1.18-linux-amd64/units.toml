@@ -227,3 +227,10 @@
 ".text" = 0x496e80
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86bd48
+
+["HarvestFull/harvest/gui/CIngameMenuScreen.cpp"]
+".text" = 0x473430
+# iostream initializer and the world grid offset.
+".bss" = 0x86ba30
+# OnEvent's button jump table.
+".rodata" = 0x5ffd00

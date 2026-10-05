@@ -1,21 +1,27 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUIElement.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::gui namespace; not the original source. Partial: the virtual order
-// follows the Mac 1.18 vtable of ox::gui::IGUIElement; members are not recovered yet.
+// Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
+// Mac 1.18 vtable of ox::gui::IGUIElement and the member offsets its accessors; member names and the
+// flag types are inferred.
 
 #ifndef OX_GUI_IGUIELEMENT_H
 #define OX_GUI_IGUIELEMENT_H
 
 #include "../IUnknown.h"
+#include "../core/CDimension2d.h"
 #include "../core/CPosition2d.h"
 #include "../core/CRect.h"
+#include "../core/CString.h"
+#include <list>
 #include "../event/IEventReceiver.h"
 
 namespace ox {
 namespace gui {
 
+class IGUIEnvironment;
+
 //! Base class of all GUI elements.
-class IGUIElement : public IUnknown
+class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
     virtual void setRelativePosition(const core::CRect<int>& position);
@@ -49,6 +55,35 @@ public:
     virtual bool OnEvent(const event::SEvent& event);
     virtual bool OnEventInNonFocusState(const event::SEvent& event);
     virtual bool bringToFront(IGUIElement* element);
+    virtual const std::list<IGUIElement*>& getChildren();
+    virtual IGUIElement* getElementFromId(int id, bool searchChildren);
+    virtual IGUIElement* getHoverItem();
+    virtual void setHoverItem(IGUIElement* item);
+    virtual core::CDimension2d<int> getPreferredSize();
+
+protected:
+    std::list<IGUIElement*> Children;
+    IGUIElement* Parent;
+    core::CRect<int> RelativeRect;
+    //! Set when the relative rectangle changes size.
+    bool RelativeSizeChanged;
+    core::CRect<int> AbsoluteRect;
+    core::CRect<int> AbsoluteClippingRect;
+    bool IsVisible;
+    bool IsEnabled;
+    bool IsFixed;
+    bool IsInvisible;
+    bool NoClip;
+    int ReportOnDraw;
+    core::CString<wchar_t> Text;
+    int ID;
+    int Type;
+    IGUIEnvironment* Environment;
+    IGUIElement* HoverItem;
+
+public:
+    //! Layout hints read by the IGUILayout sorters, such as "center br" or "tab".
+    const char* LayoutFlags;
 };
 
 } // end namespace gui

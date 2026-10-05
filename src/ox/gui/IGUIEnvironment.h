@@ -17,8 +17,19 @@ namespace video { class IVideoDriver; }
 namespace gui {
 
 class IGUIElement;
+class IGUIButton;
+class IGUILayout;
 class IGUISkin;
 class IGUIFont;
+
+//! Buttons of a message box.
+enum EMESSAGE_BOX_FLAG
+{
+    EMBF_OK = 0x1,
+    EMBF_CANCEL = 0x2,
+    EMBF_YES = 0x4,
+    EMBF_NO = 0x8
+};
 
 //! GUI Environment. Used as factory and manager of all other GUI elements.
 class IGUIEnvironment : public IUnknown
@@ -41,14 +52,14 @@ public:
     virtual IGUIElement* getRootGUIElement() = 0;
     virtual IGUIElement* getHoverParentElement() = 0;
     virtual IGUIElement* addModalScreen() = 0;
-    virtual IGUIElement* addButton(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
+    virtual IGUIButton* addButton(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         const wchar_t* text) = 0;
-    virtual IGUIElement* addTextButton(const wchar_t* text, const char* sprite, char* hoverSprite,
+    virtual IGUIButton* addTextButton(const wchar_t* text, const char* sprite, char* hoverSprite,
         IGUIFont* font, video::SColor color, IGUIElement* parent, int id) = 0;
-    virtual IGUIElement* addWindow(const core::CRect<int>& rectangle, bool modal, const wchar_t* text,
+    virtual IGUILayout* addWindow(const core::CRect<int>& rectangle, bool modal, const wchar_t* text,
         IGUIElement* parent, int id) = 0;
-    virtual IGUIElement* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
-    virtual IGUIElement* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
+    virtual IGUILayout* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
+    virtual IGUILayout* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         unsigned int flags, bool detached, bool visible) = 0;
     virtual IGUIElement* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
     virtual void addHoverDescription(IGUIElement* element, const wchar_t* text, video::SColor* color) = 0;

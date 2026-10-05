@@ -234,7 +234,8 @@ bool CIntroState::OnEvent(const ox::event::SEvent& event)
     case ox::event::EET_USER_EVENT:
         if (event.UserEvent.UserData1 == 42)
             GUIEnvironment->addMessageBox(L"",
-                settings::gp_systemConfig->getLocalizedText(L"license:invalid").c_str(), true, 1, 0, -1);
+                settings::gp_systemConfig->getLocalizedText(L"license:invalid").c_str(), true, ox::gui::EMBF_OK, 0,
+                -1);
         break;
     default:
         break;

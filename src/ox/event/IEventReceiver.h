@@ -6,8 +6,23 @@
 #ifndef OX_EVENT_IEVENTRECEIVER_H
 #define OX_EVENT_IEVENTRECEIVER_H
 
+#include "../Keycodes.h"
+
 namespace ox {
-namespace gui { class IGUIElement; }
+namespace gui {
+
+class IGUIElement;
+
+//! GUI events, in SEvent::GUIEvent.EventType.
+enum EGUI_EVENT_TYPE
+{
+    EGET_BUTTON_CLICKED = 3,
+    //! The yes button of a message box was pressed.
+    EGET_MESSAGEBOX_YES = 15
+};
+
+} // end namespace gui
+
 namespace event {
 
 enum EEVENT_TYPE
@@ -58,7 +73,7 @@ struct SEvent
         struct
         {
             gui::IGUIElement* Caller;
-            int EventType;
+            gui::EGUI_EVENT_TYPE EventType;
         } GUIEvent;
 
         struct
@@ -74,7 +89,7 @@ struct SEvent
         struct
         {
             wchar_t Char;
-            int Key;
+            EKEY_CODE Key;
             EKEY_INPUT_EVENT Event;
         } KeyInput;
 
