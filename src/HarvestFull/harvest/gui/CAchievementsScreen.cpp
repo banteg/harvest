@@ -242,29 +242,6 @@ bool CAchievementsScreen::OnEvent(const ox::event::SEvent& event)
         ox::core::CPosition2d<int> mouse(event.MouseInput.X, event.MouseInput.Y);
         switch (event.MouseInput.Event)
         {
-        case ox::event::EMIE_MOUSE_MOVED:
-        {
-            int previous = Hovered;
-            Hovered = -1;
-            if (!MedusaWindow)
-            {
-                for (int i = AWARD_COUNT - 1; i >= 0; --i)
-                {
-                    if (AwardAreas[i] && AwardAreas[i]->getAbsolutePosition().isPointInside(mouse))
-                    {
-                        Hovered = i;
-                        break;
-                    }
-                }
-            }
-            if (Hovered != previous)
-            {
-                SelectorScale = 0;
-                if (Hovered >= 0 && Achieved[Hovered])
-                    Device->getAudioDriver()->playSound("SelectBuilding.ogg", 1.0f, 0.0f, 1.0f);
-            }
-            break;
-        }
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
             if (Hovered >= 0 && AwardAreas[Hovered] &&
                 AwardAreas[Hovered]->getAbsolutePosition().isPointInside(mouse) && !MedusaWindow)
@@ -273,35 +250,7 @@ bool CAchievementsScreen::OnEvent(const ox::event::SEvent& event)
                 {
                     Device->getAudioDriver()->playSound("BtnDenial.ogg", 1.0f, 0.0f, 1.0f);
                 }
-                else if (Hovered != WICKED_AWESOME)
-                {
-                    MedusaWindow = GUIEnvironment->addWindow(ox::core::CRect<int>(0, 0, 400, 300), true, 0, 0, -1);
-                    ox::algo::CRand rand(Hovered);
-                    int file = rand.nextInt(4000);
-                    GUIEnvironment->addStaticText(
-                        settings::gp_systemConfig->getLocalizedText(L"achievementMedusa:file", file + 50).c_str(),
-                        "br center", MedusaWindow, 0, -1);
-                    ox::gui::IGUIStaticText* info = GUIEnvironment->addStaticText(
-                        settings::gp_systemConfig->getLocalizedText(ACHIEVEMENT_MEDUSA_INFO[Hovered]).c_str(),
-                        400, MedusaWindow, 0, -1, L"");
-                    info->LayoutFlags = "br";
-                    ox::core::CString<char> icon("");
-                    if (Hovered < settings::ACHIEVEMENT_MAIN_COUNT)
-                        icon = settings::CHarvestProfile::getAchievementSpriteName(Hovered, 0);
-                    else
-                        icon = settings::CHarvestProfile::getAchievementSpriteName(
-                            (Hovered - settings::ACHIEVEMENT_MAIN_COUNT) / 3 + settings::ACHIEVEMENT_MAIN_COUNT,
-                            (Hovered - settings::ACHIEVEMENT_MAIN_COUNT) % 3);
-                    info->setParagraphIcon(icon.c_str(),
-                        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true), true);
-                    ox::gui::IGUIButton* close = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20),
-                        MedusaWindow, ID_MEDUSA_CLOSE,
-                        settings::gp_systemConfig->getLocalizedText(L"achievementMedusa:close").c_str());
-                    close->LayoutFlags = "br";
-                    MedusaWindow->sortRiver(true, 10, 15, false);
-                    MedusaWindow->centerOnParent();
-                }
-                else
+                else if (Hovered == WICKED_AWESOME)
                 {
                     MedusaWindow = GUIEnvironment->addWindow(ox::core::CRect<int>(0, 0, 400, 300), true, 0, 0, -1);
                     GUIEnvironment->addStaticText(
@@ -341,8 +290,59 @@ bool CAchievementsScreen::OnEvent(const ox::event::SEvent& event)
                     MedusaWindow->centerOnParent();
                     Device->getAudioDriver()->playVoice("medusa3_phone_line.ogg");
                 }
+                else
+                {
+                    MedusaWindow = GUIEnvironment->addWindow(ox::core::CRect<int>(0, 0, 400, 300), true, 0, 0, -1);
+                    ox::algo::CRand rand(Hovered);
+                    int file = rand.nextInt(4000);
+                    GUIEnvironment->addStaticText(
+                        settings::gp_systemConfig->getLocalizedText(L"achievementMedusa:file", file + 50).c_str(),
+                        "br center", MedusaWindow, 0, -1);
+                    ox::gui::IGUIStaticText* info = GUIEnvironment->addStaticText(
+                        settings::gp_systemConfig->getLocalizedText(ACHIEVEMENT_MEDUSA_INFO[Hovered]).c_str(),
+                        400, MedusaWindow, 0, -1, L"");
+                    info->LayoutFlags = "br";
+                    ox::core::CString<char> icon("");
+                    if (Hovered < settings::ACHIEVEMENT_MAIN_COUNT)
+                        icon = settings::CHarvestProfile::getAchievementSpriteName(Hovered, 0);
+                    else
+                        icon = settings::CHarvestProfile::getAchievementSpriteName(
+                            (Hovered - settings::ACHIEVEMENT_MAIN_COUNT) / 3 + settings::ACHIEVEMENT_MAIN_COUNT,
+                            (Hovered - settings::ACHIEVEMENT_MAIN_COUNT) % 3);
+                    info->setParagraphIcon(icon.c_str(),
+                        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true), true);
+                    ox::gui::IGUIButton* close = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20),
+                        MedusaWindow, ID_MEDUSA_CLOSE,
+                        settings::gp_systemConfig->getLocalizedText(L"achievementMedusa:close").c_str());
+                    close->LayoutFlags = "br";
+                    MedusaWindow->sortRiver(true, 10, 15, false);
+                    MedusaWindow->centerOnParent();
+                }
             }
             break;
+        case ox::event::EMIE_MOUSE_MOVED:
+        {
+            int previous = Hovered;
+            Hovered = -1;
+            if (!MedusaWindow)
+            {
+                for (int i = AWARD_COUNT - 1; i >= 0; --i)
+                {
+                    if (AwardAreas[i] && AwardAreas[i]->getAbsolutePosition().isPointInside(mouse))
+                    {
+                        Hovered = i;
+                        break;
+                    }
+                }
+            }
+            if (Hovered != previous)
+            {
+                SelectorScale = 0;
+                if (Hovered >= 0 && Achieved[Hovered])
+                    Device->getAudioDriver()->playSound("SelectBuilding.ogg", 1.0f, 0.0f, 1.0f);
+            }
+            break;
+        }
         }
         break;
     }
