@@ -342,8 +342,9 @@ void CGUIScrollBar::draw()
     // draws the background
     if (Animations[ESBA_BACKGROUND])
     {
-        ox::core::CRect<int> background(AnimationRects[ESBA_BACKGROUND].UpperLeftCorner + AbsoluteRect.UpperLeftCorner,
-            AnimationRects[ESBA_BACKGROUND].LowerRightCorner + AbsoluteRect.UpperLeftCorner);
+        ox::core::CRect<int> background = AnimationRects[ESBA_BACKGROUND];
+        background.UpperLeftCorner += AbsoluteRect.UpperLeftCorner;
+        background.LowerRightCorner += AbsoluteRect.UpperLeftCorner;
         if (clip)
             clipAgainst(background, *clip);
 
