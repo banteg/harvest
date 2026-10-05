@@ -48,6 +48,11 @@ Lunar<CAlienLuaInfo>::RegType CAlienLuaInfo::methods[] =
 static const bool BUILDING_TARGET_TYPES[] =
 { true, true, false, true, true, false, false, true, true, false, false, true, false, true, true, false, true };
 
+static inline ox::core::CPosition2d<float> position2d(const ox::core::CVector3d<float>& v)
+{
+    return ox::core::CPosition2d<float>(v.X, v.Y);
+}
+
 static const bool FLYING_IMMUNITY[] = { true, true, false, false, true, true, false };
 
 static const float ALIEN_DAMAGE_MODIFIERS[14][7] =
@@ -679,17 +684,16 @@ void CAlienEntity::locateTargetBuilding()
         const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            CEntity* building = (CEntity*)*it;
-            if (building->getEntityType() == 5 && !building->isKilled() &&
-                ((CMineralsEntity*)building)->getHoggerId() == -1)
+            if (((CEntity*)*it)->getEntityType() == 5 && !((CEntity*)*it)->isKilled() &&
+                ((CMineralsEntity*)*it)->getHoggerId() == -1)
             {
-                float x = building->getPosition().X - Position.X;
-                float y = building->getPosition().Y - Position.Y;
+                float x = (*it)->getPosition().X - Position.X;
+                float y = (*it)->getPosition().Y - Position.Y;
                 float distance = x * x + y * y;
                 if (distance < bestDistance)
                 {
-                    Target.Entity = building;
-                    Target.Id = building->getId();
+                    Target.Entity = *it;
+                    Target.Id = Target.Entity->getId();
                     Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                     bestDistance = distance;
                 }
@@ -702,12 +706,10 @@ void CAlienEntity::locateTargetBuilding()
     const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
     for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        CEntity* building = (CEntity*)*it;
-        int type = building->getEntityType();
-        if (BUILDING_TARGET_TYPES[type] && !building->isKilled())
+        if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()] && !((CEntity*)*it)->isKilled())
         {
             targets.push_back(*it);
-            if (building->getEntityType() == 1 && !((CSparkMoverEntity*)building)->isAlienWaypointed())
+            if (((CEntity*)*it)->getEntityType() == 1 && !((CSparkMoverEntity*)*it)->isAlienWaypointed())
                 availableLink = true;
         }
     }
@@ -718,16 +720,16 @@ void CAlienEntity::locateTargetBuilding()
             float bestDistance = 1000000000.0f;
             for (unsigned int i = 0; i < targets.size(); ++i)
             {
-                CEntity* building = (CEntity*)targets[i];
-                if (building->getEntityType() == 1 && !((CSparkMoverEntity*)building)->isAlienWaypointed())
+                if (((CEntity*)targets[i])->getEntityType() == 1 &&
+                    !((CSparkMoverEntity*)targets[i])->isAlienWaypointed())
                 {
-                    float x = building->getPosition().X - Position.X;
-                    float y = building->getPosition().Y - Position.Y;
+                    float x = targets[i]->getPosition().X - Position.X;
+                    float y = targets[i]->getPosition().Y - Position.Y;
                     float distance = x * x + y * y;
                     if (distance < bestDistance)
                     {
-                        Target.Entity = building;
-                        Target.Id = building->getId();
+                        Target.Entity = targets[i];
+                        Target.Id = Target.Entity->getId();
                         Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                         bestDistance = distance;
                     }
@@ -739,42 +741,44 @@ void CAlienEntity::locateTargetBuilding()
             ox::entity::COxEntity* first = targets[ox::algo::CRand::rand() % targets.size()];
             ox::entity::COxEntity* second = targets[ox::algo::CRand::rand() % targets.size()];
             float firstDistance = ox::core::CMath::getSquaredDistance(
-                ox::core::CPosition2d<float>(first->getPosition().X, first->getPosition().Y),
+                position2d(first->getPosition()),
                 ox::core::CPosition2d<float>(Position.X, Position.Y));
             float secondDistance = ox::core::CMath::getSquaredDistance(
-                ox::core::CPosition2d<float>(second->getPosition().X, second->getPosition().Y),
+                position2d(second->getPosition()),
                 ox::core::CPosition2d<float>(Position.X, Position.Y));
             float distance;
-            if (secondDistance <= firstDistance)
-            {
-                Target.Entity = second;
-                distance = secondDistance;
-            }
-            else
+            if (firstDistance < secondDistance)
             {
                 Target.Entity = first;
                 distance = firstDistance;
             }
+            else
+            {
+                Target.Entity = second;
+                distance = secondDistance;
+            }
+            //! Widen the accepted range each time a random pick is not closer.
             float range = 1500.0f;
             int attempts = 10;
             while (distance > range * range && attempts > 0)
             {
                 ox::entity::COxEntity* candidate = targets[ox::algo::CRand::rand() % targets.size()];
                 float candidateDistance = ox::core::CMath::getSquaredDistance(
-                    ox::core::CPosition2d<float>(candidate->getPosition().X, candidate->getPosition().Y),
+                    position2d(candidate->getPosition()),
                     ox::core::CPosition2d<float>(Position.X, Position.Y));
                 if (candidateDistance < distance)
                 {
                     Target.Entity = candidate;
                     distance = candidateDistance;
                 }
-                range += 500.0f;
+                else
+                    range += 500.0f;
                 --attempts;
             }
         }
         if (Target.Id == -1 && AlienType == 4)
             TargetAngle = ox::core::CMath::getAngleIY(ox::core::CPosition2d<float>(Position.X, Position.Y),
-                ox::core::CPosition2d<float>(Target.Entity->getPosition().X, Target.Entity->getPosition().Y));
+                position2d(Target.Entity->getPosition()));
         Target.Id = Target.Entity->getId();
         Target.UpdateCounter = gp_entityManager->getUpdateCounter();
     }
@@ -994,33 +998,35 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
                 Target.Entity = 0;
                 Target.Id = -1;
                 locateTargetBuilding();
-            }
-        }
-        if (!Target.Entity)
-        {
-            HoggerAttached = 2;
-            locateTargetBuilding();
-        }
-        else
-        {
-            ox::core::CVector3d<float> position = Target.Entity->getPosition();
-            if (ox::core::abs_(position.X - Position.X) < 2.0f &&
-                ox::core::abs_(position.Y - Position.Y) < 2.0f)
-            {
-                Position = position;
-                Position.Y += 1.0f;
-                ((CMineralsEntity*)Target.Entity)->setHogStatus(Id);
-                MinerLanding = true;
+                if (!Target.Entity)
+                {
+                    HoggerAttached = 2;
+                    locateTargetBuilding();
+                }
             }
             else
-                MinerLanding = false;
+            {
+                ox::core::CVector3d<float> position = Target.Entity->getPosition();
+                float dx = position.X - Position.X;
+                float dy = position.Y - Position.Y;
+                if (ox::core::abs_(dx) < 2.0f && ox::core::abs_(dy) < 2.0f)
+                {
+                    Position = position;
+                    Position.Y += 1.0f;
+                    ((CMineralsEntity*)Target.Entity)->setHogStatus(Id);
+                    MinerLanding = true;
+                }
+                else
+                    MinerLanding = false;
+            }
         }
     }
     else if (Target.Entity)
     {
         ox::core::CVector3d<float> position = Target.Entity->getPosition();
-        if (ox::core::abs_(position.X - Position.X) < 2.0f &&
-            ox::core::abs_(position.Y - Position.Y) < 2.0f)
+        float dx = position.X - Position.X;
+        float dy = position.Y - Position.Y;
+        if (ox::core::abs_(dx) < 2.0f && ox::core::abs_(dy) < 2.0f)
         {
             Position = position;
             Position.Y += 1.0f;
@@ -1040,18 +1046,16 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
                 const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
                 for (std::list<ox::entity::COxEntity*>::const_reverse_iterator it = buildings.rbegin(); it != buildings.rend(); it++)
                 {
-                    int type = ((CEntity*)*it)->getEntityType();
-                    if (BUILDING_TARGET_TYPES[type] && !((CEntity*)*it)->isKilled())
+                    if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()] && !((CEntity*)*it)->isKilled())
                     {
-                        CEntity* building = (CEntity*)*it;
-                        ox::core::CVector3d<float> candidatePosition = building->getPosition();
+                        ox::core::CVector3d<float> candidatePosition = (*it)->getPosition();
                         float candidate = ox::core::CMath::getEstimateDistance(
                             ox::core::CPosition2d<float>(Position.X, Position.Y),
                             ox::core::CPosition2d<float>(candidatePosition.X, candidatePosition.Y));
                         if (candidate < distance && ox::algo::CRand::rand() % 3 == 0)
                         {
-                            Target.Entity = building;
-                            Target.Id = building->getId();
+                            Target.Entity = *it;
+                            Target.Id = Target.Entity->getId();
                             Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                             break;
                         }
