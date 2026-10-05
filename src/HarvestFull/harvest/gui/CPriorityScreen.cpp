@@ -150,8 +150,8 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
         case ox::gui::EGET_ELEMENT_DRAWN:
             if (id == ID_FRAME)
             {
-                Driver->draw2DRectangle(ox::video::SColor(0x80000020),
-                    GUIEnvironment->getRootGUIElement()->getAbsolutePosition(), 0);
+                ox::core::CRect<int> screen = GUIEnvironment->getRootGUIElement()->getAbsolutePosition();
+                Driver->draw2DRectangle(ox::video::SColor(0x80000020), screen, 0);
                 ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
                 int x = rect.UpperLeftCorner.X;
                 int y = rect.UpperLeftCorner.Y;
@@ -182,8 +182,7 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                 {
                     for (int j = (int)PriorityBoxes[index].size() - 1; j >= 0; --j)
                     {
-                        SPriorityBox* box = PriorityBoxes[index][j];
-                        if (box->Rect.isPointInside(GUIEnvironment->getMousePosition()))
+                        if (PriorityBoxes[index][j]->Rect.isPointInside(GUIEnvironment->getMousePosition()))
                         {
                             ShowTooltip = true;
                             TooltipText = entity::getAlienName(PriorityBoxes[index][j]->AlienType);
