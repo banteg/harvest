@@ -4210,7 +4210,7 @@ void CPlayState::render()
     {
         // The screen fades to black.
         int alpha = (int)((GameOverTime / -15.0f + 1.0f) * 255.0f);
-        alpha = ox::core::min_(ox::core::max_(alpha, 0), 255);
+        alpha = ox::core::clamp(alpha, 0, 255);
         Driver->draw2DRectangle(ox::video::SColor(alpha, 0, 0, 0),
             ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
         ox::core::CString<wchar_t> text(L"--- ");
