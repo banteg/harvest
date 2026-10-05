@@ -600,7 +600,7 @@ int CPlayState::secondInit()
 ox::gui::IGUILayout* CPlayState::getPopupForGuiButton(const wchar_t* text)
 {
     ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(
-        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 90, 10), GUIEnvironment->getRootGUIElement(), -1));
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 90, 10), GUIEnvironment->getHoverParentElement(), -1));
     popup->setAnimations(IngamePackage, "Tooltip");
     ox::gui::IGUIStaticText* label = GUIEnvironment->addStaticText(text, ox::core::CRect<int>(0, 0, 1000, 1000),
         false, true, popup, -1, 0);
@@ -615,7 +615,7 @@ ox::gui::IGUILayout* CPlayState::getPopupForBuildButton(const wchar_t* name, con
     int minerals)
 {
     ox::gui::IGUILayout* popup =
-        GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 100), GUIEnvironment->getRootGUIElement());
+        GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 100), GUIEnvironment->getHoverParentElement());
     ox::gui::IGUIWindow* titleFrame = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, -1));
     titleFrame->setAnimations(IngamePackage, "Tooltip");
     ox::gui::IGUIWindow* mineralsFrame = static_cast<ox::gui::IGUIWindow*>(
@@ -3740,7 +3740,7 @@ void CPlayState::setWaveListToggle(bool visible)
                 if (GameMode == game::EGM_WAVE)
                 {
                     ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
-                        GUIEnvironment->getRootGUIElement(), -1));
+                        GUIEnvironment->getHoverParentElement(), -1));
                     popup->setAnimations(IngamePackage, "Tooltip");
                     GUIEnvironment->addStaticText(ThreatLevel->getWaveDescription(i),
                         ox::core::CRect<int>(0, 0, 400, 400), false, true, popup, -1, L"")->packSize();
@@ -3819,7 +3819,7 @@ void CPlayState::setCreativeListToggle(bool visible)
                 button->LayoutFlags = "br";
                 button->setReportOnDraw(2);
                 ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
-                    GUIEnvironment->getRootGUIElement(), -1));
+                    GUIEnvironment->getHoverParentElement(), -1));
                 popup->setAnimations(IngamePackage, "Tooltip");
                 ox::core::CString<wchar_t> text =
                     settings::gp_systemConfig->getLocalizedText(entity::ALIEN_KEY_NAMES[i]);
