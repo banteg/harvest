@@ -3158,7 +3158,9 @@ address	size	symbol	evidence
 0x5db0e0	11	_ZN2ox5video21ISpriteAnimationState7hasFlagEi	mac-vtable:_ZTVN5daisy5video21CSpriteAnimationStateE:22
 0x5db0f0	12	_ZN2ox5video21ISpriteAnimationStateD0Ev	mac-vtable:_ZTVN2ox5video21ISpriteAnimationStateE:3
 0x5db100	396	_ZN2ox4algo10CBase64url6decodeEPNS_2io10IWriteFileERKNS_4core7CStringIcEE	native-calls:CHighscoreScreen-createUCS2FromBase64UTF2
+0x5db290	38	_GLOBAL__I__ZN2ox4algo10CBase64url6encodeERNS_4core7CStringIcEEPNS_2io9IReadFileE	manual:CBase64url-unit-static-initializer
 0x5db2c0	2614	_ZN2ox4algo10CBase64url6encodeERNS_4core7CStringIcEEPNS_2io9IReadFileE	manual: Mac CStatistics.cpp symbols and Linux field layout, native callees and FDE extent
+0x5dbd00	5066	_ZN2ox4algo10CBase64url7encode2ERNS_4core7CStringIcEEPNS_2io9IReadFileE	manual:Mac-symbol+amd64-percent-encoded-alphabet
 0x5dd0d0	57	_ZN2ox4algo5CRand11performRandEi	match:ox/algo/CRand.cpp
 0x5dd110	18	_ZN2ox4algo5CRand4randEv	match:ox/algo/CRand.cpp
 0x5dd130	11	_ZN2ox4algo5CRand5resetEv	match:ox/algo/CRand.cpp
@@ -4505,6 +4507,9 @@ address	size	symbol	evidence
 0x6219b0	24	_ZTIN2ox5video21ISpriteAnimationStateE	rtti
 0x6219e0	35	_ZTSN2ox5video21ISpriteAnimationStateE	rtti
 0x621a20	0	_ZTVN2ox5video21ISpriteAnimationStateE	rtti
+0x621b40	0	_ZN2ox4algoL9Base64InvE	manual:Mac-symbol+decode-table-bytes
+0x621ba0	0	_ZN2ox4algoL15Base64Alphabet2E	manual:Mac-symbol+percent-encoded-string-table
+0x621dc0	0	_ZN2ox4algoL14Base64AlphabetE	manual:Mac-symbol+alphabet-string
 0x621e20	0	_ZTVN2ox4algo12C3dRegulatorE	rtti
 0x621e40	0	_ZTVN2ox4algo10CRegulatorE	rtti
 0x621e60	25	_ZTSN2ox4algo12C3dRegulatorE	rtti
