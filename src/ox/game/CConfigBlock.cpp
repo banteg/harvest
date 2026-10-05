@@ -2,7 +2,7 @@
 
 #include "CConfigBlock.h"
 #include <cwchar>
-#include "../core/CStringFunctions.h"
+#include "../core/CStringConversions.h"
 #include "../io/CHelpIO.h"
 // The native unit has an iostream static initializer, as do the other ox units.
 #include <iostream> // IWYU pragma: keep

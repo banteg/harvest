@@ -3,7 +3,6 @@
 #ifndef OX_CORE_CSTRINGFUNCTIONS_H
 #define OX_CORE_CSTRINGFUNCTIONS_H
 
-#include <cstdio>
 #include <cstdlib>
 #include "CString.h"
 #include "../TArray.h"
@@ -33,43 +32,11 @@ public:
         return CString<char>(result);
     }
 
-    //! Converts a string in the current locale's multibyte encoding to a wide string.
-    static CString<wchar_t> ansiToWide(const CString<char>& str)
-    {
-        int size = str.size() + 1;
-        wchar_t* wide = new wchar_t[size];
-        const char* src = str.c_str();
-        wchar_t* converted = new wchar_t[size];
-        mbstowcs(converted, src, size);
-        for (int i = 0; i < size; ++i)
-            wide[i] = converted[i];
-        // scalar delete of an array, as in both builds
-        delete converted;
-        wide[size - 1] = 0;
-        CString<wchar_t> result = wide;
-        delete [] wide;
-        return CString<wchar_t>(result);
-    }
-
-    //! Parses a decimal number; characters are narrowed one by one.
-    static float wideToFloat(const wchar_t* str)
-    {
-        CString<char> ansi = str;
-        return (float)atof(ansi.c_str());
-    }
-
-    //! Formats a number with printf's format, "%.2f" by default.
-    static CString<wchar_t> floatToWide(float value, char* format = 0)
-    {
-        char buffer[20];
-        if (format)
-            sprintf(buffer, format, value);
-        else
-            sprintf(buffer, "%.2f", value);
-        return CString<wchar_t>(buffer);
-    }
-
+    static CString<wchar_t> ansiToWide(const CString<char>& str);
     static CString<wchar_t> millisecondsToWide(float milliseconds, bool showHours);
+    // Defined inline in CStringConversions.h.
+    static float wideToFloat(const wchar_t* str);
+    static CString<wchar_t> floatToWide(float value, char* format = 0);
 };
 
 //! A copy of source with every occurrence of find replaced by replacement.

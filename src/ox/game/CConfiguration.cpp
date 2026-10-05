@@ -4,7 +4,7 @@
 #include <cwchar>
 #include "CConfigBlock.h"
 #include "../algo/CBase64url.h"
-#include "../core/CStringFunctions.h"
+#include "../core/CStringConversions.h"
 #include "../io/CHelpIO.h"
 #include "../io/CMemReadFile.h"
 #include "../io/CMemWriteFile.h"
