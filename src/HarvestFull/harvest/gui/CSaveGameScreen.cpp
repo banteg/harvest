@@ -342,24 +342,22 @@ void CSaveGameScreen::loadSaveGames()
         ox::core::CString<char> filename(files->getFullFileName(i));
         ox::io::IReadFile* file = fileSystem->createAndOpenFile(filename.c_str());
         settings::SSavestateHeader header;
-        if (file)
+        if (file && settings::CSavestateInfo::readHeader(file, header))
         {
-            if (settings::CSavestateInfo::readHeader(file, header))
+            ox::core::CString<wchar_t> name(files->getFileName(i));
+            if (header.Description.size() <= 0)
+                header.Description = name;
+            if (header.PlayerName == playerName)
             {
-                ox::core::CString<wchar_t> name(files->getFileName(i));
-                if (header.Description.size() <= 0)
-                    header.Description = name;
-                if (header.PlayerName == playerName)
-                {
-                    SSaveListItem item;
-                    item.Filename = filename;
-                    item.Header = header;
-                    item.Name = name;
-                    SaveList.push_back(item);
-                }
+                SSaveListItem item;
+                item.Filename = filename;
+                item.Header = header;
+                item.Name = name;
+                SaveList.push_back(item);
             }
-            file->drop();
         }
+        if (file)
+            file->drop();
     }
     files->drop();
 
