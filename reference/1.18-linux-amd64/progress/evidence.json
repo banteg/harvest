@@ -131757,7 +131757,7 @@
     },
     {
       "unit": "ox/game/CConfiguration.cpp",
-      "object_sha256": "e166ce5f5a3560a9890ec8218edf343f695389b80473d600ca5c2504868d0de9",
+      "object_sha256": "f2b8eb58c55dc8f99787293c93983f13063dbb6a6c798a2bfde2fde376631a05",
       "exact": false,
       "sections": [
         {
@@ -131767,7 +131767,7 @@
           "exact": false,
           "address": "0x5e6530",
           "first_difference": 1854,
-          "differing_bytes": 2456,
+          "differing_bytes": 2129,
           "misplaced_symbols": [
             {
               "symbol": "_ZN2ox4game14CConfiguration8getBlockERKNS_4core7CStringIwEE",
@@ -131795,8 +131795,8 @@
               "placed": "0x5e8d20"
             },
             {
-              "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
-              "known": "0x5e8520",
+              "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
+              "known": "0x5e8860",
               "placed": "0x5e8fc0"
             },
             {
@@ -131805,8 +131805,8 @@
               "placed": "0x5e90a0"
             },
             {
-              "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
-              "known": "0x5e8860",
+              "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
+              "known": "0x5e8520",
               "placed": "0x5e92f0"
             },
             {
@@ -132216,79 +132216,7 @@
               "matches": false
             },
             {
-              "offset": 11000,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11037,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration8getBlockERKNS_4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x5e6600",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11054,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11078,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
               "offset": 11232,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11826,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11869,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration11blockExistsERKNS_4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x5e6690",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11885,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11910,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -132574,12 +132502,12 @@
               "exact": false
             },
             {
-              "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
-              "address": "0x5e8520",
+              "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
+              "address": "0x5e8860",
               "size": 214,
-              "fde": false,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN2ox4game14CConfiguration10printErrorEPKw",
@@ -132590,12 +132518,12 @@
               "exact": false
             },
             {
-              "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
-              "address": "0x5e8860",
+              "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
+              "address": "0x5e8520",
               "size": 230,
-              "fde": false,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN2ox4game14CConfiguration15parseConfigFileEPKw",
@@ -132844,7 +132772,7 @@
           "/out/ox__game__CConfiguration.o"
         ],
         "inputs": {
-          "src/ox/game/CConfiguration.cpp": "d8a875baac6c4472a3def08b8ee39686cc5b162f766b5b193c91bd8095466a02",
+          "src/ox/game/CConfiguration.cpp": "96dae91bc4424e8687b002d888f37d6367b9eb29adb07ea0491d0f1af5291d35",
           "src/ox/game/CConfiguration.h": "7b4c5d5c6e6e93411d781b6415f5d1399941c3e5b2734ae74ab332d2b5c62945",
           "src/ox/game/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -132867,9 +132795,9 @@
           "src/ox/game/../io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962"
         },
         "system_headers": 124,
-        "object_sha256": "e166ce5f5a3560a9890ec8218edf343f695389b80473d600ca5c2504868d0de9"
+        "object_sha256": "f2b8eb58c55dc8f99787293c93983f13063dbb6a6c798a2bfde2fde376631a05"
       },
-      "fuzzy_target_sha256": "048033c8f50d94c10426c2b29c2bd8883dd16dcdf4f7b92f98ad39d0a5cf49cd",
+      "fuzzy_target_sha256": "afdd933d2e834c3ae27663b9769fbfbe39d3deca829ff458104a4ca6667a330b",
       "fuzzy_functions": [
         {
           "address": "0x5e6530",
@@ -133058,10 +132986,10 @@
           "percent": 98.3237
         },
         {
-          "address": "0x5e8520",
-          "size": 230,
-          "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
-          "percent": 96.935486
+          "address": "0x5e8860",
+          "size": 214,
+          "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
+          "percent": 100.0
         },
         {
           "address": "0x5e8610",
@@ -133070,10 +132998,10 @@
           "percent": 99.440994
         },
         {
-          "address": "0x5e8860",
-          "size": 214,
-          "symbol": "_ZN2ox4game14CConfiguration11blockExistsEPKw",
-          "percent": 96.88525
+          "address": "0x5e8520",
+          "size": 230,
+          "symbol": "_ZN2ox4game14CConfiguration8getBlockEPKw",
+          "percent": 100.0
         },
         {
           "address": "0x5e93b0",
@@ -139918,17 +139846,17 @@
     },
     {
       "unit": "daisy/video/Null/CSpriteAnimationImage.cpp",
-      "object_sha256": "e49f5bbd90621fd8169a82d721e922b4482e591745b54a0e009ca16516025c2e",
+      "object_sha256": "febd6c11f32224f5a2ae588e87377017eab8c4467961b4fd3668c3b49eaee0be",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 4060,
+          "size": 4044,
           "placement": "symbol: _ZN5daisy5video21CSpriteAnimationImageC2EPN2ox5video14ISpritePackageEPNS0_12SSpriteImageEPNS3_12IVideoDriverE",
           "exact": false,
           "address": "0x5d8dc0",
           "first_difference": 567,
-          "differing_bytes": 2169,
+          "differing_bytes": 2094,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy5video21CSpriteAnimationImage16drawCornerColorsERKN2ox4core11CAffineRectIfEERKNS2_5video13SColorCornersE",
@@ -139993,12 +139921,12 @@
             {
               "symbol": "_ZN5daisy5video21CSpriteAnimationImage11drawRotatedERKN2ox4core11CPosition2dIfEEffNS2_5video6SColorE",
               "known": "0x5d9bf0",
-              "placed": "0x5d9be0"
+              "placed": "0x5d9bd0"
             },
             {
               "symbol": "_ZN5daisy5video21CSpriteAnimationImageD0Ev",
               "known": "0x5d9da0",
-              "placed": "0x5d9d90"
+              "placed": "0x5d9d80"
             }
           ],
           "bad_references": [
@@ -140019,7 +139947,7 @@
               "matches": false
             },
             {
-              "offset": 2896,
+              "offset": 2888,
               "type": 2,
               "symbol": "sincos",
               "addend": -4,
@@ -140028,11 +139956,11 @@
               "matches": false
             },
             {
-              "offset": 3001,
+              "offset": 2987,
               "type": 2,
               "symbol": ".LC3",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x7de8e258+0x10",
+              "reason": "unmapped or truncated range: 0x6bbcc68f+0x10",
               "matches": false
             }
           ],
@@ -140177,7 +140105,7 @@
             {
               "symbol": "_ZN5daisy5video21CSpriteAnimationImage6draw3dERKN2ox4core9CVector3dIfEEffbNS2_5video6SColorE",
               "address": "0x5d9720",
-              "size": 1232,
+              "size": 1209,
               "fde": false,
               "global": true,
               "exact": false
@@ -140494,7 +140422,7 @@
           "/out/daisy__video__Null__CSpriteAnimationImage.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CSpriteAnimationImage.cpp": "91296a85a06f9dda84bfda561255cb8ab5276093033106bbc83037d136f1e044",
+          "src/daisy/video/Null/CSpriteAnimationImage.cpp": "8d81d5be692a113de665487cbd8d2842041cbf6602581f2cafe403f74b880b61",
           "src/daisy/video/Null/CSpriteAnimationImage.h": "3edc19504ee68ba462709a5d361dfc25355782cc0b1a719e231d139ff15c1b2a",
           "src/ox/video/ISpriteAnimationImage.h": "7ce4abfeb527993caa2a73ca0de1117bf8868885d93b01e7a2ca4408f6db62c2",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -140518,9 +140446,9 @@
           "src/ox/video/SMaterial.h": "e7c716a4d9263e420700c004fb42d195014d91a476b3e9fba0c0f9cca7b4d992"
         },
         "system_headers": 114,
-        "object_sha256": "e49f5bbd90621fd8169a82d721e922b4482e591745b54a0e009ca16516025c2e"
+        "object_sha256": "febd6c11f32224f5a2ae588e87377017eab8c4467961b4fd3668c3b49eaee0be"
       },
-      "fuzzy_target_sha256": "d882a1589307e8582383da2f0dcafb40fcdf4c1bf6a6f644524be2f418cd8d1a",
+      "fuzzy_target_sha256": "b68dc5b003e1367311582f9cc9458b0e867c92a08f723b8d6ece60eca9c78b88",
       "fuzzy_functions": [
         {
           "address": "0x5d8dc0",
@@ -140628,7 +140556,7 @@
           "address": "0x5d9720",
           "size": 1224,
           "symbol": "_ZN5daisy5video21CSpriteAnimationImage6draw3dERKN2ox4core9CVector3dIfEEffbNS2_5video6SColorE",
-          "percent": 55.45923
+          "percent": 71.802574
         },
         {
           "address": "0x5d9bf0",
@@ -145427,7 +145355,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "f9be0c74999393ffbf40ea5ffae59434ce3e0647bb049fd560fd08bddac44595"
+    "report_sha256": "46b088c5539012ecde559ed558786d63f36cd72a44e9f6aed4c57bee259deca1"
   },
   "link": {
     "status": "unavailable",
