@@ -1577,7 +1577,7 @@ void CPlayState::displayTimeVictoryMessage()
     message.Portrait = "PortraitCommunications";
     message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:victory");
     message.Sound = "ingame_infoVictory.ogg";
-    if (record == 0 || time < record)
+    if (time < record || record == 0)
     {
         settings::gp_profileManager->getCurrentProfile()->updateLocalScore(2, GameMode,
             game::gp_world->getPlanet(), time);
