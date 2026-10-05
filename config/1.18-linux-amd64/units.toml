@@ -428,3 +428,11 @@
 ["daisy/gui/CGUIContextMenu.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c1c8
+
+["daisy/gui/CGUIEditBox.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1cc
+# processKey key switch jump table.
+".rodata" = 0x61faa0
+# L"_ " and L"_"
+".rodata.str4.4" = 0x61fa88

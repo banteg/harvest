@@ -26,7 +26,8 @@ enum EGUI_ELEMENT_TYPE
     EGUIET_SCROLL_BAR = 3,
     EGUIET_CHECK_BOX = 6,
     EGUIET_LIST_BOX = 8,
-    EGUIET_EDIT_BOX = 12
+    EGUIET_EDIT_BOX = 12,
+    EGUIET_TAB = 19
 };
 
 //! Base class of all GUI elements.
@@ -371,6 +372,7 @@ public:
         return core::CDimension2d<int>(RelativeRect.getWidth(), RelativeRect.getHeight());
     }
 
+    IGUIElement* getParent() { return Parent; }
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
     core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
