@@ -1759,10 +1759,7 @@ bool CLuaManager::writeLuaStates(ox::io::IWriteFile* file)
     CLuaFileValues::addLuaTableVars(gp_luaState, ox::core::CString<char>(""), values);
     ox::io::CHelpIO::writeInt(file, values.size());
     for (unsigned int i = 0; i < values.size(); ++i)
-    {
-        CLuaFileValues::writeLuaAttribute(file, values[i].Key);
-        CLuaFileValues::writeLuaAttribute(file, values[i].Value);
-    }
+        CLuaFileValues::writeLuaFilePair(file, values[i]);
     luaL_unref(L, LUA_REGISTRYINDEX, table);
     return true;
 }
