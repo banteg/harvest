@@ -693,36 +693,34 @@ int harvest_addSpriteState(lua_State* L)
 
 int CLuaManager::createSpriteState(const char* name, const ox::core::CString<char>& packageFile)
 {
-    ox::video::ISpritePackage* package;
+    ox::video::ISpritePackage* package = entity::CEntity::gp_spritePackage;
     if (packageFile.size() >= 5)
     {
         package = Device->getVideoDriver()->getSpritePackage(packageFile.c_str(), false);
         if (!package)
             return -1;
     }
-    else
-        package = entity::CEntity::gp_spritePackage;
 
     ox::video::ISpriteAnimationState* state = package->addNewAnimationState(ox::core::CString<char>(name));
     if (!state)
         return -1;
 
-    if (FreeSpriteState >= (int)SpriteStates.size())
+    if (FreeSpriteState < (int)SpriteStates.size())
     {
-        SpriteStates.push_back(state);
-        FreeSpriteState = SpriteStates.size();
-        return FreeSpriteState - 1;
+        int index = FreeSpriteState++;
+        SpriteStates[index] = state;
+        while (FreeSpriteState < (int)SpriteStates.size())
+        {
+            if (!SpriteStates[FreeSpriteState])
+                break;
+            ++FreeSpriteState;
+        }
+        return index;
     }
 
-    int index = FreeSpriteState++;
-    SpriteStates[index] = state;
-    while (FreeSpriteState < (int)SpriteStates.size())
-    {
-        if (!SpriteStates[FreeSpriteState])
-            break;
-        ++FreeSpriteState;
-    }
-    return index;
+    SpriteStates.push_back(state);
+    FreeSpriteState = SpriteStates.size();
+    return FreeSpriteState - 1;
 }
 
 int harvest_removeSpriteState(lua_State* L)
@@ -750,26 +748,18 @@ int harvest_renderSpriteState(lua_State* L)
         float rotation = 0.0f;
         ox::video::SColor color(0xffffffff);
         if (top >= 4)
-        {
             z = (float)lua_tonumber(L, 4);
-            if (top >= 5)
-            {
-                scale = (float)lua_tonumber(L, 5);
-                if (top >= 6)
-                {
-                    rotation = (float)lua_tonumber(L, 6);
-                    if (top >= 7)
-                    {
-                        color.setAlpha(lua_tointeger(L, 7));
-                        if (top >= 10)
-                        {
-                            color.setRed(lua_tointeger(L, 8));
-                            color.setGreen(lua_tointeger(L, 9));
-                            color.setBlue(lua_tointeger(L, 10));
-                        }
-                    }
-                }
-            }
+        if (top >= 5)
+            scale = (float)lua_tonumber(L, 5);
+        if (top >= 6)
+            rotation = (float)lua_tonumber(L, 6);
+        if (top >= 7)
+            color.setAlpha(lua_tointeger(L, 7));
+        if (top >= 10)
+        {
+            color.setRed(lua_tointeger(L, 8));
+            color.setGreen(lua_tointeger(L, 9));
+            color.setBlue(lua_tointeger(L, 10));
         }
         entity::CSpecialEffectEntity* effect = new entity::CSpecialEffectEntity((float)x, (float)y, z,
             gp_luaManager->getSpriteState(index), scale, rotation, color);
@@ -791,31 +781,31 @@ int harvest_renderSpriteStateFreeShape(lua_State* L)
     if (top >= 10)
     {
         int index = lua_tointeger(L, 1);
-        float y = (float)lua_tonumber(L, 2);
-        float x1 = (float)lua_tonumber(L, 3);
-        float y1 = (float)lua_tonumber(L, 4);
-        float x2 = (float)lua_tonumber(L, 5);
-        float y2 = (float)lua_tonumber(L, 6);
-        float x3 = (float)lua_tonumber(L, 7);
-        float y3 = (float)lua_tonumber(L, 8);
-        float x4 = (float)lua_tonumber(L, 9);
-        float y4 = (float)lua_tonumber(L, 10);
-        ox::video::SColor color;
+        lua_Number x1 = lua_tonumber(L, 2);
+        lua_Number y1 = lua_tonumber(L, 3);
+        lua_Number x2 = lua_tonumber(L, 4);
+        lua_Number y2 = lua_tonumber(L, 5);
+        lua_Number x3 = lua_tonumber(L, 6);
+        lua_Number y3 = lua_tonumber(L, 7);
+        lua_Number x4 = lua_tonumber(L, 8);
+        lua_Number y4 = lua_tonumber(L, 9);
+        //! The entity's y, which orders it among the other entities.
+        lua_Number y = lua_tonumber(L, 10);
+        ox::video::SColor color(0xffffffff);
         if (top >= 11)
-            color = ox::video::SColor(lua_tointeger(L, 11), 255, 255, 255);
-        else
-            color = 0xffffffff;
+            color.setAlpha(lua_tointeger(L, 11));
         if (top >= 14)
         {
-            int red = lua_tointeger(L, 12);
-            int green = lua_tointeger(L, 13);
-            int blue = lua_tointeger(L, 14);
-            color = ox::video::SColor(color.getAlpha(), red, green, blue);
+            color.setRed(lua_tointeger(L, 12));
+            color.setGreen(lua_tointeger(L, 13));
+            color.setBlue(lua_tointeger(L, 14));
         }
-        entity::gp_entityManager->appendEntity(new entity::CSpecialEffectEntity(
-            ox::core::CPosition2d<float>(x1, y1), ox::core::CPosition2d<float>(x2, y2),
-            ox::core::CPosition2d<float>(x3, y3), ox::core::CPosition2d<float>(x4, y4), y,
-            gp_luaManager->getSpriteState(index), color), 4);
+        ox::video::ISpriteAnimationState* sprite = gp_luaManager->getSpriteState(index);
+        entity::CSpecialEffectEntity* effect = new entity::CSpecialEffectEntity(
+            ox::core::CPosition2d<float>((float)x1, (float)y1), ox::core::CPosition2d<float>((float)x2, (float)y2),
+            ox::core::CPosition2d<float>((float)x3, (float)y3), ox::core::CPosition2d<float>((float)x4, (float)y4),
+            (float)y, sprite, color);
+        entity::gp_entityManager->appendEntity(effect, 4);
     }
     return 0;
 }
@@ -2309,17 +2299,17 @@ void CLuaManager::renderGuiObjects(ox::video::IVideoDriver* driver, ox::gui::IGU
     for (unsigned int i = 0; i < GuiObjects.size(); ++i)
     {
         SLuaGuiObject* object = GuiObjects[i];
-        if (object->Type == 2)
+        switch (object->Type)
         {
+        case 2:
             driver->draw2DRectangle(object->Color, ox::core::CRect<int>(object->X, object->Y,
                 object->X + object->Extent1, object->Y + object->Extent2), 0);
-        }
-        else if (object->Type == 1)
-        {
+            break;
+        case 1:
             driver->draw2DLine(ox::core::CPosition2d<int>(object->X, object->Y),
                 ox::core::CPosition2d<int>(object->Extent1, object->Extent2), object->Color);
-        }
-        else if (object->Type == 0)
+            break;
+        case 0:
         {
             int x = object->X;
             int y = object->Y;
@@ -2330,6 +2320,8 @@ void CLuaManager::renderGuiObjects(ox::video::IVideoDriver* driver, ox::gui::IGU
                 x -= size.Width;
             font->draw(GuiObjects[i]->Text.c_str(), ox::core::CRect<int>(x, y, x + size.Width, y + size.Height),
                 GuiObjects[i]->Color, (ox::gui::EFontHorizontalAlign)0, (ox::gui::EFontVerticalAlign)0, 0);
+            break;
+        }
         }
         delete GuiObjects[i];
     }
