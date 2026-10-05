@@ -994,7 +994,7 @@ address	size	symbol	evidence
 0x476190	199	_GLOBAL__I__ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE	manual:CPriorityScreen-static-initializer-alien-colors
 0x476260	113	_ZN7harvest3gui15CPriorityScreen18emptyPriorityBoxesEv	native-calls:priority-screen-destructor-and-create-boxes
 0x4762e0	1557	_ZN7harvest3gui15CPriorityScreen11loadSpritesEv	native-calls:priority-screen-set-visible-loads-sprites
-0x476900	64	T.319	manual:CPriorityScreen-sendCustomEvent-continue-clone
+0x476900	64	T.324	manual:CPriorityScreen-sendCustomEvent-continue-clone
 0x476940	403	_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv	native-calls:priority-screen-confirm-button
 0x476ae0	285	_ZN7harvest3gui15CPriorityScreenD2Ev	manual:CPriorityScreen-destructor-variants
 0x476c00	308	_ZN7harvest3gui15CPriorityScreen19createPriorityBoxesEv	native-calls:priority-screen-set-visible-creates-boxes
