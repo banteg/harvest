@@ -361,7 +361,7 @@ int CPlayState::secondInit()
     case 12:
     {
         BottomBar = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
-        BottomBar->setID(0x4d3);
+        BottomBar->setID(GUI_ID_BOTTOM_BAR);
         BottomBar->setReportOnDraw(1);
 
         GuiElements[GUI_ID_PRIORITIES] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_PRIORITIES, 0);
@@ -398,18 +398,19 @@ int CPlayState::secondInit()
             ox::core::CString<char>(settings::gp_systemConfig->getLocalizedText(L"game:menuBtn").c_str()).c_str(),
             true);
 
-        RecycleButton = GUIEnvironment->addCheckBox(false, ox::core::CRect<int>(0, 0, 40, 40), BottomBar, 0x4d6, 0);
+        RecycleButton = GUIEnvironment->addCheckBox(false, ox::core::CRect<int>(0, 0, 40, 40), BottomBar,
+            GUI_ID_RECYCLE, 0);
         RecycleButton->setAnimations(IngamePackage, "Recycle");
         RecycleButton->setHoverItem(
             getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:recycle").c_str()));
 
         BuildingsArea = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 50), BottomBar);
         BuildingsList = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 50), BuildingsArea);
-        BuildingsList->setID(0x4d9);
+        BuildingsList->setID(GUI_ID_BUILDINGS_LIST);
         BuildingsList->setReportOnDraw(2);
 
         ActionPanel = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
-        ActionPanel->setID(0x4d4);
+        ActionPanel->setID(GUI_ID_ACTION_PANEL);
         ActionPanel->setReportOnDraw(1);
 
         InfoText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
@@ -499,7 +500,7 @@ int CPlayState::secondInit()
             GuiElements[i] = 0;
 
         TopBar = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
-        TopBar->setID(0x4d5);
+        TopBar->setID(GUI_ID_TOP_BAR);
         TopBar->setReportOnDraw(1);
 
         CreditsText = GUIEnvironment->addStaticText(L"75",
@@ -522,7 +523,7 @@ int CPlayState::secondInit()
         ThreatLevelText->setOverrideFont(NumberFont);
         ThreatLevelText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
 
-        m_7b0 = GUIEnvironment->addEditBox(L"", ox::core::CRect<int>(0, 0, 100, 10), false, 0, 0xe);
+        m_7b0 = GUIEnvironment->addEditBox(L"", ox::core::CRect<int>(0, 0, 100, 10), false, 0, GUI_ID_SCRIPT_INPUT);
         m_7b0->setVisible(false);
         m_7b0->setEnabled(false);
         break;
@@ -1875,161 +1876,9 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
     case ox::event::EET_GUI_EVENT:
     {
         int id = event.GUIEvent.Caller->getID();
-        int type = event.GUIEvent.EventType;
-        if (type == ox::gui::EGET_ELEMENT_DRAWN)
+        switch (event.GUIEvent.EventType)
         {
-            if (id <= 0x4d2)
-            {
-                if ((unsigned int)(id - GUI_ID_FIRST_WAVE) < 10)
-                {
-                    ox::core::CString<wchar_t> label(ThreatLevel->getThreatLevel() + 1);
-                    bool aliens[WAVE_COUNT];
-                    int count;
-                    int first;
-                    if (GameMode != game::EGM_WAVE)
-                    {
-                        if (LuaManager)
-                        {
-                            label = ox::core::CString<wchar_t>(
-                                LuaManager->getWaveButtonNumber(id - GUI_ID_FIRST_WAVE));
-                            first = -1;
-                            count = 0;
-                            for (int i = 0; i < WAVE_COUNT; ++i)
-                            {
-                                aliens[i] = LuaManager->isAlienOnButton(id - GUI_ID_FIRST_WAVE, i);
-                                if (aliens[i])
-                                {
-                                    ++count;
-                                    if (first < 0)
-                                        first = i;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            first = -1;
-                            count = 0;
-                        }
-                    }
-                    else
-                    {
-                        first = -1;
-                        count = 0;
-                        for (int i = 0; i < WAVE_COUNT; ++i)
-                        {
-                            aliens[i] = ThreatLevel->alienIsPresentOnThisWave(game::gp_world->getPlanet(),
-                                id - GUI_ID_FIRST_WAVE, i);
-                            if (aliens[i])
-                            {
-                                ++count;
-                                if (first < 0)
-                                    first = i;
-                            }
-                        }
-                    }
-                    renderWaveButton(event.GUIEvent.Caller, count, first, aliens, label);
-                    return true;
-                }
-                if ((unsigned int)(id - GUI_ID_FIRST_CREATIVE_ALIEN) >= 10)
-                    return false;
-                ox::core::CString<wchar_t> label(L"");
-                bool aliens[WAVE_COUNT];
-                for (int i = 0; i < WAVE_COUNT; ++i)
-                    aliens[i] = false;
-                aliens[id - GUI_ID_FIRST_CREATIVE_ALIEN] = true;
-                renderWaveButton(event.GUIEvent.Caller, 1, id - GUI_ID_FIRST_CREATIVE_ALIEN, aliens, label);
-                return true;
-            }
-            switch (id)
-            {
-            case 0x4d3:
-                // The bottom bar.
-                if (BottomBar)
-                {
-                    GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->draw(BarLeftArea.UpperLeftCorner, 0,
-                        ox::video::SColor(0xffffffff));
-                    GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND]->draw(BarRightArea.UpperLeftCorner, 0,
-                        ox::video::SColor(0xffffffff));
-                    ox::core::CDimension2d<int> size = GuiSprites[GS_BOTTOM_CENTER_BACKGROUND]->getFrameSize(0);
-                    for (int x = BarCenterArea.UpperLeftCorner.X; x < BarCenterArea.LowerRightCorner.X;
-                         x += size.Width)
-                        GuiSprites[GS_BOTTOM_CENTER_BACKGROUND]->draw(
-                            ox::core::CPosition2d<int>(x, BarCenterArea.UpperLeftCorner.Y), &BarCenterArea,
-                            ox::video::SColor(0xffffffff));
-                }
-                return true;
-            case 0x4d4:
-                // The action panel shows the selected building.
-                if (ActionPanel)
-                {
-                    ox::core::CRect<int> panel = ActionPanel->getAbsolutePosition();
-                    GuiSprites[GS_TOP_LEFT_BACKGROUND]->draw(panel.UpperLeftCorner, 0, ox::video::SColor(0xffffffff));
-                    if (SelectedEntity && SelectedEntity->getCurrentDisplaySprite())
-                        SelectedEntity->getCurrentDisplaySprite()->drawScaled(
-                            ox::core::CPosition2d<float>(panel.UpperLeftCorner.X + 56.0f,
-                                panel.UpperLeftCorner.Y + 55.0f),
-                            0.8f, ox::video::SColor(0xffffffff));
-                }
-                return true;
-            case 0x4d5:
-                if (TopBar)
-                    renderMinimap();
-                return true;
-            case GUI_ID_ENERGY_POPUP:
-                if (GuiSprites[GS_ICON_ENERGY])
-                {
-                    ox::core::CRect<int> popup = event.GUIEvent.Caller->getAbsolutePosition();
-                    GuiSprites[GS_ICON_ENERGY]->draw(
-                        ox::core::CPosition2d<int>(popup.UpperLeftCorner.X + 11, popup.UpperLeftCorner.Y + 11), 0,
-                        ox::video::SColor(0xffffffff));
-                }
-                return true;
-            case GUI_ID_MINERALS_POPUP:
-                if (GuiSprites[GS_ICON_CREDITS])
-                {
-                    ox::core::CRect<int> popup = event.GUIEvent.Caller->getAbsolutePosition();
-                    GuiSprites[GS_ICON_CREDITS]->draw(
-                        ox::core::CPosition2d<int>(popup.UpperLeftCorner.X + 12, popup.UpperLeftCorner.Y + 11), 0,
-                        ox::video::SColor(0xffffffff));
-                }
-                return true;
-            case 0x4d9:
-            {
-                // The build buttons.
-                ox::core::CRect<int> clip = BuildingsArea->getAbsoluteClippingRect();
-                ox::core::CPosition2d<int> mouse = GUIEnvironment->getMousePosition();
-                int selected = -1;
-                if (Action == 1)
-                    selected = BuildSelection;
-                BuildableItems.renderButtonLayouts(mouse, selected, clip);
-                return true;
-            }
-            default:
-                return false;
-            }
-        }
-        else if (type == ox::gui::EGET_BUTTON_CLICKED)
-        {
-            if (id > 0x4d9)
-            {
-                if (id == 0x4da)
-                {
-                    // Buy the full game.
-                    Device->getOSOperator()->openURL(L"http://www.oxeyegames.com/harvest/buy-now");
-                    NextState = EGS_QUIT;
-                    return true;
-                }
-                if (id != 0x4db)
-                    return false;
-                if (BuyMessageBox)
-                {
-                    BuyMessageBox->remove();
-                    BuyMessageBox = 0;
-                    if (m_2c0)
-                        togglePause();
-                }
-                return true;
-            }
+        case ox::gui::EGET_BUTTON_CLICKED:
             switch (id)
             {
             case 0:
@@ -2075,12 +1924,13 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 return true;
             case GUI_ID_BUILDINGS_LEFT:
             {
+                ox::core::CRect<int> area = BuildingsArea->getAbsolutePosition();
                 int position = BuildingsList->getRelativePosition().UpperLeftCorner.X;
                 if (position < 0)
                 {
-                    ox::core::CRect<int> area = BuildingsArea->getAbsolutePosition();
-                    BuildingsScrollTarget = ox::core::min_(0.0f, (float)(position + area.LowerRightCorner.X - 60 -
-                        area.UpperLeftCorner.X));
+                    BuildingsScrollTarget = (float)(position + area.LowerRightCorner.X - 60 - area.UpperLeftCorner.X);
+                    if (BuildingsScrollTarget > 0.0f)
+                        BuildingsScrollTarget = 0.0f;
                     BuildingsScrollPosition = (float)position;
                     BuildingsScrolling = true;
                 }
@@ -2141,6 +1991,8 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                     ((entity::CDefenseTowerEntity*)SelectedEntity)->makeEndLaser(0);
                 return true;
             case GUI_ID_SPEED_BUILD:
+                SelectedEntity->handleDoubleClickSelection();
+                return true;
             case GUI_ID_UNLINK_SPEED_BUILD:
                 SelectedEntity->handleDoubleClickSelection();
                 return true;
@@ -2163,7 +2015,7 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 }
                 return true;
             case GUI_ID_WAVE_SEND:
-                if (GameMode == game::EGM_WAVE || GameMode == game::EGM_CREATIVE)
+                if (GameMode == game::EGM_CREATIVE || GameMode == game::EGM_WAVE)
                     toggleWaveList();
                 return true;
             case GUI_ID_CREATIVE_PLACE:
@@ -2173,13 +2025,10 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             case GUI_ID_FIRST_WAVE: case GUI_ID_FIRST_WAVE + 1: case GUI_ID_FIRST_WAVE + 2: case GUI_ID_FIRST_WAVE + 3:
             case GUI_ID_FIRST_WAVE + 4: case GUI_ID_FIRST_WAVE + 5: case GUI_ID_FIRST_WAVE + 6:
             case GUI_ID_FIRST_WAVE + 7: case GUI_ID_FIRST_WAVE + 8: case GUI_ID_FIRST_WAVE + 9:
-                if (GameMode == game::EGM_CREATIVE)
-                {
-                    if (LuaManager)
-                        LuaManager->hookWaveButton(id - GUI_ID_FIRST_WAVE);
-                }
-                else if (GameMode == game::EGM_WAVE)
+                if (GameMode == game::EGM_WAVE)
                     launchWaveLevel(id - GUI_ID_FIRST_WAVE);
+                else if (GameMode == game::EGM_CREATIVE && LuaManager)
+                    LuaManager->hookWaveButton(id - GUI_ID_FIRST_WAVE);
                 return true;
             case GUI_ID_FIRST_CREATIVE_ALIEN: case GUI_ID_FIRST_CREATIVE_ALIEN + 1:
             case GUI_ID_FIRST_CREATIVE_ALIEN + 2: case GUI_ID_FIRST_CREATIVE_ALIEN + 3:
@@ -2187,64 +2036,189 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             case GUI_ID_FIRST_CREATIVE_ALIEN + 6: case GUI_ID_FIRST_CREATIVE_ALIEN + 7:
             case GUI_ID_FIRST_CREATIVE_ALIEN + 8: case GUI_ID_FIRST_CREATIVE_ALIEN + 9:
                 if (GameMode == game::EGM_CREATIVE)
+                    setPlaceAlienAction(id - GUI_ID_FIRST_CREATIVE_ALIEN);
+                return true;
+            case GUI_ID_BUY:
+                Device->getOSOperator()->openURL(L"http://www.oxeyegames.com/harvest/buy-now");
+                NextState = EGS_QUIT;
+                return true;
+            case GUI_ID_BUY_CLOSE:
+                if (BuyMessageBox)
                 {
-                    Action = 3;
-                    RecycleTarget = 0;
-                    clearSelectedEntity();
-                    PlacementOk = false;
-                    CursorMoved = true;
-                    AlienSelection = id - GUI_ID_FIRST_CREATIVE_ALIEN;
+                    BuyMessageBox->remove();
+                    BuyMessageBox = 0;
+                    if (m_2c0)
+                        togglePause();
                 }
                 return true;
             default:
                 return false;
             }
-        }
-        else if (type == ox::gui::EGET_CHECKBOX_TOGGLED)
-        {
-            if (id != 0x4d6)
+        case ox::gui::EGET_CHECKBOX_TOGGLED:
+            if (id != GUI_ID_RECYCLE)
                 return false;
-            if (!RecycleButton->isChecked())
-            {
+            if (RecycleButton->isChecked())
+                setRecycleAction();
+            else
                 setNoneAction(true);
-                return false;
-            }
-            Action = 2;
-            RecycleTarget = 0;
-            clearSelectedEntity();
-            PlacementOk = false;
-            CursorMoved = true;
             return false;
-        }
-        else if (type == ox::gui::EGET_EDITBOX_ENTER && id == 0xe)
-        {
+        case ox::gui::EGET_EDITBOX_ENTER:
+            if (id != GUI_ID_SCRIPT_INPUT)
+                return false;
             // The script text input was entered.
             m_7b0->setVisible(false);
             m_7b0->setEnabled(false);
             if (LuaManager)
                 LuaManager->hookTextInput(m_7b0->getText());
             return true;
+        case ox::gui::EGET_ELEMENT_DRAWN:
+            switch (id)
+            {
+            case GUI_ID_FIRST_WAVE: case GUI_ID_FIRST_WAVE + 1: case GUI_ID_FIRST_WAVE + 2: case GUI_ID_FIRST_WAVE + 3:
+            case GUI_ID_FIRST_WAVE + 4: case GUI_ID_FIRST_WAVE + 5: case GUI_ID_FIRST_WAVE + 6:
+            case GUI_ID_FIRST_WAVE + 7: case GUI_ID_FIRST_WAVE + 8: case GUI_ID_FIRST_WAVE + 9:
+            {
+                int wave = id - GUI_ID_FIRST_WAVE;
+                ox::core::CString<wchar_t> label(ThreatLevel->getThreatLevel() + 1);
+                bool aliens[WAVE_COUNT];
+                int count;
+                int first;
+                if (GameMode == game::EGM_WAVE)
+                {
+                    first = -1;
+                    count = 0;
+                    for (int i = 0; i < WAVE_COUNT; ++i)
+                    {
+                        aliens[i] = ThreatLevel->alienIsPresentOnThisWave(game::gp_world->getPlanet(), wave, i);
+                        if (aliens[i])
+                        {
+                            ++count;
+                            if (first < 0)
+                                first = i;
+                        }
+                    }
+                }
+                else if (LuaManager)
+                {
+                    label = ox::core::CString<wchar_t>(LuaManager->getWaveButtonNumber(wave));
+                    first = -1;
+                    count = 0;
+                    for (int i = 0; i < WAVE_COUNT; ++i)
+                    {
+                        aliens[i] = LuaManager->isAlienOnButton(wave, i);
+                        if (aliens[i])
+                        {
+                            ++count;
+                            if (first < 0)
+                                first = i;
+                        }
+                    }
+                }
+                else
+                {
+                    first = -1;
+                    count = 0;
+                }
+                renderWaveButton(event.GUIEvent.Caller, count, first, aliens, label);
+                return true;
+            }
+            case GUI_ID_FIRST_CREATIVE_ALIEN: case GUI_ID_FIRST_CREATIVE_ALIEN + 1:
+            case GUI_ID_FIRST_CREATIVE_ALIEN + 2: case GUI_ID_FIRST_CREATIVE_ALIEN + 3:
+            case GUI_ID_FIRST_CREATIVE_ALIEN + 4: case GUI_ID_FIRST_CREATIVE_ALIEN + 5:
+            case GUI_ID_FIRST_CREATIVE_ALIEN + 6: case GUI_ID_FIRST_CREATIVE_ALIEN + 7:
+            case GUI_ID_FIRST_CREATIVE_ALIEN + 8: case GUI_ID_FIRST_CREATIVE_ALIEN + 9:
+            {
+                int alien = id - GUI_ID_FIRST_CREATIVE_ALIEN;
+                ox::core::CString<wchar_t> label(L"");
+                bool aliens[WAVE_COUNT];
+                for (int i = 0; i < WAVE_COUNT; ++i)
+                    aliens[i] = false;
+                aliens[alien] = true;
+                renderWaveButton(event.GUIEvent.Caller, 1, alien, aliens, label);
+                return true;
+            }
+            case GUI_ID_BOTTOM_BAR:
+                if (BottomBar)
+                {
+                    GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->draw(BarLeftArea.UpperLeftCorner, 0,
+                        ox::video::SColor(0xffffffff));
+                    GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND]->draw(BarRightArea.UpperLeftCorner, 0,
+                        ox::video::SColor(0xffffffff));
+                    ox::core::CDimension2d<int> size = GuiSprites[GS_BOTTOM_CENTER_BACKGROUND]->getFrameSize(0);
+                    for (int x = BarCenterArea.UpperLeftCorner.X; x < BarCenterArea.LowerRightCorner.X;
+                         x += size.Width)
+                        GuiSprites[GS_BOTTOM_CENTER_BACKGROUND]->draw(
+                            ox::core::CPosition2d<int>(x, BarCenterArea.UpperLeftCorner.Y), &BarCenterArea,
+                            ox::video::SColor(0xffffffff));
+                }
+                return true;
+            case GUI_ID_ACTION_PANEL:
+                // The action panel shows the selected building.
+                if (ActionPanel)
+                {
+                    ox::core::CRect<int> panel = ActionPanel->getAbsolutePosition();
+                    GuiSprites[GS_TOP_LEFT_BACKGROUND]->draw(panel.UpperLeftCorner, 0, ox::video::SColor(0xffffffff));
+                    if (SelectedEntity && SelectedEntity->getCurrentDisplaySprite())
+                        SelectedEntity->getCurrentDisplaySprite()->drawScaled(
+                            ox::core::CPosition2d<float>(panel.UpperLeftCorner.X + 56.0f,
+                                panel.UpperLeftCorner.Y + 55.0f),
+                            0.8f, ox::video::SColor(0xffffffff));
+                }
+                return true;
+            case GUI_ID_TOP_BAR:
+                if (TopBar)
+                    renderMinimap();
+                return true;
+            case GUI_ID_ENERGY_POPUP:
+                if (GuiSprites[GS_ICON_ENERGY])
+                {
+                    ox::core::CRect<int> popup = event.GUIEvent.Caller->getAbsolutePosition();
+                    GuiSprites[GS_ICON_ENERGY]->draw(
+                        ox::core::CPosition2d<int>(popup.UpperLeftCorner.X + 11, popup.UpperLeftCorner.Y + 11), 0,
+                        ox::video::SColor(0xffffffff));
+                }
+                return true;
+            case GUI_ID_MINERALS_POPUP:
+                if (GuiSprites[GS_ICON_CREDITS])
+                {
+                    ox::core::CRect<int> popup = event.GUIEvent.Caller->getAbsolutePosition();
+                    GuiSprites[GS_ICON_CREDITS]->draw(
+                        ox::core::CPosition2d<int>(popup.UpperLeftCorner.X + 12, popup.UpperLeftCorner.Y + 11), 0,
+                        ox::video::SColor(0xffffffff));
+                }
+                return true;
+            case GUI_ID_BUILDINGS_LIST:
+            {
+                // The build buttons.
+                ox::core::CRect<int> clip = BuildingsArea->getAbsoluteClippingRect();
+                ox::core::CPosition2d<int> mouse = GUIEnvironment->getMousePosition();
+                int selected = -1;
+                if (Action == 1)
+                    selected = BuildSelection;
+                BuildableItems.renderButtonLayouts(mouse, selected, clip);
+                return true;
+            }
+            default:
+                return false;
+            }
+        default:
+            return false;
         }
-        return false;
     }
     case ox::event::EET_MOUSE_INPUT_EVENT:
     {
-        int x = event.MouseInput.X;
-        int y = event.MouseInput.Y;
-        ox::core::CPosition2d<float> world(x + ViewPosition.X, y + ViewPosition.Y);
+        ox::core::CPosition2d<int> mouse(event.MouseInput.X, event.MouseInput.Y);
+        ox::core::CPosition2d<float> world = getWorldPos(mouse);
+        int x = mouse.X;
+        int y = mouse.Y;
         switch (event.MouseInput.Event)
         {
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
-            if (MinimapRect.UpperLeftCorner.X > x || MinimapRect.UpperLeftCorner.Y > y ||
-                MinimapRect.LowerRightCorner.X <= x || MinimapRect.LowerRightCorner.Y <= y)
+            if (!MinimapRect.isPointInside(mouse))
             {
-                ox::core::CRect<int> bar = BottomBar->getAbsolutePosition();
-                if (bar.UpperLeftCorner.Y <= y && bar.UpperLeftCorner.X <= x && bar.LowerRightCorner.X > x &&
-                    bar.LowerRightCorner.Y > y)
+                if (BottomBar->getAbsolutePosition().isPointInside(mouse))
                 {
-                    ox::core::CRect<int> area = BuildingsArea->getAbsolutePosition();
-                    if (area.UpperLeftCorner.Y <= y && area.UpperLeftCorner.X <= x && area.LowerRightCorner.X > x &&
-                        area.LowerRightCorner.Y > y)
+                    if (BuildingsArea->getAbsolutePosition().isPointInside(mouse))
                     {
                         for (int i = 0; i < BuildableItems.getNumBuildings(); ++i)
                         {
@@ -2263,12 +2237,10 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                     GameOverTime = 0.1f;
                     return false;
                 }
-                switch (Action)
+                if (Action == 0)
                 {
-                case 0:
-                {
-                    HasLastPlacement = false;
                     LastPlacement = world;
+                    HasLastPlacement = false;
                     entity::CEntity* clicked = entity::gp_entityManager->findClickableEntity(world);
                     if (!clicked)
                     {
@@ -2295,7 +2267,7 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                         return true;
                     }
                     if (clicked == SelectedEntity && event.MouseInput.Clicks > 1)
-                        SelectedEntity->handleDoubleClickSelection();
+                        clicked->handleDoubleClickSelection();
                     if (SelectedEntityId != clicked->getId() && AudioDriver)
                         AudioDriver->playSound("SelectBuilding.ogg", 1.0f, 0.0f, 1.0f);
                     if (LuaManager)
@@ -2306,59 +2278,63 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                     newSelectedEntity();
                     return true;
                 }
-                case 1:
+                else if (Action == 1)
+                {
                     buyBuildingAtPlacementPos();
                     return true;
-                case 2:
+                }
+                else if (Action == 2)
+                {
                     if (RecycleTarget)
                     {
                         sellEntity(RecycleTarget);
                         RecycleTarget = 0;
                         CursorMoved = true;
                     }
-                    return false;
-                case 3:
+                }
+                else if (Action == 3)
+                {
                     if ((unsigned int)AlienSelection < WAVE_COUNT)
                     {
                         placeCurrentAlienSelection(world);
                         LastPlacement = world;
                         HasLastPlacement = true;
                     }
-                    return false;
-                default:
-                    return false;
                 }
+                return false;
             }
             else
             {
                 // Clicks on the minimap move the view there.
                 MinimapDragging = true;
-                const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
-                ViewPosition.X = ox::core::clamp(ScreenSizeF.Width * -0.5f +
-                    (float)(x - MinimapRect.UpperLeftCorner.X) * (field.LowerRightCorner.X - field.UpperLeftCorner.X) /
-                    (float)(MinimapRect.LowerRightCorner.X - MinimapRect.UpperLeftCorner.X) + field.UpperLeftCorner.X,
+                ox::core::CRect<float> field = game::gp_world->getVisibleGameFieldSize();
+                ViewPosition.X = ox::core::clamp((float)(x - MinimapRect.UpperLeftCorner.X) *
+                    ((field.LowerRightCorner.X - field.UpperLeftCorner.X) /
+                    (float)(MinimapRect.LowerRightCorner.X - MinimapRect.UpperLeftCorner.X)) +
+                    ScreenSizeF.Width * -0.5f + field.UpperLeftCorner.X,
                     field.UpperLeftCorner.X, field.LowerRightCorner.X - ScreenSizeF.Width);
-                ViewPosition.Y = ox::core::clamp(ScreenSizeF.Height * -0.5f +
-                    (float)(y - MinimapRect.UpperLeftCorner.Y) * (field.LowerRightCorner.Y - field.UpperLeftCorner.Y) /
-                    (float)(MinimapRect.LowerRightCorner.Y - MinimapRect.UpperLeftCorner.Y) + field.UpperLeftCorner.Y,
+                ViewPosition.Y = ox::core::clamp((float)(y - MinimapRect.UpperLeftCorner.Y) *
+                    ((field.LowerRightCorner.Y - field.UpperLeftCorner.Y) /
+                    (float)(MinimapRect.LowerRightCorner.Y - MinimapRect.UpperLeftCorner.Y)) +
+                    ScreenSizeF.Height * -0.5f + field.UpperLeftCorner.Y,
                     field.UpperLeftCorner.Y, field.LowerRightCorner.Y - ScreenSizeF.Height);
                 return true;
             }
         case ox::event::EMIE_RMOUSE_PRESSED_DOWN:
-            if ((unsigned int)(Action - 1) < 3)
+            switch (Action)
             {
+            case 0:
+                if (SelectedEntity)
+                    SelectedEntity->handleRightClickAction(world);
+                else if (LuaManager)
+                    LuaManager->hookMouseClick(world, 1, true);
+                break;
+            case 1:
+            case 2:
+            case 3:
                 setNoneAction(true);
-                return false;
+                break;
             }
-            if (Action != 0)
-                return false;
-            if (SelectedEntity)
-            {
-                SelectedEntity->handleRightClickAction(world);
-                return false;
-            }
-            if (LuaManager)
-                LuaManager->hookMouseClick(world, 1, true);
             return false;
         case ox::event::EMIE_MMOUSE_PRESSED_DOWN:
         {
@@ -2401,16 +2377,16 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
         case ox::event::EMIE_MOUSE_MOVED:
             if (MinimapDragging)
             {
-                const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
-                int minimapHeight = MinimapRect.LowerRightCorner.Y - MinimapRect.UpperLeftCorner.Y;
-                int minimapWidth = MinimapRect.LowerRightCorner.X - MinimapRect.UpperLeftCorner.X;
+                ox::core::CRect<float> field = game::gp_world->getVisibleGameFieldSize();
+                float scaleX = (field.LowerRightCorner.X - field.UpperLeftCorner.X) /
+                    (float)(MinimapRect.LowerRightCorner.X - MinimapRect.UpperLeftCorner.X);
+                float scaleY = (field.LowerRightCorner.Y - field.UpperLeftCorner.Y) /
+                    (float)(MinimapRect.LowerRightCorner.Y - MinimapRect.UpperLeftCorner.Y);
                 ox::core::CDimension2d<int> view = getViewSize();
-                ViewPosition.X = (float)(x - MinimapRect.UpperLeftCorner.X) *
-                    (field.LowerRightCorner.X - field.UpperLeftCorner.X) / (float)minimapWidth -
-                    (float)view.Width * 0.5f + field.UpperLeftCorner.X;
-                ViewPosition.Y = (float)(y - MinimapRect.UpperLeftCorner.Y) *
-                    (field.LowerRightCorner.Y - field.UpperLeftCorner.Y) / (float)minimapHeight -
-                    (float)view.Height * 0.5f + field.UpperLeftCorner.Y;
+                ViewPosition.X = (float)(x - MinimapRect.UpperLeftCorner.X) * scaleX + (float)view.Width * -0.5f +
+                    field.UpperLeftCorner.X;
+                ViewPosition.Y = (float)(y - MinimapRect.UpperLeftCorner.Y) * scaleY + (float)view.Height * -0.5f +
+                    field.UpperLeftCorner.Y;
                 game::gp_world->constrainViewPos(ViewPosition);
             }
             else if (DraggingFromSelection && SelectedEntity)
@@ -2477,9 +2453,11 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                         {
                             if (!ListVisible[i] || !ListGroups[i])
                                 continue;
-                            ox::core::CRect<int> list = ListGroups[i]->getAbsolutePosition();
-                            if (list.UpperLeftCorner.Y - 50 > y || list.UpperLeftCorner.X - 100 > x ||
-                                list.LowerRightCorner.X <= x || list.LowerRightCorner.Y + 50 <= y)
+                            ox::core::CRect<int> area = ListGroups[i]->getAbsolutePosition();
+                            area.UpperLeftCorner.X -= 100;
+                            area.UpperLeftCorner.Y -= 50;
+                            area.LowerRightCorner.Y += 50;
+                            if (!area.isPointInside(mouse))
                             {
                                 if (i)
                                     setCreativeListToggle(false);
@@ -2494,8 +2472,8 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 RectangleSelecting = true;
             return false;
         case ox::event::EMIE_MOUSE_WHEEL:
-            ViewPosition.X = ViewPosition.X - (float)(int)(ScrollSpeed * event.MouseInput.ScrollX);
-            ViewPosition.Y = ViewPosition.Y - (float)(int)(event.MouseInput.ScrollY * ScrollSpeed);
+            ViewPosition -= ox::core::CPosition2d<float>((int)(ScrollSpeed * event.MouseInput.ScrollX),
+                (int)(event.MouseInput.ScrollY * ScrollSpeed));
             game::gp_world->constrainViewPos(ViewPosition);
             Device->getCursorControl()->setPosition(MousePosition);
             return true;
@@ -2504,193 +2482,197 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
         }
     }
     case ox::event::EET_KEY_INPUT_EVENT:
-    {
-        ox::EKEY_CODE key = event.KeyInput.Key;
-        if (event.KeyInput.Event == ox::event::EKIE_KEY_LEFT_UP)
+        switch (event.KeyInput.Event)
         {
-            m_keys[key] = false;
-            int command = Profile->getCommandForKey(key);
-            if (command == settings::EKC_GAME_OVERHEATS)
-                entity::g_useLargeSparkDeathParticle = false;
-            else if (command == settings::EKC_GAME_RANGES)
+        case ox::event::EKIE_KEY_PRESSED_DOWN:
+            m_keys[event.KeyInput.Key] = true;
+            if (event.KeyInput.Key == ox::KEY_RETURN && m_7b0)
+            {
+                // Opens the script text input.
+                m_7b0->setText(L"");
+                m_7b0->setEnabled(true);
+                m_7b0->setVisible(true);
+                GUIEnvironment->setFocus(m_7b0);
+                return true;
+            }
+            switch (Profile->getCommandForKey(event.KeyInput.Key))
+            {
+            case settings::EKC_INCREASE_SPEED:
+                if (GameSpeed <= 5)
+                    setGameSpeed(GameSpeed + 1);
+                return true;
+            case settings::EKC_DECREASE_SPEED:
+                if (GameSpeed > 0)
+                    setGameSpeed(GameSpeed - 1);
+                return true;
+            case settings::EKC_SPEED_PAUSED:
+                setGameSpeed(0);
+                return true;
+            case settings::EKC_SPEED_SLOWER:
+                setGameSpeed(1);
+                return true;
+            case settings::EKC_SPEED_NORMAL:
+                setGameSpeed(3);
+                return true;
+            case settings::EKC_SPEED_FASTER:
+                setGameSpeed(5);
+                return true;
+            case settings::EKC_SPEED_FASTEST:
+                setGameSpeed(6);
+                return true;
+            case settings::EKC_SPEED_PAUSE_TOGGLE:
+                togglePause();
+                return true;
+            case settings::EKC_BUILD_PRODUCER:
+                setBuildAction(BuildableItems.getIndexForEntityType(0));
+                return true;
+            case settings::EKC_BUILD_MOVER:
+                setBuildAction(BuildableItems.getIndexForEntityType(1));
+                return true;
+            case settings::EKC_BUILD_MINER:
+                setBuildAction(BuildableItems.getIndexForEntityType(4));
+                return true;
+            case settings::EKC_BUILD_TOWER:
+                setBuildAction(BuildableItems.getIndexForEntityType(7));
+                return true;
+            case settings::EKC_BUILD_LAUNCHER:
+                setBuildAction(BuildableItems.getIndexForEntityType(8));
+                return true;
+            case settings::EKC_ACTION_SPECIAL:
+                if (SelectedEntity)
+                {
+                    switch (SelectedEntity->getEntityType())
+                    {
+                    case 0:
+                        if (((entity::CSparkProducerEntity*)SelectedEntity)->isExpired())
+                            replaceSelectedProducer(0);
+                        break;
+                    case 1:
+                        ((entity::CSparkMoverEntity*)SelectedEntity)->startCharging();
+                        break;
+                    case 4:
+                        sellAllHarvesters();
+                        break;
+                    case 7:
+                        if (((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0)
+                            makeSelectedDeathstarTower();
+                        else if (((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0)
+                            unmakeSelectedDeathstarTower();
+                        break;
+                    }
+                }
+                return true;
+            case settings::EKC_ACTION_EAGLE:
+                if (SelectedEntity && SelectedEntity->getEntityType() == 8 && !SelectedEntity->isKilled())
+                    replaceSelectedMissileTurret(13);
+                return true;
+            case settings::EKC_ACTION_TEMPEST:
+                if (SelectedEntity && SelectedEntity->getEntityType() == 8 && !SelectedEntity->isKilled())
+                    replaceSelectedMissileTurret(14);
+                return true;
+            case settings::EKC_ACTION_SELL:
+                if (SelectedEntity && SelectedEntity->getEntityType() != 5)
+                {
+                    sellEntity(SelectedEntity);
+                    setNoneAction(true);
+                }
+                else if (MultiSelection.begin() != MultiSelection.end())
+                {
+                    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin();
+                         it != MultiSelection.end(); ++it)
+                        if (((entity::CEntity*)(*it)->Entity)->getEntityType() != 5)
+                            sellEntity((entity::CEntity*)(*it)->Entity);
+                    setNoneAction(true);
+                }
+                return true;
+            case settings::EKC_ACTION_SOMETHING:
+                if (SelectedEntity && SelectedEntity->getEntityType() == 7)
+                {
+                    ((entity::CDefenseTowerEntity*)SelectedEntity)->makeEndLaser(0);
+                    return true;
+                }
+                if (SelectedEntity && SelectedEntity->getEntityType() == 3)
+                {
+                    SelectedEntity->handleDoubleClickSelection();
+                    return true;
+                }
+                return false;
+            case settings::EKC_GAME_SETTINGS:
+                m_2c0 = GameSpeed;
+                GameSpeed = 0;
+                SettingsScreen->setVisible(true);
+                return true;
+            case settings::EKC_GAME_PRIORITIES:
+                m_2c0 = GameSpeed;
+                GameSpeed = 0;
+                PriorityScreen->setVisible(true, ThreatLevel);
+                return true;
+            case settings::EKC_GAME_RANGES:
+                ShowAllRanges = true;
+                return true;
+            case settings::EKC_GAME_OVERHEATS:
+                entity::g_useLargeSparkDeathParticle = true;
+                return true;
+            default:
+                break;
+            }
+            switch (event.KeyInput.Key)
+            {
+            case ox::KEY_ESCAPE:
+                if (m_7b0 && m_7b0->isVisible())
+                {
+                    m_7b0->setVisible(false);
+                    m_7b0->setEnabled(false);
+                }
+                else if (Action != 0 || SelectedEntity || MultiSelection.begin() != MultiSelection.end())
+                    setNoneAction(true);
+                else if (IngameMenuScreen)
+                {
+                    m_2c0 = GameSpeed;
+                    GameSpeed = 0;
+                    IngameMenuScreen->setVisible(true, GameTime > 600.0f, GameMode);
+                }
+                return true;
+            case ox::KEY_KEY_F:
+                if (event.KeyInput.Control || event.KeyInput.Shift)
+                    ShowDebugInfo = !ShowDebugInfo;
+                return true;
+            case ox::KEY_KEY_Y:
+                if (event.KeyInput.Control || event.KeyInput.Shift)
+                    ShowMouseWorldPos = !ShowMouseWorldPos;
+                return true;
+            case ox::KEY_F5:
+                sendCustomEvent(ECE_QUICK_SAVE);
+                return true;
+            case ox::KEY_F7:
+                sendCustomEvent(ECE_QUICK_LOAD);
+                return true;
+            default:
+                return false;
+            }
+        case ox::event::EKIE_KEY_LEFT_UP:
+            m_keys[event.KeyInput.Key] = false;
+            switch (Profile->getCommandForKey(event.KeyInput.Key))
+            {
+            case settings::EKC_GAME_RANGES:
                 ShowAllRanges = false;
-            if (key == ox::KEY_SPACE)
+                break;
+            case settings::EKC_GAME_OVERHEATS:
+                entity::g_useLargeSparkDeathParticle = false;
+                break;
+            default:
+                break;
+            }
+            if (event.KeyInput.Key == ox::KEY_SPACE)
             {
                 Device->getCursorControl()->setVisible(true);
                 ox::gui::ICursorControl* cursor = Device->getCursorControl();
                 cursor->setPosition(Device->getCursorControl()->getPosition());
             }
             return false;
-        }
-        if (event.KeyInput.Event != ox::event::EKIE_KEY_PRESSED_DOWN)
-            return false;
-        m_keys[key] = true;
-        if (key == ox::KEY_RETURN && m_7b0)
-        {
-            // Opens the script text input.
-            m_7b0->setText(L"");
-            m_7b0->setEnabled(true);
-            m_7b0->setVisible(true);
-            GUIEnvironment->setFocus(m_7b0);
-            return true;
-        }
-        switch (Profile->getCommandForKey(key))
-        {
-        case settings::EKC_INCREASE_SPEED:
-            if (GameSpeed <= 5)
-                setGameSpeed(GameSpeed + 1);
-            return true;
-        case settings::EKC_DECREASE_SPEED:
-            if (GameSpeed > 0)
-                setGameSpeed(GameSpeed - 1);
-            return true;
-        case settings::EKC_SPEED_PAUSED:
-            setGameSpeed(0);
-            return true;
-        case settings::EKC_SPEED_SLOWER:
-            setGameSpeed(1);
-            return true;
-        case settings::EKC_SPEED_NORMAL:
-            setGameSpeed(3);
-            return true;
-        case settings::EKC_SPEED_FASTER:
-            setGameSpeed(5);
-            return true;
-        case settings::EKC_SPEED_FASTEST:
-            setGameSpeed(6);
-            return true;
-        case settings::EKC_SPEED_PAUSE_TOGGLE:
-            togglePause();
-            return true;
-        case settings::EKC_BUILD_PRODUCER:
-            setBuildAction(BuildableItems.getIndexForEntityType(0));
-            return true;
-        case settings::EKC_BUILD_MOVER:
-            setBuildAction(BuildableItems.getIndexForEntityType(1));
-            return true;
-        case settings::EKC_BUILD_MINER:
-            setBuildAction(BuildableItems.getIndexForEntityType(4));
-            return true;
-        case settings::EKC_BUILD_TOWER:
-            setBuildAction(BuildableItems.getIndexForEntityType(7));
-            return true;
-        case settings::EKC_BUILD_LAUNCHER:
-            setBuildAction(BuildableItems.getIndexForEntityType(8));
-            return true;
-        case settings::EKC_ACTION_SPECIAL:
-            if (SelectedEntity)
-            {
-                switch (SelectedEntity->getEntityType())
-                {
-                case 0:
-                    if (((entity::CSparkProducerEntity*)SelectedEntity)->isExpired())
-                        replaceSelectedProducer(0);
-                    break;
-                case 1:
-                    ((entity::CSparkMoverEntity*)SelectedEntity)->startCharging();
-                    break;
-                case 4:
-                    sellAllHarvesters();
-                    break;
-                case 7:
-                    if (((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0)
-                        makeSelectedDeathstarTower();
-                    else if (((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0)
-                        unmakeSelectedDeathstarTower();
-                    break;
-                }
-            }
-            return true;
-        case settings::EKC_ACTION_EAGLE:
-            if (SelectedEntity && SelectedEntity->getEntityType() == 8 && !SelectedEntity->isKilled())
-                replaceSelectedMissileTurret(13);
-            return true;
-        case settings::EKC_ACTION_TEMPEST:
-            if (SelectedEntity && SelectedEntity->getEntityType() == 8 && !SelectedEntity->isKilled())
-                replaceSelectedMissileTurret(14);
-            return true;
-        case settings::EKC_ACTION_SELL:
-            if (SelectedEntity && SelectedEntity->getEntityType() != 5)
-            {
-                sellEntity(SelectedEntity);
-                setNoneAction(true);
-                return true;
-            }
-            if (MultiSelection.begin() != MultiSelection.end())
-            {
-                for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin();
-                     it != MultiSelection.end(); ++it)
-                    if (((entity::CEntity*)(*it)->Entity)->getEntityType() != 5)
-                        sellEntity((entity::CEntity*)(*it)->Entity);
-                setNoneAction(true);
-            }
-            return true;
-        case settings::EKC_ACTION_SOMETHING:
-            if (!SelectedEntity)
-                return false;
-            if (SelectedEntity->getEntityType() == 7)
-            {
-                ((entity::CDefenseTowerEntity*)SelectedEntity)->makeEndLaser(0);
-                return true;
-            }
-            if (!SelectedEntity || SelectedEntity->getEntityType() != 3)
-                return false;
-            SelectedEntity->handleDoubleClickSelection();
-            return true;
-        case settings::EKC_GAME_SETTINGS:
-            m_2c0 = GameSpeed;
-            GameSpeed = 0;
-            SettingsScreen->setVisible(true);
-            return true;
-        case settings::EKC_GAME_PRIORITIES:
-            m_2c0 = GameSpeed;
-            GameSpeed = 0;
-            PriorityScreen->setVisible(true, ThreatLevel);
-            return true;
-        case settings::EKC_GAME_RANGES:
-            ShowAllRanges = true;
-            return true;
-        case settings::EKC_GAME_OVERHEATS:
-            entity::g_useLargeSparkDeathParticle = true;
-            return true;
-        default:
-            break;
-        }
-        switch (key)
-        {
-        case ox::KEY_ESCAPE:
-            if (m_7b0 && m_7b0->isVisible())
-            {
-                m_7b0->setVisible(false);
-                m_7b0->setEnabled(false);
-            }
-            else if (Action != 0 || SelectedEntity || MultiSelection.begin() != MultiSelection.end())
-                setNoneAction(true);
-            else if (IngameMenuScreen)
-            {
-                m_2c0 = GameSpeed;
-                GameSpeed = 0;
-                IngameMenuScreen->setVisible(true, GameTime > 600.0f, GameMode);
-            }
-            return true;
-        case ox::KEY_KEY_F:
-            if (event.KeyInput.Control || event.KeyInput.Shift)
-                ShowDebugInfo = !ShowDebugInfo;
-            return true;
-        case ox::KEY_KEY_Y:
-            if (event.KeyInput.Control || event.KeyInput.Shift)
-                ShowMouseWorldPos = !ShowMouseWorldPos;
-            return true;
-        case ox::KEY_F5:
-            sendCustomEvent(ECE_QUICK_SAVE);
-            return true;
-        case ox::KEY_F7:
-            sendCustomEvent(ECE_QUICK_LOAD);
-            return true;
         default:
             return false;
         }
-    }
     case ox::event::EET_JOYSTICK_INPUT_EVENT:
     {
         // Joystick buttons click at the screen center or change the building to build.
@@ -2699,49 +2681,48 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
         mouse.MouseInput.X = ScreenSize.Width / 2;
         mouse.MouseInput.Y = ScreenSize.Height / 2;
         mouse.MouseInput.Clicks = 1;
-        if (event.JoystickEvent.Type == 1)
-        {
-            if (event.JoystickEvent.Button == 1)
-                mouse.MouseInput.Event = ox::event::EMIE_RMOUSE_LEFT_UP;
-            else if (event.JoystickEvent.Button == 0)
-                mouse.MouseInput.Event = ox::event::EMIE_LMOUSE_LEFT_UP;
-            else
-                return true;
-            OnEvent(mouse);
-            return true;
-        }
-        if (event.JoystickEvent.Type != 0)
-            return false;
-        switch (event.JoystickEvent.Button)
+        switch (event.JoystickEvent.Type)
         {
         case 0:
-            mouse.MouseInput.Event = ox::event::EMIE_LMOUSE_PRESSED_DOWN;
-            OnEvent(mouse);
+            if (event.JoystickEvent.Button == 0)
+            {
+                mouse.MouseInput.Event = ox::event::EMIE_LMOUSE_PRESSED_DOWN;
+                OnEvent(mouse);
+            }
+            else if (event.JoystickEvent.Button == 1)
+            {
+                mouse.MouseInput.Event = ox::event::EMIE_RMOUSE_PRESSED_DOWN;
+                OnEvent(mouse);
+            }
+            else if (event.JoystickEvent.Button == 2)
+            {
+                if (Action == 1)
+                    changeConstructionSelection(false);
+                else
+                    setBuildAction(BuildSelection);
+            }
+            else if (event.JoystickEvent.Button == 3)
+            {
+                if (Action == 1)
+                    changeConstructionSelection(true);
+                else
+                    setBuildAction(BuildSelection);
+            }
             return true;
         case 1:
-            mouse.MouseInput.Event = ox::event::EMIE_RMOUSE_PRESSED_DOWN;
-            OnEvent(mouse);
-            return true;
-        case 2:
-            if (Action != 1)
+            if (event.JoystickEvent.Button == 0)
             {
-                setBuildAction(BuildSelection);
-                return true;
+                mouse.MouseInput.Event = ox::event::EMIE_LMOUSE_LEFT_UP;
+                OnEvent(mouse);
             }
-            BuildSelection = BuildableItems.changeConstructionSelection(BuildSelection, false);
-            setBuildAction(BuildSelection);
-            return true;
-        case 3:
-            if (Action != 1)
+            else if (event.JoystickEvent.Button == 1)
             {
-                setBuildAction(BuildSelection);
-                return true;
+                mouse.MouseInput.Event = ox::event::EMIE_RMOUSE_LEFT_UP;
+                OnEvent(mouse);
             }
-            BuildSelection = BuildableItems.changeConstructionSelection(BuildSelection, true);
-            setBuildAction(BuildSelection);
             return true;
         default:
-            return true;
+            return false;
         }
     }
     case ox::event::EET_DEVICE_EVENT:
@@ -2769,17 +2750,9 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             {
                 if (writeStateToFile(SaveGameScreen->getSelectedSaveFilename(),
                         SaveGameScreen->getSelectedSaveDescription()))
-                {
-                    ox::core::CString<wchar_t> text(L"Game saved");
-                    if (InfoLines)
-                        InfoLines->addInfoLine(text.c_str());
-                }
+                    addInfoLine(ox::core::CString<wchar_t>(L"Game saved"));
                 else
-                {
-                    ox::core::CString<wchar_t> text(L"Write error! Unable to save game!");
-                    if (InfoLines)
-                        InfoLines->addInfoLine(text.c_str());
-                }
+                    addInfoLine(ox::core::CString<wchar_t>(L"Write error! Unable to save game!"));
             }
             return true;
         case ECE_PROFILE_CREATED:
@@ -2805,7 +2778,7 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             }
             return true;
         case ECE_REPLACE_BUILDING:
-            if (entity::gp_entityManager && game::gp_world)
+            if (entity::gp_entityManager && entity::gp_buildableItems)
             {
                 entity::CEntity* building;
                 if (event.UserEvent.UserData2 > 0)
@@ -2846,83 +2819,75 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 AchievementsScreen->setVisible(true);
             return true;
         case ECE_MAIN_ACHIEVEMENT:
-        {
             // Achievements count only for the player of the game, and never in creative games.
-            if (!(PlayerName == settings::gp_profileManager->getCurrentProfile()->getPlayerName()))
-                return true;
-            if (GameMode == game::EGM_CREATIVE)
-                return true;
-            settings::CHarvestProfile* profile = settings::gp_profileManager->getCurrentProfile();
-            int score = profile->getAchievementScore();
-            int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
-            int achievement = event.UserEvent.UserData2;
-            if (settings::gp_profileManager->getCurrentProfile()->notifyMainAchievement(achievement,
-                    game::gp_world->getPlanet()))
+            if (PlayerName == settings::gp_profileManager->getCurrentProfile()->getPlayerName() &&
+                GameMode != game::EGM_CREATIVE)
             {
-                game::SInfoLineMessage message;
-                message.Name = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedTitle");
-                ox::core::CString<wchar_t> name =
-                    settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_NAMES[achievement]);
-                int newScore = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
-                int newRating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(newScore);
-                ox::core::CString<wchar_t> ratingName =
-                    settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_RATING_NAMES[newRating]);
-                if (rating == newRating)
-                    message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedNoChange",
-                        name.c_str(), ratingName.c_str());
-                else
-                    message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awarded",
-                        name.c_str(), ratingName.c_str());
-                message.Sound = "Achievement.ogg";
-                message.Portrait =
-                    settings::CHarvestProfile::getAchievementSpriteName(achievement, game::gp_world->getPlanet());
-                addInfoLine(&message, true);
-                if (game::gp_statistics)
-                    game::gp_statistics->addLog(GameTime, 1, event.UserEvent.UserData2);
+                int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+                int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
+                if (settings::gp_profileManager->getCurrentProfile()->notifyMainAchievement(event.UserEvent.UserData2,
+                        game::gp_world->getPlanet()))
+                {
+                    game::SInfoLineMessage message;
+                    message.Name = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedTitle");
+                    ox::core::CString<wchar_t> name = settings::gp_systemConfig->getLocalizedText(
+                        settings::ACHIEVEMENT_NAMES[event.UserEvent.UserData2]);
+                    int newScore = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+                    int newRating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(newScore);
+                    ox::core::CString<wchar_t> ratingName =
+                        settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_RATING_NAMES[newRating]);
+                    if (rating == newRating)
+                        message.Text = settings::gp_systemConfig->getLocalizedText(
+                            L"achievementInfo:awardedNoChange", name.c_str(), ratingName.c_str());
+                    else
+                        message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awarded",
+                            name.c_str(), ratingName.c_str());
+                    message.Sound = "Achievement.ogg";
+                    message.Portrait = settings::CHarvestProfile::getAchievementSpriteName(event.UserEvent.UserData2,
+                        game::gp_world->getPlanet());
+                    addInfoLine(&message, true);
+                    if (game::gp_statistics)
+                        game::gp_statistics->addLog(GameTime, 1, event.UserEvent.UserData2);
+                }
+                if (score == 144)
+                    sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 24);
             }
-            if (score == 144)
-                sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 24);
             return true;
-        }
         case ECE_TUTORIAL_HINT:
-        {
             // Achievements count only for the player of the game, and never in creative games.
-            if (!(PlayerName == settings::gp_profileManager->getCurrentProfile()->getPlayerName()))
-                return true;
-            if (GameMode == game::EGM_CREATIVE)
-                return true;
-            settings::CHarvestProfile* profile = settings::gp_profileManager->getCurrentProfile();
-            int score = profile->getAchievementScore();
-            int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
-            int achievement = event.UserEvent.UserData2;
-            if (settings::gp_profileManager->getCurrentProfile()->notifyMiniAchievement(achievement,
-                    game::gp_world->getPlanet()))
+            if (PlayerName == settings::gp_profileManager->getCurrentProfile()->getPlayerName() &&
+                GameMode != game::EGM_CREATIVE)
             {
-                game::SInfoLineMessage message;
-                message.Name = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedTitle");
-                ox::core::CString<wchar_t> name =
-                    settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_NAMES[achievement]);
-                int newScore = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
-                int newRating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(newScore);
-                ox::core::CString<wchar_t> ratingName =
-                    settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_RATING_NAMES[newRating]);
-                if (rating == newRating)
-                    message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedNoChange",
-                        name.c_str(), ratingName.c_str());
-                else
-                    message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awarded",
-                        name.c_str(), ratingName.c_str());
-                message.Sound = "MiniAchievement.ogg";
-                message.Portrait =
-                    settings::CHarvestProfile::getAchievementSpriteName(achievement, game::gp_world->getPlanet());
-                addInfoLine(&message, true);
-                if (game::gp_statistics)
-                    game::gp_statistics->addLog(GameTime, 1, event.UserEvent.UserData2);
+                int score = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+                int rating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(score);
+                if (settings::gp_profileManager->getCurrentProfile()->notifyMiniAchievement(event.UserEvent.UserData2,
+                        game::gp_world->getPlanet()))
+                {
+                    game::SInfoLineMessage message;
+                    message.Name = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awardedTitle");
+                    ox::core::CString<wchar_t> name = settings::gp_systemConfig->getLocalizedText(
+                        settings::ACHIEVEMENT_NAMES[event.UserEvent.UserData2]);
+                    int newScore = settings::gp_profileManager->getCurrentProfile()->getAchievementScore();
+                    int newRating = settings::gp_profileManager->getCurrentProfile()->getAchievementRating(newScore);
+                    ox::core::CString<wchar_t> ratingName =
+                        settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_RATING_NAMES[newRating]);
+                    if (rating == newRating)
+                        message.Text = settings::gp_systemConfig->getLocalizedText(
+                            L"achievementInfo:awardedNoChange", name.c_str(), ratingName.c_str());
+                    else
+                        message.Text = settings::gp_systemConfig->getLocalizedText(L"achievementInfo:awarded",
+                            name.c_str(), ratingName.c_str());
+                    message.Sound = "MiniAchievement.ogg";
+                    message.Portrait = settings::CHarvestProfile::getAchievementSpriteName(event.UserEvent.UserData2,
+                        game::gp_world->getPlanet());
+                    addInfoLine(&message, true);
+                    if (game::gp_statistics)
+                        game::gp_statistics->addLog(GameTime, 1, event.UserEvent.UserData2);
+                }
+                if (score == 144)
+                    sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 24);
             }
-            if (score == 144)
-                sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 24);
             return true;
-        }
         case ECE_BOSS_WARNING:
         {
             game::SInfoLineMessage message;
@@ -2985,7 +2950,8 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             if (StoryScreen && event.UserEvent.UserPointer)
             {
                 // The keys held for the game are released for the dialogue.
-                memset(m_keys, 0, sizeof(m_keys));
+                for (int i = 0; i < 256; ++i)
+                    m_keys[i] = false;
                 StoryScreen->displayDialogueText((gui::CDialogueItemInfo*)event.UserEvent.UserPointer);
             }
             return true;
@@ -2993,12 +2959,8 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             addInfoLine((game::SInfoLineMessage*)event.UserEvent.UserPointer, false);
             return true;
         case ECE_ADD_INFO_TEXT:
-        {
-            ox::core::CString<wchar_t> text((const wchar_t*)event.UserEvent.UserPointer);
-            if (InfoLines)
-                InfoLines->addInfoLine(text.c_str());
+            addInfoLine(ox::core::CString<wchar_t>((const wchar_t*)event.UserEvent.UserPointer));
             return true;
-        }
         case ECE_CLOSE_DIALOGUE:
             if (StoryScreen)
                 StoryScreen->CloseWhenDone = true;

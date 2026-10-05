@@ -209,7 +209,9 @@ private:
         GUI_ID_BUILDINGS_LEFT,
         GUI_ID_BUILDINGS_RIGHT,
         GUI_ID_MENU,
-        GUI_ID_DESELECT = 15,
+        //! The script text input.
+        GUI_ID_SCRIPT_INPUT,
+        GUI_ID_DESELECT,
         GUI_ID_UNLINK,
         GUI_ID_OVERCHARGE,
         GUI_ID_EAGLE,
@@ -229,11 +231,18 @@ private:
         GUI_ID_FIRST_CREATIVE_ALIEN = 48
     };
 
-    //! Ids of the gui elements that report their drawing.
+    //! Ids of the gui elements that report their drawing, and of the buy message box buttons.
     enum
     {
-        GUI_ID_ENERGY_POPUP = 1239,
-        GUI_ID_MINERALS_POPUP = 1240
+        GUI_ID_BOTTOM_BAR = 1235,
+        GUI_ID_ACTION_PANEL,
+        GUI_ID_TOP_BAR,
+        GUI_ID_RECYCLE,
+        GUI_ID_ENERGY_POPUP,
+        GUI_ID_MINERALS_POPUP,
+        GUI_ID_BUILDINGS_LIST,
+        GUI_ID_BUY,
+        GUI_ID_BUY_CLOSE
     };
 
     //! The state updateState returns: 0 to stay, 3 for the main menu.
