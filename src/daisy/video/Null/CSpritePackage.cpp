@@ -84,8 +84,8 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
         do
         {
             file->read(&c, 1);
-            *p++ = c;
-        } while (c);
+            *p = c;
+        } while (*p++);
         animation.Name = name;
         animation.Id = atoi(animation.Name.c_str());
 
