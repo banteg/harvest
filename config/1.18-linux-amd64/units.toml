@@ -214,9 +214,9 @@
 ".bss" = 0x86b8e0
 
 ["HarvestFull/harvest/settings/CSystemConfig.cpp"]
-".text" = 0x491d50
-# iostream initializer and the game-header statics; gp_systemConfig lives in an earlier object.
-".bss" = 0x86bc94
+".text" = 0x491d00
+# gp_systemConfig, the iostream initializer and the game-header statics.
+".bss" = 0x86bc80
 
 ["HarvestFull/harvest/states/CIntroState.cpp"]
 ".text" = 0x495db0
