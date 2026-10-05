@@ -56,6 +56,28 @@ enum E_MATERIAL_FLAG
 //! Material of a mesh buffer or scene node.
 struct SMaterial
 {
+    //! The defaults are the values the Linux and Mac builds store; the field after the ambient
+    //! color starts at 1 and the flags differ from Irrlicht 0.7 in the filter defaults.
+    SMaterial()
+        : MaterialType(EMT_SOLID), AmbientColor(0xffffffff), DiffuseColor(1), EmissiveColor(0),
+          SpecularColor(0), Shininess(0.0f)
+    {
+        Texture1 = 0;
+        Texture2 = 0;
+        Wireframe = false;
+        GouraudShading = true;
+        Lighting = true;
+        ZBuffer = true;
+        ZWriteEnable = true;
+        BackfaceCulling = true;
+        BilinearFilter = false;
+        TrilinearFilter = true;
+        FogEnable = false;
+        ExtraFlags[0] = false;
+        ExtraFlags[1] = false;
+        ExtraFlags[2] = false;
+    }
+
     E_MATERIAL_TYPE MaterialType;
     SColor AmbientColor;
     SColor DiffuseColor;
@@ -89,6 +111,9 @@ struct SMaterial
         };
         bool Flags[EMF_MATERIAL_FLAG_COUNT];
     };
+
+    //! Oxeye flags after the Irrlicht ones; their meaning is not recovered.
+    bool ExtraFlags[3];
 };
 
 } // end namespace video
