@@ -19,6 +19,8 @@ enum EGUI_EVENT_TYPE
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
+    //! Sent by a check box when a click toggled it.
+    EGET_CHECKBOX_TOGGLED = 8,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! An element that reports drawing has been drawn.
@@ -48,7 +50,9 @@ enum EEVENT_TYPE
 //! Mouse input events, in SEvent::MouseInput.Event.
 enum EMOUSE_INPUT_EVENT
 {
-    EMIE_LMOUSE_LEFT_UP = 3
+    EMIE_LMOUSE_PRESSED_DOWN = 0,
+    EMIE_LMOUSE_LEFT_UP = 3,
+    EMIE_MOUSE_MOVED = 6
 };
 
 //! Keyboard input events, in SEvent::KeyInput.Event.

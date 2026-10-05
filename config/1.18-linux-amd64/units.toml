@@ -250,3 +250,9 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/gui/CPriorityScreen.cpp"]
+# iostream initializer, the game-header statics and ALIEN_COLORS.
+".bss" = 0x86ba40
+# PRIORITY_KEY_NAMES
+".rodata" = 0x601220
