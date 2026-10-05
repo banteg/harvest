@@ -1205,9 +1205,15 @@ int CPlayState::updateState(float time)
     if (MusicTime < 0)
         playPlanetMusic();
 
-    float frameDelta = ox::core::clamp(GAME_SPEED_MULTIPLIERS[GameSpeed] * time, 0.0f, GameSpeed < 5 ? 0.06f : 0.5f);
-    if (GameMode == game::EGM_WAVE)
+    // The game steps at most 0.06 seconds per frame, or 0.5 seconds at the fastest speeds.
+    float frameDelta;
+    if (GameSpeed < 5)
+        frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.06f);
+    else
+        frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.5f);
+    switch (GameMode)
     {
+    case game::EGM_WAVE:
         if (!Victory && !GameOver)
         {
             float previousTime = GameTime;
@@ -1232,9 +1238,8 @@ int CPlayState::updateState(float time)
             else if ((int)previousTime / 300 != (int)GameTime / 300)
                 game::gp_statistics->reportNewThreatLevel((int)GameTime / 300, GameTime);
         }
-    }
-    else if (GameMode == game::EGM_RUSH)
-    {
+        break;
+    case game::EGM_RUSH:
         if (!Victory && !GameOver)
         {
             float previousTime = GameTime;
@@ -1259,8 +1264,8 @@ int CPlayState::updateState(float time)
             else if ((int)previousTime / 60 != (int)GameTime / 60)
                 game::gp_statistics->reportNewThreatLevel((int)GameTime / 60, GameTime);
         }
-    }
-    else if (GameMode == game::EGM_CREATIVE)
+        break;
+    case game::EGM_CREATIVE:
     {
         float previousTime = GameTime;
         GameTime += frameDelta;
@@ -1271,9 +1276,12 @@ int CPlayState::updateState(float time)
             LuaManager->setViewPosition(ViewPosition);
             LuaManager->runFrameFunctions(frameDelta);
         }
+        break;
     }
-    else
+    default:
         GameTime += frameDelta;
+        break;
+    }
 
     // Keep the local records of the normal and insane games up to date.
     RecordCheckTime -= frameDelta;
@@ -1368,8 +1376,8 @@ int CPlayState::updateState(float time)
 
         if (entity::gp_entityManager)
         {
-            VisibleArea = ox::core::CRect<float>(ViewPosition.X - 100.0f, ViewPosition.Y - 100.0f,
-                ScreenSize.Width + 200.0f + (ViewPosition.X - 100.0f), ScreenSize.Height + 200.0f + (ViewPosition.Y - 100.0f));
+            VisibleArea = ox::core::CRect<float>(ViewPosition + ox::core::CPosition2d<float>(-100.0f, -100.0f),
+                ox::core::CDimension2d<float>(ScreenSize.Width + 200.0f, ScreenSize.Height + 200.0f));
             entity::gp_entityManager->update(step, VisibleArea);
             Minerals = game::gp_mineralAmount->getValue();
             if (game::gp_statistics)
@@ -1403,18 +1411,17 @@ int CPlayState::updateState(float time)
                 entity::gp_entityManager->updateReference(Follow, FollowLayer, true);
                 if (Follow.Entity)
                 {
-                    float x = Follow.Entity->getPosition().X - ScreenSizeF.Width * 0.5f;
-                    float y = Follow.Entity->getPosition().Y - Follow.Entity->getPosition().Z - ScreenSizeF.Height * 0.5f;
+                    ox::core::CPosition2d<float> target(Follow.Entity->getPosition().X - ScreenSizeF.Width * 0.5f,
+                        Follow.Entity->getPosition().Y - Follow.Entity->getPosition().Z - ScreenSizeF.Height * 0.5f);
                     if (FollowJump)
                     {
-                        ViewPosition.X = x;
-                        ViewPosition.Y = y;
+                        ViewPosition = target;
                         FollowJump = false;
                     }
                     else
                     {
-                        ViewPosition.X += (x - ViewPosition.X) * 4.0f * step;
-                        ViewPosition.Y += (y - ViewPosition.Y) * 4.0f * step;
+                        ViewPosition.X += (target.X - ViewPosition.X) * 4.0f * step;
+                        ViewPosition.Y += (target.Y - ViewPosition.Y) * 4.0f * step;
                     }
                     game::gp_world->constrainViewPos(ViewPosition);
                 }
@@ -1442,21 +1449,9 @@ int CPlayState::updateState(float time)
         remaining -= step;
     } while (remaining > 0);
 
-    if (GameMode == game::EGM_RUSH)
+    switch (GameMode)
     {
-        if (game::gp_statistics->getRushModeDamage() > 0 && game::gp_statistics->getRushModeDamage() < 510.0f)
-            sendCustomEvent(ECE_TUTORIAL_HINT, 32);
-    }
-    else if (GameMode == game::EGM_INSANE)
-    {
-        if (ThreatLevel->getThreatLevel() == 50)
-        {
-            sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 9);
-            sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 8);
-        }
-    }
-    else if (GameMode == game::EGM_NORMAL)
-    {
+    case game::EGM_NORMAL:
         if (game::gp_statistics->getGameStatValue(2) == 1)
             sendCustomEvent(ECE_TUTORIAL_HINT, 26);
         if (ThreatLevel->getThreatLevel() == 11)
@@ -1476,6 +1471,18 @@ int CPlayState::updateState(float time)
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 12);
         if (OverheatedCount >= 50)
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 18);
+        break;
+    case game::EGM_INSANE:
+        if (ThreatLevel->getThreatLevel() == 50)
+        {
+            sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 9);
+            sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 8);
+        }
+        break;
+    case game::EGM_RUSH:
+        if (game::gp_statistics->getRushModeDamage() > 0 && game::gp_statistics->getRushModeDamage() < 510.0f)
+            sendCustomEvent(ECE_TUTORIAL_HINT, 32);
+        break;
     }
 
     if (GameOver)
@@ -1526,22 +1533,22 @@ int CPlayState::updateState(float time)
         }
     }
 
-    if (Action == 2)
+    if (Action == 1)
     {
         if (CursorMoved)
-            updateRecycleBuilding();
-    }
-    else if (Action == 1 && CursorMoved)
-    {
-        updatePlacementPosition();
-        // Dragging places a chain of buildings a link's reach apart.
-        if (HasLastPlacement && PlacementOk)
         {
-            float distance = ox::core::CMath::getExactDistance(PlacementPosition, LastPlacement);
-            if (distance > 140.0f && distance < 150.0f)
-                buyBuildingAtPlacementPos();
+            updatePlacementPosition();
+            // Dragging places a chain of buildings a link's reach apart.
+            if (HasLastPlacement && PlacementOk)
+            {
+                float distance = ox::core::CMath::getExactDistance(PlacementPosition, LastPlacement);
+                if (distance > 140.0f && distance < 150.0f)
+                    buyBuildingAtPlacementPos();
+            }
         }
     }
+    else if (Action == 2 && CursorMoved)
+        updateRecycleBuilding();
 
     // Spawn fewer particles while the frame rate is low.
     int fps = Driver->getFPS();
