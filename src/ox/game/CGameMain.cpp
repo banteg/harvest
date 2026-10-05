@@ -57,31 +57,33 @@ void CGameMain::setState(int state)
         State = 0;
     }
 
-    if (state != STATE_QUIT)
+    if (state == STATE_QUIT)
     {
-        State = stateFactory(state);
-        if (State)
-        {
-            if (State->firstInit(Device) == 0)
-            {
-                while (true)
-                {
-                    State->renderFirst();
-                    int result = State->secondInit();
-                    if (result == 1)
-                        break;
-                    if (result != 2)
-                    {
-                        State->subscribe(event::gp_subscriberList);
-                        Device->setEventReceiver(event::gp_subscriberList);
-                        return;
-                    }
-                }
-            }
-            State->getErrorMessage();
-        }
+        Running = false;
+        return;
     }
 
+    State = stateFactory(state);
+    if (State)
+    {
+        if (State->firstInit(Device) == 0)
+        {
+            while (true)
+            {
+                State->renderFirst();
+                int result = State->secondInit();
+                if (result == 1)
+                    break;
+                if (result != 2)
+                {
+                    State->subscribe(event::gp_subscriberList);
+                    Device->setEventReceiver(event::gp_subscriberList);
+                    return;
+                }
+            }
+        }
+        State->getErrorMessage();
+    }
     Running = false;
 }
 
