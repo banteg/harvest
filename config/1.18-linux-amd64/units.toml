@@ -346,3 +346,7 @@
 ["daisy/video/Null/CSpriteAnimationState.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c204
+
+["daisy/video/Null/CSpritePackage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c180
