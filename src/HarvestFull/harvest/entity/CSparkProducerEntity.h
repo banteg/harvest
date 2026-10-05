@@ -33,6 +33,8 @@ public:
 
     virtual float getCollisionSize() const { return 25.0f; }
 
+    bool isExpired() const { return Expired; }
+
 private:
     ox::video::ISpriteAnimationState* Sprite;
     //! Seconds until the next spark.

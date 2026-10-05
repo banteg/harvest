@@ -12,10 +12,12 @@
 #include "harvest/entity/CAlienEntity.h"
 #include "harvest/entity/CBuildableItems.h"
 #include "harvest/entity/CConstructionEntity.h"
+#include "harvest/entity/CCreativeEntity.h"
 #include "harvest/entity/CDefenseTowerEntity.h"
 #include "harvest/entity/CDropshipEntity.h"
 #include "harvest/entity/CEntityManager.h"
 #include "harvest/entity/CMinerEntity.h"
+#include "harvest/entity/CSparkProducerEntity.h"
 #include "harvest/game/CLuaManager.h"
 #include "harvest/game/CScenario.h"
 #include "harvest/game/CStatistics.h"
@@ -122,8 +124,8 @@ CPlayState::CPlayState()
       RecycleSelector(0), Beam180(6.0f), Beam1c8(2.0f), Beam210(6.0f), Beam258(6.0f), m_2a0(false), ThreatLevel(0),
       Scenario(0), GameSpeed(3), m_2c0(0), m_2c4(false), m_2c5(false), m_2c8(0), m_2d0(false), MinimapDot(0),
       m_2f0(0), m_2f8(false), m_2fc(0), m_310(0), m_314(0), m_318(0), GameTime(0), m_320(false), m_321(false),
-      m_322(false), m_324(0), DenialTime(0), m_340(0), m_348(0), m_350(0), m_4f8(0), m_500(0), m_508(0), m_514(0),
-      m_518(0), RecycleButton(0), m_728(0), m_758(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
+      m_322(false), m_324(0), DenialTime(0), m_340(0), m_348(0), m_350(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
+      MinimapHeight(0), RecycleButton(0), m_728(0), m_758(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
       m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
       AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), m_828(false), m_829(false), m_82c(0),
       m_830(0), m_838(0)
@@ -186,12 +188,12 @@ CPlayState::~CPlayState()
         Selector->remove();
     if (RecycleSelector)
         RecycleSelector->remove();
-    if (m_4f8)
-        m_4f8->remove();
-    if (m_500)
-        m_500->remove();
-    if (m_508)
-        m_508->remove();
+    if (BottomBar)
+        BottomBar->remove();
+    if (ActionPanel)
+        ActionPanel->remove();
+    if (TopBar)
+        TopBar->remove();
     if (m_7b0)
         m_7b0->remove();
     for (int i = 0; i < LIST_COUNT; ++i)
@@ -563,6 +565,183 @@ bool CPlayState::initializeNewGame()
     return true;
 }
 
+void CPlayState::realignGui()
+{
+    ScreenSize = Device->getVideoDriver()->getScreenSize();
+    ScreenSizeF.Height = ScreenSize.Height;
+    ScreenSizeF.Width = ScreenSize.Width;
+    ShowMinimap = false;
+    int minimapSize = 0;
+    if (ScreenSize.Height - 600 > 40 && ScreenSize.Width - 800 > 40 && GuiSprites[GS_MINIMAP_BACKGROUND])
+    {
+        ShowMinimap = true;
+        minimapSize = ScreenSize.Width - 800 > ScreenSize.Height - 600 ? ScreenSize.Height - 500 : ScreenSize.Width - 700;
+        ox::core::CPosition2d<int> backgroundSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
+        if (minimapSize > backgroundSize.Y)
+            minimapSize = backgroundSize.Y;
+    }
+
+    ox::core::CPosition2d<int> bottomLeftSize = GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->getFrameSize(0);
+    ox::core::CPosition2d<int> bottomRightSize = GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND]->getFrameSize(0);
+    ox::core::CPosition2d<int> topLeftSize = GuiSprites[GS_TOP_LEFT_BACKGROUND]->getFrameSize(0);
+    ox::core::CPosition2d<int> topRightSize = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
+    if (ShowMinimap)
+    {
+        MinimapWidth = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0).X + GuiSprites[GS_MINIMAP_RIGHT]->getFrameSize(0).X +
+            minimapSize;
+        MinimapHeight = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Y + GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0).Y +
+            minimapSize;
+        topRightSize = ox::core::CPosition2d<int>(MinimapWidth, MinimapHeight);
+        topRightSize.X += GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).X;
+    }
+    TimerWidth = 0;
+    if (displayTimerForGameMode(GameMode))
+    {
+        TimerWidth = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0).X;
+        topRightSize.X += TimerWidth;
+    }
+    if (displayThreatLevelForGameMode(GameMode))
+        topRightSize.X += GuiSprites[GS_THREAT_LEVEL_BACKGROUND]->getFrameSize(0).X;
+
+    BottomBar->setRelativePosition(
+        ox::core::CRect<int>(0, ScreenSize.Height - bottomLeftSize.Y, ScreenSize.Width, ScreenSize.Height));
+    ox::core::CRect<int> bar = BottomBar->getAbsolutePosition();
+    BarLeftArea = ox::core::CRect<int>(bar.UpperLeftCorner, bar.UpperLeftCorner + bottomLeftSize);
+    ox::core::CPosition2d<int> rightCorner = bar.LowerRightCorner - bottomRightSize;
+    BarRightArea = ox::core::CRect<int>(rightCorner, rightCorner + bottomRightSize);
+    BarCenterArea = ox::core::CRect<int>(BarLeftArea.LowerRightCorner.X, BarLeftArea.UpperLeftCorner.Y,
+        BarRightArea.UpperLeftCorner.X, BarLeftArea.LowerRightCorner.Y);
+
+    int barWidth = bar.getWidth();
+    int barHeight = bar.getHeight();
+    GuiElements[GUI_ID_PRIORITIES]->moveTo(ox::core::CPosition2d<int>(8, barHeight - 49));
+    GuiElements[GUI_ID_SPEED_PAUSE]->moveTo(ox::core::CPosition2d<int>(8, barHeight - 23));
+    GuiElements[GUI_ID_SPEED_SLOW]->moveTo(ox::core::CPosition2d<int>(46, barHeight - 23));
+    GuiElements[GUI_ID_SPEED_NORMAL]->moveTo(ox::core::CPosition2d<int>(84, barHeight - 23));
+    GuiElements[GUI_ID_SPEED_DOUBLE]->moveTo(ox::core::CPosition2d<int>(122, barHeight - 23));
+    GuiElements[GUI_ID_SPEED_FOUR]->moveTo(ox::core::CPosition2d<int>(160, barHeight - 23));
+    GuiElements[GUI_ID_BUILDINGS_LEFT]->moveTo(ox::core::CPosition2d<int>(279, barHeight - 46));
+    GuiElements[GUI_ID_BUILDINGS_RIGHT]->moveTo(ox::core::CPosition2d<int>(barWidth - 161, barHeight - 46));
+    GuiElements[GUI_ID_MENU]->moveTo(ox::core::CPosition2d<int>(barWidth - 106, barHeight - 46));
+    RecycleButton->moveTo(ox::core::CPosition2d<int>(226, barHeight - 41));
+
+    ox::core::CRect<int> buildingsRect(311, barHeight - 46, barWidth - 166, barHeight - 4);
+    BuildingsArea->setRelativePosition(buildingsRect);
+    BuildingsList->removeAllChildren();
+    BuildingsList->setRelativePosition(ox::core::CRect<int>(0, 0, 100, 50));
+    for (int i = 0; i < BuildableItems.getNumBuildings(); ++i)
+    {
+        entity::SBuildingInfoItem* info = BuildableItems.getBuildingInfo(i);
+        if (info && info->Enabled)
+        {
+            ox::gui::IGUILayout* layout =
+                GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 60, 42), BuildingsList);
+            layout->setHoverItem(getPopupForBuildButton(info->Name.c_str(), info->Description.c_str(),
+                info->SparkCost.getValue(), info->MineralCost.getValue()));
+            BuildableItems.setItemButtonLayout(i, layout);
+        }
+        else
+            BuildableItems.setItemButtonLayout(i, 0);
+    }
+    BuildingsList->sortHorizontally(1);
+    int listWidth = BuildingsList->getRelativePosition().getWidth();
+    int space = buildingsRect.getWidth();
+    if (listWidth < space)
+    {
+        BuildingsList->moveTo(ox::core::CPosition2d<int>((space - listWidth) / 2, 0));
+        GuiElements[GUI_ID_BUILDINGS_LEFT]->setEnabled(false);
+        GuiElements[GUI_ID_BUILDINGS_RIGHT]->setEnabled(false);
+    }
+    else
+    {
+        BuildingsList->moveTo(ox::core::CPosition2d<int>(0, 0));
+        GuiElements[GUI_ID_BUILDINGS_LEFT]->setEnabled(true);
+        GuiElements[GUI_ID_BUILDINGS_RIGHT]->setEnabled(true);
+    }
+
+    m_758 = false;
+    ActionPanel->setRelativePosition(ox::core::CRect<int>(0, 0, topLeftSize.X, topLeftSize.Y + 120));
+    m_728->setRelativePosition(ox::core::CRect<int>(115, 5, 392, 27));
+    SelectedNameText->setRelativePosition(ox::core::CRect<int>(7, 6, 107, 18));
+    m_738->setRelativePosition(ox::core::CRect<int>(7, 20, 107, 30));
+    m_740->setRelativePosition(ox::core::CRect<int>(7, 69, 107, 79));
+    GuiElements[GUI_ID_DESELECT]->moveTo(ox::core::CPosition2d<int>(6, 86));
+    GuiElements[GUI_ID_UNLINK]->moveTo(ox::core::CPosition2d<int>(40, 86));
+    GuiElements[GUI_ID_OVERCHARGE]->moveTo(ox::core::CPosition2d<int>(74, 86));
+    GuiElements[GUI_ID_EAGLE]->moveTo(ox::core::CPosition2d<int>(40, 86));
+    GuiElements[GUI_ID_TEMPEST]->moveTo(ox::core::CPosition2d<int>(74, 86));
+    GuiElements[GUI_ID_DEATHSTAR]->moveTo(ox::core::CPosition2d<int>(74, 86));
+    GuiElements[GUI_ID_UNLINK_DEATHSTAR]->moveTo(ox::core::CPosition2d<int>(74, 86));
+    GuiElements[GUI_ID_END_LASER]->moveTo(ox::core::CPosition2d<int>(6, 121));
+    GuiElements[GUI_ID_SPEED_BUILD]->moveTo(ox::core::CPosition2d<int>(40, 86));
+    GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->moveTo(ox::core::CPosition2d<int>(40, 86));
+    GuiElements[GUI_ID_SELL_HARVESTERS]->moveTo(ox::core::CPosition2d<int>(40, 86));
+    GuiElements[GUI_ID_REPLACE_PRODUCER]->moveTo(ox::core::CPosition2d<int>(40, 86));
+
+    TopBar->setRelativePosition(
+        ox::core::CRect<int>(ScreenSize.Width - topRightSize.X, 0, ScreenSize.Width, topRightSize.Y));
+    ox::core::CRect<int> top = TopBar->getAbsolutePosition();
+    if (ShowMinimap)
+    {
+        int x = top.LowerRightCorner.X - MinimapWidth + (MinimapWidth - minimapSize) / 2;
+        int y = top.UpperLeftCorner.Y + GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Y;
+        MinimapRect = ox::core::CRect<int>(x, y, x + minimapSize, y + minimapSize);
+        int right = topRightSize.X - MinimapWidth;
+        m_340->setRelativePosition(ox::core::CRect<int>(right - 87, 5, right - 41, 27));
+        right = topRightSize.X - MinimapWidth;
+        m_348->setRelativePosition(ox::core::CRect<int>(right - 41, 5, right - 11, 27));
+        right = topRightSize.X - MinimapWidth - GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).X;
+        m_350->setRelativePosition(ox::core::CRect<int>(right - 53, 5, right - 27, 27));
+    }
+    else
+    {
+        MinimapRect = ox::core::CRect<int>(top.LowerRightCorner.X - 105, top.UpperLeftCorner.Y + 14,
+            top.LowerRightCorner.X - 6, top.UpperLeftCorner.Y + 115);
+        m_340->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 193, 5, topRightSize.X - 147, 27));
+        m_348->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 147, 5, topRightSize.X - 117, 27));
+        m_350->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 289, 5, topRightSize.X - 252, 27));
+    }
+
+    if (game::gp_world)
+        game::gp_world->changeViewSize(getViewSize());
+    if (!displayThreatLevelForGameMode(GameMode))
+        m_350->setVisible(false);
+
+    if (GameMode == game::EGM_WAVE)
+    {
+        toggleWaveList();
+        toggleWaveList();
+    }
+    else if (GameMode == game::EGM_CREATIVE && LuaManager)
+    {
+        if (LuaManager->isCreativeListVisible())
+        {
+            toggleCreativeList();
+            toggleCreativeList();
+        }
+        else if (ListGroups[LIST_CREATIVE])
+        {
+            ListGroups[LIST_CREATIVE]->remove();
+            ListGroups[LIST_CREATIVE] = 0;
+        }
+
+        if (LuaManager->isWaveListVisible())
+        {
+            toggleWaveList();
+            toggleWaveList();
+        }
+        else if (ListGroups[LIST_WAVES])
+        {
+            ListGroups[LIST_WAVES]->remove();
+            ListGroups[LIST_WAVES] = 0;
+        }
+    }
+
+    if (m_7b0)
+        m_7b0->setRelativePosition(
+            ox::core::CRect<int>(150, ScreenSize.Height - 100, ScreenSize.Width - 150, ScreenSize.Height - 85));
+}
+
 void CPlayState::playPlanetMusic()
 {
     if (game::gp_world && GameMode != game::EGM_CAMPAIGN)
@@ -631,16 +810,130 @@ void CPlayState::clearSelectedEntity()
     MultiSelection.clear();
     if (m_728)
         m_728->setText(L"");
-    if (m_730)
-        m_730->setText(L"");
+    if (SelectedNameText)
+        SelectedNameText->setText(L"");
     if (m_738)
         m_738->setText(L"");
     if (m_740)
         m_740->setText(L"");
-    if (m_500)
-        m_500->setVisible(false);
+    if (ActionPanel)
+        ActionPanel->setVisible(false);
     if (LuaManager)
         LuaManager->updateSelectedBuilding(0);
+}
+
+void CPlayState::newSelectedEntity()
+{
+    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin(); it != MultiSelection.end(); ++it)
+        delete *it;
+    MultiSelection.clear();
+
+    if (!SelectedEntity)
+    {
+        clearSelectedEntity();
+        return;
+    }
+
+    SelectedEntityType = SelectedEntity->getEntityType();
+    if (SelectedNameText)
+    {
+        ox::core::CString<wchar_t> name;
+        if (SelectedEntity->getEntityType() != 16)
+            name = settings::gp_systemConfig->getLocalizedText(entity::ENTITY_KEY_NAMES[SelectedEntity->getEntityType()]);
+        else
+            name = ((entity::CCreativeEntity*)SelectedEntity)->getBuildingName();
+        if (BoldFont->getDimension(name.c_str()).Width > 100)
+            SelectedNameText->setOverrideFont(SmallFont);
+        else
+            SelectedNameText->setOverrideFont(BoldFont);
+        SelectedNameText->setText(name.c_str());
+        SelectedNameText->activateOffsetScrollingToEnsureVisibleText();
+    }
+
+    if (ActionPanel)
+    {
+        ActionPanel->setVisible(true);
+        int type = SelectedEntity->getEntityType();
+        GuiElements[GUI_ID_DESELECT]->setVisible(true);
+        bool linker = type == 1;
+        bool tower = type == 7;
+        GuiElements[GUI_ID_UNLINK]->setVisible(tower || linker);
+        GuiElements[GUI_ID_OVERCHARGE]->setVisible(linker);
+        bool turret = type == 8;
+        GuiElements[GUI_ID_EAGLE]->setVisible(turret);
+        GuiElements[GUI_ID_TEMPEST]->setVisible(turret);
+        GuiElements[GUI_ID_DEATHSTAR]->setVisible(
+            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setVisible(
+            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0);
+        GuiElements[GUI_ID_END_LASER]->setVisible(tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->isLinked());
+        GuiElements[GUI_ID_SPEED_BUILD]->setVisible(
+            type == 3 && !((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setVisible(
+            type == 3 && ((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setVisible(
+            type == 4 && !((entity::CMineralGatherEntity*)SelectedEntity)->hasMoreMinerals());
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setVisible(
+            type == 0 && ((entity::CSparkProducerEntity*)SelectedEntity)->isExpired());
+        if (linker)
+            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlink", true);
+        else if (tower)
+            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlinkLaser",
+                true);
+
+        for (int i = GUI_ID_FIRST_LUA_ACTION; i < GUI_ID_WAVE_SEND; ++i)
+        {
+            if (GuiElements[i])
+            {
+                GuiElements[i]->remove();
+                GuiElements[i] = 0;
+            }
+        }
+
+        if (LuaManager && SelectedEntity->getEntityType() != 5)
+        {
+            // The script buttons follow the building's own buttons in a grid of three columns.
+            int slot = 4;
+            if (!tower)
+            {
+                slot = 3;
+                if (!turret && !linker)
+                {
+                    slot = 1;
+                    if (type == 0 || type == 4)
+                        slot = 2;
+                }
+            }
+
+            const char* buildingType = ((entity::CBuildingEntity*)SelectedEntity)->getBuildingType();
+            game::SLuaEntityActionButton* action = 0;
+            for (int id = GUI_ID_FIRST_LUA_ACTION; id < GUI_ID_WAVE_SEND; ++id, ++slot)
+            {
+                action = LuaManager->getNextEntityActionButton(buildingType, action);
+                if (!action)
+                    break;
+
+                action->Id = id - GUI_ID_FIRST_LUA_ACTION;
+                GuiElements[id] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, id, 0);
+                ((ox::gui::IGUIButton*)GuiElements[id])->setAnimations(IngamePackage, "BtnActionDeselect", true);
+                GuiElements[id]->moveTo(ox::core::CPosition2d<int>(slot % 3 * 34 + 6, slot / 3 * 35 + 86));
+                if (action->Upgrade)
+                {
+                    entity::SBuildingInfoItem* info =
+                        entity::gp_buildableItems->getBuildingInfoByEntityId(action->Command.c_str());
+                    if (info)
+                        GuiElements[id]->setHoverItem(getPopupForBuildButton(info->Name.c_str(),
+                            info->Description.c_str(), info->SparkCost.getValue(), info->MineralCost.getValue()));
+                }
+                else
+                    GuiElements[id]->setHoverItem(
+                        getPopupForGuiButton(ox::core::CString<wchar_t>(action->Command.c_str()).c_str()));
+            }
+        }
+    }
+
+    if (LuaManager)
+        LuaManager->updateSelectedBuilding(SelectedEntity);
 }
 
 void CPlayState::updateMultiSelectionReferences()
@@ -1148,7 +1441,7 @@ void CPlayState::placeCurrentAlienSelection(const ox::core::CPosition2d<float>& 
 
 void CPlayState::setWaveListToggle(bool visible)
 {
-    int y = m_508->getAbsolutePosition().LowerRightCorner.Y + 10;
+    int y = TopBar->getAbsolutePosition().LowerRightCorner.Y + 10;
     if (!ListGroups[LIST_WAVES])
     {
         ListGroups[LIST_WAVES] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), 0);
@@ -1231,7 +1524,7 @@ void CPlayState::setWaveListToggle(bool visible)
 
 void CPlayState::setCreativeListToggle(bool visible)
 {
-    int y = m_508->getAbsolutePosition().LowerRightCorner.Y + 10;
+    int y = TopBar->getAbsolutePosition().LowerRightCorner.Y + 10;
     if (!ListGroups[LIST_CREATIVE])
     {
         ListGroups[LIST_CREATIVE] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), 0);

@@ -48,6 +48,16 @@ static const int ENTITY_MINERAL_COSTS[] =
     50, 2, 0, 0, 5, 0, 0, 15, 30, 0, 0, 0, 0, 50, 40, 0, 0, 0, 0, 0, 0
 };
 
+//! The localization keys of the entity type names.
+static const wchar_t* const ENTITY_KEY_NAMES[] =
+{
+    L"build:solar", L"build:energy", L"build:spark", L"build:construction", L"build:harvester",
+    L"build:minerals", L"build:alien", L"build:defense", L"build:missileTurret", L"build:missile",
+    L"build:particle", L"build:bombBuilding", L"build:bomb", L"build:eagle", L"build:tempest",
+    L"build:tempestBlast", L"build:creative", L"build:dropship", L"build:dropshipBullet",
+    L"build:shuttleRace", L"build:specialEffect"
+};
+
 //! Base of the game's entities. The entity types, as returned by getEntityType, are
 //!  0 spark producer, 1 spark mover, 2 spark, 3 construction, 4 mineral gatherer, 5 minerals,
 //!  6 alien, 7 defense tower, 8, 13 and 14 missile turrets, 9 missile, 10 particle,

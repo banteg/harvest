@@ -14,9 +14,9 @@ namespace gui {
 class IGUILayout : public IGUIElement
 {
 public:
-    virtual void sortFlow();
-    virtual void sortVertically();
-    virtual void sortHorizontally();
+    virtual void sortFlow(int spacingX, int spacingY, bool resize, bool sortHidden);
+    virtual void sortVertically(int spacing, bool resize);
+    virtual void sortHorizontally(int spacing);
     //! Places the children in rows broken at "br" hints, aligned by their other hints.
     virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
     // The return types of the next five are not verified.

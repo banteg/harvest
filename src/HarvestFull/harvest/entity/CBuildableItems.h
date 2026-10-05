@@ -31,7 +31,7 @@ struct SBuildingInfoItem
     bool Enabled;
     int EntityType;
     ox::core::CString<wchar_t> Name;
-    unsigned char Unrecovered2[0x10];
+    ox::core::CString<wchar_t> Description;
     ox::core::CHiddenInt MineralCost;
     //! Sparks a construction site needs.
     ox::core::CHiddenInt SparkCost;

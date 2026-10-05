@@ -195,6 +195,38 @@ private:
         GUI_ELEMENT_COUNT = 58
     };
 
+    //! Ids of the in-game gui elements; GuiElements holds the ones below GUI_ELEMENT_COUNT by id.
+    enum EGUI_ID
+    {
+        GUI_ID_PRIORITIES = 5,
+        GUI_ID_SPEED_PAUSE,
+        GUI_ID_SPEED_SLOW,
+        GUI_ID_SPEED_NORMAL,
+        GUI_ID_SPEED_DOUBLE,
+        GUI_ID_SPEED_FOUR,
+        GUI_ID_BUILDINGS_LEFT,
+        GUI_ID_BUILDINGS_RIGHT,
+        GUI_ID_MENU,
+        GUI_ID_DESELECT = 15,
+        GUI_ID_UNLINK,
+        GUI_ID_OVERCHARGE,
+        GUI_ID_EAGLE,
+        GUI_ID_TEMPEST,
+        GUI_ID_DEATHSTAR,
+        GUI_ID_UNLINK_DEATHSTAR,
+        GUI_ID_END_LASER,
+        GUI_ID_SPEED_BUILD,
+        GUI_ID_UNLINK_SPEED_BUILD,
+        GUI_ID_REPLACE_PRODUCER,
+        GUI_ID_SELL_HARVESTERS,
+        //! The action buttons that scripts add to buildings.
+        GUI_ID_FIRST_LUA_ACTION,
+        GUI_ID_WAVE_SEND = 36,
+        GUI_ID_CREATIVE_PLACE,
+        GUI_ID_FIRST_WAVE,
+        GUI_ID_FIRST_CREATIVE_ALIEN = 48
+    };
+
     //! Ids of the gui elements that report their drawing.
     enum
     {
@@ -290,22 +322,29 @@ private:
     //! The alien icons of the wave buttons, by alien type.
     ox::video::ISpriteAnimationState* WaveIcons[WAVE_COUNT];
     ox::video::ISpriteAnimationState* m_488[WAVE_COUNT];
-    ox::gui::IGUIElement* m_4f8;
-    ox::gui::IGUIElement* m_500;
-    ox::gui::IGUIElement* m_508;
-    int m_510;
-    int m_514;
-    int m_518;
-    int m_51c;
-    int m_520[12];
+    //! The bar along the bottom edge and the panel in the top right corner.
+    ox::gui::IGUIElement* BottomBar;
+    //! The action buttons of the selected building.
+    ox::gui::IGUIElement* ActionPanel;
+    ox::gui::IGUIElement* TopBar;
+    int TimerWidth;
+    int MinimapWidth;
+    int MinimapHeight;
+    //! Whether the screen is large enough for the minimap.
+    bool ShowMinimap;
+    //! The parts of the bottom bar drawn by the bottom sprites.
+    ox::core::CRect<int> BarLeftArea;
+    ox::core::CRect<int> BarRightArea;
+    ox::core::CRect<int> BarCenterArea;
     ox::gui::IGUIElement* GuiElements[GUI_ELEMENT_COUNT];
     ox::gui::IGUICheckBox* RecycleButton;
     ox::gui::IGUIElement* m_728;
-    ox::gui::IGUIElement* m_730;
+    ox::gui::IGUIStaticText* SelectedNameText;
     ox::gui::IGUIElement* m_738;
     ox::gui::IGUIElement* m_740;
-    ox::gui::IGUIElement* m_748;
-    ox::gui::IGUIElement* m_750;
+    //! The build buttons, which scroll inside BuildingsArea.
+    ox::gui::IGUILayout* BuildingsArea;
+    ox::gui::IGUILayout* BuildingsList;
     bool m_758;
     int m_75c;
     int m_760;

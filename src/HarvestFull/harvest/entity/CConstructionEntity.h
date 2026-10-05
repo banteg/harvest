@@ -40,6 +40,7 @@ public:
     virtual void handleDoubleClickSelection();
 
     const char* getBuildingId();
+    bool haveMoversBeenCalled() const { return MoversCalled; }
     //! Sets how far the construction is, from 0 to 1; a finished site still needs its last spark.
     void setProgress(float progress)
     {
