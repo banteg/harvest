@@ -4,6 +4,7 @@
 // Oxeye puts the buttons in a layout group, sorts the box vertically and answers return and escape.
 
 #include "CGUIMessageBox.h"
+#include "ox/gui/IGUIButton.h"
 #include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"
