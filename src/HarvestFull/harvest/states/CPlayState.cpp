@@ -47,11 +47,13 @@
 #include "ox/core/CMath.h"
 #include "ox/core/CStringFunctions.h"
 #include "ox/gui/IGUICheckBox.h"
+#include "ox/gui/IGUIEditBox.h"
 #include "ox/gui/IGUIElement.h"
 #include "ox/gui/IGUIButton.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUILayout.h"
+#include "ox/gui/IGUISkin.h"
 #include "ox/gui/IGUIStaticText.h"
 #include "ox/io/CHelpIO.h"
 #include "ox/io/CMemReadFile.h"
@@ -106,6 +108,10 @@ const wchar_t* const GAME_SPEED_NAMES[] = {L"gamespeed:pause", L"gamespeed:half"
     L"gamespeed:normal", L"gamespeed:threehalfs", L"gamespeed:double", L"gamespeed:quadruple"};
 //! How fast the game runs at each game speed.
 const float GAME_SPEED_MULTIPLIERS[] = {0.0f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 4.0f};
+//! The sprites of the alien types, loaded ahead for the aliens of the planet.
+const char* const ALIEN_SPRITE_NAMES[] = {"Alien", "AlienJammer", "AlienTiny0000", "AlienSummoner", "AlienLooker0000",
+    "AlienHogger", "AlienSparker", "BrainBottom0000", "MegaAlienCharge", "aliennames:asdf", "aliennames:asdf",
+    "aliennames:asdf", "aliennames:asdf", "aliennames:asdf"};
 
 bool CPlayState::m_keys[256];
 
@@ -229,6 +235,343 @@ int CPlayState::firstInit(ox::IOxDevice* device)
 
     Device->setEventReceiver(this);
     return 0;
+}
+
+int CPlayState::secondInit()
+{
+    switch (InitStep++)
+    {
+    case 0:
+        BoldFont = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt");
+        SmallFont = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/smallFont.fnt");
+        NumberFont = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/mineralNumbers.fnt");
+        GUIEnvironment->getSkin()->setFont(BoldFont);
+        if (!BoldFont || !SmallFont)
+            return 1;
+        BoldFontHeight = BoldFont->getDimension(L"A").Height;
+        SmallFontHeight = SmallFont->getDimension(L"A").Height;
+        break;
+    case 1:
+        IngamePackage = Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat", false);
+        if (!IngamePackage)
+            return 1;
+        MenuPackage = Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true);
+        break;
+    case 2:
+        GUIEnvironment->getSkin()->setSpritePackage(
+            Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true));
+        GUIEnvironment->getSkin()->setColor((ox::gui::EGUI_DEFAULT_COLOR)8, ox::video::SColor(0xffffffff));
+        break;
+    case 3:
+        ScreenSize = Driver->getScreenSize();
+        ScreenSizeF = ox::core::CDimension2d<float>((float)ScreenSize.Width, (float)ScreenSize.Height);
+        break;
+    case 4:
+        entity::CEntity::gp_spritePackage = IngamePackage;
+        entity::CEntity::gp_particlePackage =
+            Driver->getParticlePackage("$GAME_RESOURCES$/harvestClientData/gfx/particles.pfx");
+        if (!entity::CEntity::gp_particlePackage)
+            return 1;
+        entity::CEntity::gp_particlePackage->setSpritePackage(
+            Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/fx.dat", false));
+        entity::CEntity::gp_particlePackage->setCallbackEngine(this);
+        entity::CEntity::gp_particlePackage->ImportanceLevel = 2;
+        entity::CEntity::gp_videoDriver = Driver;
+        entity::CEntity::gp_audioDriver = AudioDriver;
+        entity::CEntity::gp_alienChantFont = SmallFont;
+        break;
+    case 6:
+        BuildableItems.loadStandardBuildings(Driver);
+        break;
+    case 7:
+    {
+        // Loads the background animation ahead.
+        ox::video::ISpriteAnimationState* background = IngamePackage->addNewAnimationState("Background");
+        if (background)
+            background->remove();
+        break;
+    }
+    case 8:
+        MinimapDot = IngamePackage->addNewAnimationState("MinimapDot");
+        MinimapRect = ox::core::CRect<int>(ScreenSize.Width - 110, 10, ScreenSize.Width - 10, 110);
+        break;
+    case 9:
+        RangeCircle = IngamePackage->addNewAnimationState("RangeCircle");
+        Beam180.Beam = IngamePackage->addNewAnimationState("RangeLine");
+        Beam1c8.Beam = IngamePackage->addNewAnimationState("EnergyRedirect");
+        Beam210.Beam = IngamePackage->addNewAnimationState("RangeLine");
+        Beam258.Beam = IngamePackage->addNewAnimationState("RangeLine");
+        Beam180.Color = RANGE_LINE_COLOR;
+        Beam1c8.Color = ox::video::SColor(0x80ffffff);
+        Beam210.Color = MINING_LINE_COLOR;
+        break;
+    case 10:
+        GuiSprites[GS_TOP_RIGHT_BACKGROUND] = IngamePackage->addNewAnimationState("GuiTopRightBackground");
+        GuiSprites[GS_THREAT_LEVEL_BACKGROUND] = IngamePackage->addNewAnimationState("GuiThreatLevelBackground");
+        GuiSprites[GS_TIME_BACKGROUND] = IngamePackage->addNewAnimationState("GuiTimeBackground");
+        GuiSprites[GS_PROGRESS_BAR] = IngamePackage->addNewAnimationState("GuiProgressBar");
+        GuiSprites[GS_DAMAGE_BAR_BACKGROUND] = IngamePackage->addNewAnimationState("GuiDamageBarBackground");
+        GuiSprites[GS_DAMAGE_BAR] = IngamePackage->addNewAnimationState("GuiDamageBar");
+        GuiSprites[GS_OBJECTIVES_BACKGROUND] = IngamePackage->addNewAnimationState("GuiObjectivesBackground");
+        GuiSprites[GS_TOP_LEFT_BACKGROUND] = IngamePackage->addNewAnimationState("GuiTopLeftBackground");
+        GuiSprites[GS_BOTTOM_LEFT_BACKGROUND] = IngamePackage->addNewAnimationState("GuiBottomLeftBackground");
+        GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND] = IngamePackage->addNewAnimationState("GuiBottomRightBackground");
+        GuiSprites[GS_BOTTOM_CENTER_BACKGROUND] = IngamePackage->addNewAnimationState("GuiBottomCenterBackground");
+        GuiSprites[GS_ICON_ENERGY] = IngamePackage->addNewAnimationState("IconEnergy");
+        GuiSprites[GS_ICON_CREDITS] = IngamePackage->addNewAnimationState("IconCredits");
+        GuiSprites[GS_ICON_OBJECTIVE] = IngamePackage->addNewAnimationState("IconObjective");
+        break;
+    case 11:
+        GuiSprites[GS_MINIMAP_TOP_LEFT] = IngamePackage->addNewAnimationState("MinimapTopLeft");
+        GuiSprites[GS_MINIMAP_TOP] = IngamePackage->addNewAnimationState("MinimapTop");
+        GuiSprites[GS_MINIMAP_TOP_RIGHT] = IngamePackage->addNewAnimationState("MinimapTopRight");
+        GuiSprites[GS_MINIMAP_LEFT] = IngamePackage->addNewAnimationState("MinimapLeft");
+        GuiSprites[GS_MINIMAP_BOTTOM_LEFT] = IngamePackage->addNewAnimationState("MinimapBottomLeft");
+        GuiSprites[GS_MINIMAP_RIGHT] = IngamePackage->addNewAnimationState("MinimapRight");
+        GuiSprites[GS_MINIMAP_BOTTOM] = IngamePackage->addNewAnimationState("MinimapBottom");
+        GuiSprites[GS_MINIMAP_BOTTOM_RIGHT] = IngamePackage->addNewAnimationState("MinimapBottomRight");
+        GuiSprites[GS_MINIMAP_BACKGROUND] = IngamePackage->addNewAnimationState("MinimapBackground");
+        GuiSprites[GS_MINERALS_BACKGROUND] = IngamePackage->addNewAnimationState("GuiMineralsBackground");
+        break;
+    case 12:
+    {
+        BottomBar = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
+        BottomBar->setID(0x4d3);
+        BottomBar->setReportOnDraw(1);
+
+        GuiElements[GUI_ID_PRIORITIES] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_PRIORITIES, 0);
+        GuiElements[GUI_ID_PRIORITIES]->setAnimations(IngamePackage, "BtnPriorities", true);
+        GuiElements[GUI_ID_PRIORITIES]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:prios").c_str()));
+        GuiElements[GUI_ID_SPEED_PAUSE] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_SPEED_PAUSE, 0);
+        GuiElements[GUI_ID_SPEED_PAUSE]->setAnimations(IngamePackage, "BtnSpeed1", true);
+        GuiElements[GUI_ID_SPEED_PAUSE]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:pause").c_str()));
+        GuiElements[GUI_ID_SPEED_SLOW] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_SPEED_SLOW, 0);
+        GuiElements[GUI_ID_SPEED_SLOW]->setAnimations(IngamePackage, "BtnSpeed2", true);
+        GuiElements[GUI_ID_SPEED_SLOW]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:slow").c_str()));
+        GuiElements[GUI_ID_SPEED_NORMAL] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_SPEED_NORMAL, 0);
+        GuiElements[GUI_ID_SPEED_NORMAL]->setAnimations(IngamePackage, "BtnSpeed3", true);
+        GuiElements[GUI_ID_SPEED_NORMAL]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:normal").c_str()));
+        GuiElements[GUI_ID_SPEED_DOUBLE] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_SPEED_DOUBLE, 0);
+        GuiElements[GUI_ID_SPEED_DOUBLE]->setAnimations(IngamePackage, "BtnSpeed4", true);
+        GuiElements[GUI_ID_SPEED_DOUBLE]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:double").c_str()));
+        GuiElements[GUI_ID_SPEED_FOUR] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_SPEED_FOUR, 0);
+        GuiElements[GUI_ID_SPEED_FOUR]->setAnimations(IngamePackage, "BtnSpeed5", true);
+        GuiElements[GUI_ID_SPEED_FOUR]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:four").c_str()));
+        GuiElements[GUI_ID_BUILDINGS_LEFT] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_BUILDINGS_LEFT, 0);
+        GuiElements[GUI_ID_BUILDINGS_LEFT]->setAnimations(IngamePackage, "BtnBuildingsLeft", true);
+        GuiElements[GUI_ID_BUILDINGS_RIGHT] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_BUILDINGS_RIGHT, 0);
+        GuiElements[GUI_ID_BUILDINGS_RIGHT]->setAnimations(IngamePackage, "BtnBuildingsRight", true);
+        GuiElements[GUI_ID_MENU] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), BottomBar, GUI_ID_MENU, 0);
+        // The menu button's animation is localized.
+        GuiElements[GUI_ID_MENU]->setAnimations(IngamePackage,
+            ox::core::CString<char>(settings::gp_systemConfig->getLocalizedText(L"game:menuBtn").c_str()).c_str(),
+            true);
+
+        RecycleButton = GUIEnvironment->addCheckBox(false, ox::core::CRect<int>(0, 0, 40, 40), BottomBar, 0x4d6, 0);
+        RecycleButton->setAnimations(IngamePackage, "Recycle");
+        RecycleButton->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:recycle").c_str()));
+
+        BuildingsArea = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 50), BottomBar);
+        BuildingsList = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 50), BuildingsArea);
+        BuildingsList->setID(0x4d9);
+        BuildingsList->setReportOnDraw(2);
+
+        ActionPanel = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
+        ActionPanel->setID(0x4d4);
+        ActionPanel->setReportOnDraw(1);
+
+        InfoText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        InfoText->setOverrideColor(WHITE_TEXT_COLOR);
+        InfoText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        InfoText->setOverrideFont(BoldFont);
+        SelectedNameText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        SelectedNameText->setOverrideColor(WHITE_TEXT_COLOR);
+        SelectedNameText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        SelectedNameText->setOverrideFont(BoldFont);
+        OperatorText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        OperatorText->setOverrideColor(ox::video::SColor(0xffb1c7ff));
+        OperatorText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        OperatorText->setOverrideFont(SmallFont);
+        MiniStatText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        MiniStatText->setOverrideColor(ox::video::SColor(0xffb1c7ff));
+        MiniStatText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        MiniStatText->setOverrideFont(SmallFont);
+
+        GuiElements[GUI_ID_DESELECT] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_DESELECT, 0);
+        GuiElements[GUI_ID_DESELECT]->setAnimations(IngamePackage, "BtnActionDeselect", true);
+        GuiElements[GUI_ID_DESELECT]->setVisible(false);
+        GuiElements[GUI_ID_DESELECT]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:deselect", L"ESC").c_str()));
+        GuiElements[GUI_ID_UNLINK] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_UNLINK, 0);
+        GuiElements[GUI_ID_UNLINK]->setAnimations(IngamePackage, "BtnActionUnlink", true);
+        GuiElements[GUI_ID_UNLINK]->setVisible(false);
+        GuiElements[GUI_ID_UNLINK]->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:unlink").c_str()));
+        GuiElements[GUI_ID_SPEED_BUILD] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_SPEED_BUILD, 0);
+        GuiElements[GUI_ID_SPEED_BUILD]->setAnimations(IngamePackage, "BtnActionSpeedBuild", true);
+        GuiElements[GUI_ID_SPEED_BUILD]->setVisible(false);
+        GuiElements[GUI_ID_SPEED_BUILD]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:speedBuild", L"Z").c_str()));
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_UNLINK_SPEED_BUILD,
+            0);
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setAnimations(IngamePackage, "BtnActionUnlinkSpeedBuild", true);
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setVisible(false);
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:unlinkSpeedBuild", L"Z").c_str()));
+        GuiElements[GUI_ID_OVERCHARGE] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_OVERCHARGE, 0);
+        GuiElements[GUI_ID_OVERCHARGE]->setAnimations(IngamePackage, "BtnActionOvercharge", true);
+        GuiElements[GUI_ID_OVERCHARGE]->setVisible(false);
+        GuiElements[GUI_ID_OVERCHARGE]->setHoverItem(getPopupForBuildButton(
+            settings::gp_systemConfig->getLocalizedText(L"build:bombBuilding").c_str(),
+            settings::gp_systemConfig->getLocalizedText(L"buildpopups:bombBuilding", L"X").c_str(), 30, 0));
+        GuiElements[GUI_ID_REPLACE_PRODUCER] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_REPLACE_PRODUCER, 0);
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setAnimations(IngamePackage, "BtnActionReplaceProducer", true);
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setVisible(false);
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setHoverItem(getPopupForBuildButton(
+            settings::gp_systemConfig->getLocalizedText(L"build:replaceProducer").c_str(),
+            settings::gp_systemConfig->getLocalizedText(L"buildpopups:replaceProducer", L"X").c_str(), 15, 25));
+        GuiElements[GUI_ID_SELL_HARVESTERS] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_SELL_HARVESTERS, 0);
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setAnimations(IngamePackage, "BtnActionSellHarvesters", true);
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setVisible(false);
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:sellHarvesters", L"X").c_str()));
+        GuiElements[GUI_ID_EAGLE] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_EAGLE, 0);
+        GuiElements[GUI_ID_EAGLE]->setAnimations(IngamePackage, "BtnActionEagle", true);
+        GuiElements[GUI_ID_EAGLE]->setVisible(false);
+        GuiElements[GUI_ID_EAGLE]->setHoverItem(getPopupForBuildButton(
+            settings::gp_systemConfig->getLocalizedText(L"build:eagle").c_str(),
+            settings::gp_systemConfig->getLocalizedText(L"buildpopups:eagle", L"C").c_str(), 100, 50));
+        GuiElements[GUI_ID_TEMPEST] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_TEMPEST, 0);
+        GuiElements[GUI_ID_TEMPEST]->setAnimations(IngamePackage, "BtnActionTempest", true);
+        GuiElements[GUI_ID_TEMPEST]->setVisible(false);
+        GuiElements[GUI_ID_TEMPEST]->setHoverItem(getPopupForBuildButton(
+            settings::gp_systemConfig->getLocalizedText(L"build:tempest").c_str(),
+            settings::gp_systemConfig->getLocalizedText(L"buildpopups:tempest", L"V").c_str(), 100, 40));
+        GuiElements[GUI_ID_DEATHSTAR] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_DEATHSTAR, 0);
+        GuiElements[GUI_ID_DEATHSTAR]->setAnimations(IngamePackage, "BtnActionDeathStar", true);
+        GuiElements[GUI_ID_DEATHSTAR]->setVisible(false);
+        GuiElements[GUI_ID_DEATHSTAR]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:deathstar", L"X").c_str()));
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_UNLINK_DEATHSTAR, 0);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setAnimations(IngamePackage, "BtnActionUnlinkDeathStar", true);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setVisible(false);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:unlinkDeathstar", L"X").c_str()));
+        GuiElements[GUI_ID_END_LASER] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, GUI_ID_END_LASER, 0);
+        GuiElements[GUI_ID_END_LASER]->setAnimations(IngamePackage, "BtnActionEndLaser", true);
+        GuiElements[GUI_ID_END_LASER]->setVisible(false);
+        GuiElements[GUI_ID_END_LASER]->setHoverItem(getPopupForGuiButton(
+            settings::gp_systemConfig->getLocalizedText(L"gamepopups:makeEndLaser", L"Z").c_str()));
+        // The lua action buttons are created by the scenario.
+        for (int i = GUI_ID_FIRST_LUA_ACTION; i < GUI_ID_WAVE_SEND; ++i)
+            GuiElements[i] = 0;
+
+        TopBar = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 50), 0);
+        TopBar->setID(0x4d5);
+        TopBar->setReportOnDraw(1);
+
+        CreditsText = GUIEnvironment->addStaticText(L"75",
+            ox::core::CRect<int>(ScreenSize.Width - 260, 5, ScreenSize.Width - 183, 25), false, false, TopBar, -1, 0);
+        CreditsText->setOverrideColor(MINERALS_TEXT_COLOR);
+        CreditsText->setOverrideFont(NumberFont);
+        CreditsText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        CreditsText->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:credits").c_str()));
+        HarvestersText = GUIEnvironment->addStaticText(L"+0",
+            ox::core::CRect<int>(ScreenSize.Width - 183, 5, ScreenSize.Width - 153, 25), false, false, TopBar, -1, 0);
+        HarvestersText->setOverrideColor(MINERALS_TEXT_COLOR);
+        HarvestersText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+        HarvestersText->setOverrideFont(SmallFont);
+        HarvestersText->setHoverItem(
+            getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:harvesters").c_str()));
+        ThreatLevelText = GUIEnvironment->addStaticText(L"0",
+            ox::core::CRect<int>(ScreenSize.Width - 180, 5, ScreenSize.Width - 130, 25), false, false, TopBar, -1, 0);
+        ThreatLevelText->setOverrideColor(THREAT_TEXT_COLOR);
+        ThreatLevelText->setOverrideFont(NumberFont);
+        ThreatLevelText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+
+        m_7b0 = GUIEnvironment->addEditBox(L"", ox::core::CRect<int>(0, 0, 100, 10), false, 0, 0xe);
+        m_7b0->setVisible(false);
+        m_7b0->setEnabled(false);
+        break;
+    }
+    case 13:
+        SettingsScreen = new gui::CSettingsScreen(Device, false);
+        PriorityScreen = new gui::CPriorityScreen(Device);
+        IngameMenuScreen = new gui::CIngameMenuScreen(Device);
+        break;
+    case 14:
+        SaveGameScreen = new gui::CSaveGameScreen(Device);
+        StoryScreen = new gui::CStoryScreen(Device);
+        InfoLines = new gui::CGuiInfoLines(Device);
+        AchievementsScreen = new gui::CAchievementsScreen(Device);
+        break;
+    case 15:
+        if (g_loadGameFilename.size() > 0)
+        {
+            if (!readStateFromFile(g_loadGameFilename.c_str()))
+            {
+                // A save that does not load starts a new game instead.
+                g_loadGameFilename = "";
+                if (!initializeNewGame())
+                    return 1;
+            }
+            g_loadGameFilename = "";
+        }
+        else if (!initializeNewGame())
+            return 1;
+        break;
+    case 16:
+    {
+        ox::video::ISpriteAnimationState* alien = IngamePackage->addNewAnimationState("Alien");
+        if (alien)
+            alien->remove();
+        break;
+    }
+    case 17:
+        Selector = IngamePackage->addNewAnimationState("Selector");
+        RecycleSelector = IngamePackage->addNewAnimationState("RecycleSelector");
+        break;
+    case 19:
+        if (GameMode == game::EGM_CREATIVE)
+            ThreatLevelText->setHoverItem(
+                getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:alienCount").c_str()));
+        else
+            ThreatLevelText->setHoverItem(
+                getPopupForGuiButton(settings::gp_systemConfig->getLocalizedText(L"gamepopups:threat").c_str()));
+        realignGui();
+        break;
+    case 36:
+        NextState = 0;
+        updateState(0.001f);
+        break;
+    case 20:
+        for (int i = 0; i < WAVE_COUNT; ++i)
+            if (ThreatLevel && game::gp_world &&
+                game::CThreatLevel::alienOccursOnPlanet(game::gp_world->getPlanet(), i))
+                m_488[i] = IngamePackage->addNewAnimationState(ALIEN_SPRITE_NAMES[i]);
+        break;
+    case 21:
+        UseMinimapTexture = false;
+        break;
+    case 35:
+        playPlanetMusic();
+        break;
+    // Idle steps, which give the loading screen time to show.
+    case 5: case 18: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30: case 31:
+    case 32: case 33: case 34:
+        break;
+    default:
+        return 0;
+    }
+    return 2;
 }
 
 ox::gui::IGUILayout* CPlayState::getPopupForGuiButton(const wchar_t* text)

@@ -25,6 +25,7 @@ struct SEntityReference;
 namespace gui {
 class IGUIButton;
 class IGUICheckBox;
+class IGUIEditBox;
 class IGUIElement;
 class IGUIFont;
 class IGUILayout;
@@ -340,7 +341,7 @@ private:
     ox::core::CRect<int> BarLeftArea;
     ox::core::CRect<int> BarRightArea;
     ox::core::CRect<int> BarCenterArea;
-    ox::gui::IGUIElement* GuiElements[GUI_ELEMENT_COUNT];
+    ox::gui::IGUIButton* GuiElements[GUI_ELEMENT_COUNT];
     ox::gui::IGUICheckBox* RecycleButton;
     ox::gui::IGUIStaticText* InfoText;
     ox::gui::IGUIStaticText* SelectedNameText;
@@ -363,7 +364,7 @@ private:
     ox::gui::IGUILayout* ListContents[LIST_COUNT];
     ox::gui::IGUIButton* ListButtons[LIST_COUNT];
     bool ListVisible[LIST_COUNT];
-    ox::gui::IGUIElement* m_7b0;
+    ox::gui::IGUIEditBox* m_7b0;
     gui::CSettingsScreen* SettingsScreen;
     gui::CPriorityScreen* PriorityScreen;
     gui::CIngameMenuScreen* IngameMenuScreen;
