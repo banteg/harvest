@@ -711,95 +711,6 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 OnEvent(static_cast<ox::gui::IGUIModalScreen*>(event.GUIEvent.Caller)->getLastBlockedEvent());
             result = true;
             break;
-        case ox::gui::EGET_ELEMENT_DRAWN:
-            switch (id)
-            {
-            case ID_TYPE_FRAME:
-                if (TypeFrame && Sprites[SPRITE_TOP_BACKGROUND])
-                    Sprites[SPRITE_TOP_BACKGROUND]->draw(TypeFrame->getAbsolutePosition().UpperLeftCorner, 0,
-                        0xffffffff);
-                result = true;
-                break;
-            case ID_TYPE_BUTTON:
-            case ID_TYPE_BUTTON + 1:
-            case ID_TYPE_BUTTON + 2:
-            case ID_TYPE_BUTTON + 3:
-                if (Sprites[SPRITE_TOP_SELECTOR])
-                {
-                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
-                    if (id == SelectedType)
-                        Sprites[SPRITE_TOP_SELECTOR]->draw(ox::core::CPosition2d<int>(
-                            (rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
-                            (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2), 0, 0xffffffff);
-                    ox::video::SColor color = 0xc0ffffff;
-                    const ox::core::CPosition2d<int>& mouse = GUIEnvironment->getMousePosition();
-                    if (rect.UpperLeftCorner.X <= mouse.X && rect.UpperLeftCorner.Y <= mouse.Y &&
-                        mouse.X < rect.LowerRightCorner.X && mouse.Y < rect.LowerRightCorner.Y)
-                        color = 0xf0ffffff;
-                    GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt")->draw(
-                        TypeNames[id - ID_TYPE_BUTTON].c_str(), rect, color, ox::gui::EFHA_CENTER,
-                        ox::gui::EFVA_CENTER, 0);
-                }
-                result = true;
-                break;
-            case ID_SUMMARY_FRAME:
-                if (SummaryFrame && Sprites[SPRITE_PROMOTE_BACKGROUND])
-                {
-                    ox::core::CPosition2d<int> position = SummaryFrame->getAbsolutePosition().UpperLeftCorner;
-                    Sprites[SPRITE_PROMOTE_SCORE]->draw(ox::core::CPosition2d<int>(position.X, position.Y + 40), 0,
-                        0xffffffff);
-                    Sprites[SPRITE_PROMOTE_BACKGROUND]->draw(
-                        ox::core::CPosition2d<int>(position.X + 139, position.Y + 50), 0, 0xffffffff);
-                    Sprites[SPRITE_PROMOTE_MINERALS]->draw(ox::core::CPosition2d<int>(position.X, position.Y + 235),
-                        0, 0xffffffff);
-                    Sprites[SPRITE_PROMOTE_BACKGROUND]->draw(
-                        ox::core::CPosition2d<int>(position.X + 139, position.Y + 245), 0, 0xffffffff);
-                    for (int i = 0; i < 4; ++i)
-                    {
-                        Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
-                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 40), 0, 0xffffffff);
-                        Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
-                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 235), 0, 0xffffffff);
-                        Sprites[SPRITE_MODE_ICON + i]->draw(ox::core::CPosition2d<int>(
-                            (SpriteSizes[SPRITE_PROMOTE_MODE_BACKGROUND].X - SpriteSizes[SPRITE_MODE_ICON + i].X) / 2 +
-                                position.X + 120 + i * 157,
-                            position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Y), 0, 0xffffffff);
-                    }
-                }
-                result = true;
-                break;
-            case ID_LIST_FRAME:
-                if (Sprites[SPRITE_ALL_BACKGROUND])
-                    Sprites[SPRITE_ALL_BACKGROUND]->draw(ListFrame->getAbsolutePosition().UpperLeftCorner, 0,
-                        0xffffffff);
-                result = true;
-                break;
-            case ID_LIST_BUTTON + 7:
-            {
-                int sprite = SPRITE_MODE_BUTTON + GameMode;
-                if (Sprites[sprite])
-                {
-                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
-                    ox::core::CPosition2d<int> position((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
-                        (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
-                    position.X -= SpriteSizes[sprite].X / 2;
-                    position.Y -= SpriteSizes[sprite].Y / 2;
-                    Sprites[sprite]->draw(position, 0, 0xffffffff);
-                }
-                result = true;
-                break;
-            }
-            default:
-                if (id >= ID_PROMOTE && id < ID_PROMOTE + 32)
-                {
-                    Sprites[SPRITE_PLANET_ICON + (id - ID_PROMOTE) % 4]->draw(
-                        ox::core::CPosition2d<int>(event.GUIEvent.Caller->getAbsolutePosition().UpperLeftCorner), 0,
-                        0xffffffff);
-                    result = true;
-                }
-                break;
-            }
-            break;
         case ox::gui::EGET_BUTTON_CLICKED:
             switch (id)
             {
@@ -1014,11 +925,8 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
             case ID_POPUP_MODE:
                 if (Popup && ModeList)
                 {
-                    GameMode = ModeList->getSelected();
-                    if (GameMode > 3)
-                        GameMode = 3;
-                    else if (GameMode < 0)
-                        GameMode = 0;
+                    int mode = ModeList->getSelected();
+                    GameMode = mode > 3 ? 3 : (mode < 0 ? 0 : mode);
                     Popup->remove();
                     Popup = 0;
                     ModeList = 0;
@@ -1049,6 +957,96 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         ExactGroup = false;
                     }
                     loadHighscores(0);
+                }
+                break;
+            }
+            break;
+        case ox::gui::EGET_ELEMENT_DRAWN:
+            switch (id)
+            {
+            case ID_TYPE_FRAME:
+                if (TypeFrame && Sprites[SPRITE_TOP_BACKGROUND])
+                    Sprites[SPRITE_TOP_BACKGROUND]->draw(TypeFrame->getAbsolutePosition().UpperLeftCorner, 0,
+                        0xffffffff);
+                result = true;
+                break;
+            case ID_TYPE_BUTTON:
+            case ID_TYPE_BUTTON + 1:
+            case ID_TYPE_BUTTON + 2:
+            case ID_TYPE_BUTTON + 3:
+                if (Sprites[SPRITE_TOP_SELECTOR])
+                {
+                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
+                    if (id == SelectedType)
+                    {
+                        ox::core::CPosition2d<int> center((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
+                            (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
+                        Sprites[SPRITE_TOP_SELECTOR]->draw(center, 0, 0xffffffff);
+                    }
+                    ox::video::SColor color = 0xc0ffffff;
+                    const ox::core::CPosition2d<int>& mouse = GUIEnvironment->getMousePosition();
+                    if (rect.UpperLeftCorner.X <= mouse.X && rect.UpperLeftCorner.Y <= mouse.Y &&
+                        mouse.X < rect.LowerRightCorner.X && mouse.Y < rect.LowerRightCorner.Y)
+                        color = 0xf0ffffff;
+                    GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt")->draw(
+                        TypeNames[id - ID_TYPE_BUTTON].c_str(), rect, color, ox::gui::EFHA_CENTER,
+                        ox::gui::EFVA_CENTER, 0);
+                }
+                result = true;
+                break;
+            case ID_SUMMARY_FRAME:
+                if (SummaryFrame && Sprites[SPRITE_PROMOTE_BACKGROUND])
+                {
+                    ox::core::CPosition2d<int> position = SummaryFrame->getAbsolutePosition().UpperLeftCorner;
+                    Sprites[SPRITE_PROMOTE_SCORE]->draw(ox::core::CPosition2d<int>(position.X, position.Y + 40), 0,
+                        0xffffffff);
+                    Sprites[SPRITE_PROMOTE_BACKGROUND]->draw(
+                        ox::core::CPosition2d<int>(position.X + 139, position.Y + 50), 0, 0xffffffff);
+                    Sprites[SPRITE_PROMOTE_MINERALS]->draw(ox::core::CPosition2d<int>(position.X, position.Y + 235),
+                        0, 0xffffffff);
+                    Sprites[SPRITE_PROMOTE_BACKGROUND]->draw(
+                        ox::core::CPosition2d<int>(position.X + 139, position.Y + 245), 0, 0xffffffff);
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
+                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 40), 0, 0xffffffff);
+                        Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
+                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 235), 0, 0xffffffff);
+                        Sprites[SPRITE_MODE_ICON + i]->draw(ox::core::CPosition2d<int>(
+                            (SpriteSizes[SPRITE_PROMOTE_MODE_BACKGROUND].X - SpriteSizes[SPRITE_MODE_ICON + i].X) / 2 +
+                                position.X + 120 + i * 157,
+                            position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Y), 0, 0xffffffff);
+                    }
+                }
+                result = true;
+                break;
+            case ID_LIST_FRAME:
+                if (Sprites[SPRITE_ALL_BACKGROUND])
+                    Sprites[SPRITE_ALL_BACKGROUND]->draw(ListFrame->getAbsolutePosition().UpperLeftCorner, 0,
+                        0xffffffff);
+                result = true;
+                break;
+            case ID_LIST_BUTTON + 7:
+            {
+                int sprite = SPRITE_MODE_BUTTON + GameMode;
+                if (Sprites[sprite])
+                {
+                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
+                    ox::core::CPosition2d<int> position((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
+                        (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
+                    position.X -= SpriteSizes[sprite].X / 2;
+                    position.Y -= SpriteSizes[sprite].Y / 2;
+                    Sprites[sprite]->draw(position, 0, 0xffffffff);
+                }
+                result = true;
+                break;
+            }
+            default:
+                if (id >= ID_PROMOTE && id < ID_PROMOTE + 32)
+                {
+                    ox::core::CPosition2d<int> position = event.GUIEvent.Caller->getAbsolutePosition().UpperLeftCorner;
+                    Sprites[SPRITE_PLANET_ICON + (id - ID_PROMOTE) % 4]->draw(position, 0, 0xffffffff);
+                    result = true;
                 }
                 break;
             }
@@ -1084,19 +1082,20 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         break;
     }
     case ox::event::EET_NETWORK_EVENT:
-        if (event.NetworkEvent.Type == ox::event::ENET_HTTP_DONE)
+        switch (event.NetworkEvent.Type)
         {
+        case ox::event::ENET_HTTP_DONE:
             Lock.enter();
             Response = event.NetworkEvent.Data;
             Lock.leave();
             result = true;
-        }
-        else if (event.NetworkEvent.Type == ox::event::ENET_HTTP_ERROR)
-        {
+            break;
+        case ox::event::ENET_HTTP_ERROR:
             Lock.enter();
             Response = "Error";
             Lock.leave();
             result = true;
+            break;
         }
         break;
     default:
