@@ -223,29 +223,28 @@ void CSaveGameScreen::performListAction()
             startEvent.UserEvent.UserPointer = 0;
             ox::event::gp_subscriberList->OnEvent(startEvent);
         }
+        return;
+    }
+
+    if (newSlot)
+    {
+        ox::core::CString<char> path("$HARVEST_USERDATA$/profiles/");
+        path.append(ox::core::CString<char>("saveGame"));
+        filename = ox::io::CHelpIO::getNextFreeFilename(Device->getFileSystem(), path.c_str(), ".hsg");
+        description = L"";
+    }
+    SelectedFilename = filename;
+    SelectedDescription = description;
+    if (newSlot)
+    {
+        createSaveGameBox();
     }
     else
     {
-        if (newSlot)
-        {
-            ox::core::CString<char> path("$HARVEST_USERDATA$/profiles/");
-            path.append(ox::core::CString<char>("saveGame"));
-            filename = ox::io::CHelpIO::getNextFreeFilename(Device->getFileSystem(), path.c_str(), ".hsg");
-            description = L"";
-        }
-        SelectedFilename = filename;
-        SelectedDescription = description;
-        if (newSlot)
-        {
-            createSaveGameBox();
-        }
-        else
-        {
-            ox::core::CString<wchar_t> question = settings::gp_systemConfig->getLocalizedText(
-                L"menu:overwriteQuestion", SaveList[selected].Header.Description.c_str());
-            GUIEnvironment->addMessageBox(L"Overwrite game?", question.c_str(), true,
-                ox::gui::EMBF_YES | ox::gui::EMBF_NO, 0, ID_CONFIRM_OVERWRITE);
-        }
+        ox::core::CString<wchar_t> question = settings::gp_systemConfig->getLocalizedText(
+            L"menu:overwriteQuestion", SaveList[selected].Header.Description.c_str());
+        GUIEnvironment->addMessageBox(L"Overwrite game?", question.c_str(), true,
+            ox::gui::EMBF_YES | ox::gui::EMBF_NO, 0, ID_CONFIRM_OVERWRITE);
     }
 }
 
