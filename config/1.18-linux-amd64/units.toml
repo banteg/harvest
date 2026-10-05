@@ -346,3 +346,7 @@
 ["ox/gui/IGUIElement.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874278
+
+["ox/core/CAes.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874228
