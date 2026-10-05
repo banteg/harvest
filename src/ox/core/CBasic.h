@@ -24,6 +24,13 @@ inline T max_(const T a, const T b)
 }
 
 //! Returns the absolute value.
+//! value limited to [low, high]; the name and argument order are provisional.
+template <class T>
+inline T clamp(const T value, const T low, const T high)
+{
+    return value > high ? high : max_(low, value);
+}
+
 template <class T>
 inline T abs_(const T a)
 {

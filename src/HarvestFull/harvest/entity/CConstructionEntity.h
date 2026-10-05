@@ -46,7 +46,7 @@ public:
         if (progress >= 1.0f)
             Sparks = SparksNeeded;
         else
-            Sparks = ox::core::max_(ox::core::min_((int)(SparksNeeded * progress), SparksNeeded - 1), 0);
+            Sparks = ox::core::clamp((int)(SparksNeeded * progress), 0, SparksNeeded - 1);
     }
 
 private:

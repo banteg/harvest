@@ -111,8 +111,8 @@ int harvest_spawnMinerals(lua_State* L)
                     float dy = (*it)->getPosition().Y - y;
                     if (dx * dx + dy * dy < 100.0f)
                     {
-                        entity::CMineralsEntity* minerals = (entity::CMineralsEntity*)*it;
-                        minerals->setRemainingMinerals(minerals->getRemainingMinerals() + amount);
+                        ((entity::CMineralsEntity*)*it)->setRemainingMinerals(
+                            ((entity::CMineralsEntity*)*it)->getRemainingMinerals() + amount);
                         return 0;
                     }
                 }
@@ -394,15 +394,14 @@ int harvest_setRushProgress(lua_State* L)
     if (lua_gettop(L) > 0)
     {
         float progress = (float)lua_tonumber(L, 1);
-        progress = progress > 1.0f ? 1.0f : ox::core::max_(0.0f, progress);
-        gp_luaManager->RushProgress = progress;
+        gp_luaManager->RushProgress = ox::core::clamp(progress, 0.0f, 1.0f);
     }
     return 0;
 }
 
 void CLuaManager::setRushProgress(float progress)
 {
-    RushProgress = progress > 1.0f ? 1.0f : ox::core::max_(0.0f, progress);
+    RushProgress = ox::core::clamp(progress, 0.0f, 1.0f);
 }
 
 int harvest_setWaveListVisible(lua_State* L)
@@ -608,15 +607,15 @@ int harvest_setMinimumWorldBorders(lua_State* L)
 {
     if (lua_gettop(L) >= 4)
     {
-        ox::core::CRect<float> borders((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2),
-            (float)lua_tonumber(L, 3), (float)lua_tonumber(L, 4));
-        borders.UpperLeftCorner.X = ox::core::max_(borders.UpperLeftCorner.X, -4096.0f);
-        borders.LowerRightCorner.X = ox::core::min_(ox::core::max_(borders.UpperLeftCorner.X,
-            borders.LowerRightCorner.X), 5120.0f);
-        borders.UpperLeftCorner.Y = ox::core::max_(borders.UpperLeftCorner.Y, -4096.0f);
-        borders.LowerRightCorner.Y = ox::core::min_(ox::core::max_(borders.UpperLeftCorner.Y,
-            borders.LowerRightCorner.Y), 5120.0f);
-        gp_luaManager->setMinimumWorldBorders(borders);
+        float left = (float)lua_tonumber(L, 1);
+        float top = (float)lua_tonumber(L, 2);
+        float right = (float)lua_tonumber(L, 3);
+        float bottom = (float)lua_tonumber(L, 4);
+        left = ox::core::clamp(left, -4096.0f, right);
+        right = ox::core::clamp(right, left, 5120.0f);
+        top = ox::core::clamp(top, -4096.0f, bottom);
+        bottom = ox::core::clamp(bottom, top, 5120.0f);
+        gp_luaManager->setMinimumWorldBorders(ox::core::CRect<float>(left, top, right, bottom));
     }
     return 0;
 }
@@ -862,8 +861,7 @@ int harvest_isKeyPressed(lua_State* L)
     if (lua_gettop(L) > 0)
     {
         int key = lua_tointeger(L, 1);
-        if (key >= 0 && key < 256 && states::CPlayState::m_keys[key])
-            pressed = true;
+        pressed = key >= 0 && key <= 255 && states::CPlayState::m_keys[key];
     }
     lua_pushboolean(L, pressed);
     return 1;
@@ -969,12 +967,17 @@ int harvest_spawnBullet(lua_State* L)
 {
     if (lua_gettop(L) >= 7)
     {
-        float damage = (float)lua_tonumber(L, 1);
-        ox::core::CVector3d<float> start((float)lua_tonumber(L, 2), (float)lua_tonumber(L, 3),
-            (float)lua_tonumber(L, 4));
-        ox::core::CVector3d<float> target((float)lua_tonumber(L, 5), (float)lua_tonumber(L, 6),
-            (float)lua_tonumber(L, 7));
-        entity::gp_entityManager->appendEntity(new entity::CDropshipBulletEntity(damage, start, target), 4);
+        lua_Number damage = lua_tonumber(L, 1);
+        lua_Number startX = lua_tonumber(L, 2);
+        lua_Number startY = lua_tonumber(L, 3);
+        lua_Number startZ = lua_tonumber(L, 4);
+        lua_Number targetX = lua_tonumber(L, 5);
+        lua_Number targetY = lua_tonumber(L, 6);
+        lua_Number targetZ = lua_tonumber(L, 7);
+        ox::core::CVector3d<float> start((float)startX, (float)startY, (float)startZ);
+        ox::core::CVector3d<float> target((float)targetX, (float)targetY, (float)targetZ);
+        entity::CDropshipBulletEntity* bullet = new entity::CDropshipBulletEntity((float)damage, start, target);
+        entity::gp_entityManager->appendEntity(bullet, 4);
     }
     return 0;
 }
@@ -1038,13 +1041,11 @@ int harvest_getSelectedBuildings(lua_State* L)
     for (ox::TArray<ox::entity::SEntityReference*>::iterator it = buildings->begin();
          it != buildings->end(); ++it)
     {
-        entity::CEntity* entity = (entity::CEntity*)(*it)->Entity;
-        if (entity->getEntityType() != 5)
+        if (((entity::CEntity*)(*it)->Entity)->getEntityType() != 5)
         {
-            lua_pushnumber(L, index);
-            Lunar<entity::CBuildingLuaInfo>::push(L, ((entity::CBuildingEntity*)entity)->getLuaInfo());
+            lua_pushnumber(L, index++);
+            Lunar<entity::CBuildingLuaInfo>::push(L, ((entity::CBuildingEntity*)(*it)->Entity)->getLuaInfo());
             lua_rawset(L, -3);
-            ++index;
         }
     }
     return 1;
@@ -1156,7 +1157,8 @@ int harvest_spawnAlien(lua_State* L)
     if (gp_world && lua_gettop(L) >= 3 && entity::gp_entityManager)
     {
         float type = (float)lua_tonumber(L, 1);
-        int alienType = (int)(type >= 0 ? type + 0.5f : type - 0.5f) - 1;
+        int alienType = (int)(type >= 0 ? type + 0.5f : type - 0.5f);
+        alienType -= 1;
         float x = (float)lua_tonumber(L, 2);
         float y = (float)lua_tonumber(L, 3);
         if (CThreatLevel::alienOccursOnPlanet(gp_world->getPlanet(), alienType))
@@ -1175,18 +1177,20 @@ int harvest_spawnBuilding(lua_State* L)
     float progress = 1.0f;
     if (lua_gettop(L) >= 4)
         progress = (float)lua_tonumber(L, 4);
-    int id = -1;
-    if (entity::gp_buildableItems->getIndexForEntityId(buildingId) != -1)
+    if (entity::gp_buildableItems->getIndexForEntityId(buildingId) == -1)
     {
-        entity::CConstructionEntity* construction = new entity::CConstructionEntity(x, y, buildingId);
-        if (construction)
-        {
-            construction->setProgress(progress);
-            entity::gp_entityManager->appendEntity(construction, 0);
-            id = construction->getId();
-        }
+        lua_pushinteger(L, -1);
+        return 1;
     }
-    lua_pushinteger(L, id);
+    entity::CConstructionEntity* construction = new entity::CConstructionEntity(x, y, buildingId);
+    if (!construction)
+    {
+        lua_pushinteger(L, -1);
+        return 1;
+    }
+    construction->setProgress(progress);
+    entity::gp_entityManager->appendEntity(construction, 0);
+    lua_pushinteger(L, construction->getId());
     return 1;
 }
 
@@ -1215,7 +1219,8 @@ int harvest_spawnMissile(lua_State* L)
         double targetX = lua_tonumber(L, 3);
         double targetY = lua_tonumber(L, 4);
         ox::core::CPosition2d<float> target((float)targetX, (float)targetY);
-        entity::gp_entityManager->appendEntity(new entity::CMissileEntity((float)x, (float)y, target, -1, 0, -1), 3);
+        entity::CMissileEntity* missile = new entity::CMissileEntity((float)x, (float)y, target, -1, 0, -1);
+        entity::gp_entityManager->appendEntity(missile, 3);
     }
     return 0;
 }
@@ -1257,7 +1262,8 @@ int harvest_spawnTempestMissile(lua_State* L)
         double targetX = lua_tonumber(L, 3);
         double targetY = lua_tonumber(L, 4);
         ox::core::CPosition2d<float> target((float)targetX, (float)targetY);
-        entity::gp_entityManager->appendEntity(new entity::CMissileEntity((float)x, (float)y, target, -1, 1, -1), 3);
+        entity::CMissileEntity* missile = new entity::CMissileEntity((float)x, (float)y, target, -1, 1, -1);
+        entity::gp_entityManager->appendEntity(missile, 3);
     }
     return 0;
 }

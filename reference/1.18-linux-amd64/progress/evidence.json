@@ -17,7 +17,7 @@
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "84d10adc4f52975000fbf6a9916c2d70d75e66fd69fdadac401a6678f624a0d7",
+    "config/1.18-linux-amd64/symbols.tsv": "cb002121cdffba01e08912ba30f90fe867e0b41dae60b4c03718c3cc8cd5ce54",
     "config/1.18-linux-amd64/units.toml": "ac7dded60a2c9e07569a3d36ef13b5fa325b26464f8ffb569489b0e9f1633b1b"
   },
   "units": [
@@ -5975,7 +5975,7 @@
         ],
         "inputs": {
           "src/ox/core/CBasic.cpp": "23b6116af2ba8b648a21c75283f6c1a33a6b7a14e412d6db2780c0b77b99effd",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
         },
         "system_headers": 100,
@@ -9485,7 +9485,7 @@
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/HarvestFull/harvest/ECustomEvents.h": "850b5d66ce8a9e45974ac3a9e7c4572b3ed8bb8a14da43f74789e7759a8fb89b",
           "src/ox/algo/CArrayFunctions.h": "c1c020c147e23685af15997be3c5df8a5184f8f23c4a9c990de88d3d928ad679",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
@@ -11981,9 +11981,9 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "d51b6c0f4e78fd136faa4de0e13f676aff5a1afb79d964ae465d3fc14033fceb",
+          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "998fb4ca642719d5719a926f9c8eb203dbe56d6b4c4ba000a9975d56ced740cd",
           "src/HarvestFull/harvest/entity/CBuildingEntity.h": "80d9241bcc111563cff6ae7ffac4e95de9243263f0bf57a5f2cfe42a7e7473f9",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/HarvestFull/harvest/entity/CCreativeEntity.h": "daad51edd46689d28b8cc233c901fe3b78321079105a9d2c67a5d92fc68a4ffe",
           "src/HarvestFull/harvest/entity/CDefenseTowerEntity.h": "1c070a78254c2bd2ba0161f0f88aa6666f9d7b0a982a9d2a0434e57b3f5d7c33",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
@@ -15565,7 +15565,7 @@
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -16297,7 +16297,7 @@
           "src/ox/core/CRect.h": "057a212c154928473896ebe68e8c6e5a0bd045be1bfe04e7185dfa2748061689",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "d51b6c0f4e78fd136faa4de0e13f676aff5a1afb79d964ae465d3fc14033fceb",
+          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "998fb4ca642719d5719a926f9c8eb203dbe56d6b4c4ba000a9975d56ced740cd",
           "src/HarvestFull/harvest/entity/CBuildingEntity.h": "80d9241bcc111563cff6ae7ffac4e95de9243263f0bf57a5f2cfe42a7e7473f9",
           "src/HarvestFull/harvest/entity/CHarvestEntity.h": "30df4dce9b983d6dd725ba20bc4399b269f483dc160f52e508f1aa399341a447",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -16312,7 +16312,7 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/HarvestFull/harvest/ECustomEvents.h": "850b5d66ce8a9e45974ac3a9e7c4572b3ed8bb8a14da43f74789e7759a8fb89b",
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "33afcb6d4d6e86f6a7850825f971109febf945c6b3804e61d144fc3246b28454",
           "src/HarvestFull/harvest/entity/CCreativeEntity.h": "daad51edd46689d28b8cc233c901fe3b78321079105a9d2c67a5d92fc68a4ffe",
@@ -17604,7 +17604,7 @@
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
@@ -19023,7 +19023,7 @@
           "src/HarvestFull/harvest/entity/CSparkEntity.h": "2c3afebf49696fd20716c5ed9b435485c613d49ec744b585ae1216cc5e5ddcc4",
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
@@ -19903,7 +19903,7 @@
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
@@ -32634,7 +32634,7 @@
           "src/HarvestFull/harvest/entity/CAlienEntity.h": "5601b0587cb23898c14d7de42fffcf860e6b5ac174304183f0e60150a607b66d",
           "src/HarvestFull/harvest/entity/CMissileTurretEntity.h": "2a5168bde8ba8782f7b9ab1edb075c46c3c6a3da98d8de6b09207cf2fd84bdd1",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
@@ -37399,7 +37399,7 @@
           "src/HarvestFull/harvest/entity/CAlienEntity.h": "5601b0587cb23898c14d7de42fffcf860e6b5ac174304183f0e60150a607b66d",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/HarvestFull/harvest/settings/CAlienPriorities.h": "5142c1d66d9e1513171353b38b667aa34d2f70aabb0868b23570c189dc2938f3",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -48945,7 +48945,7 @@
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/HarvestFull/harvest/entity/CMineralsEntity.h": "f529ffc5b568db5d56a082e777db82bb4ca3b95bf50cd0ce796a2d5ec1bfd816",
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "33afcb6d4d6e86f6a7850825f971109febf945c6b3804e61d144fc3246b28454",
@@ -55528,7 +55528,7 @@
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
           "src/HarvestFull/harvest/entity/CMissileTurretEntity.h": "2a5168bde8ba8782f7b9ab1edb075c46c3c6a3da98d8de6b09207cf2fd84bdd1",
           "src/HarvestFull/harvest/entity/CBuildingEntity.h": "80d9241bcc111563cff6ae7ffac4e95de9243263f0bf57a5f2cfe42a7e7473f9",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
           "src/ox/event/IEventReceiver.h": "84e63c18eb1545592408d96f4f6b4144a459a854b4b6f2cd5bbd2ff1ae1aec83",
           "src/ox/audio/IAudioDriver.h": "62983e656a59de8c0499d6d4996fe8e421e4e592678783f43c4cd48b26d6a130",
@@ -58139,7 +58139,7 @@
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
           "src/ox/audio/IAudioDriver.h": "62983e656a59de8c0499d6d4996fe8e421e4e592678783f43c4cd48b26d6a130",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
@@ -60875,7 +60875,7 @@
           "src/HarvestFull/harvest/entity/CMineralsEntity.h": "f529ffc5b568db5d56a082e777db82bb4ca3b95bf50cd0ce796a2d5ec1bfd816",
           "src/ox/entity/ITestEntityFunction.h": "b178c234a2902d6a14e5584e0870db48927a7a02e2fd3d12a01ff408ffa4f9af",
           "src/ox/entity/ITestBestEntityFunction.h": "90447fc2502db934b5ad9328259525c13c12ecd827d1c86fc27db02b56345581",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c"
         },
         "system_headers": 132,
@@ -61671,7 +61671,7 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CWorld.cpp",
-      "object_sha256": "bf530c1541790bdeef784cb677a6c871f35fbcf28bcb16b55217f2454ca006a5",
+      "object_sha256": "a00322c995575e6895ef45def508806857797145c0dd4ada7e1f9199ff3a7f55",
       "exact": false,
       "sections": [
         {
@@ -61681,7 +61681,7 @@
           "exact": false,
           "address": "0x45fdd0",
           "first_difference": 522,
-          "differing_bytes": 5509,
+          "differing_bytes": 5508,
           "misplaced_symbols": [
             {
               "symbol": "_ZNK7harvest4game6CWorld23getVisibleGameFieldSizeEv",
@@ -63702,7 +63702,7 @@
           "src/ox/video/IParticlePackage.h": "54ea207a17ac6508c8eb0d38dce95af6c08b07104051c965b41d0b7959fa2027",
           "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
           "src/ox/core/CMath.h": "31ca0d074ce10a68ce8e7def8ea12df2033aa74abc07f04b4bc0fe56e41f939c",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -63711,7 +63711,7 @@
           "src/ox/io/IFileSystem.h": "2212aa9673b8df4dbd48fa6c456f2a84827c0992076bf1daba6d9c435ea1b889"
         },
         "system_headers": 129,
-        "object_sha256": "bf530c1541790bdeef784cb677a6c871f35fbcf28bcb16b55217f2454ca006a5"
+        "object_sha256": "a00322c995575e6895ef45def508806857797145c0dd4ada7e1f9199ff3a7f55"
       },
       "fuzzy_target_sha256": "19c1a0fd14fc994ec136600f2706df81ff46df80647b887eca9a257b3fd433be",
       "fuzzy_functions": [
@@ -63785,7 +63785,7 @@
           "address": "0x460220",
           "size": 630,
           "symbol": "_ZN7harvest4game6CWorld16renderBackgroundERKN2ox4core11CPosition2dIfEEPNS2_3gui8IGUIFontEPNS3_5CRectIiEE",
-          "percent": 98.62264
+          "percent": 98.62893
         },
         {
           "address": "0x4604a0",
@@ -70544,17 +70544,17 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CLuaManager.cpp",
-      "object_sha256": "98ed0ad5bf617f183982ffa8183bf2ffdff8b30b5cea67cade19a73f7f868d91",
+      "object_sha256": "732e413c3847e4914a6dd3c104e139547c3ce98424d3739a66910f931d2f21f3",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 53865,
+          "size": 53881,
           "placement": "explicit",
           "exact": false,
           "address": "0x4431c0",
           "first_difference": 2740,
-          "differing_bytes": 15214,
+          "differing_bytes": 13699,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest4game11CLuaManager22setCreativeListVisibleEb",
@@ -70914,448 +70914,430 @@
             {
               "symbol": "_ZN7harvest4game21harvest_setTimerValueEP9lua_State",
               "known": "0x444000",
-              "placed": "0x444ba0"
+              "placed": "0x444bc0"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_setRushProgressEP9lua_State",
               "known": "0x444040",
-              "placed": "0x444be0"
+              "placed": "0x444c00"
             },
             {
               "symbol": "_ZN7harvest4game22harvest_removeMineralsEP9lua_State",
               "known": "0x444a30",
-              "placed": "0x444c40"
+              "placed": "0x444c60"
             },
             {
               "symbol": "_ZN7harvest4game27harvest_spawnTempestMissileEP9lua_State",
               "known": "0x444e80",
-              "placed": "0x445090"
+              "placed": "0x4450b0"
             },
             {
               "symbol": "_ZN7harvest4game20harvest_spawnMissileEP9lua_State",
               "known": "0x444f90",
-              "placed": "0x4451a0"
+              "placed": "0x4451c0"
             },
             {
               "symbol": "_ZN7harvest4game25harvest_spawnEagleMissileEP9lua_State",
               "known": "0x4450a0",
-              "placed": "0x4452b0"
+              "placed": "0x4452d0"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_spawnChargeBombEP9lua_State",
               "known": "0x445260",
-              "placed": "0x445470"
+              "placed": "0x445490"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_spawnBuildingEP9lua_State",
               "known": "0x445380",
-              "placed": "0x445590"
+              "placed": "0x4455b0"
             },
             {
               "symbol": "_ZN7harvest4game17harvest_getPlanetEP9lua_State",
               "known": "0x445540",
-              "placed": "0x445750"
+              "placed": "0x445770"
             },
             {
               "symbol": "_ZN7harvest4game24harvest_isAlienAvailableEP9lua_State",
               "known": "0x4455c0",
-              "placed": "0x4457d0"
+              "placed": "0x4457f0"
             },
             {
               "symbol": "_ZN7harvest4game18harvest_spawnAlienEP9lua_State",
               "known": "0x445640",
-              "placed": "0x445850"
+              "placed": "0x445870"
             },
             {
               "symbol": "_ZN7harvest4game25harvest_isPositionBlockedEP9lua_State",
               "known": "0x445740",
-              "placed": "0x445950"
+              "placed": "0x445970"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_getWorldBordersEP9lua_State",
               "known": "0x445850",
-              "placed": "0x445a60"
+              "placed": "0x445a80"
             },
             {
               "symbol": "_ZN7harvest4game18harvest_addCreditsEP9lua_State",
               "known": "0x4458e0",
-              "placed": "0x445af0"
+              "placed": "0x445b10"
             },
             {
               "symbol": "_ZN7harvest4game18harvest_getCreditsEP9lua_State",
               "known": "0x445970",
-              "placed": "0x445b80"
+              "placed": "0x445ba0"
             },
             {
               "symbol": "_ZN7harvest4game19harvest_spawnBulletEP9lua_State",
               "known": "0x4459c0",
-              "placed": "0x445bd0"
+              "placed": "0x445bf0"
             },
             {
               "symbol": "_ZN7harvest4game24harvest_spawnEnergySparkEP9lua_State",
               "known": "0x445b20",
-              "placed": "0x445d30"
+              "placed": "0x445d50"
             },
             {
               "symbol": "_ZN7harvest4game28harvest_setWaveButtonVisibleEP9lua_State",
               "known": "0x446b50",
-              "placed": "0x445e40"
+              "placed": "0x445e60"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_setTimerVisibleEP9lua_State",
               "known": "0x446a90",
-              "placed": "0x445ea0"
+              "placed": "0x445ec0"
             },
             {
               "symbol": "_ZN7harvest4game26harvest_setWaveListVisibleEP9lua_State",
               "known": "0x446940",
-              "placed": "0x445f10"
+              "placed": "0x445f30"
             },
             {
               "symbol": "_ZN7harvest4game26harvest_setRushListVisibleEP9lua_State",
               "known": "0x4469b0",
-              "placed": "0x445f80"
+              "placed": "0x445fa0"
             },
             {
               "symbol": "_ZN7harvest4game30harvest_setCreativeListVisibleEP9lua_State",
               "known": "0x446a20",
-              "placed": "0x445ff0"
+              "placed": "0x446010"
             },
             {
               "symbol": "_ZN7harvest4game34harvest_renderSpriteStateFreeShapeEP9lua_State",
               "known": "0x445c30",
-              "placed": "0x446060"
+              "placed": "0x446080"
             },
             {
               "symbol": "_ZN7harvest4game25harvest_renderSpriteStateEP9lua_State",
               "known": "0x445ef0",
-              "placed": "0x446340"
+              "placed": "0x446360"
             },
             {
               "symbol": "_ZN7harvest4game27harvest_getTotalAlienDamageEP9lua_State",
               "known": "0x446120",
-              "placed": "0x4465e0"
+              "placed": "0x446600"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_getNumBuildingsEP9lua_State",
               "known": "0x446150",
-              "placed": "0x446610"
+              "placed": "0x446630"
             },
             {
               "symbol": "_ZN7harvest4game20harvest_getNumAliensEP9lua_State",
               "known": "0x446180",
-              "placed": "0x446640"
+              "placed": "0x446660"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_spawnMineralsEP9lua_State",
               "known": "0x4461b0",
-              "placed": "0x446670"
+              "placed": "0x446690"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_spawnParticleEP9lua_State",
               "known": "0x446370",
-              "placed": "0x446830"
+              "placed": "0x446850"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16renderGuiObjectsEPN2ox5video12IVideoDriverEPNS2_3gui8IGUIFontE",
               "known": "0x446530",
-              "placed": "0x4469f0"
+              "placed": "0x446a10"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16postStringAsInfoERKN2ox4core7CStringIcEE",
               "known": "0x446bb0",
-              "placed": "0x446c10"
+              "placed": "0x446c30"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager21getEntityActionButtonEiPKc",
               "known": "0x446cf0",
-              "placed": "0x446d50"
+              "placed": "0x446d70"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager13hookTextInputEPKw",
               "known": "0x446e70",
-              "placed": "0x446ed0"
+              "placed": "0x446ef0"
             },
             {
               "symbol": "_ZN7harvest4game26harvest_setBuildingEnabledEP9lua_State",
               "known": "0x447050",
-              "placed": "0x447020"
+              "placed": "0x447040"
             },
             {
               "symbol": "_ZN7harvest4game13harvest_printEP9lua_State",
               "known": "0x446fc0",
-              "placed": "0x447110"
+              "placed": "0x447130"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_defineUpgradeEP9lua_State",
               "known": "0x447140",
-              "placed": "0x4471a0"
+              "placed": "0x4471c0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager17runFrameFunctionsEf",
               "known": "0x447390",
-              "placed": "0x4473f0"
+              "placed": "0x447410"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManagerD2Ev",
               "known": "0x4474a0",
-              "placed": "0x447500"
+              "placed": "0x447520"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManagerD1Ev",
               "known": "0x447760",
-              "placed": "0x4477c0"
+              "placed": "0x4477e0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager13addTextObjectERKN2ox4core7CStringIwEERKNS3_11CPosition2dIiEEiNS2_5video6SColorE",
               "known": "0x447ab0",
-              "placed": "0x447a80"
+              "placed": "0x447aa0"
             },
             {
               "symbol": "_ZN7harvest4game16harvest_drawTextEP9lua_State",
               "known": "0x4482c0",
-              "placed": "0x447bd0"
+              "placed": "0x447bf0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager18addRectangleObjectERKN2ox4core11CPosition2dIiEERKNS3_12CDimension2dIiEENS2_5video6SColorE",
               "known": "0x447c00",
-              "placed": "0x447e40"
+              "placed": "0x447e60"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_drawRectangleEP9lua_State",
               "known": "0x447d00",
-              "placed": "0x447f40"
+              "placed": "0x447f60"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager13addLineObjectERKN2ox4core11CPosition2dIiEES7_NS2_5video6SColorE",
               "known": "0x447e80",
-              "placed": "0x4480c0"
+              "placed": "0x4480e0"
             },
             {
               "symbol": "_ZN7harvest4game16harvest_drawLineEP9lua_State",
               "known": "0x447f80",
-              "placed": "0x4481c0"
+              "placed": "0x4481e0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager17createSpriteStateEPKcRKN2ox4core7CStringIcEE",
               "known": "0x448100",
-              "placed": "0x448340"
+              "placed": "0x448360"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager15markSpriteStateEi",
               "known": "0x447a20",
-              "placed": "0x448500"
+              "placed": "0x448520"
             },
             {
               "symbol": "_ZN7harvest4game25harvest_removeSpriteStateEP9lua_State",
               "known": "0x447a80",
-              "placed": "0x448560"
+              "placed": "0x448580"
             },
             {
               "symbol": "_ZN7harvest4game23harvest_showInfoMessageEP9lua_State",
               "known": "0x44cac0",
-              "placed": "0x448590"
+              "placed": "0x4485b0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager18initCommonLuaStuffEv",
               "known": "0x448530",
-              "placed": "0x448920"
+              "placed": "0x448940"
             },
             {
               "symbol": "_ZN7harvest4game27harvest_getSelectedBuildingEP9lua_State",
               "known": "0x449080",
-              "placed": "0x449190"
+              "placed": "0x4491b0"
             },
             {
               "symbol": "_ZN7harvest4game19harvest_getBuildingEP9lua_State",
               "known": "0x449120",
-              "placed": "0x449230"
+              "placed": "0x449250"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager22hookEnergyLinkChargingEPNS_6entity15CBuildingEntityE",
               "known": "0x448da0",
-              "placed": "0x449290"
+              "placed": "0x4492b0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager24hookEnergyLinkOverheatedEPNS_6entity15CBuildingEntityE",
               "known": "0x448e30",
-              "placed": "0x449320"
+              "placed": "0x449340"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager22hookMinerOutOfMineralsEPNS_6entity15CBuildingEntityE",
               "known": "0x448ec0",
-              "placed": "0x4493b0"
+              "placed": "0x4493d0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager23hookBuildingConstructedEPNS_6entity15CBuildingEntityE",
               "known": "0x448f50",
-              "placed": "0x449440"
+              "placed": "0x449460"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager18hookBuildingPlacedEPNS_6entity15CBuildingEntityEPKc",
               "known": "0x448fe0",
-              "placed": "0x4494d0"
+              "placed": "0x4494f0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager19hookMissileLaunchedEiPNS_6entity15CBuildingEntityEiff",
               "known": "0x449180",
-              "placed": "0x449570"
+              "placed": "0x449590"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager22hookEnergySparkCreatedEiPNS_6entity15CBuildingEntityE",
               "known": "0x4492b0",
-              "placed": "0x4496a0"
+              "placed": "0x4496c0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16hookCreditsMinedEPNS_6entity15CBuildingEntityEi",
               "known": "0x449360",
-              "placed": "0x449750"
+              "placed": "0x449770"
             },
             {
               "symbol": "_ZN7harvest4game28harvest_getSelectedBuildingsEP9lua_State",
               "known": "0x449400",
-              "placed": "0x4497f0"
+              "placed": "0x449810"
             },
             {
               "symbol": "_ZN7harvest4game21harvest_findBuildingsEP9lua_State",
               "known": "0x449510",
-              "placed": "0x449910"
+              "placed": "0x449920"
             },
             {
               "symbol": "_ZN7harvest4game16harvest_getAlienEP9lua_State",
               "known": "0x449ae0",
-              "placed": "0x449da0"
+              "placed": "0x449db0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager21hookBuildingDestroyedEPKcffPNS_6entity12CAlienEntityE",
               "known": "0x449970",
-              "placed": "0x449e00"
+              "placed": "0x449e10"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16hookAlienSpawnedEPNS_6entity12CAlienEntityE",
               "known": "0x449a50",
-              "placed": "0x449ee0"
+              "placed": "0x449ef0"
             },
             {
               "symbol": "_ZN7harvest4game18harvest_findAliensEP9lua_State",
               "known": "0x449b40",
-              "placed": "0x449f70"
+              "placed": "0x449f80"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager25getNextEntityActionButtonEPKcPNS0_22SLuaEntityActionButtonE",
               "known": "0x449fb0",
-              "placed": "0x44a240"
+              "placed": "0x44a250"
             },
             {
               "symbol": "_ZN7harvest4game14extractLuaPathEP9lua_State",
               "known": "0x44a1b0",
-              "placed": "0x44a430"
+              "placed": "0x44a440"
             },
             {
               "symbol": "_ZN7harvest4game22harvest_addSpriteStateEP9lua_State",
               "known": "0x44a640",
-              "placed": "0x44a8c0"
+              "placed": "0x44a8d0"
             },
             {
               "symbol": "_ZN7harvest4game14harvest_dofileEP9lua_State",
               "known": "0x44a910",
-              "placed": "0x44ab90"
+              "placed": "0x44aba0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager19checkCreativeHookerEPKci",
               "known": "0x449df0",
-              "placed": "0x44b230"
+              "placed": "0x44b240"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager18pushCreativeHookerEPKci",
               "known": "0x44b8e0",
-              "placed": "0x44b3f0"
+              "placed": "0x44b400"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager18hookCreativeUpdateERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityEf",
               "known": "0x44bcb0",
-              "placed": "0x44b7c0"
+              "placed": "0x44b7d0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16hookCreativeInitERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityE",
               "known": "0x44bef0",
-              "placed": "0x44ba00"
+              "placed": "0x44ba10"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
               "known": "0x44f2b0",
-              "placed": "0x44bc20"
+              "placed": "0x44bc30"
             },
             {
               "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
               "known": "0x44f5f0",
-              "placed": "0x44bf60"
+              "placed": "0x44bf70"
             },
             {
               "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
               "known": "0x44f660",
-              "placed": "0x44bfd0"
+              "placed": "0x44bfe0"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager10includeModERKNS0_7SLuaModE",
               "known": "0x44c110",
-              "placed": "0x44c040"
+              "placed": "0x44c050"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager19initLuaByScriptListEv",
               "known": "0x44ca30",
-              "placed": "0x44c960"
+              "placed": "0x44c970"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
               "known": "0x44ddd0",
-              "placed": "0x44c9f0"
+              "placed": "0x44ca00"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager23refreshAvailableLuaModsEPN2ox9IOxDeviceE",
               "known": "0x44f6d0",
-              "placed": "0x44df50"
+              "placed": "0x44df60"
             },
             {
               "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "known": "0x44afb0",
-              "placed": "0x44e6f0"
+              "placed": "0x44e700"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager17initLuaBySaveFileEPN2ox2io9IReadFileEi",
               "known": "0x44fe70",
-              "placed": "0x44f080"
+              "placed": "0x44f090"
             },
             {
               "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "known": "0x44cf00",
-              "placed": "0x44f530"
+              "placed": "0x44f540"
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
               "known": "0x44db50",
-              "placed": "0x450180"
+              "placed": "0x450190"
             }
           ],
           "bad_references": [
-            {
-              "offset": 3898,
-              "type": 11,
-              "symbol": "_ZN7harvest6states10CPlayState6m_keysE",
-              "addend": 0,
-              "reason": "no target address for symbol",
-              "candidate": "0x1b8ff",
-              "matches": false
-            },
-            {
-              "offset": 3918,
-              "type": 2,
-              "symbol": "lua_pushboolean",
-              "addend": -4,
-              "destination": "0x408518",
-              "reason": "different destination",
-              "matches": false
-            },
             {
               "offset": 4739,
               "type": 2,
@@ -71375,373 +71357,7 @@
               "matches": false
             },
             {
-              "offset": 6351,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6377,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6404,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6431,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6439,
-              "type": 2,
-              "symbol": ".LC12",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x33a0274b+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6459,
-              "type": 2,
-              "symbol": "_ZN7harvest4game13gp_luaManagerE",
-              "addend": -4,
-              "destination": "0x86b900",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6520,
-              "type": 2,
-              "symbol": ".LC13",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x6fbb0fa4+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6722,
-              "type": 2,
-              "symbol": ".LC0",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0xcbb7d22+0x4",
-              "matches": false
-            },
-            {
-              "offset": 6738,
-              "type": 2,
-              "symbol": "_ZN7harvest4game13gp_luaManagerE",
-              "addend": -4,
-              "destination": "0x86b900",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7900,
-              "type": 2,
-              "symbol": "_ZN7harvest4game8gp_worldE",
-              "addend": -5,
-              "destination": "0x86b950",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7912,
-              "type": 2,
-              "symbol": "lua_gettop",
-              "addend": -4,
-              "destination": "0x407808",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7928,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -5,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7948,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7967,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7986,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8005,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8012,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8059,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8109,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity14CMissileEntityC1EffRKN2ox4core11CPosition2dIfEEiii",
-              "addend": -4,
-              "destination": "0x439a80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8124,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8146,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8154,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8172,
-              "type": 2,
-              "symbol": "_ZN7harvest4game8gp_worldE",
-              "addend": -5,
-              "destination": "0x86b950",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8184,
-              "type": 2,
-              "symbol": "lua_gettop",
-              "addend": -4,
-              "destination": "0x407808",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8200,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -5,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8220,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8239,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8258,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8277,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8284,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8331,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8378,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity14CMissileEntityC1EffRKN2ox4core11CPosition2dIfEEiii",
-              "addend": -4,
-              "destination": "0x439a80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8393,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8415,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8423,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9449,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9468,
-              "type": 2,
-              "symbol": "_ZNK2ox6entity9COxEntity5getIdEv",
-              "addend": -4,
-              "destination": "0x5e1c00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9479,
-              "type": 2,
-              "symbol": "lua_pushinteger",
-              "addend": -4,
-              "destination": "0x4077e8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9561,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9591,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9599,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10278,
+              "offset": 10310,
               "type": 2,
               "symbol": "lua_pushboolean",
               "addend": -4,
@@ -71750,7 +71366,7 @@
               "matches": false
             },
             {
-              "offset": 10373,
+              "offset": 10405,
               "type": 2,
               "symbol": "_ZN7harvest6entity16gp_entityManagerE",
               "addend": -4,
@@ -71759,7 +71375,7 @@
               "matches": false
             },
             {
-              "offset": 10386,
+              "offset": 10418,
               "type": 2,
               "symbol": "_ZN7harvest6entity14CEntityManager21isBuildingPlacementOkERN2ox4core11CPosition2dIfEEf",
               "addend": -4,
@@ -71768,7 +71384,7 @@
               "matches": false
             },
             {
-              "offset": 10778,
+              "offset": 12004,
               "type": 2,
               "symbol": "lua_gettop",
               "addend": -4,
@@ -71777,97 +71393,7 @@
               "matches": false
             },
             {
-              "offset": 10925,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10944,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10963,
-              "type": 2,
-              "symbol": "lua_tonumber",
-              "addend": -4,
-              "destination": "0x407288",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10974,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11033,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11064,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity21CDropshipBulletEntityC1EfRKN2ox4core9CVector3dIfEES7_",
-              "addend": -4,
-              "destination": "0x42b650",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11079,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity16gp_entityManagerE",
-              "addend": -4,
-              "destination": "0x86b670",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11101,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11109,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11972,
-              "type": 2,
-              "symbol": "lua_gettop",
-              "addend": -4,
-              "destination": "0x407808",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 12055,
+              "offset": 12087,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -71876,7 +71402,7 @@
               "matches": false
             },
             {
-              "offset": 12071,
+              "offset": 12103,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71885,7 +71411,7 @@
               "matches": false
             },
             {
-              "offset": 12090,
+              "offset": 12122,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71894,7 +71420,7 @@
               "matches": false
             },
             {
-              "offset": 12109,
+              "offset": 12141,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71903,7 +71429,7 @@
               "matches": false
             },
             {
-              "offset": 12128,
+              "offset": 12160,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71912,7 +71438,7 @@
               "matches": false
             },
             {
-              "offset": 12147,
+              "offset": 12179,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71921,7 +71447,7 @@
               "matches": false
             },
             {
-              "offset": 12166,
+              "offset": 12198,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71930,7 +71456,7 @@
               "matches": false
             },
             {
-              "offset": 12185,
+              "offset": 12217,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71939,7 +71465,7 @@
               "matches": false
             },
             {
-              "offset": 12204,
+              "offset": 12236,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71948,7 +71474,7 @@
               "matches": false
             },
             {
-              "offset": 12223,
+              "offset": 12255,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -71957,7 +71483,7 @@
               "matches": false
             },
             {
-              "offset": 12245,
+              "offset": 12277,
               "type": 2,
               "symbol": "_ZN7harvest6entity16gp_entityManagerE",
               "addend": -4,
@@ -71966,7 +71492,7 @@
               "matches": false
             },
             {
-              "offset": 12252,
+              "offset": 12284,
               "type": 2,
               "symbol": "_ZN7harvest4game13gp_luaManagerE",
               "addend": -4,
@@ -71975,7 +71501,7 @@
               "matches": false
             },
             {
-              "offset": 12399,
+              "offset": 12431,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager14getSpriteStateEi",
               "addend": -4,
@@ -71984,7 +71510,7 @@
               "matches": false
             },
             {
-              "offset": 12412,
+              "offset": 12444,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -71993,7 +71519,7 @@
               "matches": false
             },
             {
-              "offset": 12466,
+              "offset": 12498,
               "type": 2,
               "symbol": "_ZN7harvest6entity20CSpecialEffectEntityC1ERKN2ox4core11CPosition2dIfEES7_S7_S7_fPNS2_5video21ISpriteAnimationStateENS8_6SColorE",
               "addend": -4,
@@ -72002,7 +71528,7 @@
               "matches": false
             },
             {
-              "offset": 12481,
+              "offset": 12513,
               "type": 2,
               "symbol": "_ZN7harvest6entity16gp_entityManagerE",
               "addend": -4,
@@ -72011,7 +71537,7 @@
               "matches": false
             },
             {
-              "offset": 12511,
+              "offset": 12543,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72020,7 +71546,7 @@
               "matches": false
             },
             {
-              "offset": 12560,
+              "offset": 12592,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72029,7 +71555,7 @@
               "matches": false
             },
             {
-              "offset": 12576,
+              "offset": 12608,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72038,7 +71564,7 @@
               "matches": false
             },
             {
-              "offset": 12602,
+              "offset": 12634,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72047,7 +71573,7 @@
               "matches": false
             },
             {
-              "offset": 12648,
+              "offset": 12680,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -72056,7 +71582,7 @@
               "matches": false
             },
             {
-              "offset": 12656,
+              "offset": 12688,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72065,7 +71591,7 @@
               "matches": false
             },
             {
-              "offset": 12820,
+              "offset": 12852,
               "type": 2,
               "symbol": ".LC0",
               "addend": -4,
@@ -72073,7 +71599,7 @@
               "matches": false
             },
             {
-              "offset": 12830,
+              "offset": 12862,
               "type": 2,
               "symbol": "_ZN7harvest4game13gp_luaManagerE",
               "addend": -4,
@@ -72082,7 +71608,7 @@
               "matches": false
             },
             {
-              "offset": 12855,
+              "offset": 12887,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager14getSpriteStateEi",
               "addend": -4,
@@ -72091,7 +71617,7 @@
               "matches": false
             },
             {
-              "offset": 12868,
+              "offset": 12900,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -72100,7 +71626,7 @@
               "matches": false
             },
             {
-              "offset": 12922,
+              "offset": 12954,
               "type": 2,
               "symbol": "_ZN7harvest6entity20CSpecialEffectEntityC1EfffPN2ox5video21ISpriteAnimationStateEffNS3_6SColorE",
               "addend": -4,
@@ -72109,7 +71635,7 @@
               "matches": false
             },
             {
-              "offset": 12929,
+              "offset": 12961,
               "type": 2,
               "symbol": "_ZN7harvest6entity16gp_entityManagerE",
               "addend": -4,
@@ -72118,7 +71644,7 @@
               "matches": false
             },
             {
-              "offset": 12969,
+              "offset": 13001,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72127,7 +71653,7 @@
               "matches": false
             },
             {
-              "offset": 12999,
+              "offset": 13031,
               "type": 2,
               "symbol": ".LC0",
               "addend": -4,
@@ -72135,7 +71661,7 @@
               "matches": false
             },
             {
-              "offset": 13022,
+              "offset": 13054,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72144,7 +71670,7 @@
               "matches": false
             },
             {
-              "offset": 13084,
+              "offset": 13116,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72153,7 +71679,7 @@
               "matches": false
             },
             {
-              "offset": 13131,
+              "offset": 13163,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72162,7 +71688,7 @@
               "matches": false
             },
             {
-              "offset": 13191,
+              "offset": 13223,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72171,7 +71697,7 @@
               "matches": false
             },
             {
-              "offset": 13232,
+              "offset": 13264,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72180,7 +71706,7 @@
               "matches": false
             },
             {
-              "offset": 13270,
+              "offset": 13302,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72189,7 +71715,7 @@
               "matches": false
             },
             {
-              "offset": 13318,
+              "offset": 13350,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -72198,7 +71724,7 @@
               "matches": false
             },
             {
-              "offset": 13326,
+              "offset": 13358,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72207,25 +71733,7 @@
               "matches": false
             },
             {
-              "offset": 13766,
-              "type": 2,
-              "symbol": "_ZN7harvest6entity15CMineralsEntity20setRemainingMineralsEi",
-              "addend": -4,
-              "destination": "0x4357f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 13893,
-              "type": 2,
-              "symbol": "_ZN2ox5event20CEventSubscriberList16postDelayedEventERKNS0_6SEventE",
-              "addend": -4,
-              "reason": "no target address for symbol",
-              "candidate": "0x5e37d0",
-              "matches": false
-            },
-            {
-              "offset": 14468,
+              "offset": 14500,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72234,7 +71742,7 @@
               "matches": false
             },
             {
-              "offset": 14476,
+              "offset": 14508,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -72243,7 +71751,7 @@
               "matches": false
             },
             {
-              "offset": 19468,
+              "offset": 19500,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72252,7 +71760,7 @@
               "matches": false
             },
             {
-              "offset": 20140,
+              "offset": 20172,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72261,7 +71769,7 @@
               "matches": false
             },
             {
-              "offset": 20180,
+              "offset": 20212,
               "type": 2,
               "symbol": "lua_gettop",
               "addend": -4,
@@ -72270,7 +71778,7 @@
               "matches": false
             },
             {
-              "offset": 20208,
+              "offset": 20240,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72279,7 +71787,7 @@
               "matches": false
             },
             {
-              "offset": 20819,
+              "offset": 20851,
               "type": 2,
               "symbol": "lua_gettop",
               "addend": -4,
@@ -72288,7 +71796,7 @@
               "matches": false
             },
             {
-              "offset": 20847,
+              "offset": 20879,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72297,7 +71805,7 @@
               "matches": false
             },
             {
-              "offset": 20898,
+              "offset": 20930,
               "type": 2,
               "symbol": "_ZN7harvest6entity7CEntity16gp_spritePackageE",
               "addend": -4,
@@ -72306,7 +71814,7 @@
               "matches": false
             },
             {
-              "offset": 21221,
+              "offset": 21253,
               "type": 2,
               "symbol": "_ZNSt6vectorIPN2ox5video21ISpriteAnimationStateESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
@@ -72315,7 +71823,7 @@
               "matches": false
             },
             {
-              "offset": 21293,
+              "offset": 21325,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72324,7 +71832,7 @@
               "matches": false
             },
             {
-              "offset": 21301,
+              "offset": 21333,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72333,7 +71841,7 @@
               "matches": false
             },
             {
-              "offset": 21974,
+              "offset": 22006,
               "type": 2,
               "symbol": "_ZN7harvest4game13gp_luaManagerE",
               "addend": -4,
@@ -72342,7 +71850,7 @@
               "matches": false
             },
             {
-              "offset": 22024,
+              "offset": 22056,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72351,7 +71859,7 @@
               "matches": false
             },
             {
-              "offset": 22039,
+              "offset": 22071,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72360,7 +71868,7 @@
               "matches": false
             },
             {
-              "offset": 22054,
+              "offset": 22086,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72369,7 +71877,7 @@
               "matches": false
             },
             {
-              "offset": 22068,
+              "offset": 22100,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72378,7 +71886,7 @@
               "matches": false
             },
             {
-              "offset": 22107,
+              "offset": 22139,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -72387,7 +71895,7 @@
               "matches": false
             },
             {
-              "offset": 22123,
+              "offset": 22155,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72396,7 +71904,7 @@
               "matches": false
             },
             {
-              "offset": 22148,
+              "offset": 22180,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -72405,7 +71913,7 @@
               "matches": false
             },
             {
-              "offset": 22161,
+              "offset": 22193,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72414,7 +71922,7 @@
               "matches": false
             },
             {
-              "offset": 22226,
+              "offset": 22258,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72423,7 +71931,7 @@
               "matches": false
             },
             {
-              "offset": 22259,
+              "offset": 22291,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72432,7 +71940,7 @@
               "matches": false
             },
             {
-              "offset": 22297,
+              "offset": 22329,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72441,38 +71949,20 @@
               "matches": false
             },
             {
-              "offset": 22307,
+              "offset": 22339,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22315,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22323,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 22347,
               "type": 2,
-              "symbol": "_ZN7harvest4game16SInfoLineMessageD1Ev",
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
-              "destination": "0x450f90",
+              "destination": "0x409c40",
               "reason": "different destination",
               "matches": false
             },
@@ -72486,16 +71976,25 @@
               "matches": false
             },
             {
-              "offset": 26195,
+              "offset": 22379,
               "type": 2,
-              "symbol": "_ZN7harvest4game13gp_luaManagerE",
+              "symbol": "_ZN7harvest4game16SInfoLineMessageD1Ev",
               "addend": -4,
-              "destination": "0x86b900",
+              "destination": "0x450f90",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 26241,
+              "offset": 22387,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 26254,
               "type": 2,
               "symbol": "lua_createtable",
               "addend": -4,
@@ -72504,78 +72003,7 @@
               "matches": false
             },
             {
-              "offset": 26289,
-              "type": 2,
-              "symbol": "lua_pushnumber",
-              "addend": -4,
-              "destination": "0x407308",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26303,
-              "type": 2,
-              "symbol": "_ZN5LunarIN7harvest6entity16CBuildingLuaInfoEE4pushEP9lua_StatePS2_b",
-              "addend": -4,
-              "destination": "0x452010",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26316,
-              "type": 2,
-              "symbol": "lua_rawset",
-              "addend": -4,
-              "destination": "0x4078f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26390,
-              "type": 2,
-              "symbol": "lua_createtable",
-              "addend": -4,
-              "destination": "0x4080e8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26398,
-              "type": 2,
-              "symbol": ".LC51",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x42d94f1+0x8",
-              "matches": false
-            },
-            {
-              "offset": 26406,
-              "type": 2,
-              "symbol": "lua_pushnumber",
-              "addend": -4,
-              "destination": "0x407308",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26420,
-              "type": 2,
-              "symbol": "_ZN5LunarIN7harvest6entity16CBuildingLuaInfoEE4pushEP9lua_StatePS2_b",
-              "addend": -4,
-              "destination": "0x452010",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26433,
-              "type": 2,
-              "symbol": "lua_rawset",
-              "addend": -4,
-              "destination": "0x4078f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 26603,
+              "offset": 26619,
               "type": 2,
               "symbol": "_ZNK2ox6entity16COxEntityManager13getEntityListEi",
               "addend": -4,
@@ -72584,7 +72012,7 @@
               "matches": false
             },
             {
-              "offset": 26623,
+              "offset": 26639,
               "type": 2,
               "symbol": "lua_createtable",
               "addend": -4,
@@ -72593,7 +72021,7 @@
               "matches": false
             },
             {
-              "offset": 26746,
+              "offset": 26762,
               "type": 2,
               "symbol": "_ZNK2ox6entity9COxEntity11getPositionEv",
               "addend": -4,
@@ -72602,7 +72030,7 @@
               "matches": false
             },
             {
-              "offset": 26803,
+              "offset": 26819,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -72611,7 +72039,7 @@
               "matches": false
             },
             {
-              "offset": 26821,
+              "offset": 26837,
               "type": 2,
               "symbol": "_ZN5LunarIN7harvest6entity16CBuildingLuaInfoEE4pushEP9lua_StatePS2_b",
               "addend": -4,
@@ -72620,7 +72048,7 @@
               "matches": false
             },
             {
-              "offset": 26834,
+              "offset": 26850,
               "type": 2,
               "symbol": "lua_rawset",
               "addend": -4,
@@ -72629,7 +72057,7 @@
               "matches": false
             },
             {
-              "offset": 26880,
+              "offset": 26896,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72638,7 +72066,7 @@
               "matches": false
             },
             {
-              "offset": 26919,
+              "offset": 26935,
               "type": 2,
               "symbol": "_ZN7harvest6entity15CCreativeEntity13getBuildingIdEv",
               "addend": -4,
@@ -72647,7 +72075,7 @@
               "matches": false
             },
             {
-              "offset": 26957,
+              "offset": 26973,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72656,7 +72084,7 @@
               "matches": false
             },
             {
-              "offset": 27010,
+              "offset": 27026,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72665,7 +72093,7 @@
               "matches": false
             },
             {
-              "offset": 27042,
+              "offset": 27058,
               "type": 2,
               "symbol": "_ZNK2ox6entity9COxEntity11getPositionEv",
               "addend": -4,
@@ -72674,7 +72102,7 @@
               "matches": false
             },
             {
-              "offset": 27195,
+              "offset": 27211,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -72683,7 +72111,7 @@
               "matches": false
             },
             {
-              "offset": 27211,
+              "offset": 27227,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72692,7 +72120,7 @@
               "matches": false
             },
             {
-              "offset": 27223,
+              "offset": 27239,
               "type": 2,
               "symbol": "_ZN7harvest6entity17gp_buildableItemsE",
               "addend": -4,
@@ -72701,7 +72129,7 @@
               "matches": false
             },
             {
-              "offset": 27228,
+              "offset": 27244,
               "type": 2,
               "symbol": "_ZN7harvest6entity15CBuildableItems19getIndexForEntityIdEPKc",
               "addend": -4,
@@ -72710,7 +72138,7 @@
               "matches": false
             },
             {
-              "offset": 27235,
+              "offset": 27251,
               "type": 2,
               "symbol": "_ZN7harvest6entity17gp_buildableItemsE",
               "addend": -4,
@@ -72719,7 +72147,7 @@
               "matches": false
             },
             {
-              "offset": 27242,
+              "offset": 27258,
               "type": 2,
               "symbol": "_ZN7harvest6entity15CBuildableItems13getEntityTypeEi",
               "addend": -4,
@@ -72728,7 +72156,7 @@
               "matches": false
             },
             {
-              "offset": 27275,
+              "offset": 27291,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72737,7 +72165,7 @@
               "matches": false
             },
             {
-              "offset": 27307,
+              "offset": 27323,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72746,7 +72174,7 @@
               "matches": false
             },
             {
-              "offset": 27339,
+              "offset": 27355,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72755,7 +72183,7 @@
               "matches": false
             },
             {
-              "offset": 27350,
+              "offset": 27366,
               "type": 2,
               "symbol": "_ZN7harvest6entity16gp_entityManagerE",
               "addend": -4,
@@ -72764,7 +72192,7 @@
               "matches": false
             },
             {
-              "offset": 27408,
+              "offset": 27424,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72773,7 +72201,7 @@
               "matches": false
             },
             {
-              "offset": 27440,
+              "offset": 27456,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72782,7 +72210,7 @@
               "matches": false
             },
             {
-              "offset": 27472,
+              "offset": 27488,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72791,7 +72219,7 @@
               "matches": false
             },
             {
-              "offset": 27504,
+              "offset": 27520,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72800,16 +72228,7 @@
               "matches": false
             },
             {
-              "offset": 27553,
-              "type": 2,
-              "symbol": "lua_tolstring",
-              "addend": -4,
-              "destination": "0x4071b8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 27578,
+              "offset": 27569,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -72820,6 +72239,15 @@
             {
               "offset": 27594,
               "type": 2,
+              "symbol": "lua_tolstring",
+              "addend": -4,
+              "destination": "0x4071b8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 27610,
+              "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
               "destination": "0x409c20",
@@ -72827,7 +72255,7 @@
               "matches": false
             },
             {
-              "offset": 27602,
+              "offset": 27618,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72836,7 +72264,7 @@
               "matches": false
             },
             {
-              "offset": 28198,
+              "offset": 28214,
               "type": 2,
               "symbol": "lua_createtable",
               "addend": -4,
@@ -72845,7 +72273,7 @@
               "matches": false
             },
             {
-              "offset": 28273,
+              "offset": 28289,
               "type": 2,
               "symbol": "_ZNK2ox6entity9COxEntity11getPositionEv",
               "addend": -4,
@@ -72854,7 +72282,7 @@
               "matches": false
             },
             {
-              "offset": 28338,
+              "offset": 28354,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -72863,7 +72291,7 @@
               "matches": false
             },
             {
-              "offset": 28356,
+              "offset": 28372,
               "type": 2,
               "symbol": "_ZN5LunarIN7harvest6entity13CAlienLuaInfoEE4pushEP9lua_StatePS2_b",
               "addend": -4,
@@ -72872,7 +72300,7 @@
               "matches": false
             },
             {
-              "offset": 28369,
+              "offset": 28385,
               "type": 2,
               "symbol": "lua_rawset",
               "addend": -4,
@@ -72881,7 +72309,7 @@
               "matches": false
             },
             {
-              "offset": 28416,
+              "offset": 28432,
               "type": 2,
               "symbol": "_ZNK2ox6entity9COxEntity11getPositionEv",
               "addend": -4,
@@ -72890,7 +72318,7 @@
               "matches": false
             },
             {
-              "offset": 28505,
+              "offset": 28521,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72899,7 +72327,7 @@
               "matches": false
             },
             {
-              "offset": 28523,
+              "offset": 28539,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72908,7 +72336,7 @@
               "matches": false
             },
             {
-              "offset": 28550,
+              "offset": 28566,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72917,7 +72345,7 @@
               "matches": false
             },
             {
-              "offset": 28577,
+              "offset": 28593,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72926,7 +72354,7 @@
               "matches": false
             },
             {
-              "offset": 28631,
+              "offset": 28647,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72935,7 +72363,7 @@
               "matches": false
             },
             {
-              "offset": 28646,
+              "offset": 28662,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72944,7 +72372,7 @@
               "matches": false
             },
             {
-              "offset": 28673,
+              "offset": 28689,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72953,7 +72381,7 @@
               "matches": false
             },
             {
-              "offset": 28700,
+              "offset": 28716,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72962,7 +72390,7 @@
               "matches": false
             },
             {
-              "offset": 28727,
+              "offset": 28743,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -72971,7 +72399,7 @@
               "matches": false
             },
             {
-              "offset": 28772,
+              "offset": 28788,
               "type": 2,
               "symbol": "lua_tointeger",
               "addend": -4,
@@ -72980,7 +72408,7 @@
               "matches": false
             },
             {
-              "offset": 28982,
+              "offset": 28998,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72989,7 +72417,7 @@
               "matches": false
             },
             {
-              "offset": 29121,
+              "offset": 29137,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72998,7 +72426,7 @@
               "matches": false
             },
             {
-              "offset": 29212,
+              "offset": 29228,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73007,7 +72435,7 @@
               "matches": false
             },
             {
-              "offset": 30855,
+              "offset": 30871,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73016,7 +72444,7 @@
               "matches": false
             },
             {
-              "offset": 30875,
+              "offset": 30891,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -73025,7 +72453,7 @@
               "matches": false
             },
             {
-              "offset": 30887,
+              "offset": 30903,
               "type": 2,
               "symbol": "_ZN7harvest4game13gp_luaManagerE",
               "addend": -4,
@@ -73034,7 +72462,7 @@
               "matches": false
             },
             {
-              "offset": 30898,
+              "offset": 30914,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager17createSpriteStateEPKcRKN2ox4core7CStringIcEE",
               "addend": -4,
@@ -73043,7 +72471,7 @@
               "matches": false
             },
             {
-              "offset": 30909,
+              "offset": 30925,
               "type": 2,
               "symbol": "lua_pushinteger",
               "addend": -4,
@@ -73052,7 +72480,7 @@
               "matches": false
             },
             {
-              "offset": 30924,
+              "offset": 30940,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73061,7 +72489,7 @@
               "matches": false
             },
             {
-              "offset": 30965,
+              "offset": 30981,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73070,7 +72498,7 @@
               "matches": false
             },
             {
-              "offset": 31079,
+              "offset": 31095,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73079,7 +72507,7 @@
               "matches": false
             },
             {
-              "offset": 31107,
+              "offset": 31123,
               "type": 2,
               "symbol": "lua_pushinteger",
               "addend": -4,
@@ -73088,25 +72516,25 @@
               "matches": false
             },
             {
-              "offset": 31128,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 31136,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
               "offset": 31144,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 31152,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 31160,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -73115,7 +72543,7 @@
               "matches": false
             },
             {
-              "offset": 31160,
+              "offset": 31176,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73124,7 +72552,7 @@
               "matches": false
             },
             {
-              "offset": 33496,
+              "offset": 33512,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -73133,7 +72561,7 @@
               "matches": false
             },
             {
-              "offset": 33626,
+              "offset": 33642,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73142,7 +72570,7 @@
               "matches": false
             },
             {
-              "offset": 33718,
+              "offset": 33734,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73151,7 +72579,7 @@
               "matches": false
             },
             {
-              "offset": 33808,
+              "offset": 33824,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73160,7 +72588,7 @@
               "matches": false
             },
             {
-              "offset": 33863,
+              "offset": 33879,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73169,7 +72597,7 @@
               "matches": false
             },
             {
-              "offset": 33959,
+              "offset": 33975,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -73178,7 +72606,7 @@
               "matches": false
             },
             {
-              "offset": 34029,
+              "offset": 34045,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73187,7 +72615,7 @@
               "matches": false
             },
             {
-              "offset": 34051,
+              "offset": 34067,
               "type": 2,
               "symbol": "lua_rawgeti",
               "addend": -4,
@@ -73196,7 +72624,7 @@
               "matches": false
             },
             {
-              "offset": 34068,
+              "offset": 34084,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -73205,7 +72633,7 @@
               "matches": false
             },
             {
-              "offset": 34213,
+              "offset": 34229,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73214,7 +72642,7 @@
               "matches": false
             },
             {
-              "offset": 34265,
+              "offset": 34281,
               "type": 2,
               "symbol": "_ZNSt6vectorIN7harvest4game13SCreativeHookESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
               "addend": -4,
@@ -73223,7 +72651,7 @@
               "matches": false
             },
             {
-              "offset": 34281,
+              "offset": 34297,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73232,7 +72660,7 @@
               "matches": false
             },
             {
-              "offset": 34289,
+              "offset": 34305,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -73241,7 +72669,7 @@
               "matches": false
             },
             {
-              "offset": 39075,
+              "offset": 39091,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73250,7 +72678,7 @@
               "matches": false
             },
             {
-              "offset": 39481,
+              "offset": 39497,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -73259,7 +72687,7 @@
               "matches": false
             },
             {
-              "offset": 39497,
+              "offset": 39513,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfigurationC1EPNS_2io11IFileSystemE",
               "addend": -4,
@@ -73268,7 +72696,7 @@
               "matches": false
             },
             {
-              "offset": 39536,
+              "offset": 39552,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73277,7 +72705,7 @@
               "matches": false
             },
             {
-              "offset": 39737,
+              "offset": 39753,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73286,7 +72714,7 @@
               "matches": false
             },
             {
-              "offset": 39937,
+              "offset": 39953,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73295,7 +72723,7 @@
               "matches": false
             },
             {
-              "offset": 39970,
+              "offset": 39986,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration4readEPNS_2io9IReadFileE",
               "addend": -4,
@@ -73304,7 +72732,7 @@
               "matches": false
             },
             {
-              "offset": 40006,
+              "offset": 40022,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73313,7 +72741,7 @@
               "matches": false
             },
             {
-              "offset": 40025,
+              "offset": 40041,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 0,
@@ -73321,7 +72749,7 @@
               "matches": false
             },
             {
-              "offset": 40033,
+              "offset": 40049,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
               "addend": -4,
@@ -73330,7 +72758,7 @@
               "matches": false
             },
             {
-              "offset": 40042,
+              "offset": 40058,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 40,
@@ -73338,7 +72766,7 @@
               "matches": false
             },
             {
-              "offset": 40050,
+              "offset": 40066,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
               "addend": -4,
@@ -73347,7 +72775,7 @@
               "matches": false
             },
             {
-              "offset": 40089,
+              "offset": 40105,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73356,7 +72784,7 @@
               "matches": false
             },
             {
-              "offset": 40135,
+              "offset": 40151,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73365,7 +72793,7 @@
               "matches": false
             },
             {
-              "offset": 40181,
+              "offset": 40197,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73374,7 +72802,7 @@
               "matches": false
             },
             {
-              "offset": 40224,
+              "offset": 40240,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73383,7 +72811,7 @@
               "matches": false
             },
             {
-              "offset": 40276,
+              "offset": 40292,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73392,7 +72820,7 @@
               "matches": false
             },
             {
-              "offset": 40300,
+              "offset": 40316,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 0,
@@ -73400,7 +72828,7 @@
               "matches": false
             },
             {
-              "offset": 40316,
+              "offset": 40332,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
               "addend": -4,
@@ -73409,7 +72837,7 @@
               "matches": false
             },
             {
-              "offset": 40326,
+              "offset": 40342,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 88,
@@ -73417,7 +72845,7 @@
               "matches": false
             },
             {
-              "offset": 40334,
+              "offset": 40350,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
               "addend": -4,
@@ -73426,7 +72854,7 @@
               "matches": false
             },
             {
-              "offset": 40347,
+              "offset": 40363,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 40,
@@ -73434,7 +72862,7 @@
               "matches": false
             },
             {
-              "offset": 40355,
+              "offset": 40371,
               "type": 2,
               "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
               "addend": -4,
@@ -73443,7 +72871,7 @@
               "matches": false
             },
             {
-              "offset": 40370,
+              "offset": 40386,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73452,7 +72880,7 @@
               "matches": false
             },
             {
-              "offset": 40391,
+              "offset": 40407,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73461,7 +72889,7 @@
               "matches": false
             },
             {
-              "offset": 40578,
+              "offset": 40594,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73470,7 +72898,7 @@
               "matches": false
             },
             {
-              "offset": 40748,
+              "offset": 40764,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73479,7 +72907,7 @@
               "matches": false
             },
             {
-              "offset": 40765,
+              "offset": 40781,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 522,
@@ -73487,7 +72915,7 @@
               "matches": false
             },
             {
-              "offset": 40809,
+              "offset": 40825,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73496,7 +72924,7 @@
               "matches": false
             },
             {
-              "offset": 40822,
+              "offset": 40838,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 522,
@@ -73504,7 +72932,7 @@
               "matches": false
             },
             {
-              "offset": 40852,
+              "offset": 40868,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 522,
@@ -73512,7 +72940,7 @@
               "matches": false
             },
             {
-              "offset": 40988,
+              "offset": 41004,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73521,7 +72949,7 @@
               "matches": false
             },
             {
-              "offset": 41108,
+              "offset": 41124,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73530,7 +72958,7 @@
               "matches": false
             },
             {
-              "offset": 41165,
+              "offset": 41181,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73539,7 +72967,7 @@
               "matches": false
             },
             {
-              "offset": 41186,
+              "offset": 41202,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73548,7 +72976,7 @@
               "matches": false
             },
             {
-              "offset": 41269,
+              "offset": 41285,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73557,7 +72985,7 @@
               "matches": false
             },
             {
-              "offset": 41321,
+              "offset": 41337,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73566,7 +72994,7 @@
               "matches": false
             },
             {
-              "offset": 41406,
+              "offset": 41422,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 501,
@@ -73574,7 +73002,7 @@
               "matches": false
             },
             {
-              "offset": 41445,
+              "offset": 41461,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -73583,7 +73011,7 @@
               "matches": false
             },
             {
-              "offset": 41592,
+              "offset": 41608,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73592,7 +73020,7 @@
               "matches": false
             },
             {
-              "offset": 41665,
+              "offset": 41681,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73601,7 +73029,7 @@
               "matches": false
             },
             {
-              "offset": 41762,
+              "offset": 41778,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 510,
@@ -73609,7 +73037,7 @@
               "matches": false
             },
             {
-              "offset": 41809,
+              "offset": 41825,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73618,7 +73046,7 @@
               "matches": false
             },
             {
-              "offset": 41822,
+              "offset": 41838,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 510,
@@ -73626,7 +73054,7 @@
               "matches": false
             },
             {
-              "offset": 41860,
+              "offset": 41876,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 510,
@@ -73634,7 +73062,7 @@
               "matches": false
             },
             {
-              "offset": 42014,
+              "offset": 42030,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73643,7 +73071,7 @@
               "matches": false
             },
             {
-              "offset": 42062,
+              "offset": 42078,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
               "addend": 4,
@@ -73652,7 +73080,7 @@
               "matches": false
             },
             {
-              "offset": 42069,
+              "offset": 42085,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
               "addend": 12,
@@ -73661,7 +73089,7 @@
               "matches": false
             },
             {
-              "offset": 42135,
+              "offset": 42151,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73670,7 +73098,7 @@
               "matches": false
             },
             {
-              "offset": 42234,
+              "offset": 42250,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73679,7 +73107,7 @@
               "matches": false
             },
             {
-              "offset": 42333,
+              "offset": 42349,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73688,7 +73116,7 @@
               "matches": false
             },
             {
-              "offset": 42442,
+              "offset": 42458,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73697,7 +73125,7 @@
               "matches": false
             },
             {
-              "offset": 42527,
+              "offset": 42543,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
               "addend": 4,
@@ -73706,7 +73134,7 @@
               "matches": false
             },
             {
-              "offset": 42538,
+              "offset": 42554,
               "type": 2,
               "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
               "addend": 4,
@@ -73715,7 +73143,7 @@
               "matches": false
             },
             {
-              "offset": 42556,
+              "offset": 42572,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73724,7 +73152,7 @@
               "matches": false
             },
             {
-              "offset": 42574,
+              "offset": 42590,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73733,7 +73161,7 @@
               "matches": false
             },
             {
-              "offset": 42592,
+              "offset": 42608,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73742,7 +73170,7 @@
               "matches": false
             },
             {
-              "offset": 42602,
+              "offset": 42618,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
@@ -73751,7 +73179,7 @@
               "matches": false
             },
             {
-              "offset": 42632,
+              "offset": 42648,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73760,7 +73188,7 @@
               "matches": false
             },
             {
-              "offset": 42766,
+              "offset": 42782,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73769,7 +73197,7 @@
               "matches": false
             },
             {
-              "offset": 42790,
+              "offset": 42806,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73778,7 +73206,7 @@
               "matches": false
             },
             {
-              "offset": 42848,
+              "offset": 42864,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73787,7 +73215,7 @@
               "matches": false
             },
             {
-              "offset": 42982,
+              "offset": 42998,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73796,7 +73224,7 @@
               "matches": false
             },
             {
-              "offset": 43012,
+              "offset": 43028,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73805,7 +73233,7 @@
               "matches": false
             },
             {
-              "offset": 43119,
+              "offset": 43135,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73814,7 +73242,7 @@
               "matches": false
             },
             {
-              "offset": 43146,
+              "offset": 43162,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73823,7 +73251,7 @@
               "matches": false
             },
             {
-              "offset": 43263,
+              "offset": 43279,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73832,7 +73260,7 @@
               "matches": false
             },
             {
-              "offset": 43283,
+              "offset": 43299,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73841,7 +73269,7 @@
               "matches": false
             },
             {
-              "offset": 43331,
+              "offset": 43347,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73850,7 +73278,7 @@
               "matches": false
             },
             {
-              "offset": 43389,
+              "offset": 43405,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73859,7 +73287,7 @@
               "matches": false
             },
             {
-              "offset": 43527,
+              "offset": 43543,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73868,7 +73296,7 @@
               "matches": false
             },
             {
-              "offset": 43564,
+              "offset": 43580,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73877,7 +73305,7 @@
               "matches": false
             },
             {
-              "offset": 43595,
+              "offset": 43611,
               "type": 10,
               "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
               "addend": 0,
@@ -73886,7 +73314,7 @@
               "matches": false
             },
             {
-              "offset": 43600,
+              "offset": 43616,
               "type": 2,
               "symbol": "_ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
               "addend": -4,
@@ -73895,7 +73323,7 @@
               "matches": false
             },
             {
-              "offset": 43625,
+              "offset": 43641,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 522,
@@ -73903,7 +73331,7 @@
               "matches": false
             },
             {
-              "offset": 43667,
+              "offset": 43683,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -73912,7 +73340,7 @@
               "matches": false
             },
             {
-              "offset": 43800,
+              "offset": 43816,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73921,7 +73349,7 @@
               "matches": false
             },
             {
-              "offset": 43839,
+              "offset": 43855,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73930,7 +73358,7 @@
               "matches": false
             },
             {
-              "offset": 43965,
+              "offset": 43981,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73939,7 +73367,7 @@
               "matches": false
             },
             {
-              "offset": 44011,
+              "offset": 44027,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73948,7 +73376,7 @@
               "matches": false
             },
             {
-              "offset": 44019,
+              "offset": 44035,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -73957,7 +73385,7 @@
               "matches": false
             },
             {
-              "offset": 44035,
+              "offset": 44051,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73966,7 +73394,7 @@
               "matches": false
             },
             {
-              "offset": 44048,
+              "offset": 44064,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -73975,7 +73403,7 @@
               "matches": false
             },
             {
-              "offset": 44058,
+              "offset": 44074,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
@@ -73984,7 +73412,7 @@
               "matches": false
             },
             {
-              "offset": 44071,
+              "offset": 44087,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73993,7 +73421,7 @@
               "matches": false
             },
             {
-              "offset": 44089,
+              "offset": 44105,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74002,7 +73430,7 @@
               "matches": false
             },
             {
-              "offset": 44107,
+              "offset": 44123,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74011,7 +73439,7 @@
               "matches": false
             },
             {
-              "offset": 44120,
+              "offset": 44136,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74020,7 +73448,7 @@
               "matches": false
             },
             {
-              "offset": 44138,
+              "offset": 44154,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74029,7 +73457,7 @@
               "matches": false
             },
             {
-              "offset": 44151,
+              "offset": 44167,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74038,7 +73466,7 @@
               "matches": false
             },
             {
-              "offset": 44172,
+              "offset": 44188,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74047,7 +73475,7 @@
               "matches": false
             },
             {
-              "offset": 44185,
+              "offset": 44201,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74056,7 +73484,7 @@
               "matches": false
             },
             {
-              "offset": 44209,
+              "offset": 44225,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -74065,7 +73493,7 @@
               "matches": false
             },
             {
-              "offset": 44257,
+              "offset": 44273,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74074,7 +73502,7 @@
               "matches": false
             },
             {
-              "offset": 44271,
+              "offset": 44287,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -74083,25 +73511,7 @@
               "matches": false
             },
             {
-              "offset": 44281,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44327,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44335,
+              "offset": 44297,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -74112,6 +73522,15 @@
             {
               "offset": 44343,
               "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 44351,
+              "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
@@ -74119,7 +73538,16 @@
               "matches": false
             },
             {
-              "offset": 44401,
+              "offset": 44359,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 44417,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74128,7 +73556,7 @@
               "matches": false
             },
             {
-              "offset": 46627,
+              "offset": 46643,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74137,7 +73565,7 @@
               "matches": false
             },
             {
-              "offset": 46752,
+              "offset": 46768,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -74146,7 +73574,7 @@
               "matches": false
             },
             {
-              "offset": 46767,
+              "offset": 46783,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74155,7 +73583,7 @@
               "matches": false
             },
             {
-              "offset": 46782,
+              "offset": 46798,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -74164,7 +73592,7 @@
               "matches": false
             },
             {
-              "offset": 46809,
+              "offset": 46825,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -74173,7 +73601,7 @@
               "matches": false
             },
             {
-              "offset": 46823,
+              "offset": 46839,
               "type": 2,
               "symbol": "lua_settable",
               "addend": -4,
@@ -74182,7 +73610,7 @@
               "matches": false
             },
             {
-              "offset": 46909,
+              "offset": 46925,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74191,7 +73619,7 @@
               "matches": false
             },
             {
-              "offset": 46924,
+              "offset": 46940,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74200,7 +73628,7 @@
               "matches": false
             },
             {
-              "offset": 47016,
+              "offset": 47032,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74209,7 +73637,7 @@
               "matches": false
             },
             {
-              "offset": 47031,
+              "offset": 47047,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74218,7 +73646,7 @@
               "matches": false
             },
             {
-              "offset": 47240,
+              "offset": 47256,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74227,7 +73655,7 @@
               "matches": false
             },
             {
-              "offset": 47338,
+              "offset": 47354,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74236,7 +73664,7 @@
               "matches": false
             },
             {
-              "offset": 47418,
+              "offset": 47434,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74245,7 +73673,7 @@
               "matches": false
             },
             {
-              "offset": 47461,
+              "offset": 47477,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74254,7 +73682,7 @@
               "matches": false
             },
             {
-              "offset": 47569,
+              "offset": 47585,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74263,7 +73691,7 @@
               "matches": false
             },
             {
-              "offset": 47642,
+              "offset": 47658,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74272,7 +73700,7 @@
               "matches": false
             },
             {
-              "offset": 47659,
+              "offset": 47675,
               "type": 2,
               "symbol": "strtol",
               "addend": -4,
@@ -74281,7 +73709,7 @@
               "matches": false
             },
             {
-              "offset": 47683,
+              "offset": 47699,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -74290,7 +73718,7 @@
               "matches": false
             },
             {
-              "offset": 47697,
+              "offset": 47713,
               "type": 2,
               "symbol": "lua_createtable",
               "addend": -4,
@@ -74299,7 +73727,7 @@
               "matches": false
             },
             {
-              "offset": 47707,
+              "offset": 47723,
               "type": 2,
               "symbol": "lua_gettop",
               "addend": -4,
@@ -74308,7 +73736,7 @@
               "matches": false
             },
             {
-              "offset": 47729,
+              "offset": 47745,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "addend": -4,
@@ -74317,7 +73745,7 @@
               "matches": false
             },
             {
-              "offset": 47743,
+              "offset": 47759,
               "type": 2,
               "symbol": "lua_settable",
               "addend": -4,
@@ -74326,7 +73754,7 @@
               "matches": false
             },
             {
-              "offset": 47766,
+              "offset": 47782,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74335,7 +73763,7 @@
               "matches": false
             },
             {
-              "offset": 47785,
+              "offset": 47801,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74344,7 +73772,7 @@
               "matches": false
             },
             {
-              "offset": 47834,
+              "offset": 47850,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74353,7 +73781,7 @@
               "matches": false
             },
             {
-              "offset": 47951,
+              "offset": 47967,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74362,7 +73790,7 @@
               "matches": false
             },
             {
-              "offset": 47993,
+              "offset": 48009,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 563,
@@ -74370,7 +73798,7 @@
               "matches": false
             },
             {
-              "offset": 48023,
+              "offset": 48039,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -74379,7 +73807,7 @@
               "matches": false
             },
             {
-              "offset": 48041,
+              "offset": 48057,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 563,
@@ -74387,7 +73815,7 @@
               "matches": false
             },
             {
-              "offset": 48071,
+              "offset": 48087,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -74396,7 +73824,7 @@
               "matches": false
             },
             {
-              "offset": 48112,
+              "offset": 48128,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74405,7 +73833,7 @@
               "matches": false
             },
             {
-              "offset": 48125,
+              "offset": 48141,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74414,7 +73842,7 @@
               "matches": false
             },
             {
-              "offset": 48140,
+              "offset": 48156,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74423,7 +73851,7 @@
               "matches": false
             },
             {
-              "offset": 48183,
+              "offset": 48199,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -74432,7 +73860,7 @@
               "matches": false
             },
             {
-              "offset": 48207,
+              "offset": 48223,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 561,
@@ -74440,7 +73868,7 @@
               "matches": false
             },
             {
-              "offset": 48252,
+              "offset": 48268,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74449,7 +73877,7 @@
               "matches": false
             },
             {
-              "offset": 48262,
+              "offset": 48278,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 561,
@@ -74457,7 +73885,7 @@
               "matches": false
             },
             {
-              "offset": 48284,
+              "offset": 48300,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 561,
@@ -74465,7 +73893,7 @@
               "matches": false
             },
             {
-              "offset": 48388,
+              "offset": 48404,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74474,7 +73902,7 @@
               "matches": false
             },
             {
-              "offset": 48411,
+              "offset": 48427,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -74483,7 +73911,7 @@
               "matches": false
             },
             {
-              "offset": 48429,
+              "offset": 48445,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74492,7 +73920,7 @@
               "matches": false
             },
             {
-              "offset": 48543,
+              "offset": 48559,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74501,7 +73929,7 @@
               "matches": false
             },
             {
-              "offset": 48561,
+              "offset": 48577,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -74510,7 +73938,7 @@
               "matches": false
             },
             {
-              "offset": 48671,
+              "offset": 48687,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74519,7 +73947,7 @@
               "matches": false
             },
             {
-              "offset": 48686,
+              "offset": 48702,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 563,
@@ -74527,7 +73955,7 @@
               "matches": false
             },
             {
-              "offset": 48716,
+              "offset": 48732,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -74536,7 +73964,7 @@
               "matches": false
             },
             {
-              "offset": 48734,
+              "offset": 48750,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74545,7 +73973,7 @@
               "matches": false
             },
             {
-              "offset": 48744,
+              "offset": 48760,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74554,7 +73982,7 @@
               "matches": false
             },
             {
-              "offset": 48752,
+              "offset": 48768,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -74563,7 +73991,7 @@
               "matches": false
             },
             {
-              "offset": 48767,
+              "offset": 48783,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74572,7 +74000,7 @@
               "matches": false
             },
             {
-              "offset": 48787,
+              "offset": 48803,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74581,7 +74009,7 @@
               "matches": false
             },
             {
-              "offset": 48795,
+              "offset": 48811,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -74590,7 +74018,7 @@
               "matches": false
             },
             {
-              "offset": 48808,
+              "offset": 48824,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74599,7 +74027,7 @@
               "matches": false
             },
             {
-              "offset": 48816,
+              "offset": 48832,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -74608,7 +74036,7 @@
               "matches": false
             },
             {
-              "offset": 53367,
+              "offset": 53383,
               "type": 2,
               "symbol": "lua_rawgeti",
               "addend": -4,
@@ -74617,7 +74045,7 @@
               "matches": false
             },
             {
-              "offset": 53376,
+              "offset": 53392,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 575,
@@ -74625,7 +74053,7 @@
               "matches": false
             },
             {
-              "offset": 53381,
+              "offset": 53397,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -74634,7 +74062,7 @@
               "matches": false
             },
             {
-              "offset": 53398,
+              "offset": 53414,
               "type": 2,
               "symbol": "lua_rawgeti",
               "addend": -4,
@@ -74643,7 +74071,7 @@
               "matches": false
             },
             {
-              "offset": 53419,
+              "offset": 53435,
               "type": 2,
               "symbol": "lua_pcall",
               "addend": -4,
@@ -74652,7 +74080,7 @@
               "matches": false
             },
             {
-              "offset": 53433,
+              "offset": 53449,
               "type": 2,
               "symbol": "lua_settop",
               "addend": -4,
@@ -74661,7 +74089,7 @@
               "matches": false
             },
             {
-              "offset": 53450,
+              "offset": 53466,
               "type": 2,
               "symbol": "lua_rawgeti",
               "addend": -4,
@@ -74670,7 +74098,7 @@
               "matches": false
             },
             {
-              "offset": 53460,
+              "offset": 53476,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 563,
@@ -74678,7 +74106,7 @@
               "matches": false
             },
             {
-              "offset": 53525,
+              "offset": 53541,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -74687,7 +74115,7 @@
               "matches": false
             },
             {
-              "offset": 53537,
+              "offset": 53553,
               "type": 2,
               "symbol": "_ZN7harvest4game11gp_luaStateE",
               "addend": -4,
@@ -74696,7 +74124,7 @@
               "matches": false
             },
             {
-              "offset": 53553,
+              "offset": 53569,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "addend": -4,
@@ -74705,7 +74133,7 @@
               "matches": false
             },
             {
-              "offset": 53568,
+              "offset": 53584,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74714,7 +74142,7 @@
               "matches": false
             },
             {
-              "offset": 53604,
+              "offset": 53620,
               "type": 2,
               "symbol": "_ZN2ox2io7CHelpIO8writeIntEPNS0_10IWriteFileEi",
               "addend": -4,
@@ -74723,7 +74151,7 @@
               "matches": false
             },
             {
-              "offset": 53663,
+              "offset": 53679,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues17writeLuaAttributeEPN2ox2io10IWriteFileERNS0_13SLuaAttributeE",
               "addend": -4,
@@ -74732,7 +74160,7 @@
               "matches": false
             },
             {
-              "offset": 53680,
+              "offset": 53696,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues17writeLuaAttributeEPN2ox2io10IWriteFileERNS0_13SLuaAttributeE",
               "addend": -4,
@@ -74741,7 +74169,7 @@
               "matches": false
             },
             {
-              "offset": 53728,
+              "offset": 53744,
               "type": 2,
               "symbol": "luaL_unref",
               "addend": -4,
@@ -74750,7 +74178,7 @@
               "matches": false
             },
             {
-              "offset": 53770,
+              "offset": 53786,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74759,7 +74187,7 @@
               "matches": false
             },
             {
-              "offset": 53783,
+              "offset": 53799,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -74768,7 +74196,7 @@
               "matches": false
             },
             {
-              "offset": 53807,
+              "offset": 53823,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -74777,7 +74205,7 @@
               "matches": false
             },
             {
-              "offset": 53840,
+              "offset": 53856,
               "type": 2,
               "symbol": "_ZN2ox6TArrayIN7harvest4game12SLuaFilePairEED1Ev",
               "addend": -4,
@@ -74786,7 +74214,7 @@
               "matches": false
             },
             {
-              "offset": 53848,
+              "offset": 53864,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -74795,7 +74223,7 @@
               "matches": false
             },
             {
-              "offset": 53859,
+              "offset": 53875,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -74813,7 +74241,7 @@
               "matches": false
             }
           ],
-          "references": 1572,
+          "references": 1576,
           "functions": [
             {
               "symbol": "_ZN7harvest4game11CLuaManager22setCreativeListVisibleEb",
@@ -75242,10 +74670,10 @@
             {
               "symbol": "_ZN7harvest4game20harvest_isKeyPressedEP9lua_State",
               "address": "0x4444e0",
-              "size": 73,
-              "fde": false,
+              "size": 74,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game26harvest_setWaveButtonLabelEP9lua_State",
@@ -75386,10 +74814,10 @@
             {
               "symbol": "_ZN7harvest4game30harvest_setMinimumWorldBordersEP9lua_State",
               "address": "0x443eb0",
-              "size": 296,
-              "fde": false,
+              "size": 327,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game21harvest_setTimerValueEP9lua_State",
@@ -75405,7 +74833,7 @@
               "size": 81,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game22harvest_removeMineralsEP9lua_State",
@@ -75418,18 +74846,18 @@
             {
               "symbol": "_ZN7harvest4game27harvest_spawnTempestMissileEP9lua_State",
               "address": "0x444e80",
-              "size": 270,
-              "fde": false,
+              "size": 263,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game20harvest_spawnMissileEP9lua_State",
               "address": "0x444f90",
-              "size": 267,
-              "fde": false,
+              "size": 260,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game25harvest_spawnEagleMissileEP9lua_State",
@@ -75450,10 +74878,10 @@
             {
               "symbol": "_ZN7harvest4game21harvest_spawnBuildingEP9lua_State",
               "address": "0x445380",
-              "size": 435,
-              "fde": false,
+              "size": 441,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game17harvest_getPlanetEP9lua_State",
@@ -75474,10 +74902,10 @@
             {
               "symbol": "_ZN7harvest4game18harvest_spawnAlienEP9lua_State",
               "address": "0x445640",
-              "size": 244,
-              "fde": false,
+              "size": 241,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game25harvest_isPositionBlockedEP9lua_State",
@@ -75514,10 +74942,10 @@
             {
               "symbol": "_ZN7harvest4game19harvest_spawnBulletEP9lua_State",
               "address": "0x4459c0",
-              "size": 345,
-              "fde": false,
+              "size": 349,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game24harvest_spawnEnergySparkEP9lua_State",
@@ -75613,7 +75041,7 @@
               "size": 439,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game21harvest_spawnParticleEP9lua_State",
@@ -75874,8 +75302,8 @@
             {
               "symbol": "_ZN7harvest4game28harvest_getSelectedBuildingsEP9lua_State",
               "address": "0x449400",
-              "size": 284,
-              "fde": false,
+              "size": 261,
+              "fde": true,
               "global": true,
               "exact": false
             },
@@ -76117,6 +75545,51 @@
               "address": "0x5f54f6",
               "size": 9,
               "kind": "merged string"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5fec",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5fec",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
             },
             {
               "address": "0x5f0450",
@@ -76377,6 +75850,11 @@
               "address": "0x5f5679",
               "size": 13,
               "kind": "merged string"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
             },
             {
               "address": "0x5f5686",
@@ -79513,7 +78991,7 @@
           "/out/HarvestFull__harvest__game__CLuaManager.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CLuaManager.cpp": "9c0faef6e86307ece67feda63623fa77a126255573acfb79e6f7856961158fe9",
+          "src/HarvestFull/harvest/game/CLuaManager.cpp": "fdbf9ae7fe61f5a5755e48928e9347fd0646f3feada8ebb1517b3542281cc6c1",
           "src/HarvestFull/harvest/game/CWorld.h": "68255f5712380375e1c8e0a35ddaddd5c4c9781831c84c83bc717b06bc64ddb9",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "2f534618ac828688ba6b51b1aa13ef4e076502174ccaa6a0117aa8bc5f7b89f9",
@@ -79578,8 +79056,8 @@
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "33afcb6d4d6e86f6a7850825f971109febf945c6b3804e61d144fc3246b28454",
           "src/HarvestFull/harvest/entity/CBuildingEntity.h": "80d9241bcc111563cff6ae7ffac4e95de9243263f0bf57a5f2cfe42a7e7473f9",
-          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "d51b6c0f4e78fd136faa4de0e13f676aff5a1afb79d964ae465d3fc14033fceb",
-          "src/ox/core/CBasic.h": "6ab67d38a520797f9a0133213b91bc5bd334017ee607a77273999339b7195ef2",
+          "src/HarvestFull/harvest/entity/CConstructionEntity.h": "998fb4ca642719d5719a926f9c8eb203dbe56d6b4c4ba000a9975d56ced740cd",
+          "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/HarvestFull/harvest/entity/CCreativeEntity.h": "daad51edd46689d28b8cc233c901fe3b78321079105a9d2c67a5d92fc68a4ffe",
           "src/HarvestFull/harvest/entity/CDropshipEntity.h": "9fb72a4eea1d4af951cd6a98bc072218131933723806071558251f69703eab08",
           "src/HarvestFull/harvest/entity/CMineralsEntity.h": "f529ffc5b568db5d56a082e777db82bb4ca3b95bf50cd0ce796a2d5ec1bfd816",
@@ -79589,9 +79067,9 @@
           "src/HarvestFull/harvest/states/CPlayState.h": "e3d27d56d51978e1d362926ad25f3629e0c4c299f315142d2f5cf3cb551fc68c"
         },
         "system_headers": 141,
-        "object_sha256": "98ed0ad5bf617f183982ffa8183bf2ffdff8b30b5cea67cade19a73f7f868d91"
+        "object_sha256": "732e413c3847e4914a6dd3c104e139547c3ce98424d3739a66910f931d2f21f3"
       },
-      "fuzzy_target_sha256": "89c9c6d268260badf1a033edb513abf3bcf8ded6b876d9b6556c30d5c5cdcf68",
+      "fuzzy_target_sha256": "082a41516bafb37c68d9e1d4cd978cfa9650a90c46a5eef3034c004d3c2e17f5",
       "fuzzy_functions": [
         {
           "address": "0x4468f0",
@@ -79915,7 +79393,7 @@
           "address": "0x4444e0",
           "size": 74,
           "symbol": "_ZN7harvest4game20harvest_isKeyPressedEP9lua_State",
-          "percent": 47.272728
+          "percent": 97.27273
         },
         {
           "address": "0x4441a0",
@@ -80023,7 +79501,7 @@
           "address": "0x443eb0",
           "size": 327,
           "symbol": "_ZN7harvest4game30harvest_setMinimumWorldBordersEP9lua_State",
-          "percent": 37.24359
+          "percent": 100.0
         },
         {
           "address": "0x444000",
@@ -80035,7 +79513,7 @@
           "address": "0x444040",
           "size": 81,
           "symbol": "_ZN7harvest4game23harvest_setRushProgressEP9lua_State",
-          "percent": 90.681816
+          "percent": 100.0
         },
         {
           "address": "0x444a30",
@@ -80047,13 +79525,13 @@
           "address": "0x444e80",
           "size": 263,
           "symbol": "_ZN7harvest4game27harvest_spawnTempestMissileEP9lua_State",
-          "percent": 78.86441
+          "percent": 100.0
         },
         {
           "address": "0x444f90",
           "size": 260,
           "symbol": "_ZN7harvest4game20harvest_spawnMissileEP9lua_State",
-          "percent": 78.76271
+          "percent": 100.0
         },
         {
           "address": "0x4450a0",
@@ -80071,7 +79549,7 @@
           "address": "0x445380",
           "size": 441,
           "symbol": "_ZN7harvest4game21harvest_spawnBuildingEP9lua_State",
-          "percent": 86.66991
+          "percent": 100.0
         },
         {
           "address": "0x445540",
@@ -80089,7 +79567,7 @@
           "address": "0x445640",
           "size": 241,
           "symbol": "_ZN7harvest4game18harvest_spawnAlienEP9lua_State",
-          "percent": 94.44444
+          "percent": 100.0
         },
         {
           "address": "0x445740",
@@ -80119,7 +79597,7 @@
           "address": "0x4459c0",
           "size": 349,
           "symbol": "_ZN7harvest4game19harvest_spawnBulletEP9lua_State",
-          "percent": 61.6875
+          "percent": 100.0
         },
         {
           "address": "0x445b20",
@@ -80191,7 +79669,7 @@
           "address": "0x4461b0",
           "size": 439,
           "symbol": "_ZN7harvest4game21harvest_spawnMineralsEP9lua_State",
-          "percent": 96.60551
+          "percent": 100.0
         },
         {
           "address": "0x446370",
@@ -80389,7 +79867,7 @@
           "address": "0x449400",
           "size": 261,
           "symbol": "_ZN7harvest4game28harvest_getSelectedBuildingsEP9lua_State",
-          "percent": 59.68421
+          "percent": 94.73684
         },
         {
           "address": "0x449510",
@@ -83175,7 +82653,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "6c04fb729cb5965926f23ce0f908333b15016ed5c19be14ae9c6ea53da2e29d0"
+    "report_sha256": "fe18574e53095712ba387d9c17d187443f3017f6819be3102d4e0320feda0ee3"
   },
   "link": {
     "status": "unavailable",
