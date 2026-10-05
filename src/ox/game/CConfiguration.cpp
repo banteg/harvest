@@ -244,6 +244,11 @@ bool CConfiguration::write(io::IWriteFile* file)
     return false;
 }
 
+CConfigBlock* CConfiguration::getBlock(const wchar_t* name)
+{
+    return getBlock(core::CString<wchar_t>(name));
+}
+
 bool CConfiguration::blockExists(const wchar_t* name)
 {
     return blockExists(core::CString<wchar_t>(name));
@@ -295,11 +300,6 @@ CConfigBlock* CConfiguration::getBlockEx(const core::CString<wchar_t>& name,
     blockName = name.subString(0, separator);
     attributeName = name.subStringToEnd(separator + 1);
     return getBlock(blockName);
-}
-
-CConfigBlock* CConfiguration::getBlock(const wchar_t* name)
-{
-    return getBlock(core::CString<wchar_t>(name));
 }
 
 void CConfiguration::getAttribute(const wchar_t* name, core::CString<wchar_t>& value)
