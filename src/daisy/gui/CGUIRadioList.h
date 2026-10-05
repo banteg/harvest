@@ -18,7 +18,8 @@ namespace gui {
 class CGUIRadioList : public ox::gui::IGUIRadioList
 {
 public:
-    CGUIRadioList(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, ox::core::CRect<int> rectangle, int id);
+    CGUIRadioList(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, ox::core::CRect<int> rectangle,
+        int id);
     virtual ~CGUIRadioList();
 
 private:

@@ -18,7 +18,8 @@ namespace gui {
 class CGUIWindow : public ox::gui::IGUIWindow
 {
 public:
-    CGUIWindow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle, bool frame);
+    CGUIWindow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle, bool frame);
     virtual ~CGUIWindow();
     virtual ox::gui::IGUIButton* getCloseButton();
     virtual ox::gui::IGUIButton* getMinimizeButton();

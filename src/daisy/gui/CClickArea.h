@@ -18,7 +18,8 @@ namespace gui {
 class CClickArea : public ox::gui::IGUILayout
 {
 public:
-    CClickArea(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CClickArea(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle);
     virtual ~CClickArea();
 
 private:

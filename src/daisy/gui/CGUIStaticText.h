@@ -19,7 +19,8 @@ namespace gui {
 class CGUIStaticText : public ox::gui::IGUIStaticText
 {
 public:
-    CGUIStaticText(const wchar_t* text, bool border, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, const ox::core::CRect<int>& rectangle, const wchar_t* style);
+    CGUIStaticText(const wchar_t* text, bool border, ox::gui::IGUIEnvironment* environment,
+        ox::gui::IGUIElement* parent, int id, const ox::core::CRect<int>& rectangle, const wchar_t* style);
     virtual ~CGUIStaticText();
     virtual void setOverrideFont(ox::gui::IGUIFont* font);
     virtual void setOverrideColor(ox::video::SColor color);

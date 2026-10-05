@@ -18,7 +18,8 @@ namespace gui {
 class CGUIMeshViewer : public ox::gui::IGUIElement
 {
 public:
-    CGUIMeshViewer(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CGUIMeshViewer(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle);
     virtual ~CGUIMeshViewer();
 
 private:

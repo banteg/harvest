@@ -19,7 +19,8 @@ namespace gui {
 class CGUITextButton : public ox::gui::IGUIElement
 {
 public:
-    CGUITextButton(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, const wchar_t* text, int id, ox::gui::IGUIFont* font, ox::video::SColor color, const char* sprite, const char* hoverSprite);
+    CGUITextButton(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, const wchar_t* text, int id,
+        ox::gui::IGUIFont* font, ox::video::SColor color, const char* sprite, const char* hoverSprite);
     virtual ~CGUITextButton();
 
 private:

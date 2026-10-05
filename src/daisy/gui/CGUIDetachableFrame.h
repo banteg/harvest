@@ -18,7 +18,8 @@ namespace gui {
 class CGUIDetachableFrame : public ox::gui::IGUILayout
 {
 public:
-    CGUIDetachableFrame(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle, unsigned int flags, bool detached, bool visible);
+    CGUIDetachableFrame(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle, unsigned int flags, bool detached, bool visible);
     virtual ~CGUIDetachableFrame();
 
 private:

@@ -19,7 +19,9 @@ namespace gui {
 class CGUIPopupMenu : public ox::gui::IGUIPopupMenu
 {
 public:
-    CGUIPopupMenu(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CPosition2d<int> position, int width, const wchar_t* text, ox::gui::IGUIFont* font, ox::gui::IGUIFont* hoverFont);
+    CGUIPopupMenu(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CPosition2d<int> position, int width, const wchar_t* text, ox::gui::IGUIFont* font,
+            ox::gui::IGUIFont* hoverFont);
     virtual ~CGUIPopupMenu();
 
 private:

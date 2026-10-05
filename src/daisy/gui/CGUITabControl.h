@@ -18,7 +18,8 @@ namespace gui {
 class CGUITabControl : public ox::gui::IGUITabControl
 {
 public:
-    CGUITabControl(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, const ox::core::CRect<int>& rectangle, bool fillBackground, bool border, int id);
+    CGUITabControl(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent,
+        const ox::core::CRect<int>& rectangle, bool fillBackground, bool border, int id);
     virtual ~CGUITabControl();
     virtual ox::gui::IGUITab* addTab(const wchar_t* caption, int id);
     virtual int getTabcount();
@@ -36,7 +37,8 @@ private:
 class CGUITab : public ox::gui::IGUITab
 {
 public:
-    CGUITab(int number, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, const ox::core::CRect<int>& rectangle, int id);
+    CGUITab(int number, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent,
+        const ox::core::CRect<int>& rectangle, int id);
     virtual ~CGUITab();
 
 private:

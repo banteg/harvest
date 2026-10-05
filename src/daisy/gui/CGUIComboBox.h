@@ -18,7 +18,8 @@ namespace gui {
 class CGUIComboBox : public ox::gui::IGUIComboBox
 {
 public:
-    CGUIComboBox(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CGUIComboBox(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle);
     virtual ~CGUIComboBox();
 
 private:

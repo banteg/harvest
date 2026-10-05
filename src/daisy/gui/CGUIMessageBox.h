@@ -18,7 +18,8 @@ namespace gui {
 class CGUIMessageBox : public CGUIWindow
 {
 public:
-    CGUIMessageBox(ox::gui::IGUIEnvironment* environment, const wchar_t* caption, const wchar_t* text, int flags, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CGUIMessageBox(ox::gui::IGUIEnvironment* environment, const wchar_t* caption, const wchar_t* text, int flags,
+        ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
     virtual ~CGUIMessageBox();
 
 private:

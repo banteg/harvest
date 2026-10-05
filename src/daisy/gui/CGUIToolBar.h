@@ -18,7 +18,8 @@ namespace gui {
 class CGUIToolBar : public ox::gui::IGUIToolBar
 {
 public:
-    CGUIToolBar(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CGUIToolBar(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle);
     virtual ~CGUIToolBar();
 
 private:

@@ -18,7 +18,8 @@ namespace gui {
 class CGUICheckBox : public ox::gui::IGUICheckBox
 {
 public:
-    CGUICheckBox(bool checked, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle);
+    CGUICheckBox(bool checked, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle);
     virtual ~CGUICheckBox();
     virtual void setChecked(bool checked);
     virtual bool isChecked();

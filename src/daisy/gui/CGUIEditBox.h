@@ -18,7 +18,8 @@ namespace gui {
 class CGUIEditBox : public ox::gui::IGUIEditBox
 {
 public:
-    CGUIEditBox(const wchar_t* text, bool border, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, const ox::core::CRect<int>& rectangle, ox::IOSOperator* op);
+    CGUIEditBox(const wchar_t* text, bool border, ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent,
+        int id, const ox::core::CRect<int>& rectangle, ox::IOSOperator* op);
     virtual ~CGUIEditBox();
     virtual void setFocus();
     virtual void setOverrideFont(ox::gui::IGUIFont* font);

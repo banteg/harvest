@@ -18,7 +18,8 @@ namespace gui {
 class CGUITabButtonRow : public ox::gui::IGUITabButtonRow
 {
 public:
-    CGUITabButtonRow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, const ox::core::CRect<int>& rectangle, int id);
+    CGUITabButtonRow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent,
+        const ox::core::CRect<int>& rectangle, int id);
     virtual ~CGUITabButtonRow();
 
 private:

@@ -18,7 +18,8 @@ namespace gui {
 class CGUIButton : public ox::gui::IGUIButton
 {
 public:
-    CGUIButton(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id, ox::core::CRect<int> rectangle, bool noClip, const wchar_t* text);
+    CGUIButton(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
+        ox::core::CRect<int> rectangle, bool noClip, const wchar_t* text);
     virtual ~CGUIButton();
     virtual void setOverrideFont(ox::gui::IGUIFont* font);
     virtual void setOverrideColor(const ox::video::SColor& color);

@@ -55,7 +55,8 @@ using ox::event::SEvent;
 
 //! constructor
 CGUIEnvironment::CGUIEnvironment(ox::io::IFileSystem* fs, ox::video::IVideoDriver* driver, ox::IOSOperator* op)
-    : IGUILayout(0, 0, 0, CRect<int>(CPosition2d<int>(0, 0), driver ? driver->getScreenSize() : CDimension2d<int>(0, 0))),
+    : IGUILayout(0, 0, 0, CRect<int>(CPosition2d<int>(0, 0), driver ? driver->getScreenSize() : CDimension2d<int>(0,
+        0))),
       Driver(driver), Hovered(0), Focus(0), CurrentSkin(0), FileSystem(fs), UserReceiver(0), Operator(op),
       MousePosition(0, 0)
 {
