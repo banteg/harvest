@@ -120,27 +120,15 @@ void CStatistics::reportNewThreatLevel(int level, float time)
 
 void CStatistics::modifyLevelStatValue(int stat, float delta)
 {
-    if (Current)
-    {
-        Current->Stats[stat] += delta;
-        if (stat == 2) GameStats[1].modifyValue((int)(delta + .5f));
-    }
+    if (Current) Current->Stats[stat] += delta;
+    if (stat == 2) GameStats[1].modifyValue((int)(delta + .5f));
 }
 
 void CStatistics::reportAlienStatChange(int stat, int alienType, float amount)
 {
-    if (Current)
-    {
-        Current->AlienStats[stat][alienType] += amount;
-        switch (stat)
-        {
-        case 0: break;
-        case 1: RushModeDamage += amount; break;
-        case 2: RushModeDamage += amount; break;
-        case 3: RushModeDamage += amount; break;
-        }
-        if (stat == 0) GameStats[2].modifyValue((int)(amount + .5f));
-    }
+    if (Current) Current->AlienStats[stat][alienType] += amount;
+    if (stat == 1 || stat == 3 || stat == 2) RushModeDamage += amount;
+    if (stat == 0) GameStats[2].modifyValue((int)(amount + .5f));
 }
 
 float CStatistics::getRushModeDamage() { return RushModeDamage; }
@@ -167,6 +155,21 @@ CHighscoreInfo::CHighscoreInfo(const wchar_t* name, const wchar_t* group, int ra
     createHighscoreString();
 }
 
+//! XORs data with a key that rotates right every four bytes. Inlined in both builds; the name is ours.
+static inline void scramble(char* data, int size, int key)
+{
+    for (int i = 0; i < size; ++i)
+    {
+        switch (i & 3)
+        {
+        case 0: data[i] ^= (unsigned int)key >> 24; break;
+        case 1: data[i] ^= (unsigned int)key >> 16; break;
+        case 2: data[i] ^= (key & 0xff00) >> 8; break;
+        case 3: data[i] ^= key; key = (int)(((unsigned int)key >> 1) | ((key & 1) << 31)); break;
+        }
+    }
+}
+
 void CHighscoreInfo::createHighscoreString()
 {
     ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile;
@@ -180,32 +183,8 @@ void CHighscoreInfo::createHighscoreString()
     ox::io::CHelpIO::writeShort(file, HighestLevel.getValue());
     ox::io::CHelpIO::writeInt(file, (int)(PlayTime * 100));
 
-    int key = RandomValue;
-    int size = file->getSize() - 4;
-    char* data = file->getData();
-    for (int i = 0; i < size; ++i)
-    {
-        switch (i & 3)
-        {
-        case 0: data[i + 4] ^= (unsigned int)key >> 24; break;
-        case 1: data[i + 4] ^= (unsigned int)key >> 16; break;
-        case 2: data[i + 4] ^= (key & 0xff00) >> 8; break;
-        case 3: data[i + 4] ^= key; key = (int)(((unsigned int)key << 31) | ((unsigned int)key >> 1)); break;
-        }
-    }
-    size = file->getSize();
-    data = file->getData();
-    key = 0x4f2c7b19;
-    for (int i = 0; i < size; ++i)
-    {
-        switch (i & 3)
-        {
-        case 0: data[i] ^= (unsigned int)key >> 24; break;
-        case 1: data[i] ^= (unsigned int)key >> 16; break;
-        case 2: data[i] ^= (key & 0xff00) >> 8; break;
-        case 3: data[i] ^= key; key = (int)(((unsigned int)key << 31) | ((unsigned int)key >> 1)); break;
-        }
-    }
+    scramble(file->getData() + 4, file->getSize() - 4, RandomValue);
+    scramble(file->getData(), file->getSize(), 0x4f2c7b19);
     ox::io::CMemReadFile* reader = new ox::io::CMemReadFile(file->getData(), file->getSize(), false);
     ox::algo::CBase64url::encode(HighscoreString, reader);
     delete reader;
