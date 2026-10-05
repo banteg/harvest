@@ -250,3 +250,9 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/settings/CHarvestProfile.cpp"]
+# iostream initializer and the game-header statics.
+".bss" = 0x86bc54
+# Rating levels, attribute name tables and switch tables.
+".rodata" = 0x606480
