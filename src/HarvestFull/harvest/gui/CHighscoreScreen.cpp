@@ -731,9 +731,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 RankEditBox->setAssociatedButton(ID_POPUP_RANK);
                 GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_RANK,
                     settings::gp_systemConfig->getLocalizedText(L"highscores:apply").c_str());
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
+                ox::gui::IGUIButton* cancel = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup,
+                    ID_POPUP_CANCEL, settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str());
+                cancel->LayoutFlags = "br right";
                 sortAndMovePopup(popup, event.GUIEvent.Caller, false);
                 result = true;
                 break;
@@ -754,9 +754,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 ExactCheckBox = GUIEnvironment->addCheckBox(ExactName, ox::core::CRect<int>(0, 0, 200, 20), popup, -1,
                     settings::gp_systemConfig->getLocalizedText(L"highscores:exactMatch").c_str());
                 ExactCheckBox->LayoutFlags = "br";
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
+                ox::gui::IGUIButton* cancel = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup,
+                    ID_POPUP_CANCEL, settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str());
+                cancel->LayoutFlags = "br right";
                 sortAndMovePopup(popup, event.GUIEvent.Caller, false);
                 result = true;
                 break;
@@ -790,9 +790,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                     0xffffffff, true, true);
                 PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets4").c_str(), 0,
                     0xffffffff, true, true);
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
+                ox::gui::IGUIButton* cancel = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup,
+                    ID_POPUP_CANCEL, settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str());
+                cancel->LayoutFlags = "br right";
                 GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_PLANET,
                     settings::gp_systemConfig->getLocalizedText(L"highscores:apply").c_str());
                 sortAndMovePopup(popup, event.GUIEvent.Caller, false);
@@ -815,9 +815,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 ExactCheckBox = GUIEnvironment->addCheckBox(ExactGroup, ox::core::CRect<int>(0, 0, 200, 20), popup,
                     -1, settings::gp_systemConfig->getLocalizedText(L"highscores:exactMatch").c_str());
                 ExactCheckBox->LayoutFlags = "br";
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
+                ox::gui::IGUIButton* cancel = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup,
+                    ID_POPUP_CANCEL, settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str());
+                cancel->LayoutFlags = "br right";
                 sortAndMovePopup(popup, event.GUIEvent.Caller, false);
                 result = true;
                 break;
@@ -841,9 +841,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         ->setAnimation(HIGHSCORE_SPRITE_NAMES[SPRITE_MODE_BUTTON + i],
                             Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true));
                 ModeList->sortItems(false);
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
+                ox::gui::IGUIButton* cancel = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup,
+                    ID_POPUP_CANCEL, settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str());
+                cancel->LayoutFlags = "br right";
                 GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_MODE,
                     settings::gp_systemConfig->getLocalizedText(L"highscores:apply").c_str());
                 sortAndMovePopup(popup, event.GUIEvent.Caller, true);
@@ -874,11 +874,10 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
             case ID_POPUP_RANK:
                 if (Popup && RankEditBox)
                 {
-                    int rank = wcstol(RankEditBox->getText(), 0, 10);
+                    int offset = wcstol(RankEditBox->getText(), 0, 10) - 9;
                     Popup->remove();
                     Popup = 0;
                     RankEditBox = 0;
-                    int offset = rank - 9;
                     if (offset < 0)
                         offset = 0;
                     loadHighscores(offset);
@@ -983,11 +982,13 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                             (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
                         Sprites[SPRITE_TOP_SELECTOR]->draw(center, 0, 0xffffffff);
                     }
-                    ox::video::SColor color = 0xc0ffffff;
+                    ox::video::SColor color;
                     const ox::core::CPosition2d<int>& mouse = GUIEnvironment->getMousePosition();
                     if (rect.UpperLeftCorner.X <= mouse.X && rect.UpperLeftCorner.Y <= mouse.Y &&
                         mouse.X < rect.LowerRightCorner.X && mouse.Y < rect.LowerRightCorner.Y)
                         color = 0xf0ffffff;
+                    else
+                        color = 0xc0ffffff;
                     GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt")->draw(
                         TypeNames[id - ID_TYPE_BUTTON].c_str(), rect, color, ox::gui::EFHA_CENTER,
                         ox::gui::EFVA_CENTER, 0);
