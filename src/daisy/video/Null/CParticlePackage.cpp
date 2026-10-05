@@ -65,28 +65,6 @@ void CParticlePackage::removeParticleState(ox::video::IParticleState* state)
     state->drop();
 }
 
-bool CParticlePackage::load(ox::io::IReadFile* file)
-{
-    int version = ox::io::CHelpIO::readInt(file);
-    if (version < 0 || version > PARTICLE_PACKAGE_VERSION)
-        return false;
-
-    int count = ox::io::CHelpIO::readInt(file);
-    for (int i = 0; i < count; ++i)
-    {
-        ox::core::CString<char> name;
-        ox::io::CHelpIO::readString(file, name);
-        SParticleTypeInfo* info = new SParticleTypeInfo;
-        info->Name = name;
-        readParticleInfo(info, file, version);
-        TypeInfos.push_back(info);
-        ParticleNames.push_back(name);
-    }
-
-    std::sort(TypeInfos.begin(), TypeInfos.end(), ox::algo::SPointerSortFunctor<SParticleTypeInfo*>());
-    return true;
-}
-
 void CParticlePackage::readParticleInfo(SParticleTypeInfo* info, ox::io::IReadFile* file, int version)
 {
     ox::core::CString<char> animations;
@@ -262,6 +240,28 @@ void CParticlePackage::readParticleFunction(SParticleFunction* function, ox::io:
         function->Type = EPFT_CONSTANT;
         function->Clamp = EPFC_NONE;
     }
+}
+
+bool CParticlePackage::load(ox::io::IReadFile* file)
+{
+    int version = ox::io::CHelpIO::readInt(file);
+    if (version < 0 || version > PARTICLE_PACKAGE_VERSION)
+        return false;
+
+    int count = ox::io::CHelpIO::readInt(file);
+    for (int i = 0; i < count; ++i)
+    {
+        ox::core::CString<char> name;
+        ox::io::CHelpIO::readString(file, name);
+        SParticleTypeInfo* info = new SParticleTypeInfo;
+        info->Name = name;
+        readParticleInfo(info, file, version);
+        TypeInfos.push_back(info);
+        ParticleNames.push_back(name);
+    }
+
+    std::sort(TypeInfos.begin(), TypeInfos.end(), ox::algo::SPointerSortFunctor<SParticleTypeInfo*>());
+    return true;
 }
 
 const ox::TArray<ox::core::CString<char> >& CParticlePackage::getParticleNames()
