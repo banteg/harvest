@@ -129,15 +129,14 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
         switch (event.GUIEvent.EventType)
         {
         case ox::gui::EGET_BUTTON_CLICKED:
-            if (id == ID_CONFIRM)
+            switch (id)
             {
+            case ID_CONFIRM:
                 savePrioritiesByGUI();
                 setVisible(false, 0);
                 sendCustomEvent(ECE_CONTINUE_GAME);
                 return true;
-            }
-            else if (id == ID_CANCEL)
-            {
+            case ID_CANCEL:
                 setVisible(false, 0);
                 sendCustomEvent(ECE_CONTINUE_GAME);
                 return true;
