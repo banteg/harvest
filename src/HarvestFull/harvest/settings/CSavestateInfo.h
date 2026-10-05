@@ -33,6 +33,7 @@ struct SSavestateHeader
     int Time;
     ox::core::CString<wchar_t> Description;
 
+    // Written out rather than implicit; this reproduces GCC's inlining order in CSaveGameScreen.
     SSavestateHeader& operator=(const SSavestateHeader& other)
     {
         Magic = other.Magic;

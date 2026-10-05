@@ -35,6 +35,7 @@ struct SSaveListItem
     ox::core::CString<wchar_t> Name;
     settings::SSavestateHeader Header;
 
+    // The written-out destructor and assignment reproduce GCC's inlining order in the sort helpers.
     ~SSaveListItem()
     {
     }
