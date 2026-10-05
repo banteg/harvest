@@ -1394,8 +1394,12 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
     {
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
         if (Particle)
-            Particle->render2D(ox::core::CPosition2d<float>(Position.X - camera.X + viewPort.UpperLeftCorner.X,
-                Position.Y - camera.Y + viewPort.UpperLeftCorner.Y), 1.0f);
+        {
+            ox::core::CPosition2d<float> position;
+            position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+            position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
+            Particle->render2D(position, 1.0f);
+        }
     }
     else if (AlienType == 3 || AlienType == 4 || AlienType == 5)
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
