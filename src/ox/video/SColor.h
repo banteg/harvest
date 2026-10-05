@@ -56,7 +56,7 @@ public:
             (((color >> 8) & 0xff) << 8);
     }
 
-    unsigned int color;
+    int color;
 };
 
 } // end namespace video

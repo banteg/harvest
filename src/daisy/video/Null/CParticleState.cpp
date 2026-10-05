@@ -110,8 +110,11 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
         if (!SoundPlayed && Package && Package->getCallbackEngine())
         {
             if (!Info->SoundNames.empty())
-                Package->getCallbackEngine()->playParticleSound(
-                    Info->SoundNames[ox::algo::CRand::rand() % Info->SoundNames.size()].c_str(), position);
+            {
+                const ox::core::CString<char>& sound =
+                    Info->SoundNames[ox::algo::CRand::rand() % Info->SoundNames.size()];
+                Package->getCallbackEngine()->playParticleSound(sound.c_str(), position);
+            }
             SoundPlayed = true;
         }
 
@@ -141,12 +144,12 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
             return false;
         }
 
-        ox::core::CVector3d<float> direction = Speed;
+        ox::core::CVector3d<float> direction(Speed.X, Speed.Y, Speed.Z);
         if (Info->NormalizeSpeed)
             direction.normalize();
 
         updateParticleFunction(SpeedChange, frameDelta);
-        Speed += direction * (SpeedChange.Value * frameDelta);
+        Speed = Speed + direction * (SpeedChange.Value * frameDelta);
 
         updateParticleFunction(MoveX, frameDelta);
         updateParticleFunction(MoveY, frameDelta);
@@ -180,8 +183,8 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
                     if (first > 0)
                     {
                         createPulseParticle(position);
-                        --count;
                         --first;
+                        --count;
                     }
 
                     if (count > 0)
@@ -197,7 +200,7 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
                                 int duration = ox::algo::CRand::rand() %
                                     (Info->MaxPulseDuration - Info->MinPulseDuration) + Info->MinPulseDuration;
                                 PulseTimeLeft = duration * 0.001f;
-                                PulseInterval = NextPulseParticle = duration / particles * 0.001f;
+                                NextPulseParticle = PulseInterval = duration / particles * 0.001f;
                             }
                             else
                             {
@@ -208,11 +211,10 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
                     }
                 }
 
-                int delay = Info->MinPulseDelay;
-                int extra = 0;
-                if (delay > 0 && delay < Info->MaxPulseDelay)
-                    extra = ox::algo::CRand::rand() % (Info->MaxPulseDelay - delay);
-                PulseTimer += (delay + extra) * 0.001f;
+                int delay = 0;
+                if (Info->MinPulseDelay > 0 && Info->MinPulseDelay < Info->MaxPulseDelay)
+                    delay = ox::algo::CRand::rand() % (Info->MaxPulseDelay - Info->MinPulseDelay);
+                PulseTimer += (Info->MinPulseDelay + delay) * 0.001f;
             }
             else
                 PulseTimer += 1000000.0f;
