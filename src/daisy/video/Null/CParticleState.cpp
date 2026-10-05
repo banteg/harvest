@@ -308,20 +308,20 @@ void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance,
         x -= (float)((int)x & ~1);
         if (x < 0.5f)
             instance.Value = x * 2;
-        else if (x >= 1.5f)
-            instance.Value = (x - 2.0f) * 2;
-        else
+        else if (x < 1.5f)
             instance.Value = (1.0f - x) * 2;
+        else
+            instance.Value = (x - 2.0f) * 2;
         break;
     }
     case EPFT_SQUARE:
     {
         instance.Time += frameDelta;
         float x = instance.Time * function->Frequency + function->Phase;
-        if (x - (float)(int)x >= 0.5f)
-            instance.Value = -1.0f;
-        else
+        if (x - (float)(int)x < 0.5f)
             instance.Value = 1.0f;
+        else
+            instance.Value = -1.0f;
         break;
     }
     case EPFT_STEP:
@@ -329,10 +329,15 @@ void CParticleState::updateParticleFunction(SParticleFunctionInstance& instance,
         float previous = instance.Time * function->Frequency + function->Phase;
         instance.Time += frameDelta;
         int current = (int)(instance.Time * function->Frequency + function->Phase);
-        if (current == (int)previous && previous != 0.0f)
-            instance.Value = 0.0f;
+        if (current != (int)previous || previous == 0.0f)
+        {
+            if (current & 1)
+                instance.Value = -1.0f / frameDelta;
+            else
+                instance.Value = 1.0f / frameDelta;
+        }
         else
-            instance.Value = ((current & 1) ? -1.0f : 1.0f) / frameDelta;
+            instance.Value = 0.0f;
         break;
     }
     case EPFT_EXP:
