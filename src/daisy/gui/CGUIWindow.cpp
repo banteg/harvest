@@ -738,7 +738,7 @@ bool CGUIDetachableFrame::OnEvent(const ox::event::SEvent& event)
                 return true;
             }
         }
-        else if (event.GUIEvent.EventType == ox::gui::EGET_POPUP_MENU_SELECTED)
+        else if (event.GUIEvent.EventType == ox::gui::EGET_POPUP_MENU_OPTION_CHOSEN)
         {
             if (event.GUIEvent.Caller->getID() == LOCK_MENU_ID)
             {

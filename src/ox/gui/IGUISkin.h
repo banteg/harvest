@@ -21,7 +21,6 @@ enum EGUI_SKIN_TYPE
     EGST_WINDOWS_STANDARD,
     EGST_BLACK_WINDOWS
 };
-
 enum EGUI_DEFAULT_COLOR
 {
     EGDC_3D_DARK_SHADOW = 0,
@@ -49,7 +48,7 @@ enum EGUI_DEFAULT_COLOR
 
     EGDC_COUNT
 };
-//! Default sizes, numbered as in Irrlicht 0.7.
+//! The default sizes, as in Irrlicht 0.7 with Oxeye additions.
 enum EGUI_DEFAULT_SIZE
 {
     EGDS_SCROLLBAR_SIZE = 0,
@@ -60,9 +59,10 @@ enum EGUI_DEFAULT_SIZE
     EGDS_MESSAGE_BOX_HEIGHT,
     EGDS_BUTTON_WIDTH,
     EGDS_BUTTON_HEIGHT,
-    //! The radio button size that CGUIRadioList lays its buttons out with.
-    EGDS_RADIO_BUTTON_WIDTH,
+    //! The least height of a radio button (Oxeye; name inferred).
     EGDS_RADIO_BUTTON_HEIGHT,
+    //! The gap between the buttons of a radio list (Oxeye; name inferred).
+    EGDS_RADIO_BUTTON_SPACING,
 
     EGDS_COUNT
 };

@@ -13,6 +13,15 @@
 namespace ox {
 namespace video {
 
+//! The vertex types of mesh buffers, as in Irrlicht 0.7.
+enum E_VERTEX_TYPE
+{
+    //! S3DVertex
+    EVT_STANDARD = 0,
+    //! S3DVertex2TCoords
+    EVT_2TCOORDS
+};
+
 //! Standard vertex used by the video driver.
 struct S3DVertex
 {

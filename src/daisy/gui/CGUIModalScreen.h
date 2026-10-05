@@ -1,29 +1,42 @@
-// Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Provisional: only the size and the constructor that daisy::gui::CGUIEnvironment's factory calls.
+// Copyright (C) 2002-2004 Nikolaus Gebhardt
+// Adapted from Irrlicht 0.7 source/Irrlicht/CGUIModalScreen.h for Harvest; not the original Daisy source.
+// See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
 
 #ifndef DAISY_GUI_CGUIMODALSCREEN_H
 #define DAISY_GUI_CGUIMODALSCREEN_H
 
 #include "ox/gui/IGUIModalScreen.h"
 
-namespace ox {
-class IOSOperator;
-namespace io { class IFileSystem; }
-namespace video { class ISpritePackage; class ITexture; }
-}
-
 namespace daisy {
 namespace gui {
 
+//! Covers its parent, tints what lies behind it and swallows the mouse and key events meant for it.
 class CGUIModalScreen : public ox::gui::IGUIModalScreen
 {
 public:
+    //! constructor
     CGUIModalScreen(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id);
-    virtual ~CGUIModalScreen();
+
+    //! destructor
+    ~CGUIModalScreen();
+
+    //! called if an event happened.
+    virtual bool OnEvent(const ox::event::SEvent& event);
+
+    //! draws the element and its children
+    virtual void draw();
+
+    //! Removes a child; the screen removes itself with its last child.
+    virtual void removeChild(ox::gui::IGUIElement* child);
+
+    //! Updates the absolute position.
+    virtual void updateAbsolutePosition();
+
+    //! The last mouse or key event the screen blocked.
     virtual ox::event::SEvent getLastBlockedEvent();
 
 private:
-    char Unrecovered[0xe0 - sizeof(ox::gui::IGUIModalScreen)];
+    ox::event::SEvent LastBlockedEvent;
 };
 
 } // end namespace gui

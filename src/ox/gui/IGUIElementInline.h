@@ -169,13 +169,12 @@ inline int IGUIElement::getType()
 //! The event receiver sees events first; unhandled ones go to the parent.
 inline bool IGUIElement::OnEvent(const event::SEvent& event)
 {
-    if (EventReceiver && EventReceiver->OnEvent(event))
+    if (EventReceiver)
+        if (EventReceiver->OnEvent(event))
+            return true;
+    if (!Parent)
         return true;
-
-    if (Parent)
-        return Parent->OnEvent(event);
-
-    return true;
+    return Parent->OnEvent(event);
 }
 
 inline bool IGUIElement::OnEventInNonFocusState(const event::SEvent& event)

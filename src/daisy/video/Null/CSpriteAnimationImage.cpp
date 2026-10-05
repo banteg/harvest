@@ -165,6 +165,8 @@ void CSpriteAnimationImage::draw3d(const ox::core::CVector3d<float>& position, f
     material.MaterialType = ox::video::EMT_TRANSPARENT_ALPHA_CHANNEL;
     material.Texture1 = Texture;
     material.Lighting = false;
+    // both builds store 1 here, over SMaterial's white default
+    material.DiffuseColor = ox::video::SColor(1);
     material.BackfaceCulling = false;
 
     ox::core::CDimension2d<int> textureSize = Texture->getSize();

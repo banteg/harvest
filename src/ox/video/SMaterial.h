@@ -56,14 +56,12 @@ enum E_MATERIAL_FLAG
 //! Material of a mesh buffer or scene node.
 struct SMaterial
 {
-    //! The defaults are the values the Linux and Mac builds store; the field after the ambient
-    //! color starts at 1 and the flags differ from Irrlicht 0.7 in the filter defaults.
+    //! The defaults are the values the Linux and Mac CGUIMeshViewer constructors store; the filter
+    //! defaults differ from Irrlicht 0.7 and the textures are cleared after the flags.
     SMaterial()
-        : MaterialType(EMT_SOLID), AmbientColor(0xffffffff), DiffuseColor(1), EmissiveColor(0),
+        : MaterialType(EMT_SOLID), AmbientColor(0xffffffff), DiffuseColor(0xffffffff), EmissiveColor(0),
           SpecularColor(0), Shininess(0.0f)
     {
-        Texture1 = 0;
-        Texture2 = 0;
         Wireframe = false;
         GouraudShading = true;
         Lighting = true;
@@ -76,6 +74,8 @@ struct SMaterial
         ExtraFlags[0] = false;
         ExtraFlags[1] = false;
         ExtraFlags[2] = false;
+        Texture1 = 0;
+        Texture2 = 0;
     }
 
     E_MATERIAL_TYPE MaterialType;

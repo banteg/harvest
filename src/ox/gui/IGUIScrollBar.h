@@ -14,6 +14,11 @@ namespace gui {
 class IGUIScrollBar : public IGUIElement
 {
 public:
+    IGUIScrollBar(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual void setMax(int max) = 0;
     virtual int getMax() = 0;
     virtual void setStepSizes(int smallStep, int largeStep) = 0;

@@ -18,7 +18,6 @@ class IGUIWindow : public IGUILayout
 public:
     // Defined inline in IGUILayoutInline.h.
     IGUIWindow(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
-
     virtual IGUIButton* getCloseButton() = 0;
     virtual IGUIButton* getMinimizeButton() = 0;
     virtual IGUIButton* getMaximizeButton() = 0;
