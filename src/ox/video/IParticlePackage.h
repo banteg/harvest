@@ -33,6 +33,10 @@ public:
     virtual void setCallbackEngine(IParticleEngineCallback* callback);
     virtual IParticleEngineCallback* getCallbackEngine();
     virtual bool spriteFulfillsImportance(const core::CString<char>& name) = 0;
+
+    IParticleEngineCallback* CallbackEngine;
+    //! Particles less important than this are not created; game states set it directly.
+    int ImportanceLevel;
 };
 
 } // end namespace video

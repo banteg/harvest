@@ -277,3 +277,11 @@
 ".bss" = 0x86ba40
 # PRIORITY_KEY_NAMES
 ".rodata" = 0x601220
+
+["HarvestFull/harvest/states/CShuttleRaceState.cpp"]
+# iostream initializer, the game-header statics and LAP_CHECKPOINTS.
+".bss" = 0x86bf40
+
+["HarvestFull/harvest/entity/CBuildableItems.cpp"]
+# gp_buildableItems, the iostream initializer and the game-header statics.
+".bss" = 0x86b620
