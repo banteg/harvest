@@ -86715,64 +86715,15 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CIngameMenuScreen.cpp",
-      "object_sha256": "f15df589012c3fcf7f189683e35d31bc5b9c1147bf16f26d4a49b1dae95d8be6",
+      "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 1949,
+          "size": 1933,
           "placement": "explicit",
-          "exact": false,
+          "exact": true,
           "address": "0x473430",
-          "first_difference": 1196,
-          "differing_bytes": 51,
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN7harvest3gui17CIngameMenuScreenC1EPN2ox9IOxDeviceE",
-              "known": "0x4739f0",
-              "placed": "0x473a00"
-            },
-            {
-              "symbol": "_ZN7harvest3gui17CIngameMenuScreenC2EPN2ox9IOxDeviceE",
-              "known": "0x473a60",
-              "placed": "0x473a70"
-            },
-            {
-              "symbol": "_ZN7harvest3gui17CIngameMenuScreenD1Ev",
-              "known": "0x473ad0",
-              "placed": "0x473ae0"
-            },
-            {
-              "symbol": "_ZN7harvest3gui17CIngameMenuScreenD2Ev",
-              "known": "0x473b20",
-              "placed": "0x473b30"
-            },
-            {
-              "symbol": "_ZN7harvest3gui17CIngameMenuScreenD0Ev",
-              "known": "0x473b70",
-              "placed": "0x473b80"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 1446,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1454,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
           "references": 70,
           "functions": [
             {
@@ -86802,10 +86753,10 @@
             {
               "symbol": "_ZN7harvest3gui17CIngameMenuScreen7OnEventERKN2ox5event6SEventE",
               "address": "0x473750",
-              "size": 673,
-              "fde": false,
+              "size": 667,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest3gui17CIngameMenuScreenC1EPN2ox9IOxDeviceE",
@@ -86963,41 +86914,31 @@
           "name": ".gcc_except_table",
           "size": 135,
           "placement": "exception frames",
-          "exact": false,
+          "exact": true,
           "address": "0x65c1f5",
-          "first_difference": 43,
-          "differing_bytes": 5,
-          "references": 0
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x65c1f5",
+              "size": 135,
+              "kind": "section"
+            }
+          ]
         },
         {
           "name": ".rodata",
           "size": 56,
           "placement": "explicit",
-          "exact": false,
+          "exact": true,
           "address": "0x5ffd00",
-          "first_difference": 16,
-          "differing_bytes": 2,
-          "bad_references": [
+          "references": 7,
+          "data_ranges": [
             {
-              "offset": 16,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 1324,
-              "destination": "0x473430",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 32,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 1358,
-              "destination": "0x473430",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x5ffd00",
+              "size": 56,
+              "kind": "section"
             }
-          ],
-          "references": 7
+          ]
         },
         {
           "name": ".rodata._ZTVN7harvest3gui17CIngameMenuScreenE",
@@ -87080,7 +87021,7 @@
           "/out/HarvestFull__harvest__gui__CIngameMenuScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CIngameMenuScreen.cpp": "989ba9ed3aac704366531db3cf5887fceaded8c75c2f506b6b1bb6c7e12505bb",
+          "src/HarvestFull/harvest/gui/CIngameMenuScreen.cpp": "8debd446e7d9dd8b2413c00eef2447e124a8161e5d648eae1e956fd732d70ac8",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -87119,9 +87060,9 @@
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2"
         },
         "system_headers": 117,
-        "object_sha256": "f15df589012c3fcf7f189683e35d31bc5b9c1147bf16f26d4a49b1dae95d8be6"
+        "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f"
       },
-      "fuzzy_target_sha256": "a94927c9ad9e097841a6e8c425df997b9704ac955d166760645deba1416d7c1f",
+      "fuzzy_target_sha256": "23a538eb85fdf1a79eaae2cd8f6a030df5c66a53c7a64b543d02ade5b06647cb",
       "fuzzy_functions": [
         {
           "address": "0x473430",
@@ -87145,7 +87086,7 @@
           "address": "0x473750",
           "size": 667,
           "symbol": "_ZN7harvest3gui17CIngameMenuScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 97.97006
+          "percent": 99.88024
         },
         {
           "address": "0x4739f0",
@@ -87187,17 +87128,15 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CMenuInfoDialog.cpp",
-      "object_sha256": "8178c62de896b578b7d93fbebc52996de47c5e40d095aed2099d7da874c4c01a",
+      "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 9109,
+          "size": 9117,
           "placement": "explicit",
           "exact": false,
           "address": "0x473c00",
-          "first_difference": 8482,
-          "differing_bytes": 255,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
@@ -87223,68 +87162,6 @@
               "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
               "known": "0x473d00",
               "placed": "0x474000"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 8840,
-              "type": 2,
-              "symbol": ".LC0",
-              "addend": -4,
-              "reason": "merged constant",
-              "matches": false
-            },
-            {
-              "offset": 8863,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
-              "addend": -4,
-              "destination": "0x475b50",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8870,
-              "type": 2,
-              "symbol": "_ZN2ox5event17gp_subscriberListE",
-              "addend": -4,
-              "destination": "0x874258",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8914,
-              "type": 2,
-              "symbol": "_ZN7harvest12g_gamePlanetE",
-              "addend": -8,
-              "destination": "0x86b4d4",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8927,
-              "type": 2,
-              "symbol": "_ZN7harvest10g_gameModeE",
-              "addend": -8,
-              "destination": "0x86b4d0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8998,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 76,
-              "reason": "unmapped or truncated range: 0xffffffff+0x18",
-              "matches": false
-            },
-            {
-              "offset": 9075,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 60,
-              "reason": "unmapped or truncated range: 0xffb90000+0x10",
-              "matches": false
             }
           ],
           "references": 215,
@@ -87372,10 +87249,10 @@
             {
               "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
               "address": "0x475cb0",
-              "size": 741,
-              "fde": false,
+              "size": 749,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             }
           ],
           "data_ranges": [
@@ -87723,6 +87600,21 @@
               "address": "0x60bcfc",
               "size": 8,
               "kind": "merged string"
+            },
+            {
+              "address": "0x5f03c4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ffec0",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffec8",
+              "size": 16,
+              "kind": "merged string"
             }
           ]
         },
@@ -87860,7 +87752,7 @@
           "/out/HarvestFull__harvest__gui__CMenuInfoDialog.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CMenuInfoDialog.cpp": "83be7e456b6aca82ee81843f86570ab339e4f5ebf7e5048bed69f6e8c0761f57",
+          "src/HarvestFull/harvest/gui/CMenuInfoDialog.cpp": "1d690c2dbc030429f7b20b4f90e888e945fa0c9642aa5246c9f99a77ca2c9133",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -87908,7 +87800,7 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 117,
-        "object_sha256": "8178c62de896b578b7d93fbebc52996de47c5e40d095aed2099d7da874c4c01a"
+        "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714"
       },
       "fuzzy_target_sha256": "7da190573a3bd9762f059fd827b6bd80c8a4efd9fea3453389fd7a155fa94f8e",
       "fuzzy_functions": [
@@ -87976,7 +87868,7 @@
           "address": "0x475cb0",
           "size": 749,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-          "percent": 77.85714
+          "percent": 99.91071
         },
         {
           "address": "0x472bd0",
@@ -101831,17 +101723,17 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CHighscoreScreen.cpp",
-      "object_sha256": "0efbc0f571daaf69227de0235ea5e51beefa996b2ee5e45475a707e40df6a6ff",
+      "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 35925,
+          "size": 35893,
           "placement": "symbol: _ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
           "exact": false,
           "address": "0x469ef0",
           "first_difference": 517,
-          "differing_bytes": 9135,
+          "differing_bytes": 7696,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest3gui16CHighscoreScreen9isVisibleEv",
@@ -103019,122 +102911,15 @@
               "matches": false
             },
             {
-              "offset": 29744,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
-              "addend": -4,
-              "destination": "0x472bd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 29758,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
-              "addend": -4,
-              "destination": "0x46c800",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 29809,
-              "type": 2,
-              "symbol": "_ZN2ox4core16CCriticalSection5enterEv",
-              "addend": -4,
-              "destination": "0x5df5f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 29821,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 262,
-              "reason": "unmapped or truncated range: 0x1b800+0x6",
-              "matches": false
-            },
-            {
-              "offset": 29826,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
-              "addend": -4,
-              "destination": "0x450390",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 29834,
-              "type": 2,
-              "symbol": "_ZN2ox4core16CCriticalSection5leaveEv",
-              "addend": -4,
-              "destination": "0x5df5e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 29930,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui16CHighscoreScreen15loadSummaryPageEi",
-              "addend": -4,
-              "destination": "0x4702f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30011,
-              "type": 2,
-              "symbol": "_ZN2ox4core16CCriticalSection5enterEv",
-              "addend": -4,
-              "destination": "0x5df5f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30027,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
-              "addend": -4,
-              "destination": "0x450390",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30035,
-              "type": 2,
-              "symbol": "_ZN2ox4core16CCriticalSection5leaveEv",
-              "addend": -4,
-              "destination": "0x5df5e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30229,
-              "type": 11,
-              "symbol": ".rodata",
-              "addend": 0,
-              "destination": "0x5ff7e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30245,
-              "type": 11,
-              "symbol": ".rodata",
-              "addend": 200,
-              "destination": "0x5ff7e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 30965,
+              "offset": 30949,
               "type": 10,
               "symbol": ".rodata.str1.8",
               "addend": 272,
-              "reason": "unmapped or truncated range: 0x1b9+0x35",
+              "reason": "unmapped or truncated range: 0x48005f99+0x35",
               "matches": false
             },
             {
-              "offset": 31402,
+              "offset": 31386,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103143,7 +102928,7 @@
               "matches": false
             },
             {
-              "offset": 31499,
+              "offset": 31483,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103152,7 +102937,7 @@
               "matches": false
             },
             {
-              "offset": 31574,
+              "offset": 31558,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
               "addend": -4,
@@ -103161,7 +102946,7 @@
               "matches": false
             },
             {
-              "offset": 31649,
+              "offset": 31633,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103170,7 +102955,7 @@
               "matches": false
             },
             {
-              "offset": 31724,
+              "offset": 31703,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
               "addend": -4,
@@ -103179,7 +102964,7 @@
               "matches": false
             },
             {
-              "offset": 31802,
+              "offset": 31781,
               "type": 2,
               "symbol": "wcstol",
               "addend": -4,
@@ -103188,7 +102973,7 @@
               "matches": false
             },
             {
-              "offset": 31855,
+              "offset": 31834,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103197,7 +102982,7 @@
               "matches": false
             },
             {
-              "offset": 31922,
+              "offset": 31901,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103206,7 +102991,7 @@
               "matches": false
             },
             {
-              "offset": 31951,
+              "offset": 31930,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103215,7 +103000,7 @@
               "matches": false
             },
             {
-              "offset": 31977,
+              "offset": 31956,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
               "addend": -4,
@@ -103224,7 +103009,7 @@
               "matches": false
             },
             {
-              "offset": 31991,
+              "offset": 31970,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103233,15 +103018,15 @@
               "matches": false
             },
             {
-              "offset": 31996,
+              "offset": 31975,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2520,
-              "reason": "unmapped or truncated range: 0x8b480002+0x58",
+              "reason": "unmapped or truncated range: 0x4c005ff0+0x58",
               "matches": false
             },
             {
-              "offset": 32016,
+              "offset": 31995,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103250,15 +103035,15 @@
               "matches": false
             },
             {
-              "offset": 32037,
+              "offset": 32016,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xf0+0xa",
+              "reason": "unmapped or truncated range: 0x48005f9a+0xa",
               "matches": false
             },
             {
-              "offset": 32067,
+              "offset": 32046,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103267,23 +103052,23 @@
               "matches": false
             },
             {
-              "offset": 32175,
+              "offset": 32154,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 295,
-              "reason": "unmapped or truncated range: -0x74b80000+0x8",
+              "reason": "unmapped or truncated range: 0x48005ff5+0x8",
               "matches": false
             },
             {
-              "offset": 32298,
+              "offset": 32277,
               "type": 10,
               "symbol": ".rodata.str1.8",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0x49000000+0x37",
+              "reason": "unmapped or truncated range: 0x48005f9a+0x37",
               "matches": false
             },
             {
-              "offset": 32327,
+              "offset": 32306,
               "type": 11,
               "symbol": ".rodata",
               "addend": 440,
@@ -103292,7 +103077,7 @@
               "matches": false
             },
             {
-              "offset": 32391,
+              "offset": 32370,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103301,15 +103086,15 @@
               "matches": false
             },
             {
-              "offset": 32396,
+              "offset": 32375,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1680,
-              "reason": "unmapped or truncated range: 0x84c70002+0x48",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x48",
               "matches": false
             },
             {
-              "offset": 32416,
+              "offset": 32395,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103318,7 +103103,7 @@
               "matches": false
             },
             {
-              "offset": 32510,
+              "offset": 32489,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103327,7 +103112,7 @@
               "matches": false
             },
             {
-              "offset": 32521,
+              "offset": 32500,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103336,23 +103121,23 @@
               "matches": false
             },
             {
-              "offset": 32526,
+              "offset": 32505,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1608,
-              "reason": "unmapped or truncated range: 0x88a88b+0x44",
+              "reason": "unmapped or truncated range: 0x49005fec+0x44",
               "matches": false
             },
             {
-              "offset": 32537,
+              "offset": 32516,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 303,
-              "reason": "unmapped or truncated range: -0x7b38fffe+0x9",
+              "reason": "unmapped or truncated range: 0x4c005ff5+0x9",
               "matches": false
             },
             {
-              "offset": 32557,
+              "offset": 32536,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103361,7 +103146,7 @@
               "matches": false
             },
             {
-              "offset": 32640,
+              "offset": 32619,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103370,7 +103155,7 @@
               "matches": false
             },
             {
-              "offset": 32660,
+              "offset": 32639,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen16sortAndMovePopupEPN2ox3gui10IGUILayoutEPNS3_11IGUIElementEb",
               "addend": -4,
@@ -103379,7 +103164,7 @@
               "matches": false
             },
             {
-              "offset": 32695,
+              "offset": 32674,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -103388,7 +103173,7 @@
               "matches": false
             },
             {
-              "offset": 32721,
+              "offset": 32700,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
               "addend": -4,
@@ -103397,7 +103182,7 @@
               "matches": false
             },
             {
-              "offset": 32735,
+              "offset": 32714,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103406,32 +103191,32 @@
               "matches": false
             },
             {
-              "offset": 32740,
+              "offset": 32719,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2424,
-              "reason": "unmapped or truncated range: 0xffb94118+0x5c",
+              "reason": "unmapped or truncated range: 0x8b48ef+0x5c",
+              "matches": false
+            },
+            {
+              "offset": 32739,
+              "type": 2,
+              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
+              "addend": -4,
+              "destination": "0x493080",
+              "reason": "different destination",
               "matches": false
             },
             {
               "offset": 32760,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 32781,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xfff97d6f+0xa",
+              "reason": "unmapped or truncated range: 0x19024b4+0xa",
               "matches": false
             },
             {
-              "offset": 32808,
+              "offset": 32787,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103440,15 +103225,15 @@
               "matches": false
             },
             {
-              "offset": 32918,
+              "offset": 32897,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 295,
-              "reason": "unmapped or truncated range: -0xf874b8+0x8",
+              "reason": "unmapped or truncated range: -0x1000000+0x8",
               "matches": false
             },
             {
-              "offset": 32961,
+              "offset": 32940,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103457,15 +103242,15 @@
               "matches": false
             },
             {
-              "offset": 32966,
+              "offset": 32945,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1608,
-              "reason": "unmapped or truncated range: 0x170+0x44",
+              "reason": "unmapped or truncated range: 0x8b48ef+0x44",
               "matches": false
             },
             {
-              "offset": 32986,
+              "offset": 32965,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103474,7 +103259,7 @@
               "matches": false
             },
             {
-              "offset": 33077,
+              "offset": 33056,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103483,7 +103268,7 @@
               "matches": false
             },
             {
-              "offset": 33088,
+              "offset": 33067,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103492,15 +103277,15 @@
               "matches": false
             },
             {
-              "offset": 33093,
+              "offset": 33072,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1840,
-              "reason": "unmapped or truncated range: 0x2484c761+0x58",
+              "reason": "unmapped or truncated range: 0x8b48ef+0x58",
               "matches": false
             },
             {
-              "offset": 33113,
+              "offset": 33092,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103509,7 +103294,7 @@
               "matches": false
             },
             {
-              "offset": 33216,
+              "offset": 33195,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103518,7 +103303,7 @@
               "matches": false
             },
             {
-              "offset": 33230,
+              "offset": 33209,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103527,23 +103312,23 @@
               "matches": false
             },
             {
-              "offset": 33235,
+              "offset": 33214,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1680,
-              "reason": "unmapped or truncated range: 0x88b0+0x48",
+              "reason": "unmapped or truncated range: 0x80c748ef+0x48",
+              "matches": false
+            },
+            {
+              "offset": 33228,
+              "type": 11,
+              "symbol": ".rodata.str1.1",
+              "addend": 292,
+              "reason": "unmapped or truncated range: -0x74b7e7bb+0x3",
               "matches": false
             },
             {
               "offset": 33249,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 292,
-              "reason": "unmapped or truncated range: 0x13024+0x3",
-              "matches": false
-            },
-            {
-              "offset": 33270,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103552,7 +103337,7 @@
               "matches": false
             },
             {
-              "offset": 33356,
+              "offset": 33335,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103561,15 +103346,15 @@
               "matches": false
             },
             {
-              "offset": 33367,
+              "offset": 33346,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 303,
-              "reason": "unmapped or truncated range: -0xf46+0x9",
+              "reason": "unmapped or truncated range: -0x36cef7ad+0x9",
               "matches": false
             },
             {
-              "offset": 33384,
+              "offset": 33363,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen16sortAndMovePopupEPN2ox3gui10IGUILayoutEPNS3_11IGUIElementEb",
               "addend": -4,
@@ -103578,7 +103363,7 @@
               "matches": false
             },
             {
-              "offset": 33424,
+              "offset": 33398,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
               "addend": -4,
@@ -103587,7 +103372,7 @@
               "matches": false
             },
             {
-              "offset": 33438,
+              "offset": 33412,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103596,15 +103381,15 @@
               "matches": false
             },
             {
-              "offset": 33443,
+              "offset": 33417,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1752,
-              "reason": "unmapped or truncated range: 0xffb94118+0x58",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x58",
               "matches": false
             },
             {
-              "offset": 33463,
+              "offset": 33437,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103613,15 +103398,15 @@
               "matches": false
             },
             {
-              "offset": 33484,
+              "offset": 33458,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xfff97ab0+0xa",
+              "reason": "unmapped or truncated range: 0x48005f9a+0xa",
               "matches": false
             },
             {
-              "offset": 33511,
+              "offset": 33485,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103630,15 +103415,15 @@
               "matches": false
             },
             {
-              "offset": 33621,
+              "offset": 33595,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 295,
-              "reason": "unmapped or truncated range: -0xf874b8+0x8",
+              "reason": "unmapped or truncated range: -0x41ffa00b+0x8",
               "matches": false
             },
             {
-              "offset": 33664,
+              "offset": 33638,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103647,15 +103432,15 @@
               "matches": false
             },
             {
-              "offset": 33669,
+              "offset": 33643,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1608,
-              "reason": "unmapped or truncated range: 0x2a0+0x44",
+              "reason": "unmapped or truncated range: 0x4c005fec+0x44",
               "matches": false
             },
             {
-              "offset": 33689,
+              "offset": 33663,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103664,7 +103449,7 @@
               "matches": false
             },
             {
-              "offset": 33780,
+              "offset": 33754,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103673,7 +103458,7 @@
               "matches": false
             },
             {
-              "offset": 33791,
+              "offset": 33765,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103682,15 +103467,15 @@
               "matches": false
             },
             {
-              "offset": 33796,
+              "offset": 33770,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1840,
-              "reason": "unmapped or truncated range: 0x2484c760+0x58",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x58",
               "matches": false
             },
             {
-              "offset": 33816,
+              "offset": 33790,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103699,7 +103484,7 @@
               "matches": false
             },
             {
-              "offset": 33919,
+              "offset": 33893,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103708,7 +103493,7 @@
               "matches": false
             },
             {
-              "offset": 33933,
+              "offset": 33907,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103717,23 +103502,23 @@
               "matches": false
             },
             {
-              "offset": 33938,
+              "offset": 33912,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1680,
-              "reason": "unmapped or truncated range: 0x88b0+0x48",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x48",
               "matches": false
             },
             {
-              "offset": 33952,
+              "offset": 33926,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 292,
-              "reason": "unmapped or truncated range: 0x26024+0x3",
+              "reason": "unmapped or truncated range: 0x48005f9a+0x3",
               "matches": false
             },
             {
-              "offset": 33973,
+              "offset": 33947,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103742,7 +103527,7 @@
               "matches": false
             },
             {
-              "offset": 34069,
+              "offset": 34043,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
               "addend": -4,
@@ -103751,7 +103536,7 @@
               "matches": false
             },
             {
-              "offset": 34083,
+              "offset": 34057,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103760,15 +103545,15 @@
               "matches": false
             },
             {
-              "offset": 34088,
+              "offset": 34062,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1520,
-              "reason": "unmapped or truncated range: 0xffb94118+0x58",
+              "reason": "unmapped or truncated range: 0x4c005fec+0x58",
               "matches": false
             },
             {
-              "offset": 34108,
+              "offset": 34082,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103777,15 +103562,15 @@
               "matches": false
             },
             {
-              "offset": 34129,
+              "offset": 34103,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xfff9782b+0xa",
+              "reason": "unmapped or truncated range: 0x48005f9a+0xa",
               "matches": false
             },
             {
-              "offset": 34156,
+              "offset": 34130,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103794,23 +103579,23 @@
               "matches": false
             },
             {
-              "offset": 34187,
+              "offset": 34161,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0x84c7078b+0x4",
+              "reason": "unmapped or truncated range: 0xc7006228+0x4",
               "matches": false
             },
             {
-              "offset": 34267,
+              "offset": 34241,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 295,
-              "reason": "unmapped or truncated range: -0xf874b8+0x8",
+              "reason": "unmapped or truncated range: -0x41ffa00b+0x8",
               "matches": false
             },
             {
-              "offset": 34310,
+              "offset": 34284,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103819,15 +103604,15 @@
               "matches": false
             },
             {
-              "offset": 34315,
+              "offset": 34289,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1608,
-              "reason": "unmapped or truncated range: 0x300+0x44",
+              "reason": "unmapped or truncated range: 0x4c005fec+0x44",
               "matches": false
             },
             {
-              "offset": 34335,
+              "offset": 34309,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103836,7 +103621,7 @@
               "matches": false
             },
             {
-              "offset": 34426,
+              "offset": 34400,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103845,7 +103630,7 @@
               "matches": false
             },
             {
-              "offset": 34437,
+              "offset": 34411,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103854,15 +103639,15 @@
               "matches": false
             },
             {
-              "offset": 34442,
+              "offset": 34416,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1680,
-              "reason": "unmapped or truncated range: 0x2e0+0x48",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x48",
               "matches": false
             },
             {
-              "offset": 34462,
+              "offset": 34436,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103871,7 +103656,7 @@
               "matches": false
             },
             {
-              "offset": 34552,
+              "offset": 34526,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen10setVisibleEb",
               "addend": -4,
@@ -103880,7 +103665,7 @@
               "matches": false
             },
             {
-              "offset": 34559,
+              "offset": 34533,
               "type": 2,
               "symbol": "_ZN2ox5event17gp_subscriberListE",
               "addend": -4,
@@ -103889,7 +103674,7 @@
               "matches": false
             },
             {
-              "offset": 34636,
+              "offset": 34610,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen20createNewPopupWindowEv",
               "addend": -4,
@@ -103898,7 +103683,7 @@
               "matches": false
             },
             {
-              "offset": 34650,
+              "offset": 34624,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103907,15 +103692,15 @@
               "matches": false
             },
             {
-              "offset": 34655,
+              "offset": 34629,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1928,
-              "reason": "unmapped or truncated range: 0xffb94118+0x60",
+              "reason": "unmapped or truncated range: 0x4c005fee+0x60",
               "matches": false
             },
             {
-              "offset": 34675,
+              "offset": 34649,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103924,15 +103709,15 @@
               "matches": false
             },
             {
-              "offset": 34696,
+              "offset": 34670,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xfff975f4+0xa",
+              "reason": "unmapped or truncated range: 0x48005f9a+0xa",
               "matches": false
             },
             {
-              "offset": 34723,
+              "offset": 34697,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103941,15 +103726,15 @@
               "matches": false
             },
             {
-              "offset": 34826,
+              "offset": 34800,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 295,
-              "reason": "unmapped or truncated range: -0x7f45ffc1+0x8",
+              "reason": "unmapped or truncated range: -0x41ffa00b+0x8",
               "matches": false
             },
             {
-              "offset": 34851,
+              "offset": 34825,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103958,15 +103743,15 @@
               "matches": false
             },
             {
-              "offset": 34856,
+              "offset": 34830,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2024,
-              "reason": "unmapped or truncated range: 0x1a10+0x50",
+              "reason": "unmapped or truncated range: 0x4c005fee+0x50",
               "matches": false
             },
             {
-              "offset": 34876,
+              "offset": 34850,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -103975,7 +103760,7 @@
               "matches": false
             },
             {
-              "offset": 34929,
+              "offset": 34903,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -103984,7 +103769,7 @@
               "matches": false
             },
             {
-              "offset": 34943,
+              "offset": 34917,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -103993,15 +103778,15 @@
               "matches": false
             },
             {
-              "offset": 34948,
+              "offset": 34922,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2104,
-              "reason": "unmapped or truncated range: 0x1a10+0x50",
+              "reason": "unmapped or truncated range: 0x4c005fee+0x50",
               "matches": false
             },
             {
-              "offset": 34968,
+              "offset": 34942,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104010,7 +103795,7 @@
               "matches": false
             },
             {
-              "offset": 35021,
+              "offset": 34995,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104019,7 +103804,7 @@
               "matches": false
             },
             {
-              "offset": 35035,
+              "offset": 35009,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -104028,15 +103813,15 @@
               "matches": false
             },
             {
-              "offset": 35040,
+              "offset": 35014,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2184,
-              "reason": "unmapped or truncated range: 0x1a10+0x50",
+              "reason": "unmapped or truncated range: 0x4c005fef+0x50",
               "matches": false
             },
             {
-              "offset": 35060,
+              "offset": 35034,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104045,7 +103830,7 @@
               "matches": false
             },
             {
-              "offset": 35113,
+              "offset": 35087,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104054,7 +103839,7 @@
               "matches": false
             },
             {
-              "offset": 35127,
+              "offset": 35101,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -104063,15 +103848,15 @@
               "matches": false
             },
             {
-              "offset": 35132,
+              "offset": 35106,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2264,
-              "reason": "unmapped or truncated range: 0x1a10+0x50",
+              "reason": "unmapped or truncated range: 0x4c005fef+0x50",
               "matches": false
             },
             {
-              "offset": 35152,
+              "offset": 35126,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104080,7 +103865,7 @@
               "matches": false
             },
             {
-              "offset": 35205,
+              "offset": 35179,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104089,7 +103874,7 @@
               "matches": false
             },
             {
-              "offset": 35219,
+              "offset": 35193,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -104098,15 +103883,15 @@
               "matches": false
             },
             {
-              "offset": 35224,
+              "offset": 35198,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 2344,
-              "reason": "unmapped or truncated range: 0x1a10+0x50",
+              "reason": "unmapped or truncated range: 0x4c005fef+0x50",
               "matches": false
             },
             {
-              "offset": 35244,
+              "offset": 35218,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104115,7 +103900,7 @@
               "matches": false
             },
             {
-              "offset": 35297,
+              "offset": 35271,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104124,7 +103909,7 @@
               "matches": false
             },
             {
-              "offset": 35308,
+              "offset": 35282,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -104133,15 +103918,15 @@
               "matches": false
             },
             {
-              "offset": 35313,
+              "offset": 35287,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1680,
-              "reason": "unmapped or truncated range: 0x1d0+0x48",
+              "reason": "unmapped or truncated range: 0x4c005fed+0x48",
               "matches": false
             },
             {
-              "offset": 35333,
+              "offset": 35307,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104150,7 +103935,7 @@
               "matches": false
             },
             {
-              "offset": 35427,
+              "offset": 35401,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104159,7 +103944,7 @@
               "matches": false
             },
             {
-              "offset": 35438,
+              "offset": 35412,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -104168,23 +103953,23 @@
               "matches": false
             },
             {
-              "offset": 35443,
+              "offset": 35417,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 1608,
-              "reason": "unmapped or truncated range: 0xe8c03100+0x44",
+              "reason": "unmapped or truncated range: 0x49005fec+0x44",
               "matches": false
             },
             {
-              "offset": 35454,
+              "offset": 35428,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 303,
-              "reason": "unmapped or truncated range: 0x1b0+0x9",
+              "reason": "unmapped or truncated range: 0x4c005ff5+0x9",
               "matches": false
             },
             {
-              "offset": 35474,
+              "offset": 35448,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -104193,7 +103978,7 @@
               "matches": false
             },
             {
-              "offset": 35557,
+              "offset": 35531,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104202,7 +103987,7 @@
               "matches": false
             },
             {
-              "offset": 35590,
+              "offset": 35564,
               "type": 2,
               "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
               "addend": -4,
@@ -104211,15 +103996,15 @@
               "matches": false
             },
             {
-              "offset": 35681,
+              "offset": 35655,
               "type": 10,
               "symbol": ".rodata.str4.4",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0x8948fff9+0x4",
+              "reason": "unmapped or truncated range: 0xe8006228+0x4",
               "matches": false
             },
             {
-              "offset": 35686,
+              "offset": 35660,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
               "addend": -4,
@@ -104228,7 +104013,7 @@
               "matches": false
             },
             {
-              "offset": 35706,
+              "offset": 35680,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104237,7 +104022,7 @@
               "matches": false
             },
             {
-              "offset": 35714,
+              "offset": 35688,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -104246,7 +104031,7 @@
               "matches": false
             },
             {
-              "offset": 35725,
+              "offset": 35699,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -104255,7 +104040,7 @@
               "matches": false
             },
             {
-              "offset": 35733,
+              "offset": 35707,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -104445,8 +104230,8 @@
             {
               "symbol": "_ZN7harvest3gui16CHighscoreScreen7OnEventERKN2ox5event6SEventE",
               "address": "0x471190",
-              "size": 6533,
-              "fde": false,
+              "size": 6501,
+              "fde": true,
               "global": true,
               "exact": false
             }
@@ -104835,6 +104620,11 @@
             {
               "address": "0x622838",
               "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ff5d0",
+              "size": 6,
               "kind": "merged string"
             }
           ]
@@ -105315,13 +105105,13 @@
           "exact": false,
           "address": "0x5ff7e0",
           "first_difference": 0,
-          "differing_bytes": 87,
+          "differing_bytes": 75,
           "bad_references": [
             {
               "offset": 0,
               "type": 1,
               "symbol": ".text",
-              "addend": 34546,
+              "addend": 34520,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105330,7 +105120,7 @@
               "offset": 72,
               "type": 1,
               "symbol": ".text",
-              "addend": 34057,
+              "addend": 34031,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105339,7 +105129,7 @@
               "offset": 80,
               "type": 1,
               "symbol": ".text",
-              "addend": 33412,
+              "addend": 33386,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105348,7 +105138,7 @@
               "offset": 88,
               "type": 1,
               "symbol": ".text",
-              "addend": 33398,
+              "addend": 33372,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105357,7 +105147,7 @@
               "offset": 96,
               "type": 1,
               "symbol": ".text",
-              "addend": 35566,
+              "addend": 35540,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105366,7 +105156,7 @@
               "offset": 104,
               "type": 1,
               "symbol": ".text",
-              "addend": 34624,
+              "addend": 34598,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105375,7 +105165,7 @@
               "offset": 112,
               "type": 1,
               "symbol": ".text",
-              "addend": 32709,
+              "addend": 32688,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105384,7 +105174,7 @@
               "offset": 120,
               "type": 1,
               "symbol": ".text",
-              "addend": 32674,
+              "addend": 32653,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105393,7 +105183,7 @@
               "offset": 128,
               "type": 1,
               "symbol": ".text",
-              "addend": 31965,
+              "addend": 31944,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105402,7 +105192,7 @@
               "offset": 136,
               "type": 1,
               "symbol": ".text",
-              "addend": 31936,
+              "addend": 31915,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105411,7 +105201,7 @@
               "offset": 144,
               "type": 1,
               "symbol": ".text",
-              "addend": 31912,
+              "addend": 31891,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105420,7 +105210,7 @@
               "offset": 152,
               "type": 1,
               "symbol": ".text",
-              "addend": 31869,
+              "addend": 31848,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105429,7 +105219,7 @@
               "offset": 160,
               "type": 1,
               "symbol": ".text",
-              "addend": 31752,
+              "addend": 31731,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105438,7 +105228,7 @@
               "offset": 168,
               "type": 1,
               "symbol": ".text",
-              "addend": 31663,
+              "addend": 31642,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105447,7 +105237,7 @@
               "offset": 176,
               "type": 1,
               "symbol": ".text",
-              "addend": 31513,
+              "addend": 31497,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105456,7 +105246,7 @@
               "offset": 184,
               "type": 1,
               "symbol": ".text",
-              "addend": 31416,
+              "addend": 31400,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105465,7 +105255,7 @@
               "offset": 192,
               "type": 1,
               "symbol": ".text",
-              "addend": 31301,
+              "addend": 31285,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105474,7 +105264,7 @@
               "offset": 200,
               "type": 1,
               "symbol": ".text",
-              "addend": 31054,
+              "addend": 31038,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105483,7 +105273,7 @@
               "offset": 208,
               "type": 1,
               "symbol": ".text",
-              "addend": 30829,
+              "addend": 30813,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105492,7 +105282,7 @@
               "offset": 216,
               "type": 1,
               "symbol": ".text",
-              "addend": 30829,
+              "addend": 30813,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105501,7 +105291,7 @@
               "offset": 224,
               "type": 1,
               "symbol": ".text",
-              "addend": 30829,
+              "addend": 30813,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105510,88 +105300,7 @@
               "offset": 232,
               "type": 1,
               "symbol": ".text",
-              "addend": 30829,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 240,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30346,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 248,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30249,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 256,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 264,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 272,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 280,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 288,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 296,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
-              "destination": "0x469ec0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 304,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 30073,
+              "addend": 30813,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105600,7 +105309,7 @@
               "offset": 312,
               "type": 1,
               "symbol": ".text",
-              "addend": 31160,
+              "addend": 31144,
               "destination": "0x469ec0",
               "reason": "different destination",
               "matches": false
@@ -105973,7 +105682,7 @@
           "/out/HarvestFull__harvest__gui__CHighscoreScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CHighscoreScreen.cpp": "dfa676d5f534145e4343c6f6a7f89c7cbeb0bfe4aed48aa3cfb34d5dae56a79a",
+          "src/HarvestFull/harvest/gui/CHighscoreScreen.cpp": "41a167059a159205d06566b4e1f1af1061a5baf68268e77e06bd0cdc0a3b85ee",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -106044,9 +105753,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 135,
-        "object_sha256": "0efbc0f571daaf69227de0235ea5e51beefa996b2ee5e45475a707e40df6a6ff"
+        "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67"
       },
-      "fuzzy_target_sha256": "fbcb18c33fbdadd613bc35464bef774732fb5fbf690352a5b43265c9e0583f9c",
+      "fuzzy_target_sha256": "509a18bd6f51411b95b90ba067d07e96e3efce28918ee0f123f6ab042eadd0ab",
       "fuzzy_functions": [
         {
           "address": "0x469ef0",
@@ -106184,7 +105893,7 @@
           "address": "0x471190",
           "size": 6501,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 98.26036
+          "percent": 99.33151
         },
         {
           "address": "0x472b00",
@@ -113998,7 +113707,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CPriorityScreen.cpp",
-      "object_sha256": "d276b5f35753c59326d5d9b66bed9b44a01ab9c4884634844f3ce71fde9d5cff",
+      "object_sha256": "31c975166d14d94d7272afe003accfc2c8184b8370d1631d7ad867217233163a",
       "exact": false,
       "sections": [
         {
@@ -114008,7 +113717,7 @@
           "exact": false,
           "address": "0x475fc0",
           "first_difference": 287,
-          "differing_bytes": 1458,
+          "differing_bytes": 991,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest3gui15CPriorityScreen9isVisibleEv",
@@ -114078,7 +113787,16 @@
           ],
           "bad_references": [
             {
-              "offset": 6167,
+              "offset": 7245,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7286,
               "type": 2,
               "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
               "addend": -4,
@@ -114087,15 +113805,16 @@
               "matches": false
             },
             {
-              "offset": 6311,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x28408b48+0x4",
+              "offset": 7427,
+              "type": 2,
+              "symbol": "_ZN7harvest6entity12getAlienNameEi",
+              "addend": -4,
+              "destination": "0x40a2d0",
+              "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 6344,
+              "offset": 7442,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
               "addend": -4,
@@ -114104,16 +113823,43 @@
               "matches": false
             },
             {
-              "offset": 6720,
-              "type": 2,
-              "symbol": "_ZN7harvest4game12CThreatLevel25alienIsPresentAtThisLevelEi",
-              "addend": -4,
-              "destination": "0x45c320",
+              "offset": 7765,
+              "type": 11,
+              "symbol": "_ZN7harvest8settings18g_attackPrioritiesE",
+              "addend": 0,
+              "destination": "0x86bae0",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 7237,
+              "offset": 7770,
+              "type": 2,
+              "symbol": "_ZN7harvest8settings16CAlienPriorities21setIfRangeIsImportantEb",
+              "addend": -4,
+              "destination": "0x48a4b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7807,
+              "type": 11,
+              "symbol": "_ZN7harvest8settings18g_attackPrioritiesE",
+              "addend": 0,
+              "destination": "0x86bae0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7812,
+              "type": 2,
+              "symbol": "_ZN7harvest8settings16CAlienPriorities11setHoldFireEb",
+              "addend": -4,
+              "destination": "0x48a4c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7835,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -114122,34 +113868,7 @@
               "matches": false
             },
             {
-              "offset": 7280,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
-              "addend": -4,
-              "destination": "0x475fc0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7822,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv",
-              "addend": -4,
-              "destination": "0x476940",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7840,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 7848,
+              "offset": 7843,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -114243,7 +113962,7 @@
             {
               "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
               "address": "0x477520",
-              "size": 2348,
+              "size": 2343,
               "fde": false,
               "global": true,
               "exact": false
@@ -114475,6 +114194,11 @@
             {
               "address": "0x5fe5c8",
               "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
               "kind": "merged string"
             }
           ]
@@ -114709,7 +114433,7 @@
           "/out/HarvestFull__harvest__gui__CPriorityScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CPriorityScreen.cpp": "c50f3642740a30a29f2be88681bd2cb0adc1d3d79cf183d1d2855da5d7fd8c35",
+          "src/HarvestFull/harvest/gui/CPriorityScreen.cpp": "40850223ac8d3495e8b67ab5267b869cdd05e25f9888c3f229c273b3d5f0cbf8",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -114778,7 +114502,7 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 131,
-        "object_sha256": "d276b5f35753c59326d5d9b66bed9b44a01ab9c4884634844f3ce71fde9d5cff"
+        "object_sha256": "31c975166d14d94d7272afe003accfc2c8184b8370d1631d7ad867217233163a"
       },
       "fuzzy_target_sha256": "6db3c45f262ae581226c318d2b891c1393460f4325a6d03b812042dc8dc1818a",
       "fuzzy_functions": [
@@ -114846,7 +114570,7 @@
           "address": "0x477520",
           "size": 2335,
           "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 82.0
+          "percent": 90.679855
         },
         {
           "address": "0x478150",
@@ -120001,17 +119725,17 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CProfileScreen.cpp",
-      "object_sha256": "cb58639d9a784a58ccbaf71ea305a664d0516c15f92afb5c7ee99de60629eb72",
+      "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 8911,
+          "size": 8906,
           "placement": "symbol: _ZN7harvest3gui14CProfileScreen12removeWindowEv",
           "exact": false,
           "address": "0x478630",
           "first_difference": 6719,
-          "differing_bytes": 450,
+          "differing_bytes": 34,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest3gui14CProfileScreen9isVisibleEv",
@@ -120087,220 +119811,6 @@
               "symbol": "_ZN7harvest3gui14CProfileScreen7OnEventERKN2ox5event6SEventE",
               "known": "0x47a4b0",
               "placed": "0x47a4d0"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 8437,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen11saveProfileEb",
-              "addend": -4,
-              "destination": "0x47a010",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8462,
-              "type": 2,
-              "symbol": "_ZN2ox5event17gp_subscriberListE",
-              "addend": -4,
-              "destination": "0x874258",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8488,
-              "type": 2,
-              "symbol": "_ZN2ox5event20CEventSubscriberList16postDelayedEventERKNS0_6SEventE",
-              "addend": -4,
-              "destination": "0x5e37d0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8496,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen12removeWindowEv",
-              "addend": -4,
-              "destination": "0x478630",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8517,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8530,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1648,
-              "reason": "unmapped or truncated range: 0x8b48ea89+0x68",
-              "matches": false
-            },
-            {
-              "offset": 8562,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8569,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8574,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1752,
-              "reason": "unmapped or truncated range: 0xe8df8948+0x6c",
-              "matches": false
-            },
-            {
-              "offset": 8592,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8639,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8647,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8667,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen23createEditProfileWindowEb",
-              "addend": -4,
-              "destination": "0x478fd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8690,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen23createEditProfileWindowEb",
-              "addend": -4,
-              "destination": "0x478fd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8711,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8721,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1864,
-              "reason": "unmapped or truncated range: 0x8859e8c0+0x58",
-              "matches": false
-            },
-            {
-              "offset": 8746,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8753,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8758,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1952,
-              "reason": "unmapped or truncated range: 0x4d187b8b+0x5c",
-              "matches": false
-            },
-            {
-              "offset": 8773,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8822,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen12removeWindowEv",
-              "addend": -4,
-              "destination": "0x478630",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8830,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui14CProfileScreen23createProfileListWindowEv",
-              "addend": -4,
-              "destination": "0x4797e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8897,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8905,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
             }
           ],
           "references": 282,
@@ -120428,10 +119938,10 @@
             {
               "symbol": "_ZN7harvest3gui14CProfileScreen7OnEventERKN2ox5event6SEventE",
               "address": "0x47a4b0",
-              "size": 1071,
-              "fde": false,
+              "size": 1066,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             }
           ],
           "data_ranges": [
@@ -120624,6 +120134,26 @@
               "address": "0x601878",
               "size": 92,
               "kind": "merged string"
+            },
+            {
+              "address": "0x6019b0",
+              "size": 88,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601a08",
+              "size": 92,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6018d8",
+              "size": 104,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601940",
+              "size": 108,
+              "kind": "merged string"
             }
           ]
         },
@@ -120685,74 +120215,23 @@
           "exact": false,
           "address": "0x65c59d",
           "first_difference": 466,
-          "differing_bytes": 30,
+          "differing_bytes": 7,
           "references": 0
         },
         {
           "name": ".rodata",
           "size": 88,
           "placement": "explicit",
-          "exact": false,
+          "exact": true,
           "address": "0x601a68",
-          "first_difference": 0,
-          "differing_bytes": 11,
-          "bad_references": [
+          "references": 11,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8681,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 8,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8661,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 24,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8510,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 64,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8431,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 72,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8818,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 80,
-              "type": 1,
-              "symbol": ".text",
-              "addend": 8704,
-              "destination": "0x478610",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x601a68",
+              "size": 88,
+              "kind": "section"
             }
-          ],
-          "references": 11
+          ]
         },
         {
           "name": ".rodata._ZTVN7harvest3gui14CProfileScreenE",
@@ -120835,7 +120314,7 @@
           "/out/HarvestFull__harvest__gui__CProfileScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CProfileScreen.cpp": "d6a2cae9d1b64f027adc6f57a7ccd9aa97db0129c26b85e32b9cf829cd1fe0ad",
+          "src/HarvestFull/harvest/gui/CProfileScreen.cpp": "0768f75452ac10fbab37eb31d6b75e209631a5327281bf91d586fbd063af64d8",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -120881,9 +120360,9 @@
           "src/ox/gui/IGUIListBox.h": "2f5c32cc5c1dd6d4ed8f0bbabdf0758cd9d1f3d0eec97be4be73a44a7785385d"
         },
         "system_headers": 117,
-        "object_sha256": "cb58639d9a784a58ccbaf71ea305a664d0516c15f92afb5c7ee99de60629eb72"
+        "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805"
       },
-      "fuzzy_target_sha256": "9bdad87ede54a9a06b34dbb0974972ec32ba1849a434a4495fcfda7fd97ab65c",
+      "fuzzy_target_sha256": "7957c0ad8b976db90074dec0658723a9676c1720b6c2672251e15b811cee18a2",
       "fuzzy_functions": [
         {
           "address": "0x478630",
@@ -120979,7 +120458,7 @@
           "address": "0x47a4b0",
           "size": 1066,
           "symbol": "_ZN7harvest3gui14CProfileScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 77.770836
+          "percent": 99.916664
         },
         {
           "address": "0x409c40",
@@ -120997,17 +120476,17 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CStatisticsScreen.cpp",
-      "object_sha256": "a73be8077fa70696c3159a06c146aac2957d7f2d504f60f17b4124e40e91789a",
+      "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 16438,
+          "size": 16427,
           "placement": "symbol: _ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
           "exact": false,
           "address": "0x484f80",
           "first_difference": 153,
-          "differing_bytes": 2223,
+          "differing_bytes": 2226,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest3gui17CStatisticsScreen11renderGraphERKN2ox4core11CPosition2dIiEERKNS3_5CRectIiEERNS2_5video6SColorE",
@@ -121092,7 +120571,7 @@
           ],
           "bad_references": [
             {
-              "offset": 14315,
+              "offset": 14320,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -121101,15 +120580,15 @@
               "matches": false
             },
             {
-              "offset": 14320,
+              "offset": 14325,
               "type": 10,
               "symbol": ".rodata.str4.8",
               "addend": 896,
-              "reason": "unmapped or truncated range: 0xc9358b48+0x70",
+              "reason": "unmapped or truncated range: 0x40ba003e+0x70",
               "matches": false
             },
             {
-              "offset": 14330,
+              "offset": 14335,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -121118,7 +120597,7 @@
               "matches": false
             },
             {
-              "offset": 14341,
+              "offset": 14346,
               "type": 2,
               "symbol": "_ZN7harvest3gui17CStatisticsScreen13addInfoStringERKN2ox4core7CStringIwEE",
               "addend": -4,
@@ -121127,7 +120606,7 @@
               "matches": false
             },
             {
-              "offset": 14349,
+              "offset": 14354,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -121136,16 +120615,7 @@
               "matches": false
             },
             {
-              "offset": 14385,
-              "type": 11,
-              "symbol": ".rodata",
-              "addend": 664,
-              "destination": "0x605d20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14421,
+              "offset": 14437,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
               "addend": -4,
@@ -121154,15 +120624,15 @@
               "matches": false
             },
             {
-              "offset": 14426,
+              "offset": 14442,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 53,
-              "reason": "unmapped or truncated range: 0x8d481876+0x8",
+              "reason": "unmapped or truncated range: 0xfff8e132+0x8",
               "matches": false
             },
             {
-              "offset": 14434,
+              "offset": 14450,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
               "addend": -4,
@@ -121171,85 +120641,7 @@
               "matches": false
             },
             {
-              "offset": 14523,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14579,
-              "type": 2,
-              "symbol": ".LC13",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x16117b6+0x4",
-              "matches": false
-            },
-            {
-              "offset": 14587,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 61,
-              "reason": "unmapped or truncated range: 0x100ff310+0xb",
-              "matches": false
-            },
-            {
-              "offset": 14611,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14616,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 672,
-              "reason": "unmapped or truncated range: 0x24648d4c+0x70",
-              "matches": false
-            },
-            {
-              "offset": 14626,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "addend": -4,
-              "destination": "0x493080",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14637,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen13addInfoStringERKN2ox4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x485cb0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14645,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14653,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 14689,
+              "offset": 14545,
               "type": 2,
               "symbol": "_ZN7harvest3gui17CStatisticsScreen16submitHighscoresEv",
               "addend": -4,
@@ -121258,24 +120650,7 @@
               "matches": false
             },
             {
-              "offset": 14982,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 72,
-              "reason": "unmapped or truncated range: 0xb8ffffc7+0x8",
-              "matches": false
-            },
-            {
-              "offset": 14990,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
-              "addend": -4,
-              "destination": "0x416760",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15076,
+              "offset": 14579,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -121284,7 +120659,23 @@
               "matches": false
             },
             {
-              "offset": 15097,
+              "offset": 14635,
+              "type": 2,
+              "symbol": ".LC13",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x16cfefc5+0x4",
+              "matches": false
+            },
+            {
+              "offset": 14643,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 61,
+              "reason": "unmapped or truncated range: 0x48e6894c+0xb",
+              "matches": false
+            },
+            {
+              "offset": 14667,
               "type": 2,
               "symbol": "_ZN7harvest8settings15gp_systemConfigE",
               "addend": -4,
@@ -121293,15 +120684,15 @@
               "matches": false
             },
             {
-              "offset": 15102,
+              "offset": 14672,
               "type": 10,
               "symbol": ".rodata.str4.8",
-              "addend": 784,
-              "reason": "unmapped or truncated range: 0xa0248c+0x70",
+              "addend": 672,
+              "reason": "unmapped or truncated range: 0xe9000000+0x70",
               "matches": false
             },
             {
-              "offset": 15112,
+              "offset": 14682,
               "type": 2,
               "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
               "addend": -4,
@@ -121310,7 +120701,7 @@
               "matches": false
             },
             {
-              "offset": 15123,
+              "offset": 14693,
               "type": 2,
               "symbol": "_ZN7harvest3gui17CStatisticsScreen13addInfoStringERKN2ox4core7CStringIwEE",
               "addend": -4,
@@ -121319,50 +120710,7 @@
               "matches": false
             },
             {
-              "offset": 15237,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15303,
-              "type": 2,
-              "symbol": ".LC4",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x73a86a30+0x4",
-              "matches": false
-            },
-            {
-              "offset": 15382,
-              "type": 2,
-              "symbol": ".LC39",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x5392e19b+0x4",
-              "matches": false
-            },
-            {
-              "offset": 15459,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen11renderGraphERKN2ox4core11CPosition2dIiEERKNS3_5CRectIiEERNS2_5video6SColorE",
-              "addend": -4,
-              "destination": "0x484ee0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15507,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
-              "addend": -4,
-              "destination": "0x472bd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15854,
+              "offset": 14701,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -121371,61 +120719,7 @@
               "matches": false
             },
             {
-              "offset": 15874,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen10setVisibleEb",
-              "addend": -4,
-              "destination": "0x486810",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15933,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
-              "addend": -4,
-              "destination": "0x484f80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15953,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen12createGraphsEi",
-              "addend": -4,
-              "destination": "0x4850b0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16137,
-              "type": 2,
-              "symbol": "_ZN7harvest22g_scenarioResultPlanetE",
-              "addend": -4,
-              "destination": "0x86b4f4",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16207,
-              "type": 2,
-              "symbol": "_ZN7harvest24g_scenarioResultGameModeE",
-              "addend": -4,
-              "destination": "0x86b4f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16342,
-              "type": 2,
-              "symbol": "_ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
-              "addend": -4,
-              "destination": "0x484f80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16363,
+              "offset": 14709,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -121434,7 +120728,192 @@
               "matches": false
             },
             {
-              "offset": 16371,
+              "offset": 14994,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
+              "addend": -4,
+              "destination": "0x484f80",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15014,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 72,
+              "reason": "unmapped or truncated range: 0xf0248489+0x8",
+              "matches": false
+            },
+            {
+              "offset": 15022,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
+              "addend": -4,
+              "destination": "0x416760",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15107,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15128,
+              "type": 2,
+              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
+              "addend": -4,
+              "destination": "0x86bc80",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15133,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 784,
+              "reason": "unmapped or truncated range: 0x23d840f+0x70",
+              "matches": false
+            },
+            {
+              "offset": 15143,
+              "type": 2,
+              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
+              "addend": -4,
+              "destination": "0x493080",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15154,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen13addInfoStringERKN2ox4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x485cb0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15247,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15313,
+              "type": 2,
+              "symbol": ".LC4",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x7ec59a02+0x4",
+              "matches": false
+            },
+            {
+              "offset": 15390,
+              "type": 2,
+              "symbol": ".LC39",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x5f92f195+0x4",
+              "matches": false
+            },
+            {
+              "offset": 15467,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen11renderGraphERKN2ox4core11CPosition2dIiEERKNS3_5CRectIiEERNS2_5video6SColorE",
+              "addend": -4,
+              "destination": "0x484ee0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15516,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
+              "addend": -4,
+              "destination": "0x472bd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15870,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15890,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen12createGraphsEi",
+              "addend": -4,
+              "destination": "0x4850b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15910,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen10setVisibleEb",
+              "addend": -4,
+              "destination": "0x486810",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15969,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
+              "addend": -4,
+              "destination": "0x484f80",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16153,
+              "type": 2,
+              "symbol": "_ZN7harvest22g_scenarioResultPlanetE",
+              "addend": -4,
+              "destination": "0x86b4f4",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16223,
+              "type": 2,
+              "symbol": "_ZN7harvest24g_scenarioResultGameModeE",
+              "addend": -4,
+              "destination": "0x86b4f0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16352,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16360,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16368,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -121443,7 +120922,7 @@
               "matches": false
             },
             {
-              "offset": 16382,
+              "offset": 16383,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -121452,7 +120931,7 @@
               "matches": false
             },
             {
-              "offset": 16390,
+              "offset": 16391,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -121461,7 +120940,7 @@
               "matches": false
             },
             {
-              "offset": 16401,
+              "offset": 16415,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -121470,16 +120949,7 @@
               "matches": false
             },
             {
-              "offset": 16424,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16432,
+              "offset": 16423,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -121488,7 +120958,7 @@
               "matches": false
             }
           ],
-          "references": 380,
+          "references": 379,
           "functions": [
             {
               "symbol": "_ZN7harvest3gui17CStatisticsScreen15updateTopStringEv",
@@ -121621,7 +121091,7 @@
             {
               "symbol": "_ZN7harvest3gui17CStatisticsScreen7OnEventERKN2ox5event6SEventE",
               "address": "0x488450",
-              "size": 2470,
+              "size": 2459,
               "fde": false,
               "global": true,
               "exact": false
@@ -122085,12 +121555,12 @@
         },
         {
           "name": ".gcc_except_table",
-          "size": 553,
+          "size": 563,
           "placement": "exception frames",
           "exact": false,
           "address": "0x65cd98",
           "first_difference": 486,
-          "differing_bytes": 42,
+          "differing_bytes": 62,
           "references": 0
         },
         {
@@ -122173,12 +121643,10 @@
         },
         {
           "name": ".rodata",
-          "size": 668,
+          "size": 664,
           "placement": "explicit",
-          "exact": false,
+          "exact": true,
           "address": "0x605d20",
-          "first_difference": 664,
-          "differing_bytes": 4,
           "references": 78,
           "data_ranges": [
             {
@@ -122570,6 +122038,11 @@
               "address": "0x605a38",
               "size": 108,
               "kind": "merged string"
+            },
+            {
+              "address": "0x605d20",
+              "size": 664,
+              "kind": "section"
             }
           ]
         }
@@ -122594,7 +122067,7 @@
           "/out/HarvestFull__harvest__gui__CStatisticsScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CStatisticsScreen.cpp": "93ab5ddae4487a72f5abbfe2e9e565a675c52ee21bb8ba56fb871d827ab58223",
+          "src/HarvestFull/harvest/gui/CStatisticsScreen.cpp": "4d71579479510cd9a9c33bbb461c3c88673d87e59c3ba0d00e225aa01addf420",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -122664,9 +122137,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 127,
-        "object_sha256": "a73be8077fa70696c3159a06c146aac2957d7f2d504f60f17b4124e40e91789a"
+        "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1"
       },
-      "fuzzy_target_sha256": "6eeef18ed502a9b03115ce55c35e4b43807d213e939253fcd83ba3277a4708f1",
+      "fuzzy_target_sha256": "b36380aa8243cb767f98020f32aeffd9a30cb95c9818d3538400f6994cec0456",
       "fuzzy_functions": [
         {
           "address": "0x484f80",
@@ -122768,7 +122241,7 @@
           "address": "0x488450",
           "size": 2623,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 66.267555
+          "percent": 62.72241
         },
         {
           "address": "0x416760",
@@ -145355,7 +144828,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "46b088c5539012ecde559ed558786d63f36cd72a44e9f6aed4c57bee259deca1"
+    "report_sha256": "398ed1edec6429c3a6d1e0c06f67435660b13e24daaf66997802c7f4338e18c3"
   },
   "link": {
     "status": "unavailable",
