@@ -440,3 +440,7 @@
 ["daisy/gui/CGUIRadioList.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0ac
+
+["daisy/gui/CGUIMessageBox.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0a0

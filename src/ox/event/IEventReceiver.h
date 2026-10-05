@@ -37,6 +37,10 @@ enum EGUI_EVENT_TYPE
     EGET_MESSAGEBOX_YES = 15,
     //! The no button of a message box was pressed.
     EGET_MESSAGEBOX_NO = 16,
+    //! The OK button of a message box was pressed.
+    EGET_MESSAGEBOX_OK = 17,
+    //! The cancel or close button of a message box was pressed.
+    EGET_MESSAGEBOX_CANCEL = 18,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
     //! An element that reports drawing has been drawn.

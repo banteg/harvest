@@ -199,7 +199,11 @@ public:
     virtual void setInvisible(bool invisible);
     virtual bool doesReportOnDraw();
     virtual void setReportOnDraw(int report);
-    virtual void setText(const wchar_t* text);
+    virtual void setText(const wchar_t* text)
+    {
+        Text = text;
+    }
+
     virtual const wchar_t* getText() const;
     virtual int getID();
     virtual void setID(int id);

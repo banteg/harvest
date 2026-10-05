@@ -16,6 +16,11 @@ class IGUIButton;
 class IGUIWindow : public IGUILayout
 {
 public:
+    IGUIWindow(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUILayout(environment, parent, id, rectangle)
+    {
+    }
+
     virtual IGUIButton* getCloseButton() = 0;
     virtual IGUIButton* getMinimizeButton() = 0;
     virtual IGUIButton* getMaximizeButton() = 0;
