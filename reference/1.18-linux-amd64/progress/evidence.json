@@ -17,8 +17,8 @@
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "22316ce4a679f6a6b27f679b4d557dba8c92e5d3dd439df49179915a6a950100",
-    "config/1.18-linux-amd64/units.toml": "07a9159dbf4e100a5ffad33829d06869400767f91651583af991b12673d8bf82"
+    "config/1.18-linux-amd64/symbols.tsv": "f620129bb8c867223c93d1021c0bdb4f63816a1845f8eb32e75c8d7719efbe28",
+    "config/1.18-linux-amd64/units.toml": "ba3286f4cc2b501bb29ce0ba27f504e4dde11252fcb2c6247445d28d730f9fc6"
   },
   "units": [
     {
@@ -209,7 +209,7 @@
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/video/ColorPacking.h": "bf8a315755f2aeb5c7f657f627b6ca85718322ef1e037be17ec2cd794a40035d"
         },
         "system_headers": 108,
@@ -7355,7 +7355,7 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CThreatLevel.cpp",
-      "object_sha256": "64fe87197b12fccfcf4b2764cfd5e16c77887f8b08a9cc842ad06159713a74b6",
+      "object_sha256": "5df329943f0a89c547c0a5d104f3b405370aaad9e9c9b0b0e7eace94eefa776b",
       "exact": false,
       "sections": [
         {
@@ -9901,7 +9901,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/entity/CAlienEntity.h": "5601b0587cb23898c14d7de42fffcf860e6b5ac174304183f0e60150a607b66d",
@@ -9924,7 +9924,7 @@
           "src/HarvestFull/harvest/ECustomEvents.h": "ec5c902ed6fa964fb9279f78336da022b49476b5655154976e6d7c7b4ac65abc",
           "src/ox/event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/event/../Keycodes.h": "3808a41604b2622bc536289dc49ed1c43f9e92996a30304412e2c92851744913",
-          "src/ox/algo/CArrayFunctions.h": "c1c020c147e23685af15997be3c5df8a5184f8f23c4a9c990de88d3d928ad679",
+          "src/ox/algo/CArrayFunctions.h": "c2124b2119c34ee56e258f92cd9e4734d06a37663e658eeb0c8c54d7fd4c217a",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
@@ -9933,10 +9933,10 @@
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
         },
-        "system_headers": 134,
-        "object_sha256": "64fe87197b12fccfcf4b2764cfd5e16c77887f8b08a9cc842ad06159713a74b6"
+        "system_headers": 149,
+        "object_sha256": "5df329943f0a89c547c0a5d104f3b405370aaad9e9c9b0b0e7eace94eefa776b"
       },
-      "fuzzy_target_sha256": "2dc3f85222e58abc84bf31272bdd689ec391725655d9ecc5ff30b2ced18aa009",
+      "fuzzy_target_sha256": "ce1ff60a23f9ccf2e9f06bfb7d755d28e2bc9b595d99fdcc43610264146ba729",
       "fuzzy_functions": [
         {
           "address": "0x45bf40",
@@ -12401,7 +12401,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -12442,10 +12442,10 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
@@ -12878,7 +12878,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CBuildingEntity.cpp",
-      "object_sha256": "67ba09d78c654423de1f995b57391b5d839291b35405e045941cc53f00817709",
+      "object_sha256": "2cec880ee8fe6454c360249cade4d14cf56f59c1f2003442c21841fcb0b79286",
       "exact": true,
       "sections": [
         {
@@ -13595,7 +13595,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -13623,9 +13623,9 @@
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78"
         },
         "system_headers": 128,
-        "object_sha256": "67ba09d78c654423de1f995b57391b5d839291b35405e045941cc53f00817709"
+        "object_sha256": "2cec880ee8fe6454c360249cade4d14cf56f59c1f2003442c21841fcb0b79286"
       },
-      "fuzzy_target_sha256": "efeb96cd898b27a3166eedc543a7e2247837fb80311816c770dbe5f51b4d63ab",
+      "fuzzy_target_sha256": "64af4199a96c2a526e4f616e2b66156600877a6215a8487bbb80b5ffe1cf1f08",
       "fuzzy_functions": [
         {
           "address": "0x41ac30",
@@ -14380,7 +14380,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -15172,7 +15172,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -15996,7 +15996,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -16740,7 +16740,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -18025,7 +18025,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -18062,10 +18062,10 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
         },
         "system_headers": 132,
@@ -18287,7 +18287,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CSparkMoverEntity.cpp",
-      "object_sha256": "e26786cf004f5b8cedc377c7e3c9ccab96a433e0b29861c5cbe8eb7505b8111d",
+      "object_sha256": "fea6badf26719c58c62e2e87ab592181b05decb2e5a902231577a96e2b47eb06",
       "exact": false,
       "sections": [
         {
@@ -18297,7 +18297,7 @@
           "exact": false,
           "address": "0x440ec0",
           "first_difference": 323,
-          "differing_bytes": 734,
+          "differing_bytes": 658,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest6entity17CSparkMoverEntity31handleSelectionDraggedToNothingEv",
@@ -18780,7 +18780,7 @@
               "size": 644,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest6entity17CSparkMoverEntity6renderERKN2ox4core11CPosition2dIfEERKNS3_5CRectIiEE",
@@ -19446,7 +19446,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -19484,14 +19484,14 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
         },
         "system_headers": 132,
-        "object_sha256": "e26786cf004f5b8cedc377c7e3c9ccab96a433e0b29861c5cbe8eb7505b8111d"
+        "object_sha256": "fea6badf26719c58c62e2e87ab592181b05decb2e5a902231577a96e2b47eb06"
       },
       "fuzzy_target_sha256": "f13dd131aa5382c4a775718d8a879f36bed6d452a67e60031709e56221911425",
       "fuzzy_functions": [
@@ -19631,7 +19631,7 @@
           "address": "0x441a90",
           "size": 644,
           "symbol": "_ZN7harvest6entity17CSparkMoverEntity11updateLogicEf",
-          "percent": 99.09091
+          "percent": 100.0
         },
         {
           "address": "0x441d20",
@@ -20333,7 +20333,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -20786,7 +20786,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -37577,7 +37577,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -37614,10 +37614,10 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
         },
         "system_headers": 134,
@@ -37929,7 +37929,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CMissileTurretEntity.cpp",
-      "object_sha256": "ab0c18d33e57d1ee81fbc3b60230f6374e8c7279a1c45656149771274392ef28",
+      "object_sha256": "c84f953edb30e77b75c4d9ba72aa2706d52054b619cb1436e59788d2da2160b8",
       "exact": false,
       "sections": [
         {
@@ -37939,7 +37939,7 @@
           "exact": false,
           "address": "0x435ec0",
           "first_difference": 1199,
-          "differing_bytes": 8259,
+          "differing_bytes": 8258,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest6entity20CMissileTurretEntity23getCurrentDisplaySpriteEv",
@@ -42343,7 +42343,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -42378,14 +42378,14 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
         },
         "system_headers": 147,
-        "object_sha256": "ab0c18d33e57d1ee81fbc3b60230f6374e8c7279a1c45656149771274392ef28"
+        "object_sha256": "c84f953edb30e77b75c4d9ba72aa2706d52054b619cb1436e59788d2da2160b8"
       },
       "fuzzy_target_sha256": "34575c0b11c5e69b8576a1f980e0cfb8f0f2fec3b3873645b718c13c75e0e859",
       "fuzzy_functions": [
@@ -42651,7 +42651,7 @@
           "address": "0x439b60",
           "size": 1842,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity11updateLogicEf",
-          "percent": 13.916667
+          "percent": 15.347222
         },
         {
           "address": "0x43a2a0",
@@ -42855,7 +42855,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CAlienEntity.cpp",
-      "object_sha256": "3a47ee146129c5f1d5e3b8dad0b379366fe4ca0927842df766499b4118087f57",
+      "object_sha256": "1ec33c4cfe859f172e7f32fbcf3a86a35d8df62ca01137cd3e7054a81e1ddeca",
       "exact": false,
       "sections": [
         {
@@ -53901,7 +53901,7 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -53947,17 +53947,17 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/HarvestFull/harvest/entity/CSparkMoverEntity.h": "f12399c9f256759e67f949027bc8ba4cccc07ad2d399d0e84dc9cad03a8c392e",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
         },
         "system_headers": 132,
-        "object_sha256": "3a47ee146129c5f1d5e3b8dad0b379366fe4ca0927842df766499b4118087f57"
+        "object_sha256": "1ec33c4cfe859f172e7f32fbcf3a86a35d8df62ca01137cd3e7054a81e1ddeca"
       },
-      "fuzzy_target_sha256": "1991abf9867c1394f0d1e58464b8aa8d9913b893095fcd065e2480774326ccaa",
+      "fuzzy_target_sha256": "6997d27f1df6321f310b5ccb7d5ebab6e63379dcef7d20b54a14fdcbea4531bf",
       "fuzzy_functions": [
         {
           "address": "0x40a2d0",
@@ -60339,7 +60339,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -62880,7 +62880,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -62902,8 +62902,8 @@
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1"
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27"
         },
         "system_headers": 132,
         "object_sha256": "907a367b994a1b1bfa8ab62bd11db6f03de37c0fc1963690718914a0aeeed227"
@@ -64222,7 +64222,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -65601,7 +65601,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -68432,7 +68432,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -68460,8 +68460,8 @@
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/core/CMath.h": "b6e2b481552a71d3e788f0708baa4bb2319e2610d8f64d592836f2eba8183fef",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
@@ -69474,7 +69474,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -74884,7 +74884,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -83768,7 +83768,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -83796,7 +83796,7 @@
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
@@ -83832,9 +83832,9 @@
           "src/HarvestFull/harvest/entity/CMissileTurretEntity.h": "2a5168bde8ba8782f7b9ab1edb075c46c3c6a3da98d8de6b09207cf2fd84bdd1",
           "src/HarvestFull/harvest/entity/CPerimeterBomb.h": "52f1613403c9b7fc4b196fa28b6ffff5b30f7cc160615b77ff57b51590949b01",
           "src/HarvestFull/harvest/entity/CSparkEntity.h": "2c3afebf49696fd20716c5ed9b435485c613d49ec744b585ae1216cc5e5ddcc4",
-          "src/HarvestFull/harvest/states/CPlayState.h": "7e155fc07f3fb6ac8e4b094a793b2fbeedfa68cb16ed20915526f8daf9addfd7",
+          "src/HarvestFull/harvest/states/CPlayState.h": "db39b5750620e158dbb157da1e20dcb7a6c0c216b0e3fac0cf08130afe61f8cd",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
-          "src/ox/video/IParticleEngineCallback.h": "a66639f54609608f28c09834b01fd1b2f71ab8ef6af59a1201d464c663f4c0d4"
+          "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57"
         },
         "system_headers": 141,
         "object_sha256": "732e413c3847e4914a6dd3c104e139547c3ce98424d3739a66910f931d2f21f3"
@@ -87070,7 +87070,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -88006,7 +88006,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -88047,7 +88047,7 @@
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -88419,13 +88419,13 @@
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/../event/../Keycodes.h": "3808a41604b2622bc536289dc49ed1c43f9e92996a30304412e2c92851744913",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
           "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -88873,7 +88873,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -88894,7 +88894,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2"
         },
@@ -89638,7 +89638,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -89662,7 +89662,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
@@ -90510,7 +90510,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -90536,13 +90536,13 @@
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/HarvestFull/harvest/states/CMainMenuState.h": "8e6644312e7ba933e3452a41b0148c659b30317c0ae0cf93f6a82a6094c06712",
-          "src/HarvestFull/harvest/states/CPlayState.h": "7e155fc07f3fb6ac8e4b094a793b2fbeedfa68cb16ed20915526f8daf9addfd7",
-          "src/ox/video/IParticleEngineCallback.h": "a66639f54609608f28c09834b01fd1b2f71ab8ef6af59a1201d464c663f4c0d4",
+          "src/HarvestFull/harvest/states/CPlayState.h": "db39b5750620e158dbb157da1e20dcb7a6c0c216b0e3fac0cf08130afe61f8cd",
+          "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57",
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "23bf725f90672ecd931ea978334c9004eb04d5c39e9d75be4f3efbe92f8816eb",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "099db34f249ac2feb8ef31c99ccde2383f09efd6e1f69e4e36035573e6c9dbb7",
+          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "c0f2fe323f43d0cfb22c6728667788448c687fc83039d1465d42dd8ce2e36b29",
           "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
           "src/HarvestFull/harvest/game/CThreatLevel.h": "91ca60fdda8a94c199c422c879133979c296a2f81a1ac70c76c3e531df132528",
           "src/ox/IOSOperator.h": "eb8bbc640b0df94c1efe4afda10c9b791990ce1ef322b6f8a97bf57ab97ebb47",
@@ -90551,7 +90551,7 @@
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
@@ -106675,7 +106675,7 @@
           "/out/HarvestFull__harvest__states__CPlayState.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/states/CPlayState.cpp": "24e30a097a2ec268aaf4051594ed4156d9a650d7ce475a0afed2975c2514dd5d",
+          "src/HarvestFull/harvest/states/CPlayState.cpp": "51e26d358bb87a818627e99c3837a3d8f1a75fa83d45f2b1ad42a80efc629042",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -106687,7 +106687,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -106698,13 +106698,13 @@
           "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/entity/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/states/CPlayState.h": "7e155fc07f3fb6ac8e4b094a793b2fbeedfa68cb16ed20915526f8daf9addfd7",
+          "src/HarvestFull/harvest/states/CPlayState.h": "db39b5750620e158dbb157da1e20dcb7a6c0c216b0e3fac0cf08130afe61f8cd",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/event/../Keycodes.h": "3808a41604b2622bc536289dc49ed1c43f9e92996a30304412e2c92851744913",
-          "src/ox/video/IParticleEngineCallback.h": "a66639f54609608f28c09834b01fd1b2f71ab8ef6af59a1201d464c663f4c0d4",
+          "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57",
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "23bf725f90672ecd931ea978334c9004eb04d5c39e9d75be4f3efbe92f8816eb",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
@@ -106773,7 +106773,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEditBox.h": "99d15934c2e90334ba6c65c2bd59409efc729e4fe277d2fb7ba0b6bcec5be7b4",
           "src/ox/gui/IGUIButton.h": "7a32bc8f11ac0000afc1826dfaf490712889108fe52c0c2e0de043fbcf5a50e3",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
@@ -106789,9 +106789,9 @@
           "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
           "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/ITexture.h": "97a91fa4290c85cb94665f1a7b7dca4323b0f88512ee95ae5aac6d901d5e6315",
@@ -111531,7 +111531,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -111563,7 +111563,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUICheckBox.h": "908f357ce0d3ee822f64e0d1b3d71f356accac7ac01e170f0c55485d705ed015",
           "src/ox/gui/IGUIEditBox.h": "99d15934c2e90334ba6c65c2bd59409efc729e4fe277d2fb7ba0b6bcec5be7b4",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
@@ -111795,7 +111795,7 @@
     },
     {
       "unit": "HarvestFull/harvest/settings/CHarvestProfile.cpp",
-      "object_sha256": "704b7cdec353dfb9aaa441627e3805c591178817cf5de934713483820942f350",
+      "object_sha256": "a242c15d61aba280c00d1ae17d50634de9af5442ae748bea339395b3f5b61104",
       "exact": false,
       "sections": [
         {
@@ -113405,7 +113405,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -113434,9 +113434,9 @@
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962"
         },
         "system_headers": 131,
-        "object_sha256": "704b7cdec353dfb9aaa441627e3805c591178817cf5de934713483820942f350"
+        "object_sha256": "a242c15d61aba280c00d1ae17d50634de9af5442ae748bea339395b3f5b61104"
       },
-      "fuzzy_target_sha256": "c3d2f85a5d541f234dc3d7f177584b775843c32c538966d2b42f70dfdd2f8371",
+      "fuzzy_target_sha256": "e8d62ee402a3039ca6fc60e366c0e521cb8f019aa51c09d87074c43cb8e11630",
       "fuzzy_functions": [
         {
           "address": "0x48ae60",
@@ -114592,7 +114592,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -117128,7 +117128,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -117156,7 +117156,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUICheckBox.h": "908f357ce0d3ee822f64e0d1b3d71f356accac7ac01e170f0c55485d705ed015",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
@@ -117412,7 +117412,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -117738,7 +117738,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -117751,7 +117751,7 @@
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/../event/../Keycodes.h": "3808a41604b2622bc536289dc49ed1c43f9e92996a30304412e2c92851744913",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
@@ -119366,7 +119366,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -119394,7 +119394,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIImage.h": "fcf2a4aab1370c9bb7d096f827480d073c1055873b650250b701c4efcbb97618",
           "src/ox/gui/IGUIModalScreen.h": "c7ef9b34decb977b8129628869763d4021b198364eb3bc5860ce0adbeca333e3",
@@ -119538,7 +119538,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CPriorityScreen.cpp",
-      "object_sha256": "babac251ac0bc13662174eea360564af6415e074e23f467a8df947ef8e1ff16d",
+      "object_sha256": "bef5d734e92b781f6cdf6d7e103e8dbb7d152195bd90125e1e25e68fb4934c3a",
       "exact": false,
       "sections": [
         {
@@ -119741,7 +119741,7 @@
               "exact": true
             },
             {
-              "symbol": "T.327",
+              "symbol": "T.325",
               "address": "0x476900",
               "size": 64,
               "fde": true,
@@ -120261,7 +120261,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -120305,7 +120305,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUICheckBox.h": "908f357ce0d3ee822f64e0d1b3d71f356accac7ac01e170f0c55485d705ed015",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
@@ -120317,9 +120317,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 131,
-        "object_sha256": "babac251ac0bc13662174eea360564af6415e074e23f467a8df947ef8e1ff16d"
+        "object_sha256": "bef5d734e92b781f6cdf6d7e103e8dbb7d152195bd90125e1e25e68fb4934c3a"
       },
-      "fuzzy_target_sha256": "0f464fd423ef6023ab21fa421887d274823e1c510928fc87e0d3255bd2b9c4f6",
+      "fuzzy_target_sha256": "6841c363bdeb69cf30cfd358c2ff0aa38cee71efcea9b2345da1a052c1dd9287",
       "fuzzy_functions": [
         {
           "address": "0x475fc0",
@@ -120354,7 +120354,7 @@
         {
           "address": "0x476900",
           "size": 64,
-          "symbol": "T.327",
+          "symbol": "T.325",
           "percent": 100.0
         },
         {
@@ -123295,7 +123295,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -123307,7 +123307,7 @@
           "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/entity/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "099db34f249ac2feb8ef31c99ccde2383f09efd6e1f69e4e36035573e6c9dbb7",
+          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "c0f2fe323f43d0cfb22c6728667788448c687fc83039d1465d42dd8ce2e36b29",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -123318,7 +123318,7 @@
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/video/IParticleEngineCallback.h": "a66639f54609608f28c09834b01fd1b2f71ab8ef6af59a1201d464c663f4c0d4",
+          "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57",
           "src/HarvestFull/harvest/states/CLoadingScreen.h": "fb8aa963f14941fc61ebca9b15160a04ea120c03a3dca6098960951cf4eb650e",
           "src/ox/audio/IAudioDriver.h": "d54cb1b9b347f6f85221e522c9f55ce1ae0c3d4cb8cde5006091a936a397871b",
           "src/ox/audio/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -123334,14 +123334,14 @@
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/input/IJoystickDriver.h": "1ffe90f49753037f7b2946a2a7942b55a1eef63bab926af72540a9c1f01f2991",
           "src/ox/input/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
-          "src/ox/video/IParticlePackage.h": "2ec3a9005bf225710d8a4c8c9ff893cefe490befa71a256bf473101a9ac4c29a",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/video/IParticleState.h": "c559d0b3c539917d9e81f8917e46c51adccd9be465b7c7c71cb25c1b94a132b1",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
@@ -125278,7 +125278,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -126383,7 +126383,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -126409,7 +126409,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEditBox.h": "99d15934c2e90334ba6c65c2bd59409efc729e4fe277d2fb7ba0b6bcec5be7b4",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
@@ -126532,7 +126532,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CStatisticsScreen.cpp",
-      "object_sha256": "20736e14cadf98b9fb525dda39524cc039b4e33506cc0445b8fece3f64d9995f",
+      "object_sha256": "fa533d374f2b75e2af20184046d105804204fd7f1c4e4d740a6a797bd770dfc7",
       "exact": false,
       "sections": [
         {
@@ -128141,7 +128141,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -128180,7 +128180,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
@@ -128197,9 +128197,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 127,
-        "object_sha256": "20736e14cadf98b9fb525dda39524cc039b4e33506cc0445b8fece3f64d9995f"
+        "object_sha256": "fa533d374f2b75e2af20184046d105804204fd7f1c4e4d740a6a797bd770dfc7"
       },
-      "fuzzy_target_sha256": "4ffcbfed0e23a148ca1d4a57c325309cf1fabb7c5754bb19f0c3e51cfc71f140",
+      "fuzzy_target_sha256": "741b417b17e7b23b448b9b7b04333da82e6f78645cf410d69c684ebaafd74043",
       "fuzzy_functions": [
         {
           "address": "0x484f80",
@@ -128809,7 +128809,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -128829,7 +128829,7 @@
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
           "src/ox/gui/IGUIElement.h": "be9da7d28ca84bd5539d231c215cb5cbc48abaee721e87fd7f4517e71f685012",
@@ -132458,7 +132458,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -132524,7 +132524,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUICheckBox.h": "908f357ce0d3ee822f64e0d1b3d71f356accac7ac01e170f0c55485d705ed015",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIImage.h": "fcf2a4aab1370c9bb7d096f827480d073c1055873b650250b701c4efcbb97618",
@@ -132540,7 +132540,7 @@
           "src/ox/scene/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/../video/SMaterial.h": "0814cc40d035056102ee0684ee5a6cde1078a7def4e23ff1961d831837a72bea",
-          "src/ox/scene/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/scene/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/scene/IBillboardSceneNode.h": "1815eeb1321cb9da5d2c7f31ee09c3664b30f862ba5292225e967d08c77c628e",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/scene/ICameraSceneNode.h": "af7d7f7d4b5b018f898870b99265b3bb2a678385662e81ab89a7a6ef41eaccf9",
@@ -134344,7 +134344,7 @@
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -134375,7 +134375,7 @@
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "803a46304ef8702863e129b10acec6229a7e6572be73011e743a978f37cf162a",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
           "src/ox/gui/IGUIEditBox.h": "99d15934c2e90334ba6c65c2bd59409efc729e4fe277d2fb7ba0b6bcec5be7b4",
           "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUILayout.h": "f1b05412f393a396f1463982339afe4bce79a077093942092a4d03409b8cc3e2",
@@ -134615,6 +134615,2012 @@
           "percent": 99.979256
         }
       ]
+    },
+    {
+      "unit": "daisy/video/Null/CParticlePackage.cpp",
+      "object_sha256": "08cc1db91013c477a6fb6ac58bf3f6f2505d1354d611ad1ff54bc5aa40243184",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 9618,
+          "placement": "symbol: _ZN5daisy5video16CParticlePackage16setSpritePackageEPN2ox5video14ISpritePackageE",
+          "exact": false,
+          "address": "0x59c3f0",
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage19removeParticleStateEPN2ox5video14IParticleStateE",
+              "known": "0x59c530",
+              "placed": "0x59c480"
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage20readParticleFunctionEPNS0_17SParticleFunctionEPN2ox2io9IReadFileEi",
+              "known": "0x59c480",
+              "placed": "0x59c5f0"
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD1Ev",
+              "known": "0x59ced0",
+              "placed": "0x59c8f0"
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD2Ev",
+              "known": "0x59c8f0",
+              "placed": "0x59cbe0"
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD0Ev",
+              "known": "0x59cbe0",
+              "placed": "0x59ced0"
+            }
+          ],
+          "references": 241,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage16setSpritePackageEPN2ox5video14ISpritePackageE",
+              "address": "0x59c3f0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage16getParticleNamesEv",
+              "address": "0x59c400",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage24spriteFulfillsImportanceERKN2ox4core7CStringIcEE",
+              "address": "0x59c410",
+              "size": 55,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5video16CParticlePackageC2EPN2ox5video12IVideoDriverE",
+              "address": "0x59c450",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage19removeParticleStateEPN2ox5video14IParticleStateE",
+              "address": "0x59c530",
+              "size": 358,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage20readParticleFunctionEPNS0_17SParticleFunctionEPN2ox2io9IReadFileEi",
+              "address": "0x59c480",
+              "size": 176,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage19addNewParticleStateERKN2ox4core7CStringIcEE",
+              "address": "0x59c6a0",
+              "size": 138,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageC1EPN2ox5video12IVideoDriverE",
+              "address": "0x59c730",
+              "size": 220,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageC2EPN2ox5video12IVideoDriverE",
+              "address": "0x59c810",
+              "size": 220,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD1Ev",
+              "address": "0x59ced0",
+              "size": 741,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD2Ev",
+              "address": "0x59c8f0",
+              "size": 741,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackageD0Ev",
+              "address": "0x59cbe0",
+              "size": 748,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage17getParticleSoundsEv",
+              "address": "0x59d1c0",
+              "size": 406,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage10splitNamesERN2ox6TArrayINS2_4core7CStringIcEEEES6_",
+              "address": "0x59d360",
+              "size": 1949,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage16readParticleInfoEPNS0_17SParticleTypeInfoEPN2ox2io9IReadFileEi",
+              "address": "0x59db00",
+              "size": 2530,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video16CParticlePackage4loadEPN2ox2io9IReadFileE",
+              "address": "0x59e4f0",
+              "size": 1170,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c178",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c178",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video16IParticlePackage17setCallbackEngineEPNS0_23IParticleEngineCallbackE",
+          "size": 5,
+          "placement": "symbol: _ZN2ox5video16IParticlePackage17setCallbackEngineEPNS0_23IParticleEngineCallbackE",
+          "exact": true,
+          "address": "0x59e9a0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video16IParticlePackage17setCallbackEngineEPNS0_23IParticleEngineCallbackE",
+              "address": "0x59e9a0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video16IParticlePackage17getCallbackEngineEv",
+          "size": 5,
+          "placement": "symbol: _ZN2ox5video16IParticlePackage17getCallbackEngineEv",
+          "exact": true,
+          "address": "0x59e9b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video16IParticlePackage17getCallbackEngineEv",
+              "address": "0x59e9b0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video16IParticlePackageD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5video16IParticlePackageD1Ev",
+          "exact": true,
+          "address": "0x59e990",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video16IParticlePackageD1Ev",
+              "address": "0x59e990",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4algo14binarySearchIfINS_6TArrayIPN5daisy5video17SParticleTypeInfoEEENS4_25SParticleTypeInfoSearcherIS6_EENS_4core7CStringIcEEEEiRKT_T0_RKT1_",
+          "size": 273,
+          "placement": "symbol: _ZN2ox4algo14binarySearchIfINS_6TArrayIPN5daisy5video17SParticleTypeInfoEEENS4_25SParticleTypeInfoSearcherIS6_EENS_4core7CStringIcEEEEiRKT_T0_RKT1_",
+          "exact": true,
+          "address": "0x59e9c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4algo14binarySearchIfINS_6TArrayIPN5daisy5video17SParticleTypeInfoEEENS4_25SParticleTypeInfoSearcherIS6_EENS_4core7CStringIcEEEEiRKT_T0_RKT1_",
+              "address": "0x59e9c0",
+              "size": 273,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
+          "exact": true,
+          "address": "0x409c20",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "address": "0x409c20",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video16IParticlePackageD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox5video16IParticlePackageD0Ev",
+          "exact": true,
+          "address": "0x59eae0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video16IParticlePackageD0Ev",
+              "address": "0x59eae0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElS5_N2ox4algo19SPointerSortFunctorIS5_EEEvT_T0_SG_T1_T2_",
+          "size": 497,
+          "placement": "symbol: _ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElS5_N2ox4algo19SPointerSortFunctorIS5_EEEvT_T0_SG_T1_T2_",
+          "exact": true,
+          "address": "0x59eaf0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElS5_N2ox4algo19SPointerSortFunctorIS5_EEEvT_T0_SG_T1_T2_",
+              "address": "0x59eaf0",
+              "size": 497,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt13__heap_selectIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_SF_T0_",
+          "size": 276,
+          "placement": "symbol: _ZSt13__heap_selectIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_SF_T0_",
+          "exact": true,
+          "address": "0x59ecf0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZSt13__heap_selectIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_SF_T0_",
+              "address": "0x59ecf0",
+              "size": 276,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_",
+          "size": 399,
+          "placement": "symbol: _ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_",
+          "exact": false,
+          "address": "0x59ee10",
+          "first_difference": 144,
+          "differing_bytes": 3,
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_",
+              "address": "0x59ee10",
+              "size": 399,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_T1_",
+          "size": 1037,
+          "placement": "symbol: _ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_T1_",
+          "exact": false,
+          "address": "0x59efa0",
+          "first_difference": 162,
+          "differing_bytes": 5,
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_T1_",
+              "address": "0x59efa0",
+              "size": 1037,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox6TArrayINS_4core7CStringIcEEED1Ev",
+          "size": 69,
+          "placement": "symbol: _ZN2ox6TArrayINS_4core7CStringIcEEED1Ev",
+          "exact": true,
+          "address": "0x450c90",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox6TArrayINS_4core7CStringIcEEED1Ev",
+              "address": "0x450c90",
+              "size": 69,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIPN5daisy5video17SParticleTypeInfoESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "size": 401,
+          "placement": "symbol: _ZNSt6vectorIPN5daisy5video17SParticleTypeInfoESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "exact": true,
+          "address": "0x59f3b0",
+          "references": 5,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIPN5daisy5video17SParticleTypeInfoESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "address": "0x59f3b0",
+              "size": 401,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIN2ox4core7CStringIcEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "size": 1436,
+          "placement": "symbol: _ZNSt6vectorIN2ox4core7CStringIcEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "exact": false,
+          "address": "0x451cc0",
+          "first_difference": 2,
+          "differing_bytes": 1392,
+          "bad_references": [
+            {
+              "offset": 69,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 184,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 294,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 309,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 388,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 408,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 482,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 574,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 647,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 778,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 944,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1049,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1086,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1218,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1229,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1237,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1245,
+              "type": 2,
+              "symbol": "__cxa_begin_catch",
+              "addend": -4,
+              "destination": "0x4074f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1267,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1277,
+              "type": 2,
+              "symbol": "__cxa_begin_catch",
+              "addend": -4,
+              "destination": "0x4074f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1299,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1312,
+              "type": 2,
+              "symbol": "__cxa_begin_catch",
+              "addend": -4,
+              "destination": "0x4074f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1344,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1351,
+              "type": 2,
+              "symbol": "__cxa_rethrow",
+              "addend": -4,
+              "destination": "0x408228",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1361,
+              "type": 2,
+              "symbol": "__cxa_rethrow",
+              "addend": -4,
+              "destination": "0x408228",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1369,
+              "type": 2,
+              "symbol": "__cxa_end_catch",
+              "addend": -4,
+              "destination": "0x4083a8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1393,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1411,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1416,
+              "type": 2,
+              "symbol": "__cxa_rethrow",
+              "addend": -4,
+              "destination": "0x408228",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1424,
+              "type": 2,
+              "symbol": "__cxa_end_catch",
+              "addend": -4,
+              "destination": "0x4083a8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1432,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 30,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIN2ox4core7CStringIcEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "address": "0x451cc0",
+              "size": 1436,
+              "fde": false,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy5video16CParticlePackageE",
+          "size": 104,
+          "placement": "symbol: _ZTVN5daisy5video16CParticlePackageE",
+          "exact": true,
+          "address": "0x61cee0",
+          "references": 12,
+          "data_ranges": [
+            {
+              "address": "0x61cee0",
+              "size": 104,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy5video16CParticlePackageE",
+          "size": 33,
+          "placement": "symbol: _ZTSN5daisy5video16CParticlePackageE",
+          "exact": true,
+          "address": "0x61cf60",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x61cf60",
+              "size": 33,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy5video16CParticlePackageE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy5video16CParticlePackageE",
+          "exact": true,
+          "address": "0x61cf90",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x61cf90",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox5video16IParticlePackageE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox5video16IParticlePackageE",
+          "exact": true,
+          "address": "0x61cfb0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x61cfb0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox5video16IParticlePackageE",
+          "size": 30,
+          "placement": "symbol: _ZTSN2ox5video16IParticlePackageE",
+          "exact": true,
+          "address": "0x61cfd0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x61cfd0",
+              "size": 30,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox5video16IParticlePackageE",
+          "size": 104,
+          "placement": "symbol: _ZTVN2ox5video16IParticlePackageE",
+          "exact": true,
+          "address": "0x61d000",
+          "references": 12,
+          "data_ranges": [
+            {
+              "address": "0x61d000",
+              "size": 104,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [
+        ".gcc_except_table"
+      ],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__video__Null__CParticlePackage.d",
+          "-c",
+          "src/daisy/video/Null/CParticlePackage.cpp",
+          "-o",
+          "/out/daisy__video__Null__CParticlePackage.o"
+        ],
+        "inputs": {
+          "src/daisy/video/Null/CParticlePackage.cpp": "25cda67e72068466ca6c9ca1963c86dfca92648aab0402a30182239942147daf",
+          "src/daisy/video/Null/CParticlePackage.h": "572b4ac22dd2231368e8a9c9ce20d99aa2cb63845d887ef52fea043c7e874f8d",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
+          "src/daisy/video/Null/CParticleState.h": "a742df4d4c3163f39387f9d7cc435b536a4e62fb21783488079b4cf19c44185b",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/algo/CArrayFunctions.h": "c2124b2119c34ee56e258f92cd9e4734d06a37663e658eeb0c8c54d7fd4c217a",
+          "src/ox/algo/SPointerSortFunctor.h": "0c29ef987a5d3d5572aae50cf8b634c510053e8059716acebd37f7a3f4416d72",
+          "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
+          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+        },
+        "system_headers": 138,
+        "object_sha256": "08cc1db91013c477a6fb6ac58bf3f6f2505d1354d611ad1ff54bc5aa40243184"
+      },
+      "fuzzy_target_sha256": "254d010f262edc08dcba0e08cb997c55b9ceecf8f16f1fb50c3911deaa26a35e",
+      "fuzzy_functions": [
+        {
+          "address": "0x59c3f0",
+          "size": 5,
+          "symbol": "_ZN5daisy5video16CParticlePackage16setSpritePackageEPN2ox5video14ISpritePackageE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c400",
+          "size": 5,
+          "symbol": "_ZN5daisy5video16CParticlePackage16getParticleNamesEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c410",
+          "size": 55,
+          "symbol": "_ZN5daisy5video16CParticlePackage24spriteFulfillsImportanceERKN2ox4core7CStringIcEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c450",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5video16CParticlePackageC2EPN2ox5video12IVideoDriverE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c530",
+          "size": 358,
+          "symbol": "_ZN5daisy5video16CParticlePackage19removeParticleStateEPN2ox5video14IParticleStateE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c480",
+          "size": 176,
+          "symbol": "_ZN5daisy5video16CParticlePackage20readParticleFunctionEPNS0_17SParticleFunctionEPN2ox2io9IReadFileEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c6a0",
+          "size": 138,
+          "symbol": "_ZN5daisy5video16CParticlePackage19addNewParticleStateERKN2ox4core7CStringIcEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c730",
+          "size": 220,
+          "symbol": "_ZN5daisy5video16CParticlePackageC1EPN2ox5video12IVideoDriverE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c810",
+          "size": 220,
+          "symbol": "_ZN5daisy5video16CParticlePackageC2EPN2ox5video12IVideoDriverE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59ced0",
+          "size": 741,
+          "symbol": "_ZN5daisy5video16CParticlePackageD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59c8f0",
+          "size": 741,
+          "symbol": "_ZN5daisy5video16CParticlePackageD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59cbe0",
+          "size": 748,
+          "symbol": "_ZN5daisy5video16CParticlePackageD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59d1c0",
+          "size": 406,
+          "symbol": "_ZN5daisy5video16CParticlePackage17getParticleSoundsEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59d360",
+          "size": 1949,
+          "symbol": "_ZN5daisy5video16CParticlePackage10splitNamesERN2ox6TArrayINS2_4core7CStringIcEEEES6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59db00",
+          "size": 2530,
+          "symbol": "_ZN5daisy5video16CParticlePackage16readParticleInfoEPNS0_17SParticleTypeInfoEPN2ox2io9IReadFileEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59e4f0",
+          "size": 1170,
+          "symbol": "_ZN5daisy5video16CParticlePackage4loadEPN2ox2io9IReadFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59e9a0",
+          "size": 5,
+          "symbol": "_ZN2ox5video16IParticlePackage17setCallbackEngineEPNS0_23IParticleEngineCallbackE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59e9b0",
+          "size": 5,
+          "symbol": "_ZN2ox5video16IParticlePackage17getCallbackEngineEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59e990",
+          "size": 8,
+          "symbol": "_ZN2ox5video16IParticlePackageD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59e9c0",
+          "size": 273,
+          "symbol": "_ZN2ox4algo14binarySearchIfINS_6TArrayIPN5daisy5video17SParticleTypeInfoEEENS4_25SParticleTypeInfoSearcherIS6_EENS_4core7CStringIcEEEEiRKT_T0_RKT1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c20",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIcED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59eae0",
+          "size": 12,
+          "symbol": "_ZN2ox5video16IParticlePackageD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59eaf0",
+          "size": 497,
+          "symbol": "_ZSt13__adjust_heapIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElS5_N2ox4algo19SPointerSortFunctorIS5_EEEvT_T0_SG_T1_T2_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59ecf0",
+          "size": 276,
+          "symbol": "_ZSt13__heap_selectIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_SF_T0_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59ee10",
+          "size": 399,
+          "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEEN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_",
+          "percent": 99.333336
+        },
+        {
+          "address": "0x59efa0",
+          "size": 1037,
+          "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_T1_",
+          "percent": 99.703125
+        },
+        {
+          "address": "0x450c90",
+          "size": 69,
+          "symbol": "_ZN2ox6TArrayINS_4core7CStringIcEEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f3b0",
+          "size": 401,
+          "symbol": "_ZNSt6vectorIPN5daisy5video17SParticleTypeInfoESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x451cc0",
+          "size": 839,
+          "symbol": "_ZNSt6vectorIN2ox4core7CStringIcEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 11.933921
+        }
+      ]
+    },
+    {
+      "unit": "daisy/video/Null/CParticleState.cpp",
+      "object_sha256": "f46f7aa6be548c85d21867896abee7c9182ede86814b72d8c7d515c4cf43d178",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 7702,
+          "placement": "symbol: _ZN5daisy5video14CParticleStateD2Ev",
+          "exact": false,
+          "address": "0x59f550",
+          "first_difference": 3716,
+          "differing_bytes": 223,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5video14CParticleState22updateParticleFunctionERNS0_25SParticleFunctionInstanceEf",
+              "known": "0x5a00a0",
+              "placed": "0x59fba0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState19createOnDieParticleERN2ox4core9CVector3dIfEE",
+              "known": "0x59fba0",
+              "placed": "0x59fed0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState12notifyBounceERN2ox4core9CVector3dIfEERKS5_",
+              "known": "0x59ffb0",
+              "placed": "0x5a02e0"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 5359,
+              "type": 2,
+              "symbol": "_ZN2ox4algo5CRand4randEv",
+              "addend": -4,
+              "destination": "0x5dd110",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5409,
+              "type": 2,
+              "symbol": ".LC4",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x249e95b9+0x4",
+              "matches": false
+            }
+          ],
+          "references": 85,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video14CParticleStateD2Ev",
+              "address": "0x59f550",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleStateD1Ev",
+              "address": "0x59f560",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState6removeEv",
+              "address": "0x59f570",
+              "size": 50,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState15getParticleNameEv",
+              "address": "0x59f5b0",
+              "size": 19,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState16getAnimationNameEv",
+              "address": "0x59f5d0",
+              "size": 38,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState15getCurrentColorEv",
+              "address": "0x59f600",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState15getCurrentScaleEv",
+              "address": "0x59f610",
+              "size": 6,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState10addToSpeedERKN2ox4core9CVector3dIfEE",
+              "address": "0x59f620",
+              "size": 45,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState15setCurrentSpeedERKN2ox4core9CVector3dIfEE",
+              "address": "0x59f650",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState20applyParentModifiersEPS1_",
+              "address": "0x59f670",
+              "size": 83,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState8render3DERKN2ox4core9CVector3dIfEE",
+              "address": "0x59f6d0",
+              "size": 42,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState14render2DShadowERKN2ox4core11CPosition2dIfEEff",
+              "address": "0x59f700",
+              "size": 72,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState15getCurrentSpeedEv",
+              "address": "0x59f750",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState14isGroundSpriteEv",
+              "address": "0x59f760",
+              "size": 17,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZNK5daisy5video14CParticleState21getParticleImportanceEv",
+              "address": "0x59f780",
+              "size": 16,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZNK5daisy5video14CParticleState15getWindModifierEv",
+              "address": "0x59f790",
+              "size": 33,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5video14CParticleStateC2EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+              "address": "0x59f7c0",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState8render2DERKN2ox4core11CPosition2dIfEEf",
+              "address": "0x59f7f0",
+              "size": 206,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState19createPulseParticleEN2ox4core9CVector3dIfEE",
+              "address": "0x59f8c0",
+              "size": 735,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState22updateParticleFunctionERNS0_25SParticleFunctionInstanceEf",
+              "address": "0x5a00a0",
+              "size": 810,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState19createOnDieParticleERN2ox4core9CVector3dIfEE",
+              "address": "0x59fba0",
+              "size": 1039,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState12notifyBounceERN2ox4core9CVector3dIfEERKS5_",
+              "address": "0x59ffb0",
+              "size": 234,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleState6updateEfRN2ox4core9CVector3dIfEE",
+              "address": "0x5a03d0",
+              "size": 1865,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleStateD0Ev",
+              "address": "0x5a0b20",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleStateC2EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+              "address": "0x5a0b30",
+              "size": 1046,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CParticleStateC1EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+              "address": "0x5a0f50",
+              "size": 1046,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x622e31",
+              "size": 1,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622e31",
+              "size": 1,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f03c4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x61d280",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03c4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03c4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03c4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f03cc",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60b86c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0408",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0474",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f47e4",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04b8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04b8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c17c",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c17c",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video14IParticleStateD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5video14IParticleStateD1Ev",
+          "exact": true,
+          "address": "0x5a1370",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video14IParticleStateD1Ev",
+              "address": "0x5a1370",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata",
+          "size": 64,
+          "placement": "references",
+          "exact": true,
+          "address": "0x61d068",
+          "references": 8,
+          "data_ranges": [
+            {
+              "address": "0x61d068",
+              "size": 64,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5video14IParticleStateD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox5video14IParticleStateD0Ev",
+          "exact": true,
+          "address": "0x5a1380",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5video14IParticleStateD0Ev",
+              "address": "0x5a1380",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 32,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x664e13",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x664e13",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy5video14CParticleStateE",
+          "size": 160,
+          "placement": "symbol: _ZTVN5daisy5video14CParticleStateE",
+          "exact": true,
+          "address": "0x61d0c0",
+          "references": 19,
+          "data_ranges": [
+            {
+              "address": "0x61d0c0",
+              "size": 160,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy5video14CParticleStateE",
+          "size": 31,
+          "placement": "symbol: _ZTSN5daisy5video14CParticleStateE",
+          "exact": true,
+          "address": "0x61d160",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x61d160",
+              "size": 31,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy5video14CParticleStateE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy5video14CParticleStateE",
+          "exact": true,
+          "address": "0x61d180",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x61d180",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox5video14IParticleStateE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox5video14IParticleStateE",
+          "exact": true,
+          "address": "0x61d1a0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x61d1a0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox5video14IParticleStateE",
+          "size": 28,
+          "placement": "symbol: _ZTSN2ox5video14IParticleStateE",
+          "exact": true,
+          "address": "0x61d1c0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x61d1c0",
+              "size": 28,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox5video14IParticleStateE",
+          "size": 160,
+          "placement": "symbol: _ZTVN2ox5video14IParticleStateE",
+          "exact": true,
+          "address": "0x61d1e0",
+          "references": 19,
+          "data_ranges": [
+            {
+              "address": "0x61d1e0",
+              "size": 160,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__video__Null__CParticleState.d",
+          "-c",
+          "src/daisy/video/Null/CParticleState.cpp",
+          "-o",
+          "/out/daisy__video__Null__CParticleState.o"
+        ],
+        "inputs": {
+          "src/daisy/video/Null/CParticleState.cpp": "96765c7cb387f8ddcf9a45b52520a717cb6096e5952c9ca4f63fd0e0b04f5fcc",
+          "src/daisy/video/Null/CParticleState.h": "a742df4d4c3163f39387f9d7cc435b536a4e62fb21783488079b4cf19c44185b",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "485b0e9b9d6f30f24366bfaf066157ba6279050ffdc37b779ae4a7b33bc4009c",
+          "src/daisy/video/Null/CParticlePackage.h": "572b4ac22dd2231368e8a9c9ce20d99aa2cb63845d887ef52fea043c7e874f8d",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
+          "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
+          "src/ox/core/CMath.h": "b6e2b481552a71d3e788f0708baa4bb2319e2610d8f64d592836f2eba8183fef",
+          "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
+          "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5"
+        },
+        "system_headers": 114,
+        "object_sha256": "f46f7aa6be548c85d21867896abee7c9182ede86814b72d8c7d515c4cf43d178"
+      },
+      "fuzzy_target_sha256": "3ab29614be3eda3eaeaaa4d42a94d60926aef183083a86439835f2898d4304a5",
+      "fuzzy_functions": [
+        {
+          "address": "0x59f550",
+          "size": 8,
+          "symbol": "_ZN5daisy5video14CParticleStateD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f560",
+          "size": 8,
+          "symbol": "_ZN5daisy5video14CParticleStateD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f570",
+          "size": 50,
+          "symbol": "_ZN5daisy5video14CParticleState6removeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f5b0",
+          "size": 19,
+          "symbol": "_ZN5daisy5video14CParticleState15getParticleNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f5d0",
+          "size": 38,
+          "symbol": "_ZN5daisy5video14CParticleState16getAnimationNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f600",
+          "size": 5,
+          "symbol": "_ZN5daisy5video14CParticleState15getCurrentColorEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f610",
+          "size": 6,
+          "symbol": "_ZN5daisy5video14CParticleState15getCurrentScaleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f620",
+          "size": 45,
+          "symbol": "_ZN5daisy5video14CParticleState10addToSpeedERKN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f650",
+          "size": 18,
+          "symbol": "_ZN5daisy5video14CParticleState15setCurrentSpeedERKN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f670",
+          "size": 83,
+          "symbol": "_ZN5daisy5video14CParticleState20applyParentModifiersEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f6d0",
+          "size": 42,
+          "symbol": "_ZN5daisy5video14CParticleState8render3DERKN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f700",
+          "size": 72,
+          "symbol": "_ZN5daisy5video14CParticleState14render2DShadowERKN2ox4core11CPosition2dIfEEff",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f750",
+          "size": 5,
+          "symbol": "_ZN5daisy5video14CParticleState15getCurrentSpeedEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f760",
+          "size": 17,
+          "symbol": "_ZN5daisy5video14CParticleState14isGroundSpriteEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f780",
+          "size": 16,
+          "symbol": "_ZNK5daisy5video14CParticleState21getParticleImportanceEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f790",
+          "size": 33,
+          "symbol": "_ZNK5daisy5video14CParticleState15getWindModifierEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f7c0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5video14CParticleStateC2EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f7f0",
+          "size": 206,
+          "symbol": "_ZN5daisy5video14CParticleState8render2DERKN2ox4core11CPosition2dIfEEf",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59f8c0",
+          "size": 735,
+          "symbol": "_ZN5daisy5video14CParticleState19createPulseParticleEN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a00a0",
+          "size": 810,
+          "symbol": "_ZN5daisy5video14CParticleState22updateParticleFunctionERNS0_25SParticleFunctionInstanceEf",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59fba0",
+          "size": 1039,
+          "symbol": "_ZN5daisy5video14CParticleState19createOnDieParticleERN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x59ffb0",
+          "size": 234,
+          "symbol": "_ZN5daisy5video14CParticleState12notifyBounceERN2ox4core9CVector3dIfEERKS5_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a03d0",
+          "size": 1865,
+          "symbol": "_ZN5daisy5video14CParticleState6updateEfRN2ox4core9CVector3dIfEE",
+          "percent": 94.07366
+        },
+        {
+          "address": "0x5a0b20",
+          "size": 12,
+          "symbol": "_ZN5daisy5video14CParticleStateD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a0b30",
+          "size": 1046,
+          "symbol": "_ZN5daisy5video14CParticleStateC2EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a0f50",
+          "size": 1046,
+          "symbol": "_ZN5daisy5video14CParticleStateC1EPN2ox5video16IParticlePackageEPNS3_14ISpritePackageEPNS0_17SParticleTypeInfoE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a1370",
+          "size": 8,
+          "symbol": "_ZN2ox5video14IParticleStateD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5a1380",
+          "size": 12,
+          "symbol": "_ZN2ox5video14IParticleStateD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
     }
   ],
   "fuzzy": {
@@ -134623,7 +136629,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "e012682f0481d20acaea6673f116402e1ec9ed07e8dbd6e0a592a40bc64c6294"
+    "report_sha256": "65c6a72dd8716d269ae1c657a7d7177fc37244a986a9c3d80261558995a63ad7"
   },
   "link": {
     "status": "unavailable",
