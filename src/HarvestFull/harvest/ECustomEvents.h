@@ -27,13 +27,13 @@ enum ECUSTOM_EVENT
     ECE_TUTORIAL_HINT = 22
 };
 
-//! Sends a game event to the subscribers right away.
-inline void sendCustomEvent(ECUSTOM_EVENT type)
+//! Sends a game event with an optional value to the subscribers right away.
+inline void sendCustomEvent(ECUSTOM_EVENT type, int value = 0)
 {
     ox::event::SEvent event;
     event.EventType = ox::event::EET_USER_EVENT;
     event.UserEvent.UserData1 = type;
-    event.UserEvent.UserData2 = 0;
+    event.UserEvent.UserData2 = value;
     event.UserEvent.UserData3 = 0;
     event.UserEvent.UserPointer = 0;
     ox::event::gp_subscriberList->OnEvent(event);

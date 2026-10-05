@@ -46,7 +46,7 @@ public:
     virtual bool isInvisible();
     virtual void setInvisible(bool invisible);
     virtual bool doesReportOnDraw();
-    virtual void setReportOnDraw(bool report);
+    virtual void setReportOnDraw(int report);
     virtual void setText(const wchar_t* text);
     virtual const wchar_t* getText() const;
     virtual int getID();
@@ -62,6 +62,7 @@ public:
     virtual core::CDimension2d<int> getPreferredSize();
 
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
+    core::CRect<int> getRelativePosition() { return RelativeRect; }
 
 protected:
     std::list<IGUIElement*> Children;

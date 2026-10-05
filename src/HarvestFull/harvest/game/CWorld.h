@@ -101,9 +101,10 @@ private:
 public:
     //! Read directly by particles, which only feel wind on planet 1; see getPlanet.
     int Planet;
+    //! Set directly when a saved game is read.
+    int GameMode;
 
 private:
-    int GameMode;
     ox::video::ISpriteAnimationState* GroundSprites[2];
     ox::video::ISpriteAnimationState* DoodadSprites[23];
     ox::core::CDimension2d<int> DoodadSizes[23];

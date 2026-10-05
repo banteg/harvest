@@ -26,8 +26,8 @@ enum EGAME_MODE
     EGM_INSANE,
     EGM_RUSH,
     EGM_CREATIVE,
-    //! The shuttle race minigame.
-    EGM_SHUTTLE_RACE
+    //! The campaign, run by a CScenario.
+    EGM_CAMPAIGN
 };
 
 //! An alien queued by a wave attack.

@@ -23,6 +23,7 @@ class COxEntity;
 struct SEntityReference;
 } // end namespace entity
 namespace gui {
+class IGUIButton;
 class IGUICheckBox;
 class IGUIElement;
 class IGUIFont;
@@ -43,6 +44,7 @@ class CScenario;
 class CThreatLevel;
 struct SInfoLineMessage;
 } // end namespace game
+namespace settings { class CHarvestProfile; }
 namespace gui {
 class CAchievementsScreen;
 class CGuiInfoLines;
@@ -180,10 +182,24 @@ private:
         GS_COUNT
     };
 
+    enum ELIST
+    {
+        LIST_WAVES,
+        LIST_CREATIVE,
+        LIST_COUNT
+    };
+
     enum
     {
         WAVE_COUNT = 14,
         GUI_ELEMENT_COUNT = 58
+    };
+
+    //! Ids of the gui elements that report their drawing.
+    enum
+    {
+        GUI_ID_ENERGY_POPUP = 1239,
+        GUI_ID_MINERALS_POPUP = 1240
     };
 
     int m_050;
@@ -245,7 +261,8 @@ private:
     bool m_2c4;
     bool m_2c5;
     int m_2c8;
-    int m_2cc;
+    //! The credits when the game ended.
+    int Minerals;
     bool m_2d0;
     ox::core::CRect<int> MinimapRect;
     ox::video::ISpriteAnimationState* MinimapDot;
@@ -270,7 +287,8 @@ private:
     ox::gui::IGUIStaticText* m_348;
     ox::gui::IGUIStaticText* m_350;
     ox::video::ISpriteAnimationState* GuiSprites[GS_COUNT];
-    ox::video::ISpriteAnimationState* m_418[WAVE_COUNT];
+    //! The alien icons of the wave buttons, by alien type.
+    ox::video::ISpriteAnimationState* WaveIcons[WAVE_COUNT];
     ox::video::ISpriteAnimationState* m_488[WAVE_COUNT];
     ox::gui::IGUIElement* m_4f8;
     ox::gui::IGUIElement* m_500;
@@ -296,10 +314,11 @@ private:
     int m_76c;
     int m_770;
     bool m_774;
-    ox::gui::IGUIElement* m_778[2];
-    ox::gui::IGUIElement* m_788[2];
-    ox::gui::IGUIElement* m_798[2];
-    bool m_7a8[2];
+    //! The wave and creative alien lists at the right edge, indexed by ELIST.
+    ox::gui::IGUILayout* ListGroups[LIST_COUNT];
+    ox::gui::IGUILayout* ListContents[LIST_COUNT];
+    ox::gui::IGUIButton* ListButtons[LIST_COUNT];
+    bool ListVisible[LIST_COUNT];
     ox::gui::IGUIElement* m_7b0;
     gui::CSettingsScreen* SettingsScreen;
     gui::CPriorityScreen* PriorityScreen;
@@ -308,13 +327,14 @@ private:
     gui::CStoryScreen* StoryScreen;
     gui::CAchievementsScreen* AchievementsScreen;
     gui::CGuiInfoLines* InfoLines;
-    int m_7f0;
-    int m_7f4;
-    void* m_7f8;
-    ox::core::CString<wchar_t> m_800;
-    ox::core::CString<wchar_t> m_810;
-    int m_820;
-    float m_824;
+    //! When the game was started, as returned by time(), and a checksum of it for the highscores.
+    int StartTime;
+    int RandomValue;
+    settings::CHarvestProfile* Profile;
+    ox::core::CString<wchar_t> PlayerName;
+    ox::core::CString<wchar_t> PlayerGroup;
+    int ParticleSetting;
+    float ScrollSpeed;
     bool m_828;
     bool m_829;
     int m_82c;

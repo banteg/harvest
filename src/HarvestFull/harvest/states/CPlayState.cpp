@@ -1,6 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 
 #include <math.h>
+#include <time.h>
 #include <iostream>
 #include "harvest/game/CWorld.h"
 #include "harvest/entity/CHarvestEntity.h"
@@ -12,6 +13,7 @@
 #include "harvest/entity/CBuildableItems.h"
 #include "harvest/entity/CConstructionEntity.h"
 #include "harvest/entity/CDefenseTowerEntity.h"
+#include "harvest/entity/CDropshipEntity.h"
 #include "harvest/entity/CEntityManager.h"
 #include "harvest/entity/CMinerEntity.h"
 #include "harvest/game/CLuaManager.h"
@@ -27,17 +29,32 @@
 #include "harvest/gui/CSettingsScreen.h"
 #include "harvest/gui/CStoryScreen.h"
 #include "harvest/settings/CSystemConfig.h"
+#include "harvest/settings/CHarvestProfile.h"
+#include "harvest/settings/CProfileManager.h"
+#include "harvest/settings/CSavestateInfo.h"
+#include "harvest/settings/CAlienPriorities.h"
 #include "ox/IOxDevice.h"
 #include "ox/audio/IAudioDriver.h"
+#include "ox/algo/CRand.h"
+#include "ox/core/CAes.h"
+#include "ox/core/CCipherKey.h"
 #include "ox/core/CBasic.h"
 #include "ox/core/CHiddenInt.h"
 #include "ox/core/CMath.h"
+#include "ox/core/CStringFunctions.h"
 #include "ox/gui/IGUICheckBox.h"
 #include "ox/gui/IGUIElement.h"
+#include "ox/gui/IGUIButton.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUILayout.h"
 #include "ox/gui/IGUIStaticText.h"
+#include "ox/io/CHelpIO.h"
+#include "ox/io/CMemReadFile.h"
+#include "ox/io/CMemWriteFile.h"
+#include "ox/io/IFileSystem.h"
+#include "ox/io/IReadFile.h"
+#include "ox/io/IWriteFile.h"
 #include "ox/video/IParticleState.h"
 #include "ox/video/ISpriteAnimationState.h"
 #include "ox/video/ISpritePackage.h"
@@ -47,12 +64,19 @@ namespace harvest {
 namespace game {
 
 //! Replaces the credit counters with new empty ones.
-static void createCredits()
+static inline void createCredits()
 {
     delete gp_mineralAmount;
     gp_mineralAmount = new ox::core::CHiddenInt();
     delete gp_negatedMineralAmount;
     gp_negatedMineralAmount = new ox::core::CHiddenInt();
+}
+
+//! Sets the credits and their negated copy, which catches memory editing.
+inline void setCredits(int credits)
+{
+    gp_mineralAmount->setValue(credits);
+    gp_negatedMineralAmount->setValue(-credits);
 }
 
 } // end namespace game
@@ -79,7 +103,7 @@ bool CPlayState::m_keys[256];
 
 bool displayThreatLevelForGameMode(int gameMode)
 {
-    return gameMode == game::EGM_NORMAL || gameMode == game::EGM_INSANE || gameMode == game::EGM_SHUTTLE_RACE ||
+    return gameMode == game::EGM_NORMAL || gameMode == game::EGM_INSANE || gameMode == game::EGM_CAMPAIGN ||
         gameMode == game::EGM_CREATIVE;
 }
 
@@ -101,7 +125,7 @@ CPlayState::CPlayState()
       m_322(false), m_324(0), DenialTime(0), m_340(0), m_348(0), m_350(0), m_4f8(0), m_500(0), m_508(0), m_514(0),
       m_518(0), RecycleButton(0), m_728(0), m_758(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
       m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
-      AchievementsScreen(0), InfoLines(0), m_7f8(0), m_820(2), m_824(1.0f), m_828(false), m_829(false), m_82c(0),
+      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), m_828(false), m_829(false), m_82c(0),
       m_830(0), m_838(0)
 {
     for (int i = 0; i < 256; ++i)
@@ -110,15 +134,15 @@ CPlayState::CPlayState()
         GuiSprites[i] = 0;
     for (int i = 0; i < WAVE_COUNT; ++i)
     {
-        m_418[i] = 0;
+        WaveIcons[i] = 0;
         m_488[i] = 0;
     }
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < LIST_COUNT; ++i)
     {
-        m_7a8[i] = false;
-        m_778[i] = 0;
-        m_788[i] = 0;
-        m_798[i] = 0;
+        ListVisible[i] = false;
+        ListGroups[i] = 0;
+        ListContents[i] = 0;
+        ListButtons[i] = 0;
     }
     LuaManager = 0;
 }
@@ -170,16 +194,16 @@ CPlayState::~CPlayState()
         m_508->remove();
     if (m_7b0)
         m_7b0->remove();
-    for (int i = 0; i < 2; ++i)
-        if (m_778[i])
-            m_778[i]->remove();
+    for (int i = 0; i < LIST_COUNT; ++i)
+        if (ListGroups[i])
+            ListGroups[i]->remove();
     for (int i = 0; i < GS_COUNT; ++i)
         if (GuiSprites[i])
             GuiSprites[i]->remove();
     for (int i = 0; i < WAVE_COUNT; ++i)
     {
-        if (m_418[i])
-            m_418[i]->remove();
+        if (WaveIcons[i])
+            WaveIcons[i]->remove();
         if (m_488[i])
             m_488[i]->remove();
     }
@@ -213,9 +237,335 @@ ox::gui::IGUILayout* CPlayState::getPopupForGuiButton(const wchar_t* text)
     return popup;
 }
 
+ox::gui::IGUILayout* CPlayState::getPopupForBuildButton(const wchar_t* name, const wchar_t* description, int energy,
+    int minerals)
+{
+    ox::gui::IGUILayout* popup =
+        GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 100), GUIEnvironment->getRootGUIElement());
+    ox::gui::IGUILayout* titleFrame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, -1);
+    titleFrame->setAnimations(IngamePackage, "Tooltip");
+    ox::gui::IGUILayout* mineralsFrame =
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_MINERALS_POPUP);
+    mineralsFrame->setAnimations(IngamePackage, "Tooltip");
+    mineralsFrame->setReportOnDraw(1);
+    ox::gui::IGUILayout* energyFrame =
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_ENERGY_POPUP);
+    energyFrame->setAnimations(IngamePackage, "Tooltip");
+    energyFrame->setReportOnDraw(1);
+    ox::gui::IGUILayout* descriptionFrame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 240, 23), popup, -1);
+    descriptionFrame->setAnimations(IngamePackage, "Tooltip");
+    descriptionFrame->LayoutFlags = "br";
+
+    ox::gui::IGUIStaticText* title = GUIEnvironment->addStaticText(name, 138, titleFrame, BoldFont, -1, L"");
+    title->setOverrideColor(WHITE_TEXT_COLOR);
+    title->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+    titleFrame->sortRiver(true, 1, 3, false);
+    title->move(ox::core::CPosition2d<int>(0, 1));
+
+    ox::core::CString<wchar_t> text(L"   ");
+    text.append(energy);
+    ox::gui::IGUIStaticText* energyText = GUIEnvironment->addStaticText(text.c_str(), 50, energyFrame, BoldFont, -1, L"");
+    energyText->setOverrideColor(ENERGY_TEXT_COLOR);
+    energyText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+    energyFrame->sortRiver(true, 1, 3, false);
+    energyText->move(ox::core::CPosition2d<int>(0, 1));
+
+    text = L"   ";
+    text.append(minerals);
+    ox::gui::IGUIStaticText* mineralsText =
+        GUIEnvironment->addStaticText(text.c_str(), 50, mineralsFrame, BoldFont, -1, L"");
+    mineralsText->setOverrideColor(MINERALS_TEXT_COLOR);
+    mineralsText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+    mineralsFrame->sortRiver(true, 1, 3, false);
+    mineralsText->move(ox::core::CPosition2d<int>(0, 1));
+
+    GUIEnvironment->addStaticText(description, 240, descriptionFrame, BoldFont, -1, L"")->setOverrideColor(
+        WHITE_TEXT_COLOR);
+    descriptionFrame->sortRiver(true, 5, 3, false);
+    popup->sortRiver(true, 1, 3, false);
+    return popup;
+}
+
+bool CPlayState::readStateFromFile(const char* filename)
+{
+    ox::io::IReadFile* file = Device->getFileSystem()->createAndOpenFile(filename);
+    if (!file)
+        return false;
+
+    bool result = false;
+    settings::SSavestateHeader header;
+    if (!settings::CSavestateInfo::readHeader(file, header))
+    {
+        file->drop();
+        return result;
+    }
+
+    if (settings::gp_profileManager && settings::gp_profileManager->getCurrentProfile())
+        Profile = settings::gp_profileManager->getCurrentProfile();
+    if (settings::gp_systemConfig)
+    {
+        ParticleSetting = settings::gp_systemConfig->getParticleSetting();
+        ScrollSpeed = settings::gp_systemConfig->getScrollSpeed();
+    }
+
+    eraseGameObjects();
+    game::createCredits();
+    game::gp_statistics = new game::CStatistics();
+    game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
+    entity::gp_entityManager = new entity::CEntityManager();
+    entity::g_nextEntityId = 1;
+    ThreatLevel = new game::CThreatLevel(g_gameMode);
+
+    int compressedSize = ox::io::CHelpIO::readInt(file);
+    int size = ox::io::CHelpIO::readInt(file);
+    if (compressedSize <= 0)
+    {
+        file->drop();
+        return result;
+    }
+
+    unsigned char* data;
+    if (header.Version > 12)
+    {
+        int encryptedSize = ox::io::CHelpIO::readInt(file);
+        ox::core::CAes aes;
+        ox::algo::CRand random(1);
+        char keyData[32];
+        for (int i = 0; i < 32; ++i)
+            keyData[i] = random.nextInt(256);
+        ox::core::CCipherKey key(keyData, 32);
+        aes.setKey(&key);
+
+        unsigned char* encrypted = new unsigned char[encryptedSize];
+        data = new unsigned char[encryptedSize];
+        file->read(encrypted, encryptedSize);
+        file->drop();
+        aes.decrypt(data, encrypted, encryptedSize);
+        delete[] encrypted;
+    }
+    else
+    {
+        // Older saves are scrambled with a rotating key.
+        data = new unsigned char[compressedSize];
+        file->read(data, compressedSize);
+        file->drop();
+        unsigned int scramble = 0x4f2c7b19;
+        for (int i = 0; i < compressedSize; ++i)
+        {
+            switch (i & 3)
+            {
+            case 0:
+                data[i] ^= scramble >> 24;
+                break;
+            case 1:
+                data[i] ^= scramble >> 16;
+                break;
+            case 2:
+                data[i] ^= scramble >> 8;
+                break;
+            case 3:
+                data[i] ^= scramble;
+                scramble = scramble << 31 | scramble >> 1;
+                break;
+            }
+        }
+    }
+
+    unsigned char* unpacked = new unsigned char[size];
+    unsigned int written;
+    if (!Device->getFileSystem()->zipInflateData(unpacked, size, data, compressedSize, written))
+    {
+        delete[] data;
+        delete[] unpacked;
+        return result;
+    }
+
+    ox::io::CMemReadFile* memFile = new ox::io::CMemReadFile(unpacked, size, false);
+    StartTime = ox::io::CHelpIO::readInt(memFile);
+    RandomValue = ox::io::CHelpIO::readInt(memFile);
+    ox::io::CHelpIO::readWideString(memFile, PlayerName);
+    ox::io::CHelpIO::readWideString(memFile, PlayerGroup);
+    ViewPosition.X = ox::io::CHelpIO::readFloat(memFile);
+    ViewPosition.Y = ox::io::CHelpIO::readFloat(memFile);
+    GameMode = ox::io::CHelpIO::readInt(memFile);
+    game::gp_world->GameMode = GameMode;
+    ThreatLevel->read(memFile, header.Version);
+    int nextEntityId = ox::io::CHelpIO::readInt(memFile);
+    if (header.Version > 14)
+    {
+        game::gp_mineralAmount->read(memFile);
+        game::setCredits(game::gp_mineralAmount->getValue());
+    }
+    else
+        game::setCredits(ox::io::CHelpIO::readInt(memFile));
+
+    if (header.Version > 18)
+    {
+        GameTime = ox::io::CHelpIO::readFloat(memFile);
+        m_320 = ox::io::CHelpIO::readInt(memFile) != 0;
+    }
+    else
+        m_320 = false;
+    if (header.Version > 19)
+        m_328 = ox::io::CHelpIO::readInt(memFile) != 0;
+    else
+        m_328 = false;
+    m_321 = false;
+    m_322 = false;
+
+    if (header.Version > 28 && ox::io::CHelpIO::readByte(memFile))
+    {
+        LuaManager = new game::CLuaManager(Device, this);
+        if (!LuaManager->initLuaBySaveFile(memFile, header.Version))
+        {
+            delete LuaManager;
+            LuaManager = 0;
+        }
+    }
+
+    if (!game::gp_world->readAndInitialize(memFile, header.Version, Driver, getViewSize()))
+    {
+        delete memFile;
+        delete[] data;
+        delete[] unpacked;
+        return result;
+    }
+
+    game::gp_statistics->read(memFile, header.Version);
+    if (header.Version > 10)
+        for (int i = 0; i < 5; ++i)
+            settings::g_attackPriorities[i].read(memFile, header.Version);
+    if (GameMode == game::EGM_CREATIVE)
+        BuildableItems.loadCreativeBuildings(Device);
+    entity::gp_entityManager->readEntities(memFile, header.Version);
+    entity::g_nextEntityId = nextEntityId;
+    delete memFile;
+    delete[] data;
+    delete[] unpacked;
+
+    // Let the entities settle once before the first frame.
+    float x = ViewPosition.X - 100.0f;
+    float y = ViewPosition.Y - 100.0f;
+    entity::gp_entityManager->update(0.001f,
+        ox::core::CRect<float>(x, y, ScreenSize.Width + 200.0f + x, ScreenSize.Height + 200.0f + y));
+    GameSpeed = 0;
+    result = true;
+    return result;
+}
+
+bool CPlayState::initializeNewGame()
+{
+    eraseGameObjects();
+    StartTime = time(0);
+    int random = ox::algo::CRand::rand();
+    RandomValue = (random & 0xffffff) | ((random >> 8) + (random >> 16) + random) << 24;
+    if (settings::gp_profileManager && settings::gp_profileManager->getCurrentProfile())
+    {
+        Profile = settings::gp_profileManager->getCurrentProfile();
+        PlayerName = Profile->getPlayerName();
+        PlayerGroup = Profile->getPlayerGroup();
+    }
+    if (settings::gp_systemConfig)
+    {
+        ParticleSetting = settings::gp_systemConfig->getParticleSetting();
+        ScrollSpeed = settings::gp_systemConfig->getScrollSpeed();
+    }
+
+    GameMode = g_gameMode;
+    GameTime = 0;
+    m_320 = false;
+    m_321 = false;
+    m_322 = false;
+    m_328 = false;
+    if (GameMode != game::EGM_CAMPAIGN)
+    {
+        game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
+        game::createCredits();
+        if (!game::gp_world->initializeWorld(Driver, getViewSize()))
+            return false;
+
+        entity::gp_entityManager = new entity::CEntityManager();
+        entity::g_nextEntityId = 1;
+        game::gp_world->initializeNewGame(0);
+        entity::gp_entityManager->addBuilding(0, 510.0f, 510.0f);
+        entity::gp_entityManager->addBuilding(0, 590.0f, 540.0f);
+        entity::gp_entityManager->addBuilding(1, 530.0f, 550.0f);
+        entity::gp_entityManager->addBuilding(1, 480.0f, 480.0f);
+        entity::gp_entityManager->addBuilding(1, 570.0f, 460.0f);
+        entity::gp_entityManager->appendEntity(new entity::CDropshipEntity(600.0f, 500.0f, true), 4);
+        displayWelcomeMessage();
+        if (GameMode == game::EGM_RUSH)
+        {
+            game::setCredits(1500);
+            entity::gp_entityManager->addBuilding(0, 540.0f, 440.0f);
+            entity::gp_entityManager->addBuilding(0, 620.0f, 470.0f);
+        }
+        else if (GameMode == game::EGM_INSANE)
+        {
+            game::setCredits(1000);
+            entity::gp_entityManager->addBuilding(0, 540.0f, 440.0f);
+            entity::gp_entityManager->addBuilding(0, 620.0f, 470.0f);
+        }
+        else
+            game::setCredits(45);
+    }
+    else
+    {
+        Scenario = new game::CScenario();
+        g_gamePlanet = Scenario->getScenarioPlanet();
+        int credits = Scenario->getStartingCredits();
+        game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
+        game::createCredits();
+        game::setCredits(credits);
+        if (!game::gp_world->initializeWorld(Driver, getViewSize()))
+            return false;
+
+        entity::gp_entityManager = new entity::CEntityManager();
+        entity::g_nextEntityId = 1;
+        game::gp_world->initializeNewGame(Scenario);
+        Scenario->addStartingEntities();
+        Scenario->createScenarioEvents(this);
+        if (StoryScreen)
+        {
+            StoryScreen->displayBlackness(10.0f);
+            StoryScreen->setVisible(true);
+        }
+    }
+
+    ViewPosition.X = (game::gp_world->getActualGameFieldSize().getWidth() - ScreenSizeF.Width) * 0.5f;
+    ViewPosition.Y = (game::gp_world->getActualGameFieldSize().getHeight() - ScreenSizeF.Height) * 0.5f;
+    ThreatLevel = new game::CThreatLevel(GameMode);
+    game::gp_statistics = new game::CStatistics();
+    if (settings::gp_profileManager && settings::gp_profileManager->getCurrentProfile())
+    {
+        settings::CHarvestProfile* profile = settings::gp_profileManager->getCurrentProfile();
+        for (int i = 0; i < 5; ++i)
+        {
+            settings::g_attackPriorities[i].setPrioritiesFromString(profile->getAttackPriority(i));
+            settings::g_attackPriorities[i].setIfRangeIsImportant(profile->getAttackRangeMatters(i));
+        }
+    }
+
+    if (GameMode == game::EGM_CREATIVE)
+    {
+        BuildableItems.loadCreativeBuildings(Device);
+        if (!game::CLuaManager::s_availableLuaScriptFiles.empty())
+        {
+            entity::gp_entityManager->update(0.0f, ox::core::CRect<float>(0.0f, 0.0f, 1.0f, 1.0f));
+            LuaManager = new game::CLuaManager(Device, this);
+            LuaManager->initLuaByScriptList();
+            LuaManager->hookNewGame();
+            ox::TArray<ox::core::CString<char> >& errors = LuaManager->getCompilerErrors();
+            for (unsigned int i = 0; i < errors.size(); ++i)
+                addInfoLine(ox::core::CString<wchar_t>(errors[i].c_str()));
+        }
+    }
+    return true;
+}
+
 void CPlayState::playPlanetMusic()
 {
-    if (game::gp_world && GameMode != game::EGM_SHUTTLE_RACE)
+    if (game::gp_world && GameMode != game::EGM_CAMPAIGN)
     {
         switch (game::gp_world->getPlanet())
         {
@@ -231,6 +581,48 @@ void CPlayState::playPlanetMusic()
         }
     }
     m_330 = 1200.0f;
+}
+
+void CPlayState::displayTimeVictoryMessage()
+{
+    int record = settings::gp_profileManager->getCurrentProfile()->getLocalScore(2, GameMode,
+        game::gp_world->getPlanet());
+    int time = (int)(GameTime * 1000.0f);
+
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:victoryTitle");
+    message.Portrait = "PortraitCommunications";
+    message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:victory");
+    message.Sound = "ingame_infoVictory.ogg";
+    if (record == 0 || time < record)
+    {
+        settings::gp_profileManager->getCurrentProfile()->updateLocalScore(2, GameMode,
+            game::gp_world->getPlanet(), time);
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:victoryNewRecord",
+            ox::core::CStringFunctions::millisecondsToWide(GameTime, true).c_str());
+    }
+    addInfoLine(&message, false);
+}
+
+void CPlayState::displayRecordMessage(int value, bool minerals)
+{
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:recordTitle");
+    message.Portrait = "PortraitCommunications";
+    if (minerals)
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:newMineralsRecord", value);
+    else
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:newLevelRecord", value);
+    addInfoLine(&message, false);
+}
+
+void CPlayState::displayInsaneRewardMessage()
+{
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:insaneRewardTitle");
+    message.Portrait = "PortraitCommunications";
+    message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:insaneRewardMessage", 250);
+    addInfoLine(&message, false);
 }
 
 void CPlayState::clearSelectedEntity()
@@ -270,6 +662,32 @@ void CPlayState::updateMultiSelectionReferences()
         SelectedEntity = (entity::CEntity*)MultiSelection[0]->Entity;
         newSelectedEntity();
     }
+}
+
+void CPlayState::checkWaveReward()
+{
+    int reward = ThreatLevel->getWaveReward();
+    if (reward <= 0 || m_2c4)
+        return;
+
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardTitle");
+    message.Portrait = "PortraitCommunications";
+    message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardMessage", reward);
+    addInfoLine(&message, false);
+
+    game::gp_mineralAmount->modifyValue(reward);
+    game::gp_negatedMineralAmount->modifyValue(-reward);
+    if (game::gp_statistics)
+        game::gp_statistics->addLog(GameTime, 0, reward);
+
+    sendCustomEvent((ECUSTOM_EVENT)22, 31);
+    if (reward >= 16250)
+        sendCustomEvent((ECUSTOM_EVENT)21, 19);
+    if (!m_328)
+        sendCustomEvent((ECUSTOM_EVENT)21, 23);
+    if (GameTime < 900.0f)
+        sendCustomEvent((ECUSTOM_EVENT)21, 22);
 }
 
 void CPlayState::updatePlacementPosition()
@@ -452,12 +870,31 @@ void CPlayState::replaceSelectedProducer(int entityType)
 
 void CPlayState::toggleWaveList()
 {
-    setWaveListToggle(!m_7a8[0]);
+    setWaveListToggle(!ListVisible[LIST_WAVES]);
 }
 
 void CPlayState::toggleCreativeList()
 {
-    setCreativeListToggle(!m_7a8[1]);
+    setCreativeListToggle(!ListVisible[LIST_CREATIVE]);
+}
+
+void CPlayState::launchWaveLevel(int wave)
+{
+    if (ThreatLevel)
+    {
+        ox::core::CString<wchar_t> aliens;
+        ThreatLevel->spawnNextWaveAttack(wave, aliens);
+
+        game::SInfoLineMessage message;
+        message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningTitle");
+        message.Portrait = "PortraitCommunications";
+        message.Sound = "ingame_infoWave.ogg";
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningMessage", aliens.c_str());
+        addInfoLine(&message, false);
+    }
+    setWaveListToggle(!ListVisible[LIST_WAVES]);
+    setWaveListToggle(!ListVisible[LIST_WAVES]);
+    m_328 = false;
 }
 
 void CPlayState::setPlaceAlienAction(int alienType)
@@ -516,17 +953,17 @@ void CPlayState::renderWaveButton(ox::gui::IGUIElement* button, int numAliens, i
         (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
     if (numAliens == 1)
     {
-        if (m_418[firstAlien])
-            m_418[firstAlien]->draw(center, 0, ox::video::SColor(0xffffffff));
+        if (WaveIcons[firstAlien])
+            WaveIcons[firstAlien]->draw(center, 0, ox::video::SColor(0xffffffff));
     }
     else
     {
         int x = rect.UpperLeftCorner.X + 40;
         for (int i = firstAlien; i < WAVE_COUNT; ++i)
         {
-            if (aliens[i] && m_418[i])
+            if (aliens[i] && WaveIcons[i])
             {
-                m_418[i]->draw(ox::core::CPosition2d<int>(x, center.Y), 0, ox::video::SColor(0xffffffff));
+                WaveIcons[i]->draw(ox::core::CPosition2d<int>(x, center.Y), 0, ox::video::SColor(0xffffffff));
                 x += 20 / (numAliens - 1);
             }
         }
@@ -709,6 +1146,167 @@ void CPlayState::placeCurrentAlienSelection(const ox::core::CPosition2d<float>& 
         LuaManager->hookAlienSpawned(alien);
 }
 
+void CPlayState::setWaveListToggle(bool visible)
+{
+    int y = m_508->getAbsolutePosition().LowerRightCorner.Y + 10;
+    if (!ListGroups[LIST_WAVES])
+    {
+        ListGroups[LIST_WAVES] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), 0);
+        ListButtons[LIST_WAVES] =
+            GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 50, 50), ListGroups[LIST_WAVES], 36, 0);
+        ListButtons[LIST_WAVES]->setAnimations(IngamePackage, "WaveSendBtn", true);
+        ListButtons[LIST_WAVES]->LayoutFlags = "br";
+        ListContents[LIST_WAVES] =
+            GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), ListGroups[LIST_WAVES]);
+        ListContents[LIST_WAVES]->LayoutFlags = "br";
+        ListGroups[LIST_WAVES]->sortRiver(true, 0, 1, false);
+        ListGroups[LIST_WAVES]->moveTo(ox::core::CPosition2d<int>(
+            ScreenSize.Width - 1 - ListGroups[LIST_WAVES]->getRelativePosition().getWidth(), y));
+        loadWaveListSprites();
+    }
+
+    if (ListVisible[LIST_WAVES] == visible)
+        return;
+
+    ListVisible[LIST_WAVES] = visible;
+    if (visible)
+    {
+        if (ListContents[LIST_WAVES])
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                if (ThreatLevel->hasWaveBeenLaunched(i))
+                    continue;
+                if (LuaManager && !LuaManager->isWaveButtonVisible(i))
+                    continue;
+
+                ox::gui::IGUIButton* button =
+                    GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 50, 50), ListContents[LIST_WAVES], i + 38, 0);
+                button->setAnimations(IngamePackage, "WaveBtn", true);
+                button->LayoutFlags = "br";
+                button->setReportOnDraw(2);
+                if (GameMode == game::EGM_WAVE)
+                {
+                    ox::gui::IGUILayout* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
+                        GUIEnvironment->getRootGUIElement(), -1);
+                    popup->setAnimations(IngamePackage, "Tooltip");
+                    GUIEnvironment->addStaticText(ThreatLevel->getWaveDescription(i),
+                        ox::core::CRect<int>(0, 0, 400, 400), false, true, popup, -1, L"")->packSize();
+                    popup->sortRiver(true, 5, 5, false);
+                    button->setHoverItem(popup);
+                }
+            }
+            ListContents[LIST_WAVES]->sortRiver(true, 0, 1, false);
+        }
+        ListGroups[LIST_WAVES]->sortRiver(true, 0, 1, false);
+        ox::core::CRect<int> area = ListGroups[LIST_WAVES]->getRelativePosition();
+        int offset = 0;
+        if (ListGroups[LIST_CREATIVE] && LuaManager && LuaManager->isCreativeListVisible())
+            offset = -ListGroups[LIST_CREATIVE]->getRelativePosition().getWidth() - 1;
+        if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
+            offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+        ListGroups[LIST_WAVES]->moveTo(ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
+    }
+    else
+    {
+        if (ListContents[LIST_WAVES])
+        {
+            ListContents[LIST_WAVES]->removeAllChildren();
+            ListGroups[LIST_WAVES]->sortRiver(true, 0, 1, false);
+        }
+        if (ListGroups[LIST_WAVES])
+        {
+            ListGroups[LIST_WAVES]->sortRiver(true, 0, 0, false);
+            ox::core::CRect<int> area = ListGroups[LIST_WAVES]->getRelativePosition();
+            int offset = 0;
+            if (ListGroups[LIST_CREATIVE] && LuaManager && LuaManager->isCreativeListVisible())
+                offset = -ListGroups[LIST_CREATIVE]->getRelativePosition().getWidth() - 1;
+            if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
+                offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+            ListGroups[LIST_WAVES]->moveTo(
+                ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
+        }
+    }
+}
+
+void CPlayState::setCreativeListToggle(bool visible)
+{
+    int y = m_508->getAbsolutePosition().LowerRightCorner.Y + 10;
+    if (!ListGroups[LIST_CREATIVE])
+    {
+        ListGroups[LIST_CREATIVE] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), 0);
+        ListButtons[LIST_CREATIVE] =
+            GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 50, 50), ListGroups[LIST_CREATIVE], 37, 0);
+        ListButtons[LIST_CREATIVE]->setAnimations(IngamePackage, "CreativePlaceBtn", true);
+        ListButtons[LIST_CREATIVE]->LayoutFlags = "br";
+        ListContents[LIST_CREATIVE] =
+            GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 50, 50), ListGroups[LIST_CREATIVE]);
+        ListContents[LIST_CREATIVE]->LayoutFlags = "br";
+        ListGroups[LIST_CREATIVE]->sortRiver(true, 0, 1, false);
+        ListGroups[LIST_CREATIVE]->moveTo(ox::core::CPosition2d<int>(
+            ScreenSize.Width - 1 - ListGroups[LIST_CREATIVE]->getRelativePosition().getWidth(), y));
+        loadWaveListSprites();
+    }
+
+    if (ListVisible[LIST_CREATIVE] == visible)
+        return;
+
+    ListVisible[LIST_CREATIVE] = visible;
+    if (visible)
+    {
+        if (ListContents[LIST_CREATIVE])
+        {
+            for (int i = 0; i < WAVE_COUNT; ++i)
+            {
+                if (!ThreatLevel->alienIsPresentAtThisLevel(i))
+                    continue;
+
+                ox::gui::IGUIButton* button = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 50, 50),
+                    ListContents[LIST_CREATIVE], i + 48, 0);
+                button->setAnimations(IngamePackage, "WaveBtn", true);
+                button->LayoutFlags = "br";
+                button->setReportOnDraw(2);
+                ox::gui::IGUILayout* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
+                    GUIEnvironment->getRootGUIElement(), -1);
+                popup->setAnimations(IngamePackage, "Tooltip");
+                ox::core::CString<wchar_t> text =
+                    settings::gp_systemConfig->getLocalizedText(entity::ALIEN_KEY_NAMES[i]);
+                text = settings::gp_systemConfig->getLocalizedText(L"ingame:drawAlien", text.c_str());
+                GUIEnvironment->addStaticText(text.c_str(), ox::core::CRect<int>(0, 0, 400, 400), false, true, popup,
+                    -1, L"")->packSize();
+                popup->sortRiver(true, 5, 5, false);
+                button->setHoverItem(popup);
+            }
+            ListContents[LIST_CREATIVE]->sortRiver(true, 0, 1, false);
+        }
+        ListGroups[LIST_CREATIVE]->sortRiver(true, 0, 1, false);
+        ox::core::CRect<int> area = ListGroups[LIST_CREATIVE]->getRelativePosition();
+        int offset = 0;
+        if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
+            offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+        ListGroups[LIST_CREATIVE]->moveTo(
+            ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
+    }
+    else
+    {
+        if (ListContents[LIST_CREATIVE])
+        {
+            ListContents[LIST_CREATIVE]->removeAllChildren();
+            ListGroups[LIST_CREATIVE]->sortRiver(true, 0, 1, false);
+        }
+        if (ListGroups[LIST_CREATIVE])
+        {
+            ListGroups[LIST_CREATIVE]->sortRiver(true, 0, 0, false);
+            ox::core::CRect<int> area = ListGroups[LIST_CREATIVE]->getRelativePosition();
+            int offset = 0;
+            if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
+                offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+            ListGroups[LIST_CREATIVE]->moveTo(
+                ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
+        }
+    }
+}
+
 bool CPlayState::isMultiSelected()
 {
     return !MultiSelection.empty();
@@ -734,6 +1332,83 @@ void CPlayState::addInfoLine(game::SInfoLineMessage* message, bool sound)
                 AudioDriver->playSound("message.ogg", 1.0f, 0.0f, 1.0f);
         }
     }
+}
+
+bool CPlayState::writeStateToFile(const char* filename, const wchar_t* description)
+{
+    ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile();
+    ox::io::CHelpIO::writeInt(file, StartTime);
+    ox::io::CHelpIO::writeInt(file, RandomValue);
+    ox::io::CHelpIO::writeWideString(file, PlayerName, true);
+    ox::io::CHelpIO::writeWideString(file, PlayerGroup, true);
+    ox::io::CHelpIO::writeFloat(file, ViewPosition.X);
+    ox::io::CHelpIO::writeFloat(file, ViewPosition.Y);
+    ox::io::CHelpIO::writeInt(file, GameMode);
+    ThreatLevel->write(file);
+    ox::io::CHelpIO::writeInt(file, entity::g_nextEntityId);
+    game::gp_mineralAmount->write(file);
+    ox::io::CHelpIO::writeFloat(file, GameTime);
+    ox::io::CHelpIO::writeInt(file, m_320);
+    ox::io::CHelpIO::writeInt(file, m_328);
+    if (LuaManager)
+    {
+        ox::io::CHelpIO::writeByte(file, 1);
+        LuaManager->writeLuaStates(file);
+    }
+    else
+        ox::io::CHelpIO::writeByte(file, 0);
+    game::gp_world->write(file);
+    game::gp_statistics->write(file);
+    for (int i = 0; i < 5; ++i)
+        settings::g_attackPriorities[i].write(file);
+    entity::gp_entityManager->writeEntities(file);
+
+    int size = file->getSize();
+    unsigned char* compressed = new unsigned char[size];
+    unsigned int compressedSize = 0;
+    Device->getFileSystem()->zipDeflateData(compressed, size, (unsigned char*)file->getData(), size, compressedSize);
+    delete file;
+
+    ox::core::CAes aes;
+    ox::algo::CRand random(1);
+    char keyData[32];
+    for (int i = 0; i < 32; ++i)
+        keyData[i] = random.nextInt(256);
+    ox::core::CCipherKey key(keyData, 32);
+    aes.setKey(&key);
+
+    int encryptedSize = aes.getEncryptedDataSize(compressedSize);
+    unsigned char* encrypted = new unsigned char[encryptedSize];
+    aes.encrypt(encrypted, compressed, compressedSize);
+    delete[] compressed;
+
+    bool result;
+    ox::io::IWriteFile* saveFile = Device->getFileSystem()->createAndWriteFile(filename, false);
+    if (saveFile)
+    {
+        settings::SSavestateHeader header;
+        header.PlayerName = PlayerName;
+        header.GameMode = GameMode;
+        header.ThreatLevel = ThreatLevel->getThreatLevel();
+        header.Minerals = Minerals;
+        header.Planet = game::gp_world->getPlanet();
+        header.Time = time(0);
+        header.Description = description;
+        settings::CSavestateInfo::writeHeader(saveFile, header);
+        ox::io::CHelpIO::writeInt(saveFile, compressedSize);
+        ox::io::CHelpIO::writeInt(saveFile, size);
+        ox::io::CHelpIO::writeInt(saveFile, encryptedSize);
+        saveFile->write(encrypted, encryptedSize);
+        delete[] encrypted;
+        saveFile->drop();
+        result = true;
+    }
+    else
+    {
+        result = false;
+        delete[] encrypted;
+    }
+    return result;
 }
 
 void CPlayState::addInfoLine(const ox::core::CString<wchar_t>& text)
@@ -858,6 +1533,71 @@ void CPlayState::eraseGameObjects()
     m_111 = false;
     setNoneAction(true);
     g_scenarioResult = 0;
+}
+
+void CPlayState::displayWelcomeMessage()
+{
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"characters:pilot");
+    message.Portrait = "PortraitDropShip";
+    switch (GameMode)
+    {
+    case game::EGM_NORMAL:
+    case game::EGM_INSANE:
+    {
+        int levels = settings::gp_profileManager->getCurrentProfile()->getLocalScore(0, GameMode,
+            game::gp_world->getPlanet());
+        int minerals = settings::gp_profileManager->getCurrentProfile()->getLocalScore(1, GameMode,
+            game::gp_world->getPlanet());
+        if (levels == 0 || minerals == 0)
+        {
+            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeNoScores");
+            message.Sound = "welcomeGoodLuck.ogg";
+        }
+        else
+        {
+            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeLevelScores", levels, minerals);
+            message.Sound = "welcomeLevelScores.ogg";
+        }
+        break;
+    }
+    case game::EGM_WAVE:
+    case game::EGM_RUSH:
+    {
+        int time = settings::gp_profileManager->getCurrentProfile()->getLocalScore(2, GameMode,
+            game::gp_world->getPlanet());
+        if (time)
+        {
+            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeTimeScores",
+                ox::core::CStringFunctions::millisecondsToWide(time * 0.001f, true).c_str());
+            message.Sound = "welcomeLevelScores.ogg";
+        }
+        else
+        {
+            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeNoScores");
+            message.Sound = "welcomeGoodLuck.ogg";
+        }
+        break;
+    }
+    case game::EGM_CREATIVE:
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeCreative");
+        message.Sound = "welcomeCreative.ogg";
+        break;
+    }
+    addInfoLine(&message, false);
+}
+
+void CPlayState::loadWaveListSprites()
+{
+    WaveIcons[0] = IngamePackage->addNewAnimationState("WaveIconMilky");
+    WaveIcons[1] = IngamePackage->addNewAnimationState("WaveIconShielder");
+    WaveIcons[2] = IngamePackage->addNewAnimationState("WaveIconTiny");
+    WaveIcons[3] = IngamePackage->addNewAnimationState("WaveIconSummoner");
+    WaveIcons[4] = IngamePackage->addNewAnimationState("WaveIconLooker");
+    WaveIcons[5] = IngamePackage->addNewAnimationState("WaveIconHogger");
+    WaveIcons[6] = IngamePackage->addNewAnimationState("WaveIconStealer");
+    WaveIcons[7] = IngamePackage->addNewAnimationState("WaveIconBrain");
+    WaveIcons[8] = IngamePackage->addNewAnimationState("WaveIconMega");
 }
 
 void CPlayState::addToSelection(entity::CEntity* building)

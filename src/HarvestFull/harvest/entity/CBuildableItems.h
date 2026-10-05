@@ -8,6 +8,16 @@
 #include "ox/core/CHiddenInt.h"
 #include "ox/entity/COxEntity.h"
 #include "ox/core/CString.h"
+#include "ox/core/CRect.h"
+
+namespace ox {
+class IOxDevice;
+namespace gui { class IGUILayout; }
+namespace video {
+class ISpriteAnimationState;
+class IVideoDriver;
+} // end namespace video
+} // end namespace ox
 
 namespace harvest {
 namespace entity {
@@ -53,6 +63,14 @@ public:
     float getEntityRadius(int index);
     //! The next or previous enabled building after index, wrapping around.
     int changeConstructionSelection(int index, bool next);
+    void loadStandardBuildings(ox::video::IVideoDriver* driver);
+    void loadCreativeBuildings(ox::IOxDevice* device);
+    int getNumBuildings();
+    ox::video::ISpriteAnimationState* getPreviewSprite(int index);
+    bool isPointWithinButton(int index, ox::core::CPosition2d<int> position);
+    void renderButtonLayouts(const ox::core::CPosition2d<int>& offset, int selected, ox::core::CRect<int> clip);
+    //! Places the item's build button in a layout.
+    void setItemButtonLayout(int index, ox::gui::IGUILayout* layout);
     void addSpecialUpgrade(const char* entityId, const char* upgradeId, const char* name, int cost,
         int count, float value, const char* description);
 
