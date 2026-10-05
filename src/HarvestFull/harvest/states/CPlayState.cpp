@@ -4011,33 +4011,7 @@ void CPlayState::render()
         }
     }
 
-    if (Action == 3)
-    {
-        if ((unsigned int)AlienSelection < WAVE_COUNT && m_488[AlienSelection])
-        {
-            ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
-            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + mouse.X - ViewPosition.X,
-                viewPort.UpperLeftCorner.Y + mouse.Y - ViewPosition.Y);
-            m_488[AlienSelection]->drawScaled(position, 1.0f, ox::video::SColor(0x80ffffff));
-        }
-    }
-    else if (Action != 1)
-    {
-        if (SelectedEntity)
-        {
-            if (RangeCircle)
-                renderRangeCircleForEntity(SelectedEntity, viewPort);
-            if (HasLastPlacement && SelectedEntity->getEntityType() == 1)
-            {
-                // The energy redirection being dragged from a spark mover.
-                const ox::core::CVector3d<float>& start = SelectedEntity->getPosition();
-                Beam1c8.Start = ox::core::CPosition2d<float>(start.X, start.Y);
-                Beam1c8.End = getWorldPos(GUIEnvironment->getMousePosition());
-                entity::gp_entityManager->renderEnergyBeam(&Beam1c8, ViewPosition, viewPort);
-            }
-        }
-    }
-    else
+    if (Action == 1)
     {
         int entityType = BuildableItems.getEntityType(BuildSelection);
         if (Beam180.Beam)
@@ -4103,6 +4077,32 @@ void CPlayState::render()
                 ox::video::SColor(0x80ffffff));
         }
     }
+    else if (Action == 3)
+    {
+        if ((unsigned int)AlienSelection < WAVE_COUNT && m_488[AlienSelection])
+        {
+            ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
+            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + mouse.X - ViewPosition.X,
+                viewPort.UpperLeftCorner.Y + mouse.Y - ViewPosition.Y);
+            m_488[AlienSelection]->drawScaled(position, 1.0f, ox::video::SColor(0x80ffffff));
+        }
+    }
+    else
+    {
+        if (SelectedEntity)
+        {
+            if (RangeCircle)
+                renderRangeCircleForEntity(SelectedEntity, viewPort);
+            if (HasLastPlacement && SelectedEntity->getEntityType() == 1)
+            {
+                // The energy redirection being dragged from a spark mover.
+                const ox::core::CVector3d<float>& start = SelectedEntity->getPosition();
+                Beam1c8.Start = ox::core::CPosition2d<float>(start.X, start.Y);
+                Beam1c8.End = getWorldPos(GUIEnvironment->getMousePosition());
+                entity::gp_entityManager->renderEnergyBeam(&Beam1c8, ViewPosition, viewPort);
+            }
+        }
+    }
 
     if (Selector)
     {
@@ -4110,8 +4110,8 @@ void CPlayState::render()
         {
             ox::core::CPosition2d<float> position(SelectedEntity->getPosition().X - ViewPosition.X,
                 SelectedEntity->getPosition().Y - ViewPosition.Y);
-            Selector->drawScaled(position, SelectedEntity->getCollisionSize() * 1.5f / 25.0f,
-                ox::video::SColor(0xffffffff));
+            float scale = SelectedEntity->getCollisionSize() * 1.5f / 25.0f;
+            Selector->drawScaled(position, scale, ox::video::SColor(0xffffffff));
         }
         else
         {
@@ -4121,8 +4121,8 @@ void CPlayState::render()
                 entity::CEntity* selected = (entity::CEntity*)(*it)->Entity;
                 ox::core::CPosition2d<float> position(selected->getPosition().X - ViewPosition.X,
                     selected->getPosition().Y - ViewPosition.Y);
-                Selector->drawScaled(position, selected->getCollisionSize() * 1.5f / 25.0f,
-                    ox::video::SColor(0xffffffff));
+                float scale = selected->getCollisionSize() * 1.5f / 25.0f;
+                Selector->drawScaled(position, scale, ox::video::SColor(0xffffffff));
             }
         }
     }
@@ -4152,7 +4152,7 @@ void CPlayState::render()
         game::gp_world->renderEdgeShades(ViewPosition);
 
     // Blacks out the screen beyond the edges of the field.
-    const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
+    ox::core::CRect<float> field = game::gp_world->getVisibleGameFieldSize();
     if (ScreenSizeF.Width + ViewPosition.X > field.LowerRightCorner.X)
         Driver->draw2DRectangle(ox::video::SColor(0xff000000),
             ox::core::CRect<int>((int)(field.LowerRightCorner.X - ViewPosition.X), 0, ScreenSize.Width,
