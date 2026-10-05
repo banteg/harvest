@@ -399,10 +399,11 @@ void CShuttleRaceState::render()
             }
 
         if (Sprites[SPRITE_LOGO])
-            Sprites[SPRITE_LOGO]->draw(
-                ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X - (int)ViewPositions[i].X + 1673,
-                    viewPort.UpperLeftCorner.Y - (int)ViewPositions[i].Y - 856),
-                0, ox::video::SColor(0xa0ffffff));
+        {
+            ox::core::CPosition2d<int> logoPosition(viewPort.UpperLeftCorner.X - (int)ViewPositions[i].X + 1673,
+                viewPort.UpperLeftCorner.Y - (int)ViewPositions[i].Y - 856);
+            Sprites[SPRITE_LOGO]->draw(logoPosition, 0, ox::video::SColor(0xa0ffffff));
+        }
 
         if (entity::gp_entityManager)
         {
@@ -410,8 +411,7 @@ void CShuttleRaceState::render()
             {
                 // Two beam stubs: towards the next checkpoint, and from it towards the one after.
                 const ox::core::CVector3d<float>& shuttlePosition = Shuttles[i]->getPosition();
-                GuideBeam.Start.X = shuttlePosition.X;
-                GuideBeam.Start.Y = shuttlePosition.Y;
+                GuideBeam.Start = ox::core::CPosition2d<float>(shuttlePosition.X, shuttlePosition.Y);
                 GuideBeam.End = entity::LAP_CHECKPOINTS[Shuttles[i]->getNextCheckPoint()];
                 float angle = ox::core::CMath::getAngleIY(GuideBeam.Start, GuideBeam.End);
                 GuideBeam.End.X = GuideBeam.Start.X + cos(angle) * 125.0;

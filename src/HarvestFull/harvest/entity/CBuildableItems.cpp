@@ -174,7 +174,6 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
                 delete localization;
         }
     }
-    unsigned int localizationCount = localizations.size();
 
     for (int i = 0; i < buildingFiles->getFileCount(); ++i)
     {
@@ -213,7 +212,7 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
                     ox::core::CString<wchar_t> description;
                     block->getAttribute(L"name", name);
                     block->getAttribute(L"description", description);
-                    for (unsigned int k = 0; k < localizationCount; ++k)
+                    for (unsigned int k = 0; k < localizations.size(); ++k)
                     {
                         ox::game::CConfigBlock* text = localizations[k]->getBlock(blockName);
                         if (text && text->attributeExists(L"name") == true &&
@@ -238,7 +237,7 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
             delete config;
     }
 
-    for (unsigned int i = 0; i < localizationCount; ++i)
+    for (unsigned int i = 0; i < localizations.size(); ++i)
         if (localizations[i])
             delete localizations[i];
 }
