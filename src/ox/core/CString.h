@@ -112,7 +112,7 @@ public:
             return *this;
 
         delete [] array;
-        allocated = used = other.size() + 1;
+        allocated = used = other.used;
         array = new T[used];
 
         const T* p = other.c_str();

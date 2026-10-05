@@ -149,7 +149,7 @@ public:
     void hookTextInput(const wchar_t* text);
     void hookCreativeInit(const ox::core::CString<char>& id, entity::CCreativeEntity* building);
     bool pushCreativeHooker(const char* name, int hookSet);
-    int checkCreativeHooker(const char* name, int hookSet);
+    void checkCreativeHooker(const char* name, int hookSet);
     void hookCreativeUpdate(const ox::core::CString<char>& id, entity::CCreativeEntity* building, float frameDelta);
     bool isRunningMods();
     float getThreatLevelProgress();

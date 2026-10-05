@@ -35,6 +35,27 @@ public:
             (((color >> 8) & 0xff) << 8) | (color & 0xff);
     }
 
+    //! Sets the red component, from 0 to 255.
+    void setRed(int r)
+    {
+        color = ((r & 0xff) << 16) | (((color >> 24) & 0xff) << 24) | (((color >> 8) & 0xff) << 8) |
+            (color & 0xff);
+    }
+
+    //! Sets the green component, from 0 to 255.
+    void setGreen(int g)
+    {
+        color = ((g & 0xff) << 8) | (((color >> 24) & 0xff) << 24) | (((color >> 16) & 0xff) << 16) |
+            (color & 0xff);
+    }
+
+    //! Sets the blue component, from 0 to 255.
+    void setBlue(int b)
+    {
+        color = (b & 0xff) | (((color >> 24) & 0xff) << 24) | (((color >> 16) & 0xff) << 16) |
+            (((color >> 8) & 0xff) << 8);
+    }
+
     unsigned int color;
 };
 

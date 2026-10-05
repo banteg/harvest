@@ -137,10 +137,10 @@ int harvest_findBuildings(lua_State* L)
 {
     int top = lua_gettop(L);
     ox::core::CString<char> buildingId;
-    int type;
-    if (top == 5)
+    int type = -1;
+    if (top == 1)
     {
-        buildingId = lua_tostring(L, 5);
+        buildingId = lua_tostring(L, 1);
         type = entity::gp_buildableItems->getEntityType(
             entity::gp_buildableItems->getIndexForEntityId(buildingId.c_str()));
     }
@@ -150,42 +150,37 @@ int harvest_findBuildings(lua_State* L)
         type = entity::gp_buildableItems->getEntityType(
             entity::gp_buildableItems->getIndexForEntityId(buildingId.c_str()));
     }
-    else
+    else if (top == 5)
     {
-        type = -1;
-        if (top == 1)
-        {
-            buildingId = lua_tostring(L, 1);
-            type = entity::gp_buildableItems->getEntityType(
-                entity::gp_buildableItems->getIndexForEntityId(buildingId.c_str()));
-        }
+        buildingId = lua_tostring(L, 5);
+        type = entity::gp_buildableItems->getEntityType(
+            entity::gp_buildableItems->getIndexForEntityId(buildingId.c_str()));
     }
 
-    float left, top_, right, bottom;
-    float x, y, squaredRadius;
+    float x1, y1, x2, y2;
     bool inRect, inCircle;
     if (top == 3 || top == 4)
     {
-        x = (float)lua_tonumber(L, 1);
-        y = (float)lua_tonumber(L, 2);
-        float radius = (float)lua_tonumber(L, 3);
-        squaredRadius = radius * radius;
-        inRect = false;
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        x2 *= x2;
         inCircle = true;
+        inRect = false;
+    }
+    else if (top == 5)
+    {
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        y2 = (float)lua_tonumber(L, 4);
+        inCircle = false;
+        inRect = true;
     }
     else
     {
-        if (top == 5)
-        {
-            left = (float)lua_tonumber(L, 1);
-            top_ = (float)lua_tonumber(L, 2);
-            right = (float)lua_tonumber(L, 3);
-            bottom = (float)lua_tonumber(L, 4);
-            inRect = true;
-        }
-        else
-            inRect = false;
         inCircle = false;
+        inRect = false;
     }
 
     if (!entity::gp_entityManager)
@@ -196,34 +191,31 @@ int harvest_findBuildings(lua_State* L)
     int index = 1;
     for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
     {
-        entity::CEntity* building = (entity::CEntity*)*it;
-        if (building->getEntityType() == 5)
-            continue;
-        if (type >= 0)
+        if (((entity::CEntity*)*it)->getEntityType() != 5)
         {
-            if (type != building->getEntityType())
-                continue;
-            if (type == 16 && buildingId != ox::core::CString<char>(((entity::CCreativeEntity*)building)->getBuildingId()))
-                continue;
+            if (type < 0 || (type == ((entity::CEntity*)*it)->getEntityType() &&
+                (type != 16 || buildingId == ox::core::CString<char>(((entity::CCreativeEntity*)*it)->getBuildingId()))))
+            {
+                if (inRect)
+                {
+                    const ox::core::CVector3d<float>& position = (*it)->getPosition();
+                    if (x1 > position.X || position.X > x2 || y1 > position.Y || position.Y > y2)
+                        continue;
+                }
+                if (inCircle)
+                {
+                    const ox::core::CVector3d<float>& position = (*it)->getPosition();
+                    float dx = position.X - x1;
+                    float dy = position.Y - y1;
+                    if (dx * dx + dy * dy > x2)
+                        continue;
+                }
+                lua_pushnumber(L, index);
+                Lunar<entity::CBuildingLuaInfo>::push(L, ((entity::CBuildingEntity*)*it)->getLuaInfo());
+                lua_rawset(L, -3);
+                ++index;
+            }
         }
-        if (inRect)
-        {
-            const ox::core::CVector3d<float>& position = building->getPosition();
-            if (left > position.X || position.X > right || top_ > position.Y || position.Y > bottom)
-                continue;
-        }
-        if (inCircle)
-        {
-            const ox::core::CVector3d<float>& position = building->getPosition();
-            float dx = position.X - x;
-            float dy = position.Y - y;
-            if (dx * dx + dy * dy > squaredRadius)
-                continue;
-        }
-        lua_pushnumber(L, index);
-        Lunar<entity::CBuildingLuaInfo>::push(L, ((entity::CBuildingEntity*)building)->getLuaInfo());
-        lua_rawset(L, -3);
-        ++index;
     }
     return 1;
 }
@@ -752,43 +744,37 @@ int harvest_renderSpriteState(lua_State* L)
     if (top >= 3)
     {
         int index = lua_tointeger(L, 1);
-        float x = (float)lua_tonumber(L, 2);
-        float y = (float)lua_tonumber(L, 3);
-        float z = 0;
-        float scale;
-        float rotation = 0;
-        ox::video::SColor color;
+        lua_Number x = lua_tonumber(L, 2);
+        lua_Number y = lua_tonumber(L, 3);
+        float z = 0.0f;
+        float scale = 1.0f;
+        float rotation = 0.0f;
+        ox::video::SColor color(0xffffffff);
         if (top >= 4)
-            z = (float)lua_tonumber(L, 4);
-        if (top >= 5)
         {
-            scale = (float)lua_tonumber(L, 5);
-            if (top >= 6)
-                rotation = (float)lua_tonumber(L, 6);
-            else
-                rotation = 0;
-            color = 0xffffffff;
-            if (top >= 7)
+            z = (float)lua_tonumber(L, 4);
+            if (top >= 5)
             {
-                int alpha = lua_tointeger(L, 7);
-                if (top >= 10)
+                scale = (float)lua_tonumber(L, 5);
+                if (top >= 6)
                 {
-                    int red = lua_tointeger(L, 8);
-                    int green = lua_tointeger(L, 9);
-                    int blue = lua_tointeger(L, 10);
-                    color = ox::video::SColor(alpha, red, green, blue);
+                    rotation = (float)lua_tonumber(L, 6);
+                    if (top >= 7)
+                    {
+                        color.setAlpha(lua_tointeger(L, 7));
+                        if (top >= 10)
+                        {
+                            color.setRed(lua_tointeger(L, 8));
+                            color.setGreen(lua_tointeger(L, 9));
+                            color.setBlue(lua_tointeger(L, 10));
+                        }
+                    }
                 }
-                else
-                    color = ox::video::SColor(alpha, 255, 255, 255);
             }
         }
-        else
-        {
-            color = 0xffffffff;
-            scale = 1.0f;
-        }
-        entity::gp_entityManager->appendEntity(new entity::CSpecialEffectEntity(x, y, z,
-            gp_luaManager->getSpriteState(index), scale, rotation, color), 4);
+        entity::CSpecialEffectEntity* effect = new entity::CSpecialEffectEntity((float)x, (float)y, z,
+            gp_luaManager->getSpriteState(index), scale, rotation, color);
+        entity::gp_entityManager->appendEntity(effect, 4);
     }
     return 0;
 }
@@ -1292,7 +1278,8 @@ int harvest_removeMinerals(lua_State* L)
     }
     case 1:
     {
-        entity::CEntity* minerals = (entity::CEntity*)entity::gp_entityManager->locateEntity(lua_tointeger(L, 1), 0);
+        int id = lua_tointeger(L, 1);
+        entity::CEntity* minerals = (entity::CEntity*)entity::gp_entityManager->locateEntity(id, 0);
         if (minerals && minerals->getEntityType() == 5)
             minerals->killEntity();
         break;
@@ -1311,6 +1298,7 @@ int harvest_removeMinerals(lua_State* L)
         float x = (float)lua_tonumber(L, 1);
         float y = (float)lua_tonumber(L, 2);
         float radius = (float)lua_tonumber(L, 3);
+        radius *= radius;
         const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
         {
@@ -1318,7 +1306,7 @@ int harvest_removeMinerals(lua_State* L)
             {
                 float dx = (*it)->getPosition().X - x;
                 float dy = (*it)->getPosition().Y - y;
-                if (dx * dx + dy * dy < radius * radius)
+                if (dx * dx + dy * dy < radius)
                     (*it)->killEntity();
             }
         }
@@ -1330,6 +1318,7 @@ int harvest_removeMinerals(lua_State* L)
         float y = (float)lua_tonumber(L, 2);
         float radius = (float)lua_tonumber(L, 3);
         int amount = lua_tointeger(L, 4);
+        radius *= radius;
         const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
         {
@@ -1337,7 +1326,7 @@ int harvest_removeMinerals(lua_State* L)
             {
                 float dx = (*it)->getPosition().X - x;
                 float dy = (*it)->getPosition().Y - y;
-                if (dx * dx + dy * dy < radius * radius)
+                if (dx * dx + dy * dy < radius)
                     ((entity::CMineralsEntity*)*it)->withdrawAmount(amount);
             }
         }
@@ -1445,7 +1434,7 @@ int harvest_drawLine(lua_State* L)
             int red = lua_tointeger(L, 5);
             int green = lua_tointeger(L, 6);
             int blue = lua_tointeger(L, 7);
-            color = ox::video::SColor(255, red, green, blue);
+            color = (blue & 0xff) | ((green & 0xff) << 8) | ((red & 0xff) << 16) | 0xff000000;
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1609,20 +1598,20 @@ void CLuaManager::includeMod(const SLuaMod& mod)
     ox::core::CString<char> filename = mod.Path;
     filename.append(ox::core::CString<char>("main.lua"));
     ox::io::IReadFile* file = Device->getFileSystem()->createAndOpenFile(filename.c_str());
-    if (!file)
-        return;
-
-    ox::core::CString<char> script = "-- FILE@";
-    script.append(filename);
-    script.append(ox::core::CString<char>("\n"));
-    ox::core::CString<char> content;
-    ox::io::CHelpIO::readString(file, content);
-    script.append(content);
-    if (luaL_loadstring(L, script.c_str()) == 0 && lua_pcall(L, 0, LUA_MULTRET, 0) == 0)
-        RunningMods.push_back(mod);
-    else
-        CompilerErrors.push_back(ox::core::CString<char>(lua_tostring(L, -1)));
-    file->drop();
+    if (file)
+    {
+        ox::core::CString<char> script = "-- FILE@";
+        script.append(filename);
+        script.append(ox::core::CString<char>("\n"));
+        ox::core::CString<char> content;
+        ox::io::CHelpIO::readString(file, content);
+        script.append(content);
+        if (luaL_loadstring(L, script.c_str()) == 0 && lua_pcall(L, 0, LUA_MULTRET, 0) == 0)
+            RunningMods.push_back(mod);
+        else
+            CompilerErrors.push_back(ox::core::CString<char>(lua_tostring(L, -1)));
+        file->drop();
+    }
 }
 
 void CLuaManager::initLuaByScriptList()
@@ -1661,8 +1650,7 @@ bool CLuaManager::initLuaBySaveFile(ox::io::IReadFile* file, int version)
     for (int i = 0; i < numValues; ++i)
     {
         SLuaFilePair pair;
-        CLuaFileValues::readLuaAttribute(file, pair.Key, version);
-        CLuaFileValues::readLuaAttribute(file, pair.Value, version);
+        CLuaFileValues::readLuaFilePair(file, pair, version);
         values.push_back(pair);
     }
 
@@ -1930,7 +1918,7 @@ void CLuaManager::postStringAsInfo(const ox::core::CString<char>& text)
     event.UserEvent.UserData1 = 33;
     event.UserEvent.UserData2 = 0;
     event.UserEvent.UserData3 = 0;
-    event.UserEvent.UserPointer = &message;
+    event.UserEvent.UserPointer = (void*)message.c_str();
     if (gp_luaManager)
         gp_luaManager->EventReceiver->OnEvent(event);
     else
@@ -2194,7 +2182,7 @@ bool CLuaManager::pushCreativeHooker(const char* name, int hookSet)
     return true;
 }
 
-int CLuaManager::checkCreativeHooker(const char* name, int hookSet)
+void CLuaManager::checkCreativeHooker(const char* name, int hookSet)
 {
     int result = lua_tointeger(L, -1);
     ox::TArray<SCreativeHook>& hooks = CreativeHooks[hookSet];
@@ -2203,10 +2191,9 @@ int CLuaManager::checkCreativeHooker(const char* name, int hookSet)
         if (hooks[i].Name == ox::core::CString<char>(name))
         {
             hooks[i].State = result ? 2 : 1;
-            break;
+            return;
         }
     }
-    return result;
 }
 
 void CLuaManager::hookCreativeUpdate(const ox::core::CString<char>& id, entity::CCreativeEntity* building,
