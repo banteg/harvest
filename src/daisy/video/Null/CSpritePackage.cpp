@@ -16,6 +16,103 @@
 namespace daisy {
 namespace video {
 
+bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
+{
+    unsigned int version = ox::io::CHelpIO::readInt(file);
+    if (version > 3)
+        return false;
+
+    TextureSize = ox::io::CHelpIO::readInt(file);
+    TextureFormat = ox::io::CHelpIO::readInt(file);
+    TextureCount = ox::io::CHelpIO::readInt(file);
+    SpriteCount = ox::io::CHelpIO::readInt(file);
+    BundleCount = ox::io::CHelpIO::readInt(file);
+    AnimationCount = ox::io::CHelpIO::readInt(file);
+    HeaderSize = SPRITE_PACKAGE_HEADER_SIZE;
+    TextureDataSize = TextureSize * TextureSize;
+    switch (TextureFormat)
+    {
+    case 0:
+        TextureDataSize *= 3;
+        break;
+    case 1:
+        TextureDataSize *= 4;
+        break;
+    }
+
+    for (int i = 0; i < TextureCount; ++i)
+    {
+        ox::core::CString<char> name(i);
+        name.append(ox::core::CString<char>("#"));
+        name.append(ox::core::CString<char>(file->getFileName()));
+        TextureNames.push_back(name);
+        TextureLoaded.push_back(0);
+    }
+    Filename = filename;
+
+    file->seek(TextureCount * TextureDataSize + HeaderSize);
+    for (int i = 0; i < SpriteCount; ++i)
+    {
+        SSpriteImage image;
+        readSprite(image, file, version);
+        Sprites.push_back(image);
+    }
+    std::sort(Sprites.begin(), Sprites.end(), SImageIdSortFunctor<SSpriteImage>());
+
+    for (int i = 0; i < BundleCount; ++i)
+    {
+        SSpriteBundle bundle;
+        readSpriteHeader(bundle.Header, file, version);
+        bundle.Columns = ox::io::CHelpIO::readInt(file);
+        int count = ox::io::CHelpIO::readInt(file);
+        for (int j = count; j > 0; --j)
+        {
+            SSpriteImage image;
+            readSprite(image, file, version);
+            bundle.Images.push_back(image);
+        }
+        Bundles.push_back(bundle);
+    }
+    std::sort(Bundles.begin(), Bundles.end(), SImageIdSortFunctor<SSpriteBundle>());
+
+    for (int i = 0; i < AnimationCount; ++i)
+    {
+        SAnimationData animation;
+        char name[256];
+        char* p = name;
+        char c = 0;
+        do
+        {
+            file->read(&c, 1);
+            *p++ = c;
+        } while (c);
+        animation.Name = name;
+        animation.Id = atoi(animation.Name.c_str());
+
+        int count = ox::io::CHelpIO::readInt(file);
+        int value;
+        for (int j = count; j > 0; --j)
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Frames.push_back(value);
+        }
+        for (int j = count; j > 0; --j)
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Jumps.push_back(value);
+        }
+        for (int j = count; j > 0; --j)
+        {
+            value = ox::io::CHelpIO::readInt(file);
+            animation.Durations.push_back(value);
+        }
+
+        Animations.push_back(animation);
+        AnimationNames.push_back(animation.Name);
+    }
+    return true;
+}
+
 CSpritePackage::CSpritePackage(ox::video::IVideoDriver* driver, bool keepStates)
     : TextureDataSize(0), HeaderSize(0), KeepStates(keepStates), StatesSorted(false)
 {
@@ -248,103 +345,6 @@ ox::video::ITexture* CSpritePackage::readTexture(int index)
 ox::video::ITexture* CSpritePackage::getTexture(const ox::core::CString<char>& name)
 {
     return Driver->getTexture(name.c_str());
-}
-
-bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
-{
-    unsigned int version = ox::io::CHelpIO::readInt(file);
-    if (version > 3)
-        return false;
-
-    TextureSize = ox::io::CHelpIO::readInt(file);
-    TextureFormat = ox::io::CHelpIO::readInt(file);
-    TextureCount = ox::io::CHelpIO::readInt(file);
-    SpriteCount = ox::io::CHelpIO::readInt(file);
-    BundleCount = ox::io::CHelpIO::readInt(file);
-    AnimationCount = ox::io::CHelpIO::readInt(file);
-    HeaderSize = SPRITE_PACKAGE_HEADER_SIZE;
-    TextureDataSize = TextureSize * TextureSize;
-    switch (TextureFormat)
-    {
-    case 0:
-        TextureDataSize *= 3;
-        break;
-    case 1:
-        TextureDataSize *= 4;
-        break;
-    }
-
-    for (int i = 0; i < TextureCount; ++i)
-    {
-        ox::core::CString<char> name(i);
-        name.append(ox::core::CString<char>("#"));
-        name.append(ox::core::CString<char>(file->getFileName()));
-        TextureNames.push_back(name);
-        TextureLoaded.push_back(0);
-    }
-    Filename = filename;
-
-    file->seek(TextureCount * TextureDataSize + HeaderSize);
-    for (int i = 0; i < SpriteCount; ++i)
-    {
-        SSpriteImage image;
-        readSprite(image, file, version);
-        Sprites.push_back(image);
-    }
-    std::sort(Sprites.begin(), Sprites.end(), SImageIdSortFunctor<SSpriteImage>());
-
-    for (int i = 0; i < BundleCount; ++i)
-    {
-        SSpriteBundle bundle;
-        readSpriteHeader(bundle.Header, file, version);
-        bundle.Columns = ox::io::CHelpIO::readInt(file);
-        int count = ox::io::CHelpIO::readInt(file);
-        for (int j = count; j > 0; --j)
-        {
-            SSpriteImage image;
-            readSprite(image, file, version);
-            bundle.Images.push_back(image);
-        }
-        Bundles.push_back(bundle);
-    }
-    std::sort(Bundles.begin(), Bundles.end(), SImageIdSortFunctor<SSpriteBundle>());
-
-    for (int i = 0; i < AnimationCount; ++i)
-    {
-        SAnimationData animation;
-        char name[256];
-        char* p = name;
-        char c = 0;
-        do
-        {
-            file->read(&c, 1);
-            *p++ = c;
-        } while (c);
-        animation.Name = name;
-        animation.Id = atoi(animation.Name.c_str());
-
-        int count = ox::io::CHelpIO::readInt(file);
-        int value;
-        for (int j = count; j > 0; --j)
-        {
-            value = ox::io::CHelpIO::readInt(file);
-            animation.Frames.push_back(value);
-        }
-        for (int j = count; j > 0; --j)
-        {
-            value = ox::io::CHelpIO::readInt(file);
-            animation.Jumps.push_back(value);
-        }
-        for (int j = count; j > 0; --j)
-        {
-            value = ox::io::CHelpIO::readInt(file);
-            animation.Durations.push_back(value);
-        }
-
-        Animations.push_back(animation);
-        AnimationNames.push_back(animation.Name);
-    }
-    return true;
 }
 
 void CSpritePackage::readSprite(SSpriteImage& image, ox::io::IReadFile* file, int version)
