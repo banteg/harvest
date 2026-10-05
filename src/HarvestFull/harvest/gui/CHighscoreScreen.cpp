@@ -341,19 +341,22 @@ ox::core::CString<wchar_t> CHighscoreScreen::createUCS2FromBase64UTF2(const ox::
     ox::core::CString<wchar_t> result = L"";
     for (int i = 0; i < file->getSize(); ++i)
     {
-        if ((file->getData()[i] & 0xe0) == 0xc0 && i < file->getSize() - 1)
+        // UTF-8 sequences of up to three bytes, decoded to UCS-2
+        if (((unsigned char)file->getData()[i] & 0xe0) == 0xc0 && i < file->getSize() - 1)
         {
-            result.append((wchar_t)((file->getData()[i] & 0x1f) << 6 | (file->getData()[i + 1] & 0x3f)));
+            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 1] & 0x3f) +
+                (((unsigned char)file->getData()[i] & 0x1f) << 6)));
             ++i;
         }
-        else if ((file->getData()[i] & 0xf0) == 0xe0 && i < file->getSize() - 2)
+        else if (((unsigned char)file->getData()[i] & 0xf0) == 0xe0 && i < file->getSize() - 2)
         {
-            result.append((wchar_t)((file->getData()[i] & 0xf) << 12 | (file->getData()[i + 1] & 0x3f) << 6 |
-                (file->getData()[i + 2] & 0x3f)));
+            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 2] & 0x3f) +
+                (((unsigned char)file->getData()[i + 1] & 0x3f) << 6) +
+                (((unsigned char)file->getData()[i] & 0xf) << 12)));
             i += 2;
         }
         else if (file->getData()[i])
-            result.append((wchar_t)file->getData()[i]);
+            result.append((wchar_t)(unsigned char)file->getData()[i]);
     }
     delete file;
     return result;
@@ -719,18 +722,6 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         case ox::gui::EGET_ELEMENT_DRAWN:
             switch (id)
             {
-            case ID_LIST_BUTTON + 7:
-                if (Sprites[SPRITE_MODE_BUTTON + GameMode])
-                {
-                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
-                    Sprites[SPRITE_MODE_BUTTON + GameMode]->draw(ox::core::CPosition2d<int>(
-                        (rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2 -
-                            SpriteSizes[SPRITE_MODE_BUTTON + GameMode].X / 2,
-                        (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2 -
-                            SpriteSizes[SPRITE_MODE_BUTTON + GameMode].Y / 2), 0, 0xffffffff);
-                }
-                result = true;
-                break;
             case ID_TYPE_FRAME:
                 if (TypeFrame && Sprites[SPRITE_TOP_BACKGROUND])
                     Sprites[SPRITE_TOP_BACKGROUND]->draw(TypeFrame->getAbsolutePosition().UpperLeftCorner, 0,
@@ -791,6 +782,21 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         0xffffffff);
                 result = true;
                 break;
+            case ID_LIST_BUTTON + 7:
+            {
+                int sprite = SPRITE_MODE_BUTTON + GameMode;
+                if (Sprites[sprite])
+                {
+                    ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
+                    ox::core::CPosition2d<int> position((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
+                        (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
+                    position.X -= SpriteSizes[sprite].X / 2;
+                    position.Y -= SpriteSizes[sprite].Y / 2;
+                    Sprites[sprite]->draw(position, 0, 0xffffffff);
+                }
+                result = true;
+                break;
+            }
             default:
                 if (id >= ID_PROMOTE && id < ID_PROMOTE + 32)
                 {
@@ -805,39 +811,6 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         case ox::gui::EGET_BUTTON_CLICKED:
             switch (id)
             {
-            case ID_LIST_BUTTON + 3:
-                SortMode = (SortMode == 2) | 2;
-                loadHighscores(0);
-                result = true;
-                break;
-            case ID_LIST_BUTTON + 4:
-            {
-                ox::gui::IGUILayout* popup = createNewPopupWindow();
-                GUIEnvironment->addStaticText(
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:selectPlanet").c_str(), "br center",
-                    popup, 0, -1);
-                PlanetList = GUIEnvironment->addListBox(ox::core::CRect<int>(0, 0, 250, 100), popup, -1, false);
-                PlanetList->LayoutFlags = "br left";
-                PlanetList->setSelectable(true);
-                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets0").c_str(), 0,
-                    0xffffffff, true, true);
-                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets1").c_str(), 0,
-                    0xffffffff, true, true);
-                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets2").c_str(), 0,
-                    0xffffffff, true, true);
-                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets3").c_str(), 0,
-                    0xffffffff, true, true);
-                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets4").c_str(), 0,
-                    0xffffffff, true, true);
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
-                    "br right";
-                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_PLANET,
-                    settings::gp_systemConfig->getLocalizedText(L"highscores:apply").c_str());
-                sortAndMovePopup(popup, event.GUIEvent.Caller, false);
-                result = true;
-                break;
-            }
             case ID_BACK:
                 setVisible(false);
                 sendCustomEvent(ECE_CONTINUE_GAME);
@@ -890,6 +863,39 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 loadHighscores(0);
                 result = true;
                 break;
+            case ID_LIST_BUTTON + 3:
+                SortMode = (SortMode == 2) | 2;
+                loadHighscores(0);
+                result = true;
+                break;
+            case ID_LIST_BUTTON + 4:
+            {
+                ox::gui::IGUILayout* popup = createNewPopupWindow();
+                GUIEnvironment->addStaticText(
+                    settings::gp_systemConfig->getLocalizedText(L"highscores:selectPlanet").c_str(), "br center",
+                    popup, 0, -1);
+                PlanetList = GUIEnvironment->addListBox(ox::core::CRect<int>(0, 0, 250, 100), popup, -1, false);
+                PlanetList->LayoutFlags = "br left";
+                PlanetList->setSelectable(true);
+                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets0").c_str(), 0,
+                    0xffffffff, true, true);
+                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets1").c_str(), 0,
+                    0xffffffff, true, true);
+                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets2").c_str(), 0,
+                    0xffffffff, true, true);
+                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets3").c_str(), 0,
+                    0xffffffff, true, true);
+                PlanetList->addTextItem(settings::gp_systemConfig->getLocalizedText(L"highscores:planets4").c_str(), 0,
+                    0xffffffff, true, true);
+                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_CANCEL,
+                    settings::gp_systemConfig->getLocalizedText(L"highscores:cancel").c_str())->LayoutFlags =
+                    "br right";
+                GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 100, 20), popup, ID_POPUP_PLANET,
+                    settings::gp_systemConfig->getLocalizedText(L"highscores:apply").c_str());
+                sortAndMovePopup(popup, event.GUIEvent.Caller, false);
+                result = true;
+                break;
+            }
             case ID_LIST_BUTTON + 5:
             {
                 ox::gui::IGUILayout* popup = createNewPopupWindow();
@@ -1051,13 +1057,14 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         break;
     }
     case ox::event::EET_MOUSE_INPUT_EVENT:
+    {
+        ox::core::CPosition2d<int> mouse(event.MouseInput.X, event.MouseInput.Y);
         switch (event.MouseInput.Event)
         {
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
             for (int i = 0; i < 4; ++i)
             {
-                if (TypeButtons[i] && TypeButtons[i]->getAbsolutePosition().isPointInside(
-                    ox::core::CPosition2d<int>(event.MouseInput.X, event.MouseInput.Y)))
+                if (TypeButtons[i] && TypeButtons[i]->getAbsolutePosition().isPointInside(mouse))
                 {
                     if (i == 3)
                         loadHighscores(0);
@@ -1075,6 +1082,7 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
             break;
         }
         break;
+    }
     case ox::event::EET_NETWORK_EVENT:
         if (event.NetworkEvent.Type == ox::event::ENET_HTTP_DONE)
         {
