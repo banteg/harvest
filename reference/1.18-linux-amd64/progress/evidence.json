@@ -17,8 +17,8 @@
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "411626b6725112e69ef75337267cff12a8032d39bb50b5838d59625f57af4ce8",
-    "config/1.18-linux-amd64/units.toml": "39fdfaea1b70fd4271d64d4a4941d90b2a050001bf25dfb4db3678bee3c46e40"
+    "config/1.18-linux-amd64/symbols.tsv": "d7712b283ae5097f09f0319ae20c549757bfb90064dccdab794f18177886feca",
+    "config/1.18-linux-amd64/units.toml": "ba3c28d3114fea9184e3c497d8a84714f7b3c1a7c66bc362e21b9e49d8219ae9"
   },
   "units": [
     {
@@ -9460,8 +9460,9 @@
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -11959,11 +11960,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -13153,11 +13154,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -13938,11 +13939,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -14730,11 +14731,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -15554,11 +15555,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -16298,11 +16299,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -17583,11 +17584,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -19004,11 +19005,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -19891,11 +19892,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -20344,11 +20345,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -32621,11 +32622,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -37387,11 +37388,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -48958,8 +48959,9 @@
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -55544,11 +55546,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -58167,11 +58169,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -59509,11 +59511,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -60888,11 +60890,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -63713,17 +63715,17 @@
           "/out/HarvestFull__harvest__game__CWorld.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CWorld.cpp": "1409dd0e75506cd0f17cc557942d70310eb5b08304547dd62dd5d080c11c9fa2",
+          "src/HarvestFull/harvest/game/CWorld.cpp": "7d7206458b83b17855081204d3c96c786ca7e4a46de237d74f6cde2c85093cf8",
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -64760,11 +64762,11 @@
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -70170,11 +70172,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -79053,11 +79055,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -82399,11 +82401,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -83329,17 +83331,17 @@
           "/out/HarvestFull__harvest__states__CIntroState.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/states/CIntroState.cpp": "9ffaa2ebb2e71d84176abcef7c6e7965803a7ac433bf534fdf51fbc05d057268",
+          "src/HarvestFull/harvest/states/CIntroState.cpp": "77bf9e3eb5298da3cc1456aac880dd872e4fa183ab75dffe93d670858885917b",
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -83362,7 +83364,7 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/HarvestFull/harvest/states/CIntroState.h": "497fdea6ee09a3264f19b7a2b5f70f04385758313802dbd5c3dd588ead95d1f8",
+          "src/HarvestFull/harvest/states/CIntroState.h": "e4d49f8cb427bb4306cf6ec27201930c1cc45d20789f696b51135678e292ae5c",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
@@ -83762,8 +83764,9 @@
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -83771,7 +83774,6 @@
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 114,
@@ -84187,11 +84189,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -84287,57 +84289,20 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CMenuInfoDialog.cpp",
-      "object_sha256": "15fc40155924d6187b4b0afaa768d59f146b0f6852df56691ebc13c72262be9b",
+      "object_sha256": "c73474e0c643d7c0dd15168f0fb257ecb82efa7231047560b24f090bba009b00",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 2332,
+          "size": 9109,
           "placement": "explicit",
           "exact": false,
           "address": "0x473c00",
-          "first_difference": 722,
+          "first_difference": 8482,
           "differing_bytes": 255,
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
-              "known": "0x475b50",
-              "placed": "0x473d00"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-              "known": "0x475cb0",
-              "placed": "0x473e60"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogD1Ev",
-              "known": "0x473dd0",
-              "placed": "0x474150"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogD2Ev",
-              "known": "0x473ea0",
-              "placed": "0x474220"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogC2EPN2ox9IOxDeviceE",
-              "known": "0x474020",
-              "placed": "0x4742f0"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
-              "known": "0x473d00",
-              "placed": "0x4743a0"
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
-              "known": "0x473f70",
-              "placed": "0x474470"
-            }
-          ],
           "bad_references": [
             {
-              "offset": 1080,
+              "offset": 8840,
               "type": 2,
               "symbol": ".LC0",
               "addend": -4,
@@ -84345,7 +84310,7 @@
               "matches": false
             },
             {
-              "offset": 1103,
+              "offset": 8863,
               "type": 2,
               "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
               "addend": -4,
@@ -84354,7 +84319,7 @@
               "matches": false
             },
             {
-              "offset": 1110,
+              "offset": 8870,
               "type": 2,
               "symbol": "_ZN2ox5event17gp_subscriberListE",
               "addend": -4,
@@ -84363,7 +84328,7 @@
               "matches": false
             },
             {
-              "offset": 1154,
+              "offset": 8914,
               "type": 2,
               "symbol": "_ZN7harvest12g_gamePlanetE",
               "addend": -8,
@@ -84372,7 +84337,7 @@
               "matches": false
             },
             {
-              "offset": 1167,
+              "offset": 8927,
               "type": 2,
               "symbol": "_ZN7harvest10g_gameModeE",
               "addend": -8,
@@ -84381,23 +84346,23 @@
               "matches": false
             },
             {
-              "offset": 1238,
+              "offset": 8998,
               "type": 10,
               "symbol": ".rodata.str4.4",
-              "addend": 24,
+              "addend": 76,
               "reason": "unmapped or truncated range: 0xffffffff+0x18",
               "matches": false
             },
             {
-              "offset": 1315,
+              "offset": 9075,
               "type": 10,
               "symbol": ".rodata.str4.4",
-              "addend": 8,
+              "addend": 60,
               "reason": "unmapped or truncated range: 0xffb90000+0x10",
               "matches": false
             }
           ],
-          "references": 54,
+          "references": 215,
           "functions": [
             {
               "symbol": "_ZN7harvest3gui15CMenuInfoDialog6updateEf",
@@ -84424,20 +84389,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
-              "address": "0x475b50",
-              "size": 341,
+              "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
+              "address": "0x473d00",
+              "size": 206,
               "fde": true,
               "global": true,
               "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-              "address": "0x475cb0",
-              "size": 741,
-              "fde": false,
-              "global": true,
-              "exact": false
             },
             {
               "symbol": "_ZN7harvest3gui15CMenuInfoDialogD1Ev",
@@ -84456,6 +84413,14 @@
               "exact": true
             },
             {
+              "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
+              "address": "0x473f70",
+              "size": 172,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
               "symbol": "_ZN7harvest3gui15CMenuInfoDialogC2EPN2ox9IOxDeviceE",
               "address": "0x474020",
               "size": 172,
@@ -84464,20 +84429,28 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
-              "address": "0x473d00",
-              "size": 206,
+              "symbol": "_ZN7harvest3gui15CMenuInfoDialog14refillMainViewEi",
+              "address": "0x4740d0",
+              "size": 6771,
               "fde": true,
               "global": true,
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
-              "address": "0x473f70",
-              "size": 172,
+              "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
+              "address": "0x475b50",
+              "size": 341,
               "fde": true,
               "global": true,
               "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
+              "address": "0x475cb0",
+              "size": 741,
+              "fde": false,
+              "global": true,
+              "exact": false
             }
           ],
           "data_ranges": [
@@ -84489,6 +84462,316 @@
             {
               "address": "0x5ffde8",
               "size": 25,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f6cd8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f6cd8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f6cd8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffed8",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffeb0",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffeb0",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffeb0",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f6cd8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f60e8",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffeb0",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600148",
+              "size": 120,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6001c0",
+              "size": 100,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600228",
+              "size": 92,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600288",
+              "size": 104,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0638",
+              "size": 50,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a88",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a62",
+              "size": 7,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0404",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f2d30",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0638",
+              "size": 50,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffe1d",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a70",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a70",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a69",
+              "size": 10,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fe5c8",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a69",
+              "size": 10,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fe5c8",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6002f0",
+              "size": 1232,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a62",
+              "size": 7,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a20",
+              "size": 55,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffe3a",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a70",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a20",
+              "size": 55,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffe4c",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9ae8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a69",
+              "size": 10,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6007c0",
+              "size": 1236,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a62",
+              "size": 7,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a20",
+              "size": 55,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffe5e",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a70",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a20",
+              "size": 55,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ffe70",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9ae8",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a69",
+              "size": 10,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fff30",
+              "size": 120,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fffa8",
+              "size": 100,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600010",
+              "size": 116,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600088",
+              "size": 96,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6000e8",
+              "size": 92,
               "kind": "merged string"
             },
             {
@@ -84530,6 +84813,57 @@
               "address": "0x86ba38",
               "size": 8,
               "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwEaSERKS2_",
+          "size": 105,
+          "placement": "symbol: _ZN2ox4core7CStringIwEaSERKS2_",
+          "exact": true,
+          "address": "0x472bd0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
+              "address": "0x472bd0",
+              "size": 105,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIwED1Ev",
+          "exact": true,
+          "address": "0x409c40",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "address": "0x409c40",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 317,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x65c27c",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x65c27c",
+              "size": 317,
+              "kind": "section"
             }
           ]
         },
@@ -84594,9 +84928,7 @@
           "references": 3
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -84616,50 +84948,55 @@
           "/out/HarvestFull__harvest__gui__CMenuInfoDialog.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CMenuInfoDialog.cpp": "8e92b40facc746eaa0dffdfacdd4c2e26cdac018d59ea0640ff032c4e43eb623",
+          "src/HarvestFull/harvest/gui/CMenuInfoDialog.cpp": "83be7e456b6aca82ee81843f86570ab339e4f5ebf7e5048bed69f6e8c0761f57",
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "89ebf7ab97f091632e9d7b519932925a64779f00943c2fedb20d30a484f413e1",
+          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "8af3fb7fc4a34de7b6bdce1e083bbd27c91b3c1f05bc62a34a0f66a5acc4ad70",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/HarvestFull/harvest/CHarvestFullMain.h": "2a9bc8227fa36d9ee3201246c9b4a79857d1106950964a46bca139ecca93b21e",
           "src/ox/game/CGameMain.h": "7a549bfca06057c8909d9cf032ca009ca51ffe091d4b3e09b3dcb04f5399a0d9",
+          "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/audio/IAudioDriver.h": "d54cb1b9b347f6f85221e522c9f55ce1ae0c3d4cb8cde5006091a936a397871b",
           "src/ox/audio/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
+          "src/ox/gui/IGUIButton.h": "7a32bc8f11ac0000afc1826dfaf490712889108fe52c0c2e0de043fbcf5a50e3",
+          "src/ox/gui/IGUIElement.h": "f2c52da554c602e3a77e86879a0617336eef01c03c7fe2eaed77b97daddedf0b",
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/gui/../event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
+          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUILayout.h": "a9c0a78bb6afb9c838ffad9cdbe29c04fa877893617417793b40ccfafc4fa1d3",
-          "src/ox/gui/IGUIElement.h": "f2c52da554c602e3a77e86879a0617336eef01c03c7fe2eaed77b97daddedf0b",
-          "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f"
+          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
+          "src/ox/gui/IGUIStaticText.h": "8dc7d5b46ed18dec636f60c381acb536f77ca03021c366cec9c8e60f9372ba4e",
+          "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 117,
-        "object_sha256": "15fc40155924d6187b4b0afaa768d59f146b0f6852df56691ebc13c72262be9b"
+        "object_sha256": "c73474e0c643d7c0dd15168f0fb257ecb82efa7231047560b24f090bba009b00"
       },
-      "fuzzy_target_sha256": "098a1793600ace40ba6f2030d21124f6cf58d5aabd72744179c85713e7c3f3a2",
+      "fuzzy_target_sha256": "58df4039c4d6cd15fc0bf97b82617df08b71ca3f3598f3981b64b89a702097dc",
       "fuzzy_functions": [
         {
           "address": "0x473c00",
@@ -84680,16 +85017,10 @@
           "percent": 100.0
         },
         {
-          "address": "0x475b50",
-          "size": 341,
-          "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
+          "address": "0x473d00",
+          "size": 206,
+          "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
           "percent": 100.0
-        },
-        {
-          "address": "0x475cb0",
-          "size": 749,
-          "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-          "percent": 77.85714
         },
         {
           "address": "0x473dd0",
@@ -84704,21 +85035,45 @@
           "percent": 100.0
         },
         {
+          "address": "0x473f70",
+          "size": 172,
+          "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
+          "percent": 100.0
+        },
+        {
           "address": "0x474020",
           "size": 172,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialogC2EPN2ox9IOxDeviceE",
           "percent": 100.0
         },
         {
-          "address": "0x473d00",
-          "size": 206,
-          "symbol": "_ZN7harvest3gui15CMenuInfoDialogD0Ev",
+          "address": "0x4740d0",
+          "size": 6771,
+          "symbol": "_ZN7harvest3gui15CMenuInfoDialog14refillMainViewEi",
+          "percent": 99.81041
+        },
+        {
+          "address": "0x475b50",
+          "size": 341,
+          "symbol": "_ZN7harvest3gui15CMenuInfoDialog10setVisibleEbi",
           "percent": 100.0
         },
         {
-          "address": "0x473f70",
-          "size": 172,
-          "symbol": "_ZN7harvest3gui15CMenuInfoDialogC1EPN2ox9IOxDeviceE",
+          "address": "0x475cb0",
+          "size": 749,
+          "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
+          "percent": 77.85714
+        },
+        {
+          "address": "0x472bd0",
+          "size": 105,
+          "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c40",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIwED1Ev",
           "percent": 100.0
         }
       ]
@@ -85473,11 +85828,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -85497,7 +85852,7 @@
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/HarvestFull/harvest/settings/CProfileManager.h": "86ce1f7e3d302f61cccf7af0e502480e439ad226b956e5919b7830535a5dcba7",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/HarvestFull/harvest/states/CIntroState.h": "497fdea6ee09a3264f19b7a2b5f70f04385758313802dbd5c3dd588ead95d1f8",
+          "src/HarvestFull/harvest/states/CIntroState.h": "e4d49f8cb427bb4306cf6ec27201930c1cc45d20789f696b51135678e292ae5c",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
@@ -88047,11 +88402,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -88062,7 +88417,7 @@
           "src/ox/event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/HarvestFull/harvest/ECustomEvents.h": "a28c2a0abde7d0038dcda3638012fa245773bf81fefab0d9610851b93199d9fe",
-          "src/HarvestFull/harvest/settings/CHarvestProfile.h": "72bef6096a27b47dbd76da25c5b8f5767cc85ae165fe23ff96f1edfcd01436cf",
+          "src/HarvestFull/harvest/settings/CHarvestProfile.h": "ce63a2717c557272f68f882ec9e6b298acd13fd11ffd4245f1b880f9aa006b98",
           "src/ox/Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/HarvestFull/harvest/settings/CProfileManager.h": "86ce1f7e3d302f61cccf7af0e502480e439ad226b956e5919b7830535a5dcba7",
@@ -88086,7 +88441,7 @@
           "src/ox/gui/IGUIListBox.h": "e615a43b5599a90de1945a4202109b2d2e116ee6475cbc2ac3728f32f3f2cce2",
           "src/ox/gui/IGUIScrollBar.h": "c1747ccfdcc21dcb5904ebca819ebba0cc5cbff062b80ccd0d542c1ac7aaff19",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
-          "src/ox/gui/IGUIStaticText.h": "38686c13d3910edfb56235c9b3c323d0d56ad1451941c6e71cc08765052a4b46",
+          "src/ox/gui/IGUIStaticText.h": "8dc7d5b46ed18dec636f60c381acb536f77ca03021c366cec9c8e60f9372ba4e",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUITabControl.h": "c42cef2bb4942a96887ef850f63c2410184b39f59ee602096304dee310116102",
           "src/ox/input/KeyNames.h": "6edada3e9cdbd11a0bf05d3d3081be869015ce31b91f92c305b4365af582e4e1",
@@ -88329,11 +88684,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -88655,11 +89010,11 @@
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -88679,7 +89034,7 @@
           "src/ox/gui/../event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
-          "src/ox/gui/IGUIStaticText.h": "38686c13d3910edfb56235c9b3c323d0d56ad1451941c6e71cc08765052a4b46",
+          "src/ox/gui/IGUIStaticText.h": "8dc7d5b46ed18dec636f60c381acb536f77ca03021c366cec9c8e60f9372ba4e",
           "src/ox/gui/IGUIElement.h": "f2c52da554c602e3a77e86879a0617336eef01c03c7fe2eaed77b97daddedf0b",
           "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -90277,17 +90632,17 @@
           "/out/HarvestFull__harvest__gui__CAchievementsScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CAchievementsScreen.cpp": "b1c96327821abc95b49f976d746e2d8dddc002f45d227aa48eaaea8fd69f89ec",
+          "src/HarvestFull/harvest/gui/CAchievementsScreen.cpp": "c35480241632721cd27be6707f6d37427055b3c1c2d961c3b6ca8609ee9e6987",
           "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -90297,7 +90652,7 @@
           "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "a736e238f9ccd9849b9e247bb4631307327ec8ae4e2560607551e7a7573aa809",
           "src/ox/event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
-          "src/HarvestFull/harvest/settings/CHarvestProfile.h": "72bef6096a27b47dbd76da25c5b8f5767cc85ae165fe23ff96f1edfcd01436cf",
+          "src/HarvestFull/harvest/settings/CHarvestProfile.h": "ce63a2717c557272f68f882ec9e6b298acd13fd11ffd4245f1b880f9aa006b98",
           "src/ox/Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/HarvestFull/harvest/settings/CProfileManager.h": "86ce1f7e3d302f61cccf7af0e502480e439ad226b956e5919b7830535a5dcba7",
@@ -90321,7 +90676,7 @@
           "src/ox/gui/IGUIModalScreen.h": "c7ef9b34decb977b8129628869763d4021b198364eb3bc5860ce0adbeca333e3",
           "src/ox/gui/IGUILayout.h": "a9c0a78bb6afb9c838ffad9cdbe29c04fa877893617417793b40ccfafc4fa1d3",
           "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
-          "src/ox/gui/IGUIStaticText.h": "38686c13d3910edfb56235c9b3c323d0d56ad1451941c6e71cc08765052a4b46",
+          "src/ox/gui/IGUIStaticText.h": "8dc7d5b46ed18dec636f60c381acb536f77ca03021c366cec9c8e60f9372ba4e",
           "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
           "src/ox/gui/IGUIWindow.h": "0e65900087d69b2c7e598f95773ee1963a018599c74ef0e59caa3a329737e071",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
@@ -90456,6 +90811,911 @@
           "percent": 100.0
         }
       ]
+    },
+    {
+      "unit": "HarvestFull/harvest/gui/CPriorityScreen.cpp",
+      "object_sha256": "f68da54c3159186027d83cdbe646dae77500874f3463ff11c534f614ff2c193a",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 9430,
+          "placement": "symbol: _ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
+          "exact": false,
+          "address": "0x475fc0",
+          "first_difference": 287,
+          "differing_bytes": 1458,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen9isVisibleEv",
+              "known": "0x475fa0",
+              "placed": "0x476190"
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+              "known": "0x476190",
+              "placed": "0x4761b0"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen18emptyPriorityBoxesEv",
+              "known": "0x476260",
+              "placed": "0x476280"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen11loadSpritesEv",
+              "known": "0x4762e0",
+              "placed": "0x476300"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv",
+              "known": "0x476940",
+              "placed": "0x476960"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD1Ev",
+              "known": "0x478030",
+              "placed": "0x476b00"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen19createPriorityBoxesEv",
+              "known": "0x476c00",
+              "placed": "0x476c20"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen10setVisibleEbPNS_4game12CThreatLevelE",
+              "known": "0x476d40",
+              "placed": "0x476d60"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
+              "known": "0x477520",
+              "placed": "0x477540"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD0Ev",
+              "known": "0x478150",
+              "placed": "0x477e70"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+              "known": "0x477e40",
+              "placed": "0x477fa0"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD2Ev",
+              "known": "0x476ae0",
+              "placed": "0x478190"
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenC1EPN2ox9IOxDeviceE",
+              "known": "0x478280",
+              "placed": "0x4782b0"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 6167,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
+              "addend": -4,
+              "destination": "0x475fc0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6311,
+              "type": 10,
+              "symbol": ".rodata.str4.4",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x28408b48+0x4",
+              "matches": false
+            },
+            {
+              "offset": 6344,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
+              "addend": -4,
+              "destination": "0x472b00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6720,
+              "type": 2,
+              "symbol": "_ZN7harvest4game12CThreatLevel25alienIsPresentAtThisLevelEi",
+              "addend": -4,
+              "destination": "0x45c320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7237,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7280,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
+              "addend": -4,
+              "destination": "0x475fc0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7822,
+              "type": 2,
+              "symbol": "_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv",
+              "addend": -4,
+              "destination": "0x476940",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7840,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7848,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 231,
+          "functions": [
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
+              "address": "0x475fc0",
+              "size": 457,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen9isVisibleEv",
+              "address": "0x475fa0",
+              "size": 27,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+              "address": "0x476190",
+              "size": 199,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen18emptyPriorityBoxesEv",
+              "address": "0x476260",
+              "size": 113,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen11loadSpritesEv",
+              "address": "0x4762e0",
+              "size": 1557,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "T.324",
+              "address": "0x476900",
+              "size": 64,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv",
+              "address": "0x476940",
+              "size": 403,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD1Ev",
+              "address": "0x478030",
+              "size": 285,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen19createPriorityBoxesEv",
+              "address": "0x476c00",
+              "size": 308,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen10setVisibleEbPNS_4game12CThreatLevelE",
+              "address": "0x476d40",
+              "size": 2010,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
+              "address": "0x477520",
+              "size": 2348,
+              "fde": false,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD0Ev",
+              "address": "0x478150",
+              "size": 293,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+              "address": "0x477e40",
+              "size": 486,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenD2Ev",
+              "address": "0x476ae0",
+              "size": 285,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest3gui15CPriorityScreenC1EPN2ox9IOxDeviceE",
+              "address": "0x478280",
+              "size": 486,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f0638",
+              "size": 50,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600d28",
+              "size": 30,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600d46",
+              "size": 27,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600d61",
+              "size": 30,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600d7f",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600d97",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600db4",
+              "size": 25,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600dcd",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600ddd",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600def",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e01",
+              "size": 21,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e16",
+              "size": 17,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e27",
+              "size": 21,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e3c",
+              "size": 19,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e4f",
+              "size": 22,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e65",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e79",
+              "size": 18,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e8b",
+              "size": 17,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600e9c",
+              "size": 22,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600eb2",
+              "size": 26,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600ecc",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600ee4",
+              "size": 22,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600efa",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fe5c8",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600f30",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600f80",
+              "size": 56,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a70",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600fb8",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0638",
+              "size": 50,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600f12",
+              "size": 17,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0638",
+              "size": 50,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600f23",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x600ff0",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f9a62",
+              "size": 7,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fe5c8",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601028",
+              "size": 48,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5fe5c8",
+              "size": 52,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 88,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86ba40",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86ba40",
+              "size": 88,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcEC1IcEEPKT_",
+          "size": 179,
+          "placement": "symbol: _ZN2ox4core7CStringIcEC1IcEEPKT_",
+          "exact": true,
+          "address": "0x416760",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
+              "address": "0x416760",
+              "size": 179,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
+          "exact": true,
+          "address": "0x409c20",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "address": "0x409c20",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIwED1Ev",
+          "exact": true,
+          "address": "0x409c40",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "address": "0x409c40",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
+          "size": 205,
+          "placement": "symbol: _ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
+          "exact": false,
+          "address": "0x472b00",
+          "first_difference": 33,
+          "differing_bytes": 10,
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
+              "address": "0x472b00",
+              "size": 205,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIPN7harvest3gui12SPriorityBoxESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "size": 401,
+          "placement": "symbol: _ZNSt6vectorIPN7harvest3gui12SPriorityBoxESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "exact": true,
+          "address": "0x478470",
+          "references": 5,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIPN7harvest3gui12SPriorityBoxESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "address": "0x478470",
+              "size": 401,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN7harvest3gui15CPriorityScreenE",
+          "size": 40,
+          "placement": "symbol: _ZTVN7harvest3gui15CPriorityScreenE",
+          "exact": true,
+          "address": "0x601180",
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x601180",
+              "size": 40,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN7harvest3gui15CPriorityScreenE",
+          "size": 32,
+          "placement": "symbol: _ZTSN7harvest3gui15CPriorityScreenE",
+          "exact": true,
+          "address": "0x6011c0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6011c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN7harvest3gui15CPriorityScreenE",
+          "size": 24,
+          "placement": "symbol: _ZTIN7harvest3gui15CPriorityScreenE",
+          "exact": false,
+          "address": "0x6011e0",
+          "first_difference": 0,
+          "differing_bytes": 6,
+          "bad_references": [
+            {
+              "offset": 0,
+              "type": 1,
+              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
+              "addend": 16,
+              "destination": "0x86b380",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16,
+              "type": 1,
+              "symbol": "_ZTIN2ox5event14IEventReceiverE",
+              "addend": 0,
+              "destination": "0x622770",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 3
+        },
+        {
+          "name": ".rodata",
+          "size": 40,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x601220",
+          "references": 5,
+          "data_ranges": [
+            {
+              "address": "0x601058",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601090",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6010e0",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601118",
+              "size": 44,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601148",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x601220",
+              "size": 40,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [
+        ".gcc_except_table"
+      ],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/HarvestFull__harvest__gui__CPriorityScreen.d",
+          "-c",
+          "src/HarvestFull/harvest/gui/CPriorityScreen.cpp",
+          "-o",
+          "/out/HarvestFull__harvest__gui__CPriorityScreen.o"
+        ],
+        "inputs": {
+          "src/HarvestFull/harvest/gui/CPriorityScreen.cpp": "c50f3642740a30a29f2be88681bd2cb0adc1d3d79cf183d1d2855da5d7fd8c35",
+          "src/HarvestFull/harvest/game/CWorld.h": "28d4b85229ecf6b78f90cbf3d42bf7b9325c29b904374879d5186b579d2f011e",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
+          "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
+          "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/ISpriteAnimationState.h": "5c1ba71c529fd1303c03a9f4d771517a00074893fcb8e1cf552f6c16ce0cf425",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
+          "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/HarvestFull/harvest/entity/CAlienEntity.h": "5601b0587cb23898c14d7de42fffcf860e6b5ac174304183f0e60150a607b66d",
+          "src/HarvestFull/harvest/entity/CHarvestEntity.h": "30df4dce9b983d6dd725ba20bc4399b269f483dc160f52e508f1aa399341a447",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/entity/COxEntity.h": "7833d3dbcc46577e95cbe0b94903abb3ce350f1d7a339f6625bddcb6654bd19e",
+          "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/entity/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
+          "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
+          "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/lua/lunar.h": "ae76261d81282629a4624e799851f955c0c92519695bcf7e28fd8d617b856504",
+          "third_party/luajit-2.0.0-beta8/include/lua.hpp": "3365db69037f3ae891e9ae6489fdfcdaf73185347b8b8ff7c0e8ee66523753f1",
+          "third_party/luajit-2.0.0-beta8/include/lua.h": "c906dd3a71ff93b50e5eaea4f7a47ca40d859227d52574208b5b4123c1053368",
+          "third_party/luajit-2.0.0-beta8/include/luaconf.h": "1a401f42e1865b5ffdee60e93d64bfb94bad10703fa03dd61efe76124d888975",
+          "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
+          "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
+          "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
+          "src/HarvestFull/harvest/gui/CPriorityScreen.h": "5978da963c630090dee17e25d2b41a424c7753aa4bb41d5fc2cd4335935afeac",
+          "src/ox/event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
+          "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
+          "src/HarvestFull/harvest/ECustomEvents.h": "a28c2a0abde7d0038dcda3638012fa245773bf81fefab0d9610851b93199d9fe",
+          "src/HarvestFull/harvest/game/CThreatLevel.h": "af04d3cc1851ed4c49703dfc3d1399eae4b7667478b305bfa1ad38c70d37849d",
+          "src/HarvestFull/harvest/settings/CAlienPriorities.h": "5142c1d66d9e1513171353b38b667aa34d2f70aabb0868b23570c189dc2938f3",
+          "src/HarvestFull/harvest/settings/CHarvestProfile.h": "ce63a2717c557272f68f882ec9e6b298acd13fd11ffd4245f1b880f9aa006b98",
+          "src/ox/Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
+          "src/HarvestFull/harvest/settings/CProfileManager.h": "86ce1f7e3d302f61cccf7af0e502480e439ad226b956e5919b7830535a5dcba7",
+          "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
+          "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/gui/ICursorControl.h": "560080b88aa82b03416000a15a31b55100f0b0b8ecccf04fa03633ddfd6a038c",
+          "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/gui/IGUIButton.h": "7a32bc8f11ac0000afc1826dfaf490712889108fe52c0c2e0de043fbcf5a50e3",
+          "src/ox/gui/IGUIElement.h": "f2c52da554c602e3a77e86879a0617336eef01c03c7fe2eaed77b97daddedf0b",
+          "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/gui/../core/CRect.h": "39057c0519492220d6c2bef65d3b6ef285c5943a1c3966d6b2763929ca979d11",
+          "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/gui/../event/IEventReceiver.h": "a297fcf55ed75f63fe7a9adb32d184b3b70f4352a8dd37d64f4d1bcc2a968ab0",
+          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
+          "src/ox/gui/IGUICheckBox.h": "908f357ce0d3ee822f64e0d1b3d71f356accac7ac01e170f0c55485d705ed015",
+          "src/ox/gui/IGUIEnvironment.h": "9cf19aceabe75cd36654f988b444c0ca98027da4351839226639ad179a342d94",
+          "src/ox/gui/IGUIFont.h": "7d8bef60ba4de252f40f6932af5522c9cac367a95b29ec52202d3632b5e166b2",
+          "src/ox/gui/IGUILayout.h": "a9c0a78bb6afb9c838ffad9cdbe29c04fa877893617417793b40ccfafc4fa1d3",
+          "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
+          "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
+        },
+        "system_headers": 131,
+        "object_sha256": "f68da54c3159186027d83cdbe646dae77500874f3463ff11c534f614ff2c193a"
+      },
+      "fuzzy_target_sha256": "5684714dcec4375a7831b78afe6e289ac79183de0338356666c0fec0836f99e5",
+      "fuzzy_functions": [
+        {
+          "address": "0x475fc0",
+          "size": 457,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
+          "percent": 96.63866
+        },
+        {
+          "address": "0x475fa0",
+          "size": 27,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen9isVisibleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476190",
+          "size": 199,
+          "symbol": "_GLOBAL__I__ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476260",
+          "size": 113,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen18emptyPriorityBoxesEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4762e0",
+          "size": 1557,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen11loadSpritesEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476900",
+          "size": 64,
+          "symbol": "T.324",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476940",
+          "size": 403,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen19savePrioritiesByGUIEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x478030",
+          "size": 285,
+          "symbol": "_ZN7harvest3gui15CPriorityScreenD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476c00",
+          "size": 308,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen19createPriorityBoxesEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476d40",
+          "size": 2010,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen10setVisibleEbPNS_4game12CThreatLevelE",
+          "percent": 99.75177
+        },
+        {
+          "address": "0x477520",
+          "size": 2335,
+          "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
+          "percent": 82.0
+        },
+        {
+          "address": "0x478150",
+          "size": 293,
+          "symbol": "_ZN7harvest3gui15CPriorityScreenD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x477e40",
+          "size": 486,
+          "symbol": "_ZN7harvest3gui15CPriorityScreenC2EPN2ox9IOxDeviceE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x476ae0",
+          "size": 285,
+          "symbol": "_ZN7harvest3gui15CPriorityScreenD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x478280",
+          "size": 486,
+          "symbol": "_ZN7harvest3gui15CPriorityScreenC1EPN2ox9IOxDeviceE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x416760",
+          "size": 179,
+          "symbol": "_ZN2ox4core7CStringIcEC1IcEEPKT_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c20",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIcED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c40",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIwED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x472b00",
+          "size": 205,
+          "symbol": "_ZN2ox4core7CStringIwEaSIwEERS2_PKT_",
+          "percent": 96.40625
+        },
+        {
+          "address": "0x478470",
+          "size": 401,
+          "symbol": "_ZNSt6vectorIPN7harvest3gui12SPriorityBoxESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 100.0
+        }
+      ]
     }
   ],
   "fuzzy": {
@@ -90464,7 +91724,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "8f809c4c568a319d2e582c992666b9da728661279da7b1c4dcac19462df79828"
+    "report_sha256": "0c32f56840657692576ffa851d9c9abf27c4a37c99be7cc6b53c22f4811b57dc"
   },
   "link": {
     "status": "unavailable",
