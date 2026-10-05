@@ -1314,7 +1314,6 @@ void CMainMenuState::createLuaSelectionWindow()
     list->EventReceiver = this;
     for (unsigned int i = 0; i < game::CLuaManager::s_availableLuaScriptFiles.size(); ++i)
     {
-        game::SLuaMod& mod = game::CLuaManager::s_availableLuaScriptFiles[i];
         ox::gui::IGUIElement* row =
             GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 250, 40), list->getListParent());
         row->setID(ID_FIRST_MOD + i);
@@ -1324,6 +1323,7 @@ void CMainMenuState::createLuaSelectionWindow()
         ox::gui::IGUILayout* textGroup =
             (ox::gui::IGUILayout*)GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(60, 0, 250, 40), row);
 
+        game::SLuaMod& mod = game::CLuaManager::s_availableLuaScriptFiles[i];
         GUIEnvironment->addCheckBox(mod.Enabled, ox::core::CRect<int>(1, 11, 19, 29), checkGroup, ID_FIRST_MOD + i,
             0)->LayoutFlags = "br";
         checkGroup->sortRiver(false, 0, 11, false);

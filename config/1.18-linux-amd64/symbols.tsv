@@ -4284,6 +4284,7 @@ address	size	symbol	evidence
 0x86b7a0	112	_ZN7harvest6entity19g_bestMiddleTargetsE	manual:Mac-global-name+amd64-shuttle-ctor-and-startup-layout
 0x86b810	4	_ZN7harvest6entity13g_bestLapTimeE	manual:Mac-global-name+amd64-shuttle-ctor-and-startup-layout
 0x86b814	4	_ZN7harvest6entity19g_recentBestLapTimeE	manual:Mac-global-name+amd64-shuttle-ctor-and-startup-layout
+0x86b8e0	0	_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE	reloc:HarvestFull/harvest/states/CMainMenuState.cpp:_ZN7harvest6states14CMainMenuState24createLuaSelectionWindowEv
 0x86b8f8	8	_ZN7harvest4game11gp_luaStateE	manual:Mac-global-name+amd64-Lua-constructors-and-registry-calls
 0x86b900	0	_ZN7harvest4game13gp_luaManagerE	reloc:HarvestFull/harvest/entity/CBuildingEntity.cpp:_ZN7harvest6entity15CBuildingEntityC1Eiiff
 0x86b920	0	_ZN7harvest4game13gp_statisticsE	reloc:HarvestFull/harvest/entity/CConstructionEntity.cpp:_ZN7harvest6entity19CConstructionEntity11updateLogicEf
