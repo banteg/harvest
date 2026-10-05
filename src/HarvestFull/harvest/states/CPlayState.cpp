@@ -1412,9 +1412,10 @@ int CPlayState::updateState(float time)
                 ox::entity::COxEntity* entity = Follow.Entity;
                 if (entity)
                 {
+                    ox::core::CPosition2d<float> position(entity->getPosition().X,
+                        entity->getPosition().Y - entity->getPosition().Z);
                     ox::core::CPosition2d<float> target =
-                        ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y - entity->getPosition().Z) -
-                        ox::core::CPosition2d<float>(ScreenSizeF.Width * 0.5f, ScreenSizeF.Height * 0.5f);
+                        position - ox::core::CPosition2d<float>(ScreenSizeF.Width * 0.5f, ScreenSizeF.Height * 0.5f);
                     if (FollowJump)
                     {
                         ViewPosition = target;
@@ -1449,9 +1450,8 @@ int CPlayState::updateState(float time)
         remaining -= step;
     } while (remaining > 0);
 
-    switch (GameMode)
+    if (GameMode == game::EGM_NORMAL)
     {
-    case game::EGM_NORMAL:
         if (game::gp_statistics->getGameStatValue(2) == 1)
             sendCustomEvent(ECE_TUTORIAL_HINT, 26);
         if (ThreatLevel->getThreatLevel() == 11)
@@ -1471,18 +1471,19 @@ int CPlayState::updateState(float time)
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 12);
         if (OverheatedCount >= 50)
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 18);
-        break;
-    case game::EGM_INSANE:
+    }
+    else if (GameMode == game::EGM_INSANE)
+    {
         if (ThreatLevel->getThreatLevel() == 50)
         {
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 9);
             sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 8);
         }
-        break;
-    case game::EGM_RUSH:
+    }
+    else if (GameMode == game::EGM_RUSH)
+    {
         if (game::gp_statistics->getRushModeDamage() > 0 && game::gp_statistics->getRushModeDamage() < 510.0f)
             sendCustomEvent(ECE_TUTORIAL_HINT, 32);
-        break;
     }
 
     if (GameOver)
@@ -1499,9 +1500,9 @@ int CPlayState::updateState(float time)
                 else
                     highscore = GameMode == game::EGM_NORMAL || GameMode == game::EGM_INSANE;
                 if (highscore)
-                    game::CHighscoreInfo::setNewHighscoreInfo(new game::CHighscoreInfo(PlayerName.c_str(), PlayerGroup.c_str(), RandomValue, StartTime,
-                        GameMode, game::gp_world->getPlanet(), game::gp_statistics->getGameStatValue(1),
-                        ThreatLevel->getThreatLevel(), GameTime));
+                    game::CHighscoreInfo::setNewHighscoreInfo(new game::CHighscoreInfo(PlayerName.c_str(),
+                        PlayerGroup.c_str(), RandomValue, StartTime, GameMode, game::gp_world->getPlanet(),
+                        game::gp_statistics->getGameStatValue(1), ThreatLevel->getThreatLevel(), GameTime));
                 else
                     game::CHighscoreInfo::setNewHighscoreInfo(0);
             }
