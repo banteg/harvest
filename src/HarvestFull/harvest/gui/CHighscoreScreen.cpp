@@ -543,9 +543,10 @@ void CHighscoreScreen::setVisible(bool visible)
             }
 
             int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].X) / 2;
-            ListFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(margin,
-                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y, margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
-                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y), Background);
+            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y,
+                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y);
+            ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
             ListFrame->setReportOnDraw(1);
             ListFrame->setID(ID_LIST_FRAME);
             ListFrame->LayoutFlags = "br center";
@@ -554,8 +555,12 @@ void CHighscoreScreen::setVisible(bool visible)
             int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y;
             int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].X + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].X;
             int summaryLeft = (800 - summaryWidth) / 2;
-            SummaryFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(summaryLeft, summaryTop,
-                summaryLeft + summaryWidth, summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y), Background);
+            ox::core::CRect<int> summaryArea;
+            summaryArea.UpperLeftCorner.X = summaryLeft;
+            summaryArea.UpperLeftCorner.Y = summaryTop;
+            summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
+            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y;
+            SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
             SummaryFrame->setReportOnDraw(1);
             SummaryFrame->setID(ID_SUMMARY_FRAME);
             SummaryFrame->LayoutFlags = "br center";
