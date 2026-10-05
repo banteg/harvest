@@ -330,7 +330,11 @@ def layer_config():
             {"layer": "game", "start": 0x1000, "end": 0x1020},
             {"layer": "platform", "start": 0x1020, "end": 0x1100},
         ],
-        "rule": [{"layer": "engine", "pattern": r"5daisy5video\d+CSpritePackage"}],
+        "rule": [
+            {"layer": "engine", "pattern": r"5daisy5video\d+CSpritePackage"},
+            {"layer": "engine", "pattern": r"^_ZNK?2ox"},
+        ],
+        "copies": [r"^_ZN?K?(St|9__gnu_cxx)", r"^_ZNK?2ox"],
     }
 
 
@@ -368,3 +372,23 @@ def test_functions_outside_every_layer_range_are_rejected():
     config["range"] = config["range"][:1]
     with pytest.raises(ValueError, match="outside every layer range"):
         progress.assign_layers([{"address": 0x1020, "size": 8, "section": ".text"}], {}, config)
+
+
+def test_copies_take_the_surrounding_layer_and_are_never_inherited():
+    addresses = range(0x1000, 0x1060, 0x10)
+    functions = [{"address": address, "size": 8, "section": ".text"} for address in addresses]
+    names = {
+        0x1000: "_ZN7harvest4game6CWorld6updateEv",
+        0x1010: "_ZN2ox4core7CStringIcEaSERKS2_",
+        0x1030: "_ZN5daisy5video14CSpritePackage4loadEv",
+        0x1040: "_ZNSt6vectorIiSaIiEE13_M_insert_auxEv",
+    }
+    layers = progress.assign_layers(functions, names, layer_config())
+    assert layers == {
+        0x1000: "game",
+        0x1010: "engine",
+        0x1020: "platform",
+        0x1030: "engine",
+        0x1040: "engine",
+        0x1050: "engine",
+    }

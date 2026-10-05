@@ -56,7 +56,10 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
   but whose drawing a port redoes; **Platform layer** is the rest of daisy (OpenGL and software
   renderers, scene graph and mesh loaders, device, input, file system, network and OpenAL backends).
   A rule matches a symbol name; unnamed functions take the layer of the closest earlier named function
-  in their address range. The layers do not change the whole-binary measures.
+  in their address range. Template and inline copies a unit emits beside its own code (STL
+  instantiations, `ox` interface inlines) take the layer of the code around them unless a rule names
+  one (`ox` code is engine wherever it is emitted), and unnamed functions never inherit from a copy.
+  The layers do not change the whole-binary measures.
 
 The initial capture at the `CMemReadFile` + `CMemWriteFile` stage has 35 unique matched functions
 and 995 matched bytes: **0.04980%**. These two objects emit 37 function records, including two shared

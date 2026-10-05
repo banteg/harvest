@@ -5,6 +5,11 @@
 # name), else the layer of the closest named function before it in the same `range`, else the range's
 # layer. The ranges follow the link order: the game objects, then the daisy engine (Irrlicht 0.7
 # derived), then the ox library.
+#
+# `copies` match the template and inline code a unit emits beside its own: STL instantiations and
+# ox interface inlines. A copy takes a rule's layer when one matches, else the layer of the code around
+# it, and never becomes the layer that later unnamed functions inherit.
+copies = ['^_ZN?K?(St|9__gnu_cxx)', '^_ZNK?2ox']
 
 [layers.game]
 name = "Game logic (harvest)"
@@ -26,17 +31,19 @@ end = 0x4bad60
 [[range]]
 layer = "platform"
 start = 0x4bad60
-end = 0x5db2c0
+end = 0x5db100
 
 [[range]]
 layer = "engine"
-start = 0x5db2c0
+start = 0x5db100
 end = 0x5eedd8
 
-# Data formats and behaviour the game depends on, inside the daisy range.
+# Data formats and behaviour the game depends on, inside the daisy range: the sprite and particle
+# packages with their records, the fonts, and the sound logic with its info stubs. A pattern may match
+# anywhere in a name, so templates over these records follow them.
 [[rule]]
 layer = "engine"
-pattern = '5daisy5video\d+(CSpritePackage|CSpriteAnimation\w*|CParticlePackage|CParticleState)'
+pattern = '5daisy5video\d+(CSprite|CParticle|SSprite|SAnimation|SImage|SParticle)'
 
 [[rule]]
 layer = "engine"
@@ -44,8 +51,13 @@ pattern = '5daisy3gui(8CGUIFont|12CUnicodeFont)'
 
 [[rule]]
 layer = "engine"
-pattern = '5daisy5audio12CAudioDriver'
+pattern = '5daisy5audio\d+(CAudioDriver|C\w+InfoStub)'
 
 [[rule]]
 layer = "toolkit"
 pattern = '5daisy3gui'
+
+# The ox library's interfaces, wherever their inline bodies are emitted.
+[[rule]]
+layer = "engine"
+pattern = '^_ZNK?2ox'

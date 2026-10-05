@@ -322,8 +322,10 @@ def load_layers(build: str) -> dict | None:
 
 def assign_layers(functions: list[dict], names: dict[int, str], config: dict) -> dict[int, str]:
     """Each function's layer: the first matching rule, else the closest earlier named function in its range,
-    else the range's own layer."""
+    else the range's own layer. Copies (template and inline code a unit emits beside its own) take a rule's
+    layer or the inherited one, and never become what later functions inherit."""
     rules = [(re.compile(rule["pattern"]), rule["layer"]) for rule in config.get("rule", [])]
+    copies = [re.compile(pattern) for pattern in config.get("copies", [])]
     ranges = sorted((r["start"], r["end"], r["layer"]) for r in config["range"])
     starts = [start for start, _, _ in ranges]
     result = {}
@@ -336,9 +338,14 @@ def assign_layers(functions: list[dict], names: dict[int, str], config: dict) ->
         if index != current_range:
             current_range, inherited = index, ranges[index][2]
         name = names.get(address)
-        if name is not None:
-            inherited = next((layer for pattern, layer in rules if pattern.search(name)), ranges[index][2])
-        result[address] = inherited
+        if name is None:
+            result[address] = inherited
+            continue
+        ruled = next((layer for pattern, layer in rules if pattern.search(name)), None)
+        if any(pattern.search(name) for pattern in copies):
+            result[address] = ruled or inherited
+        else:
+            inherited = result[address] = ruled or ranges[index][2]
     if unknown := set(result.values()) - set(config["layers"]):
         raise ValueError(f"undefined layers: {', '.join(sorted(unknown))}")
     return result
