@@ -256,3 +256,24 @@
 ".bss" = 0x86b9b0
 # OnEvent's jump tables and the sprite and localization key tables.
 ".rodata" = 0x5ff7e0
+
+["HarvestFull/harvest/gui/CSettingsScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86baa8
+# KEY_NAMES and KeyCommandNames.
+".rodata" = 0x604460
+".gcc_except_table" = 0x65cb6b
+
+["HarvestFull/harvest/gui/CGuiEffects.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b99c
+
+["HarvestFull/harvest/gui/CGuiInfoLines.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b9a4
+
+["HarvestFull/harvest/gui/CAchievementsScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b994
+# The award tables.
+".rodata" = 0x5fdf00

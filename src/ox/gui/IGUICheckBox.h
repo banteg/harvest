@@ -1,7 +1,5 @@
-// Copyright (C) 2002-2004 Nikolaus Gebhardt
-// Adapted from Irrlicht 0.7 include/IGUICheckBox.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
-// Mac 1.18 vtable of daisy::gui::CGUICheckBox.
+// Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
+// The virtual order follows the Mac 1.18 vtable of daisy::gui::CGUICheckBox.
 
 #ifndef OX_GUI_IGUICHECKBOX_H
 #define OX_GUI_IGUICHECKBOX_H
@@ -15,12 +13,12 @@ namespace gui {
 
 class IGUIFont;
 
+//! A check box with a text.
 class IGUICheckBox : public IGUIElement
 {
 public:
     virtual void setChecked(bool checked) = 0;
     virtual bool isChecked() = 0;
-    //! Draws the box with the named animation of the package instead of the skin.
     virtual void setAnimations(video::ISpritePackage* package, const char* name) = 0;
     virtual void setTextColor(video::SColor color) = 0;
     virtual void setTextFont(IGUIFont* font) = 0;

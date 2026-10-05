@@ -8,16 +8,18 @@
 #include "../video/SColor.h"
 
 namespace ox {
-namespace video { class ITexture; class ISpritePackage; }
+namespace video {
+class ISpritePackage;
+class ITexture;
+} // end namespace video
 namespace gui {
 
-//! Shows a texture or a sprite animation.
+//! An element that shows a texture or a sprite animation.
 class IGUIImage : public IGUIElement
 {
 public:
     virtual void setImage(video::ITexture* image) = 0;
-    //! Shows the named animation of the package instead of a texture.
-    virtual void setAnimation(const char* name, video::ISpritePackage* package) = 0;
+    virtual void setAnimation(const char* animation, video::ISpritePackage* package) = 0;
     virtual void setOverrideColor(video::SColor color) = 0;
 };
 

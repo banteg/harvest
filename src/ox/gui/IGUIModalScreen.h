@@ -9,11 +9,11 @@
 namespace ox {
 namespace gui {
 
-//! A layout covering the screen that blocks the input to the elements behind it.
+//! A screen-filling layout that blocks the events of the elements behind it.
 class IGUIModalScreen : public IGUILayout
 {
 public:
-    //! The last event the screen kept from the elements behind it.
+    //! The event of the last EGET_MODAL_SCREEN_BLOCKED notification.
     virtual event::SEvent getLastBlockedEvent() = 0;
 };
 
