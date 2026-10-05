@@ -15,7 +15,28 @@ namespace gui {
 
 class IGUIFont;
 
-enum EGUI_DEFAULT_COLOR {};
+//! The default colors, in Irrlicht 0.7's order.
+enum EGUI_DEFAULT_COLOR
+{
+    EGDC_3D_DARK_SHADOW = 0,
+    EGDC_3D_SHADOW,
+    EGDC_3D_FACE,
+    EGDC_3D_HIGH_LIGHT,
+    EGDC_3D_LIGHT,
+    EGDC_ACTIVE_BORDER,
+    EGDC_ACTIVE_CAPTION,
+    EGDC_APP_WORKSPACE,
+    EGDC_BUTTON_TEXT,
+    EGDC_GRAY_TEXT,
+    EGDC_HIGH_LIGHT,
+    EGDC_HIGH_LIGHT_TEXT,
+    EGDC_INACTIVE_BORDER,
+    EGDC_INACTIVE_CAPTION,
+    EGDC_TOOLTIP,
+    EGDC_SCROLLBAR,
+    EGDC_WINDOW,
+    EGDC_COUNT
+};
 enum EGUI_DEFAULT_SIZE {};
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT

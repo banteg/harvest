@@ -14,6 +14,11 @@ namespace gui {
 class IGUILayout : public IGUIElement
 {
 public:
+    IGUILayout(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual void sortFlow(int spacingX, int spacingY, bool resize, bool sortHidden);
     virtual void sortVertically(int spacing, bool resize);
     virtual void sortHorizontally(int spacing);
