@@ -228,9 +228,9 @@ int CMissileTurretEntity::updateLogic(float frameDelta)
                         float ay = ox::core::abs_(dy);
                         if (ax != 0 || ay != 0)
                         {
-                            float length = ax > ay ? ax - ay + ay * 1.5f : ay - ax + ax * 1.5f;
-                            float lead = ox::core::max_(1.2f, length / 500.0f * 3.5f) * 10.0f;
+                            float length = ax > ay ? ay * 1.5f + (ax - ay) : ax * 1.5f + (ay - ax);
                             float magnitude = ox::core::CVector2d<float>(dx, dy).getLength();
+                            float lead = ox::core::max_(1.2f, length / 500.0f * 3.5f) * 10.0f;
                             TargetPosition.X += dx / magnitude * lead;
                             TargetPosition.Y += dy / magnitude * lead;
                         }
