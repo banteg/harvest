@@ -3639,9 +3639,13 @@ void CPlayState::buildingShiftSelected(entity::CEntity* building)
     if (SelectedEntity)
     {
         entity::CEntity* selected = SelectedEntity;
-        clearSelectedEntity();
         if (selected == building)
+        {
+            // Shift-clicking the selection deselects it.
+            clearSelectedEntity();
             return;
+        }
+        clearSelectedEntity();
         addToSelection(selected);
         addToSelection(building);
         return;
