@@ -350,7 +350,7 @@ void CHarvestProfile::updateLocalScore(int type, int mode, int planet, int score
 bool CHarvestProfile::notifyMainAchievement(int achievement, int planet)
 {
     unsigned char flags = Achievements[achievement];
-    if ((flags & EAF_COMPLETE) || achievement >= MAIN_ACHIEVEMENT_COUNT)
+    if ((flags & EAF_COMPLETE) || achievement >= ACHIEVEMENT_MAIN_COUNT)
         return false;
 
     switch (planet)
@@ -385,7 +385,7 @@ bool CHarvestProfile::notifyMainAchievement(int achievement, int planet)
 bool CHarvestProfile::notifyMiniAchievement(int achievement, int planet)
 {
     unsigned char flags = Achievements[achievement];
-    if ((flags & EAF_COMPLETE) || achievement < MAIN_ACHIEVEMENT_COUNT)
+    if ((flags & EAF_COMPLETE) || achievement < ACHIEVEMENT_MAIN_COUNT)
         return false;
 
     unsigned char flag = 0;
@@ -414,12 +414,12 @@ bool CHarvestProfile::notifyMiniAchievement(int achievement, int planet)
 int CHarvestProfile::getAchievementScore()
 {
     int score = 0;
-    for (int i = 0; i < MAIN_ACHIEVEMENT_COUNT; ++i)
+    for (int i = 0; i < ACHIEVEMENT_MAIN_COUNT; ++i)
     {
         if (Achievements[i] & EAF_COMPLETE)
             score += 5;
     }
-    for (int i = MAIN_ACHIEVEMENT_COUNT; i < ACHIEVEMENT_COUNT; ++i)
+    for (int i = ACHIEVEMENT_MAIN_COUNT; i < ACHIEVEMENT_COUNT; ++i)
     {
         unsigned char flags = Achievements[i];
         if (flags & EAF_COMPLETE)
@@ -494,7 +494,7 @@ bool CHarvestProfile::hasMiniAchievement(int achievement, int planet)
 
 ox::core::CString<char> CHarvestProfile::getAchievementSpriteName(int achievement, int planet)
 {
-    if (achievement < MAIN_ACHIEVEMENT_COUNT)
+    if (achievement < ACHIEVEMENT_MAIN_COUNT)
     {
         int number = achievement + 1;
         ox::core::CString<char> name = "Achievement";
@@ -504,7 +504,7 @@ ox::core::CString<char> CHarvestProfile::getAchievementSpriteName(int achievemen
         return ox::core::CString<char>(name);
     }
 
-    int number = achievement - (MAIN_ACHIEVEMENT_COUNT - 1);
+    int number = achievement - (ACHIEVEMENT_MAIN_COUNT - 1);
     ox::core::CString<char> name = "MiniAchievement";
     if (number < 10)
         name.append(ox::core::CString<char>("0"));
@@ -546,14 +546,14 @@ EKeyCommands CHarvestProfile::getCommandForKey(ox::EKEY_CODE key)
     return KeyMapping[key];
 }
 
-ox::EKEY_CODE CHarvestProfile::getKeyForCommand(EKeyCommands command)
+int CHarvestProfile::getKeyForCommand(EKeyCommands command)
 {
     for (int i = 0; i < 255; ++i)
     {
         if (KeyMapping[i] == command)
-            return (ox::EKEY_CODE)i;
+            return i;
     }
-    return (ox::EKEY_CODE)0;
+    return 0;
 }
 
 } // end namespace settings
