@@ -969,6 +969,12 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         0xffffffff);
                 result = true;
                 break;
+            case ID_LIST_FRAME:
+                if (Sprites[SPRITE_ALL_BACKGROUND])
+                    Sprites[SPRITE_ALL_BACKGROUND]->draw(ListFrame->getAbsolutePosition().UpperLeftCorner, 0,
+                        0xffffffff);
+                result = true;
+                break;
             case ID_TYPE_BUTTON:
             case ID_TYPE_BUTTON + 1:
             case ID_TYPE_BUTTON + 2:
@@ -1020,12 +1026,6 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                             position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Y), 0, 0xffffffff);
                     }
                 }
-                result = true;
-                break;
-            case ID_LIST_FRAME:
-                if (Sprites[SPRITE_ALL_BACKGROUND])
-                    Sprites[SPRITE_ALL_BACKGROUND]->draw(ListFrame->getAbsolutePosition().UpperLeftCorner, 0,
-                        0xffffffff);
                 result = true;
                 break;
             case ID_LIST_BUTTON + 7:
