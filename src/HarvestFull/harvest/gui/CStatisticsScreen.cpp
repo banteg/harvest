@@ -199,6 +199,7 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
                     if (Sprites[SPRITE_OVERALL_BACKGROUND])
                     {
                         Sprites[SPRITE_OVERALL_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
+                        // Native quirk: advances by the diagram background's height.
                         position.Y += SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Height;
                     }
                     if (Sprites[SPRITE_SCORE])
@@ -309,6 +310,7 @@ void CStatisticsScreen::setVisible(bool visible)
             const int BUTTON_X[] = {16, 104, 192, 280, 368, 456, 544, 632};
             const int BUTTON_Y[] = {389, 389, 389, 389, 389, 389, 389, 389};
             ox::video::SColor popupColor(0xffffffff);
+            // The native code fetches the level statistics here without using them.
             game::gp_statistics->getAllLevelStats();
             for (int i = 0; i <= GRAPH_OVERALL; ++i)
             {
@@ -342,6 +344,7 @@ void CStatisticsScreen::setVisible(bool visible)
             else
                 bestLevel = ox::core::CString<wchar_t>(settings::gp_profileManager->getCurrentProfile()->getLocalScore(
                     0, g_scenarioResultGameMode, g_scenarioResultPlanet));
+            // A second, unused query of the best minerals.
             settings::gp_profileManager->getCurrentProfile()->getLocalScore(
                 1, g_scenarioResultGameMode, g_scenarioResultPlanet);
             text = GUIEnvironment->addStaticText(bestLevel.c_str(), ox::core::CRect<int>(264, 115, 417, 136), false,
