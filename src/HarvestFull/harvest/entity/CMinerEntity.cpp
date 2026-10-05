@@ -72,16 +72,12 @@ int CMineralGatherEntity::updateLogic(float frameDelta)
             Beam.End = ox::core::CPosition2d<float>(Target.Entity->getPosition().X, Target.Entity->getPosition().Y);
 
             // the beam fades in, and out over its last half second
-            int alpha;
-            if (MiningTime < 3.7f)
-                alpha = (int)(MiningTime * 255.0f);
+            if (MiningTime < 4.2f - 0.5f)
+                Beam.Color = ox::video::SColor(ox::core::clamp((int)(MiningTime * 255.0f), 32, 255),
+                    255, 255, 255);
             else
-                alpha = (int)((4.2f - MiningTime) * 511.0f);
-            if (alpha > 255)
-                alpha = 255;
-            else if (alpha < 32)
-                alpha = 32;
-            Beam.Color = ox::video::SColor(alpha, 255, 255, 255);
+                Beam.Color = ox::video::SColor(ox::core::clamp((int)((4.2f - MiningTime) * 511.0f), 32, 255),
+                    255, 255, 255);
         }
 
         MiningTime += frameDelta;
@@ -256,10 +252,10 @@ ox::core::CString<wchar_t> CMineralGatherEntity::getInfoString()
 {
     if (OutOfMinerals)
         return settings::gp_systemConfig->getLocalizedText(L"entity:harvesterAreaCleared");
+    if (Active && Target.Entity)
+        return settings::gp_systemConfig->getLocalizedText(L"entity:harvesterHarvesting");
     if (!Active)
         return settings::gp_systemConfig->getLocalizedText(L"entity:harvesterWaiting");
-    if (Target.Entity)
-        return settings::gp_systemConfig->getLocalizedText(L"entity:harvesterHarvesting");
     return settings::gp_systemConfig->getLocalizedText(L"entity:harvesterActive");
 }
 
