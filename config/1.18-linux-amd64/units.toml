@@ -440,3 +440,7 @@
 ["daisy/gui/CGUIMenu.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c098
+
+["daisy/gui/CGUIFileOpenDialog.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c084

@@ -31,6 +31,10 @@ enum EGUI_EVENT_TYPE
     EGET_LISTBOX_CHANGED = 10,
     //! The selected list box item was selected again.
     EGET_LISTBOX_SELECTED_AGAIN = 12,
+    //! A file open dialog selected a file.
+    EGET_FILE_SELECTED = 13,
+    //! A file open dialog was cancelled.
+    EGET_FILE_CHOOSE_DIALOG_CANCELLED = 14,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! The no button of a message box was pressed.
