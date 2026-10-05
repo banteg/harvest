@@ -114,14 +114,15 @@ bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
             }
             break;
         case ox::gui::EGET_MESSAGEBOX_YES:
-            switch (id)
+            if (id == ID_CONFIRM_DELETE)
             {
-            case ID_CONFIRM_OVERWRITE:
-                createSaveGameBox();
-                return true;
-            case ID_CONFIRM_DELETE:
                 Device->getFileSystem()->deleteFile(DeleteFilename.c_str());
                 loadSaveGames();
+                return true;
+            }
+            if (id == ID_CONFIRM_OVERWRITE)
+            {
+                createSaveGameBox();
                 return true;
             }
             break;
