@@ -790,8 +790,7 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
             result = true;
             break;
         case ox::event::EMIE_LMOUSE_LEFT_UP:
-            result = true;
-            break;
+            return true;
         default:
             break;
         }
