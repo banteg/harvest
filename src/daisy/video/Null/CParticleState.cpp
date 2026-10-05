@@ -394,20 +394,27 @@ void CParticleState::setCurrentSpeed(const ox::core::CVector3d<float>& speed)
 void CParticleState::applyParentModifiers(CParticleState* parent)
 {
     if (Info && Info->ParentSpeedModifier != 0.0f)
-        Speed += parent->Speed * Info->ParentSpeedModifier;
+    {
+        ox::core::CVector3d<float> inherited = parent->Speed;
+        inherited *= Info->ParentSpeedModifier;
+        Speed += inherited;
+    }
 }
 
 void CParticleState::render2D(const ox::core::CPosition2d<float>& position, float scale)
 {
     if (Info->RotateToDirection)
     {
-        if (LastPosition.X <= -1000.0f)
+        if (LastPosition.X > -1000.0f)
+        {
+            Rotation = ox::core::CMath::getAngleIY(LastPosition, position);
+            LastPosition = position;
+        }
+        else
         {
             LastPosition = position;
             return;
         }
-        Rotation = ox::core::CMath::getAngleIY(LastPosition, position);
-        LastPosition = position;
     }
 
     if (!Animation)
@@ -415,10 +422,10 @@ void CParticleState::render2D(const ox::core::CPosition2d<float>& position, floa
 
     if (!Info->MirrorByDirection)
         Animation->drawRotated(position, Rotation, scale * Scale, Color);
-    else if (Speed.X >= 0.0f)
-        Animation->drawRotated(position, 0.0f, scale * Scale, Color);
-    else
+    else if (Speed.X < 0.0f)
         Animation->drawMirrored(position, scale * Scale, Color);
+    else
+        Animation->drawRotated(position, 0.0f, scale * Scale, Color);
 }
 
 void CParticleState::render3D(const ox::core::CVector3d<float>& position)
