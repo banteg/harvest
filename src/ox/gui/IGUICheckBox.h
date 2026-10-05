@@ -17,6 +17,11 @@ class IGUIFont;
 class IGUICheckBox : public IGUIElement
 {
 public:
+    IGUICheckBox(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual void setChecked(bool checked) = 0;
     virtual bool isChecked() = 0;
     virtual void setAnimations(video::ISpritePackage* package, const char* name) = 0;

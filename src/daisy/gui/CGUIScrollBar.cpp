@@ -35,22 +35,22 @@ CGUIScrollBar::CGUIScrollBar(bool horizontal, ox::gui::IGUIEnvironment* environm
     if (Horizontal)
     {
         size = RelativeRect.getHeight();
-        UpButton = new CGUIButton(Environment, this, -1, ox::core::CRect<int>(0, 0, size, size), NoClip);
+        UpButton = new CGUIButton(Environment, this, -1, ox::core::CRect<int>(0, 0, size, size), NoClip, 0);
         UpButton->setText(GUI_ICON_CURSOR_LEFT);
         UpButton->drop();
         DownButton = new CGUIButton(Environment, this, -1,
-            ox::core::CRect<int>(RelativeRect.getWidth() - size, 0, RelativeRect.getWidth(), size), NoClip);
+            ox::core::CRect<int>(RelativeRect.getWidth() - size, 0, RelativeRect.getWidth(), size), NoClip, 0);
         DownButton->setText(GUI_ICON_CURSOR_RIGHT);
         DownButton->drop();
     }
     else
     {
         size = RelativeRect.getWidth();
-        UpButton = new CGUIButton(Environment, this, -1, ox::core::CRect<int>(0, 0, size, size), NoClip);
+        UpButton = new CGUIButton(Environment, this, -1, ox::core::CRect<int>(0, 0, size, size), NoClip, 0);
         UpButton->setText(GUI_ICON_CURSOR_UP);
         UpButton->drop();
         DownButton = new CGUIButton(Environment, this, -1,
-            ox::core::CRect<int>(0, RelativeRect.getHeight() - size, size, RelativeRect.getHeight()), NoClip);
+            ox::core::CRect<int>(0, RelativeRect.getHeight() - size, size, RelativeRect.getHeight()), NoClip, 0);
         DownButton->setText(GUI_ICON_CURSOR_DOWN);
         DownButton->drop();
     }
