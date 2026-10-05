@@ -22,7 +22,6 @@
 namespace daisy {
 namespace gui {
 
-
 namespace {
 
 //! Clips a rectangle against another, as Irrlicht's rect::clipAgainst.
@@ -40,8 +39,6 @@ inline void clipAgainst(ox::core::CRect<int>& rect, const ox::core::CRect<int>& 
 }
 
 } // end anonymous namespace
-
-#define PART_AREA(area, part) area = AnimationRects[part]; area.UpperLeftCorner += rect.UpperLeftCorner; area.LowerRightCorner += rect.UpperLeftCorner
 
 //! constructor
 CGUIWindow::CGUIWindow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
@@ -173,7 +170,8 @@ void CGUIWindow::updateAnimationRects()
 
     int sideWidth = AnimationRects[EWP_LEFT].getWidth();
     int top = AnimationRects[EWP_TOP_RIGHT].getHeight();
-    AnimationRects[EWP_LEFT] = ox::core::CRect<int>(0, top, sideWidth, AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y);
+    AnimationRects[EWP_LEFT] =
+        ox::core::CRect<int>(0, top, sideWidth, AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y);
 
     // the right edge is as wide as the left one
     AnimationRects[EWP_RIGHT] = ox::core::CRect<int>(width - sideWidth, top, width,
@@ -330,44 +328,58 @@ void CGUIWindow::draw()
     {
         const ox::video::SColor white(0xffffffff);
         // corners
-        Animations[EWP_TOP_LEFT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.Y), cl, white);
-        Animations[EWP_TOP_RIGHT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.Y), cl, white);
-        Animations[EWP_BOTTOM_LEFT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y), cl, white);
-        Animations[EWP_BOTTOM_RIGHT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.Y), cl, white);
+        Animations[EWP_TOP_LEFT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.Y), cl, white);
+        Animations[EWP_TOP_RIGHT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.Y), cl, white);
+        Animations[EWP_BOTTOM_LEFT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y), cl, white);
+        Animations[EWP_BOTTOM_RIGHT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.Y), cl, white);
 
         // top and bottom edges
         ox::core::CRect<int> area;
-        PART_AREA(area, EWP_TOP);
+        area = AnimationRects[EWP_TOP];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         int step = Animations[EWP_TOP]->getFrameSize(0).Width;
         for (int x = area.UpperLeftCorner.X; x < area.LowerRightCorner.X; x += step)
             Animations[EWP_TOP]->draw(ox::core::CPosition2d<int>(x, area.UpperLeftCorner.Y), &area, white);
 
-        PART_AREA(area, EWP_BOTTOM);
+        area = AnimationRects[EWP_BOTTOM];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_BOTTOM]->getFrameSize(0).Width;
         for (int x = area.UpperLeftCorner.X; x < area.LowerRightCorner.X; x += step)
             Animations[EWP_BOTTOM]->draw(ox::core::CPosition2d<int>(x, area.UpperLeftCorner.Y), &area, white);
 
         // left and right edges
-        PART_AREA(area, EWP_LEFT);
+        area = AnimationRects[EWP_LEFT];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_LEFT]->getFrameSize(0).Height;
         for (int y = area.UpperLeftCorner.Y; y < area.LowerRightCorner.Y; y += step)
             Animations[EWP_LEFT]->draw(ox::core::CPosition2d<int>(area.UpperLeftCorner.X, y), &area, white);
 
-        PART_AREA(area, EWP_RIGHT);
+        area = AnimationRects[EWP_RIGHT];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_RIGHT]->getFrameSize(0).Height;
         for (int y = area.UpperLeftCorner.Y; y < area.LowerRightCorner.Y; y += step)
             Animations[EWP_RIGHT]->draw(ox::core::CPosition2d<int>(area.UpperLeftCorner.X, y), &area, white);
 
         // background
-        PART_AREA(area, EWP_BACKGROUND);
+        area = AnimationRects[EWP_BACKGROUND];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         int stepX = Animations[EWP_BACKGROUND]->getFrameSize(0).Width;
         int stepY = Animations[EWP_BACKGROUND]->getFrameSize(0).Height;
@@ -505,6 +517,8 @@ static const int LOCK_MENU_ID = -387;
 
 //! How close, in pixels, a dragged frame snaps to a layout group's edge.
 static const int SNAP_DISTANCE = 14;
+
+//! Whether an edge offset is within the snapping distance.
 static bool snaps(int offset)
 {
     if (offset < -SNAP_DISTANCE)
@@ -513,7 +527,6 @@ static bool snaps(int offset)
         return false;
     return true;
 }
-#define SNAPS(offset) snaps(offset)
 
 CGUIDetachableFrame::CGUIDetachableFrame(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
     ox::core::CRect<int> rectangle, unsigned int fadeDelay, bool hasMenu, bool hideable)
@@ -650,7 +663,8 @@ void CGUIDetachableFrame::updateAnimationRects()
 
     int sideWidth = AnimationRects[EWP_LEFT].getWidth();
     int top = AnimationRects[EWP_TOP_RIGHT].getHeight();
-    AnimationRects[EWP_LEFT] = ox::core::CRect<int>(0, top, sideWidth, AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y);
+    AnimationRects[EWP_LEFT] =
+        ox::core::CRect<int>(0, top, sideWidth, AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y);
 
     // the right edge is as wide as the left one
     AnimationRects[EWP_RIGHT] = ox::core::CRect<int>(width - sideWidth, top, width,
@@ -703,8 +717,8 @@ bool CGUIDetachableFrame::OnEvent(const ox::event::SEvent& event)
         {
             if (event.GUIEvent.Caller == MenuButton && MenuButton)
             {
-                PopupMenu = Environment->addPopupMenu(MenuButton->getAbsolutePosition().LowerRightCorner, 100, L"Menu Options",
-                    PopupMenuTitleFont, PopupMenuItemsFont, 0, -1);
+                PopupMenu = Environment->addPopupMenu(MenuButton->getAbsolutePosition().LowerRightCorner, 100,
+                    L"Menu Options", PopupMenuTitleFont, PopupMenuItemsFont, 0, -1);
                 if (Lockable)
                     PopupMenu->addMenuOption(Locked ? L"Unlock Window" : L"Lock Window", LOCK_MENU_ID);
                 for (unsigned int i = 0; i < MenuOptions.size(); ++i)
@@ -923,7 +937,7 @@ void CGUIDetachableFrame::snapToItem(ox::gui::IGUIElement* item, ox::core::CRect
     if (!snappedX && overlapY)
     {
         int offset = rect.UpperLeftCorner.X - area.LowerRightCorner.X;
-        if (SNAPS(offset))
+        if (snaps(offset))
         {
             rect.UpperLeftCorner.X -= offset;
             rect.LowerRightCorner.X -= offset;
@@ -932,7 +946,7 @@ void CGUIDetachableFrame::snapToItem(ox::gui::IGUIElement* item, ox::core::CRect
         else
         {
             offset = rect.LowerRightCorner.X - area.UpperLeftCorner.X;
-            if (SNAPS(offset))
+            if (snaps(offset))
             {
                 rect.UpperLeftCorner.X -= offset;
                 rect.LowerRightCorner.X -= offset;
@@ -944,7 +958,7 @@ void CGUIDetachableFrame::snapToItem(ox::gui::IGUIElement* item, ox::core::CRect
     if (!snappedY && overlapX)
     {
         int offset = rect.UpperLeftCorner.Y - area.LowerRightCorner.Y;
-        if (SNAPS(offset))
+        if (snaps(offset))
         {
             rect.UpperLeftCorner.Y -= offset;
             rect.LowerRightCorner.Y -= offset;
@@ -953,7 +967,7 @@ void CGUIDetachableFrame::snapToItem(ox::gui::IGUIElement* item, ox::core::CRect
         else
         {
             offset = rect.LowerRightCorner.Y - area.UpperLeftCorner.Y;
-            if (SNAPS(offset))
+            if (snaps(offset))
             {
                 rect.UpperLeftCorner.Y -= offset;
                 rect.LowerRightCorner.Y -= offset;
@@ -1009,44 +1023,58 @@ void CGUIDetachableFrame::draw()
     if (Animations[EWP_BACKGROUND])
     {
         // corners
-        Animations[EWP_TOP_LEFT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.Y), cl, color);
-        Animations[EWP_TOP_RIGHT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.Y), cl, color);
-        Animations[EWP_BOTTOM_LEFT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y), cl, color);
-        Animations[EWP_BOTTOM_RIGHT]->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.Y), cl, color);
+        Animations[EWP_TOP_LEFT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_LEFT].UpperLeftCorner.Y), cl, color);
+        Animations[EWP_TOP_RIGHT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP_RIGHT].UpperLeftCorner.Y), cl, color);
+        Animations[EWP_BOTTOM_LEFT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_LEFT].UpperLeftCorner.Y), cl, color);
+        Animations[EWP_BOTTOM_RIGHT]->draw(
+            ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.X,
+                rect.UpperLeftCorner.Y + AnimationRects[EWP_BOTTOM_RIGHT].UpperLeftCorner.Y), cl, color);
 
         // top and bottom edges
         ox::core::CRect<int> area;
-        PART_AREA(area, EWP_TOP);
+        area = AnimationRects[EWP_TOP];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         int step = Animations[EWP_TOP]->getFrameSize(0).Width;
         for (int x = area.UpperLeftCorner.X; x < area.LowerRightCorner.X; x += step)
             Animations[EWP_TOP]->draw(ox::core::CPosition2d<int>(x, area.UpperLeftCorner.Y), &area, color);
 
-        PART_AREA(area, EWP_BOTTOM);
+        area = AnimationRects[EWP_BOTTOM];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_BOTTOM]->getFrameSize(0).Width;
         for (int x = area.UpperLeftCorner.X; x < area.LowerRightCorner.X; x += step)
             Animations[EWP_BOTTOM]->draw(ox::core::CPosition2d<int>(x, area.UpperLeftCorner.Y), &area, color);
 
         // left and right edges
-        PART_AREA(area, EWP_LEFT);
+        area = AnimationRects[EWP_LEFT];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_LEFT]->getFrameSize(0).Height;
         for (int y = area.UpperLeftCorner.Y; y < area.LowerRightCorner.Y; y += step)
             Animations[EWP_LEFT]->draw(ox::core::CPosition2d<int>(area.UpperLeftCorner.X, y), &area, color);
 
-        PART_AREA(area, EWP_RIGHT);
+        area = AnimationRects[EWP_RIGHT];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         step = Animations[EWP_RIGHT]->getFrameSize(0).Height;
         for (int y = area.UpperLeftCorner.Y; y < area.LowerRightCorner.Y; y += step)
             Animations[EWP_RIGHT]->draw(ox::core::CPosition2d<int>(area.UpperLeftCorner.X, y), &area, color);
 
         // background
-        PART_AREA(area, EWP_BACKGROUND);
+        area = AnimationRects[EWP_BACKGROUND];
+        area.UpperLeftCorner += rect.UpperLeftCorner;
+        area.LowerRightCorner += rect.UpperLeftCorner;
         clipAgainst(area, *cl);
         int stepX = Animations[EWP_BACKGROUND]->getFrameSize(0).Width;
         int stepY = Animations[EWP_BACKGROUND]->getFrameSize(0).Height;
@@ -1088,8 +1116,9 @@ void CGUIDetachableFrame::draw()
         }
 
         if (SizeDragHandle && Resizable)
-            SizeDragHandle->draw(ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + SizeDragHandleRect.UpperLeftCorner.X,
-            rect.UpperLeftCorner.Y + SizeDragHandleRect.UpperLeftCorner.Y), cl, color);
+            SizeDragHandle->draw(
+                ox::core::CPosition2d<int>(rect.UpperLeftCorner.X + SizeDragHandleRect.UpperLeftCorner.X,
+                    rect.UpperLeftCorner.Y + SizeDragHandleRect.UpperLeftCorner.Y), cl, color);
 
         // the caption goes between the top corners
         rect.UpperLeftCorner.X += AnimationRects[EWP_TOP_LEFT].getWidth() + 2;
