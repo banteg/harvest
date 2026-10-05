@@ -328,7 +328,9 @@ bool CAchievementsScreen::OnEvent(const ox::event::SEvent& event)
             {
                 for (int i = AWARD_COUNT - 1; i >= 0; --i)
                 {
-                    if (AwardAreas[i] && AwardAreas[i]->getAbsolutePosition().isPointInside(mouse))
+                    if (!AwardAreas[i])
+                        continue;
+                    if (AwardAreas[i]->getAbsolutePosition().isPointInside(mouse))
                     {
                         Hovered = i;
                         break;
