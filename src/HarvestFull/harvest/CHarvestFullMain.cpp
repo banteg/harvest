@@ -27,7 +27,7 @@ namespace harvest {
 
 int g_gameMode;
 int g_gamePlanet;
-ox::core::CString<char> g_loadGameFilename;
+ox::core::CString<char> g_loadGameFilename = "";
 int g_scenarioResultGameMode;
 int g_scenarioResultPlanet;
 int g_scenarioResult = -1;
@@ -173,17 +173,15 @@ bool CHarvestSuperReceiver::OnEvent(const ox::event::SEvent& event)
     bool result = false;
     if (event.EventType == ox::event::EET_GUI_EVENT)
     {
-        if (event.GUIEvent.EventType == ox::gui::EGET_CHECKBOX_CHANGED)
-        {
-            if (event.GUIEvent.Caller->getType() == 18)
-                Device->getAudioDriver();
-        }
-        else if (event.GUIEvent.EventType == ox::gui::EGET_BUTTON_CLICKED ||
+        if (event.GUIEvent.EventType == ox::gui::EGET_BUTTON_CLICKED ||
             event.GUIEvent.EventType == ox::gui::EGET_TEXT_BUTTON_CLICKED)
         {
             if (Device->getAudioDriver())
                 Device->getAudioDriver()->playSound("BtnPressed.ogg", 1.0f, 0.0f, 1.0f);
         }
+        else if (event.GUIEvent.EventType == ox::gui::EGET_CHECKBOX_CHANGED &&
+            event.GUIEvent.Caller->getType() == 18)
+            Device->getAudioDriver();
     }
     else if (event.EventType == ox::event::EET_KEY_INPUT_EVENT)
     {
