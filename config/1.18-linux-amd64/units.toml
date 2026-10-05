@@ -317,3 +317,11 @@
 ["HarvestFull/harvest/gui/CStoryScreen.cpp"]
 # iostream initializer and the world grid offset.
 ".bss" = 0x86babc
+
+["HarvestFull/harvest/states/CMainMenuState.cpp"]
+# iostream initializer, the game-header statics and the planet scene positions.
+".bss" = 0x86bd60
+# The game mode names, icons and rating meters.
+".data" = 0x868e20
+# Jump tables and the planet, texture and achievement rating name tables.
+".rodata" = 0x608020

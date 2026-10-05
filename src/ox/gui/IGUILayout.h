@@ -1,5 +1,5 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: the virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIWindow up to updateChildrenForContentArea.
+// Partial: the virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIWindow up to sortRiver.
 
 #ifndef OX_GUI_IGUILAYOUT_H
 #define OX_GUI_IGUILAYOUT_H
@@ -7,6 +7,7 @@
 #include "IGUIElement.h"
 
 namespace ox {
+namespace video { class ISpritePackage; }
 namespace gui {
 
 //! An element that arranges its children by their layout hints.
@@ -18,8 +19,14 @@ public:
     virtual void sortHorizontally();
     //! Places the children in rows broken at "br" hints, aligned by their other hints.
     virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
-    virtual core::CRect<int> getContentArea();
+    // The slots below are CGUIWindow's; addWindow and addFrame return their windows as layouts.
+    virtual IGUIElement* getContentArea();
     virtual void updateChildrenForContentArea();
+    virtual IGUIElement* getCloseButton();
+    virtual IGUIElement* getMinimizeButton();
+    virtual IGUIElement* getMaximizeButton();
+    //! Draws the window with the named frame sprites of the package.
+    virtual void setAnimations(video::ISpritePackage* package, const char* name);
 };
 
 } // end namespace gui
