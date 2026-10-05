@@ -118,6 +118,24 @@ const char* const ALIEN_SPRITE_NAMES[] = {"Alien", "AlienJammer", "AlienTiny0000
     "AlienHogger", "AlienSparker", "BrainBottom0000", "MegaAlienCharge", "aliennames:asdf", "aliennames:asdf",
     "aliennames:asdf", "aliennames:asdf", "aliennames:asdf"};
 
+//! Swaps the corners where the rectangle is upside down, as Irrlicht's rect::repair.
+static inline void repairRect(ox::core::CRect<float>& rect)
+{
+    if (rect.LowerRightCorner.X < rect.UpperLeftCorner.X)
+    {
+        float t = rect.LowerRightCorner.X;
+        rect.LowerRightCorner.X = rect.UpperLeftCorner.X;
+        rect.UpperLeftCorner.X = t;
+    }
+
+    if (rect.LowerRightCorner.Y < rect.UpperLeftCorner.Y)
+    {
+        float t = rect.LowerRightCorner.Y;
+        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y;
+        rect.UpperLeftCorner.Y = t;
+    }
+}
+
 bool CPlayState::m_keys[256];
 
 bool displayThreatLevelForGameMode(int gameMode)
@@ -3541,7 +3559,7 @@ void CPlayState::performRectangleSelection(ox::core::CPosition2d<float> corner1,
         clearSelectedEntity();
 
     ox::core::CRect<float> rect(corner1, corner2);
-    rect.repair();
+    repairRect(rect);
 
     const std::list<ox::entity::COxEntity*>& buildings = entity::gp_entityManager->getEntityList(0);
     bool selectedNothing = true;

@@ -49,24 +49,6 @@ public:
         return LowerRightCorner.Y - UpperLeftCorner.Y;
     }
 
-    //! Swaps the corners where the rectangle is upside down.
-    void repair()
-    {
-        if (LowerRightCorner.X < UpperLeftCorner.X)
-        {
-            T t = LowerRightCorner.X;
-            LowerRightCorner.X = UpperLeftCorner.X;
-            UpperLeftCorner.X = t;
-        }
-
-        if (LowerRightCorner.Y < UpperLeftCorner.Y)
-        {
-            T t = LowerRightCorner.Y;
-            LowerRightCorner.Y = UpperLeftCorner.Y;
-            UpperLeftCorner.Y = t;
-        }
-    }
-
     bool isPointInside(const CPosition2d<T>& position) const
     {
         return position.X >= UpperLeftCorner.X && position.Y >= UpperLeftCorner.Y &&

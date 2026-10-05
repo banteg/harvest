@@ -82,8 +82,20 @@ enum ECUSTOM_EVENT
     ECE_START_SHUTTLE_RACE = 40
 };
 
-//! Sends a game event with an optional value to the subscribers right away.
-inline void sendCustomEvent(ECUSTOM_EVENT type, int value = 0)
+//! Sends a game event to the subscribers right away.
+inline void sendCustomEvent(ECUSTOM_EVENT type)
+{
+    ox::event::SEvent event;
+    event.EventType = ox::event::EET_USER_EVENT;
+    event.UserEvent.UserData1 = type;
+    event.UserEvent.UserData2 = 0;
+    event.UserEvent.UserData3 = 0;
+    event.UserEvent.UserPointer = 0;
+    ox::event::gp_subscriberList->OnEvent(event);
+}
+
+//! Sends a game event with a value in UserData2 to the subscribers right away.
+inline void sendCustomEvent(ECUSTOM_EVENT type, int value)
 {
     ox::event::SEvent event;
     event.EventType = ox::event::EET_USER_EVENT;
