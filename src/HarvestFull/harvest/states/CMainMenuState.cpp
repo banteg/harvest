@@ -275,7 +275,7 @@ int CMainMenuState::secondInit()
     case 3:
         ScreenSize = Driver->getScreenSize();
         RootElement = GUIEnvironment->addLayoutGroup(
-            ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), GUIEnvironment->getRootGUIElement());
+            ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), ScreenSize), GUIEnvironment->getRootGUIElement());
         HeadingText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 20, ScreenSize.Width, 60), false,
             false, RootElement, -1, L"");
         HeadingText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
