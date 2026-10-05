@@ -5,6 +5,7 @@
 #define OX_ALGO_CARRAYFUNCTIONS_H
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 
 namespace ox {
@@ -47,6 +48,16 @@ int binarySearchIf(const A& array, S searcher, const V& value)
         else
             low = middle + 1;
     }
+    return -1;
+}
+
+//! Returns the index of the first element in [first, last) that matches value by predicate, or -1.
+template <class TIterator, class TPredicate, class TValue>
+int linearSearchIf(TIterator first, TIterator last, TPredicate predicate, const TValue& value)
+{
+    TIterator found = std::find_if(first, last, std::bind2nd(predicate, value));
+    if (found != last && predicate(*found, value))
+        return found - first;
     return -1;
 }
 

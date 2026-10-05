@@ -400,3 +400,19 @@
 ".bss" = 0x86c0c8
 # draw color code jump table.
 ".rodata" = 0x616ea8
+
+["daisy/video/Null/CSpriteAnimationImage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1fc
+
+["daisy/video/Null/CSpriteAnimationImageBundle.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c200
+
+["daisy/video/Null/CSpriteAnimationState.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c204
+
+["daisy/video/Null/CSpritePackage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c180

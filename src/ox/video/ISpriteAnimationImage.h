@@ -1,44 +1,43 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// The virtual interface follows the Mac vtable (names from daisy::video::CSpriteAnimationState).
+// The virtual interface follows the Mac vtable of daisy::video::CSpriteAnimationImage.
 
-#ifndef OX_VIDEO_ISPRITEANIMATIONSTATE_H
-#define OX_VIDEO_ISPRITEANIMATIONSTATE_H
+#ifndef OX_VIDEO_ISPRITEANIMATIONIMAGE_H
+#define OX_VIDEO_ISPRITEANIMATIONIMAGE_H
 
 #include "../IUnknown.h"
 #include "../core/CDimension2d.h"
 #include "../core/CPosition2d.h"
 #include "../core/CRect.h"
 #include "../core/CVector3d.h"
+#include "ISpritePackage.h"
 #include "SColor.h"
 
 namespace ox {
-namespace io {
-class IReadFile;
-class IWriteFile;
-} // end namespace io
-
 namespace core {
 template <class T> class CAffineRect;
 } // end namespace core
 
 namespace video {
 
-class ISpritePackage;
 class ITexture;
 struct SColorCorners;
 
-//! A running animation of a sprite.
-class ISpriteAnimationState : public IUnknown
+//! One frame of a sprite animation: a sprite image, or a bundle of images drawn as a grid.
+//! Images are shared by the animation states of a sprite package and reference counted.
+class ISpriteAnimationImage : public IUnknown
 {
 public:
-    ISpriteAnimationState(ISpritePackage* package)
-        : Package(package), Flags(0)
+    ISpriteAnimationImage(ISpritePackage* package)
+        : Package(package)
     {
     }
 
-    virtual void remove() = 0;
-    virtual void reset() = 0;
-    virtual bool update(float frameDelta) = 0;
+    //! Releases the image from its package.
+    virtual void remove()
+    {
+        if (Package)
+            Package->removeImage(this);
+    }
 
     virtual void draw(const core::CPosition2d<int>& position, const core::CRect<int>* clip, SColor color) = 0;
     virtual void drawMultipleColors(const core::CAffineRect<float>& rect, const SColorCorners& colors) = 0;
@@ -47,40 +46,30 @@ public:
     //! Draws rotated by an angle in radians and scaled.
     virtual void drawRotated(const core::CPosition2d<float>& position, float rotation, float scale, SColor color) = 0;
     virtual void drawMirrored(const core::CPosition2d<float>& position, float scale, SColor color) = 0;
-    //! Draws the frame stretched onto four corners.
+    //! Draws the image stretched onto four corners.
     virtual void drawFreeShape(const core::CPosition2d<float>& corner1, const core::CPosition2d<float>& corner2,
         const core::CPosition2d<float>& corner3, const core::CPosition2d<float>& corner4, SColor color) = 0;
-    //! Draws the frame as a quad in the XY plane, rotated by an angle in radians and scaled.
+    //! Draws the image as a quad in the XY plane, rotated by an angle in radians and scaled.
     virtual void draw3d(const core::CVector3d<float>& position, float rotation, float scale, bool mirrored,
         SColor color) = 0;
 
-    virtual core::CPosition2d<int> getFrameOffset(int frame) = 0;
-    virtual core::CPosition2d<int> getFrameOriginalOffset(int frame) = 0;
-    virtual core::CDimension2d<int> getFrameSize(int frame) = 0;
-    virtual core::CDimension2d<int> getFrameOriginalSize(int frame) = 0;
-    virtual ITexture* getFrameTexture(int frame) = 0;
-    //! The source rectangle of a frame in its texture.
-    virtual core::CRect<int> getFrameTexturePosition(int frame) = 0;
+    virtual core::CPosition2d<int> getOffset() = 0;
+    virtual core::CPosition2d<int> getOriginalOffset() = 0;
+    virtual core::CDimension2d<int> getSize() = 0;
+    virtual core::CDimension2d<int> getOriginalSize() = 0;
+    virtual ITexture* getTexture() = 0;
+    //! The source rectangle of the image in its texture.
+    virtual core::CRect<int> getTexturePosition() = 0;
+    virtual int getImageId() = 0;
 
-    virtual void setFlag(int flag, bool enabled)
+    //! Orders images by id, for the sorted image list of a package.
+    bool operator<(ISpriteAnimationImage& other)
     {
-        if (enabled)
-            Flags |= flag;
-        else
-            Flags &= ~flag;
+        return getImageId() < other.getImageId();
     }
-
-    virtual bool hasFlag(int flag)
-    {
-        return (Flags & flag) == flag;
-    }
-
-    virtual bool read(io::IReadFile* file) = 0;
-    virtual bool write(io::IWriteFile* file) = 0;
 
 protected:
     ISpritePackage* Package;
-    int Flags;
 };
 
 } // end namespace video

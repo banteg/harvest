@@ -18,6 +18,7 @@ public:
     virtual void* lock() = 0;
     virtual void unlock() = 0;
     virtual const core::CDimension2d<int>& getOriginalSize() = 0;
+    //! The size of the texture in video memory, which may be larger than the original image.
     virtual const core::CDimension2d<int>& getSize() = 0;
     virtual int getDriverType() = 0;
     //! An ECOLOR_FORMAT value.
