@@ -198,9 +198,10 @@ int CShuttleEntity::updateLogic(float frameDelta)
         ReturnPosition = LAP_CHECKPOINTS[previous];
         ReturnState = 1;
         UseMiddleTarget = true;
-        MiddleTargets[NextCheckPoint % 14].X = (LAP_CHECKPOINTS[NextCheckPoint % 14].X + LAP_CHECKPOINTS[previous].X) * .5f;
-        MiddleTargets[NextCheckPoint % 14].Y = (LAP_CHECKPOINTS[NextCheckPoint % 14].Y + LAP_CHECKPOINTS[previous].Y) * .5f;
-        EndTargets[NextCheckPoint % 14] = LAP_CHECKPOINTS[NextCheckPoint % 14];
+        int next = NextCheckPoint % 14;
+        MiddleTargets[next].X = (LAP_CHECKPOINTS[next].X + LAP_CHECKPOINTS[previous].X) * .5f;
+        MiddleTargets[next].Y = (LAP_CHECKPOINTS[next].Y + LAP_CHECKPOINTS[previous].Y) * .5f;
+        EndTargets[next] = LAP_CHECKPOINTS[next];
     }
     float x = Position.X - LAP_CHECKPOINTS[NextCheckPoint % 14].X;
     float y = Position.Y - LAP_CHECKPOINTS[NextCheckPoint % 14].Y;
@@ -278,7 +279,7 @@ void CShuttleEntity::setCurrentPlacing(int placing) { Placing = placing; }
 int CShuttleEntity::getCurrentPlacing() const { return Placing; }
 float CShuttleEntity::getCurrentLapTime() const { return LapTime; }
 float CShuttleEntity::getTotalTime() const { return TotalTime; }
-void CShuttleEntity::resetAllAiByMe(bool mutate)
+void CShuttleEntity::resetAllAiByMe(bool copyMine)
 {
     NextCheckPoint = 1;
     LapTime = 0;
@@ -293,19 +294,15 @@ void CShuttleEntity::resetAllAiByMe(bool mutate)
         if ((*it)->getEntityType() != 19) continue;
         CShuttleEntity* shuttle = (CShuttleEntity*)*it;
         if (shuttle->Ai < 0 || shuttle->getId() == getId()) continue;
-        if (mutate)
+        if (!copyMine)
         {
+            // every other AI mutates its own targets
             for (int i = 0; i < 14; ++i)
             {
-                float x = shuttle->EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5);
-                float y;
-                if (x > LAP_CHECKPOINTS[i].X + 125.0f) x = LAP_CHECKPOINTS[i].X + 125.0f;
-                else x = ox::core::max_(LAP_CHECKPOINTS[i].X - 125.0f, x);
-                shuttle->EndTargets[i].X = x;
-                y = shuttle->EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5);
-                if (y > LAP_CHECKPOINTS[i].Y + 125.0f) y = LAP_CHECKPOINTS[i].Y + 125.0f;
-                else y = ox::core::max_(LAP_CHECKPOINTS[i].Y - 125.0f, y);
-                shuttle->EndTargets[i].Y = y;
+                shuttle->EndTargets[i].X = ox::core::clamp(shuttle->EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].X - 125.0f, LAP_CHECKPOINTS[i].X + 125.0f);
+                shuttle->EndTargets[i].Y = ox::core::clamp(shuttle->EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].Y - 125.0f, LAP_CHECKPOINTS[i].Y + 125.0f);
                 if (ox::algo::CRand::rand() % 150 == 0)
                 {
                     shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
@@ -320,17 +317,13 @@ void CShuttleEntity::resetAllAiByMe(bool mutate)
         }
         else
         {
+            // every other AI starts from a jittered copy of this shuttle's targets
             for (int i = 0; i < 14; ++i)
             {
-                float x = EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5);
-                float y;
-                if (x > LAP_CHECKPOINTS[i].X + 125.0f) x = LAP_CHECKPOINTS[i].X + 125.0f;
-                else x = ox::core::max_(LAP_CHECKPOINTS[i].X - 125.0f, x);
-                shuttle->EndTargets[i].X = x;
-                y = EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5);
-                if (y > LAP_CHECKPOINTS[i].Y + 125.0f) y = LAP_CHECKPOINTS[i].Y + 125.0f;
-                else y = ox::core::max_(LAP_CHECKPOINTS[i].Y - 125.0f, y);
-                shuttle->EndTargets[i].Y = y;
+                shuttle->EndTargets[i].X = ox::core::clamp(EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].X - 125.0f, LAP_CHECKPOINTS[i].X + 125.0f);
+                shuttle->EndTargets[i].Y = ox::core::clamp(EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].Y - 125.0f, LAP_CHECKPOINTS[i].Y + 125.0f);
                 if (ox::algo::CRand::rand() % 15 == 0)
                 {
                     shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
@@ -342,8 +335,7 @@ void CShuttleEntity::resetAllAiByMe(bool mutate)
                     shuttle->MiddleTargets[i].Y = MiddleTargets[i].Y + (ox::algo::CRand::rand() % 51 - 25);
                 }
             }
-        }
-    }
+        }    }
 }
 } // end namespace entity
 } // end namespace harvest

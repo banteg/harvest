@@ -163,8 +163,8 @@ int CShuttleRaceState::secondInit()
         {
             Finished[i] = false;
             const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
-            ViewPositions[i].X = (field.UpperLeftCorner.X + field.LowerRightCorner.X) * 0.5f;
-            ViewPositions[i].Y = (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * 0.5f;
+            ViewPositions[i] = ox::core::CPosition2d<float>((field.UpperLeftCorner.X + field.LowerRightCorner.X) * 0.5f,
+                (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * 0.5f);
             ViewPositions[i].X += ScreenSizeF.Width * -0.25f;
             ViewPositions[i].Y -= ScreenSizeF.Height * 0.5f;
         }
@@ -285,9 +285,8 @@ int CShuttleRaceState::updateState(float time)
         Shuttles[0]->setMovementFlag(4, JoystickDriver->isButtonPressed(0, 0) || Keys[ox::KEY_KEY_W]);
     }
 
-    switch (RaceState)
+    if (RaceState == RACE_COUNTDOWN)
     {
-    case RACE_COUNTDOWN:
         Countdown -= frameDelta;
         ShowMessage = true;
         if (Countdown > 2.0f)
@@ -301,8 +300,8 @@ int CShuttleRaceState::updateState(float time)
             Message = L"GO!";
             RaceState = RACE_RUNNING;
         }
-        break;
-    case RACE_RUNNING:
+    }
+    else if (RaceState == RACE_RUNNING)
     {
         Countdown -= frameDelta;
         ShowMessage = Countdown > -1.0f;
@@ -322,15 +321,14 @@ int CShuttleRaceState::updateState(float time)
                 }
             frameDelta -= step;
         }
-        break;
     }
-    case RACE_FINISHED:
+    else if (RaceState == RACE_FINISHED)
+    {
         ShowMessage = true;
         Message = L"We have a Winner! ";
         Message.append(ox::core::CString<wchar_t>(L"Time: "));
         Message.append(ox::core::CStringFunctions::millisecondsToWide(Shuttles[0]->getTotalTime(), false));
         SubMessage = L"Press N to Quit, or Y to Play Again";
-        break;
     }
 
     for (int i = 0; i < 2; ++i)
@@ -338,18 +336,15 @@ int CShuttleRaceState::updateState(float time)
         if (!Shuttles[i])
             continue;
         const ox::core::CVector3d<float>& shuttlePosition = Shuttles[i]->getPosition();
-        ViewPositions[i].X = shuttlePosition.X;
-        ViewPositions[i].Y = shuttlePosition.Y;
+        ViewPositions[i] = ox::core::CPosition2d<float>(shuttlePosition.X, shuttlePosition.Y);
         ViewPositions[i].X += Shuttles[i]->getCurrentSpeed().X * 0.5f;
         ViewPositions[i].Y += Shuttles[i]->getCurrentSpeed().Y * 0.5f;
         ViewPositions[i].X += ScreenSizeF.Width * -0.25f;
         ViewPositions[i].Y -= ScreenSizeF.Height * 0.5f;
         if (game::gp_world)
             game::gp_world->constrainViewPos(ViewPositions[i]);
-        ViewRects[i].UpperLeftCorner.X = ViewPositions[i].X - 100.0f;
-        ViewRects[i].UpperLeftCorner.Y = ViewPositions[i].Y - 100.0f;
-        ViewRects[i].LowerRightCorner.X = ScreenSize.Width * 0.5f + 200.0f + ViewRects[i].UpperLeftCorner.X;
-        ViewRects[i].LowerRightCorner.Y = ScreenSize.Height + 200.0f + ViewRects[i].UpperLeftCorner.Y;
+        ViewRects[i] = ox::core::CRect<float>(ViewPositions[i] + ox::core::CPosition2d<float>(-100.0f, -100.0f),
+            ox::core::CDimension2d<float>(ScreenSize.Width * 0.5f + 200.0f, ScreenSize.Height + 200.0f));
     }
     return NextState;
 }
@@ -393,8 +388,8 @@ void CShuttleRaceState::render()
                 ox::core::CPosition2d<float> position(
                     entity::LAP_CHECKPOINTS[j].X - ViewPositions[i].X + viewPort.UpperLeftCorner.X,
                     entity::LAP_CHECKPOINTS[j].Y - ViewPositions[i].Y + viewPort.UpperLeftCorner.Y);
-                ox::video::SColor color = j == Shuttles[i]->getNextCheckPoint() ? ox::video::SColor(0xffffffff)
-                                                                               : ox::video::SColor(0xff40cc40);
+                ox::video::SColor color = j != Shuttles[i]->getNextCheckPoint() ? ox::video::SColor(0xff40cc40)
+                                                                               : ox::video::SColor(0xffffffff);
                 Sprites[SPRITE_CHECKPOINT]->drawScaled(position, 250.0f / 255.0f, color);
             }
 
@@ -431,12 +426,12 @@ void CShuttleRaceState::render()
             {
                 if (!Shuttles[j])
                     continue;
-                const ox::core::CVector3d<float>& position = Shuttles[j]->getPosition();
+                ox::core::CVector3d<float> position = Shuttles[j]->getPosition();
                 ox::core::CString<wchar_t> name(L"P");
                 name.append(j + 1);
                 int x = (int)(position.X - ViewPositions[i].X) + viewPort.UpperLeftCorner.X;
                 int y = (int)(position.Y - ViewPositions[i].Y) + viewPort.UpperLeftCorner.Y;
-                Font->draw(name.c_str(), ox::core::CRect<int>(x - 50, y - 30, x + 50, y - 10),
+                Font->draw(name.c_str(), ox::core::CRect<int>(ox::core::CPosition2d<int>(x - 50, y - 30), ox::core::CDimension2d<int>(100, 20)),
                     ox::video::SColor(0xffffffff), ox::gui::EFHA_CENTER, ox::gui::EFVA_TOP, 0);
             }
         }
@@ -449,10 +444,10 @@ void CShuttleRaceState::render()
                 text = L"Position: ";
                 text.append(Shuttles[i]->getCurrentPlacing());
             }
-            else if (i != 0)
-                text = L"Up, Left, Right or Gamepad 2";
-            else
+            else if (i == 0)
                 text = L"W, A, D or Gamepad 1";
+            else
+                text = L"Up, Left, Right or Gamepad 2";
             LargeFont->draw(text.c_str(),
                 ox::core::CRect<int>(viewPort.UpperLeftCorner.X + 10, ScreenSize.Height - 74, ScreenSize.Width / 2,
                     ScreenSize.Height),
@@ -471,14 +466,14 @@ void CShuttleRaceState::render()
         }
 
         // The line between the two views.
-        if (i != 0)
-            Driver->draw2DLine(viewPort.UpperLeftCorner,
-                ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.LowerRightCorner.Y),
-                ox::video::SColor(0xff000000));
-        else
+        if (i == 0)
             Driver->draw2DLine(
                 ox::core::CPosition2d<int>(viewPort.LowerRightCorner.X - 1, viewPort.UpperLeftCorner.Y),
                 ox::core::CPosition2d<int>(viewPort.LowerRightCorner.X - 1, viewPort.LowerRightCorner.Y),
+                ox::video::SColor(0xff000000));
+        else
+            Driver->draw2DLine(ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.UpperLeftCorner.Y),
+                ox::core::CPosition2d<int>(viewPort.UpperLeftCorner.X, viewPort.LowerRightCorner.Y),
                 ox::video::SColor(0xff000000));
     }
 

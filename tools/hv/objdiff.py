@@ -88,7 +88,7 @@ def render(result: dict, symbol: str, context: int = 2) -> list[str]:
         line = instruction.get("formatted", "")
         relocation = instruction.get("relocation")
         if relocation is not None:
-            target = symbols[int(relocation["target_symbol"])]
+            target = symbols[int(relocation.get("target_symbol", 0))]
             line += f"  <{target.get('demangled_name') or target.get('name')}>"
         return line
 
