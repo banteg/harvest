@@ -6,6 +6,7 @@
 #define OX_VIDEO_ISPRITEANIMATIONSTATE_H
 
 #include "../IUnknown.h"
+#include "../core/CDimension2d.h"
 #include "../core/CPosition2d.h"
 #include "../core/CRect.h"
 #include "../core/CVector3d.h"
@@ -49,8 +50,8 @@ public:
 
     virtual core::CPosition2d<int> getFrameOffset(int frame) = 0;
     virtual core::CPosition2d<int> getFrameOriginalOffset(int frame) = 0;
-    virtual core::CPosition2d<int> getFrameSize(int frame) = 0;
-    virtual core::CPosition2d<int> getFrameOriginalSize(int frame) = 0;
+    virtual core::CDimension2d<int> getFrameSize(int frame) = 0;
+    virtual core::CDimension2d<int> getFrameOriginalSize(int frame) = 0;
     virtual ITexture* getFrameTexture(int frame) = 0;
     virtual core::CPosition2d<int> getFrameTexturePosition(int frame) = 0;
 

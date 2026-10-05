@@ -582,39 +582,40 @@ void CPlayState::realignGui()
     {
         ShowMinimap = true;
         minimapSize = ScreenSize.Width - 800 > ScreenSize.Height - 600 ? ScreenSize.Height - 500 : ScreenSize.Width - 700;
-        ox::core::CPosition2d<int> backgroundSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
-        if (minimapSize > backgroundSize.Y)
-            minimapSize = backgroundSize.Y;
+        ox::core::CDimension2d<int> backgroundSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
+        if (minimapSize > backgroundSize.Height)
+            minimapSize = backgroundSize.Height;
     }
 
-    ox::core::CPosition2d<int> bottomLeftSize = GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->getFrameSize(0);
-    ox::core::CPosition2d<int> bottomRightSize = GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND]->getFrameSize(0);
-    ox::core::CPosition2d<int> topLeftSize = GuiSprites[GS_TOP_LEFT_BACKGROUND]->getFrameSize(0);
-    ox::core::CPosition2d<int> topRightSize = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
+    ox::core::CDimension2d<int> bottomLeftSize = GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->getFrameSize(0);
+    ox::core::CDimension2d<int> bottomRightSize = GuiSprites[GS_BOTTOM_RIGHT_BACKGROUND]->getFrameSize(0);
+    ox::core::CDimension2d<int> topLeftSize = GuiSprites[GS_TOP_LEFT_BACKGROUND]->getFrameSize(0);
+    ox::core::CDimension2d<int> topRightSize = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
     if (ShowMinimap)
     {
-        MinimapWidth = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0).X + GuiSprites[GS_MINIMAP_RIGHT]->getFrameSize(0).X +
+        MinimapWidth = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0).Width + GuiSprites[GS_MINIMAP_RIGHT]->getFrameSize(0).Width +
             minimapSize;
-        MinimapHeight = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Y + GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0).Y +
+        MinimapHeight = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Height + GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0).Height +
             minimapSize;
-        topRightSize = ox::core::CPosition2d<int>(MinimapWidth, MinimapHeight);
-        topRightSize.X += GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).X;
+        topRightSize = ox::core::CDimension2d<int>(MinimapWidth, MinimapHeight);
+        topRightSize.Width += GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).Width;
     }
     TimerWidth = 0;
     if (displayTimerForGameMode(GameMode))
     {
-        TimerWidth = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0).X;
-        topRightSize.X += TimerWidth;
+        TimerWidth = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0).Width;
+        topRightSize.Width += TimerWidth;
     }
     if (displayThreatLevelForGameMode(GameMode))
-        topRightSize.X += GuiSprites[GS_THREAT_LEVEL_BACKGROUND]->getFrameSize(0).X;
+        topRightSize.Width += GuiSprites[GS_THREAT_LEVEL_BACKGROUND]->getFrameSize(0).Width;
 
     BottomBar->setRelativePosition(
-        ox::core::CRect<int>(0, ScreenSize.Height - bottomLeftSize.Y, ScreenSize.Width, ScreenSize.Height));
+        ox::core::CRect<int>(0, ScreenSize.Height - bottomLeftSize.Height, ScreenSize.Width, ScreenSize.Height));
     ox::core::CRect<int> bar = BottomBar->getAbsolutePosition();
-    BarLeftArea = ox::core::CRect<int>(bar.UpperLeftCorner, bar.UpperLeftCorner + bottomLeftSize);
-    ox::core::CPosition2d<int> rightCorner = bar.LowerRightCorner - bottomRightSize;
-    BarRightArea = ox::core::CRect<int>(rightCorner, rightCorner + bottomRightSize);
+    BarLeftArea = ox::core::CRect<int>(bar.UpperLeftCorner, bottomLeftSize);
+    ox::core::CPosition2d<int> rightCorner(bar.LowerRightCorner.X - bottomRightSize.Width,
+        bar.LowerRightCorner.Y - bottomRightSize.Height);
+    BarRightArea = ox::core::CRect<int>(rightCorner, bottomRightSize);
     BarCenterArea = ox::core::CRect<int>(BarLeftArea.LowerRightCorner.X, BarLeftArea.UpperLeftCorner.Y,
         BarRightArea.UpperLeftCorner.X, BarLeftArea.LowerRightCorner.Y);
 
@@ -666,7 +667,7 @@ void CPlayState::realignGui()
     }
 
     BuildingsScrolling = false;
-    ActionPanel->setRelativePosition(ox::core::CRect<int>(0, 0, topLeftSize.X, topLeftSize.Y + 120));
+    ActionPanel->setRelativePosition(ox::core::CRect<int>(0, 0, topLeftSize.Width, topLeftSize.Height + 120));
     InfoText->setRelativePosition(ox::core::CRect<int>(115, 5, 392, 27));
     SelectedNameText->setRelativePosition(ox::core::CRect<int>(7, 6, 107, 18));
     OperatorText->setRelativePosition(ox::core::CRect<int>(7, 20, 107, 30));
@@ -685,27 +686,27 @@ void CPlayState::realignGui()
     GuiElements[GUI_ID_REPLACE_PRODUCER]->moveTo(ox::core::CPosition2d<int>(40, 86));
 
     TopBar->setRelativePosition(
-        ox::core::CRect<int>(ScreenSize.Width - topRightSize.X, 0, ScreenSize.Width, topRightSize.Y));
+        ox::core::CRect<int>(ScreenSize.Width - topRightSize.Width, 0, ScreenSize.Width, topRightSize.Height));
     ox::core::CRect<int> top = TopBar->getAbsolutePosition();
     if (ShowMinimap)
     {
         int x = top.LowerRightCorner.X - MinimapWidth + (MinimapWidth - minimapSize) / 2;
-        int y = top.UpperLeftCorner.Y + GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Y;
+        int y = top.UpperLeftCorner.Y + GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Height;
         MinimapRect = ox::core::CRect<int>(x, y, x + minimapSize, y + minimapSize);
-        int right = topRightSize.X - MinimapWidth;
+        int right = topRightSize.Width - MinimapWidth;
         CreditsText->setRelativePosition(ox::core::CRect<int>(right - 87, 5, right - 41, 27));
-        right = topRightSize.X - MinimapWidth;
+        right = topRightSize.Width - MinimapWidth;
         HarvestersText->setRelativePosition(ox::core::CRect<int>(right - 41, 5, right - 11, 27));
-        right = topRightSize.X - MinimapWidth - GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).X;
+        right = topRightSize.Width - MinimapWidth - GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).Width;
         ThreatLevelText->setRelativePosition(ox::core::CRect<int>(right - 53, 5, right - 27, 27));
     }
     else
     {
         MinimapRect = ox::core::CRect<int>(top.LowerRightCorner.X - 105, top.UpperLeftCorner.Y + 14,
             top.LowerRightCorner.X - 6, top.UpperLeftCorner.Y + 115);
-        CreditsText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 193, 5, topRightSize.X - 147, 27));
-        HarvestersText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 147, 5, topRightSize.X - 117, 27));
-        ThreatLevelText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 289, 5, topRightSize.X - 252, 27));
+        CreditsText->setRelativePosition(ox::core::CRect<int>(topRightSize.Width - 193, 5, topRightSize.Width - 147, 27));
+        HarvestersText->setRelativePosition(ox::core::CRect<int>(topRightSize.Width - 147, 5, topRightSize.Width - 117, 27));
+        ThreatLevelText->setRelativePosition(ox::core::CRect<int>(topRightSize.Width - 289, 5, topRightSize.Width - 252, 27));
     }
 
     if (game::gp_world)
@@ -1161,7 +1162,7 @@ int CPlayState::updateState(float time)
 
     // Spawn fewer particles while the frame rate is low.
     int fps = Driver->getFPS();
-    int quality = entity::CEntity::gp_particlePackage->Quality;
+    int quality = entity::CEntity::gp_particlePackage->ImportanceLevel;
     if (fps > 54)
         quality = 2;
     else if (fps >= 30 && fps < 40)
@@ -1170,7 +1171,7 @@ int CPlayState::updateState(float time)
         quality = 0;
     if (quality > ParticleSetting)
         quality = ParticleSetting;
-    entity::CEntity::gp_particlePackage->Quality = quality;
+    entity::CEntity::gp_particlePackage->ImportanceLevel = quality;
 
     if (!SelectedEntity)
         ActionPanel->setVisible(false);
@@ -1675,48 +1676,48 @@ void CPlayState::renderMinimap()
     if (ShowMinimap && GuiSprites[GS_MINIMAP_BACKGROUND])
     {
         // The frame around the minimap, the edges tiled between the corners.
-        ox::core::CPosition2d<int> cornerSize = GuiSprites[GS_MINIMAP_TOP_LEFT]->getFrameSize(0);
+        ox::core::CDimension2d<int> cornerSize = GuiSprites[GS_MINIMAP_TOP_LEFT]->getFrameSize(0);
         ox::core::CPosition2d<int> topLeft(top.LowerRightCorner.X - MinimapWidth, top.UpperLeftCorner.Y);
         GuiSprites[GS_MINIMAP_TOP_LEFT]->draw(topLeft, 0, ox::video::SColor(0xffffffff));
-        ox::core::CPosition2d<int> topRight(top.LowerRightCorner.X - cornerSize.X, top.UpperLeftCorner.Y);
+        ox::core::CPosition2d<int> topRight(top.LowerRightCorner.X - cornerSize.Width, top.UpperLeftCorner.Y);
         GuiSprites[GS_MINIMAP_TOP_RIGHT]->draw(topRight, 0, ox::video::SColor(0xffffffff));
-        ox::core::CRect<int> topEdge(cornerSize.X + topLeft.X, top.UpperLeftCorner.Y, topRight.X,
-            cornerSize.Y + top.UpperLeftCorner.Y);
-        ox::core::CPosition2d<int> tileSize = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0);
-        for (int x = topEdge.UpperLeftCorner.X; x < topEdge.LowerRightCorner.X; x += tileSize.X)
+        ox::core::CRect<int> topEdge(cornerSize.Width + topLeft.X, top.UpperLeftCorner.Y, topRight.X,
+            cornerSize.Height + top.UpperLeftCorner.Y);
+        ox::core::CDimension2d<int> tileSize = GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0);
+        for (int x = topEdge.UpperLeftCorner.X; x < topEdge.LowerRightCorner.X; x += tileSize.Width)
             GuiSprites[GS_MINIMAP_TOP]->draw(ox::core::CPosition2d<int>(x, top.UpperLeftCorner.Y), &topEdge,
                 ox::video::SColor(0xffffffff));
 
         cornerSize = GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->getFrameSize(0);
         ox::core::CPosition2d<int> bottomLeft(top.LowerRightCorner.X - MinimapWidth,
-            MinimapHeight + top.UpperLeftCorner.Y - cornerSize.Y);
+            MinimapHeight + top.UpperLeftCorner.Y - cornerSize.Height);
         GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->draw(bottomLeft, 0, ox::video::SColor(0xffffffff));
-        ox::core::CPosition2d<int> bottomRight(top.LowerRightCorner.X - cornerSize.X, bottomLeft.Y);
+        ox::core::CPosition2d<int> bottomRight(top.LowerRightCorner.X - cornerSize.Width, bottomLeft.Y);
         GuiSprites[GS_MINIMAP_BOTTOM_RIGHT]->draw(bottomRight, 0, ox::video::SColor(0xffffffff));
-        ox::core::CRect<int> bottomEdge(cornerSize.X + bottomLeft.X, bottomLeft.Y, bottomRight.X,
-            cornerSize.Y + bottomLeft.Y);
+        ox::core::CRect<int> bottomEdge(cornerSize.Width + bottomLeft.X, bottomLeft.Y, bottomRight.X,
+            cornerSize.Height + bottomLeft.Y);
         tileSize = GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0);
-        for (int x = bottomEdge.UpperLeftCorner.X; x < bottomEdge.LowerRightCorner.X; x += tileSize.X)
+        for (int x = bottomEdge.UpperLeftCorner.X; x < bottomEdge.LowerRightCorner.X; x += tileSize.Width)
             GuiSprites[GS_MINIMAP_BOTTOM]->draw(ox::core::CPosition2d<int>(x, bottomLeft.Y), &bottomEdge,
                 ox::video::SColor(0xffffffff));
 
-        ox::core::CPosition2d<int> sideSize = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0);
-        ox::core::CRect<int> leftEdge(topLeft.X, topEdge.LowerRightCorner.Y, sideSize.X + topLeft.X, bottomLeft.Y);
+        ox::core::CDimension2d<int> sideSize = GuiSprites[GS_MINIMAP_LEFT]->getFrameSize(0);
+        ox::core::CRect<int> leftEdge(topLeft.X, topEdge.LowerRightCorner.Y, sideSize.Width + topLeft.X, bottomLeft.Y);
         GuiSprites[GS_MINIMAP_LEFT]->draw(leftEdge.UpperLeftCorner, &leftEdge, ox::video::SColor(0xffffffff));
-        ox::core::CRect<int> rightEdge(top.LowerRightCorner.X - sideSize.X, topEdge.LowerRightCorner.Y,
+        ox::core::CRect<int> rightEdge(top.LowerRightCorner.X - sideSize.Width, topEdge.LowerRightCorner.Y,
             top.LowerRightCorner.X, bottomLeft.Y);
         GuiSprites[GS_MINIMAP_RIGHT]->draw(rightEdge.UpperLeftCorner, &rightEdge, ox::video::SColor(0xffffffff));
 
         tileSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
         ox::core::CRect<int> background(leftEdge.LowerRightCorner.X, leftEdge.UpperLeftCorner.Y,
             rightEdge.UpperLeftCorner.X, leftEdge.LowerRightCorner.Y);
-        for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += tileSize.X)
+        for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += tileSize.Width)
             GuiSprites[GS_MINIMAP_BACKGROUND]->draw(ox::core::CPosition2d<int>(x, background.UpperLeftCorner.Y),
                 &background, ox::video::SColor(0xffffffff));
 
-        ox::core::CPosition2d<int> mineralsSize = GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0);
+        ox::core::CDimension2d<int> mineralsSize = GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0);
         GuiSprites[GS_MINERALS_BACKGROUND]->draw(
-            ox::core::CPosition2d<int>(topLeft.X - mineralsSize.X, top.UpperLeftCorner.Y), 0,
+            ox::core::CPosition2d<int>(topLeft.X - mineralsSize.Width, top.UpperLeftCorner.Y), 0,
             ox::video::SColor(0xffffffff));
     }
     else if (GuiSprites[GS_TOP_RIGHT_BACKGROUND])
@@ -1724,9 +1725,9 @@ void CPlayState::renderMinimap()
         // The second planet has a bright ground, so the small minimap gets a dark backing.
         if (game::gp_world->getPlanet() == 1)
             Driver->draw2DRectangle(ox::video::SColor(0x80000000), MinimapRect, 0);
-        ox::core::CPosition2d<int> size = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
+        ox::core::CDimension2d<int> size = GuiSprites[GS_TOP_RIGHT_BACKGROUND]->getFrameSize(0);
         GuiSprites[GS_TOP_RIGHT_BACKGROUND]->draw(
-            ox::core::CPosition2d<int>(top.LowerRightCorner.X - size.X, top.UpperLeftCorner.Y), 0,
+            ox::core::CPosition2d<int>(top.LowerRightCorner.X - size.Width, top.UpperLeftCorner.Y), 0,
             ox::video::SColor(0xffffffff));
     }
 
@@ -1740,10 +1741,10 @@ void CPlayState::renderMinimap()
             progress = LuaManager->getThreatLevelProgress();
         if (progress > 0)
         {
-            ox::core::CPosition2d<int> size = GuiSprites[GS_PROGRESS_BAR]->getFrameSize(0);
+            ox::core::CDimension2d<int> size = GuiSprites[GS_PROGRESS_BAR]->getFrameSize(0);
             ox::core::CPosition2d<int> position(top.UpperLeftCorner.X + TimerWidth + 13, top.UpperLeftCorner.Y + 4);
-            size.X = (int)(size.X * progress + 0.5f);
-            ox::core::CRect<int> clip(position, position + size);
+            size.Width = (int)(size.Width * progress + 0.5f);
+            ox::core::CRect<int> clip(position, size);
             GuiSprites[GS_PROGRESS_BAR]->draw(position, &clip, THREAT_TEXT_COLOR);
         }
     }
@@ -1773,18 +1774,18 @@ void CPlayState::renderMinimap()
             text = ox::core::CStringFunctions::millisecondsToWide(LuaManager->getTimerValue(), true);
         else
             text = ox::core::CStringFunctions::millisecondsToWide(GameTime, true);
-        ox::core::CPosition2d<int> size = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0);
+        ox::core::CDimension2d<int> size = GuiSprites[GS_TIME_BACKGROUND]->getFrameSize(0);
         BoldFont->draw(text.c_str(),
-            ox::core::CRect<int>(top.UpperLeftCorner.X + 30, top.UpperLeftCorner.Y, size.X + top.UpperLeftCorner.X,
-                top.UpperLeftCorner.Y + size.Y),
+            ox::core::CRect<int>(top.UpperLeftCorner.X + 30, top.UpperLeftCorner.Y, size.Width + top.UpperLeftCorner.X,
+                top.UpperLeftCorner.Y + size.Height),
             ox::video::SColor(0xffffffff), ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
     }
 
     if ((GameMode == game::EGM_RUSH || (GameMode == game::EGM_CREATIVE && LuaManager && LuaManager->isRushListVisible())) &&
         GuiSprites[GS_DAMAGE_BAR_BACKGROUND])
     {
-        ox::core::CPosition2d<int> size = GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0);
-        ox::core::CPosition2d<int> position(ScreenSize.Width - size.X, TopBar->getAbsolutePosition().LowerRightCorner.Y + 10);
+        ox::core::CDimension2d<int> size = GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0);
+        ox::core::CPosition2d<int> position(ScreenSize.Width - size.Width, TopBar->getAbsolutePosition().LowerRightCorner.Y + 10);
         GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->draw(position, 0, ox::video::SColor(0xffffffff));
         float damage = game::gp_statistics->getRushModeDamage();
         if (GameMode == game::EGM_CREATIVE && LuaManager)
@@ -1794,8 +1795,8 @@ void CPlayState::renderMinimap()
             size = GuiSprites[GS_DAMAGE_BAR]->getFrameSize(0);
             position.X += 40;
             position.Y += 42;
-            ox::core::CRect<int> clip(position.X, (int)(size.Y * (damage / -50000.0f + 1.0f)) + position.Y,
-                size.X + position.X, position.Y + size.Y);
+            ox::core::CRect<int> clip(position.X, (int)(size.Height * (damage / -50000.0f + 1.0f)) + position.Y,
+                size.Width + position.X, position.Y + size.Height);
             GuiSprites[GS_DAMAGE_BAR]->draw(position, &clip, ox::video::SColor(0xffffffff));
         }
     }
@@ -1990,7 +1991,7 @@ ox::core::CDimension2d<int> CPlayState::getViewSize()
     int width = ScreenSize.Width;
     int height = ScreenSize.Height;
     if (GuiSprites[GS_BOTTOM_LEFT_BACKGROUND])
-        height -= GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->getFrameSize(0).Y;
+        height -= GuiSprites[GS_BOTTOM_LEFT_BACKGROUND]->getFrameSize(0).Height;
     return ox::core::CDimension2d<int>(width, height);
 }
 
@@ -2198,7 +2199,7 @@ void CPlayState::setWaveListToggle(bool visible)
         if (ListGroups[LIST_CREATIVE] && LuaManager && LuaManager->isCreativeListVisible())
             offset = -ListGroups[LIST_CREATIVE]->getRelativePosition().getWidth() - 1;
         if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
-            offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+            offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).Width - 1;
         ListGroups[LIST_WAVES]->moveTo(ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
     }
     else
@@ -2216,7 +2217,7 @@ void CPlayState::setWaveListToggle(bool visible)
             if (ListGroups[LIST_CREATIVE] && LuaManager && LuaManager->isCreativeListVisible())
                 offset = -ListGroups[LIST_CREATIVE]->getRelativePosition().getWidth() - 1;
             if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
-                offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+                offset += -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).Width - 1;
             ListGroups[LIST_WAVES]->moveTo(
                 ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
         }
@@ -2277,7 +2278,7 @@ void CPlayState::setCreativeListToggle(bool visible)
         ox::core::CRect<int> area = ListGroups[LIST_CREATIVE]->getRelativePosition();
         int offset = 0;
         if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
-            offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+            offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).Width - 1;
         ListGroups[LIST_CREATIVE]->moveTo(
             ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
     }
@@ -2294,7 +2295,7 @@ void CPlayState::setCreativeListToggle(bool visible)
             ox::core::CRect<int> area = ListGroups[LIST_CREATIVE]->getRelativePosition();
             int offset = 0;
             if (GuiSprites[GS_DAMAGE_BAR_BACKGROUND] && LuaManager && LuaManager->isRushListVisible())
-                offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).X - 1;
+                offset = -GuiSprites[GS_DAMAGE_BAR_BACKGROUND]->getFrameSize(0).Width - 1;
             ListGroups[LIST_CREATIVE]->moveTo(
                 ox::core::CPosition2d<int>(ScreenSize.Width - 1 - area.getWidth() + offset, y));
         }

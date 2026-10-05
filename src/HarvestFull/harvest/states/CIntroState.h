@@ -61,7 +61,7 @@ private:
     ox::algo::CTimeCounter LayerCounter;
     ox::video::ISpritePackage* SplashPackage;
     ox::video::ISpriteAnimationState* Sprites[SPRITE_COUNT];
-    ox::core::CPosition2d<int> SpriteSizes[SPRITE_COUNT];
+    ox::core::CDimension2d<int> SpriteSizes[SPRITE_COUNT];
     ox::core::CPosition2d<int> LayerPositions[5];
     ox::gui::IGUIElement* SkipElement;
     //! Neither set nor read by the 1.18 code; only the object size shows it.

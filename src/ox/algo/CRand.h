@@ -12,7 +12,6 @@ class CRand
 {
 public:
     CRand() : Current(0x0f0f0f0f) {}
-    //! A sequence of its own starting at seed.
     CRand(int seed) : Current(seed) {}
     virtual ~CRand() {}
 

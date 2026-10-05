@@ -462,9 +462,9 @@ bool CWorld::initializeWorld(ox::video::IVideoDriver* driver, const ox::core::CD
     for (int i = 0; i < 23; ++i)
         if (DoodadSprites[i])
         {
-            ox::core::CPosition2d<int> size = DoodadSprites[i]->getFrameSize(0);
-            DoodadSizes[i].Width = size.X;
-            DoodadSizes[i].Height = size.Y;
+            ox::core::CDimension2d<int> size = DoodadSprites[i]->getFrameSize(0);
+            DoodadSizes[i].Width = size.Width;
+            DoodadSizes[i].Height = size.Height;
         }
     DoodadCollisionRadii[0] = 214;
     DoodadCollisionRadii[1] = 146;

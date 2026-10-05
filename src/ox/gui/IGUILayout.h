@@ -7,7 +7,6 @@
 #include "IGUIElement.h"
 
 namespace ox {
-namespace video { class ISpritePackage; }
 namespace gui {
 
 //! An element that arranges its children by their layout hints.
@@ -19,9 +18,9 @@ public:
     virtual void sortHorizontally(int spacing);
     //! Places the children in rows broken at "br" hints, aligned by their other hints.
     virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
-    // The return types of the next five are not verified.
     virtual core::CRect<int> getContentArea();
     virtual void updateChildrenForContentArea();
+    // The return types of the next three are not verified.
     virtual IGUIElement* getCloseButton();
     virtual IGUIElement* getMinimizeButton();
     virtual IGUIElement* getMaximizeButton();

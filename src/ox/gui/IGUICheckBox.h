@@ -1,6 +1,5 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// The virtual order follows the Mac 1.18 vtable of daisy::gui::CGUICheckBox; return types that no
-// recovered code uses are not verified.
+// The virtual order follows the Mac 1.18 vtable of daisy::gui::CGUICheckBox.
 
 #ifndef OX_GUI_IGUICHECKBOX_H
 #define OX_GUI_IGUICHECKBOX_H
@@ -14,7 +13,7 @@ namespace gui {
 
 class IGUIFont;
 
-//! A check box, also used as a toggle button.
+//! A check box with a text.
 class IGUICheckBox : public IGUIElement
 {
 public:

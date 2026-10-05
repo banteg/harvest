@@ -11,6 +11,8 @@ namespace ox {
 namespace io { class IFileSystem; class IReadFile; }
 namespace game {
 
+class CConfigBlock;
+
 //! A configuration file of blocks and attributes, such as "mod:name".
 class CConfiguration
 {
@@ -22,7 +24,9 @@ public:
     bool read(io::IReadFile* file);
     void write(const char* filename);
     bool attributeExists(const wchar_t* name);
+    bool attributeExists(const core::CString<wchar_t>& name);
     bool getAttribute(const wchar_t* name, core::CString<wchar_t>& value);
+    bool getAttribute(const core::CString<wchar_t>& name, core::CString<wchar_t>& value);
     bool getAttributeFromBase64(const wchar_t* name, core::CString<wchar_t>& value);
     int getAttributeAsInt(const wchar_t* name);
     float getAttributeAsFloat(const wchar_t* name);
@@ -31,11 +35,12 @@ public:
     void setAttribute(const wchar_t* name, int value);
     void setAttribute(const wchar_t* name, float value);
     void setAttributeAsBase64(const core::CString<wchar_t>& name, const core::CString<wchar_t>& value);
+    TArray<CConfigBlock*>& getBlocks();
+    CConfigBlock* getBlock(const core::CString<wchar_t>& name);
 
 private:
     io::IFileSystem* FileSystem;
-    // The parsed blocks; their type is not recovered yet.
-    TArray<void*> Blocks;
+    TArray<CConfigBlock*> Blocks;
 };
 
 } // end namespace game

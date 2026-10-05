@@ -32,6 +32,14 @@ inline float getWorldGridOffset()
 //! Added to world coordinates to index the entity grid.
 static const float WORLD_GRID_OFFSET = getWorldGridOffset();
 
+//! Text keys of the planet names, by planet index. The header is inferred.
+static const wchar_t* const PlanetNames[] =
+{
+    L"Hephaestus",
+    L"Poseidon",
+    L"Ares"
+};
+
 //! A scenery obstacle: its sprite bounds limit the elliptical collision test.
 struct SDoodad
 {
