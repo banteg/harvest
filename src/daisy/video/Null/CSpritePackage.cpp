@@ -118,26 +118,25 @@ ox::video::ISpriteAnimationImage* CSpritePackage::addNewImage(int id)
         return Images[index];
     }
 
-    if (id < SPRITE_BUNDLE_FIRST_ID)
-    {
-        index = ox::algo::binarySearchIf(Sprites, SImageIdSearcher<SSpriteImage>(), id);
-        if (index < 0)
-            return 0;
-        ox::video::ISpriteAnimationImage* image = new CSpriteAnimationImage(this, &Sprites[index], Driver);
-        Images.push_back(image);
-        std::sort(Images.begin(), Images.end(), ox::algo::SPointerSortFunctor<ox::video::ISpriteAnimationImage*>());
-        return image;
-    }
-    else
+    ox::video::ISpriteAnimationImage* bundle;
+    ox::video::ISpriteAnimationImage* sprite;
+    if (id >= SPRITE_BUNDLE_FIRST_ID)
     {
         index = ox::algo::binarySearchIf(Bundles, SImageIdSearcher<SSpriteBundle>(), id);
         if (index < 0)
             return 0;
-        ox::video::ISpriteAnimationImage* image = new CSpriteAnimationImageBundle(this, &Bundles[index], Driver);
-        Images.push_back(image);
+        bundle = new CSpriteAnimationImageBundle(this, &Bundles[index], Driver);
+        Images.push_back(bundle);
         std::sort(Images.begin(), Images.end(), ox::algo::SPointerSortFunctor<ox::video::ISpriteAnimationImage*>());
-        return image;
+        return bundle;
     }
+    index = ox::algo::binarySearchIf(Sprites, SImageIdSearcher<SSpriteImage>(), id);
+    if (index < 0)
+        return 0;
+    sprite = new CSpriteAnimationImage(this, &Sprites[index], Driver);
+    Images.push_back(sprite);
+    std::sort(Images.begin(), Images.end(), ox::algo::SPointerSortFunctor<ox::video::ISpriteAnimationImage*>());
+    return sprite;
 }
 
 void CSpritePackage::removeImage(ox::video::ISpriteAnimationImage* image)
