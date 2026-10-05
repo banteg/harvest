@@ -1657,7 +1657,8 @@ void CPlayState::newSelectedEntity()
     {
         ox::core::CString<wchar_t> name;
         if (SelectedEntity->getEntityType() != 16)
-            name = settings::gp_systemConfig->getLocalizedText(entity::ENTITY_KEY_NAMES[SelectedEntity->getEntityType()]);
+            name = settings::gp_systemConfig->getLocalizedText(
+                entity::ENTITY_KEY_NAMES[SelectedEntity->getEntityType()]).c_str();
         else
             name = ((entity::CCreativeEntity*)SelectedEntity)->getBuildingName();
         if (BoldFont->getDimension(name.c_str()).Width > 100)
@@ -1675,7 +1676,7 @@ void CPlayState::newSelectedEntity()
         GuiElements[GUI_ID_DESELECT]->setVisible(true);
         bool linker = type == 1;
         bool tower = type == 7;
-        GuiElements[GUI_ID_UNLINK]->setVisible(tower || linker);
+        GuiElements[GUI_ID_UNLINK]->setVisible(tower | linker);
         GuiElements[GUI_ID_OVERCHARGE]->setVisible(linker);
         bool turret = type == 8;
         GuiElements[GUI_ID_EAGLE]->setVisible(turret);
