@@ -49,8 +49,7 @@ bool CProfileManager::openProfile(const ox::core::CString<char>& filename)
 CProfileManager::~CProfileManager()
 {
     writeCurrentProfile();
-    if (CurrentProfile)
-        delete CurrentProfile;
+    delete CurrentProfile;
     for (unsigned int i = 0; i < Profiles.size(); ++i)
     {
         if (Profiles[i])
@@ -94,8 +93,7 @@ void CProfileManager::createProfileList()
             name->Name = profile.getPlayerName();
             Profiles.push_back(name);
         }
-        if (config)
-            delete config;
+        delete config;
     }
     files->drop();
 }
