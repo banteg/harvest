@@ -316,13 +316,37 @@ void CSettingsScreen::applyScreenMode()
 bool CSettingsScreen::OnEvent(const ox::event::SEvent& event)
 {
     bool result = false;
-    if (event.EventType == ox::event::EET_GUI_EVENT)
+    if (event.EventType == ox::event::EET_DEVICE_EVENT)
+    {
+        if (event.DeviceEvent.Type == ox::event::EDE_FULLSCREEN_TOGGLED)
+        {
+            ox::core::CDimension2d<int> size = Device->getVideoDriver()->getScreenSize();
+            Window->centerOnRect(ox::core::CRect<int>(0, 0, size.Width, size.Height));
+            setCheckboxChecked(ID_FULLSCREEN, Device->getVideoDriver()->isFullscreen());
+        }
+    }
+    else if (event.EventType == ox::event::EET_GUI_EVENT)
     {
         int id = event.GUIEvent.Caller->getID();
         switch (event.GUIEvent.EventType)
         {
         case ox::gui::EGET_BUTTON_CLICKED:
-            if (id == ID_DONE)
+            switch (id)
+            {
+            default:
+                if (id >= ID_KEY_COMMAND && id < ID_KEY_COMMAND + settings::EKC_COUNT)
+                {
+                    if (LoadBlock)
+                    {
+                        LoadBlock->remove();
+                        LoadBlock = 0;
+                    }
+                    createLoadBlock();
+                    KeyCommand = id - ID_KEY_COMMAND;
+                    result = true;
+                }
+                break;
+            case ID_DONE:
             {
                 settings::gp_systemConfig->saveConfig();
                 Window->setVisible(false);
@@ -336,17 +360,8 @@ bool CSettingsScreen::OnEvent(const ox::event::SEvent& event)
                     sendCustomEvent(ECE_LANGUAGE_CHANGED);
                 }
                 result = true;
+                break;
             }
-            else if (id >= ID_KEY_COMMAND && id < ID_KEY_COMMAND + settings::EKC_COUNT)
-            {
-                if (LoadBlock)
-                {
-                    LoadBlock->remove();
-                    LoadBlock = 0;
-                }
-                createLoadBlock();
-                KeyCommand = id - ID_KEY_COMMAND;
-                result = true;
             }
             break;
         case ox::gui::EGET_SCROLL_BAR_CHANGED:
@@ -437,7 +452,7 @@ bool CSettingsScreen::OnEvent(const ox::event::SEvent& event)
                                 LoadBlock->remove();
                                 LoadBlock = 0;
                             }
-                            result = true;
+                            return true;
                         }
                     }
                 }
@@ -450,15 +465,6 @@ bool CSettingsScreen::OnEvent(const ox::event::SEvent& event)
             Window->setVisible(false);
             sendCustomEvent(ECE_CONTINUE_GAME);
             result = true;
-        }
-    }
-    else if (event.EventType == ox::event::EET_DEVICE_EVENT)
-    {
-        if (event.DeviceEvent.Type == ox::event::EDE_FULLSCREEN_TOGGLED)
-        {
-            ox::core::CDimension2d<int> size = Device->getVideoDriver()->getScreenSize();
-            Window->centerOnRect(ox::core::CRect<int>(0, 0, size.Width, size.Height));
-            setCheckboxChecked(ID_FULLSCREEN, Device->getVideoDriver()->isFullscreen());
         }
     }
     return result;
