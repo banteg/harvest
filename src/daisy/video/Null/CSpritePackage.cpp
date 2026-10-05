@@ -299,7 +299,7 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
         readSpriteHeader(bundle.Header, file, version);
         bundle.Columns = ox::io::CHelpIO::readInt(file);
         int count = ox::io::CHelpIO::readInt(file);
-        for (int j = 0; j < count; ++j)
+        for (int j = count; j > 0; --j)
         {
             SSpriteImage image;
             readSprite(image, file, version);
@@ -325,17 +325,17 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
 
         int count = ox::io::CHelpIO::readInt(file);
         int value;
-        for (int j = 0; j < count; ++j)
+        for (int j = count; j > 0; --j)
         {
             value = ox::io::CHelpIO::readInt(file);
             animation.Frames.push_back(value);
         }
-        for (int j = 0; j < count; ++j)
+        for (int j = count; j > 0; --j)
         {
             value = ox::io::CHelpIO::readInt(file);
             animation.Jumps.push_back(value);
         }
-        for (int j = 0; j < count; ++j)
+        for (int j = count; j > 0; --j)
         {
             value = ox::io::CHelpIO::readInt(file);
             animation.Durations.push_back(value);
