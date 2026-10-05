@@ -119,124 +119,6 @@ static const wchar_t* const HIGHSCORE_TYPE_NAMES[] =
     L"highscores:table"
 };
 
-bool CHighscoreScreen::isVisible()
-{
-    if (Window)
-        return Window->isVisible();
-    return false;
-}
-
-ox::gui::IGUILayout* CHighscoreScreen::createNewPopupWindow()
-{
-    if (Popup)
-    {
-        Popup->remove();
-        Popup = 0;
-    }
-    Popup = GUIEnvironment->addModalScreen();
-    return GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 200, 100), Popup, -1);
-}
-
-void CHighscoreScreen::sortAndMovePopup(ox::gui::IGUILayout* popup, ox::gui::IGUIElement* button, bool above)
-{
-    popup->sortRiver(true, 5, 5, false);
-    if (above)
-        popup->moveTo(ox::core::CPosition2d<int>(button->getAbsolutePosition().UpperLeftCorner.X,
-            button->getAbsolutePosition().UpperLeftCorner.Y - 10 - popup->getAbsolutePosition().getHeight()));
-    else
-        popup->moveTo(ox::core::CPosition2d<int>(button->getAbsolutePosition().UpperLeftCorner.X,
-            button->getAbsolutePosition().LowerRightCorner.Y + 10));
-
-    ox::core::CRect<int> rect = popup->getAbsolutePosition();
-    if (rect.LowerRightCorner.X > Driver->getScreenSize().Width)
-        popup->moveTo(ox::core::CPosition2d<int>(
-            rect.UpperLeftCorner.X + Driver->getScreenSize().Width - rect.LowerRightCorner.X,
-            rect.UpperLeftCorner.Y));
-}
-
-void CHighscoreScreen::createStatusString(const wchar_t* text)
-{
-    if (StatusText)
-    {
-        StatusText->remove();
-        StatusText = 0;
-    }
-    if (ListFrame)
-    {
-        StatusText = GUIEnvironment->addStaticText(text, STATUS_LABEL_AREA, false, true, ListFrame, -1, L"");
-        StatusText->packSize();
-        ox::core::CRect<int> rect = StatusText->getRelativePosition();
-        StatusText->moveTo(ox::core::CPosition2d<int>(
-            (STATUS_LABEL_AREA.getWidth() - rect.getWidth()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.X,
-            (STATUS_LABEL_AREA.getHeight() - rect.getHeight()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.Y));
-    }
-}
-
-ox::core::CString<wchar_t> CHighscoreScreen::parseRelativeTimeFormat(const ox::core::CString<char>& seconds)
-{
-    time(0);
-    int age = atoi(seconds.c_str());
-    if (age < 60)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:secondsAgo", age);
-    if (age < 120)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastMinute");
-    if (age < 3600)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:minutesAgo", age / 60);
-    if (age < 7200)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastHour");
-    if (age < 86400)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:hoursAgo", age / 3600);
-    if (age < 172800)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:yesterday");
-    if (age < 1209600)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:daysAgo", age / 86400);
-    if (age < 31536000)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:weeksAgo", age / 604800);
-    if (age < 63072000)
-        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastYear");
-    return settings::gp_systemConfig->getLocalizedText(L"highscores:yearsAgo", age / 31536000);
-}
-
-void CHighscoreScreen::createLoadBlock()
-{
-    LoadBlock = GUIEnvironment->addModalScreen();
-    ox::gui::IGUILayout* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 30, 30), LoadBlock, -1);
-    GUIEnvironment->addStaticText(settings::gp_systemConfig->getLocalizedText(L"highscores:loading").c_str(),
-        "br center", frame, 0, -1);
-    frame->sortRiver(true, 20, 20, false);
-    frame->centerOnParent();
-}
-
-ox::core::CString<char> CHighscoreScreen::createBase64ForUCS2(const ox::core::CString<wchar_t>& text)
-{
-    ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile();
-    ox::io::CHelpIO::writeWideString(file, text, true);
-    ox::io::CMemReadFile data(file->getData(), file->getSize(), false);
-    ox::core::CString<char> result;
-    ox::algo::CBase64url::encode(result, &data);
-    delete file;
-    return ox::core::CString<char>(result);
-}
-
-void CHighscoreScreen::loadSprites()
-{
-    if (SpritesLoaded)
-        return;
-
-    ox::video::ISpritePackage* package =
-        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true);
-    if (package)
-    {
-        for (int i = 0; i < SPRITE_COUNT; ++i)
-        {
-            Sprites[i] = package->addNewAnimationState(HIGHSCORE_SPRITE_NAMES[i]);
-            if (Sprites[i])
-                SpriteSizes[i] = Sprites[i]->getFrameSize(0);
-        }
-    }
-    SpritesLoaded = true;
-}
-
 CHighscoreScreen::CHighscoreScreen(ox::IOxDevice* device)
     : Device(device), Ready(true), GameMode(0), Planet(0), Unknown38(0), SortMode(0), ExactName(false),
       ExactGroup(false), Offset(0), SummaryCategory(0), ShownSummaryCategory(-1), SpritesLoaded(false), Window(0),
@@ -279,131 +161,39 @@ CHighscoreScreen::~CHighscoreScreen()
             Sprites[i]->remove();
 }
 
-void CHighscoreScreen::createSummaryPage()
+void CHighscoreScreen::update(float frameDelta)
 {
-    if (ShownSummaryCategory == SummaryCategory)
+    Lock.enter();
+    if (Response.size() > 0)
     {
-        SummaryFrame->setVisible(true);
-        ListFrame->setVisible(false);
-        SelectedType = ID_TYPE_BUTTON + ShownSummaryCategory;
-        return;
-    }
-
-    ShownSummaryCategory = SummaryCategory;
-    SelectedType = ID_TYPE_BUTTON + SummaryCategory;
-    SummaryFrame->removeAllChildren();
-
-    const int PLAYET_Y_POS[4] = {77, 114, 151, 40};
-    ox::gui::IGUIFont* font = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/smallFont.fnt");
-    for (int i = 0; i < 4; ++i)
-    {
-        for (int j = 0; j < 2; ++j)
+        if (Response == ox::core::CString<char>("Error"))
         {
-            for (int k = 0; k < 4; ++k)
+            Response = "";
+            if (LoadBlock)
             {
-                PromoteButtons[i][j][k] = 0;
-                if (SummaryPages[ShownSummaryCategory].Entries[i][j][k].Name.size() > 0)
-                {
-                    int x = 131 + i * 157;
-                    int y = 22 + j * 195;
-                    ox::gui::IGUIButton* button = GUIEnvironment->addButton(
-                        ox::core::CRect<int>(x, y + PLAYET_Y_POS[k], x + 50, y + PLAYET_Y_POS[k] + 30), SummaryFrame,
-                        ID_PROMOTE + i * 8 + j * 4 + k, 0);
-                    button->setAnimations(
-                        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true),
-                        "BtnPromote", true);
-                    button->setReportOnDraw(2);
-                    PromoteButtons[i][j][k] = button;
-
-                    ox::core::CRect<int> textArea(33, 4, 125, 29);
-                    ox::core::CString<wchar_t> text = SummaryPages[ShownSummaryCategory].Entries[i][j][k].Name;
-                    text.append(L"\n(");
-                    text.append(SummaryPages[ShownSummaryCategory].Entries[i][j][k].Score);
-                    text.append(L")");
-                    ox::gui::IGUIStaticText* label =
-                        GUIEnvironment->addStaticText(text.c_str(), textArea, false, true, button, -1, L"");
-                    label->setOverrideFont(font);
-                    label->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_TOP);
-                }
+                LoadBlock->remove();
+                LoadBlock = 0;
             }
+            Ready = true;
         }
-    }
-    SummaryFrame->setVisible(true);
-    ListFrame->setVisible(false);
-}
-
-ox::core::CString<wchar_t> CHighscoreScreen::createUCS2FromBase64UTF2(const ox::core::CString<char>& text)
-{
-    ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile();
-    ox::algo::CBase64url::decode(file, text);
-    ox::core::CString<wchar_t> result = L"";
-    for (int i = 0; i < file->getSize(); ++i)
-    {
-        // UTF-8 sequences of up to three bytes, decoded to UCS-2
-        if (((unsigned char)file->getData()[i] & 0xe0) == 0xc0 && i < file->getSize() - 1)
+        else
         {
-            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 1] & 0x3f) +
-                (((unsigned char)file->getData()[i] & 0x1f) << 6)));
-            ++i;
+            if (SummaryMode)
+                parseSummaryPage(Response);
+            else
+                parseHighscoreString(Response);
+            Response = "";
+            Ready = true;
+            if (LoadBlock)
+            {
+                LoadBlock->remove();
+                LoadBlock = 0;
+            }
+            if (SummaryMode)
+                createSummaryPage();
         }
-        else if (((unsigned char)file->getData()[i] & 0xf0) == 0xe0 && i < file->getSize() - 2)
-        {
-            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 2] & 0x3f) +
-                (((unsigned char)file->getData()[i + 1] & 0x3f) << 6) +
-                (((unsigned char)file->getData()[i] & 0xf) << 12)));
-            i += 2;
-        }
-        else if (file->getData()[i])
-            result.append((wchar_t)(unsigned char)file->getData()[i]);
     }
-    delete file;
-    return result;
-}
-
-void CHighscoreScreen::loadHighscores(int offset)
-{
-    if (!Ready)
-        return;
-
-    Ready = false;
-    if (LoadBlock)
-    {
-        LoadBlock->remove();
-        LoadBlock = 0;
-    }
-    createLoadBlock();
-    if (!Connection)
-    {
-        Connection = new ox::net::CHTTPConnectionHandler();
-        Connection->init(Device, this);
-    }
-    Offset = offset;
-
-    ox::core::CString<char> url = "/highscores/harvest/getHighScores.php?version=1";
-    url.append("&mode=");
-    url.append(GameMode);
-    url.append("&planet=");
-    url.append(Planet);
-    url.append("&offset=");
-    url.append(offset);
-    url.append("&orderMode=");
-    url.append(SortMode);
-    if (ExactName)
-        url.append("&exactName=1");
-    if (ExactGroup)
-        url.append("&exactGroup=1");
-    if (NameFilter.size() > 0)
-    {
-        url.append("&nameFilter=");
-        url.append(createBase64ForUCS2(NameFilter));
-    }
-    if (GroupFilter.size() > 0)
-    {
-        url.append("&groupFilter=");
-        url.append(createBase64ForUCS2(GroupFilter));
-    }
-    SummaryMode = false;
-    Connection->doGet(url, L"www.oxeyegames.com", 80);
+    Lock.leave();
 }
 
 void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
@@ -442,145 +232,6 @@ void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
         }
     }
     SummaryLoaded[SummaryCategory] = true;
-}
-
-
-void CHighscoreScreen::update(float frameDelta)
-{
-    Lock.enter();
-    if (Response.size() > 0)
-    {
-        if (Response == ox::core::CString<char>("Error"))
-        {
-            Response = "";
-            if (LoadBlock)
-            {
-                LoadBlock->remove();
-                LoadBlock = 0;
-            }
-            Ready = true;
-        }
-        else
-        {
-            if (SummaryMode)
-                parseSummaryPage(Response);
-            else
-                parseHighscoreString(Response);
-            Response = "";
-            Ready = true;
-            if (LoadBlock)
-            {
-                LoadBlock->remove();
-                LoadBlock = 0;
-            }
-            if (SummaryMode)
-                createSummaryPage();
-        }
-    }
-    Lock.leave();
-}
-
-void CHighscoreScreen::loadSummaryPage(int category)
-{
-    if (SummaryLoaded[category])
-    {
-        SummaryCategory = category;
-        createSummaryPage();
-        return;
-    }
-    if (!Ready)
-        return;
-
-    Ready = false;
-    createLoadBlock();
-    if (!Connection)
-    {
-        Connection = new ox::net::CHTTPConnectionHandler();
-        Connection->init(Device, this);
-    }
-
-    ox::core::CString<char> url = "/highscores/harvest/getSummaryPage.php?version=1";
-    url.append("&category=");
-    url.append(category);
-    ox::core::CString<wchar_t> group = settings::gp_profileManager->getCurrentProfile()->getPlayerGroup();
-    if (group.size() > 0)
-    {
-        url.append("&peerGroup=");
-        url.append(createBase64ForUCS2(group));
-    }
-    SummaryMode = true;
-    SummaryCategory = category;
-    Connection->doGet(url, L"www.oxeyegames.com", 80);
-}
-
-void CHighscoreScreen::setVisible(bool visible)
-{
-    if (visible)
-    {
-        if (!Window)
-        {
-            loadSprites();
-            Window = GUIEnvironment->addModalScreen();
-            Window->setID(ID_SCREEN);
-            Background = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 800, 600), Window);
-            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].X,
-                SpriteSizes[SPRITE_TOP_BACKGROUND].Y + 5), Background);
-            TypeFrame->setReportOnDraw(1);
-            TypeFrame->setID(ID_TYPE_FRAME);
-            TypeFrame->LayoutFlags = "br center";
-
-            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Y - SpriteSizes[SPRITE_TOP_SELECTOR].Y) / 2;
-            int width = SpriteSizes[SPRITE_TOP_SELECTOR].X;
-            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].X - width * 4) / 2;
-            for (int i = 0; i < 4; ++i)
-            {
-                TypeButtons[i] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(left, top,
-                    SpriteSizes[SPRITE_TOP_SELECTOR].X + left, SpriteSizes[SPRITE_TOP_SELECTOR].Y + top), TypeFrame);
-                TypeButtons[i]->setID(ID_TYPE_BUTTON + i);
-                TypeButtons[i]->setReportOnDraw(2);
-                TypeNames[i] = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_TYPE_NAMES[i]);
-                left += width;
-            }
-
-            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].X) / 2;
-            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y,
-                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
-                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y);
-            ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
-            ListFrame->setReportOnDraw(1);
-            ListFrame->setID(ID_LIST_FRAME);
-            ListFrame->LayoutFlags = "br center";
-            ListFrame->setVisible(false);
-
-            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y;
-            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].X + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].X;
-            int summaryLeft = (800 - summaryWidth) / 2;
-            ox::core::CRect<int> summaryArea;
-            summaryArea.UpperLeftCorner.X = summaryLeft;
-            summaryArea.UpperLeftCorner.Y = summaryTop;
-            summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
-            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y;
-            SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
-            SummaryFrame->setReportOnDraw(1);
-            SummaryFrame->setID(ID_SUMMARY_FRAME);
-            SummaryFrame->LayoutFlags = "br center";
-            StatusText = 0;
-
-            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin * 2 + 5;
-            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background, ID_BACK,
-                settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
-            back->LayoutFlags = "br";
-            back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
-            back->centerOnParent();
-            back->moveTo(ox::core::CPosition2d<int>(back->getRelativePosition().UpperLeftCorner.X,
-                backY));
-        }
-        Background->centerOnParent();
-        Window->setVisible(true);
-        loadSummaryPage(0);
-    }
-    else if (Window)
-        Window->setVisible(false);
 }
 
 void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
@@ -700,6 +351,59 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
     SummaryFrame->setVisible(false);
     ListFrame->setVisible(true);
     SelectedType = ID_TYPE_BUTTON + 3;
+}
+
+void CHighscoreScreen::createSummaryPage()
+{
+    if (ShownSummaryCategory == SummaryCategory)
+    {
+        SummaryFrame->setVisible(true);
+        ListFrame->setVisible(false);
+        SelectedType = ID_TYPE_BUTTON + ShownSummaryCategory;
+        return;
+    }
+
+    ShownSummaryCategory = SummaryCategory;
+    SelectedType = ID_TYPE_BUTTON + SummaryCategory;
+    SummaryFrame->removeAllChildren();
+
+    const int PLAYET_Y_POS[4] = {77, 114, 151, 40};
+    ox::gui::IGUIFont* font = GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/smallFont.fnt");
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 2; ++j)
+        {
+            for (int k = 0; k < 4; ++k)
+            {
+                PromoteButtons[i][j][k] = 0;
+                if (SummaryPages[ShownSummaryCategory].Entries[i][j][k].Name.size() > 0)
+                {
+                    int x = 131 + i * 157;
+                    int y = 22 + j * 195;
+                    ox::gui::IGUIButton* button = GUIEnvironment->addButton(
+                        ox::core::CRect<int>(x, y + PLAYET_Y_POS[k], x + 50, y + PLAYET_Y_POS[k] + 30), SummaryFrame,
+                        ID_PROMOTE + i * 8 + j * 4 + k, 0);
+                    button->setAnimations(
+                        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true),
+                        "BtnPromote", true);
+                    button->setReportOnDraw(2);
+                    PromoteButtons[i][j][k] = button;
+
+                    ox::core::CRect<int> textArea(33, 4, 125, 29);
+                    ox::core::CString<wchar_t> text = SummaryPages[ShownSummaryCategory].Entries[i][j][k].Name;
+                    text.append(L"\n(");
+                    text.append(SummaryPages[ShownSummaryCategory].Entries[i][j][k].Score);
+                    text.append(L")");
+                    ox::gui::IGUIStaticText* label =
+                        GUIEnvironment->addStaticText(text.c_str(), textArea, false, true, button, -1, L"");
+                    label->setOverrideFont(font);
+                    label->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_TOP);
+                }
+            }
+        }
+    }
+    SummaryFrame->setVisible(true);
+    ListFrame->setVisible(false);
 }
 
 bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
@@ -1110,6 +814,301 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         break;
     }
     return result;
+}
+
+void CHighscoreScreen::setVisible(bool visible)
+{
+    if (visible)
+    {
+        if (!Window)
+        {
+            loadSprites();
+            Window = GUIEnvironment->addModalScreen();
+            Window->setID(ID_SCREEN);
+            Background = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 800, 600), Window);
+            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].X,
+                SpriteSizes[SPRITE_TOP_BACKGROUND].Y + 5), Background);
+            TypeFrame->setReportOnDraw(1);
+            TypeFrame->setID(ID_TYPE_FRAME);
+            TypeFrame->LayoutFlags = "br center";
+
+            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Y - SpriteSizes[SPRITE_TOP_SELECTOR].Y) / 2;
+            int width = SpriteSizes[SPRITE_TOP_SELECTOR].X;
+            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].X - width * 4) / 2;
+            for (int i = 0; i < 4; ++i)
+            {
+                TypeButtons[i] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(left, top,
+                    SpriteSizes[SPRITE_TOP_SELECTOR].X + left, SpriteSizes[SPRITE_TOP_SELECTOR].Y + top), TypeFrame);
+                TypeButtons[i]->setID(ID_TYPE_BUTTON + i);
+                TypeButtons[i]->setReportOnDraw(2);
+                TypeNames[i] = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_TYPE_NAMES[i]);
+                left += width;
+            }
+
+            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].X) / 2;
+            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y,
+                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y);
+            ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
+            ListFrame->setReportOnDraw(1);
+            ListFrame->setID(ID_LIST_FRAME);
+            ListFrame->LayoutFlags = "br center";
+            ListFrame->setVisible(false);
+
+            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y;
+            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].X + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].X;
+            int summaryLeft = (800 - summaryWidth) / 2;
+            ox::core::CRect<int> summaryArea;
+            summaryArea.UpperLeftCorner.X = summaryLeft;
+            summaryArea.UpperLeftCorner.Y = summaryTop;
+            summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
+            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y;
+            SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
+            SummaryFrame->setReportOnDraw(1);
+            SummaryFrame->setID(ID_SUMMARY_FRAME);
+            SummaryFrame->LayoutFlags = "br center";
+            StatusText = 0;
+
+            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin * 2 + 5;
+            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background, ID_BACK,
+                settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
+            back->LayoutFlags = "br";
+            back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
+            back->centerOnParent();
+            back->moveTo(ox::core::CPosition2d<int>(back->getRelativePosition().UpperLeftCorner.X,
+                backY));
+        }
+        Background->centerOnParent();
+        Window->setVisible(true);
+        loadSummaryPage(0);
+    }
+    else if (Window)
+        Window->setVisible(false);
+}
+
+ox::gui::IGUILayout* CHighscoreScreen::createNewPopupWindow()
+{
+    if (Popup)
+    {
+        Popup->remove();
+        Popup = 0;
+    }
+    Popup = GUIEnvironment->addModalScreen();
+    return GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 200, 100), Popup, -1);
+}
+
+void CHighscoreScreen::sortAndMovePopup(ox::gui::IGUILayout* popup, ox::gui::IGUIElement* button, bool above)
+{
+    popup->sortRiver(true, 5, 5, false);
+    if (above)
+        popup->moveTo(ox::core::CPosition2d<int>(button->getAbsolutePosition().UpperLeftCorner.X,
+            button->getAbsolutePosition().UpperLeftCorner.Y - 10 - popup->getAbsolutePosition().getHeight()));
+    else
+        popup->moveTo(ox::core::CPosition2d<int>(button->getAbsolutePosition().UpperLeftCorner.X,
+            button->getAbsolutePosition().LowerRightCorner.Y + 10));
+
+    ox::core::CRect<int> rect = popup->getAbsolutePosition();
+    if (rect.LowerRightCorner.X > Driver->getScreenSize().Width)
+        popup->moveTo(ox::core::CPosition2d<int>(
+            rect.UpperLeftCorner.X + Driver->getScreenSize().Width - rect.LowerRightCorner.X,
+            rect.UpperLeftCorner.Y));
+}
+
+void CHighscoreScreen::loadHighscores(int offset)
+{
+    if (!Ready)
+        return;
+
+    Ready = false;
+    if (LoadBlock)
+    {
+        LoadBlock->remove();
+        LoadBlock = 0;
+    }
+    createLoadBlock();
+    if (!Connection)
+    {
+        Connection = new ox::net::CHTTPConnectionHandler();
+        Connection->init(Device, this);
+    }
+    Offset = offset;
+
+    ox::core::CString<char> url = "/highscores/harvest/getHighScores.php?version=1";
+    url.append("&mode=");
+    url.append(GameMode);
+    url.append("&planet=");
+    url.append(Planet);
+    url.append("&offset=");
+    url.append(offset);
+    url.append("&orderMode=");
+    url.append(SortMode);
+    if (ExactName)
+        url.append("&exactName=1");
+    if (ExactGroup)
+        url.append("&exactGroup=1");
+    if (NameFilter.size() > 0)
+    {
+        url.append("&nameFilter=");
+        url.append(createBase64ForUCS2(NameFilter));
+    }
+    if (GroupFilter.size() > 0)
+    {
+        url.append("&groupFilter=");
+        url.append(createBase64ForUCS2(GroupFilter));
+    }
+    SummaryMode = false;
+    Connection->doGet(url, L"www.oxeyegames.com", 80);
+}
+
+void CHighscoreScreen::loadSummaryPage(int category)
+{
+    if (SummaryLoaded[category])
+    {
+        SummaryCategory = category;
+        createSummaryPage();
+        return;
+    }
+    if (!Ready)
+        return;
+
+    Ready = false;
+    createLoadBlock();
+    if (!Connection)
+    {
+        Connection = new ox::net::CHTTPConnectionHandler();
+        Connection->init(Device, this);
+    }
+
+    ox::core::CString<char> url = "/highscores/harvest/getSummaryPage.php?version=1";
+    url.append("&category=");
+    url.append(category);
+    ox::core::CString<wchar_t> group = settings::gp_profileManager->getCurrentProfile()->getPlayerGroup();
+    if (group.size() > 0)
+    {
+        url.append("&peerGroup=");
+        url.append(createBase64ForUCS2(group));
+    }
+    SummaryMode = true;
+    SummaryCategory = category;
+    Connection->doGet(url, L"www.oxeyegames.com", 80);
+}
+
+void CHighscoreScreen::loadSprites()
+{
+    if (SpritesLoaded)
+        return;
+
+    ox::video::ISpritePackage* package =
+        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true);
+    if (package)
+    {
+        for (int i = 0; i < SPRITE_COUNT; ++i)
+        {
+            Sprites[i] = package->addNewAnimationState(HIGHSCORE_SPRITE_NAMES[i]);
+            if (Sprites[i])
+                SpriteSizes[i] = Sprites[i]->getFrameSize(0);
+        }
+    }
+    SpritesLoaded = true;
+}
+
+bool CHighscoreScreen::isVisible()
+{
+    if (Window)
+        return Window->isVisible();
+    return false;
+}
+
+void CHighscoreScreen::createLoadBlock()
+{
+    LoadBlock = GUIEnvironment->addModalScreen();
+    ox::gui::IGUILayout* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 30, 30), LoadBlock, -1);
+    GUIEnvironment->addStaticText(settings::gp_systemConfig->getLocalizedText(L"highscores:loading").c_str(),
+        "br center", frame, 0, -1);
+    frame->sortRiver(true, 20, 20, false);
+    frame->centerOnParent();
+}
+
+ox::core::CString<char> CHighscoreScreen::createBase64ForUCS2(const ox::core::CString<wchar_t>& text)
+{
+    ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile();
+    ox::io::CHelpIO::writeWideString(file, text, true);
+    ox::io::CMemReadFile data(file->getData(), file->getSize(), false);
+    ox::core::CString<char> result;
+    ox::algo::CBase64url::encode(result, &data);
+    delete file;
+    return ox::core::CString<char>(result);
+}
+
+ox::core::CString<wchar_t> CHighscoreScreen::createUCS2FromBase64UTF2(const ox::core::CString<char>& text)
+{
+    ox::io::CMemWriteFile* file = new ox::io::CMemWriteFile();
+    ox::algo::CBase64url::decode(file, text);
+    ox::core::CString<wchar_t> result = L"";
+    for (int i = 0; i < file->getSize(); ++i)
+    {
+        // UTF-8 sequences of up to three bytes, decoded to UCS-2
+        if (((unsigned char)file->getData()[i] & 0xe0) == 0xc0 && i < file->getSize() - 1)
+        {
+            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 1] & 0x3f) +
+                (((unsigned char)file->getData()[i] & 0x1f) << 6)));
+            ++i;
+        }
+        else if (((unsigned char)file->getData()[i] & 0xf0) == 0xe0 && i < file->getSize() - 2)
+        {
+            result.append((wchar_t)(unsigned short)(((unsigned char)file->getData()[i + 2] & 0x3f) +
+                (((unsigned char)file->getData()[i + 1] & 0x3f) << 6) +
+                (((unsigned char)file->getData()[i] & 0xf) << 12)));
+            i += 2;
+        }
+        else if (file->getData()[i])
+            result.append((wchar_t)(unsigned char)file->getData()[i]);
+    }
+    delete file;
+    return result;
+}
+
+ox::core::CString<wchar_t> CHighscoreScreen::parseRelativeTimeFormat(const ox::core::CString<char>& seconds)
+{
+    time(0);
+    int age = atoi(seconds.c_str());
+    if (age < 60)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:secondsAgo", age);
+    if (age < 120)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastMinute");
+    if (age < 3600)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:minutesAgo", age / 60);
+    if (age < 7200)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastHour");
+    if (age < 86400)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:hoursAgo", age / 3600);
+    if (age < 172800)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:yesterday");
+    if (age < 1209600)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:daysAgo", age / 86400);
+    if (age < 31536000)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:weeksAgo", age / 604800);
+    if (age < 63072000)
+        return settings::gp_systemConfig->getLocalizedText(L"highscores:lastYear");
+    return settings::gp_systemConfig->getLocalizedText(L"highscores:yearsAgo", age / 31536000);
+}
+
+void CHighscoreScreen::createStatusString(const wchar_t* text)
+{
+    if (StatusText)
+    {
+        StatusText->remove();
+        StatusText = 0;
+    }
+    if (ListFrame)
+    {
+        StatusText = GUIEnvironment->addStaticText(text, STATUS_LABEL_AREA, false, true, ListFrame, -1, L"");
+        StatusText->packSize();
+        ox::core::CRect<int> rect = StatusText->getRelativePosition();
+        StatusText->moveTo(ox::core::CPosition2d<int>(
+            (STATUS_LABEL_AREA.getWidth() - rect.getWidth()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.X,
+            (STATUS_LABEL_AREA.getHeight() - rect.getHeight()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.Y));
+    }
 }
 
 } // end namespace gui
