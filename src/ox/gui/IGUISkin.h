@@ -15,10 +15,26 @@ namespace gui {
 
 class IGUIFont;
 
-//! Default colors. Partial: only the values recovered code uses, numbered as in Irrlicht 0.7.
+//! Default colors, numbered as in Irrlicht 0.7; Oxeye's additions after EGDC_WINDOW are not named yet.
 enum EGUI_DEFAULT_COLOR
 {
-    EGDC_3D_DARK_SHADOW = 0
+    EGDC_3D_DARK_SHADOW = 0,
+    EGDC_3D_SHADOW,
+    EGDC_3D_FACE,
+    EGDC_3D_HIGH_LIGHT,
+    EGDC_3D_LIGHT,
+    EGDC_ACTIVE_BORDER,
+    EGDC_ACTIVE_CAPTION,
+    EGDC_APP_WORKSPACE,
+    EGDC_BUTTON_TEXT,
+    EGDC_GRAY_TEXT,
+    EGDC_HIGH_LIGHT,
+    EGDC_HIGH_LIGHT_TEXT,
+    EGDC_INACTIVE_BORDER,
+    EGDC_INACTIVE_CAPTION,
+    EGDC_TOOLTIP,
+    EGDC_SCROLLBAR,
+    EGDC_WINDOW
 };
 //! Default sizes. Partial: only the values recovered code uses, numbered as in Irrlicht 0.7.
 enum EGUI_DEFAULT_SIZE
