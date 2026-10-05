@@ -254,6 +254,11 @@
 ["HarvestFull/harvest/states/CPlayState.cpp"]
 # m_keys, the iostream initializer, game-header statics and the gui colors.
 ".bss" = 0x86be00
+["HarvestFull/harvest/gui/CHighscoreScreen.cpp"]
+# iostream initializer, the world grid offset, STATUS_LABEL_AREA and the function-local delimiters.
+".bss" = 0x86b9b0
+# OnEvent's jump tables and the sprite and localization key tables.
+".rodata" = 0x5ff7e0
 
 ["HarvestFull/harvest/settings/CHarvestProfile.cpp"]
 # iostream initializer and the game-header statics.
@@ -305,3 +310,25 @@
 ".bss" = 0x86ba98
 # OnEvent button jump table.
 ".rodata" = 0x601a68
+
+["HarvestFull/harvest/gui/CStatisticsScreen.cpp"]
+# iostream initializer, the world grid offset and ENERGY_PROGRESS_COLOR.
+".bss" = 0x86bab0
+# The sprite, button, popup, achievement and total name tables.
+".rodata" = 0x605d20
+
+["HarvestFull/harvest/gui/CStoryScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86babc
+
+["HarvestFull/harvest/states/CMainMenuState.cpp"]
+# iostream initializer, the game-header statics and the planet scene positions.
+".bss" = 0x86bd60
+# The game mode names, icons and rating meters.
+".data" = 0x868e20
+# Jump tables and the planet, texture and achievement rating name tables.
+".rodata" = 0x608020
+
+["HarvestFull/harvest/gui/CSaveGameScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86baa0

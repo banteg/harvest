@@ -29,6 +29,8 @@ enum EGUI_EVENT_TYPE
     EGET_LISTBOX_SELECTED_AGAIN = 12,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
+    //! The no button of a message box was pressed.
+    EGET_MESSAGEBOX_NO = 16,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
     //! An element that reports drawing has been drawn.

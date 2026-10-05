@@ -59,6 +59,7 @@
 #include "ox/gui/IGUILayout.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/gui/IGUIStaticText.h"
+#include "ox/gui/IGUIWindow.h"
 #include "ox/io/CHelpIO.h"
 #include "ox/io/CMemReadFile.h"
 #include "ox/io/CMemWriteFile.h"
@@ -580,8 +581,8 @@ int CPlayState::secondInit()
 
 ox::gui::IGUILayout* CPlayState::getPopupForGuiButton(const wchar_t* text)
 {
-    ox::gui::IGUILayout* popup =
-        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 90, 10), GUIEnvironment->getRootGUIElement(), -1);
+    ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 90, 10), GUIEnvironment->getRootGUIElement(), -1));
     popup->setAnimations(IngamePackage, "Tooltip");
     ox::gui::IGUIStaticText* label = GUIEnvironment->addStaticText(text, ox::core::CRect<int>(0, 0, 1000, 1000),
         false, true, popup, -1, 0);
@@ -597,17 +598,17 @@ ox::gui::IGUILayout* CPlayState::getPopupForBuildButton(const wchar_t* name, con
 {
     ox::gui::IGUILayout* popup =
         GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 100, 100), GUIEnvironment->getRootGUIElement());
-    ox::gui::IGUILayout* titleFrame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, -1);
+    ox::gui::IGUIWindow* titleFrame = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, -1));
     titleFrame->setAnimations(IngamePackage, "Tooltip");
-    ox::gui::IGUILayout* mineralsFrame =
-        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_MINERALS_POPUP);
+    ox::gui::IGUIWindow* mineralsFrame = static_cast<ox::gui::IGUIWindow*>(
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_MINERALS_POPUP));
     mineralsFrame->setAnimations(IngamePackage, "Tooltip");
     mineralsFrame->setReportOnDraw(1);
-    ox::gui::IGUILayout* energyFrame =
-        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_ENERGY_POPUP);
+    ox::gui::IGUIWindow* energyFrame = static_cast<ox::gui::IGUIWindow*>(
+        GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 20, 20), popup, GUI_ID_ENERGY_POPUP));
     energyFrame->setAnimations(IngamePackage, "Tooltip");
     energyFrame->setReportOnDraw(1);
-    ox::gui::IGUILayout* descriptionFrame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 240, 23), popup, -1);
+    ox::gui::IGUIWindow* descriptionFrame = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 240, 23), popup, -1));
     descriptionFrame->setAnimations(IngamePackage, "Tooltip");
     descriptionFrame->LayoutFlags = "br";
 
@@ -2801,7 +2802,7 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
             g_gamePlanet = game::gp_world->getPlanet();
             g_loadGameFilename = "";
             return true;
-        case ECE_LOAD_GAME:
+        case ECE_START_GAME:
             NextState = EGS_PLAY;
             return true;
         case ECE_LANGUAGE_CHANGED:
@@ -2915,7 +2916,7 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
         case ECE_END_INITIAL_WORLD:
             game::gp_world->InitialWorld = false;
             return true;
-        case ECE_SKIP_SCENARIO_EVENT:
+        case ECE_SKIP_STORY:
             if (Scenario)
             {
                 HighlightActive = false;
@@ -3720,8 +3721,8 @@ void CPlayState::setWaveListToggle(bool visible)
                 button->setReportOnDraw(2);
                 if (GameMode == game::EGM_WAVE)
                 {
-                    ox::gui::IGUILayout* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
-                        GUIEnvironment->getRootGUIElement(), -1);
+                    ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
+                        GUIEnvironment->getRootGUIElement(), -1));
                     popup->setAnimations(IngamePackage, "Tooltip");
                     GUIEnvironment->addStaticText(ThreatLevel->getWaveDescription(i),
                         ox::core::CRect<int>(0, 0, 400, 400), false, true, popup, -1, L"")->packSize();
@@ -3799,8 +3800,8 @@ void CPlayState::setCreativeListToggle(bool visible)
                 button->setAnimations(IngamePackage, "WaveBtn", true);
                 button->LayoutFlags = "br";
                 button->setReportOnDraw(2);
-                ox::gui::IGUILayout* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
-                    GUIEnvironment->getRootGUIElement(), -1);
+                ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50),
+                    GUIEnvironment->getRootGUIElement(), -1));
                 popup->setAnimations(IngamePackage, "Tooltip");
                 ox::core::CString<wchar_t> text =
                     settings::gp_systemConfig->getLocalizedText(entity::ALIEN_KEY_NAMES[i]);
@@ -3923,7 +3924,7 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         header.PlayerName = PlayerName;
         header.GameMode = GameMode;
         header.ThreatLevel = ThreatLevel->getThreatLevel();
-        header.Minerals = Minerals;
+        header.Unknown = Minerals;
         header.Planet = game::gp_world->getPlanet();
         header.Time = time(0);
         header.Description = description;

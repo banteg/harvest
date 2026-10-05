@@ -16,23 +16,40 @@ class IWriteFile;
 namespace harvest {
 namespace settings {
 
-//! The header of a saved game, shown in the save game list.
+//! The header at the start of a save game file.
 struct SSavestateHeader
 {
-    //! 0x123123ff in a valid file.
+    //! 0x123123ff.
     int Magic;
     int Version;
     ox::core::CString<wchar_t> PlayerName;
+    //! As in harvest::game::EGAME_MODE.
     int GameMode;
     int ThreatLevel;
-    int Minerals;
+    // Not read by recovered code.
+    int Unknown;
     int Planet;
-    //! When the game was saved, as returned by time().
+    //! Seconds since the epoch.
     int Time;
     ox::core::CString<wchar_t> Description;
+
+    // Written out rather than implicit; this reproduces GCC's inlining order in CSaveGameScreen.
+    SSavestateHeader& operator=(const SSavestateHeader& other)
+    {
+        Magic = other.Magic;
+        Version = other.Version;
+        PlayerName = other.PlayerName;
+        GameMode = other.GameMode;
+        ThreatLevel = other.ThreatLevel;
+        Unknown = other.Unknown;
+        Planet = other.Planet;
+        Time = other.Time;
+        Description = other.Description;
+        return *this;
+    }
 };
 
-//! Reads and writes saved game headers.
+//! Reads and writes save game headers.
 class CSavestateInfo
 {
 public:

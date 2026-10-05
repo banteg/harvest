@@ -40,6 +40,7 @@ enum EKEY_CODE
     KEY_KEY_R = 0x52,
     KEY_KEY_S = 0x53,
     KEY_KEY_T = 0x54,
+    KEY_KEY_U = 0x55,
     KEY_KEY_V = 0x56,
     KEY_KEY_W = 0x57,
     KEY_KEY_X = 0x58,

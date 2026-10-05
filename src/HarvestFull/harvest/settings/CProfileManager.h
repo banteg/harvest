@@ -19,6 +19,8 @@ namespace settings {
 
 class CHarvestProfile;
 
+class CHarvestProfile;
+
 //! A profile found in the profiles directory.
 struct SProfileName
 {

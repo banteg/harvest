@@ -19,9 +19,9 @@ enum ECUSTOM_EVENT
     ECE_SCROLL_SPEED_CHANGED = 3,
     //! The in-game menu was closed to continue the game.
     ECE_CONTINUE_GAME = 4,
-    //! Save the game to the save slot selected in the save screen.
+    //! Save the game under the chosen save slot.
     ECE_SAVE_GAME = 5,
-    //! A new profile was created on the profile screen.
+    //! A new profile was created on the profile screen; the main menu shows its welcome dialog.
     ECE_PROFILE_CREATED = 6,
     //! The first attack of a threat level has been spawned.
     ECE_ATTACK_STARTED = 7,
@@ -33,9 +33,9 @@ enum ECUSTOM_EVENT
     ECE_REPLACE_BUILDING = 10,
     //! Leave the game for the new game selection.
     ECE_NEW_GAME = 11,
-    //! Leave the game to load the game in g_loadGameFilename.
-    ECE_LOAD_GAME = 12,
-    //! A new language file was opened.
+    //! Leave the main menu for the game.
+    ECE_START_GAME = 12,
+    //! A new language file was opened; the main menu restarts.
     ECE_LANGUAGE_CHANGED = 13,
     //! Leave the game.
     ECE_EXIT_GAME = 14,
@@ -54,8 +54,8 @@ enum ECUSTOM_EVENT
     ECE_BOSS_WARNING = 23,
     //! Ends the initial world of the rush and campaign modes, which then grows.
     ECE_END_INITIAL_WORLD = 24,
-    //! Skips to the next scenario event.
-    ECE_SKIP_SCENARIO_EVENT = 25,
+    //! Return or space was pressed on the story screen; skips to the next scenario event.
+    ECE_SKIP_STORY = 25,
     ECE_GAME_WON = 26,
     ECE_GAME_LOST = 27,
     //! The view follows the entity UserData2 of the layer UserData3.
