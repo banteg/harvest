@@ -50,9 +50,12 @@ enum E_VIDEO_DRIVER_FEATURE
 {
 };
 
-//! Geometry transformation states. The enumerators are not recovered.
+//! Geometry transformation states, as in Irrlicht 0.7.
 enum E_TRANSFORMATION_STATE
 {
+    ETS_VIEW = 0,
+    ETS_WORLD,
+    ETS_PROJECTION
 };
 
 //! Flags for texture creation; the enumerators are not recovered yet.

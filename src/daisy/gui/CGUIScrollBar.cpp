@@ -296,15 +296,18 @@ void CGUIScrollBar::setNewThumbState(int state)
 
 void CGUIScrollBar::setPosFromMousePos(int x, int y)
 {
+    ox::core::CPosition2d<int> pos(x, y);
+    pos -= AbsoluteRect.UpperLeftCorner;
+    int offset = -(DrawHeight / 2) - DrawHeight;
     if (Horizontal)
     {
         float f = (float)(AnimationRects[ESBA_BACKGROUND].getWidth() - DrawHeight) / (float)Max;
-        setPos((int)((float)(x - AbsoluteRect.UpperLeftCorner.X - DrawHeight - DrawHeight / 2) / f));
+        setPos((int)((float)(pos.X + offset) / f));
     }
     else
     {
         float f = (float)(AnimationRects[ESBA_BACKGROUND].getHeight() - DrawHeight) / (float)Max;
-        setPos((int)((float)(y - AbsoluteRect.UpperLeftCorner.Y - DrawHeight - DrawHeight / 2) / f));
+        setPos((int)((float)(pos.Y + offset) / f));
     }
 }
 
@@ -345,15 +348,15 @@ void CGUIScrollBar::draw()
 
         if (Horizontal)
         {
-            ox::core::CDimension2d<int> size = Animations[ESBA_BACKGROUND]->getFrameSize(0);
-            for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += size.Width)
+            int width = Animations[ESBA_BACKGROUND]->getFrameSize(0).Width;
+            for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += width)
                 Animations[ESBA_BACKGROUND]->draw(ox::core::CPosition2d<int>(x, background.UpperLeftCorner.Y),
                     &background, ox::video::SColor(0xffffffff));
         }
         else
         {
-            ox::core::CDimension2d<int> size = Animations[ESBA_BACKGROUND]->getFrameSize(0);
-            for (int y = background.UpperLeftCorner.Y; y < background.LowerRightCorner.Y; y += size.Height)
+            int height = Animations[ESBA_BACKGROUND]->getFrameSize(0).Height;
+            for (int y = background.UpperLeftCorner.Y; y < background.LowerRightCorner.Y; y += height)
                 Animations[ESBA_BACKGROUND]->draw(ox::core::CPosition2d<int>(background.UpperLeftCorner.X, y),
                     &background, ox::video::SColor(0xffffffff));
         }
@@ -439,14 +442,20 @@ void CGUIScrollBar::setMax(int max)
     DownButton->setEnabled(enable);
 
     int smallStep = Max / 50;
-    SmallStep = smallStep > 0 ? smallStep : 1;
+    if (smallStep <= 0)
+        smallStep = 1;
+    SmallStep = smallStep;
     LargeStep = Max / 5;
 }
 
 void CGUIScrollBar::setStepSizes(int smallStep, int largeStep)
 {
-    SmallStep = smallStep > 0 ? smallStep : 1;
-    LargeStep = largeStep > 0 ? largeStep : 1;
+    if (smallStep <= 0)
+        smallStep = 1;
+    if (largeStep <= 0)
+        largeStep = 1;
+    SmallStep = smallStep;
+    LargeStep = largeStep;
 }
 
 int CGUIScrollBar::getMax()
