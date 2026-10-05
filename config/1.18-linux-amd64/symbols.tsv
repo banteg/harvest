@@ -3522,6 +3522,7 @@ address	size	symbol	evidence
 0x5ee8e0	12	_ZN2ox3net21CVariablePacketParserD0Ev	mac-vtable:_ZTVN2ox3net21CVariablePacketParserE:3
 0x5ee8f0	288	_ZN2ox3net21CVariablePacketParser11fetchStringERNS_4core7CStringIcEE	manual:FDE layout of the CVariablePacket object, identified from Linux decompilation
 0x5eea10	420	_ZN2ox3net21CVariablePacketParser15fetchWideStringERNS_4core7CStringIwEE	manual:FDE layout of the CVariablePacket object, identified from Linux decompilation
+0x5eebc0	38	_GLOBAL__I__Z18AlwaysAppendToFilePKcS0_z	manual:AlwaysAppendToFile-unit-static-initializer
 0x5eebf0	268	_Z18AlwaysAppendToFilePKcS0_z	reloc:HarvestFull/harvest/game/CLuaManager.cpp:_ZN7harvest4game11CLuaManager17runFrameFunctionsEf
 0x5eefa0	0	_ZTVN7harvest21CHarvestSuperReceiverE	rtti
 0x5eefe0	0	_ZTVN7harvest16CHarvestFullMainE	rtti

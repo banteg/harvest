@@ -354,3 +354,7 @@
 ["ox/core/CMath.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874240
+
+["ox/core/AlwaysAppendToFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874290
