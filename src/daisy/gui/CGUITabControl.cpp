@@ -256,7 +256,92 @@ void CGUITabControl::draw()
     if (!font)
         return;
 
-    if (!Animations[ETCA_BACKGROUND])
+    if (Animations[ETCA_BACKGROUND])
+    {
+        // the skin: corners, tiled edges, tiled background, then the tabs over the tiled top edge
+        int x = frameRect.UpperLeftCorner.X;
+        int y = frameRect.UpperLeftCorner.Y;
+        const ox::video::SColor white(0xffffffff);
+
+        Animations[ETCA_TOP_LEFT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_TOP_LEFT].UpperLeftCorner.X + x,
+            Rects[ETCA_TOP_LEFT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
+        Animations[ETCA_TOP_RIGHT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_TOP_RIGHT].UpperLeftCorner.X + x,
+            Rects[ETCA_TOP_RIGHT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
+        Animations[ETCA_BOTTOM_LEFT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_BOTTOM_LEFT].UpperLeftCorner.X + x,
+            Rects[ETCA_BOTTOM_LEFT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
+        Animations[ETCA_BOTTOM_RIGHT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_BOTTOM_RIGHT].UpperLeftCorner.X + x,
+            Rects[ETCA_BOTTOM_RIGHT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
+
+        ox::core::CRect<int> r(Rects[ETCA_BOTTOM].UpperLeftCorner.X + x, Rects[ETCA_BOTTOM].UpperLeftCorner.Y + y,
+            Rects[ETCA_BOTTOM].LowerRightCorner.X + x, Rects[ETCA_BOTTOM].LowerRightCorner.Y + y);
+        clipAgainst(r, AbsoluteClippingRect);
+        int step = Animations[ETCA_BOTTOM]->getFrameSize(0).Width;
+        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += step)
+            Animations[ETCA_BOTTOM]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
+
+        r = ox::core::CRect<int>(Rects[ETCA_LEFT].UpperLeftCorner.X + x, Rects[ETCA_LEFT].UpperLeftCorner.Y + y,
+            Rects[ETCA_LEFT].LowerRightCorner.X + x, Rects[ETCA_LEFT].LowerRightCorner.Y + y);
+        clipAgainst(r, AbsoluteClippingRect);
+        step = Animations[ETCA_LEFT]->getFrameSize(0).Height;
+        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
+            Animations[ETCA_LEFT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
+
+        r = ox::core::CRect<int>(Rects[ETCA_RIGHT].UpperLeftCorner.X + x, Rects[ETCA_RIGHT].UpperLeftCorner.Y + y,
+            Rects[ETCA_RIGHT].LowerRightCorner.X + x, Rects[ETCA_RIGHT].LowerRightCorner.Y + y);
+        clipAgainst(r, AbsoluteClippingRect);
+        step = Animations[ETCA_RIGHT]->getFrameSize(0).Height;
+        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
+            Animations[ETCA_RIGHT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
+
+        r = ox::core::CRect<int>(Rects[ETCA_BACKGROUND].UpperLeftCorner.X + x,
+            Rects[ETCA_BACKGROUND].UpperLeftCorner.Y + y, Rects[ETCA_BACKGROUND].LowerRightCorner.X + x,
+            Rects[ETCA_BACKGROUND].LowerRightCorner.Y + y);
+        clipAgainst(r, AbsoluteClippingRect);
+        int width = Animations[ETCA_BACKGROUND]->getFrameSize(0).Width;
+        int height = Animations[ETCA_BACKGROUND]->getFrameSize(0).Height;
+        for (int j = r.UpperLeftCorner.Y; j < r.LowerRightCorner.Y; j += height)
+            for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
+                Animations[ETCA_BACKGROUND]->draw(ox::core::CPosition2d<int>(i, j), &r, white);
+
+        // the tabs
+        r = ox::core::CRect<int>(Rects[ETCA_TOP].UpperLeftCorner.X + x, Rects[ETCA_TOP].UpperLeftCorner.Y + y,
+            Rects[ETCA_TOP].LowerRightCorner.X + x, Rects[ETCA_TOP].LowerRightCorner.Y + y);
+        int tabWidth = Animations[ETCA_TAB]->getFrameSize(0).Width;
+        int tabHeight = Animations[ETCA_TAB]->getFrameSize(0).Height;
+        int left = 0;
+        int right = 0;
+        int offset = 0;
+        for (int i = 0; i < (int)Tabs.size(); ++i)
+        {
+            int tabX = r.UpperLeftCorner.X + offset;
+            Animations[ETCA_TAB]->draw(ox::core::CPosition2d<int>(tabX, y), &AbsoluteClippingRect, white);
+            font->draw(Tabs[i]->getText(), ox::core::CRect<int>(tabX, y, tabX + tabWidth, tabHeight + y),
+                TextColor, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, &AbsoluteClippingRect);
+
+            if (i == ActiveTab)
+                left = tabX;
+            if (i == ActiveTab)
+                right = tabX + tabWidth;
+            offset += tabWidth;
+        }
+
+        // the top edge left and right of the active tab
+        width = Animations[ETCA_TOP]->getFrameSize(0).Width;
+        if (left > r.UpperLeftCorner.X)
+        {
+            r.LowerRightCorner.X = left;
+            clipAgainst(r, AbsoluteClippingRect);
+            for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
+                Animations[ETCA_TOP]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
+        }
+
+        r = ox::core::CRect<int>(right, y + Rects[ETCA_TOP].UpperLeftCorner.Y, x + Rects[ETCA_TOP].LowerRightCorner.X,
+            y + Rects[ETCA_TOP].LowerRightCorner.Y);
+        clipAgainst(r, AbsoluteClippingRect);
+        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
+            Animations[ETCA_TOP]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
+    }
+    else
     {
         int tabheight = skin->getSize(ox::gui::EGDS_BUTTON_HEIGHT);
         frameRect.UpperLeftCorner.Y += 2;
@@ -408,91 +493,6 @@ void CGUITabControl::draw()
             tr.LowerRightCorner.Y -= 1;
             driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_FACE), tr, &AbsoluteClippingRect);
         }
-    }
-    else
-    {
-        // the skin: corners, tiled edges, tiled background, then the tabs over the tiled top edge
-        int x = frameRect.UpperLeftCorner.X;
-        int y = frameRect.UpperLeftCorner.Y;
-        const ox::video::SColor white(0xffffffff);
-
-        Animations[ETCA_TOP_LEFT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_TOP_LEFT].UpperLeftCorner.X + x,
-            Rects[ETCA_TOP_LEFT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
-        Animations[ETCA_TOP_RIGHT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_TOP_RIGHT].UpperLeftCorner.X + x,
-            Rects[ETCA_TOP_RIGHT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
-        Animations[ETCA_BOTTOM_LEFT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_BOTTOM_LEFT].UpperLeftCorner.X + x,
-            Rects[ETCA_BOTTOM_LEFT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
-        Animations[ETCA_BOTTOM_RIGHT]->draw(ox::core::CPosition2d<int>(Rects[ETCA_BOTTOM_RIGHT].UpperLeftCorner.X + x,
-            Rects[ETCA_BOTTOM_RIGHT].UpperLeftCorner.Y + y), &AbsoluteClippingRect, white);
-
-        ox::core::CRect<int> r(Rects[ETCA_BOTTOM].UpperLeftCorner.X + x, Rects[ETCA_BOTTOM].UpperLeftCorner.Y + y,
-            Rects[ETCA_BOTTOM].LowerRightCorner.X + x, Rects[ETCA_BOTTOM].LowerRightCorner.Y + y);
-        clipAgainst(r, AbsoluteClippingRect);
-        int step = Animations[ETCA_BOTTOM]->getFrameSize(0).Width;
-        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += step)
-            Animations[ETCA_BOTTOM]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
-
-        r = ox::core::CRect<int>(Rects[ETCA_LEFT].UpperLeftCorner.X + x, Rects[ETCA_LEFT].UpperLeftCorner.Y + y,
-            Rects[ETCA_LEFT].LowerRightCorner.X + x, Rects[ETCA_LEFT].LowerRightCorner.Y + y);
-        clipAgainst(r, AbsoluteClippingRect);
-        step = Animations[ETCA_LEFT]->getFrameSize(0).Height;
-        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
-            Animations[ETCA_LEFT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
-
-        r = ox::core::CRect<int>(Rects[ETCA_RIGHT].UpperLeftCorner.X + x, Rects[ETCA_RIGHT].UpperLeftCorner.Y + y,
-            Rects[ETCA_RIGHT].LowerRightCorner.X + x, Rects[ETCA_RIGHT].LowerRightCorner.Y + y);
-        clipAgainst(r, AbsoluteClippingRect);
-        step = Animations[ETCA_RIGHT]->getFrameSize(0).Height;
-        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
-            Animations[ETCA_RIGHT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
-
-        r = ox::core::CRect<int>(Rects[ETCA_BACKGROUND].UpperLeftCorner.X + x,
-            Rects[ETCA_BACKGROUND].UpperLeftCorner.Y + y, Rects[ETCA_BACKGROUND].LowerRightCorner.X + x,
-            Rects[ETCA_BACKGROUND].LowerRightCorner.Y + y);
-        clipAgainst(r, AbsoluteClippingRect);
-        int width = Animations[ETCA_BACKGROUND]->getFrameSize(0).Width;
-        int height = Animations[ETCA_BACKGROUND]->getFrameSize(0).Height;
-        for (int j = r.UpperLeftCorner.Y; j < r.LowerRightCorner.Y; j += height)
-            for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
-                Animations[ETCA_BACKGROUND]->draw(ox::core::CPosition2d<int>(i, j), &r, white);
-
-        // the tabs
-        r = ox::core::CRect<int>(Rects[ETCA_TOP].UpperLeftCorner.X + x, Rects[ETCA_TOP].UpperLeftCorner.Y + y,
-            Rects[ETCA_TOP].LowerRightCorner.X + x, Rects[ETCA_TOP].LowerRightCorner.Y + y);
-        int tabWidth = Animations[ETCA_TAB]->getFrameSize(0).Width;
-        int tabHeight = Animations[ETCA_TAB]->getFrameSize(0).Height;
-        int left = 0;
-        int right = 0;
-        int offset = 0;
-        for (int i = 0; i < (int)Tabs.size(); ++i)
-        {
-            int tabX = offset + r.UpperLeftCorner.X;
-            Animations[ETCA_TAB]->draw(ox::core::CPosition2d<int>(tabX, y), &AbsoluteClippingRect, white);
-            offset += tabWidth;
-            font->draw(Tabs[i]->getText(), ox::core::CRect<int>(tabX, y, r.UpperLeftCorner.X + offset, tabHeight + y),
-                TextColor, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, &AbsoluteClippingRect);
-
-            if (i == ActiveTab)
-                left = tabX;
-            if (i == ActiveTab)
-                right = r.UpperLeftCorner.X + offset;
-        }
-
-        // the top edge left and right of the active tab
-        width = Animations[ETCA_TOP]->getFrameSize(0).Width;
-        if (left > r.UpperLeftCorner.X)
-        {
-            r.LowerRightCorner.X = left;
-            clipAgainst(r, AbsoluteClippingRect);
-            for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
-                Animations[ETCA_TOP]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
-        }
-
-        r = ox::core::CRect<int>(right, y + Rects[ETCA_TOP].UpperLeftCorner.Y, x + Rects[ETCA_TOP].LowerRightCorner.X,
-            y + Rects[ETCA_TOP].LowerRightCorner.Y);
-        clipAgainst(r, AbsoluteClippingRect);
-        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += width)
-            Animations[ETCA_TOP]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
     }
 
     IGUIElement::draw();
