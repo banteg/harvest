@@ -92,7 +92,7 @@ void CBuildableItems::addBuilding(ox::video::IVideoDriver* driver, const char* s
     if (driver)
         package = driver->getSpritePackage(spritePackage, false);
 
-    SBuildingInfoItem* item = new SBuildingInfoItem();
+    SBuildingInfoItem* item = new SBuildingInfoItem;
     item->EntityId = entityId;
     item->Enabled = enabled;
     item->EntityType = entityType;
@@ -105,10 +105,8 @@ void CBuildableItems::addBuilding(ox::video::IVideoDriver* driver, const char* s
     item->SpritePackage = spritePackage;
     item->BuildingSpriteName = buildingSprite;
     item->SpriteName = constructionSprite;
-    item->Sprites[SBuildingInfoItem::SPRITE_BUTTON_CHECKED] = 0;
-    item->Sprites[SBuildingInfoItem::SPRITE_PREVIEW] = 0;
-    item->Sprites[SBuildingInfoItem::SPRITE_BUTTON_NORMAL] = 0;
-    item->Sprites[SBuildingInfoItem::SPRITE_BUTTON_HIGHLIGHTED] = 0;
+    for (int i = 0; i < SBuildingInfoItem::SPRITE_COUNT; ++i)
+        item->Sprites[i] = 0;
 
     if (package)
     {
