@@ -3942,8 +3942,8 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         settings::SSavestateHeader header;
         header.PlayerName = PlayerName;
         header.GameMode = GameMode;
-        header.ThreatLevel = ThreatLevel->getThreatLevel();
         header.Unknown = Minerals;
+        header.ThreatLevel = ThreatLevel->getThreatLevel();
         header.Planet = game::gp_world->getPlanet();
         header.Time = time(0);
         header.Description = description;
