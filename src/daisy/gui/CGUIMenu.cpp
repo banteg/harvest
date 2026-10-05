@@ -3,6 +3,7 @@
 // See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
 
 #include "CGUIMenu.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"
 #include "ox/gui/IGUISkin.h"

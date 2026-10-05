@@ -32,7 +32,8 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
-    //! Defined inline in IGUIElementInline.h, which only the element implementations include.
+    // The constructor and the virtuals declared after remove() are defined inline in IGUIElementInline.h,
+    // which only the element implementations include.
     IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
 
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
@@ -142,37 +143,7 @@ public:
     //! Removes this element from its parent.
     virtual void remove();
 
-    //! Draws the visible children; ReportOnDraw 1 reports before and 2 after drawing them.
-    virtual void draw()
-    {
-        if (!IsVisible)
-            return;
-
-        if (ReportOnDraw == 1)
-        {
-            event::SEvent event;
-            event.EventType = event::EET_GUI_EVENT;
-            event.GUIEvent.Caller = this;
-            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
-            OnEvent(event);
-        }
-
-        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-        {
-            if ((*it)->AbsoluteRect.isRectCollided((*it)->AbsoluteClippingRect) || !(*it)->isFixed())
-                (*it)->draw();
-        }
-
-        if (ReportOnDraw == 2)
-        {
-            event::SEvent event;
-            event.EventType = event::EET_GUI_EVENT;
-            event.GUIEvent.Caller = this;
-            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
-            OnEvent(event);
-        }
-    }
-
+    virtual void draw();
     virtual void move(core::CPosition2d<int> offset);
     virtual void moveTo(core::CPosition2d<int> position);
     virtual void centerOnRect(const core::CRect<int>& rect);
@@ -184,12 +155,7 @@ public:
     virtual bool isFixed();
     virtual void setFixed(bool fixed);
     virtual bool isInvisible();
-
-    virtual void setInvisible(bool invisible)
-    {
-        IsInvisible = invisible;
-    }
-
+    virtual void setInvisible(bool invisible);
     virtual bool doesReportOnDraw();
     virtual void setReportOnDraw(int report);
     virtual void setText(const wchar_t* text);
@@ -213,25 +179,7 @@ public:
     const core::CRect<int>& getAbsoluteClippingRect() { return AbsoluteClippingRect; }
 
     //! Returns the topmost visible element at the point, searching the children from back to front.
-    IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point)
-    {
-        if (!AbsoluteClippingRect.isPointInside(point))
-            return 0;
-
-        IGUIElement* target = 0;
-        if (IsVisible)
-            for (std::list<IGUIElement*>::reverse_iterator it = Children.rbegin(); it != Children.rend(); ++it)
-            {
-                target = (*it)->getElementFromPoint(point);
-                if (target)
-                    return target;
-            }
-
-        if (AbsoluteRect.isPointInside(point) && IsVisible)
-            target = this;
-
-        return target;
-    }
+    IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point);
 
 protected:
     std::list<IGUIElement*> Children;

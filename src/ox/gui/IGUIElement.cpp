@@ -1,6 +1,6 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 
-#include "IGUIElement.h"
+#include "IGUIElementInline.h"
 #include "IGUIEnvironment.h"
 // The native unit has an iostream static initializer, as do the other ox units.
 #include <iostream> // IWYU pragma: keep
