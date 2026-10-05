@@ -548,16 +548,16 @@ void CMainMenuState::realignGui()
     Buttons[BUTTON_EXIT]->moveTo(ox::core::CPosition2d<int>(726, 36));
 }
 
-void CMainMenuState::createEditProfileWindow(bool firstProfile)
-{
-    if (ProfileScreen)
-        ProfileScreen->createEditProfileWindow(firstProfile);
-}
-
 void CMainMenuState::createProfileListWindow()
 {
     if (ProfileScreen)
         ProfileScreen->createProfileListWindow();
+}
+
+void CMainMenuState::createEditProfileWindow(bool firstProfile)
+{
+    if (ProfileScreen)
+        ProfileScreen->createEditProfileWindow(firstProfile);
 }
 
 int CMainMenuState::updateState(float time)
@@ -869,7 +869,7 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                         GameModeWindow->setVisible(false);
                     hidePopupPlanet();
                     if (HeadingText)
-                        HeadingText->setText(ox::core::CString<wchar_t>().c_str());
+                        HeadingText->setText(ox::core::CString<wchar_t>("").c_str());
                     return true;
                 case ID_MODS_CANCEL:
                     if (ModalWindow)
@@ -1031,7 +1031,7 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                         GameModeWindow->setVisible(false);
                     hidePopupPlanet();
                     if (HeadingText)
-                        HeadingText->setText(ox::core::CString<wchar_t>().c_str());
+                        HeadingText->setText(ox::core::CString<wchar_t>("").c_str());
                 }
             }
             else if (event.MouseInput.Event == ox::event::EMIE_MOUSE_MOVED)
@@ -1084,8 +1084,11 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                                 GameModeTitle->activateProgressiveReveal(0);
                             }
                             if (GameModeDescription)
-                                GameModeDescription->setText(
-                                    settings::gp_systemConfig->getLocalizedText(GAME_MODE_DESCRIPTIONS[i]).c_str());
+                            {
+                                ox::core::CString<wchar_t> text =
+                                    settings::gp_systemConfig->getLocalizedText(GAME_MODE_DESCRIPTIONS[i]);
+                                GameModeDescription->setText(text.c_str());
+                            }
                             if (GameModeStats[0])
                             {
                                 ox::core::CString<wchar_t> text =
@@ -1168,6 +1171,33 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
         break;
     }
     return false;
+}
+
+void CMainMenuState::renderFirst()
+{
+    if (LoadingScreen)
+        LoadingScreen->render(Device, Driver);
+}
+
+void CMainMenuState::render()
+{
+    Driver->beginScene(true, true, ox::video::SColor(0xff000000));
+    SceneManager->drawAll();
+
+    if (Mode == MODE_NEUTRAL && Sprites[SPRITE_LOGO])
+    {
+        int y = (ScreenSize.Height - 600) / 2 + 30;
+        Sprites[SPRITE_LOGO]->draw(ox::core::CPosition2d<int>(ScreenSize.Width / 2, y), 0,
+            ox::video::SColor(0xffffffff));
+    }
+
+    GUIEnvironment->drawAll();
+
+    if (FadeAlpha > 0.0f)
+        Driver->draw2DRectangle(ox::video::SColor((int)FadeAlpha << 24),
+            ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
+
+    Driver->endScene();
 }
 
 void CMainMenuState::enterPlanetSelectMode()
@@ -1367,33 +1397,6 @@ void CMainMenuState::createLuaSelectionWindow()
     ModalWindow->sortRiver(true, 5, 5, false);
     ModalWindow->centerOnParent();
     ModList = list;
-}
-
-void CMainMenuState::renderFirst()
-{
-    if (LoadingScreen)
-        LoadingScreen->render(Device, Driver);
-}
-
-void CMainMenuState::render()
-{
-    Driver->beginScene(true, true, ox::video::SColor(0xff000000));
-    SceneManager->drawAll();
-
-    if (Mode == MODE_NEUTRAL && Sprites[SPRITE_LOGO])
-    {
-        int y = (ScreenSize.Height - 600) / 2 + 30;
-        Sprites[SPRITE_LOGO]->draw(ox::core::CPosition2d<int>(ScreenSize.Width / 2, y), 0,
-            ox::video::SColor(0xffffffff));
-    }
-
-    GUIEnvironment->drawAll();
-
-    if (FadeAlpha > 0.0f)
-        Driver->draw2DRectangle(ox::video::SColor((int)FadeAlpha << 24),
-            ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
-
-    Driver->endScene();
 }
 
 void CMainMenuState::createDemoMessageBox()
