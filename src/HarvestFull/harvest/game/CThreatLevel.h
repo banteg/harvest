@@ -25,7 +25,9 @@ enum EGAME_MODE
     EGM_WAVE,
     EGM_INSANE,
     EGM_RUSH,
-    EGM_CREATIVE
+    EGM_CREATIVE,
+    //! The shuttle race minigame.
+    EGM_SHUTTLE_RACE
 };
 
 //! An alien queued by a wave attack.

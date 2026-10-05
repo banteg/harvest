@@ -4,6 +4,7 @@
 #ifndef HARVEST_ENTITY_CBUILDABLEITEMS_H
 #define HARVEST_ENTITY_CBUILDABLEITEMS_H
 
+#include "ox/TArray.h"
 #include "ox/core/CHiddenInt.h"
 #include "ox/entity/COxEntity.h"
 #include "ox/core/CString.h"
@@ -37,6 +38,8 @@ struct SBuildingInfoItem
 class CBuildableItems
 {
 public:
+    CBuildableItems();
+    virtual ~CBuildableItems();
     const char* getEntityIdForEntityInstance(CEntity* entity);
     int getIndexForEntityType(int entityType);
     int getIndexForEntityId(const char* entityId);
@@ -45,8 +48,19 @@ public:
     const char* getEntityId(int index);
     SBuildingInfoItem* getBuildingInfoByEntityId(const char* entityId);
     int getEntityType(int index);
+    int getEntityMineralCost(int index);
+    //! The collision radius of an item's building.
+    float getEntityRadius(int index);
+    //! The next or previous enabled building after index, wrapping around.
+    int changeConstructionSelection(int index, bool next);
     void addSpecialUpgrade(const char* entityId, const char* upgradeId, const char* name, int cost,
         int count, float value, const char* description);
+
+private:
+    // Not recovered yet.
+    bool Unknown8;
+    bool Unknown9;
+    ox::TArray<SBuildingInfoItem*> Items;
 };
 
 extern CBuildableItems* gp_buildableItems;

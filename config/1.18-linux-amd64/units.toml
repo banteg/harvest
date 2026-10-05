@@ -250,3 +250,7 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/states/CPlayState.cpp"]
+# m_keys, the iostream initializer, game-header statics and the gui colors.
+".bss" = 0x86be00
