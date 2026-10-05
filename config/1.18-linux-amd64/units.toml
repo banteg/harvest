@@ -342,3 +342,7 @@
 ["ox/event/IEventReceiver.cpp"]
 # gp_subscriberList, then the std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874258
+
+["ox/gui/IGUIElement.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874278
