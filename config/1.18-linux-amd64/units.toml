@@ -432,3 +432,7 @@
 ["daisy/gui/CGUIStaticText.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0b8
+
+["daisy/gui/CGUITabControl.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0bc

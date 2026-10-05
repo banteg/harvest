@@ -18,6 +18,8 @@ class IGUIElement;
 //! GUI events, in SEvent::GUIEvent.EventType.
 enum EGUI_EVENT_TYPE
 {
+    //! An element lost the focus.
+    EGET_ELEMENT_FOCUS_LOST = 0,
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
@@ -35,6 +37,10 @@ enum EGUI_EVENT_TYPE
     EGET_MESSAGEBOX_NO = 16,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
+    //! The active tab of a tab control or tab button row changed.
+    EGET_TAB_CHANGED = 21,
+    //! The close button of a tab button row's active tab was clicked; the tab is removed.
+    EGET_TAB_CLOSED = 22,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
@@ -115,6 +121,8 @@ struct SEvent
         {
             gui::IGUIElement* Caller;
             gui::EGUI_EVENT_TYPE EventType;
+            //! The index of the closed tab, with EGET_TAB_CLOSED.
+            int Index;
         } GUIEvent;
 
         struct

@@ -42,7 +42,7 @@ CSettingsScreen::CSettingsScreen(ox::IOxDevice* device, bool languageSelection)
 
     // General tab
     ox::gui::IGUITab* generalTab =
-        tabs->addTab(settings::gp_systemConfig->getLocalizedText(L"settings:general").c_str(), -1);
+        tabs->addTab(const_cast<wchar_t*>(settings::gp_systemConfig->getLocalizedText(L"settings:general").c_str()), -1);
     ox::gui::IGUILayout* generalGroup = env->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 410), generalTab);
     generalGroup->LayoutFlags = "center";
 
@@ -151,7 +151,7 @@ CSettingsScreen::CSettingsScreen(ox::IOxDevice* device, bool languageSelection)
 
     // Keys tab
     ox::gui::IGUITab* keysTab =
-        tabs->addTab(settings::gp_systemConfig->getLocalizedText(L"settings:keys").c_str(), -1);
+        tabs->addTab(const_cast<wchar_t*>(settings::gp_systemConfig->getLocalizedText(L"settings:keys").c_str()), -1);
     ox::gui::IGUILayout* keysGroup = env->addLayoutGroup(ox::core::CRect<int>(0, 0, 400, 400), keysTab);
     keysGroup->LayoutFlags = "center";
     ox::gui::IGUIListBox* keyList = env->addListBox(ox::core::CRect<int>(0, 0, 360, 320), keysGroup, -1, false);

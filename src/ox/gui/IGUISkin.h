@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUISkin.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
-// Mac 1.18 vtable of daisy::gui::CGUISkin; the size enumerators are not recovered yet.
+// Mac 1.18 vtable of daisy::gui::CGUISkin.
 
 #ifndef OX_GUI_IGUISKIN_H
 #define OX_GUI_IGUISKIN_H
@@ -37,7 +37,19 @@ enum EGUI_DEFAULT_COLOR
     EGDC_WINDOW,
     EGDC_COUNT
 };
-enum EGUI_DEFAULT_SIZE {};
+//! The default sizes, as in Irrlicht 0.7.
+enum EGUI_DEFAULT_SIZE
+{
+    EGDS_SCROLLBAR_SIZE = 0,
+    EGDS_MENU_HEIGHT,
+    EGDS_WINDOW_BUTTON_WIDTH,
+    EGDS_CHECK_BOX_WIDTH,
+    EGDS_MESSAGE_BOX_WIDTH,
+    EGDS_MESSAGE_BOX_HEIGHT,
+    EGDS_BUTTON_WIDTH,
+    EGDS_BUTTON_HEIGHT,
+    EGDS_COUNT
+};
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT
 {
