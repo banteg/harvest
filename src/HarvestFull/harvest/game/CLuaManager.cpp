@@ -784,7 +784,7 @@ int harvest_renderSpriteStateFreeShape(lua_State* L)
         lua_Number y3 = lua_tonumber(L, 7);
         lua_Number x4 = lua_tonumber(L, 8);
         lua_Number y4 = lua_tonumber(L, 9);
-        //! The entity's y, which orders it among the other entities.
+        // The entity's y, which orders it among the other entities.
         lua_Number y = lua_tonumber(L, 10);
         ox::video::SColor color(0xffffffff);
         if (top >= 11)
@@ -2303,8 +2303,9 @@ void CLuaManager::renderGuiObjects(ox::video::IVideoDriver* driver, ox::gui::IGU
                 ox::core::CPosition2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2), GuiObjects[i]->Color);
             break;
         case 2:
-            driver->draw2DRectangle(GuiObjects[i]->Color, ox::core::CRect<int>(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
-                ox::core::CDimension2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2)), 0);
+            driver->draw2DRectangle(GuiObjects[i]->Color,
+                ox::core::CRect<int>(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
+                    ox::core::CDimension2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2)), 0);
             break;
         }
         delete GuiObjects[i];
