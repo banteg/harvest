@@ -554,7 +554,7 @@ int CAlienEntity::updateLogic(float frameDelta)
                 Sprites[3]->reset();
             }
         }
-        if (AlienType == 7)
+        else if (AlienType == 7)
         {
             SummonerCharging = false;
             PendingSummon = false;
@@ -571,9 +571,11 @@ int CAlienEntity::updateLogic(float frameDelta)
         if (game::gp_world)
         {
             const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
+            ox::core::CPosition2d<float> center((field.UpperLeftCorner.X + field.LowerRightCorner.X) * .5f,
+                (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * .5f);
             float angle = Id * 10.0f * .0174532905f;
-            target.X = cos((double)angle) * 450.0 + (field.UpperLeftCorner.X + field.LowerRightCorner.X) * .5f;
-            target.Y = sin((double)angle) * 450.0 + (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * .5f;
+            target.X = cos((double)angle) * 450.0 + center.X;
+            target.Y = sin((double)angle) * 450.0 + center.Y;
         }
     }
     if (SpawnCooldown > 0)
@@ -618,12 +620,7 @@ int CAlienEntity::updateLogic(float frameDelta)
         break;
     }
     movement += Speed * frameDelta;
-    if (AlienType == 8)
-    {
-        Position.X += movement.X;
-        Position.Y += movement.Y;
-    }
-    else
+    if (AlienType != 8)
     {
         ox::core::CPosition2d<float> position(Position.X + movement.X, Position.Y + movement.Y);
         if (game::gp_world->mayMoveHere(position))
@@ -647,14 +644,21 @@ int CAlienEntity::updateLogic(float frameDelta)
             JumpSpeed.Z = 0;
         }
     }
+    else
+    {
+        Position.X += movement.X;
+        Position.Y += movement.Y;
+    }
     gp_entityManager->updateGridEntity(this, oldPosition, 1);
     if (AlienType == 2)
         Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * .5f);
     else
         Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * 5.0f);
-    if (AlienType != 5 && AlienType != 8 && !Invisible && Target.Entity)
+    if (AlienType != 8 && AlienType != 5 && !Invisible && Target.Entity)
     {
-        if (ox::core::abs_(target.X - Position.X) < 5.0f && ox::core::abs_(target.Y - Position.Y) < 5.0f)
+        float dx = target.X - Position.X;
+        float dy = target.Y - Position.Y;
+        if (ox::core::abs_(dx) < 5.0f && ox::core::abs_(dy) < 5.0f)
         {
             Target.Entity->killEntity();
             placeBuildingParticle(Target.Entity);
@@ -666,11 +670,16 @@ int CAlienEntity::updateLogic(float frameDelta)
     }
     else if (Invisible)
     {
-        if (ox::core::abs_(target.X - Position.X) < 5.0f && ox::core::abs_(target.Y - Position.Y) < 5.0f)
+        float dx = target.X - Position.X;
+        float dy = target.Y - Position.Y;
+        if (ox::core::abs_(dx) < 5.0f && ox::core::abs_(dy) < 5.0f)
             Invisible = false;
     }
-    if (ShieldSprite && ShieldSprite->update(frameDelta))
-        ShieldSprite->setFlag(1, true);
+    if (ShieldSprite)
+    {
+        if (ShieldSprite->update(frameDelta))
+            ShieldSprite->setFlag(1, true);
+    }
     return 0;
 }
 
