@@ -1365,8 +1365,8 @@ void CMainMenuState::render()
 
     if (Mode == MODE_NEUTRAL && Sprites[SPRITE_LOGO])
     {
-        ox::core::CPosition2d<int> position(ScreenSize.Width / 2, (ScreenSize.Height - 600) / 2 + 30);
-        Sprites[SPRITE_LOGO]->draw(position, 0, ox::video::SColor(0xffffffff));
+        int y = (ScreenSize.Height - 600) / 2 + 30;
+        Sprites[SPRITE_LOGO]->draw(ox::core::CPosition2d<int>(ScreenSize.Width / 2, y), 0, ox::video::SColor(0xffffffff));
     }
 
     GUIEnvironment->drawAll();
