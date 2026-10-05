@@ -51,7 +51,7 @@ public:
     int getCurrentPlacing() const;
     float getCurrentLapTime() const;
     float getTotalTime() const;
-    void resetAllAiByMe(bool mutate);
+    void resetAllAiByMe(bool copyMine);
 private:
     ox::video::ISpriteAnimationState* Sprites[30];
     int SpriteIndex;
