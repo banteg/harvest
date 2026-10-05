@@ -172,10 +172,10 @@ bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
                 {
                     ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
                     ox::core::CRect<int> clip = event.GUIEvent.Caller->getAbsoluteClippingRect();
-                    ox::core::CPosition2d<int> size = ModeIcons[index]->getFrameSize(0);
+                    ox::core::CDimension2d<int> size = ModeIcons[index]->getFrameSize(0);
                     ModeIcons[index]->draw(ox::core::CPosition2d<int>(
-                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.X / 2,
-                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Y / 2),
+                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.Width / 2,
+                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Height / 2),
                         &clip, ox::video::SColor(0xffffffff));
                 }
                 return true;
@@ -189,10 +189,10 @@ bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
                 {
                     ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
                     ox::core::CRect<int> clip = event.GUIEvent.Caller->getAbsoluteClippingRect();
-                    ox::core::CPosition2d<int> size = PlanetIcons[index]->getFrameSize(0);
+                    ox::core::CDimension2d<int> size = PlanetIcons[index]->getFrameSize(0);
                     PlanetIcons[index]->draw(ox::core::CPosition2d<int>(
-                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.X / 2,
-                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Y / 2),
+                        (rect.LowerRightCorner.X + rect.UpperLeftCorner.X) / 2 - size.Width / 2,
+                        (rect.LowerRightCorner.Y + rect.UpperLeftCorner.Y) / 2 - size.Height / 2),
                         &clip, ox::video::SColor(0xffffffff));
                 }
                 return true;
