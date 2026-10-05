@@ -254,3 +254,7 @@
 ["HarvestFull/harvest/gui/CGuiEffects.cpp"]
 # iostream initializer and the world grid offset.
 ".bss" = 0x86b99c
+
+["HarvestFull/harvest/gui/CGuiInfoLines.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b9a4
