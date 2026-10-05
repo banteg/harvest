@@ -6,8 +6,17 @@
 #ifndef DAISY_OS_H
 #define DAISY_OS_H
 
+#include "ox/event/ILogger.h"
+
 namespace daisy {
 namespace os {
+
+class Printer
+{
+public:
+    //! Logs a printf-style message.
+    static void log(const char* format, ox::event::ELOG_LEVEL level, ...);
+};
 
 class Timer
 {

@@ -55,12 +55,15 @@ enum E_TRANSFORMATION_STATE
 {
 };
 
-//! Texture color formats. The enumerators are not recovered.
 //! Flags for texture creation; the enumerators are not recovered yet.
 enum E_TEXTURE_CREATION_FLAG {};
 
+//! Texture color formats. Partial: only the ones CGUIFont reads; the 32 bit value is the one the
+//! binaries compare against.
 enum ECOLOR_FORMAT
 {
+    ECF_A1R5G5B5 = 0,
+    ECF_A8R8G8B8 = 0x8101800
 };
 
 //! Performs the 2d and 3d drawing and owns textures, sprite packages and particle packages.
