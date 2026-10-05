@@ -325,3 +325,7 @@
 ".data" = 0x868e20
 # Jump tables and the planet, texture and achievement rating name tables.
 ".rodata" = 0x608020
+
+["HarvestFull/harvest/gui/CSaveGameScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86baa0
