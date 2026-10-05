@@ -45,7 +45,8 @@ CGUIComboBox::CGUIComboBox(IGUIEnvironment* environment, IGUIElement* parent, in
     IGUISkin* skin = Environment->getSkin();
     Type = EGUIET_COMBO_BOX;
 
-    ListButton = Environment->addButton(core::CRect<int>(0, 0, 20, 20), this, -1, 0);
+    core::CRect<int> r(0, 0, 20, 20);
+    ListButton = Environment->addButton(r, this, -1, 0);
     ListButton->setAnimations(skin->getSpritePackage(), "Combobox", true);
 
     Animations[EA_BACKGROUND] = 0;
@@ -75,8 +76,12 @@ void CGUIComboBox::setRelativePosition(const core::CRect<int>& position)
             position.getWidth() - ListButton->getRelativePosition().getWidth(), 0));
     }
 
-    IGUIElement::setRelativePosition(core::CRect<int>(position.UpperLeftCorner.X, position.UpperLeftCorner.Y,
-        position.LowerRightCorner.X, position.UpperLeftCorner.Y + height));
+    core::CRect<int> rect;
+    rect.UpperLeftCorner.X = position.UpperLeftCorner.X;
+    rect.UpperLeftCorner.Y = position.UpperLeftCorner.Y;
+    rect.LowerRightCorner.X = position.LowerRightCorner.X;
+    rect.LowerRightCorner.Y = position.UpperLeftCorner.Y + height;
+    IGUIElement::setRelativePosition(rect);
 }
 
 //! Returns amount of items in box
@@ -258,23 +263,22 @@ void CGUIComboBox::draw()
     else
     {
         // the left end
-        core::CRect<int> rect(frameRect.UpperLeftCorner.X + AnimationRects[EA_LEFT].UpperLeftCorner.X,
-            frameRect.UpperLeftCorner.Y + AnimationRects[EA_LEFT].UpperLeftCorner.Y,
-            frameRect.UpperLeftCorner.X + AnimationRects[EA_LEFT].LowerRightCorner.X,
-            frameRect.UpperLeftCorner.Y + AnimationRects[EA_LEFT].LowerRightCorner.Y);
+        core::CRect<int> rect(AnimationRects[EA_LEFT]);
+        rect.UpperLeftCorner += frameRect.UpperLeftCorner;
+        rect.LowerRightCorner += frameRect.UpperLeftCorner;
         clipAgainst(rect, AbsoluteClippingRect);
         Animations[EA_LEFT]->draw(rect.UpperLeftCorner, &rect, video::SColor(0xffffffff));
 
         // the background, repeated up to the button
-        rect.UpperLeftCorner.X = AnimationRects[EA_BACKGROUND].UpperLeftCorner.X + frameRect.UpperLeftCorner.X +
-            AnimationRects[EA_LEFT].getWidth();
-        rect.UpperLeftCorner.Y = AnimationRects[EA_BACKGROUND].UpperLeftCorner.Y + frameRect.UpperLeftCorner.Y;
+        rect = AnimationRects[EA_BACKGROUND];
+        rect.UpperLeftCorner += frameRect.UpperLeftCorner;
+        rect.LowerRightCorner += frameRect.UpperLeftCorner;
+        rect.UpperLeftCorner.X += AnimationRects[EA_LEFT].getWidth();
         rect.LowerRightCorner.X = ListButton->getAbsolutePosition().UpperLeftCorner.X;
-        rect.LowerRightCorner.Y = frameRect.UpperLeftCorner.Y + AnimationRects[EA_BACKGROUND].LowerRightCorner.Y;
         clipAgainst(rect, AbsoluteClippingRect);
 
-        core::CDimension2d<int> size = Animations[EA_BACKGROUND]->getFrameSize(0);
-        for (int x = rect.UpperLeftCorner.X; x < rect.LowerRightCorner.X; x += size.Width)
+        int width = Animations[EA_BACKGROUND]->getFrameSize(0).Width;
+        for (int x = rect.UpperLeftCorner.X; x < rect.LowerRightCorner.X; x += width)
             Animations[EA_BACKGROUND]->draw(core::CPosition2d<int>(x, rect.UpperLeftCorner.Y), &rect,
                 video::SColor(0xffffffff));
     }
@@ -318,8 +322,9 @@ void CGUIComboBox::openCloseMenu()
         h *= (skin->getFont()->getDimension(L"A").Height + 1);
 
         // open list box on the root element, below the box
-        core::CRect<int> r(AbsoluteRect.UpperLeftCorner.X, AbsoluteRect.LowerRightCorner.Y,
-            AbsoluteRect.LowerRightCorner.X, AbsoluteRect.LowerRightCorner.Y + AbsoluteRect.getHeight() + h);
+        core::CRect<int> r(AbsoluteRect);
+        r.UpperLeftCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+        r.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y + AbsoluteRect.getHeight() + h;
 
         CGUIListBox* listBox = new CGUIListBox(Environment, Environment->getRootGUIElement(), -1, r, false, true,
             true);
