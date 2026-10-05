@@ -12,6 +12,7 @@ class CRand
 {
 public:
     CRand() : Current(0x0f0f0f0f) {}
+    CRand(int seed) : Current(seed) {}
     virtual ~CRand() {}
 
     //! The next value of the sequence after seed.

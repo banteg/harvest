@@ -1,19 +1,18 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: the virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIStaticText up to
-// setWordWrap.
+// The virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIStaticText.
 
 #ifndef OX_GUI_IGUISTATICTEXT_H
 #define OX_GUI_IGUISTATICTEXT_H
 
 #include "IGUIElement.h"
+#include "IGUIFont.h"
 #include "../video/SColor.h"
 
 namespace ox {
+namespace video { class ISpritePackage; }
 namespace gui {
 
-class IGUIFont;
-
-//! A static text.
+//! A text label.
 class IGUIStaticText : public IGUIElement
 {
 public:
@@ -22,6 +21,14 @@ public:
     virtual video::SColor getOverrideColor() = 0;
     virtual void enableOverrideColor(bool enable) = 0;
     virtual void setWordWrap(bool enable) = 0;
+    virtual void setTextAlignment(EFontHorizontalAlign horizontal, EFontVerticalAlign vertical) = 0;
+    virtual int getTextHeight() = 0;
+    //! Draws the named sprite of the package in front of the text.
+    virtual void setParagraphIcon(const char* sprite, video::ISpritePackage* package, bool enable) = 0;
+    virtual void activateProgressiveReveal(unsigned int time) = 0;
+    virtual unsigned int getTotalProgressiveTime() = 0;
+    virtual void activateOffsetScrollingToEnsureVisibleText() = 0;
+    virtual void packSize() = 0;
 };
 
 } // end namespace gui
