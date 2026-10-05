@@ -250,3 +250,7 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/gui/CGuiEffects.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86b99c
