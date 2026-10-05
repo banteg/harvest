@@ -11,7 +11,8 @@ namespace ox {
 enum EKEY_CODE
 {
     KEY_ESCAPE = 0x1B,
-    KEY_KEY_T = 0x54
+    KEY_KEY_T = 0x54,
+    KEY_KEY_U = 0x55
 };
 
 } // end namespace ox

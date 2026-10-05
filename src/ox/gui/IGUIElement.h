@@ -62,6 +62,7 @@ public:
     virtual core::CDimension2d<int> getPreferredSize();
 
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
+    core::CRect<int> getRelativePosition() { return RelativeRect; }
 
 protected:
     std::list<IGUIElement*> Children;

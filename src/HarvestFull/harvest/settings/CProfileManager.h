@@ -4,10 +4,15 @@
 #ifndef HARVEST_SETTINGS_CPROFILEMANAGER_H
 #define HARVEST_SETTINGS_CPROFILEMANAGER_H
 
+#include "ox/TArray.h"
+#include "ox/core/CString.h"
+
 namespace ox { class IOxDevice; }
 
 namespace harvest {
 namespace settings {
+
+class CHarvestProfile;
 
 //! The player profiles.
 class CProfileManager
@@ -15,6 +20,9 @@ class CProfileManager
 public:
     CProfileManager(ox::IOxDevice* device);
     virtual ~CProfileManager();
+    //! The profiles found, read again when refresh is set or none were found yet.
+    ox::TArray<ox::core::CString<wchar_t>*>& getProfileNames(bool refresh);
+    CHarvestProfile* getCurrentProfile();
 
 private:
     // Not recovered yet; keeps the Linux object size of 56 bytes.

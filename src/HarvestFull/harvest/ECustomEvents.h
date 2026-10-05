@@ -13,10 +13,16 @@ enum ECUSTOM_EVENT
 {
     //! The in-game menu was closed to continue the game.
     ECE_CONTINUE_GAME = 4,
+    //! Show the welcome dialog of the main menu.
+    ECE_SHOW_WELCOME_DIALOG = 6,
     //! The first attack of a threat level has been spawned.
     ECE_ATTACK_STARTED = 7,
     //! Leave the game for the new game selection.
     ECE_NEW_GAME = 11,
+    //! Leave the main menu for the game.
+    ECE_START_GAME = 12,
+    //! Restart the main menu state.
+    ECE_RESTART_MAIN_MENU = 13,
     //! Leave the game.
     ECE_EXIT_GAME = 14,
     ECE_SHOW_SAVE_SCREEN = 17,
@@ -24,7 +30,9 @@ enum ECUSTOM_EVENT
     ECE_SHOW_SETTINGS_SCREEN = 19,
     ECE_SHOW_AWARDS_SCREEN = 20,
     //! A tutorial hint of the normal game mode, numbered by UserData2.
-    ECE_TUTORIAL_HINT = 22
+    ECE_TUTORIAL_HINT = 22,
+    //! Leave the main menu for the shuttle race.
+    ECE_START_SHUTTLE_RACE = 40
 };
 
 //! Sends a game event to the subscribers right away.
