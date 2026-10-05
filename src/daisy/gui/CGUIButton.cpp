@@ -369,8 +369,8 @@ CGUITextButton::CGUITextButton(IGUIEnvironment* environment, IGUIElement* parent
     Sprites[ES_TOP] = 0;
     Sprites[ES_UNUSED] = 0;
 
-    int width = 0;
     int height = 0;
+    int width = 0;
 
     if (Font)
     {
@@ -379,7 +379,7 @@ CGUITextButton::CGUITextButton(IGUIEnvironment* environment, IGUIElement* parent
         height = TextSize.Height;
     }
 
-    video::ISpritePackage* package = Environment->getSkin()->getSpritePackage();
+    video::ISpritePackage* package = environment->getSkin()->getSpritePackage();
 
     if (sideSprite && package)
     {
@@ -388,7 +388,7 @@ CGUITextButton::CGUITextButton(IGUIEnvironment* environment, IGUIElement* parent
         {
             core::CDimension2d<int> size = Sprites[ES_SIDE]->getFrameSize(0);
             width += size.Width * 2;
-            if (size.Height > height)
+            if (height < size.Height)
                 height = size.Height;
         }
     }
@@ -400,7 +400,7 @@ CGUITextButton::CGUITextButton(IGUIEnvironment* environment, IGUIElement* parent
         {
             core::CDimension2d<int> size = Sprites[ES_TOP]->getFrameSize(0);
             height += size.Height;
-            if (size.Width > width)
+            if (width < size.Width)
                 width = size.Width;
         }
     }
