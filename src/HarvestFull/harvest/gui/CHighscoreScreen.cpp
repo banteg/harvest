@@ -938,9 +938,14 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                 break;
             }
             case ID_LIST_BUTTON + 8:
-                loadHighscores(Offset - 20 >= 0 ? Offset - 20 : 0);
+            {
+                int offset = Offset - 20;
+                if (offset < 0)
+                    offset = 0;
+                loadHighscores(offset);
                 result = true;
                 break;
+            }
             case ID_LIST_BUTTON + 9:
                 loadHighscores(Offset + 20);
                 result = true;
@@ -960,7 +965,10 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                     Popup->remove();
                     Popup = 0;
                     RankEditBox = 0;
-                    loadHighscores(rank - 9 >= 0 ? rank - 9 : 0);
+                    int offset = rank - 9;
+                    if (offset < 0)
+                        offset = 0;
+                    loadHighscores(offset);
                 }
                 result = true;
                 break;
