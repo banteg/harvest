@@ -556,6 +556,8 @@ int CMissileEntity::updateLogic(float frameDelta)
     }
     else
     {
+        float dx = TargetPosition.X - Position.X;
+        float dy = TargetPosition.Y - Position.Y;
         if (MissileType == 0 && Position.Z < 5.0f)
         {
             const std::list<ox::entity::COxEntity*>& entities = gp_entityManager->getEntityList(1);
@@ -577,19 +579,25 @@ int CMissileEntity::updateLogic(float frameDelta)
                 }
             }
             if (!aliens.empty())
+            {
                 std::sort(aliens.begin(), aliens.end(), SAlienDistanceSorter());
-            int kills = 0;
-            for (unsigned int i = 0; i < 7 && i < aliens.size(); ++i)
-            {
-                float falloff = float(100.0 - sqrt(double(aliens[i].SquaredDistance)));
-                float damage = falloff * falloff * falloff / 1000000.0f * 120.0f;
-                kills += aliens[i].Alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 3.0f, 1);
-            }
-            if (kills > 0 && OwnerId >= 0)
-            {
-                ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
-                if (owner && owner->getEntityType() == 8)
-                    static_cast<CMissileTurretEntity*>(owner)->addKillCount(kills);
+                int kills = 0;
+                for (unsigned int i = 0; i < 7; ++i)
+                {
+                    if (i >= aliens.size())
+                        break;
+                    float falloff = float(100.0 - sqrt(double(aliens[i].SquaredDistance)));
+                    float damage = falloff * falloff * falloff / 1000000.0f * 120.0f;
+                    if (aliens[i].Alien->dealDamage(damage,
+                            ox::core::CPosition2d<float>(Position.X, Position.Y), 3.0f, 1))
+                        ++kills;
+                }
+                if (kills > 0 && OwnerId >= 0)
+                {
+                    ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
+                    if (owner && owner->getEntityType() == 8)
+                        static_cast<CMissileTurretEntity*>(owner)->addKillCount(kills);
+                }
             }
             gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f,
                 0, "MissleExplosion"), 4);
@@ -621,8 +629,6 @@ int CMissileEntity::updateLogic(float frameDelta)
                 0, "MirvExplosion"), 4);
             return 1;
         }
-        float dx = TargetPosition.X - Position.X;
-        float dy = TargetPosition.Y - Position.Y;
         TargetPosition.Z = sqrtf(dx * dx + dy * dy) * 0.5f;
         if (MissileType == 1)
             updateSpeed(ox::core::CVector3d<float>(dx, dy, TargetPosition.Z - Position.Z),
