@@ -18,8 +18,12 @@ class IGUIElement;
 //! GUI events, in SEvent::GUIEvent.EventType.
 enum EGUI_EVENT_TYPE
 {
-    //! An element lost the focus.
+    //! The element lost the focus.
     EGET_ELEMENT_FOCUS_LOST = 0,
+    //! The mouse entered the element.
+    EGET_ELEMENT_HOVERED = 1,
+    //! The mouse left the element.
+    EGET_ELEMENT_LEFT = 2,
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
@@ -29,6 +33,8 @@ enum EGUI_EVENT_TYPE
     EGET_CHECKBOX_TOGGLED = 8,
     //! The selection of a list box changed.
     EGET_LISTBOX_CHANGED = 10,
+    //! The selection of a combo box changed.
+    EGET_COMBO_BOX_CHANGED = 11,
     //! The selected list box item was selected again.
     EGET_LISTBOX_SELECTED_AGAIN = 12,
     //! A file open dialog selected a file.
@@ -44,7 +50,14 @@ enum EGUI_EVENT_TYPE
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
-    EGET_MODAL_SCREEN_BLOCKED = 30
+    EGET_MODAL_SCREEN_BLOCKED = 30,
+    //! Mouse buttons released and pressed over a daisy::gui::CClickArea.
+    EGET_CLICK_AREA_LEFT_UP = 31,
+    EGET_CLICK_AREA_LEFT_DOWN = 32,
+    EGET_CLICK_AREA_MIDDLE_UP = 33,
+    EGET_CLICK_AREA_MIDDLE_DOWN = 34,
+    EGET_CLICK_AREA_RIGHT_UP = 35,
+    EGET_CLICK_AREA_RIGHT_DOWN = 36
 };
 
 } // end namespace gui
