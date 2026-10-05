@@ -261,13 +261,7 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
                 bool killed = alien->dealDamage(damage,
                     ox::core::CPosition2d<float>(Position.X, Position.Y), 0.8f, 0);
                 TargetHeight = 3.0f;
-                if (0.0f < damage || alien->getAlienType() != 4)
-                {
-                    TargetPosition = Target.Entity->getPosition();
-                    if (alien->getAlienType() == 5)
-                        TargetHeight = 23.0f;
-                }
-                else
+                if (damage <= 0.0f && alien->getAlienType() == 4)
                 {
                     ShieldHitTime += frameDelta;
                     if (ShieldHitTime >= 0.5f)
@@ -282,6 +276,12 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
                         TargetPosition.Y += direction.Y * 20.0f;
                         noHitParticle = true;
                     }
+                }
+                else
+                {
+                    TargetPosition = Target.Entity->getPosition();
+                    if (alien->getAlienType() == 5)
+                        TargetHeight = 23.0f;
                 }
                 if (0.0f >= Energy.getValue() || killed)
                     stopShootingAndClearTarget();
@@ -345,12 +345,26 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
         DrawLaser = true;
         LaserPhase += 4.0f * frameDelta;
         if (ForwardTarget.Id > 0)
-            Beam.End = ox::core::CPosition2d<float>(TargetPosition.X, TargetPosition.Y - 16.0f);
+        {
+            Beam.End.X = TargetPosition.X;
+            Beam.End.Y = TargetPosition.Y - 16.0f;
+        }
         else
-            Beam.End = ox::core::CPosition2d<float>(TargetPosition.X, TargetPosition.Y);
+        {
+            Beam.End.X = TargetPosition.X;
+            Beam.End.Y = TargetPosition.Y;
+        }
         int laserAlpha = int(sin(LaserPhase) * 60.0) + alpha;
         Beam.Color = ox::video::SColor(ox::core::min_(laserAlpha, 255), 255, 255, 255);
-        if (!noHitParticle)
+        if (noHitParticle)
+        {
+            if (HitParticle)
+            {
+                HitParticle->remove();
+                HitParticle = 0;
+            }
+        }
+        else
         {
             if (!HitParticle)
                 HitParticle = gp_particlePackage->addNewParticleState(ox::core::CString<char>("LaserHit"));
@@ -358,14 +372,6 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
             {
                 ox::core::CVector3d<float> position(Beam.End.X, Beam.End.Y + 3.0f, TargetHeight);
                 HitParticle->update(frameDelta, position);
-            }
-        }
-        else
-        {
-            if (HitParticle)
-            {
-                HitParticle->remove();
-                HitParticle = 0;
             }
         }
         Beam.End.Y -= TargetHeight;
@@ -625,7 +631,8 @@ bool CDefenseTowerEntity::isForwardingToThis(CDefenseTowerEntity* tower)
     if (this == tower)
         return true;
     if (ForwardTarget.Entity)
-        return ((CDefenseTowerEntity*)ForwardTarget.Entity)->isForwardingToThis(tower);
+        return ForwardTarget.Entity == tower
+            || ((CDefenseTowerEntity*)ForwardTarget.Entity)->isForwardingToThis(tower);
     return false;
 }
 
