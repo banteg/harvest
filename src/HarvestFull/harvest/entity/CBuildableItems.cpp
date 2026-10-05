@@ -163,21 +163,15 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
     for (int i = 0; i < textFiles->getFileCount(); ++i)
     {
         ox::core::CString<char> filename = textFiles->getFileName(i);
-        for (int c = 0;; ++c)
+        if (filename.startsWith(language))
         {
-            if (c >= language.size())
-            {
-                ox::game::CTextLocalization* localization = new ox::game::CTextLocalization(fileSystem);
-                ox::core::CString<char> path = directory;
-                path.append(filename);
-                if (localization->read(path.c_str()) == true)
-                    localizations.push_back(localization);
-                else if (localization)
-                    delete localization;
-                break;
-            }
-            if (filename[c] != language[c])
-                break;
+            ox::game::CTextLocalization* localization = new ox::game::CTextLocalization(fileSystem);
+            ox::core::CString<char> path = directory;
+            path.append(filename);
+            if (localization->read(path.c_str()) == true)
+                localizations.push_back(localization);
+            else if (localization)
+                delete localization;
         }
     }
     unsigned int localizationCount = localizations.size();
@@ -194,25 +188,12 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
             {
                 ox::game::CConfigBlock* block = blocks[j];
                 ox::core::CString<wchar_t> blockName = block->getBlockName();
-                if (!block->attributeExists(L"name"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"description"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"package"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"buildingSprite"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"buttonSprite"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"constructionSprite"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"radius"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"minerals"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"energy"))
-                    buildingFiles->getFileName(i);
-                else if (!block->attributeExists(L"radius"))
+                // A block missing an attribute is skipped; the file name was meant for an error message.
+                if (!block->attributeExists(L"name") || !block->attributeExists(L"description") ||
+                    !block->attributeExists(L"package") || !block->attributeExists(L"buildingSprite") ||
+                    !block->attributeExists(L"buttonSprite") || !block->attributeExists(L"constructionSprite") ||
+                    !block->attributeExists(L"radius") || !block->attributeExists(L"minerals") ||
+                    !block->attributeExists(L"energy") || !block->attributeExists(L"radius"))
                     buildingFiles->getFileName(i);
                 else
                 {
