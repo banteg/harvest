@@ -1,6 +1,6 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: the virtual interface follows the Mac vtable (names from daisy::video::CParticleState);
-// return types that no recovered code uses are not verified.
+// The virtual interface follows the Mac vtable (names from daisy::video::CParticleState); the return
+// types follow the Linux daisy::video::CParticleState.
 
 #ifndef OX_VIDEO_IPARTICLESTATE_H
 #define OX_VIDEO_IPARTICLESTATE_H
@@ -24,14 +24,15 @@ public:
     virtual void render2D(const core::CPosition2d<float>& position, float scale) = 0;
     virtual void render2DShadow(const core::CPosition2d<float>& position, float scale, float alpha) = 0;
     virtual void render3D(const core::CVector3d<float>& position) = 0;
-    virtual core::CVector3d<float> getCurrentSpeed() = 0;
+    virtual const core::CVector3d<float>& getCurrentSpeed() = 0;
     //! Bounces off a surface; true when the particle stops.
     virtual bool notifyBounce(core::CVector3d<float>& position, const core::CVector3d<float>& normal) = 0;
     virtual void addToSpeed(const core::CVector3d<float>& speed) = 0;
     virtual void setCurrentSpeed(const core::CVector3d<float>& speed) = 0;
-    virtual const core::CString<char>& getParticleName() = 0;
-    virtual const core::CString<char>& getAnimationName() = 0;
-    virtual SColor getCurrentColor() = 0;
+    virtual const char* getParticleName() = 0;
+    //! The first animation name of the particle type, or "".
+    virtual const char* getAnimationName() = 0;
+    virtual const SColor& getCurrentColor() = 0;
     virtual float getCurrentScale() = 0;
     virtual bool isGroundSprite() = 0;
     virtual float getWindModifier() const = 0;
