@@ -14,6 +14,10 @@ namespace gui {
 class IGUILayout : public IGUIElement
 {
 public:
+    // Defined inline in IGUILayoutInline.h, which only the element implementations include.
+    IGUILayout(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
+
+    virtual core::CRect<int> getParentAbsoluteClippingRect(bool clip);
     virtual void sortFlow(int spacingX, int spacingY, bool resize, bool sortHidden);
     virtual void sortVertically(int spacing, bool resize);
     virtual void sortHorizontally(int spacing);

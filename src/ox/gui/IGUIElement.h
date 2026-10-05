@@ -25,7 +25,11 @@ enum EGUI_ELEMENT_TYPE
 {
     EGUIET_SCROLL_BAR = 3,
     EGUIET_CHECK_BOX = 6,
-    EGUIET_LIST_BOX = 8
+    EGUIET_LIST_BOX = 8,
+    //! IGUILayout and the elements derived from it; detachable frames snap to layout groups.
+    EGUIET_LAYOUT = 19,
+    EGUIET_WINDOW = 20,
+    EGUIET_DETACHABLE_FRAME = 21
 };
 
 //! Base class of all GUI elements.

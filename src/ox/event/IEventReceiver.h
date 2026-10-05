@@ -41,8 +41,14 @@ enum EGUI_EVENT_TYPE
     EGET_MESSAGEBOX_NO = 16,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
+    //! Sent to the parent by a window or detachable frame whose close button hid it.
+    EGET_WINDOW_CLOSED = 24,
+    //! Sent to the parent by a detachable frame that the user resized.
+    EGET_ELEMENT_RESIZED = 25,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
+    //! A popup menu option was chosen; the caller's ID is the option's.
+    EGET_POPUP_MENU_SELECTED = 28,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
     EGET_MODAL_SCREEN_BLOCKED = 30
 };
