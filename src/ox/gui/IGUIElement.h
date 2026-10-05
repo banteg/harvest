@@ -194,7 +194,12 @@ public:
     virtual bool isFixed();
     virtual void setFixed(bool fixed);
     virtual bool isInvisible();
-    virtual void setInvisible(bool invisible);
+
+    virtual void setInvisible(bool invisible)
+    {
+        IsInvisible = invisible;
+    }
+
     virtual bool doesReportOnDraw();
     virtual void setReportOnDraw(int report);
     virtual void setText(const wchar_t* text);
@@ -211,9 +216,32 @@ public:
     virtual void setHoverItem(IGUIElement* item);
     virtual core::CDimension2d<int> getPreferredSize();
 
+    IGUIElement* getParent() { return Parent; }
+
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
-    core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+    const core::CRect<int>& getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+
+    //! Returns the topmost visible element at the point, searching the children from back to front.
+    IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point)
+    {
+        if (!AbsoluteClippingRect.isPointInside(point))
+            return 0;
+
+        IGUIElement* target = 0;
+        if (IsVisible)
+            for (std::list<IGUIElement*>::reverse_iterator it = Children.rbegin(); it != Children.rend(); ++it)
+            {
+                target = (*it)->getElementFromPoint(point);
+                if (target)
+                    return target;
+            }
+
+        if (AbsoluteRect.isPointInside(point) && IsVisible)
+            target = this;
+
+        return target;
+    }
 
 protected:
     std::list<IGUIElement*> Children;

@@ -20,7 +20,11 @@ enum EGUI_DEFAULT_COLOR
 {
     EGDC_3D_DARK_SHADOW = 0
 };
-enum EGUI_DEFAULT_SIZE {};
+//! Default sizes. Partial: only the values recovered code uses, numbered as in Irrlicht 0.7.
+enum EGUI_DEFAULT_SIZE
+{
+    EGDS_SCROLLBAR_SIZE = 0
+};
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT
 {

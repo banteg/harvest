@@ -432,3 +432,7 @@
 ["daisy/gui/CGUIInOutFader.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c090
+
+["daisy/gui/CGUIListBox.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c094
