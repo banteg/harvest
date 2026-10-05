@@ -294,41 +294,38 @@ ox::game::CTextLocalization* CSystemConfig::performOpenLanguageFile(const ox::co
 ox::core::CString<wchar_t> CSystemConfig::getLocalizedText(const wchar_t* key, ...)
 {
     ox::core::CString<wchar_t> text;
-    ox::game::CTextLocalization* language = Language;
-    if (!language)
+    ox::game::CTextLocalization* language = Language ? Language : DefaultLanguage;
+    if (language)
     {
-        language = DefaultLanguage;
-        if (!language)
-        {
-            ox::core::CString<wchar_t> missing = L"no lang ??? ";
-            missing.append(ox::core::CString<wchar_t>(key));
-            missing.append(ox::core::CString<wchar_t>(L" ???"));
-            return ox::core::CString<wchar_t>(missing);
-        }
-    }
-
-    text = language->getText(key);
-    if (text.size() == 0)
-    {
-        text = DefaultLanguage->getText(key);
+        text = language->getText(key);
         if (text.size() == 0)
         {
-            text.append(ox::core::CString<wchar_t>(L"??? "));
-            text.append(ox::core::CString<wchar_t>(key));
-            text.append(ox::core::CString<wchar_t>(L" ???"));
-            return ox::core::CString<wchar_t>(text);
+            text = DefaultLanguage->getText(key);
+            if (text.size() == 0)
+            {
+                text.append(ox::core::CString<wchar_t>(L"??? "));
+                text.append(ox::core::CString<wchar_t>(key));
+                text.append(ox::core::CString<wchar_t>(L" ???"));
+                return ox::core::CString<wchar_t>(text);
+            }
         }
+
+        text = ox::core::replaceAll(text, ox::core::CString<wchar_t>(L"%s"), ox::core::CString<wchar_t>(L"%S"));
+        va_list args;
+        va_start(args, key);
+        wchar_t buffer[1024];
+        memset(buffer, 0, sizeof(buffer));
+        // The Mac build reads errno here; the Linux errno accessor is const, so the read is dropped.
+        if (vswprintf(buffer, 1024, text.c_str(), args) < 0)
+            errno;
+        va_end(args);
+        return ox::core::CString<wchar_t>(buffer);
     }
 
-    text = ox::core::replaceAll(text, ox::core::CString<wchar_t>(L"%s"), ox::core::CString<wchar_t>(L"%S"));
-    va_list args;
-    va_start(args, key);
-    wchar_t buffer[1024];
-    memset(buffer, 0, sizeof(buffer));
-    if (vswprintf(buffer, 1024, text.c_str(), args) < 0)
-        errno;
-    va_end(args);
-    return ox::core::CString<wchar_t>(buffer);
+    ox::core::CString<wchar_t> missing = L"no lang ??? ";
+    missing.append(ox::core::CString<wchar_t>(key));
+    missing.append(ox::core::CString<wchar_t>(L" ???"));
+    return ox::core::CString<wchar_t>(missing);
 }
 
 void CSystemConfig::getAllLanguages(ox::TArray<SLanguageFile>& languages)
@@ -341,14 +338,17 @@ void CSystemConfig::getAllLanguages(ox::TArray<SLanguageFile>& languages)
         ox::core::CString<char> filename = "$GAME_RESOURCES$/harvestClientData/lang/";
         filename.append(ox::core::CString<char>(files->getFileName(i)));
         printf(filename.c_str());
-        if (config->read(filename.c_str()) == true && config->attributeExists(L"global:languageName") == true)
+        if (config->read(filename.c_str()) == true)
         {
-            ox::core::CString<wchar_t> name;
-            config->getAttribute(L"global:languageName", name);
-            SLanguageFile language;
-            language.Name = name;
-            language.Filename = filename;
-            languages.push_back(language);
+            if (config->attributeExists(L"global:languageName") == true)
+            {
+                ox::core::CString<wchar_t> name;
+                config->getAttribute(L"global:languageName", name);
+                SLanguageFile language;
+                language.Name = name;
+                language.Filename = filename;
+                languages.push_back(language);
+            }
         }
         if (config)
             delete config;
