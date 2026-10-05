@@ -8,6 +8,7 @@
 
 #include <vector>
 #include "IGUILayout.h"
+#include "IGUIWindow.h"
 #include "IGUIElementInline.h"
 #include "../TArray.h"
 
@@ -18,6 +19,12 @@ inline IGUILayout::IGUILayout(IGUIEnvironment* environment, IGUIElement* parent,
     : IGUIElement(environment, parent, id, rectangle)
 {
     Type = EGUIET_LAYOUT;
+}
+
+inline IGUIWindow::IGUIWindow(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+    : IGUILayout(environment, parent, id, rectangle)
+{
+    Type = EGUIET_WINDOW;
 }
 
 inline void IGUILayout::sortFlow(int spacingX, int spacingY, bool rightToLeft, bool resize)

@@ -58,8 +58,14 @@ enum EGUI_EVENT_TYPE
     EGET_TAB_CLOSED = 22,
     //! A context menu item was clicked; IGUIContextMenu::getSelectedItem returns it.
     EGET_MENU_ITEM_SELECTED = 23,
+    //! Sent to the parent by a window or detachable frame whose close button hid it.
+    EGET_WINDOW_CLOSED = 24,
+    //! Sent to the parent by a detachable frame that the user resized.
+    EGET_ELEMENT_RESIZED = 25,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
+    //! A popup menu option was chosen; the caller's ID is the option's.
+    EGET_POPUP_MENU_SELECTED = 28,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
     EGET_MODAL_SCREEN_BLOCKED = 30,
     //! Mouse buttons released and pressed over a daisy::gui::CClickArea.

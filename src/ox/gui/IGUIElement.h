@@ -33,6 +33,8 @@ enum EGUI_ELEMENT_TYPE
     //! IGUILayout and the elements derived from it, such as tabs.
     EGUIET_LAYOUT = 19,
     EGUIET_TAB = EGUIET_LAYOUT,
+    EGUIET_WINDOW = 20,
+    EGUIET_DETACHABLE_FRAME = 21,
     EGUIET_TEXT_BUTTON = 22,
     EGUIET_TAB_BUTTON_ROW = 23,
     EGUIET_CLICK_AREA = 24
