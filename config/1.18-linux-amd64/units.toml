@@ -350,3 +350,39 @@
 ["ox/game/CConfiguration.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874268
+
+["ox/game/CGameMain.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x87426c
+
+["ox/event/IEventReceiver.cpp"]
+# gp_subscriberList, then the std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874258
+
+["ox/gui/IGUIElement.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874278
+
+["ox/core/CAes.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874228
+
+["ox/core/CMath.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874240
+
+["ox/core/AlwaysAppendToFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874290
+
+["ox/game/CTextLocalization.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874274
+
+["ox/core/CStringFunctions.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874244
+
+["ox/algo/CBase64url.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c208

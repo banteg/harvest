@@ -32,12 +32,110 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
-    virtual void setRelativePosition(const core::CRect<int>& position);
-    virtual core::CRect<int> getParentAbsoluteClippingRect(bool clip);
-    virtual void updateAbsolutePosition();
-    virtual void addChild(IGUIElement* child);
-    virtual void removeChild(IGUIElement* child);
-    virtual void removeAllChildren();
+    // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
+    // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
+    virtual ~IGUIElement()
+    {
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+        {
+            (*it)->Parent = 0;
+            (*it)->drop();
+        }
+        Children.clear();
+
+        if (HoverItem)
+        {
+            if (HoverItem->Parent)
+                HoverItem->remove();
+            else
+                HoverItem->drop();
+        }
+    }
+
+    virtual void setRelativePosition(const core::CRect<int>& position)
+    {
+        if (position.getHeight() != RelativeRect.getHeight() || position.getWidth() != RelativeRect.getWidth())
+            RelativeSizeChanged = true;
+        RelativeRect = position;
+        updateAbsolutePosition();
+    }
+
+    virtual core::CRect<int> getParentAbsoluteClippingRect(bool clip)
+    {
+        if (IsInvisible && Parent)
+            return Parent->getParentAbsoluteClippingRect(clip);
+        return AbsoluteClippingRect;
+    }
+
+    virtual void updateAbsolutePosition()
+    {
+        core::CRect<int> parentAbsolute(0, 0, 0, 0);
+        core::CRect<int> parentAbsoluteClip;
+        if (Parent)
+        {
+            parentAbsolute = Parent->AbsoluteRect;
+            parentAbsoluteClip = Parent->getParentAbsoluteClippingRect(IsFixed);
+        }
+
+        AbsoluteRect.UpperLeftCorner.X = RelativeRect.UpperLeftCorner.X + parentAbsolute.UpperLeftCorner.X;
+        AbsoluteRect.UpperLeftCorner.Y = RelativeRect.UpperLeftCorner.Y + parentAbsolute.UpperLeftCorner.Y;
+        AbsoluteRect.LowerRightCorner.X = RelativeRect.LowerRightCorner.X + parentAbsolute.UpperLeftCorner.X;
+        AbsoluteRect.LowerRightCorner.Y = RelativeRect.LowerRightCorner.Y + parentAbsolute.UpperLeftCorner.Y;
+
+        if (!Parent)
+            parentAbsoluteClip = AbsoluteRect;
+
+        AbsoluteClippingRect = AbsoluteRect;
+        if (!NoClip)
+        {
+            // clip against the parent's clipping rectangle
+            if (parentAbsoluteClip.LowerRightCorner.X < AbsoluteClippingRect.LowerRightCorner.X)
+                AbsoluteClippingRect.LowerRightCorner.X = parentAbsoluteClip.LowerRightCorner.X;
+            if (parentAbsoluteClip.LowerRightCorner.Y < AbsoluteClippingRect.LowerRightCorner.Y)
+                AbsoluteClippingRect.LowerRightCorner.Y = parentAbsoluteClip.LowerRightCorner.Y;
+            if (parentAbsoluteClip.UpperLeftCorner.X > AbsoluteClippingRect.UpperLeftCorner.X)
+                AbsoluteClippingRect.UpperLeftCorner.X = parentAbsoluteClip.UpperLeftCorner.X;
+            if (parentAbsoluteClip.UpperLeftCorner.Y > AbsoluteClippingRect.UpperLeftCorner.Y)
+                AbsoluteClippingRect.UpperLeftCorner.Y = parentAbsoluteClip.UpperLeftCorner.Y;
+        }
+
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+            (*it)->updateAbsolutePosition();
+    }
+
+    virtual void addChild(IGUIElement* child)
+    {
+        if (child)
+        {
+            Children.push_back(child);
+            child->grab();
+        }
+    }
+
+    virtual void removeChild(IGUIElement* child)
+    {
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+        {
+            if (*it == child)
+            {
+                child->drop();
+                Children.erase(it);
+                return;
+            }
+        }
+    }
+
+    virtual void removeAllChildren()
+    {
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+        {
+            (*it)->Parent = 0;
+            (*it)->remove();
+            (*it)->drop();
+        }
+        Children.clear();
+    }
+
     //! Removes this element from its parent.
     virtual void remove();
     virtual void draw();

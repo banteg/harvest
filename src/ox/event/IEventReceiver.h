@@ -6,7 +6,9 @@
 #ifndef OX_EVENT_IEVENTRECEIVER_H
 #define OX_EVENT_IEVENTRECEIVER_H
 
+#include <vector>
 #include "../Keycodes.h"
+#include "../core/CCriticalSection.h"
 
 namespace ox {
 namespace gui {
@@ -171,9 +173,9 @@ struct SEvent
             void* UserPointer;
         } UserEvent;
 
-        // Other event structs are not recovered yet. The Linux amd64 SEvent is 48 bytes, and
-        // CHTTPConnectionHandler::OnEvent keeps several on the stack, so the union keeps that size.
-        void* unrecovered[5];
+        // Other event structs are not recovered yet. The Linux amd64 SEvent is 40 bytes, the element
+        // size of the delayed event lists of CEventSubscriberList, so the union keeps that size.
+        void* unrecovered[4];
     };
 };
 
@@ -199,7 +201,7 @@ private:
     CEventSubscriberList* SubscriberList;
 };
 
-//! Forwards events to its subscribers. Partial: the subscriber storage is not recovered yet.
+//! Forwards events to its subscribers, now or on the next executeDelayedEvents call.
 class CEventSubscriberList : public IEventReceiver
 {
 public:
@@ -213,6 +215,15 @@ public:
     void removeSubscriber(IEventReceiver* receiver);
     //! Sends the event to the subscribers on the next update.
     void postDelayedEvent(const SEvent& event);
+    //! Sends the events posted since the last call.
+    void executeDelayedEvents();
+
+private:
+    std::vector<IEventReceiver*> Subscribers;
+    //! Events are posted to one list while the other one is sent.
+    std::vector<SEvent> DelayedEvents[2];
+    int CurrentDelayedEvents;
+    core::CCriticalSection DelayedEventsLock;
 };
 
 //! The subscriber list that game events are posted to.
