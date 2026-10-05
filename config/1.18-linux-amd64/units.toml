@@ -386,3 +386,17 @@
 ["ox/algo/CBase64url.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c208
+
+["daisy/audio/CAudioDriver.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1b4
+
+["daisy/gui/CGUIFont.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c088
+
+["daisy/gui/CUnicodeFont.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0c8
+# draw color code jump table.
+".rodata" = 0x616ea8

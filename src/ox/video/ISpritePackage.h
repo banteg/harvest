@@ -23,7 +23,8 @@ class ISpritePackage : public IUnknown
 public:
     virtual void updateAllAnimations(float frameDelta) = 0;
     virtual const TArray<ITexture*>& getTextureList() = 0;
-    virtual const TArray<ISpriteAnimation*>& getAnimationList() = 0;
+    //! The animation names (CUnicodeFont reads them as character codes).
+    virtual const TArray<core::CString<char> >& getAnimationList() = 0;
     virtual ITexture* getTexture(int index) = 0;
     virtual ITexture* getTexture(const core::CString<char>& name) = 0;
     //! Starts a running state of the named animation.

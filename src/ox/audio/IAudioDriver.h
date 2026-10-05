@@ -3,14 +3,15 @@
 // Return types unused by recovered callers are provisional.
 #ifndef OX_AUDIO_IAUDIODRIVER_H
 #define OX_AUDIO_IAUDIODRIVER_H
+#include "../IUnknown.h"
 #include "../core/CVector3d.h"
 namespace ox {
 namespace scene { class ICameraSceneNode; }
 namespace audio {
-class IAudioDriver
+class IAudioDriver : public IUnknown
 {
 public:
-    virtual ~IAudioDriver();
+    virtual ~IAudioDriver() {}
     virtual void stopAllSounds() = 0;
     virtual void periodicStreamUpdate() = 0;
     virtual void setSoundEffectPath(const char* path) = 0;
@@ -24,14 +25,14 @@ public:
     virtual void setGlobalRollOffFactor(float factor) = 0;
     virtual void setOpenAlDistanceModel(int model) = 0;
     virtual void setSoundPriority(float priority) = 0;
-    virtual void loadSound(const char* name) = 0;
+    virtual bool loadSound(const char* name) = 0;
     virtual void playSound(const char* name, float volume, float pan, float pitch) = 0;
     virtual void loopSound(const char* name, float volume, float pan, float pitch, float fade) = 0;
     virtual void stopLoopSound(const char* name) = 0;
     virtual bool loadMusic(const char* name) = 0;
     virtual void playMusic(const char* name, float volume, bool loop) = 0;
     virtual void stopMusic(const char* name) = 0;
-    virtual bool updateMusic(const char* name, float frameDelta) = 0;
+    virtual bool updateMusic(const char* name, float volume) = 0;
     virtual void stopAllMusic() = 0;
     //! Plays a voice line, dampening the other sounds while it plays.
     virtual void playVoice(const char* name) = 0;

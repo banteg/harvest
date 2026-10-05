@@ -8,8 +8,8 @@
 #include "ox/video/SColor.h"
 namespace ox {
 namespace gui {
-enum EFontHorizontalAlign { EFHA_LEFT = 0, EFHA_CENTER = 1 };
-enum EFontVerticalAlign { EFVA_TOP = 0, EFVA_CENTER = 1 };
+enum EFontHorizontalAlign { EFHA_LEFT = 0, EFHA_CENTER = 1, EFHA_RIGHT = 2 };
+enum EFontVerticalAlign { EFVA_TOP = 0, EFVA_CENTER = 1, EFVA_BOTTOM = 2 };
 class IGUIFont : public IUnknown
 {
 public:
