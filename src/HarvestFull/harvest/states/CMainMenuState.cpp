@@ -1166,7 +1166,10 @@ void CMainMenuState::enterPlanetSelectMode()
         GameModeWindow->setVisible(false);
     hidePopupPlanet();
     if (HeadingText)
-        HeadingText->setText(ox::core::CString<wchar_t>(L"Please Select Destination").c_str());
+    {
+        ox::core::CString<wchar_t> text(L"Please Select Destination");
+        HeadingText->setText(text.c_str());
+    }
 }
 
 void CMainMenuState::enterNeutralMode()
@@ -1230,7 +1233,10 @@ void CMainMenuState::enterGameModeSelectMode(int planet)
     Mode = MODE_GAME_MODE_SELECT;
     SelectedPlanet = planet;
     if (HeadingText)
-        HeadingText->setText(ox::core::CString<wchar_t>(L"Please Select Game Mode").c_str());
+    {
+        ox::core::CString<wchar_t> text(L"Please Select Game Mode");
+        HeadingText->setText(text.c_str());
+    }
     hidePopupPlanet();
 
     int x = (ScreenSize.Width - 700) / 2;
@@ -1243,9 +1249,9 @@ void CMainMenuState::enterGameModeSelectMode(int planet)
     ox::core::CString<wchar_t> backText = settings::gp_systemConfig->getLocalizedText(L"menu:back");
     ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), GameModeWindow, ID_BACK,
         backText.c_str());
-    int bottom = 400 - back->getRelativePosition().getHeight();
-    back->moveTo(ox::core::CPosition2d<int>(0, bottom));
-    bottom -= 10;
+    int backY = 400 - back->getRelativePosition().getHeight();
+    int bottom = backY - 10;
+    back->moveTo(ox::core::CPosition2d<int>(0, backY));
 
     ox::gui::IGUILayout* info = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 200, 200), GameModeWindow, -1);
     info->setAnimations(MenuPackage, "Black");
@@ -1274,17 +1280,20 @@ void CMainMenuState::enterGameModeSelectMode(int planet)
         description, -1, L"");
     GameModeDescription->LayoutFlags = "br left";
     GameModeDescription->setOverrideFont(SmallFont);
-    for (int i = 0; i < 4; ++i)
-    {
-        GameModeStats[i] = GUIEnvironment->addStaticText(L"", 200, description, SmallFont, -1, L"");
-        GameModeStats[i]->LayoutFlags = "br";
-    }
+    GameModeStats[0] = GUIEnvironment->addStaticText(L"", 200, description, SmallFont, -1, L"");
+    GameModeStats[0]->LayoutFlags = "br";
+    GameModeStats[1] = GUIEnvironment->addStaticText(L"", 200, description, SmallFont, -1, L"");
+    GameModeStats[1]->LayoutFlags = "br";
+    GameModeStats[2] = GUIEnvironment->addStaticText(L"", 200, description, SmallFont, -1, L"");
+    GameModeStats[2]->LayoutFlags = "br";
+    GameModeStats[3] = GUIEnvironment->addStaticText(L"", 200, description, SmallFont, -1, L"");
+    GameModeStats[3]->LayoutFlags = "br";
     description->sortRiver(true, 5, 5, false);
 
     ((ox::gui::IGUILayout*)modes)->sortRiver(true, 0, 0, false);
-    int height = modes->getRelativePosition().getHeight();
-    modes->moveTo(ox::core::CPosition2d<int>(700 - modes->getRelativePosition().getWidth(), bottom - height));
-    buttons->moveTo(ox::core::CPosition2d<int>(0, (height - buttons->getRelativePosition().getHeight()) / 2));
+    ox::core::CRect<int> modesRect = modes->getRelativePosition();
+    modes->moveTo(ox::core::CPosition2d<int>(700 - modesRect.getWidth(), bottom - modesRect.getHeight()));
+    buttons->moveTo(ox::core::CPosition2d<int>(0, (modesRect.getHeight() - buttons->getRelativePosition().getHeight()) / 2));
     GameModeWindow->setVisible(true);
 }
 
