@@ -5,7 +5,7 @@
 
 #include "ox/event/IEventReceiver.h"
 #include "ox/core/CCriticalSection.h"
-#include "ox/core/CPosition2d.h"
+#include "ox/core/CDimension2d.h"
 #include "ox/core/CString.h"
 
 namespace ox {
@@ -119,7 +119,7 @@ private:
     int ShownSummaryCategory;
     bool SpritesLoaded;
     ox::video::ISpriteAnimationState* Sprites[24];
-    ox::core::CPosition2d<int> SpriteSizes[24];
+    ox::core::CDimension2d<int> SpriteSizes[24];
     ox::gui::IGUIElement* Window;
     ox::gui::IGUIElement* Background;
     ox::gui::IGUIElement* TypeFrame;

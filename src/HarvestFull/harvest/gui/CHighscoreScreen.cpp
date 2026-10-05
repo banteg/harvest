@@ -292,11 +292,11 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
                 int sprite = SPRITE_TINY_PLANET_ICON + planet;
                 if ((unsigned int)planet > 4)
                     sprite = SPRITE_TINY_PLANET_ICON;
-                const ox::core::CPosition2d<int>& size = SpriteSizes[sprite];
-                int left = (TEXT_AREA_COORDS[j].getWidth() - size.X) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.X;
-                int top = (TEXT_AREA_COORDS[j].getHeight() - size.Y) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.Y +
+                const ox::core::CDimension2d<int>& size = SpriteSizes[sprite];
+                int left = (TEXT_AREA_COORDS[j].getWidth() - size.Width) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.X;
+                int top = (TEXT_AREA_COORDS[j].getHeight() - size.Height) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.Y +
                     rowOffset;
-                GUIEnvironment->addImage(ox::core::CRect<int>(left, top, left + size.X, top + size.Y), ListFrame, -1,
+                GUIEnvironment->addImage(ox::core::CRect<int>(left, top, left + size.Width, top + size.Height), ListFrame, -1,
                     0)->setAnimation(HIGHSCORE_SPRITE_NAMES[sprite], package);
             }
             else
@@ -735,9 +735,9 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
                             ox::core::CPosition2d<int>(position.X + offset, position.Y + 235), 0, 0xffffffff);
                         Sprites[SPRITE_MODE_ICON + i]->draw(ox::core::CPosition2d<int>(
-                            (SpriteSizes[SPRITE_PROMOTE_MODE_BACKGROUND].X - SpriteSizes[SPRITE_MODE_ICON + i].X) / 2 +
+                            (SpriteSizes[SPRITE_PROMOTE_MODE_BACKGROUND].Width - SpriteSizes[SPRITE_MODE_ICON + i].Width) / 2 +
                                 position.X + offset,
-                            position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Y), 0, 0xffffffff);
+                            position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Height), 0, 0xffffffff);
                     }
                 }
                 result = true;
@@ -750,8 +750,8 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                     ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
                     ox::core::CPosition2d<int> position((rect.UpperLeftCorner.X + rect.LowerRightCorner.X) / 2,
                         (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
-                    position.X -= SpriteSizes[sprite].X / 2;
-                    position.Y -= SpriteSizes[sprite].Y / 2;
+                    position.X -= SpriteSizes[sprite].Width / 2;
+                    position.Y -= SpriteSizes[sprite].Height / 2;
                     Sprites[sprite]->draw(position, 0, 0xffffffff);
                 }
                 result = true;
@@ -830,50 +830,50 @@ void CHighscoreScreen::setVisible(bool visible)
             Window = GUIEnvironment->addModalScreen();
             Window->setID(ID_SCREEN);
             Background = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 800, 600), Window);
-            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].X,
-                SpriteSizes[SPRITE_TOP_BACKGROUND].Y + 5), Background);
+            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].Width,
+                SpriteSizes[SPRITE_TOP_BACKGROUND].Height + 5), Background);
             TypeFrame->setReportOnDraw(1);
             TypeFrame->setID(ID_TYPE_FRAME);
             TypeFrame->LayoutFlags = "br center";
 
-            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Y - SpriteSizes[SPRITE_TOP_SELECTOR].Y) / 2;
-            int width = SpriteSizes[SPRITE_TOP_SELECTOR].X;
-            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].X - width * 4) / 2;
+            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Height - SpriteSizes[SPRITE_TOP_SELECTOR].Height) / 2;
+            int width = SpriteSizes[SPRITE_TOP_SELECTOR].Width;
+            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].Width - width * 4) / 2;
             for (int i = 0; i < 4; ++i)
             {
                 TypeButtons[i] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(left, top,
-                    SpriteSizes[SPRITE_TOP_SELECTOR].X + left, SpriteSizes[SPRITE_TOP_SELECTOR].Y + top), TypeFrame);
+                    SpriteSizes[SPRITE_TOP_SELECTOR].Width + left, SpriteSizes[SPRITE_TOP_SELECTOR].Height + top), TypeFrame);
                 TypeButtons[i]->setID(ID_TYPE_BUTTON + i);
                 TypeButtons[i]->setReportOnDraw(2);
                 TypeNames[i] = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_TYPE_NAMES[i]);
                 left += width;
             }
 
-            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].X) / 2;
-            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y,
-                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
-                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y);
+            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].Width) / 2;
+            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height,
+                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].Width,
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height);
             ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
             ListFrame->setReportOnDraw(1);
             ListFrame->setID(ID_LIST_FRAME);
             ListFrame->LayoutFlags = "br center";
             ListFrame->setVisible(false);
 
-            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y;
-            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].X + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].X;
+            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height;
+            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].Width + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].Width;
             int summaryLeft = (800 - summaryWidth) / 2;
             ox::core::CRect<int> summaryArea;
             summaryArea.UpperLeftCorner.X = summaryLeft;
             summaryArea.UpperLeftCorner.Y = summaryTop;
             summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
-            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y;
+            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Height;
             SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
             SummaryFrame->setReportOnDraw(1);
             SummaryFrame->setID(ID_SUMMARY_FRAME);
             SummaryFrame->LayoutFlags = "br center";
             StatusText = 0;
 
-            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin * 2 + 5;
+            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height + margin * 2 + 5;
             ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background,
                 ID_BACK, settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
             back->LayoutFlags = "br";
