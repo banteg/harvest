@@ -60,6 +60,17 @@ static const ox::video::SColor ALIEN_COLORS[] =
 //! The game command that toggles the priority screen.
 static const int COMMAND_PRIORITY_SCREEN = 20;
 
+//! A rectangle given by its upper left corner and its size, initialized in that order like Irrlicht's
+//! rect(position, dimension) constructor; CRect lacks it because adding it changes other units' code.
+struct SSizedRect : public ox::core::CRect<int>
+{
+    SSizedRect(const ox::core::CPosition2d<int>& position, const ox::core::CDimension2d<int>& size)
+    {
+        UpperLeftCorner = position;
+        LowerRightCorner = ox::core::CPosition2d<int>(position.X + size.Width, position.Y + size.Height);
+    }
+};
+
 static const char* const INGAME_SPRITES = "$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat";
 static const char* const BOLD_FONT = "$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt";
 
@@ -243,7 +254,7 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                     if (TooltipText.size() > 0 && Font)
                     {
                         ox::core::CDimension2d<int> size = Font->getDimension(TooltipText.c_str());
-                        ox::core::CRect<int> textRect(
+                        SSizedRect textRect(
                             ox::core::CPosition2d<int>(TooltipX + (52 - size.Width) / 2, TooltipY + 52), size);
                         ox::core::CRect<int> background(textRect.UpperLeftCorner.X - 2, textRect.UpperLeftCorner.Y - 2,
                             textRect.LowerRightCorner.X + 2, textRect.LowerRightCorner.Y + 2);
@@ -387,8 +398,8 @@ void CPriorityScreen::setVisible(bool visible, game::CThreatLevel* threatLevel)
             for (int i = 0; i < 5; ++i)
             {
                 int x = 64 + i * 135;
-                ox::gui::IGUIElement* column = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(
-                    ox::core::CPosition2d<int>(x, 0), SpriteSizes[ES_DISPLAY_BACKGROUND]), Frame);
+                ox::gui::IGUIElement* column = GUIEnvironment->addLayoutGroup(
+                    SSizedRect(ox::core::CPosition2d<int>(x, 0), SpriteSizes[ES_DISPLAY_BACKGROUND]), Frame);
                 if (i == 0)
                     column->LayoutFlags = "br";
                 ox::gui::IGUIElement* title =
