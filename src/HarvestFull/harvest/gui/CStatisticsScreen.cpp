@@ -560,9 +560,9 @@ void CStatisticsScreen::loadSprites()
             Sprites[i] = package->addNewAnimationState(STAT_SPRITE_NAMES[i]);
             if (Sprites[i])
             {
-                ox::core::CPosition2d<int> size = Sprites[i]->getFrameSize(0);
-                SpriteSizes[i].Width = size.X;
-                SpriteSizes[i].Height = size.Y;
+                ox::core::CDimension2d<int> size = Sprites[i]->getFrameSize(0);
+                SpriteSizes[i].Width = size.Width;
+                SpriteSizes[i].Height = size.Height;
             }
         }
     }
