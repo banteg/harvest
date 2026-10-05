@@ -19,14 +19,20 @@ enum EGUI_EVENT_TYPE
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
-    //! Another list box item was selected.
+    //! Sent by daisy::gui::CGUIScrollBar when its position changes.
+    EGET_SCROLL_BAR_CHANGED = 7,
+    //! Sent by daisy::gui::CGUICheckBox when it is clicked.
+    EGET_CHECKBOX_TOGGLED = 8,
+    //! The selection of a list box changed.
     EGET_LISTBOX_CHANGED = 10,
     //! The selected list box item was selected again.
     EGET_LISTBOX_SELECTED_AGAIN = 12,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! An element that reports drawing has been drawn.
-    EGET_ELEMENT_DRAWN = 26
+    EGET_ELEMENT_DRAWN = 26,
+    //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
+    EGET_MODAL_SCREEN_BLOCKED = 30
 };
 
 } // end namespace gui
@@ -53,7 +59,8 @@ enum EEVENT_TYPE
 enum EMOUSE_INPUT_EVENT
 {
     EMIE_LMOUSE_PRESSED_DOWN = 0,
-    EMIE_LMOUSE_LEFT_UP = 3
+    EMIE_LMOUSE_LEFT_UP = 3,
+    EMIE_MOUSE_MOVED = 6
 };
 
 //! Keyboard input events, in SEvent::KeyInput.Event.

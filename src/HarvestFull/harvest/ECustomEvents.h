@@ -11,6 +11,10 @@ namespace harvest {
 //! Game events, sent as ox::event::EET_USER_EVENT with the value in UserData1.
 enum ECUSTOM_EVENT
 {
+    //! The particle setting was changed in the settings screen.
+    ECE_PARTICLE_SETTING_CHANGED = 2,
+    //! The scroll speed was changed in the settings screen.
+    ECE_SCROLL_SPEED_CHANGED = 3,
     //! The in-game menu was closed to continue the game.
     ECE_CONTINUE_GAME = 4,
     //! A new profile was created on the profile screen.
@@ -19,6 +23,8 @@ enum ECUSTOM_EVENT
     ECE_ATTACK_STARTED = 7,
     //! Leave the game for the new game selection.
     ECE_NEW_GAME = 11,
+    //! A new language file was opened.
+    ECE_LANGUAGE_CHANGED = 13,
     //! Leave the game.
     ECE_EXIT_GAME = 14,
     ECE_SHOW_SAVE_SCREEN = 17,

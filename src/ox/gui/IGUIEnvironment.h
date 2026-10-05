@@ -76,7 +76,7 @@ public:
     virtual IGUILayout* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
     virtual IGUILayout* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         unsigned int flags, bool detached, bool visible) = 0;
-    virtual IGUIElement* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
+    virtual IGUILayout* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
     virtual void addHoverDescription(IGUIElement* element, const wchar_t* text, video::SColor* color) = 0;
     virtual IGUIElement* addMessageBox(const wchar_t* caption, const wchar_t* text, bool modal, int flags,
         IGUIElement* parent, int id) = 0;
