@@ -434,5 +434,3 @@
 ".bss" = 0x86c1cc
 # processKey key switch jump table.
 ".rodata" = 0x61faa0
-# L"_ " and L"_"
-".rodata.str4.4" = 0x61fa88

@@ -144,11 +144,13 @@ bool CGUIEditBox::OnEvent(const event::SEvent& event)
 
 bool CGUIEditBox::processKey(const event::SEvent& event)
 {
+    if (event.KeyInput.Event == event::EKIE_KEY_LEFT_UP)
+        return false;
+
     bool textChanged = false;
 
-    switch (event.KeyInput.Event)
+    if (event.KeyInput.Event == event::EKIE_PASTE)
     {
-    case event::EKIE_PASTE:
         // paste from the clipboard
         if (Operator)
         {
@@ -187,8 +189,10 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
             MarkEnd = 0;
         }
         return true;
+    }
 
-    case event::EKIE_KEY_PRESSED_DOWN:
+    if (event.KeyInput.Event == event::EKIE_KEY_PRESSED_DOWN)
+    {
         switch (event.KeyInput.Key)
         {
         case KEY_END:
@@ -220,31 +224,6 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
                 }
             }
             return true;
-        case KEY_ESCAPE:
-            return false;
-        case KEY_TAB:
-            {
-                // focus the next edit box of the tab
-                IGUIElement* tab = Parent;
-                while (tab->getType() == EGUIET_TAB && tab->getParent())
-                    tab = tab->getParent();
-
-                for (int id = ID + 1;; ++id)
-                {
-                    CGUIEditBox* next = (CGUIEditBox*)tab->getElementFromId(id, true);
-                    if (!next)
-                        break;
-
-                    if (next->getType() == EGUIET_EDIT_BOX)
-                    {
-                        Environment->setFocus(next);
-                        next->MarkBegin = 0;
-                        next->MarkEnd = next->Text.size();
-                        break;
-                    }
-                }
-            }
-            break;
         case KEY_LEFT:
             MarkBegin = 0;
             MarkEnd = 0;
@@ -331,12 +310,38 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
                 textChanged = true;
             }
             break;
+        case KEY_TAB:
+            {
+                // focus the next edit box of the tab
+                IGUIElement* tab = Parent;
+                while (tab->getType() == EGUIET_TAB && tab->getParent())
+                    tab = tab->getParent();
+
+                for (int id = ID + 1;; ++id)
+                {
+                    IGUIElement* next = tab->getElementFromId(id, true);
+                    if (!next)
+                        break;
+
+                    if (next->getType() == EGUIET_EDIT_BOX)
+                    {
+                        CGUIEditBox* box = (CGUIEditBox*)next;
+                        Environment->setFocus(box);
+                        box->MarkBegin = 0;
+                        box->MarkEnd = box->Text.size();
+                        break;
+                    }
+                }
+            }
+            break;
+        case KEY_ESCAPE:
+            return false;
         default:
             break;
         }
-        break;
-
-    case event::EKIE_CHARACTER:
+    }
+    else if (event.KeyInput.Event == event::EKIE_CHARACTER)
+    {
         // control characters are not typed
         if (event.KeyInput.Char >= 30)
         {
@@ -372,13 +377,6 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
                 textChanged = true;
             }
         }
-        break;
-
-    case event::EKIE_KEY_LEFT_UP:
-        return false;
-
-    default:
-        break;
     }
 
     // calculate scrollpos
@@ -515,28 +513,25 @@ void CGUIEditBox::draw()
         if (Animations[EEBA_BACKGROUND])
         {
             // the background is tiled between the left and right animations
-            core::CRect<int> rect(frameRect.UpperLeftCorner.X + AnimationRects[EEBA_BACKGROUND].UpperLeftCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_BACKGROUND].UpperLeftCorner.Y,
-                frameRect.UpperLeftCorner.X + AnimationRects[EEBA_BACKGROUND].LowerRightCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_BACKGROUND].LowerRightCorner.Y);
+            core::CRect<int> rect = AnimationRects[EEBA_BACKGROUND];
+            rect.UpperLeftCorner += frameRect.UpperLeftCorner;
+            rect.LowerRightCorner += frameRect.UpperLeftCorner;
             clipAgainst(rect, AbsoluteClippingRect);
 
-            core::CDimension2d<int> size = Animations[EEBA_BACKGROUND]->getFrameSize(0);
-            for (int x = rect.UpperLeftCorner.X; x < rect.LowerRightCorner.X; x += size.Width)
+            int tileWidth = Animations[EEBA_BACKGROUND]->getFrameSize(0).Width;
+            for (int x = rect.UpperLeftCorner.X; x < rect.LowerRightCorner.X; x += tileWidth)
                 Animations[EEBA_BACKGROUND]->draw(core::CPosition2d<int>(x, rect.UpperLeftCorner.Y), &rect,
                     video::SColor(0xffffffff));
 
-            rect = core::CRect<int>(frameRect.UpperLeftCorner.X + AnimationRects[EEBA_LEFT].UpperLeftCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_LEFT].UpperLeftCorner.Y,
-                frameRect.UpperLeftCorner.X + AnimationRects[EEBA_LEFT].LowerRightCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_LEFT].LowerRightCorner.Y);
+            rect = AnimationRects[EEBA_LEFT];
+            rect.UpperLeftCorner += frameRect.UpperLeftCorner;
+            rect.LowerRightCorner += frameRect.UpperLeftCorner;
             clipAgainst(rect, AbsoluteClippingRect);
             Animations[EEBA_LEFT]->draw(rect.UpperLeftCorner, &rect, video::SColor(0xffffffff));
 
-            rect = core::CRect<int>(frameRect.UpperLeftCorner.X + AnimationRects[EEBA_RIGHT].UpperLeftCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_RIGHT].UpperLeftCorner.Y,
-                frameRect.UpperLeftCorner.X + AnimationRects[EEBA_RIGHT].LowerRightCorner.X,
-                frameRect.UpperLeftCorner.Y + AnimationRects[EEBA_RIGHT].LowerRightCorner.Y);
+            rect = AnimationRects[EEBA_RIGHT];
+            rect.UpperLeftCorner += frameRect.UpperLeftCorner;
+            rect.LowerRightCorner += frameRect.UpperLeftCorner;
             clipAgainst(rect, AbsoluteClippingRect);
             Animations[EEBA_RIGHT]->draw(rect.UpperLeftCorner, &rect, video::SColor(0xffffffff));
 
@@ -665,10 +660,15 @@ void CGUIEditBox::draw()
             else
             {
                 // normal text, grayed when disabled
-                font->draw(text.c_str(), rct,
-                    OverrideColorEnabled ? OverrideColor :
-                        (isEnabled() ? skin->getColor(EGDC_BUTTON_TEXT) : skin->getColor(EGDC_GRAY_TEXT)),
-                    EFHA_LEFT, EFVA_CENTER, &AbsoluteClippingRect);
+                video::SColor color = OverrideColor;
+                if (!OverrideColorEnabled)
+                {
+                    if (isEnabled())
+                        color = skin->getColor(EGDC_BUTTON_TEXT);
+                    else
+                        color = skin->getColor(EGDC_GRAY_TEXT);
+                }
+                font->draw(text.c_str(), rct, color, EFHA_LEFT, EFVA_CENTER, &AbsoluteClippingRect);
             }
         }
     }
