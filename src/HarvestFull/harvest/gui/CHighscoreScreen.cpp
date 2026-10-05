@@ -611,8 +611,12 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
         if (columns.size() != 7)
             continue;
         ox::video::SColor color = 0xffffffff;
-        if (i == 0 && atoi(columns[0].c_str()) == 1)
-            color = 0xffffffc0;
+        if (i == 0)
+        {
+            color = 0xffffffff;
+            if (atoi(columns[0].c_str()) == 1)
+                color = 0xffffffc0;
+        }
 
         for (int j = 0; j < 7; ++j)
         {
@@ -659,11 +663,12 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
         "BtnPlanetsTotal"};
     for (int i = 0; i < 10; ++i)
     {
+        const wchar_t* caption = BUTTON_CAPTIONS[i];
         const char* sprite = BUTTON_SPRITE_NAMES[i];
         if (i == 4)
             sprite = PLANET_BTN_SPRITES[Planet];
         ox::gui::IGUIButton* button = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 10, 10), ListFrame,
-            ID_LIST_BUTTON + i, BUTTON_CAPTIONS[i]);
+            ID_LIST_BUTTON + i, caption);
         button->setAnimations(package, sprite, true);
         button->moveTo(ox::core::CPosition2d<int>(BUTTON_X[i], BUTTON_Y[i]));
         if (i == 7)
@@ -673,21 +678,18 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
     ox::core::CString<wchar_t> mode = settings::gp_systemConfig->getLocalizedText(GAME_MODE_NAMES[GameMode]);
     ox::core::CString<wchar_t> planet = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_PLANET_NAMES[Planet]);
     ox::core::CString<wchar_t> sort = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_SORT_MODES[SortMode]);
-    if (NameFilter.size() > 0)
-    {
-        if (GroupFilter.size() > 0)
-            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoBothFilter",
-                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str(), GroupFilter.c_str()).c_str());
-        else
-            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNameFilter",
-                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str()).c_str());
-    }
+    if (NameFilter.size() > 0 && GroupFilter.size() > 0)
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoBothFilter", mode.c_str(),
+            planet.c_str(), sort.c_str(), NameFilter.c_str(), GroupFilter.c_str()).c_str());
+    else if (NameFilter.size() > 0)
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNameFilter", mode.c_str(),
+            planet.c_str(), sort.c_str(), NameFilter.c_str()).c_str());
     else if (GroupFilter.size() > 0)
-        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoGroupFilter",
-            mode.c_str(), planet.c_str(), sort.c_str(), GroupFilter.c_str()).c_str());
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoGroupFilter", mode.c_str(),
+            planet.c_str(), sort.c_str(), GroupFilter.c_str()).c_str());
     else
-        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNormal",
-            mode.c_str(), planet.c_str(), sort.c_str()).c_str());
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNormal", mode.c_str(),
+            planet.c_str(), sort.c_str()).c_str());
 
     SummaryFrame->setVisible(false);
     ListFrame->setVisible(true);
