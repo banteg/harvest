@@ -1337,7 +1337,7 @@ address	size	symbol	evidence
 0x497d00	101	_ZN7harvest6states14CMainMenuState9firstInitEPN2ox9IOxDeviceE	mac-vtable:_ZTVN7harvest6states14CMainMenuStateE:5
 0x497d70	704	_ZN7harvest6states14CMainMenuStateC1Ev	native-calls:state-factory-main-menu
 0x498030	704	_ZN7harvest6states14CMainMenuStateC2Ev	manual:CMainMenuState-constructor-variants
-0x4982f0	46	_ZN2ox4core7CStringIwEC1Ev	manual:CMainMenuState-comdat-by-content
+0x4982f0	46	T.548	manual:CMainMenuState-ipa-cp-clone-of-wide-CString-from-empty-narrow-literal
 0x498320	467	_ZN7harvest6states14CMainMenuStateD2Ev	manual:CMainMenuState-destructor-variants
 0x498500	475	_ZN7harvest6states14CMainMenuStateD0Ev	mac-vtable:_ZTVN7harvest6states14CMainMenuStateE:4
 0x4986e0	467	_ZN7harvest6states14CMainMenuStateD1Ev	mac-vtable:_ZTVN7harvest6states14CMainMenuStateE:3
