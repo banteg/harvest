@@ -254,6 +254,8 @@
 ["HarvestFull/harvest/states/CPlayState.cpp"]
 # m_keys, the iostream initializer, game-header statics and the gui colors.
 ".bss" = 0x86be00
+# The jump tables, then the key, game speed, entity, achievement and alien name tables.
+".rodata" = 0x6089c0
 ["HarvestFull/harvest/gui/CHighscoreScreen.cpp"]
 # iostream initializer, the world grid offset, STATUS_LABEL_AREA and the function-local delimiters.
 ".bss" = 0x86b9b0

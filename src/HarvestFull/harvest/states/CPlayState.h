@@ -74,8 +74,8 @@ struct SMinimapMarker
     float Time;
 };
 
-//! The game state of a running game.
-class CPlayState : public ox::game::CGameState, public ox::video::IParticleEngineCallback
+//! The game state of a running game. Its typeinfo records the particle callback base as private.
+class CPlayState : public ox::game::CGameState, ox::video::IParticleEngineCallback
 {
 public:
     CPlayState();
