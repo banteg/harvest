@@ -3221,16 +3221,16 @@ void CPlayState::renderMinimap()
             GuiSprites[GS_MINIMAP_TOP]->draw(ox::core::CPosition2d<int>(x, top.UpperLeftCorner.Y), &topEdge,
                 ox::video::SColor(0xffffffff));
 
-        cornerSize = GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->getFrameSize(0);
+        ox::core::CDimension2d<int> bottomSize = GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->getFrameSize(0);
         ox::core::CPosition2d<int> bottomLeft(top.LowerRightCorner.X - MinimapWidth,
-            MinimapHeight + top.UpperLeftCorner.Y - cornerSize.Height);
+            MinimapHeight + top.UpperLeftCorner.Y - bottomSize.Height);
         GuiSprites[GS_MINIMAP_BOTTOM_LEFT]->draw(bottomLeft, 0, ox::video::SColor(0xffffffff));
-        ox::core::CPosition2d<int> bottomRight(top.LowerRightCorner.X - cornerSize.Width, bottomLeft.Y);
+        ox::core::CPosition2d<int> bottomRight(top.LowerRightCorner.X - bottomSize.Width, bottomLeft.Y);
         GuiSprites[GS_MINIMAP_BOTTOM_RIGHT]->draw(bottomRight, 0, ox::video::SColor(0xffffffff));
-        ox::core::CRect<int> bottomEdge(cornerSize.Width + bottomLeft.X, bottomLeft.Y, bottomRight.X,
-            cornerSize.Height + bottomLeft.Y);
-        tileSize = GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0);
-        for (int x = bottomEdge.UpperLeftCorner.X; x < bottomEdge.LowerRightCorner.X; x += tileSize.Width)
+        ox::core::CRect<int> bottomEdge(bottomSize.Width + bottomLeft.X, bottomLeft.Y, bottomRight.X,
+            bottomSize.Height + bottomLeft.Y);
+        ox::core::CDimension2d<int> bottomTileSize = GuiSprites[GS_MINIMAP_BOTTOM]->getFrameSize(0);
+        for (int x = bottomEdge.UpperLeftCorner.X; x < bottomEdge.LowerRightCorner.X; x += bottomTileSize.Width)
             GuiSprites[GS_MINIMAP_BOTTOM]->draw(ox::core::CPosition2d<int>(x, bottomLeft.Y), &bottomEdge,
                 ox::video::SColor(0xffffffff));
 
@@ -3241,10 +3241,10 @@ void CPlayState::renderMinimap()
             top.LowerRightCorner.X, bottomLeft.Y);
         GuiSprites[GS_MINIMAP_RIGHT]->draw(rightEdge.UpperLeftCorner, &rightEdge, ox::video::SColor(0xffffffff));
 
-        tileSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
+        ox::core::CDimension2d<int> backgroundSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
         ox::core::CRect<int> background(leftEdge.LowerRightCorner.X, leftEdge.UpperLeftCorner.Y,
             rightEdge.UpperLeftCorner.X, leftEdge.LowerRightCorner.Y);
-        for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += tileSize.Width)
+        for (int x = background.UpperLeftCorner.X; x < background.LowerRightCorner.X; x += backgroundSize.Width)
             GuiSprites[GS_MINIMAP_BACKGROUND]->draw(ox::core::CPosition2d<int>(x, background.UpperLeftCorner.Y),
                 &background, ox::video::SColor(0xffffffff));
 
@@ -3365,14 +3365,15 @@ void CPlayState::renderMinimap()
         const std::list<ox::entity::COxEntity*>& buildings = entity::gp_entityManager->getEntityList(0);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
         {
-            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            ox::entity::COxEntity* building = *it;
+            ox::core::CVector3d<float> position = building->getPosition();
             if (!field.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y)))
                 continue;
 
             // The selected building's kind stands out; minerals are cyan.
             ox::video::SColor color(0xffffffff);
-            if ((*it)->getEntityType() != selectedType)
-                color = (*it)->getEntityType() == 5 ? ox::video::SColor(0xff20c0c0) :
+            if (building->getEntityType() != selectedType)
+                color = building->getEntityType() == 5 ? ox::video::SColor(0xff20c0c0) :
                     ox::video::SColor(selectedType < 0 ? 0xff20ff20 : 0x4020ff20);
             MinimapDot->draw(ox::core::CPosition2d<int>((int)((position.X - field.UpperLeftCorner.X) * scaleX) +
                                                             area.UpperLeftCorner.X,
@@ -3383,7 +3384,7 @@ void CPlayState::renderMinimap()
         const std::list<ox::entity::COxEntity*>& aliens = entity::gp_entityManager->getEntityList(1);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != aliens.end(); ++it)
         {
-            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            ox::core::CVector3d<float> position = (*it)->getPosition();
             if (!field.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y)))
                 continue;
 
@@ -3404,17 +3405,17 @@ void CPlayState::renderMinimap()
 
     for (std::list<SMinimapMarker>::iterator it = MinimapMarkers.begin(); it != MinimapMarkers.end(); ++it)
     {
-        int x = (int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X;
-        int y = (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y;
+        ox::core::CPosition2d<int> position((int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X,
+            (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y);
         ox::core::CRect<int> box;
         if (it->Time > 4.0f)
         {
             int size = (int)((it->Time - 4.0f) * 100.0f) + 6;
-            box.UpperLeftCorner = ox::core::CPosition2d<int>(x - size / 2, y - size / 2);
+            box.UpperLeftCorner = position - ox::core::CPosition2d<int>(size / 2, size / 2);
             box.LowerRightCorner = box.UpperLeftCorner + ox::core::CPosition2d<int>(size, size);
         }
         else
-            box = ox::core::CRect<int>(x - 3, y - 3, x + 4, y + 4);
+            box = ox::core::CRect<int>(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
 
         // Clip the square to the minimap and skip the edges that were cut.
         bool left = true;
@@ -3466,8 +3467,8 @@ void CPlayState::renderMinimap()
     Driver->draw2DLine(view, ox::core::CPosition2d<int>(view.X, view.Y + viewSize.Height), ox::video::SColor(0xc0ffffff));
     Driver->draw2DLine(ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y + viewSize.Height),
         ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y), ox::video::SColor(0xc0ffffff));
-    Driver->draw2DLine(ox::core::CPosition2d<int>(view.X, view.Y + viewSize.Height),
-        ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y + viewSize.Height), ox::video::SColor(0xc0ffffff));
+    Driver->draw2DLine(ox::core::CPosition2d<int>(view.X + viewSize.Width, view.Y + viewSize.Height),
+        ox::core::CPosition2d<int>(view.X, view.Y + viewSize.Height), ox::video::SColor(0xc0ffffff));
 }
 
 void CPlayState::renderWaveButton(ox::gui::IGUIElement* button, int numAliens, int firstAlien, bool* aliens,
