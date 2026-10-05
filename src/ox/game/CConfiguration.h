@@ -11,6 +11,8 @@ namespace ox {
 namespace io { class IFileSystem; class IReadFile; }
 namespace game {
 
+class CConfigBlock;
+
 //! A configuration file of blocks and attributes, such as "mod:name".
 class CConfiguration
 {

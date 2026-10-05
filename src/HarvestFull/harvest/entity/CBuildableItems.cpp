@@ -260,8 +260,8 @@ void CBuildableItems::renderButtonLayouts(const ox::core::CPosition2d<int>& mous
             continue;
 
         ox::core::CRect<int> button = item->ButtonLayout->getAbsolutePosition();
-        ox::core::CPosition2d<int> center = button.getCenter();
-        center.Y -= 2;
+        ox::core::CPosition2d<int> center((button.UpperLeftCorner.X + button.LowerRightCorner.X) / 2,
+            (button.UpperLeftCorner.Y + button.LowerRightCorner.Y) / 2 - 2);
         if (i == selected && item->Sprites[SBuildingInfoItem::SPRITE_BUTTON_CHECKED])
             item->Sprites[SBuildingInfoItem::SPRITE_BUTTON_CHECKED]->draw(center, &clip,
                 ox::video::SColor(0xffffffff));
