@@ -48,6 +48,15 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
 - **Display:** one treemap unit per FDE, with readable Mac-derived names when available, plus four
   unclaimed-code units and matched/unclaimed data intervals. The **Allocated data** category isolates
   data progress. Leave the site's default category as **All** to retain the full denominator.
+- **Port-relevance layers:** `config/<build>/layers.toml` puts every FDE into one more category, so
+  the code a modern port keeps can be followed apart from code it would replace. **Game logic**
+  is the `harvest` objects; **Engine core** is the `ox` library plus the daisy pieces that define
+  data formats or game behaviour (sprite and particle packages, fonts, the sound logic in
+  `CAudioDriver`); **GUI toolkit** is the other `daisy::gui` widgets, whose interfaces the game uses
+  but whose drawing a port redoes; **Platform layer** is the rest of daisy (OpenGL and software
+  renderers, scene graph and mesh loaders, device, input, file system, network and OpenAL backends).
+  A rule matches a symbol name; unnamed functions take the layer of the closest earlier named function
+  in their address range. The layers do not change the whole-binary measures.
 
 The initial capture at the `CMemReadFile` + `CMemWriteFile` stage has 35 unique matched functions
 and 995 matched bytes: **0.04980%**. These two objects emit 37 function records, including two shared

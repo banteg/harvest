@@ -12,7 +12,7 @@
     "tools/hv/symbols.py": "0d9150908ba72df692193dbeabb92d9dc3c43830bab42f029a098da5f5f9e76c",
     "tools/hv/toolchain.py": "76dc57846080216558776bf378e09294c3bb3ce3555c850235f839eb2afa8423",
     "tools/hv/units.py": "2f71fb16f1daffbc46e613e3cb0dd1995ae88f4d61eedc8560a15eb625e197d6",
-    "tools/hv/progress.py": "6267493d0cc0a524a6317860fb80d54711bc9b764ace873a1e489c60334f04af",
+    "tools/hv/progress.py": "da6db2cccccd6a93c39e663d71f7fb5824ba639585c4c78d41fdbb592f432929",
     "tools/hv/metrics.py": "c1629714cd34f7916908b7adae46131b626f651380603cd500f32ff0a6675414",
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",

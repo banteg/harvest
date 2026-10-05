@@ -1,12 +1,15 @@
 """Capture local matching evidence; publish fresh objdiff-v2 progress without originals in CI."""
 
 import argparse
+import bisect
 import csv
 import hashlib
 import io
 import json
+import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 from hv import builds, metrics, units
@@ -309,12 +312,51 @@ def measures(
     }
 
 
+def load_layers(build: str) -> dict | None:
+    """The port-relevance layer config (config/<build>/layers.toml), or None when the build has none."""
+    path = builds.ROOT / "config" / build / "layers.toml"
+    if not path.exists():
+        return None
+    return tomllib.loads(path.read_text())
+
+
+def assign_layers(functions: list[dict], names: dict[int, str], config: dict) -> dict[int, str]:
+    """Each function's layer: the first matching rule, else the closest earlier named function in its range,
+    else the range's own layer."""
+    rules = [(re.compile(rule["pattern"]), rule["layer"]) for rule in config.get("rule", [])]
+    ranges = sorted((r["start"], r["end"], r["layer"]) for r in config["range"])
+    starts = [start for start, _, _ in ranges]
+    result = {}
+    current_range, inherited = None, None
+    for function in sorted(functions, key=lambda f: f["address"]):
+        address = function["address"]
+        index = bisect.bisect_right(starts, address) - 1
+        if index < 0 or address >= ranges[index][1]:
+            raise ValueError(f"function {address:#x} lies outside every layer range")
+        if index != current_range:
+            current_range, inherited = index, ranges[index][2]
+        name = names.get(address)
+        if name is not None:
+            inherited = next((layer for pattern, layer in rules if pattern.search(name)), ranges[index][2])
+        result[address] = inherited
+    if unknown := set(result.values()) - set(config["layers"]):
+        raise ValueError(f"undefined layers: {', '.join(sorted(unknown))}")
+    return result
+
+
 def make_report(
-    inv: dict, functions: list[dict], evidence: dict, names: dict[int, str], demangled: dict[str, str]
+    inv: dict,
+    functions: list[dict],
+    evidence: dict,
+    names: dict[int, str],
+    demangled: dict[str, str],
+    layers: dict | None = None,
 ) -> dict:
     matched = measured_functions(functions, evidence)
     fuzzy = metrics.fuzzy_functions(functions, evidence)
     data = metrics.data_ranges(inv, evidence)
+    layer_of = assign_layers(functions, names, layers) if layers else {}
+    layer_totals = {layer: [0, 0, 0, 0, 0.0] for layer in layers["layers"]} if layers else {}
     fuzzy_code = 0.0
     report_units = []
     covered = dict.fromkeys((s["name"] for s in inv["sections"]), 0)
@@ -329,6 +371,14 @@ def make_report(
         )
         display = demangled.get(symbol, symbol)
         metadata = {"complete": False, "progress_categories": ["functions"]}
+        if layer := layer_of.get(address):
+            metadata["progress_categories"].append(layer)
+            totals = layer_totals[layer]
+            totals[0] += size
+            totals[1] += size if proof else 0
+            totals[2] += 1
+            totals[3] += int(bool(proof))
+            totals[4] += size * percent / 100
         if proof:
             metadata["source_path"] = f"src/{proof['sources'][0]}"
         elif score:
@@ -434,6 +484,16 @@ def make_report(
                 "name": "Unclaimed executable bytes",
                 "measures": measures(inv["total_code"] - function_code, 0, 0, 0, len(gaps)),
             },
+            *(
+                {
+                    "id": layer,
+                    "name": layers["layers"][layer]["name"],
+                    "measures": measures(
+                        code, matched_bytes, count, matched_count, count, fuzzy_code=fuzzy_bytes
+                    ),
+                }
+                for layer, (code, matched_bytes, count, matched_count, fuzzy_bytes) in layer_totals.items()
+            ),
         ],
     }
 
@@ -449,7 +509,7 @@ def export(build: str, output: Path) -> dict:
     reference = builds.REFERENCE / "1.18-mac-i386" / "functions.csv"
     with reference.open() as stream:
         demangled = {row["symbol"]: row["name"] for row in csv.DictReader(stream)}
-    report = make_report(inv, functions, evidence, names, demangled)
+    report = make_report(inv, functions, evidence, names, demangled, load_layers(build))
     write_json(output, report)
     return report
 
@@ -469,6 +529,13 @@ def main(argv: list[str] | None = None) -> int:
             f"{m['matched_code']}/{m['total_code']} bytes ({m['matched_code_percent']:.5f}%), "
             f"{m['matched_functions']}/{m['total_functions']} functions -> {args.output}"
         )
+        for category in report["categories"][3:]:
+            c = category["measures"]
+            print(
+                f"  {category['id']:8} {c['matched_code']:>7}/{c['total_code']:>7} bytes "
+                f"({c['matched_code_percent']:6.2f}%), "
+                f"{c['matched_functions']}/{c['total_functions']} functions"
+            )
         print(
             f"fuzzy {m['fuzzy_match_percent']:.5f}%; "
             f"data {m['matched_data']}/{m['total_data']} ({m['matched_data_percent']:.5f}%); "

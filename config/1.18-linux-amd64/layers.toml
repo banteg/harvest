@@ -1,0 +1,51 @@
+# Port-relevance layers for the progress report. Every FDE function gets one layer, shown as its own
+# decomp.dev category next to the whole-binary numbers.
+#
+# A function's layer is the first `rule` whose pattern matches its symbol name (searched in the mangled
+# name), else the layer of the closest named function before it in the same `range`, else the range's
+# layer. The ranges follow the link order: the game objects, then the daisy engine (Irrlicht 0.7
+# derived), then the ox library.
+
+[layers.game]
+name = "Game logic (harvest)"
+
+[layers.engine]
+name = "Engine core a port keeps (ox, sprite/particle packages, fonts, sound logic)"
+
+[layers.toolkit]
+name = "GUI toolkit widgets (daisy::gui)"
+
+[layers.platform]
+name = "Platform layer a port replaces (renderers, scene graph, device, file and audio backends)"
+
+[[range]]
+layer = "game"
+start = 0x408740
+end = 0x4bad60
+
+[[range]]
+layer = "platform"
+start = 0x4bad60
+end = 0x5db2c0
+
+[[range]]
+layer = "engine"
+start = 0x5db2c0
+end = 0x5eedd8
+
+# Data formats and behaviour the game depends on, inside the daisy range.
+[[rule]]
+layer = "engine"
+pattern = '5daisy5video\d+(CSpritePackage|CSpriteAnimation\w*|CParticlePackage|CParticleState)'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy3gui(8CGUIFont|12CUnicodeFont)'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy5audio12CAudioDriver'
+
+[[rule]]
+layer = "toolkit"
+pattern = '5daisy3gui'

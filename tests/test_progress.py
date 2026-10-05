@@ -321,3 +321,50 @@ def test_false_linked_claim_rejected(captured):
     progress.write_json(dest / "evidence.json", evidence)
     with pytest.raises(ValueError, match="linked evidence"):
         progress.validate("test")
+
+
+def layer_config():
+    return {
+        "layers": {"game": {"name": "Game"}, "engine": {"name": "Engine"}, "platform": {"name": "Platform"}},
+        "range": [
+            {"layer": "game", "start": 0x1000, "end": 0x1020},
+            {"layer": "platform", "start": 0x1020, "end": 0x1100},
+        ],
+        "rule": [{"layer": "engine", "pattern": r"5daisy5video\d+CSpritePackage"}],
+    }
+
+
+def test_layers_follow_rules_then_the_previous_named_function_then_the_range():
+    functions = [
+        {"address": 0x1000, "size": 8, "section": ".text"},
+        {"address": 0x1020, "size": 8, "section": ".text"},
+        {"address": 0x1030, "size": 8, "section": ".text"},
+        {"address": 0x1040, "size": 8, "section": ".text"},
+        {"address": 0x1050, "size": 8, "section": ".text"},
+    ]
+    names = {0x1030: "_ZN5daisy5video14CSpritePackage4loadEv", 0x1050: "_ZN5daisy5video10CVideoNull5clearEv"}
+    layers = progress.assign_layers(functions, names, layer_config())
+    assert layers == {
+        0x1000: "game",
+        0x1020: "platform",
+        0x1030: "engine",
+        0x1040: "engine",
+        0x1050: "platform",
+    }
+
+
+def test_layer_categories_measure_their_functions():
+    inv, functions, evidence = sample()
+    report = progress.make_report(inv, functions, evidence, {}, {}, layer_config())
+    categories = {c["id"]: c["measures"] for c in report["categories"]}
+    assert categories["game"]["total_code"] == "20" and categories["game"]["matched_code"] == "20"
+    assert categories["platform"]["total_code"] == "40" and categories["platform"]["matched_code"] == "0"
+    assert categories["engine"]["total_functions"] == 0
+    assert report["units"][0]["metadata"]["progress_categories"] == ["functions", "game"]
+
+
+def test_functions_outside_every_layer_range_are_rejected():
+    config = layer_config()
+    config["range"] = config["range"][:1]
+    with pytest.raises(ValueError, match="outside every layer range"):
+        progress.assign_layers([{"address": 0x1020, "size": 8, "section": ".text"}], {}, config)
