@@ -851,7 +851,29 @@ bool CPlayState::initializeNewGame()
     LevelRecordShown = false;
     MineralsRecordShown = false;
     BuildingAttacked = false;
-    if (GameMode != game::EGM_CAMPAIGN)
+    if (GameMode == game::EGM_CAMPAIGN)
+    {
+        Scenario = new game::CScenario();
+        g_gamePlanet = Scenario->getScenarioPlanet();
+        int credits = Scenario->getStartingCredits();
+        game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
+        game::createCredits();
+        game::setCredits(credits);
+        if (!game::gp_world->initializeWorld(Driver, getViewSize()))
+            return false;
+
+        entity::gp_entityManager = new entity::CEntityManager();
+        entity::g_nextEntityId = 1;
+        game::gp_world->initializeNewGame(Scenario);
+        Scenario->addStartingEntities();
+        Scenario->createScenarioEvents(this);
+        if (StoryScreen)
+        {
+            StoryScreen->displayBlackness(10.0f);
+            StoryScreen->setVisible(true);
+        }
+    }
+    else
     {
         game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
         game::createCredits();
@@ -882,28 +904,6 @@ bool CPlayState::initializeNewGame()
         }
         else
             game::setCredits(45);
-    }
-    else
-    {
-        Scenario = new game::CScenario();
-        g_gamePlanet = Scenario->getScenarioPlanet();
-        int credits = Scenario->getStartingCredits();
-        game::gp_world = new game::CWorld(GameMode, g_gamePlanet);
-        game::createCredits();
-        game::setCredits(credits);
-        if (!game::gp_world->initializeWorld(Driver, getViewSize()))
-            return false;
-
-        entity::gp_entityManager = new entity::CEntityManager();
-        entity::g_nextEntityId = 1;
-        game::gp_world->initializeNewGame(Scenario);
-        Scenario->addStartingEntities();
-        Scenario->createScenarioEvents(this);
-        if (StoryScreen)
-        {
-            StoryScreen->displayBlackness(10.0f);
-            StoryScreen->setVisible(true);
-        }
     }
 
     ViewPosition.X = (game::gp_world->getActualGameFieldSize().getWidth() - ScreenSizeF.Width) * 0.5f;
