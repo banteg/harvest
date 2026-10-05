@@ -425,25 +425,18 @@ void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
 
                 ox::TArray<ox::core::CString<char> > columns;
                 ox::core::splitString(columns, rows[row], colDelimiter);
-                SSummaryEntry& entry = SummaryPages[SummaryCategory].Entries[i][j][k];
-                if (SummaryCategory == 2)
+                if (SummaryCategory != 2 && columns.size() == 3)
                 {
-                    // the groups summary has no player names
-                    if (columns.size() == 2)
-                    {
-                        SummaryPages[SummaryCategory].Entries[i][j][k].Name = createUCS2FromBase64UTF2(columns[0]);
-                        SummaryPages[SummaryCategory].Entries[i][j][k].Group =
-                            SummaryPages[SummaryCategory].Entries[i][j][k].Name;
-                        SummaryPages[SummaryCategory].Entries[i][j][k].Score =
-                            ox::core::CString<wchar_t>(columns[1].c_str());
-                    }
-                }
-                else if (columns.size() == 3)
-                {
-                    entry.Name = createUCS2FromBase64UTF2(columns[0]);
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Name = createUCS2FromBase64UTF2(columns[0]);
                     SummaryPages[SummaryCategory].Entries[i][j][k].Group = createUCS2FromBase64UTF2(columns[1]);
-                    SummaryPages[SummaryCategory].Entries[i][j][k].Score =
-                        ox::core::CString<wchar_t>(columns[2].c_str());
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Score = ox::core::CString<wchar_t>(columns[2].c_str());
+                }
+                else if (SummaryCategory == 2 && columns.size() == 2)
+                {
+                    // the groups summary names only the group
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Name = createUCS2FromBase64UTF2(columns[0]);
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Group = SummaryPages[SummaryCategory].Entries[i][j][k].Name;
+                    SummaryPages[SummaryCategory].Entries[i][j][k].Score = ox::core::CString<wchar_t>(columns[1].c_str());
                 }
             }
         }
