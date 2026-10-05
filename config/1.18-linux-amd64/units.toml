@@ -250,3 +250,10 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/gui/CSettingsScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86baa8
+# KEY_NAMES and KeyCommandNames.
+".rodata" = 0x604460
+".gcc_except_table" = 0x65cb6b
