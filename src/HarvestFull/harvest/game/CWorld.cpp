@@ -578,8 +578,8 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
             {
                 float angle = (float)puff->Speed.getAngle() * .0174532905f;
                 float amount = puff->SpeedMagnitude * frameDelta * .00666666683f;
-                float ANGLE_OFFS[5] = { 0, .3f, -.3f, .75f, -.75f };
-                float SPEED_SCALES[5] = { 1.6f, 1.1f, 1.1f, .2f, .2f };
+                const float ANGLE_OFFS[5] = { 0, .3f, -.3f, .75f, -.75f };
+                const float SPEED_SCALES[5] = { 1.6f, 1.1f, 1.1f, .2f, .2f };
                 for (int i = 0; i < 5; ++i)
                     if (puff->Particles[i])
                     {
@@ -608,7 +608,8 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
             WindPuffs.push_back(puff);
         }
     }
-    if (!((GameMode == 3 || GameMode == 5) && InitialWorld))
+    if ((GameMode == 3 || GameMode == 5) && InitialWorld) ActualGameField = TargetGameField;
+    else
     {
         ActualGameField.UpperLeftCorner.X = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.X - 512) >> 9) * 512);
         ActualGameField.UpperLeftCorner.Y = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.Y - 512) >> 9) * 512);
@@ -627,7 +628,6 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
         ActualGameField.LowerRightCorner.X = ox::core::min_(ActualGameField.LowerRightCorner.X, 5120.0f);
         ActualGameField.LowerRightCorner.Y = ox::core::min_(ActualGameField.LowerRightCorner.Y, 5120.0f);
     }
-    else ActualGameField = TargetGameField;
     if (ActualGameField.UpperLeftCorner.X < TargetGameField.UpperLeftCorner.X)
         expandWorld(1, ActualGameField.UpperLeftCorner.X, true);
     if (ActualGameField.UpperLeftCorner.Y < TargetGameField.UpperLeftCorner.Y)
@@ -637,22 +637,22 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
     if (ActualGameField.LowerRightCorner.Y > TargetGameField.LowerRightCorner.Y)
         expandWorld(2, ActualGameField.LowerRightCorner.Y, true);
     float movement = frameDelta * 100;
-    if (ActualGameField.UpperLeftCorner.X > VisibleGameField.UpperLeftCorner.X)
+    if (VisibleGameField.UpperLeftCorner.X < ActualGameField.UpperLeftCorner.X)
         VisibleGameField.UpperLeftCorner.X = ox::core::min_(VisibleGameField.UpperLeftCorner.X + movement, ActualGameField.UpperLeftCorner.X);
-    else if (ActualGameField.UpperLeftCorner.X < VisibleGameField.UpperLeftCorner.X)
+    else if (VisibleGameField.UpperLeftCorner.X > ActualGameField.UpperLeftCorner.X)
         VisibleGameField.UpperLeftCorner.X = ActualGameField.UpperLeftCorner.X;
-    if (ActualGameField.UpperLeftCorner.Y > VisibleGameField.UpperLeftCorner.Y)
+    if (VisibleGameField.UpperLeftCorner.Y < ActualGameField.UpperLeftCorner.Y)
         VisibleGameField.UpperLeftCorner.Y = ox::core::min_(VisibleGameField.UpperLeftCorner.Y + movement, ActualGameField.UpperLeftCorner.Y);
-    else if (ActualGameField.UpperLeftCorner.Y < VisibleGameField.UpperLeftCorner.Y)
+    else if (VisibleGameField.UpperLeftCorner.Y > ActualGameField.UpperLeftCorner.Y)
         VisibleGameField.UpperLeftCorner.Y = ActualGameField.UpperLeftCorner.Y;
-    if (ActualGameField.LowerRightCorner.X < VisibleGameField.LowerRightCorner.X)
-        VisibleGameField.LowerRightCorner.X = ox::core::max_(VisibleGameField.LowerRightCorner.X - movement, ActualGameField.LowerRightCorner.X);
-    else if (ActualGameField.LowerRightCorner.X > VisibleGameField.LowerRightCorner.X)
+    if (VisibleGameField.LowerRightCorner.X < ActualGameField.LowerRightCorner.X)
         VisibleGameField.LowerRightCorner.X = ActualGameField.LowerRightCorner.X;
-    if (ActualGameField.LowerRightCorner.Y < VisibleGameField.LowerRightCorner.Y)
-        VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
-    else if (ActualGameField.LowerRightCorner.Y > VisibleGameField.LowerRightCorner.Y)
+    else if (VisibleGameField.LowerRightCorner.X > ActualGameField.LowerRightCorner.X)
+        VisibleGameField.LowerRightCorner.X = ox::core::max_(VisibleGameField.LowerRightCorner.X - movement, ActualGameField.LowerRightCorner.X);
+    if (VisibleGameField.LowerRightCorner.Y < ActualGameField.LowerRightCorner.Y)
         VisibleGameField.LowerRightCorner.Y = ActualGameField.LowerRightCorner.Y;
+    else if (VisibleGameField.LowerRightCorner.Y > ActualGameField.LowerRightCorner.Y)
+        VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
 }
 
 void CWorld::renderBackground(const ox::core::CPosition2d<float>& position, ox::gui::IGUIFont* font,
