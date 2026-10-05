@@ -9,9 +9,9 @@
 #include "IGUIElement.h"
 #include "IGUIFont.h"
 #include "../video/SColor.h"
+#include "../TArray.h"
 
 namespace ox {
-template <class T> class TArray;
 namespace video { class ISpritePackage; }
 namespace gui {
 
@@ -35,14 +35,19 @@ public:
     //! Shrinks the element to the size of its text.
     virtual void packSize() = 0;
 
-    //! Splits text at spaces and newlines into the lines that fit width when drawn with font; every
-    //! wrapped line starts with style. A word wider than width gets a line of its own.
-    static inline void breakText(const core::CString<wchar_t>& text, IGUIFont* font, TArray<core::CString<wchar_t> >& lines,
-        int width, const wchar_t* style);
+    //! Breaks text into lines no wider than width; lines after the first start with indent. Defined in
+    //! IGUIStaticTextInline.h.
+    static void breakText(const core::CString<wchar_t>& text, IGUIFont* font,
+        TArray<core::CString<wchar_t> >& lines, int width, const wchar_t* indent);
 
-    //! The height of text broken into lines of width.
-    static inline int getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
-        const wchar_t* style);
+    //! The height of text broken into lines no wider than width.
+    static int getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
+        const wchar_t* indent)
+    {
+        TArray<core::CString<wchar_t> > lines;
+        breakText(text, font, lines, width, indent);
+        return lines.size() * font->getDimension(L"A").Height;
+    }
 };
 
 } // end namespace gui

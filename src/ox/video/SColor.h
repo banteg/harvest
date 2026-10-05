@@ -57,6 +57,14 @@ public:
         color = (b & 0xff) | (color & 0xffffff00);
     }
 
+    //! Interpolates between this color (d = 1) and other (d = 0).
+    SColor getInterpolated(SColor other, float d) const
+    {
+        float inv = 1.0f - d;
+        return SColor((int)(other.getAlpha() * inv + getAlpha() * d), (int)(other.getRed() * inv + getRed() * d),
+            (int)(other.getGreen() * inv + getGreen() * d), (int)(other.getBlue() * inv + getBlue() * d));
+    }
+
     //! Signed like Irrlicht's s32: CParticleState::update extracts components with arithmetic shifts.
     int color;
 };

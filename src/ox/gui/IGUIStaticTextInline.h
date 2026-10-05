@@ -1,7 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// The inline IGUIStaticText text helpers. The Linux build emits breakText's copy in
-// daisy/gui/CGUIEnvironment.cpp. They are kept out of IGUIStaticText.h because instantiating their
-// templates there changes the register choices of the game units that include it.
+// The inline IGUIStaticText::breakText. The Linux build emits its copy in daisy/gui/CGUIEnvironment.cpp.
+// It is kept out of IGUIStaticText.h because instantiating its templates there changes the register
+// choices of the game units that include it.
 
 #ifndef OX_GUI_IGUISTATICTEXTINLINE_H
 #define OX_GUI_IGUISTATICTEXTINLINE_H
@@ -12,8 +12,8 @@
 namespace ox {
 namespace gui {
 
-inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFont* font, TArray<core::CString<wchar_t> >& lines,
-    int width, const wchar_t* style)
+inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFont* font,
+    TArray<core::CString<wchar_t> >& lines, int width, const wchar_t* style)
 {
     if (!font)
         return;
@@ -84,14 +84,6 @@ inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFo
     }
     else
         lines.push_back(text);
-}
-
-inline int IGUIStaticText::getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
-    const wchar_t* style)
-{
-    TArray<core::CString<wchar_t> > lines;
-    breakText(text, font, lines, width, style);
-    return lines.size() * font->getDimension(L"A").Height;
 }
 
 } // end namespace gui
