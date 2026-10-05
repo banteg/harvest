@@ -3431,6 +3431,8 @@ address	size	symbol	evidence
 0x5ea880	12	_ZN2ox4game10CGameStateD1Ev	mac-vtable:_ZTVN2ox4game10CGameStateE:3
 0x5ea890	12	_ZN2ox4game10CGameStateD2Ev	match:ox/game/CGameState.cpp
 0x5ea8a0	25	_ZN2ox4game10CGameStateD0Ev	mac-vtable:_ZTVN2ox4game10CGameStateE:4
+0x5ea8c0	38	_GLOBAL__I__ZN2ox4game17CTextLocalization7getTextEPKw	manual:CTextLocalization-unit-static-initializer
+0x5ea8f0	658	_ZN2ox4game17CTextLocalization7getTextEPKw	manual:Mac-symbol+amd64-getAttribute-and-replaceAll-calls
 0x5eabc0	227	_ZN2ox3gui11IGUIElement6removeEv	mac-vtable:_ZTVN5daisy3gui15CGUIEnvironmentE:61
 0x5eacc0	341	_ZN2ox3gui11IGUIElementD1Ev	mac-vtable:_ZTVN2ox3gui11IGUIElementE:2
 0x5eae30	348	_ZN2ox3gui11IGUIElementD0Ev	mac-vtable:_ZTVN2ox3gui11IGUIElementE:3

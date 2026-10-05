@@ -358,3 +358,7 @@
 ["ox/core/AlwaysAppendToFile.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874290
+
+["ox/game/CTextLocalization.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874274
