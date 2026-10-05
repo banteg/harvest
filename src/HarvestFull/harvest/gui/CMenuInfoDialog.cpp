@@ -45,9 +45,12 @@ bool CMenuInfoDialog::OnEvent(const ox::event::SEvent& event)
     case ox::event::EET_GUI_EVENT:
     {
         int id = event.GUIEvent.Caller->getID();
-        if (event.GUIEvent.EventType == ox::gui::EGET_BUTTON_CLICKED)
+        switch (event.GUIEvent.EventType)
         {
-            if (id == ID_START_TUTORIAL)
+        case ox::gui::EGET_BUTTON_CLICKED:
+            switch (id)
+            {
+            case ID_START_TUTORIAL:
             {
                 setVisible(false, EIM_WELCOME);
                 g_gamePlanet = 0;
@@ -61,7 +64,7 @@ bool CMenuInfoDialog::OnEvent(const ox::event::SEvent& event)
                 ox::event::gp_subscriberList->OnEvent(startEvent);
                 return true;
             }
-            if (id == ID_CLOSE)
+            case ID_CLOSE:
             {
                 setVisible(false, EIM_WELCOME);
                 ox::event::SEvent closeEvent;
@@ -74,9 +77,9 @@ bool CMenuInfoDialog::OnEvent(const ox::event::SEvent& event)
                 g_scenarioResult = -1;
                 return true;
             }
-        }
-        else if (event.GUIEvent.EventType == ox::gui::EGET_ELEMENT_DRAWN)
-        {
+            }
+            break;
+        case ox::gui::EGET_ELEMENT_DRAWN:
             if ((id == ID_SYNDICATE_TEXT && SyndicateTime > 0) || (id == ID_INFO_TEXT && InfoTime > 0))
             {
                 ox::core::CRect<int> rect = event.GUIEvent.Caller->getAbsolutePosition();
@@ -97,6 +100,9 @@ bool CMenuInfoDialog::OnEvent(const ox::event::SEvent& event)
                     break;
                 }
             }
+            break;
+        default:
+            break;
         }
         break;
     }
@@ -104,7 +110,7 @@ bool CMenuInfoDialog::OnEvent(const ox::event::SEvent& event)
     case ox::event::EET_KEY_INPUT_EVENT:
         return true;
     default:
-        break;
+        return false;
     }
     return false;
 }

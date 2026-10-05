@@ -32,6 +32,7 @@ CProfileScreen::~CProfileScreen()
 
 bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
 {
+    bool result = false;
     switch (event.EventType)
     {
     case ox::event::EET_GUI_EVENT:
@@ -44,19 +45,23 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
             {
             case ID_CREATE_PROFILE:
                 createEditProfileWindow(true);
-                return true;
+                result = true;
+                break;
             case ID_EDIT_PROFILE:
                 createEditProfileWindow(false);
-                return true;
+                result = true;
+                break;
             case ID_DELETE_PROFILE:
                 GUIEnvironment->addMessageBox(
                     settings::gp_systemConfig->getLocalizedText(L"profile:confirmDeleteTitle").c_str(),
                     settings::gp_systemConfig->getLocalizedText(L"profile:confirmDeleteText").c_str(),
                     true, ox::gui::EMBF_YES | ox::gui::EMBF_NO, Window, ID_CONFIRM_DELETE);
-                return true;
+                result = true;
+                break;
             case ID_BACK:
                 removeWindow();
-                return true;
+                result = true;
+                break;
             case ID_SAVE:
                 if (saveProfile(false) && !EditMode)
                 {
@@ -66,17 +71,20 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                     ox::event::gp_subscriberList->postDelayedEvent(created);
                     removeWindow();
                 }
-                return true;
+                result = true;
+                break;
             case ID_CANCEL:
                 removeWindow();
                 createProfileListWindow();
-                return true;
+                result = true;
+                break;
             case ID_GROUP_INFO:
                 GUIEnvironment->addMessageBox(
                     settings::gp_systemConfig->getLocalizedText(L"profile:groupInfoTitle").c_str(),
                     settings::gp_systemConfig->getLocalizedText(L"profile:groupInfoText").c_str(),
                     true, ox::gui::EMBF_OK, 0, -1);
-                return true;
+                result = true;
+                break;
             }
             break;
         case ox::gui::EGET_LISTBOX_CHANGED:
@@ -90,14 +98,16 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                     ox::core::CString<wchar_t> name = list->getListItem(selected)->getText();
                     settings::gp_profileManager->openProfileByName(name);
                 }
-                return true;
+                result = true;
+                break;
             }
             break;
         case ox::gui::EGET_LISTBOX_SELECTED_AGAIN:
             if (id == ID_PROFILE_LIST)
             {
                 removeWindow();
-                return true;
+                result = true;
+                break;
             }
             break;
         case ox::gui::EGET_MESSAGEBOX_YES:
@@ -105,7 +115,8 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
             {
             case ID_NAME_TAKEN:
                 saveProfile(true);
-                return true;
+                result = true;
+                break;
             case ID_CONFIRM_DELETE:
             {
                 deleteCurrentProfile();
@@ -117,7 +128,8 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
                     ox::core::CString<wchar_t> name = list->getListItem(selected)->getText();
                     settings::gp_profileManager->openProfileByName(name);
                 }
-                return true;
+                result = true;
+                break;
             }
             }
             break;
@@ -139,7 +151,7 @@ bool CProfileScreen::OnEvent(const ox::event::SEvent& event)
     default:
         break;
     }
-    return false;
+    return result;
 }
 
 void CProfileScreen::createEditProfileWindow(bool newProfile)

@@ -95,7 +95,7 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
             if ((unsigned int)(id - ID_GRAPH_BUTTON) <= GRAPH_OVERALL)
             {
                 int type = id - ID_GRAPH_BUTTON;
-                if (GraphType != type && game::gp_statistics->getAllLevelStats().size() >= 2)
+                if (type != GraphType && game::gp_statistics->getAllLevelStats().size() >= 2)
                 {
                     GraphType = type;
                     if (type == GRAPH_OVERALL)
@@ -261,8 +261,8 @@ bool CStatisticsScreen::OnEvent(const ox::event::SEvent& event)
         {
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
         case ox::event::EMIE_LMOUSE_LEFT_UP:
-            result = true;
-            break;
+            // Returning here keeps the native compare chain (a result flag becomes a lookup table).
+            return true;
         default:
             break;
         }

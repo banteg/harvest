@@ -34,8 +34,9 @@ bool CIngameMenuScreen::OnEvent(const ox::event::SEvent& event)
     case ox::event::EET_GUI_EVENT:
     {
         int id = event.GUIEvent.Caller->getID();
-        if (event.GUIEvent.EventType == ox::gui::EGET_BUTTON_CLICKED)
+        switch (event.GUIEvent.EventType)
         {
+        case ox::gui::EGET_BUTTON_CLICKED:
             switch (id)
             {
             case ID_NEW_GAME:
@@ -90,9 +91,8 @@ bool CIngameMenuScreen::OnEvent(const ox::event::SEvent& event)
                 result = true;
                 break;
             }
-        }
-        else if (event.GUIEvent.EventType == ox::gui::EGET_MESSAGEBOX_YES)
-        {
+            break;
+        case ox::gui::EGET_MESSAGEBOX_YES:
             if (id == ID_CONFIRM_EXIT)
             {
                 setVisible(false, false, 0);
@@ -105,6 +105,9 @@ bool CIngameMenuScreen::OnEvent(const ox::event::SEvent& event)
                 sendCustomEvent(ECE_NEW_GAME);
                 result = true;
             }
+            break;
+        default:
+            break;
         }
         break;
     }
