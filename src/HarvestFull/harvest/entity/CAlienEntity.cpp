@@ -869,7 +869,7 @@ void CAlienEntity::updateSummonerMovement(float frameDelta, ox::core::CVector3d<
                     }
                 }
             }
-            if (SummonerCharging)
+            else if (SummonerCharging)
             {
                 PendingSummon = true;
                 StateTimer = 4.0f;
@@ -879,8 +879,9 @@ void CAlienEntity::updateSummonerMovement(float frameDelta, ox::core::CVector3d<
                     float angle = i * 2.09439516f + StateAngle;
                     double sine = sin((double)angle);
                     double cosine = cos((double)angle);
-                    gp_entityManager->appendEntity(new CParticleEntity(cosine * 60.0 + Position.X,
-                        sine * 50.0 + Position.Y, 5.0f, 0, "AlienTeleportation"), 4);
+                    float x = Position.X + cosine * 60.0;
+                    float y = Position.Y + sine * 50.0;
+                    gp_entityManager->appendEntity(new CParticleEntity(x, y, 5.0f, 0, "AlienTeleportation"), 4);
                 }
             }
         }
