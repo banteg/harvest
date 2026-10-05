@@ -173,6 +173,14 @@ const char* MODE_DESIGN_ICONS[] =
     "ModeMeter4|right"
 };
 
+//! A rectangle at the origin with the given size.
+static ox::core::CRect<int> getScreenRect(const ox::core::CDimension2d<int>& size)
+{
+    ox::core::CRect<int> rect;
+    rect.LowerRightCorner = ox::core::CPosition2d<int>(size.Width, size.Height);
+    return rect;
+}
+
 //! The GUI element type of check boxes.
 static const int CHECK_BOX_ELEMENT_TYPE = 6;
 //! The GUI event of a mod check box.
@@ -275,7 +283,7 @@ int CMainMenuState::secondInit()
     case 3:
         ScreenSize = Driver->getScreenSize();
         RootElement = GUIEnvironment->addLayoutGroup(
-            ox::core::CRect<int>(ox::core::CPosition2d<int>(0, 0), ScreenSize), GUIEnvironment->getRootGUIElement());
+            getScreenRect(ScreenSize), GUIEnvironment->getRootGUIElement());
         HeadingText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 20, ScreenSize.Width, 60), false,
             false, RootElement, -1, L"");
         HeadingText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
