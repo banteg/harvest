@@ -5,6 +5,7 @@
 // back-and-forth scrolling of centered text that does not fit.
 
 #include "CGUIStaticText.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIFont.h"

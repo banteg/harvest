@@ -4,6 +4,7 @@
 // Oxeye ignores the button images.
 
 #include "CGUIToolBar.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/video/IVideoDriver.h"

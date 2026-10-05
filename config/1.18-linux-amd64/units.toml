@@ -436,3 +436,23 @@
 ["daisy/gui/CGUITabControl.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0bc
+
+["daisy/gui/CGUIImage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c08c
+
+["daisy/gui/CGUIInOutFader.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c090
+
+["daisy/gui/CGUIListBox.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c094
+
+["daisy/gui/CGUIMenu.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c098
+
+["daisy/gui/CGUIFileOpenDialog.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c084
