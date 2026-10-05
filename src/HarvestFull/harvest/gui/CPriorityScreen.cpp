@@ -180,7 +180,7 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                 int hovered = -1;
                 if (!Dragging)
                 {
-                    for (int j = PriorityBoxes[index].size() - 1; j >= 0; --j)
+                    for (int j = (int)PriorityBoxes[index].size() - 1; j >= 0; --j)
                     {
                         SPriorityBox* box = PriorityBoxes[index][j];
                         if (box->Rect.isPointInside(GUIEnvironment->getMousePosition()))
@@ -244,11 +244,11 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                     if (TooltipText.size() > 0 && Font)
                     {
                         ox::core::CDimension2d<int> size = Font->getDimension(TooltipText.c_str());
-                        int x = TooltipX + (52 - size.Width) / 2;
-                        ox::core::CRect<int> textRect(x, TooltipY + 52, x + size.Width, TooltipY + 52 + size.Height);
-                        Driver->draw2DRectangle(ox::video::SColor(0x80000000),
-                            ox::core::CRect<int>(textRect.UpperLeftCorner.X - 2, TooltipY + 50,
-                                textRect.LowerRightCorner.X + 2, textRect.LowerRightCorner.Y + 2), 0);
+                        ox::core::CRect<int> textRect(
+                            ox::core::CPosition2d<int>(TooltipX + (52 - size.Width) / 2, TooltipY + 52), size);
+                        ox::core::CRect<int> background(textRect.UpperLeftCorner.X - 2, textRect.UpperLeftCorner.Y - 2,
+                            textRect.LowerRightCorner.X + 2, textRect.LowerRightCorner.Y + 2);
+                        Driver->draw2DRectangle(ox::video::SColor(0x80000000), background, 0);
                         Font->draw(TooltipText.c_str(), textRect, ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT,
                             ox::gui::EFVA_TOP, 0);
                     }
@@ -260,22 +260,21 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
     }
     case ox::event::EET_MOUSE_INPUT_EVENT:
     {
-        int x = event.MouseInput.X;
-        int y = event.MouseInput.Y;
+        ox::core::CPosition2d<int> mouse(event.MouseInput.X, event.MouseInput.Y);
         switch (event.MouseInput.Event)
         {
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
             for (int i = 0; i < 5; ++i)
             {
-                for (int j = PriorityBoxes[i].size() - 1; j >= 0; --j)
+                for (int j = (int)PriorityBoxes[i].size() - 1; j >= 0; --j)
                 {
                     SPriorityBox* box = PriorityBoxes[i][j];
-                    if (box->Rect.isPointInside(ox::core::CPosition2d<int>(x, y)))
+                    if (box->Rect.isPointInside(mouse))
                     {
-                        Dragging = true;
                         DraggedBox = box;
-                        DragX = x;
-                        DragY = y;
+                        Dragging = true;
+                        DragX = mouse.X;
+                        DragY = mouse.Y;
                         Device->getCursorControl()->setVisible(false);
                         break;
                     }
@@ -292,7 +291,7 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
             if (Dragging && DraggedBox)
             {
                 // Dragging a box up by more than 30 pixels raises its priority, down lowers it.
-                int dy = y - DragY;
+                int dy = mouse.Y - DragY;
                 if (dy < -30)
                 {
                     if (DraggedBox->Priority < 3)
@@ -300,8 +299,8 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                         ++DraggedBox->Priority;
                         updatePriorityBoxPositions();
                     }
-                    DragX = x;
-                    DragY = y;
+                    DragX = mouse.X;
+                    DragY = mouse.Y;
                 }
                 else if (dy > 30)
                 {
@@ -310,8 +309,8 @@ bool CPriorityScreen::OnEvent(const ox::event::SEvent& event)
                         --DraggedBox->Priority;
                         updatePriorityBoxPositions();
                     }
-                    DragX = x;
-                    DragY = y;
+                    DragX = mouse.X;
+                    DragY = mouse.Y;
                 }
             }
             break;
