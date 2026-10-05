@@ -734,16 +734,16 @@ bool CPlayState::readStateFromFile(const char* filename)
             switch (i & 3)
             {
             case 0:
-                data[i] ^= scramble >> 24;
+                data[i] ^= (scramble & 0xff000000) >> 24;
                 break;
             case 1:
-                data[i] ^= scramble >> 16;
+                data[i] ^= (scramble & 0xff0000) >> 16;
                 break;
             case 2:
-                data[i] ^= scramble >> 8;
+                data[i] ^= (scramble & 0xff00) >> 8;
                 break;
             case 3:
-                data[i] ^= scramble;
+                data[i] ^= scramble & 0xff;
                 scramble = scramble << 31 | scramble >> 1;
                 break;
             }
@@ -792,13 +792,16 @@ bool CPlayState::readStateFromFile(const char* filename)
     LevelRecordShown = false;
     MineralsRecordShown = false;
 
-    if (header.Version > 28 && ox::io::CHelpIO::readByte(memFile))
+    if (header.Version > 28)
     {
-        LuaManager = new game::CLuaManager(Device, this);
-        if (!LuaManager->initLuaBySaveFile(memFile, header.Version))
+        if (ox::io::CHelpIO::readByte(memFile))
         {
-            delete LuaManager;
-            LuaManager = 0;
+            LuaManager = new game::CLuaManager(Device, this);
+            if (!LuaManager->initLuaBySaveFile(memFile, header.Version))
+            {
+                delete LuaManager;
+                LuaManager = 0;
+            }
         }
     }
 
@@ -823,10 +826,9 @@ bool CPlayState::readStateFromFile(const char* filename)
     delete[] unpacked;
 
     // Let the entities settle once before the first frame.
-    float x = ViewPosition.X - 100.0f;
-    float y = ViewPosition.Y - 100.0f;
     entity::gp_entityManager->update(0.001f,
-        ox::core::CRect<float>(x, y, ScreenSize.Width + 200.0f + x, ScreenSize.Height + 200.0f + y));
+        ox::core::CRect<float>(ViewPosition + ox::core::CPosition2d<float>(-100.0f, -100.0f),
+            ox::core::CDimension2d<float>(ScreenSize.Width + 200.0f, ScreenSize.Height + 200.0f)));
     GameSpeed = 0;
     result = true;
     return result;
