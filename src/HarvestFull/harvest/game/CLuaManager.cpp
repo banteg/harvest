@@ -199,7 +199,7 @@ int harvest_findBuildings(lua_State* L)
             {
                 if (inRect)
                 {
-                    const ox::core::CVector3d<float>& position = (*it)->getPosition();
+                    ox::core::CVector3d<float> position = (*it)->getPosition();
                     if (x1 > position.X || position.X > x2 || y1 > position.Y || position.Y > y2)
                         continue;
                 }
