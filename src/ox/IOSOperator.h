@@ -11,7 +11,7 @@
 
 namespace ox {
 
-//! Operating system services.
+//! Operating system services. Reference counted: the GUI environment grabs it.
 class IOSOperator : public IUnknown
 {
 public:

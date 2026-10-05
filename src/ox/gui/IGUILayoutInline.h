@@ -1,8 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Inline bodies of IGUILayout. The Linux build emits them as COMDAT copies in the environment's object,
-// so the original header defines them inline. They live apart from IGUILayout.h like
-// IGUIElementInline.h; the layout widget units include this header because the size of these bodies
-// decides which destructor calls GCC inlines there.
+// The inline IGUILayout sorters. The Linux build emits their copies in daisy/gui/CGUIEnvironment.cpp.
+// They are kept out of IGUILayout.h because instantiating their templates there changes the
+// register choices of the game units that include it.
 
 #ifndef OX_GUI_IGUILAYOUTINLINE_H
 #define OX_GUI_IGUILAYOUTINLINE_H
@@ -15,104 +14,87 @@
 namespace ox {
 namespace gui {
 
-inline core::CRect<int> IGUILayout::getParentAbsoluteClippingRect(bool clip)
+inline IGUILayout::IGUILayout(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+    : IGUIElement(environment, parent, id, rectangle)
 {
-    if (IsInvisible && Parent)
-        return Parent->getParentAbsoluteClippingRect(clip);
-
-    if (clip)
-        return AbsoluteClippingRect;
-
-    core::CRect<int> rect = getContentArea();
-    rect.UpperLeftCorner += AbsoluteRect.UpperLeftCorner;
-    rect.LowerRightCorner += AbsoluteRect.UpperLeftCorner;
-    if (Parent)
-    {
-        core::CRect<int> parentClip = Parent->getParentAbsoluteClippingRect(IsFixed);
-        if (parentClip.LowerRightCorner.X < rect.LowerRightCorner.X)
-            rect.LowerRightCorner.X = parentClip.LowerRightCorner.X;
-        if (parentClip.LowerRightCorner.Y < rect.LowerRightCorner.Y)
-            rect.LowerRightCorner.Y = parentClip.LowerRightCorner.Y;
-        if (parentClip.UpperLeftCorner.X > rect.UpperLeftCorner.X)
-            rect.UpperLeftCorner.X = parentClip.UpperLeftCorner.X;
-        if (parentClip.UpperLeftCorner.Y > rect.UpperLeftCorner.Y)
-            rect.UpperLeftCorner.Y = parentClip.UpperLeftCorner.Y;
-    }
-    return rect;
+    Type = EGUIET_LAYOUT;
 }
 
 inline void IGUILayout::sortFlow(int spacingX, int spacingY, bool rightToLeft, bool resize)
 {
     core::CRect<int> area = getContentArea();
-    int maxX = area.getWidth() - spacingX;
+    int width = area.getWidth() - spacingX;
     int y = spacingY;
     int rowHeight = 0;
     int maxWidth = 0;
-    bool first = true;
 
     if (!rightToLeft)
     {
         int x = spacingX;
+        bool first = true;
         for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
         {
             if ((*it)->isFixed())
                 continue;
 
-            core::CRect<int> r = (*it)->getRelativePosition();
-            if (x + r.getWidth() >= maxX && !first)
+            core::CRect<int> rect = (*it)->getRelativePosition();
+            int right = x + rect.getWidth();
+            if (right >= width && !first)
             {
                 y += rowHeight + spacingY;
                 x = spacingX;
                 rowHeight = 0;
+                right = spacingX + rect.getWidth();
             }
 
-            core::CRect<int> rect(x, y, x + r.getWidth(), r.getHeight() + y);
-            (*it)->setRelativePosition(rect);
-            x += rect.getWidth() + spacingX;
+            core::CRect<int> placed(x, y, right, rect.getHeight() + y);
+            (*it)->setRelativePosition(placed);
+            x += spacingX + placed.getWidth();
             first = false;
-            if (rowHeight < rect.getHeight())
-                rowHeight = rect.getHeight();
+            if (rowHeight < placed.getHeight())
+                rowHeight = placed.getHeight();
             if (x > maxWidth)
                 maxWidth = x;
         }
     }
     else
     {
-        int x = maxX;
+        int x = width;
+        bool first = true;
         for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
         {
             if ((*it)->isFixed())
                 continue;
 
-            core::CRect<int> r = (*it)->getRelativePosition();
-            x -= r.getWidth();
-            if (x < spacingX && !first)
+            core::CRect<int> rect = (*it)->getRelativePosition();
+            int left = x - rect.getWidth();
+            if (spacingX > left && !first)
             {
                 y += rowHeight + spacingY;
-                x = maxX - r.getWidth();
                 rowHeight = 0;
+                left = width - rect.getWidth();
             }
 
-            core::CRect<int> rect(x, y, x + r.getWidth(), r.getHeight() + y);
-            (*it)->setRelativePosition(rect);
-            x -= spacingX;
+            core::CRect<int> placed(left, y, left + rect.getWidth(), rect.getHeight() + y);
+            (*it)->setRelativePosition(placed);
+            x = left - spacingX;
             first = false;
-            if (rowHeight < rect.getHeight())
-                rowHeight = rect.getHeight();
-            if (maxX - x > maxWidth)
-                maxWidth = maxX - x;
+            if (rowHeight < placed.getHeight())
+                rowHeight = placed.getHeight();
+            if (width - x > maxWidth)
+                maxWidth = width - x;
         }
     }
 
-    int extra = y + rowHeight + spacingY + area.UpperLeftCorner.Y - area.LowerRightCorner.Y;
-    if (extra > 0)
-        RelativeRect.LowerRightCorner.Y += extra;
+    int growY = y + rowHeight + spacingY - area.getHeight();
+    if (growY > 0)
+        RelativeRect.LowerRightCorner.Y += growY;
 
     if (resize)
     {
-        extra = maxWidth + area.UpperLeftCorner.X - area.LowerRightCorner.X;
-        if (extra > 0)
-            RelativeRect.LowerRightCorner.X += extra;
+        int growX = maxWidth - area.getWidth();
+        if (growX > 0)
+            RelativeRect.LowerRightCorner.X += growX;
     }
 
     setRelativePosition(RelativeRect);
@@ -130,18 +112,18 @@ inline void IGUILayout::sortVertically(int spacing, bool center)
         if ((*it)->isFixed())
             continue;
 
-        core::CRect<int> r = (*it)->getRelativePosition();
+        core::CRect<int> rect = (*it)->getRelativePosition();
         if (center)
-            x = (width - r.getWidth()) / 2;
+            x = (width - rect.getWidth()) / 2;
 
-        core::CRect<int> rect(x, y, r.getWidth() + x, r.getHeight() + y);
-        (*it)->setRelativePosition(rect);
-        y += rect.getHeight() + spacing;
+        core::CRect<int> placed(x, y, rect.getWidth() + x, rect.getHeight() + y);
+        (*it)->setRelativePosition(placed);
+        y += placed.getHeight() + spacing;
     }
 
-    int extra = y + area.UpperLeftCorner.Y - area.LowerRightCorner.Y;
-    if (extra > 0)
-        RelativeRect.LowerRightCorner.Y += extra;
+    int grow = y + area.UpperLeftCorner.Y - area.LowerRightCorner.Y;
+    if (grow > 0)
+        RelativeRect.LowerRightCorner.Y += grow;
 
     setRelativePosition(RelativeRect);
     updateChildrenForContentArea();
@@ -157,36 +139,35 @@ inline void IGUILayout::sortHorizontally(int spacing)
         if ((*it)->isFixed())
             continue;
 
-        core::CRect<int> r = (*it)->getRelativePosition();
-        int y = (height - r.getHeight()) / 2;
-        core::CRect<int> rect(x, y, r.getWidth() + x, y + r.getHeight());
-        (*it)->setRelativePosition(rect);
-        x += rect.getWidth() + spacing;
+        core::CRect<int> rect = (*it)->getRelativePosition();
+        int y = (height - rect.getHeight()) / 2;
+        core::CRect<int> placed(x, y, rect.getWidth() + x, y + rect.getHeight());
+        (*it)->setRelativePosition(placed);
+        x += placed.getWidth() + spacing;
     }
 
-    int extra = x + area.UpperLeftCorner.X - area.LowerRightCorner.X;
-    if (extra > 0)
-        RelativeRect.LowerRightCorner.X += extra;
+    int grow = x + area.UpperLeftCorner.X - area.LowerRightCorner.X;
+    if (grow > 0)
+        RelativeRect.LowerRightCorner.X += grow;
 
     setRelativePosition(RelativeRect);
     updateChildrenForContentArea();
 }
 
-inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool tabUnflagged)
+inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden)
 {
     if (Children.empty())
         return;
 
     std::vector<TArray<IGUIElement*> > rows;
-    // the alignments of each row: 0 left or top, 1 center or middle, 2 right or bottom
-    std::vector<int> rowHAlign;
-    std::vector<int> rowVAlign;
-    int vAlign = 0;
-    int hAlign = 0;
+    std::vector<int> horizontal;
+    std::vector<int> vertical;
+    int horizontalAlign = 0;
+    int verticalAlign = 0;
     rows.push_back(TArray<IGUIElement*>());
-    rowHAlign.push_back(hAlign);
-    // the first row's vertical alignment is pushed from the horizontal one, as in the original
-    rowVAlign.push_back(hAlign);
+    // the first row's vertical alignment starts from horizontalAlign, as in both builds (both are 0)
+    horizontal.push_back(horizontalAlign);
+    vertical.push_back(horizontalAlign);
 
     int row = 0;
     int tabs = 0;
@@ -196,62 +177,42 @@ inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool 
         if ((*it)->isFixed())
             continue;
 
-        const char* hints = (*it)->LayoutFlags;
-        if (!hints)
+        const char* flags = (*it)->LayoutFlags;
+        if (!flags && !sortHidden)
         {
-            if (!tabUnflagged)
-            {
-                rows[row].push_back(*it);
-                continue;
-            }
-            hints = "tab";
+            rows[row].push_back(*it);
+            continue;
         }
+        if (!flags)
+            flags = "";
 
-        core::CString<char> flags = hints;
-        if (flags.findNext("br", 0) >= 0 && !rows[row].empty())
+        core::CString<char> hints = flags;
+        if (hints.findNext("br", 0) >= 0 && !rows[row].empty())
         {
             rows.push_back(TArray<IGUIElement*>());
-            rowHAlign.push_back(hAlign);
-            rowVAlign.push_back(vAlign);
+            horizontal.push_back(horizontalAlign);
+            vertical.push_back(verticalAlign);
             ++row;
             tabs = 0;
         }
 
         rows[row].push_back(*it);
 
-        if (flags.findNext("top", 0) >= 0)
-        {
-            vAlign = 0;
-            rowVAlign[row] = 0;
-        }
-        else if (flags.findNext("middle", 0) >= 0)
-        {
-            vAlign = 1;
-            rowVAlign[row] = 1;
-        }
-        else if (flags.findNext("bottom", 0) >= 0)
-        {
-            vAlign = 2;
-            rowVAlign[row] = 2;
-        }
+        if (hints.findNext("top", 0) >= 0)
+            vertical[row] = verticalAlign = 0;
+        else if (hints.findNext("middle", 0) >= 0)
+            vertical[row] = verticalAlign = 1;
+        else if (hints.findNext("bottom", 0) >= 0)
+            vertical[row] = verticalAlign = 2;
 
-        if (flags.findNext("left", 0) >= 0)
-        {
-            hAlign = 0;
-            rowHAlign[row] = 0;
-        }
-        else if (flags.findNext("center", 0) >= 0)
-        {
-            hAlign = 1;
-            rowHAlign[row] = 1;
-        }
-        else if (flags.findNext("right", 0) >= 0)
-        {
-            hAlign = 2;
-            rowHAlign[row] = 2;
-        }
+        if (hints.findNext("left", 0) >= 0)
+            horizontal[row] = horizontalAlign = 0;
+        else if (hints.findNext("center", 0) >= 0)
+            horizontal[row] = horizontalAlign = 1;
+        else if (hints.findNext("right", 0) >= 0)
+            horizontal[row] = horizontalAlign = 2;
 
-        if (flags.findNext("tab", 0) >= 0)
+        if (hints.findNext("tab", 0) >= 0)
         {
             ++tabs;
             if (maxTabs < tabs)
@@ -259,7 +220,7 @@ inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool 
         }
     }
 
-    // the rows at their preferred sizes
+    // place the rows at the preferred sizes
     int y = spacingY;
     for (unsigned int i = 0; i < rows.size(); ++i)
     {
@@ -276,31 +237,29 @@ inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool 
         y += rowHeight + spacingY;
     }
 
-    // line up the tab columns
+    // line up the n-th tab of every row with the rightmost one
     for (int tab = 0; tab < maxTabs; ++tab)
     {
-        int column = 0;
+        int tabX = 0;
         for (unsigned int i = 0; i < rows.size(); ++i)
         {
             int index = 0;
             for (unsigned int j = 0; j < rows[i].size(); ++j)
             {
-                const char* hints = rows[i][j]->LayoutFlags;
-                if (!hints)
-                {
-                    if (!tabUnflagged)
-                        continue;
-                    hints = "tab";
-                }
+                const char* flags = rows[i][j]->LayoutFlags;
+                if (!flags && !sortHidden)
+                    continue;
+                if (!flags)
+                    flags = "";
 
-                core::CString<char> flags = hints;
-                if (flags.findNext("tab", 0) >= 0)
+                core::CString<char> hints = flags;
+                if (hints.findNext("tab", 0) >= 0)
                 {
-                    if (index == tab)
+                    if (tab == index)
                     {
-                        int x = rows[i][j]->getRelativePosition().UpperLeftCorner.X;
-                        if (column < x)
-                            column = x;
+                        int left = rows[i][j]->getRelativePosition().UpperLeftCorner.X;
+                        if (left > tabX)
+                            tabX = left;
                         break;
                     }
                     ++index;
@@ -313,28 +272,26 @@ inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool 
             int index = 0;
             for (unsigned int j = 0; j < rows[i].size(); ++j)
             {
-                const char* hints = rows[i][j]->LayoutFlags;
-                if (!hints)
-                {
-                    if (!tabUnflagged)
-                        continue;
-                    hints = "tab";
-                }
+                const char* flags = rows[i][j]->LayoutFlags;
+                if (!flags && !sortHidden)
+                    continue;
+                if (!flags)
+                    flags = "";
 
-                core::CString<char> flags = hints;
-                if (flags.findNext("tab", 0) >= 0)
+                core::CString<char> hints = flags;
+                if (hints.findNext("tab", 0) >= 0)
                 {
-                    if (index == tab)
+                    if (tab == index)
                     {
-                        int shift = column - rows[i][j]->getRelativePosition().UpperLeftCorner.X;
-                        if (shift > 0)
+                        int offset = tabX - rows[i][j]->getRelativePosition().UpperLeftCorner.X;
+                        if (offset > 0)
                         {
-                            for (unsigned int k = j; k < rows[i].size(); ++k)
+                            for (; j < rows[i].size(); ++j)
                             {
-                                core::CRect<int> rect = rows[i][k]->getRelativePosition();
-                                rect.UpperLeftCorner.X += shift;
-                                rect.LowerRightCorner.X += shift;
-                                rows[i][k]->setRelativePosition(rect);
+                                core::CRect<int> rect = rows[i][j]->getRelativePosition();
+                                rect.UpperLeftCorner.X += offset;
+                                rect.LowerRightCorner.X += offset;
+                                rows[i][j]->setRelativePosition(rect);
                             }
                         }
                         break;
@@ -347,90 +304,72 @@ inline void IGUILayout::sortRiver(bool resize, int spacingX, int spacingY, bool 
 
     if (resize)
     {
-        int width = spacingX;
-        int height = spacingY;
+        int right = spacingX;
+        int bottom = spacingY;
         for (unsigned int i = 0; i < rows.size(); ++i)
         {
             for (unsigned int j = 0; j < rows[i].size(); ++j)
             {
                 core::CRect<int> rect = rows[i][j]->getRelativePosition();
-                if (width < rect.LowerRightCorner.X)
-                    width = rect.LowerRightCorner.X;
-                if (height < rect.LowerRightCorner.Y)
-                    height = rect.LowerRightCorner.Y;
+                if (right < rect.LowerRightCorner.X)
+                    right = rect.LowerRightCorner.X;
+                if (bottom < rect.LowerRightCorner.Y)
+                    bottom = rect.LowerRightCorner.Y;
             }
         }
 
         core::CRect<int> area = getContentArea();
-        RelativeRect.LowerRightCorner.X += width + spacingX - area.LowerRightCorner.X + area.UpperLeftCorner.X;
-        RelativeRect.LowerRightCorner.Y += height + spacingY - area.LowerRightCorner.Y + area.UpperLeftCorner.Y;
+        RelativeRect.LowerRightCorner.X += right + spacingX - area.getWidth();
+        RelativeRect.LowerRightCorner.Y += bottom + spacingY - area.getHeight();
         setRelativePosition(RelativeRect);
     }
 
-    // align the rows
-    int areaWidth = getContentArea().getWidth();
+    core::CRect<int> area = getContentArea();
+    int width = area.getWidth();
+
+    // align the rows horizontally; the divisor is 2 for centered rows
     for (unsigned int i = 0; i < rows.size(); ++i)
     {
-        int align = rowHAlign[i];
-        if (align == 0)
+        if (horizontal[i] == 0)
             continue;
 
         int right = 0;
         for (unsigned int j = 0; j < rows[i].size(); ++j)
-        {
-            int x = rows[i][j]->getRelativePosition().LowerRightCorner.X;
-            if (right < x)
-                right = x;
-        }
+            if (right < rows[i][j]->getRelativePosition().LowerRightCorner.X)
+                right = rows[i][j]->getRelativePosition().LowerRightCorner.X;
 
-        int shift = (areaWidth - right - spacingX) / (align == 1 ? 2 : 1);
+        int offset = (width - right - spacingX) / (horizontal[i] == 1 ? 2 : 1);
         for (unsigned int j = 0; j < rows[i].size(); ++j)
         {
             core::CRect<int> rect = rows[i][j]->getRelativePosition();
-            rect.UpperLeftCorner.X += shift;
-            rect.LowerRightCorner.X += shift;
+            rect.UpperLeftCorner.X += offset;
+            rect.LowerRightCorner.X += offset;
             rows[i][j]->setRelativePosition(rect);
         }
     }
 
+    // align the elements of each row vertically
     for (unsigned int i = 0; i < rows.size(); ++i)
     {
-        int align = rowVAlign[i];
-        if (align == 0)
+        if (vertical[i] == 0)
             continue;
 
-        int height = 0;
+        int rowHeight = 0;
         for (unsigned int j = 0; j < rows[i].size(); ++j)
-        {
-            int h = rows[i][j]->getRelativePosition().getHeight();
-            if (height < h)
-                height = h;
-        }
+            if (rowHeight < rows[i][j]->getRelativePosition().getHeight())
+                rowHeight = rows[i][j]->getRelativePosition().getHeight();
 
         for (unsigned int j = 0; j < rows[i].size(); ++j)
         {
             core::CRect<int> rect = rows[i][j]->getRelativePosition();
-            int shift = (height - rect.getHeight()) / (align == 1 ? 2 : 1);
-            rect.UpperLeftCorner.Y += shift;
-            rect.LowerRightCorner.Y += shift;
+            int offset = (rowHeight - rect.getHeight()) / (vertical[i] == 1 ? 2 : 1);
+            rect.UpperLeftCorner.Y += offset;
+            rect.LowerRightCorner.Y += offset;
             rows[i][j]->setRelativePosition(rect);
         }
     }
 
     updateChildrenForContentArea();
-}
-
-inline core::CRect<int> IGUILayout::getContentArea()
-{
-    return core::CRect<int>(0, 0, RelativeRect.getWidth(), RelativeRect.getHeight());
-}
-
-inline void IGUILayout::updateChildrenForContentArea()
-{
-    core::CPosition2d<int> offset = getContentArea().UpperLeftCorner;
-    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
-        if (!(*it)->isFixed())
-            (*it)->move(offset);
 }
 
 } // end namespace gui

@@ -30,7 +30,9 @@ enum EGUI_ELEMENT_TYPE
     EGUIET_EDIT_BOX = 12,
     EGUIET_COMBO_BOX = 16,
     EGUIET_BUTTON = 18,
-    EGUIET_TAB = 19,
+    //! IGUILayout and the elements derived from it, such as tabs.
+    EGUIET_LAYOUT = 19,
+    EGUIET_TAB = EGUIET_LAYOUT,
     EGUIET_TEXT_BUTTON = 22,
     EGUIET_TAB_BUTTON_ROW = 23,
     EGUIET_CLICK_AREA = 24
@@ -190,6 +192,9 @@ public:
     IGUIElement* getElementFromPoint(const core::CPosition2d<int>& point);
 
 protected:
+    //! Clears its children's parent links when destroyed.
+    friend class IGUIHoverParent;
+
     std::list<IGUIElement*> Children;
     IGUIElement* Parent;
     core::CRect<int> RelativeRect;

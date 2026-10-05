@@ -41,7 +41,8 @@ public:
     //! Shrinks the element to the size of its text.
     virtual void packSize() = 0;
 
-    //! Breaks text into lines no wider than width; lines after the first start with indent.
+    //! Breaks text into lines no wider than width; lines after the first start with indent. Defined in
+    //! IGUIStaticTextInline.h.
     static void breakText(const core::CString<wchar_t>& text, IGUIFont* font,
         TArray<core::CString<wchar_t> >& lines, int width, const wchar_t* indent);
 

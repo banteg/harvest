@@ -1,7 +1,8 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUISkin.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
-// Mac 1.18 vtable of daisy::gui::CGUISkin; the color and size enumerators are not recovered yet.
+// Mac 1.18 vtable of daisy::gui::CGUISkin. Oxeye's extra color and size names are inferred from
+// the widgets that read them.
 
 #ifndef OX_GUI_IGUISKIN_H
 #define OX_GUI_IGUISKIN_H
@@ -15,7 +16,12 @@ namespace gui {
 
 class IGUIFont;
 
-//! Default colors, numbered as in Irrlicht 0.7; Oxeye's additions after EGDC_WINDOW are not named yet.
+enum EGUI_SKIN_TYPE
+{
+    EGST_WINDOWS_STANDARD,
+    EGST_BLACK_WINDOWS
+};
+
 enum EGUI_DEFAULT_COLOR
 {
     EGDC_3D_DARK_SHADOW = 0,
@@ -34,7 +40,14 @@ enum EGUI_DEFAULT_COLOR
     EGDC_INACTIVE_CAPTION,
     EGDC_TOOLTIP,
     EGDC_SCROLLBAR,
-    EGDC_WINDOW
+    EGDC_WINDOW,
+    //! The shade a modal screen draws over the elements behind it.
+    EGDC_MODAL_SCREEN,
+    //! The fill and border of a selected list box or popup menu item.
+    EGDC_LIST_HIGH_LIGHT,
+    EGDC_LIST_HIGH_LIGHT_BORDER,
+
+    EGDC_COUNT
 };
 //! Default sizes, numbered as in Irrlicht 0.7.
 enum EGUI_DEFAULT_SIZE
@@ -46,15 +59,23 @@ enum EGUI_DEFAULT_SIZE
     EGDS_MESSAGE_BOX_WIDTH,
     EGDS_MESSAGE_BOX_HEIGHT,
     EGDS_BUTTON_WIDTH,
-    EGDS_BUTTON_HEIGHT
+    EGDS_BUTTON_HEIGHT,
+    //! The radio button size that CGUIRadioList lays its buttons out with.
+    EGDS_RADIO_BUTTON_WIDTH,
+    EGDS_RADIO_BUTTON_HEIGHT,
+
+    EGDS_COUNT
 };
+
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT
 {
     EGDT_MSG_BOX_OK = 0,
     EGDT_MSG_BOX_CANCEL,
     EGDT_MSG_BOX_YES,
-    EGDT_MSG_BOX_NO
+    EGDT_MSG_BOX_NO,
+
+    EGDT_COUNT
 };
 
 //! A skin modifies the look of the GUI elements.

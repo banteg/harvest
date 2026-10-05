@@ -27,6 +27,9 @@ enum EGUI_EVENT_TYPE
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
+    //! Sent to buttons after EGET_ELEMENT_HOVERED and EGET_ELEMENT_LEFT.
+    EGET_BUTTON_HOVERED = 5,
+    EGET_BUTTON_LEFT = 6,
     //! Sent by daisy::gui::CGUIScrollBar when its position changes.
     EGET_SCROLL_BAR_CHANGED = 7,
     //! Sent by daisy::gui::CGUICheckBox when it is clicked.

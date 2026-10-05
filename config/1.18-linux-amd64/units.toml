@@ -447,6 +447,14 @@
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0bc
 
+["daisy/gui/CGUISkin.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0b4
+
+["daisy/gui/CGUIEnvironment.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c080
+
 ["daisy/gui/CGUIImage.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c08c
