@@ -301,3 +301,13 @@
 ".bss" = 0x86ba98
 # OnEvent button jump table.
 ".rodata" = 0x601a68
+
+["HarvestFull/harvest/gui/CStatisticsScreen.cpp"]
+# iostream initializer, the world grid offset and ENERGY_PROGRESS_COLOR.
+".bss" = 0x86bab0
+# The sprite, button, popup, achievement and total name tables.
+".rodata" = 0x605d20
+
+["HarvestFull/harvest/gui/CStoryScreen.cpp"]
+# iostream initializer and the world grid offset.
+".bss" = 0x86babc
