@@ -250,3 +250,7 @@
 ".bss" = 0x86b4d0
 # g_scenarioResult
 ".data" = 0x868b30
+
+["HarvestFull/harvest/gui/CHighscoreScreen.cpp"]
+# iostream initializer, the world grid offset, STATUS_LABEL_AREA and the function-local delimiters.
+".bss" = 0x86b9b0

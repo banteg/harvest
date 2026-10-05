@@ -59,7 +59,22 @@ CString<T> replaceAll(const CString<T>& source, const CString<T>& find, const CS
 
 //! Splits str at every occurrence of separator into parts.
 template <class T>
-void splitString(TArray<CString<T> >& parts, const CString<T>& str, const CString<T>& separator);
+void splitString(TArray<CString<T> >& parts, const CString<T>& str, const CString<T>& separator)
+{
+    CString<T> rest = str;
+    int separatorSize = separator.size();
+    do
+    {
+        int position = rest.findNext(separator.c_str(), 0);
+        if (position < 0)
+        {
+            parts.push_back(rest);
+            break;
+        }
+        parts.push_back(rest.subString(0, position));
+        rest = rest.subStringToEnd(position + separatorSize);
+    } while (rest.size() > 0);
+}
 
 } // end namespace core
 } // end namespace ox
