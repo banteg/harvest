@@ -350,3 +350,7 @@
 ["ox/core/CAes.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x874228
+
+["ox/core/CMath.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874240
