@@ -32,6 +32,19 @@ enum EGUI_ELEMENT_TYPE
 class IGUIElement : public IUnknown, public event::IEventReceiver
 {
 public:
+    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : Parent(parent), RelativeRect(rectangle), RelativeSizeChanged(false), IsVisible(true), IsEnabled(true),
+          IsFixed(false), IsInvisible(false), NoClip(false), ReportOnDraw(0), ID(id), Type(0),
+          Environment(environment), HoverItem(0), LayoutFlags(0), EventReceiver(0)
+    {
+        AbsoluteRect = RelativeRect;
+        AbsoluteClippingRect = RelativeRect;
+        updateAbsolutePosition();
+
+        if (Parent)
+            Parent->addChild(this);
+    }
+
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
     // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
     virtual ~IGUIElement()
@@ -138,7 +151,38 @@ public:
 
     //! Removes this element from its parent.
     virtual void remove();
-    virtual void draw();
+
+    //! Draws the visible children; ReportOnDraw 1 reports before and 2 after drawing them.
+    virtual void draw()
+    {
+        if (!IsVisible)
+            return;
+
+        if (ReportOnDraw == 1)
+        {
+            event::SEvent event;
+            event.EventType = event::EET_GUI_EVENT;
+            event.GUIEvent.Caller = this;
+            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
+            OnEvent(event);
+        }
+
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+        {
+            if ((*it)->AbsoluteRect.isRectCollided((*it)->AbsoluteClippingRect) || !(*it)->isFixed())
+                (*it)->draw();
+        }
+
+        if (ReportOnDraw == 2)
+        {
+            event::SEvent event;
+            event.EventType = event::EET_GUI_EVENT;
+            event.GUIEvent.Caller = this;
+            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
+            OnEvent(event);
+        }
+    }
+
     virtual void move(core::CPosition2d<int> offset);
     virtual void moveTo(core::CPosition2d<int> position);
     virtual void centerOnRect(const core::CRect<int>& rect);
@@ -194,6 +238,8 @@ protected:
 public:
     //! Layout hints read by the IGUILayout sorters, such as "center br" or "tab".
     const char* LayoutFlags;
+    //! Receives the events of this element before its parent does.
+    event::IEventReceiver* EventReceiver;
 };
 
 } // end namespace gui

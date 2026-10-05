@@ -35,9 +35,6 @@ public:
     virtual bool selectionWasDoubleClicked() = 0;
     virtual IGUIElement* getScrollBar() = 0;
     virtual void setIconFont(IGUIFont* font) = 0;
-
-    //! Receives the events of the list items.
-    event::IEventReceiver* EventReceiver;
 };
 
 } // end namespace gui

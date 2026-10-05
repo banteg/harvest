@@ -424,3 +424,11 @@
 ["HarvestFull/harvest/gfx/CScatterShader.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86b990
+
+["daisy/gui/CGUIImage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c08c
+
+["daisy/gui/CGUIInOutFader.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c090
