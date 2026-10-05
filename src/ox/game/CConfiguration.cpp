@@ -118,7 +118,8 @@ bool CConfiguration::isNextChar(const wchar_t* text, wchar_t ch)
                 return false;
             i += length;
         }
-        else if (text[i] != L'\t' && text[i] != L' ' && text[i] != L'\n' && text[i] != L'\r')
+        else if ((text[i] != L' ' && text[i] != L'\t' && text[i] != L'\n' && text[i] != L'\r')
+            || text[i] == 0)
             return false;
         ++i;
     }
