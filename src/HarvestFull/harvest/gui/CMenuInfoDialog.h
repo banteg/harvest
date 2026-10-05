@@ -26,7 +26,10 @@ public:
     enum EInfoMode
     {
         EIM_WELCOME,
-        EIM_DEBRIEFING
+        EIM_DEBRIEFING,
+        //! Placeholder pages of the demo for features of the final game.
+        EIM_HIGHSCORES,
+        EIM_STATISTICS
     };
 
     CMenuInfoDialog(ox::IOxDevice* device);

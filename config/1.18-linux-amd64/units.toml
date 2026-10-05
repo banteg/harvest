@@ -271,3 +271,9 @@
 ".bss" = 0x86b994
 # The award tables.
 ".rodata" = 0x5fdf00
+
+["HarvestFull/harvest/gui/CPriorityScreen.cpp"]
+# iostream initializer, the game-header statics and ALIEN_COLORS.
+".bss" = 0x86ba40
+# PRIORITY_KEY_NAMES
+".rodata" = 0x601220

@@ -181,6 +181,11 @@ public:
     bool makeKeyMapping(ox::EKEY_CODE key, EKeyCommands command);
     //! The key bound to the command, or 0.
     int getKeyForCommand(EKeyCommands command);
+    //! Returns the game command bound to the key.
+    int getCommandForKey(ox::EKEY_CODE key);
+    //! Stores a priority set in the CAlienPriorities string form.
+    void setAttackPriority(int index, const ox::core::CString<wchar_t>& priorities);
+    void setAttackRangeMatters(int index, bool matters);
 
     int getAchievementScore();
     //! The ACHIEVEMENT_RATING_NAMES index that the score earns.
