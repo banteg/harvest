@@ -22,6 +22,17 @@ extern int g_scenarioResultPlanet;
 //! The outcome of the last scenario, -1 when it was left early.
 extern int g_scenarioResult;
 
+//! The game states, as created by CHarvestFullMain::stateFactory.
+enum EGAME_STATE
+{
+    //! Ends the main loop.
+    EGS_QUIT = 1,
+    EGS_INTRO,
+    EGS_MAIN_MENU,
+    EGS_PLAY,
+    EGS_SHUTTLE_RACE
+};
+
 //! Handles the input every state shares: button sounds, screenshots and the fullscreen toggle.
 class CHarvestSuperReceiver : public ox::event::IEventReceiver
 {

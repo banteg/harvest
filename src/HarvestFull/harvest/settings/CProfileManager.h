@@ -4,6 +4,8 @@
 #ifndef HARVEST_SETTINGS_CPROFILEMANAGER_H
 #define HARVEST_SETTINGS_CPROFILEMANAGER_H
 
+namespace ox { class IOxDevice; }
+
 namespace harvest {
 namespace settings {
 
@@ -11,7 +13,12 @@ namespace settings {
 class CProfileManager
 {
 public:
+    CProfileManager(ox::IOxDevice* device);
     virtual ~CProfileManager();
+
+private:
+    // Not recovered yet; keeps the Linux object size of 56 bytes.
+    char Unrecovered[56 - sizeof(void*)];
 };
 
 extern CProfileManager* gp_profileManager;

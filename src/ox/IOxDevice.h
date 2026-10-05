@@ -19,8 +19,15 @@ namespace video
     class IVideoDriver;
     class IVideoModeList;
     class IImage;
-    // enumerators not recovered yet
-    enum E_DRIVER_TYPE {};
+    //! The video drivers, as in Irrlicht 0.7.
+    enum E_DRIVER_TYPE
+    {
+        EDT_NULL = 0,
+        EDT_SOFTWARE,
+        EDT_DIRECTX8,
+        EDT_DIRECTX9,
+        EDT_OPENGL
+    };
 }
 namespace io { class IFileSystem; }
 namespace gui { class IGUIEnvironment; class ICursorControl; }
@@ -86,6 +93,10 @@ public:
     virtual void initThreadPool(unsigned int threads) = 0;
     virtual IThreadPool* getThreadPool() = 0;
 };
+
+//! Creates the engine device with the given video driver.
+extern "C" IOxDevice* createDevice(video::E_DRIVER_TYPE driverType, event::IEventReceiver* receiver,
+                                   const wchar_t* version);
 
 } // end namespace ox
 

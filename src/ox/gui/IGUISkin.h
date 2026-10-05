@@ -17,7 +17,14 @@ class IGUIFont;
 
 enum EGUI_DEFAULT_COLOR {};
 enum EGUI_DEFAULT_SIZE {};
-enum EGUI_DEFAULT_TEXT {};
+//! The default texts of message box buttons, as in Irrlicht 0.7.
+enum EGUI_DEFAULT_TEXT
+{
+    EGDT_MSG_BOX_OK = 0,
+    EGDT_MSG_BOX_CANCEL,
+    EGDT_MSG_BOX_YES,
+    EGDT_MSG_BOX_NO
+};
 
 //! A skin modifies the look of the GUI elements.
 class IGUISkin : public IUnknown

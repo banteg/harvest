@@ -64,6 +64,8 @@ private:
     ox::core::CPosition2d<int> SpriteSizes[SPRITE_COUNT];
     ox::core::CPosition2d<int> LayerPositions[5];
     ox::gui::IGUIElement* SkipElement;
+    //! Neither set nor read by the 1.18 code; only the object size shows it.
+    ox::gui::IGUIElement* UnusedElement;
 };
 
 } // end namespace states

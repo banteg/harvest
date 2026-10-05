@@ -17,7 +17,7 @@
     "tools/hv/objdiff.py": "b2157b405263ec966eca3abcdf47e0cb56171100d0aee42ea83af28595497637",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "647feeefed2a76445aedefc25f192a29a1397f34c15bf001ea1abf4c2064f3cf",
+    "config/1.18-linux-amd64/symbols.tsv": "9634f5d83ee8110775d2cf9f9acf0dec0c20ade5562ca39bc48c6f7a2169951c",
     "config/1.18-linux-amd64/units.toml": "b03148a83aa149af1d29c7ac223032b4867c578c364c28be85f6b1f289d4e425"
   },
   "units": [
@@ -1160,7 +1160,7 @@
         "inputs": {
           "src/ox/game/CGameState.cpp": "1df4d06aebfdc1257242ab25712a81f43c077bdef5bdbe6a696eb599e3edeb52",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -3450,7 +3450,7 @@
           "src/ox/net/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/net/INetworkDevice.h": "2f29b75e1d69e6568a0c16c58feac3f348f9371c093a5fbf6904b9843111e0d4",
           "src/ox/net/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/net/../IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/net/../IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/net/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/net/../core/CThread.h": "25e5b4252bd09654f47a9a7cc9f89b36b41c37818f4be32ade879f9e796a4775",
           "src/ox/net/../core/CStringFunctions.h": "197754e7c5b67964808a2e9224994d22ab390dfe4c273303bc9a1d64ffa32758",
@@ -13176,7 +13176,7 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/HarvestFull/harvest/CHarvestFullMain.h": "e042fe0d54c769dced3b9e80bde50c8a4cad3df71a48f83bee023c094977c6c8",
+          "src/HarvestFull/harvest/CHarvestFullMain.h": "2a9bc8227fa36d9ee3201246c9b4a79857d1106950964a46bca139ecca93b21e",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/ox/game/CGameMain.h": "7a549bfca06057c8909d9cf032ca009ca51ffe091d4b3e09b3dcb04f5399a0d9",
@@ -70559,7 +70559,7 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CLuaManager.cpp",
-      "object_sha256": "76c0191cd6314ad06586b8fbefa45cc75e9c3a1432d5f797caea4a2f7cba37f2",
+      "object_sha256": "732e413c3847e4914a6dd3c104e139547c3ce98424d3739a66910f931d2f21f3",
       "exact": false,
       "sections": [
         {
@@ -70569,7 +70569,7 @@
           "exact": false,
           "address": "0x4431c0",
           "first_difference": 2740,
-          "differing_bytes": 13689,
+          "differing_bytes": 13699,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest4game11CLuaManager22setCreativeListVisibleEb",
@@ -79034,7 +79034,7 @@
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/HarvestFull/harvest/game/CThreatLevel.h": "af04d3cc1851ed4c49703dfc3d1399eae4b7667478b305bfa1ad38c70d37849d",
           "src/HarvestFull/harvest/game/SInfoLineMessage.h": "33aa55d3cd365ce34fb04a2e1097bbf8e687967d6449e38bc2d1da150394e5dd",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
@@ -79082,10 +79082,11 @@
           "src/HarvestFull/harvest/entity/CMissileTurretEntity.h": "2a5168bde8ba8782f7b9ab1edb075c46c3c6a3da98d8de6b09207cf2fd84bdd1",
           "src/HarvestFull/harvest/entity/CPerimeterBomb.h": "52f1613403c9b7fc4b196fa28b6ffff5b30f7cc160615b77ff57b51590949b01",
           "src/HarvestFull/harvest/entity/CSparkEntity.h": "2c3afebf49696fd20716c5ed9b435485c613d49ec744b585ae1216cc5e5ddcc4",
-          "src/HarvestFull/harvest/states/CPlayState.h": "e3d27d56d51978e1d362926ad25f3629e0c4c299f315142d2f5cf3cb551fc68c"
+          "src/HarvestFull/harvest/states/CPlayState.h": "40c0dfc8ea3260f4771596cc1f299164bb139f411b4c363cd2d085efce12b3e2",
+          "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6"
         },
         "system_headers": 141,
-        "object_sha256": "76c0191cd6314ad06586b8fbefa45cc75e9c3a1432d5f797caea4a2f7cba37f2"
+        "object_sha256": "732e413c3847e4914a6dd3c104e139547c3ce98424d3739a66910f931d2f21f3"
       },
       "fuzzy_target_sha256": "082a41516bafb37c68d9e1d4cd978cfa9650a90c46a5eef3034c004d3c2e17f5",
       "fuzzy_functions": [
@@ -79915,7 +79916,7 @@
           "address": "0x449b40",
           "size": 683,
           "symbol": "_ZN7harvest4game18harvest_findAliensEP9lua_State",
-          "percent": 77.26471
+          "percent": 76.55882
         },
         {
           "address": "0x449fb0",
@@ -80327,7 +80328,7 @@
           "exact": false,
           "address": "0x491d50",
           "first_difference": 2244,
-          "differing_bytes": 1569,
+          "differing_bytes": 1473,
           "misplaced_symbols": [
             {
               "symbol": "_GLOBAL__I__ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
@@ -80506,12 +80507,12 @@
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-              "known": "0x4943f0",
+              "known": "0x493e90",
               "placed": "0x4932c0"
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-              "known": "0x493e90",
+              "known": "0x4943f0",
               "placed": "0x493820"
             },
             {
@@ -81040,15 +81041,6 @@
               "matches": false
             },
             {
-              "offset": 5942,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
               "offset": 6108,
               "type": 2,
               "symbol": "_Znam",
@@ -81064,15 +81056,6 @@
               "addend": -4,
               "reason": "no target address for symbol",
               "candidate": "0x5e6560",
-              "matches": false
-            },
-            {
-              "offset": 7316,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
               "matches": false
             },
             {
@@ -81450,7 +81433,7 @@
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-              "address": "0x4943f0",
+              "address": "0x493e90",
               "size": 1363,
               "fde": true,
               "global": true,
@@ -81458,7 +81441,7 @@
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-              "address": "0x493e90",
+              "address": "0x4943f0",
               "size": 1363,
               "fde": true,
               "global": true,
@@ -82353,7 +82336,7 @@
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/audio/IAudioDriver.h": "5c2d3a8ea398d1e3f213fac33cca09b69afe2ea032b7d5f27a5591a339517362",
           "src/ox/core/CStringFunctions.h": "197754e7c5b67964808a2e9224994d22ab390dfe4c273303bc9a1d64ffa32758",
@@ -82390,7 +82373,7 @@
         "system_headers": 150,
         "object_sha256": "19777a938ce8068316f5d4f1c318c96b3ba03b780f1218802e245eefb944db98"
       },
-      "fuzzy_target_sha256": "00d8608c94057e6c10b4ffa842921c117cd6b283503b1788a89d35b0b731ad68",
+      "fuzzy_target_sha256": "db82e9165301d4dc1c373856e5830a3e35f2338b041d4700175211f0511ca606",
       "fuzzy_functions": [
         {
           "address": "0x495d70",
@@ -82603,16 +82586,16 @@
           "percent": 99.3125
         },
         {
-          "address": "0x4943f0",
-          "size": 1363,
-          "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-          "percent": 98.46154
-        },
-        {
           "address": "0x493e90",
           "size": 1363,
+          "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
+          "percent": 98.81657
+        },
+        {
+          "address": "0x4943f0",
+          "size": 1363,
           "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-          "percent": 98.47633
+          "percent": 98.92012
         },
         {
           "address": "0x492960",
@@ -83290,10 +83273,10 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/HarvestFull/harvest/states/CIntroState.h": "22fe1abe0060354b5e84617f91f006ccf072ae46e688d594fee316e9c3fb14eb",
+          "src/HarvestFull/harvest/states/CIntroState.h": "497fdea6ee09a3264f19b7a2b5f70f04385758313802dbd5c3dd588ead95d1f8",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
@@ -83310,7 +83293,7 @@
           "src/ox/gui/../event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/gui/IGUIEnvironment.h": "b016dd35c87d64a31ee051e82d00cdec30268d350755e312a0726e2ef86c68cb",
           "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
-          "src/ox/gui/IGUISkin.h": "f93da9189eee92136a3dd675a580e2a78a874a4aa57243e2891d2eb0baa1791a",
+          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
           "src/ox/video/ISpritePackage.h": "1c83a8f36232f0523f5904df2e8fc7714228f81d3f8c405d97d71dcce2ad56c5",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -83672,7 +83655,7 @@
         "inputs": {
           "src/HarvestFull/harvest/states/CLoadingScreen.cpp": "0c5013f6a5ab82bd549a6df62f8fb7b1302d1dd11f5bb5c2f4752f01bbebb790",
           "src/HarvestFull/harvest/states/CLoadingScreen.h": "fb8aa963f14941fc61ebca9b15160a04ea120c03a3dca6098960951cf4eb650e",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -83688,7 +83671,7 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CRect.h": "057a212c154928473896ebe68e8c6e5a0bd045be1bfe04e7185dfa2748061689",
           "src/ox/video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
-          "src/ox/gui/IGUISkin.h": "f93da9189eee92136a3dd675a580e2a78a874a4aa57243e2891d2eb0baa1791a",
+          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
           "src/ox/video/ISpriteAnimationState.h": "8b81fb234372c9d700058cc86893dfc1c5b35b851caf0f5a1eaae5796d81894e",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -84130,7 +84113,7 @@
           "src/HarvestFull/harvest/ECustomEvents.h": "f632bd84197deee3abb516f0e8d9341f7772b581748c6d4256ef72a39f8f9e3a",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/IGUIButton.h": "7a32bc8f11ac0000afc1826dfaf490712889108fe52c0c2e0de043fbcf5a50e3",
           "src/ox/gui/IGUIElement.h": "ec314964c85d1d82414bdefbfabebe3cb989d09addffa4d4525ee54ebcb0e013",
@@ -84562,9 +84545,9 @@
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
-          "src/HarvestFull/harvest/CHarvestFullMain.h": "e042fe0d54c769dced3b9e80bde50c8a4cad3df71a48f83bee023c094977c6c8",
+          "src/HarvestFull/harvest/CHarvestFullMain.h": "2a9bc8227fa36d9ee3201246c9b4a79857d1106950964a46bca139ecca93b21e",
           "src/ox/game/CGameMain.h": "7a549bfca06057c8909d9cf032ca009ca51ffe091d4b3e09b3dcb04f5399a0d9",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/audio/IAudioDriver.h": "5c2d3a8ea398d1e3f213fac33cca09b69afe2ea032b7d5f27a5591a339517362",
           "src/ox/gui/IGUIEnvironment.h": "b016dd35c87d64a31ee051e82d00cdec30268d350755e312a0726e2ef86c68cb",
@@ -84578,7 +84561,7 @@
           "src/ox/gui/IGUIElement.h": "ec314964c85d1d82414bdefbfabebe3cb989d09addffa4d4525ee54ebcb0e013",
           "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/gui/IGUISkin.h": "f93da9189eee92136a3dd675a580e2a78a874a4aa57243e2891d2eb0baa1791a"
+          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f"
         },
         "system_headers": 117,
         "object_sha256": "15fc40155924d6187b4b0afaa768d59f146b0f6852df56691ebc13c72262be9b"
@@ -84730,7 +84713,7 @@
         ],
         "inputs": {
           "src/HarvestFull/main.cpp": "26bd6405ddbbbe56186378525769cfa9479bf9dd8a6bb79ed063c03140d3326e",
-          "src/HarvestFull/harvest/CHarvestFullMain.h": "e042fe0d54c769dced3b9e80bde50c8a4cad3df71a48f83bee023c094977c6c8",
+          "src/HarvestFull/harvest/CHarvestFullMain.h": "2a9bc8227fa36d9ee3201246c9b4a79857d1106950964a46bca139ecca93b21e",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
@@ -84757,17 +84740,17 @@
     },
     {
       "unit": "HarvestFull/harvest/CHarvestFullMain.cpp",
-      "object_sha256": "d8b7e0be3996dcd923f43d9bd931e4d5a35df851a39a0d8623fc49e83a55f1d1",
+      "object_sha256": "62caf559dfb4b2191cebceda79afa86a93b067fa3f3ea739b157b3ed278af76b",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 1449,
+          "size": 4874,
           "placement": "symbol: _ZN7harvest16CHarvestFullMain10updateMainEf",
           "exact": false,
           "address": "0x4088e0",
           "first_difference": 88,
-          "differing_bytes": 107,
+          "differing_bytes": 21,
           "misplaced_symbols": [
             {
               "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
@@ -84790,29 +84773,34 @@
               "placed": "0x408bc0"
             },
             {
-              "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
-              "known": "0x408e20",
+              "symbol": "_ZN7harvest16CHarvestFullMain12stateFactoryEi",
+              "known": "0x408b80",
               "placed": "0x408c10"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainC1Ev",
-              "known": "0x408d20",
-              "placed": "0x408cd0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainC2Ev",
-              "known": "0x408d40",
-              "placed": "0x408cf0"
             },
             {
               "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
               "known": "0x408c60",
-              "placed": "0x408d10"
+              "placed": "0x408cf0"
+            },
+            {
+              "symbol": "_ZN7harvest16CHarvestFullMainC1Ev",
+              "known": "0x408d20",
+              "placed": "0x408db0"
+            },
+            {
+              "symbol": "_ZN7harvest16CHarvestFullMainC2Ev",
+              "known": "0x408d40",
+              "placed": "0x408dd0"
             },
             {
               "symbol": "_ZN7harvest16CHarvestFullMainD0Ev",
               "known": "0x408d60",
-              "placed": "0x408dd0"
+              "placed": "0x408df0"
+            },
+            {
+              "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
+              "known": "0x408e20",
+              "placed": "0x408eb0"
             }
           ],
           "bad_references": [
@@ -84833,25 +84821,9 @@
               "destination": "0x86b4e0",
               "reason": "different destination",
               "matches": false
-            },
-            {
-              "offset": 410,
-              "type": 2,
-              "symbol": ".LC3",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x7cbf7612+0x4",
-              "matches": false
-            },
-            {
-              "offset": 424,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x8b48107b+0xf",
-              "matches": false
             }
           ],
-          "references": 70,
+          "references": 190,
           "functions": [
             {
               "symbol": "_ZN7harvest16CHarvestFullMain10updateMainEf",
@@ -84894,8 +84866,16 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
-              "address": "0x408e20",
+              "symbol": "_ZN7harvest16CHarvestFullMain12stateFactoryEi",
+              "address": "0x408b80",
+              "size": 218,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
+              "address": "0x408c60",
               "size": 177,
               "fde": true,
               "global": true,
@@ -84918,17 +84898,25 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
-              "address": "0x408c60",
+              "symbol": "_ZN7harvest16CHarvestFullMainD0Ev",
+              "address": "0x408d60",
+              "size": 185,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
+              "address": "0x408e20",
               "size": 177,
               "fde": true,
               "global": true,
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest16CHarvestFullMainD0Ev",
-              "address": "0x408d60",
-              "size": 185,
+              "symbol": "_ZN7harvest16CHarvestFullMain4initEv",
+              "address": "0x408f70",
+              "size": 3194,
               "fde": true,
               "global": true,
               "exact": true
@@ -84936,8 +84924,13 @@
           ],
           "data_ranges": [
             {
-              "address": "0x5eee08",
-              "size": 32,
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5eee47",
+              "size": 15,
               "kind": "merged string"
             },
             {
@@ -84948,6 +84941,151 @@
             {
               "address": "0x5eee08",
               "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee08",
+              "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeed4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee6e",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee76",
+              "size": 19,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee76",
+              "size": 19,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee89",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee08",
+              "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeea6",
+              "size": 27,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee28",
+              "size": 31,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeee4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeee4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeee4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeea6",
+              "size": 27,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee08",
+              "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee89",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee76",
+              "size": 19,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeec1",
+              "size": 17,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee56",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee56",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee56",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eef08",
+              "size": 36,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eef30",
+              "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eef50",
+              "size": 32,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eef70",
+              "size": 48,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeee4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
               "kind": "merged string"
             }
           ]
@@ -85030,6 +85168,93 @@
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "address": "0x409c20",
               "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIwED1Ev",
+          "exact": true,
+          "address": "0x409c40",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "address": "0x409c40",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 436,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x657938",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x657938",
+              "size": 436,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
+          "size": 69,
+          "placement": "symbol: _ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
+          "exact": true,
+          "address": "0x409c60",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
+              "address": "0x409c60",
+              "size": 69,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox6TArrayIN7harvest8settings13SLanguageFileEED1Ev",
+          "size": 83,
+          "placement": "symbol: _ZN2ox6TArrayIN7harvest8settings13SLanguageFileEED1Ev",
+          "exact": true,
+          "address": "0x409cb0",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN2ox6TArrayIN7harvest8settings13SLanguageFileEED1Ev",
+              "address": "0x409cb0",
+              "size": 83,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "size": 1468,
+          "placement": "symbol: _ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "exact": true,
+          "address": "0x409d10",
+          "references": 30,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "address": "0x409d10",
+              "size": 1468,
               "fde": true,
               "global": true,
               "exact": true
@@ -85127,9 +85352,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -85149,7 +85372,7 @@
           "/out/HarvestFull__harvest__CHarvestFullMain.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/CHarvestFullMain.cpp": "af557eef5ae2de23950e8e4465743eb7690cd537c080523205e0b63c448ab753",
+          "src/HarvestFull/harvest/CHarvestFullMain.cpp": "e2ef26de3e859282a4b58fb1c655df6bcb746862073b49675fbcdf4fa8c7f3fe",
           "src/HarvestFull/harvest/game/CWorld.h": "68255f5712380375e1c8e0a35ddaddd5c4c9781831c84c83bc717b06bc64ddb9",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "2f534618ac828688ba6b51b1aa13ef4e076502174ccaa6a0117aa8bc5f7b89f9",
@@ -85171,31 +85394,48 @@
           "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/entity/../core/CRect.h": "057a212c154928473896ebe68e8c6e5a0bd045be1bfe04e7185dfa2748061689",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/CHarvestFullMain.h": "e042fe0d54c769dced3b9e80bde50c8a4cad3df71a48f83bee023c094977c6c8",
+          "src/HarvestFull/harvest/CHarvestFullMain.h": "2a9bc8227fa36d9ee3201246c9b4a79857d1106950964a46bca139ecca93b21e",
           "src/ox/event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
           "src/ox/event/../Keycodes.h": "3b0c3c602f61834ddda593c3352df8547c868b3785869fa273a931640ce417a2",
           "src/ox/game/CGameMain.h": "7a549bfca06057c8909d9cf032ca009ca51ffe091d4b3e09b3dcb04f5399a0d9",
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
-          "src/HarvestFull/harvest/settings/CProfileManager.h": "04a7a5a0f145b2a114483f3d9ab8a457f3d8c3423508669a0750f31a8b1846ce",
+          "src/HarvestFull/harvest/settings/CProfileManager.h": "fd125effc3ec803e5b966da19188cac4f37c4588d5649ca947bc0e4a84da76ae",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "74ed1ede88e9ac2236e5ad88ab71825083c16bb90218d2c1ca2dc297e80fb957",
-          "src/ox/IOxDevice.h": "cc963fe39f6d75fa7343119780d5547ca017c65a93276bff58697d579d334e79",
+          "src/HarvestFull/harvest/states/CIntroState.h": "497fdea6ee09a3264f19b7a2b5f70f04385758313802dbd5c3dd588ead95d1f8",
+          "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
+          "src/ox/game/CGameState.h": "79ebddb318512d9bce89477aab3d59b51bdb50c6ad7024b979db3050012154f6",
+          "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/audio/IAudioDriver.h": "5c2d3a8ea398d1e3f213fac33cca09b69afe2ea032b7d5f27a5591a339517362",
-          "src/ox/gui/IGUIElement.h": "ec314964c85d1d82414bdefbfabebe3cb989d09addffa4d4525ee54ebcb0e013",
+          "src/HarvestFull/harvest/states/CMainMenuState.h": "7a2e45a26a97c47b7fcd502349f5a2fa3b606b78c867a47797e0744bcd7b1170",
+          "src/HarvestFull/harvest/states/CPlayState.h": "40c0dfc8ea3260f4771596cc1f299164bb139f411b4c363cd2d085efce12b3e2",
+          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "131714af550af953b859bce85e7408ee6c9c51c0ebb15dde9102208b8341a974",
+          "src/HarvestFull/harvest/game/CThreatLevel.h": "af04d3cc1851ed4c49703dfc3d1399eae4b7667478b305bfa1ad38c70d37849d",
+          "src/ox/IOSOperator.h": "eb8bbc640b0df94c1efe4afda10c9b791990ce1ef322b6f8a97bf57ab97ebb47",
+          "src/ox/ITimer.h": "6a3512bca4ae4f28c32e3e05d0571eb5867e16ba77a918d994dc20a8bffba148",
+          "src/ox/gui/IGUIEnvironment.h": "b016dd35c87d64a31ee051e82d00cdec30268d350755e312a0726e2ef86c68cb",
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/../core/CRect.h": "057a212c154928473896ebe68e8c6e5a0bd045be1bfe04e7185dfa2748061689",
-          "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/gui/../video/SColor.h": "0579c01562db61ad06859df18ead40a5669d5e58561dbf4f8df6e449a486860b",
           "src/ox/gui/../event/IEventReceiver.h": "5bcca7c4684199fea8f5a0bdeb76efc2f9d3c43595651230f0a13a61facbed29",
+          "src/ox/gui/IGUISkin.h": "623574eaf7763cb9938bea2668f4d74a389a3dde84bc6071335e7d228690937f",
+          "src/ox/io/IFileSystem.h": "2212aa9673b8df4dbd48fa6c456f2a84827c0992076bf1daba6d9c435ea1b889",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/audio/IAudioDriver.h": "5c2d3a8ea398d1e3f213fac33cca09b69afe2ea032b7d5f27a5591a339517362",
+          "src/ox/gui/IGUIElement.h": "ec314964c85d1d82414bdefbfabebe3cb989d09addffa4d4525ee54ebcb0e013",
+          "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/gui/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/video/IVideoDriver.h": "433e82f688b15b788c3b2a4885a75f0c5b9707f9db71a3f02f16096e590057c1",
           "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
-        "system_headers": 117,
-        "object_sha256": "d8b7e0be3996dcd923f43d9bd931e4d5a35df851a39a0d8623fc49e83a55f1d1"
+        "system_headers": 124,
+        "object_sha256": "62caf559dfb4b2191cebceda79afa86a93b067fa3f3ea739b157b3ed278af76b"
       },
-      "fuzzy_target_sha256": "4ca1dd363de3c64a340c04b54502527c8e2aa18994cae3f2fa28449097ffd042",
+      "fuzzy_target_sha256": "4c1dace75d03bab217cdc48b01bdb3b06e8c320c549da3b22ea00ebc2934a6ee",
       "fuzzy_functions": [
         {
           "address": "0x4088e0",
@@ -85213,7 +85453,7 @@
           "address": "0x4088f0",
           "size": 487,
           "symbol": "_ZN7harvest21CHarvestSuperReceiver7OnEventERKN2ox5event6SEventE",
-          "percent": 80.51219
+          "percent": 94.50407
         },
         {
           "address": "0x408ae0",
@@ -85228,9 +85468,15 @@
           "percent": 100.0
         },
         {
-          "address": "0x408e20",
+          "address": "0x408b80",
+          "size": 218,
+          "symbol": "_ZN7harvest16CHarvestFullMain12stateFactoryEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x408c60",
           "size": 177,
-          "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
+          "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
           "percent": 100.0
         },
         {
@@ -85246,16 +85492,22 @@
           "percent": 100.0
         },
         {
-          "address": "0x408c60",
-          "size": 177,
-          "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
-          "percent": 100.0
-        },
-        {
           "address": "0x408d60",
           "size": 185,
           "symbol": "_ZN7harvest16CHarvestFullMainD0Ev",
           "percent": 100.0
+        },
+        {
+          "address": "0x408e20",
+          "size": 177,
+          "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x408f70",
+          "size": 3194,
+          "symbol": "_ZN7harvest16CHarvestFullMain4initEv",
+          "percent": 99.916985
         },
         {
           "address": "0x409bf0",
@@ -85274,6 +85526,30 @@
           "size": 18,
           "symbol": "_ZN2ox4core7CStringIcED1Ev",
           "percent": 100.0
+        },
+        {
+          "address": "0x409c40",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIwED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c60",
+          "size": 69,
+          "symbol": "_ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409cb0",
+          "size": 83,
+          "symbol": "_ZN2ox6TArrayIN7harvest8settings13SLanguageFileEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409d10",
+          "size": 1468,
+          "symbol": "_ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 100.0
         }
       ]
     }
@@ -85284,7 +85560,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "141aedd2016a5de250f2f7f630128d3dfc4730ed9164744656c453b646e8175f"
+    "report_sha256": "b97bb0d075940ac474b64f461d486e46bef0c8cd404128ecc93baae00a1265a9"
   },
   "link": {
     "status": "unavailable",
