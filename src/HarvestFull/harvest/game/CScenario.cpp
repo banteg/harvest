@@ -49,17 +49,13 @@ void CScenario::addEvent(CHarvestEvent* event) { Events.push_back(event); }
 
 void CScenario::update(float frameDelta)
 {
-    if (!Events.empty())
+    if (!Events.empty()) Time += frameDelta;
+    while (!Events.empty() && Time >= Events.front()->Delay)
     {
-        Time += frameDelta;
-        while (!Events.empty())
-        {
-            if (!(Time >= Events.front()->Delay)) break;
-            Time = 0;
-            Events.front()->runEvent();
-            delete Events.front();
-            Events.pop_front();
-        }
+        Time = 0;
+        Events.front()->runEvent();
+        delete Events.front();
+        Events.pop_front();
     }
     for (std::list<CHarvestEvent*>::iterator it = ConditionalEvents.begin(); it != ConditionalEvents.end();)
     {

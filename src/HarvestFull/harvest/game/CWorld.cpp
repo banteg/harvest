@@ -63,359 +63,6 @@ CWorld::~CWorld()
     for (unsigned int i = 0; i < WindPuffs.size(); ++i) delete WindPuffs[i];
 }
 
-void CWorld::changeViewSize(const ox::core::CDimension2d<int>& size)
-{
-    ViewSize.Width = size.Width;
-    ViewSize.Height = size.Height;
-}
-
-int CWorld::getPlanet() const { return Planet; }
-int CWorld::getGameMode() const { return GameMode; }
-const ox::core::CRect<float>& CWorld::getActualGameFieldSize() const { return ActualGameField; }
-const ox::core::CRect<float>& CWorld::getVisibleGameFieldSize() const { return VisibleGameField; }
-
-bool CWorld::hasWorldExpandedAtLeastOnce()
-{
-    if (GameMode != 0) return true;
-    return TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048;
-}
-
-bool CWorld::worldChangesSizeInThisGameMode() const
-{
-    if (GameMode == 3 || GameMode == 5) return !InitialWorld;
-    return true;
-}
-
-void CWorld::constrainViewPos(ox::core::CPosition2d<float>& position)
-{
-    if (ViewSize.Width > VisibleGameField.getWidth())
-        position.X = (VisibleGameField.getWidth() - ViewSize.Width) * .5f;
-    else
-    {
-        if (position.X <= VisibleGameField.UpperLeftCorner.X) position.X = VisibleGameField.UpperLeftCorner.X;
-        else if (position.X + ViewSize.Width >= VisibleGameField.LowerRightCorner.X)
-            position.X = VisibleGameField.LowerRightCorner.X - ViewSize.Width;
-    }
-    // The native oversize-height case writes X, rather than Y.
-    if (ViewSize.Height > VisibleGameField.getHeight())
-        position.X = (VisibleGameField.getHeight() - ViewSize.Height) * .5f;
-    else
-    {
-        if (position.Y <= VisibleGameField.UpperLeftCorner.Y) position.Y = VisibleGameField.UpperLeftCorner.Y;
-        else if (position.Y + ViewSize.Height >= VisibleGameField.LowerRightCorner.Y)
-            position.Y = VisibleGameField.LowerRightCorner.Y - ViewSize.Height;
-    }
-}
-
-bool CWorld::checkCollisionWithDoodad(const SDoodad* doodad, const ox::core::CPosition2d<float>& position)
-{
-    if (!doodad->Bounds.isPointInside(position)) return false;
-    float x = position.X - doodad->Position.X;
-    float y = (position.Y - doodad->Position.Y) * 1.5f;
-    float radius = DoodadCollisionRadii[doodad->Type];
-    return x * x + y * y <= radius * radius;
-}
-
-bool CWorld::mayMoveHere(const ox::core::CPosition2d<float>& position)
-{
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-            if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
-    }
-    return true;
-}
-
-bool CWorld::mayPlaceObjectHere(const ox::core::CPosition2d<float>& position, bool building)
-{
-    if (building && STARTING_AREA.isPointInside(position)) return false;
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-            if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
-    }
-    return true;
-}
-
-float CWorld::getCollisionTangent(const ox::core::CPosition2d<float>& position)
-{
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-        {
-            SDoodad* doodad = DoodadGrid[cellIndex][i];
-            if (checkCollisionWithDoodad(doodad, position))
-            {
-                float dx = position.X - doodad->Position.X;
-                float dy = (position.Y - doodad->Position.Y) * 1.5f;
-                if (dx == 0) return dy < 0 ? 4.71238899f : 1.57079637f;
-                float angle = atanf(dy / dx);
-                if (dx < 0) angle += 3.14159274f;
-                return angle;
-            }
-        }
-    }
-    return 0;
-}
-
-ox::core::CPosition2d<float> CWorld::findRendezvousPoint(
-    const ox::core::CPosition2d<float>& position, const ox::core::CVector2d<float>& movement)
-{
-    if (!DoodadGrid || !DoodadGridArea.isPointInside(position))
-        return ox::core::CPosition2d<float>(0, 0);
-    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-    int cellIndex = y * DoodadGridWidth + x;
-    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-    {
-        if (!checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) continue;
-        float angle = ox::core::CMath::getAngleIY(DoodadGrid[cellIndex][i]->Position, position);
-        if (angle <= 0 && angle > -.785398185f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 0;
-        else if (angle <= 1.57079637f && angle > 0)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 1.57079637f : 0;
-        else if (angle <= 3.14159274f && angle > 1.57079637f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 1.57079637f : 3.14159274f;
-        else if (angle <= 4.71238899f && angle > 3.14159274f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 3.14159274f;
-        else
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 0;
-        float radius = DoodadCollisionRadii[DoodadGrid[cellIndex][i]->Type];
-        return ox::core::CPosition2d<float>(DoodadGrid[cellIndex][i]->Position.X + cos((double)angle) * (radius + 40),
-            DoodadGrid[cellIndex][i]->Position.Y + sin((double)angle) * (radius * .691999972f + 40));
-    }
-    return ox::core::CPosition2d<float>(position);
-}
-
-void CWorld::applyWind(const ox::core::CVector3d<float>& position,
-    ox::core::CVector2d<float>& speed, float frameDelta) const
-{
-    if (Planet != 1) return;
-    for (unsigned int i = 0; i < WindPuffs.size(); ++i)
-    {
-        float distance = ox::core::CMath::getEstimateDistance(
-            ox::core::CPosition2d<float>(WindPuffs[i]->Position.X, WindPuffs[i]->Position.Y),
-            ox::core::CPosition2d<float>(position.X, position.Y));
-        if (distance < 200)
-        {
-            float amount = (1.0f - distance / 200.0f) * frameDelta;
-            speed.X += WindPuffs[i]->Speed.X * amount;
-            speed.Y += WindPuffs[i]->Speed.Y * amount;
-        }
-    }
-    speed.X -= 5.0f * frameDelta;
-}
-
-void CWorld::createDoodad(const ox::core::CPosition2d<float>& position, int type)
-{
-    SDoodad* doodad = new SDoodad;
-    doodad->Type = type;
-    doodad->Position = position;
-    float halfHeight = DoodadSizes[type].Height >> 1;
-    float halfWidth = DoodadSizes[type].Width >> 1;
-    doodad->Bounds = ox::core::CRect<float>(position.X - halfWidth, position.Y - halfHeight,
-        position.X + halfWidth, position.Y + halfHeight);
-    Doodads.push_back(doodad);
-}
-
-void CWorld::placeDoodads(const ox::core::CRect<float>& area, int count)
-{
-    for (int i = 0; i < count; ++i)
-    {
-        int type = 0;
-        if (Planet == 2)
-        {
-            int choice = Random.nextInt(10);
-            if ((unsigned int)choice <= 9) type = DOODAD_TYPES[choice];
-            type = i == 0 ? 0 : type;
-        }
-        else if (Planet == 0) type = Random.nextInt(6) + 5;
-        else if (Planet == 1) type = Random.nextInt(12) + 11;
-        ox::core::CPosition2d<float> position;
-        bool valid = false;
-        for (int attempt = 0; attempt < 4 && !valid; ++attempt)
-        {
-            position.X = area.UpperLeftCorner.X + Random.nextInt((int)area.getWidth());
-            position.Y = area.UpperLeftCorner.Y + Random.nextInt((int)area.getHeight());
-            float halfHeight = DoodadSizes[type].Height >> 1;
-            float halfWidth = DoodadSizes[type].Width >> 1;
-            ox::core::CRect<float> bounds(position.X - halfWidth, position.Y - halfHeight,
-                position.X + halfWidth, position.Y + halfHeight);
-            if (bounds.isRectCollided(STARTING_AREA)) continue;
-            valid = true;
-            if (Planet == 2)
-                for (unsigned int j = 0; j < Doodads.size(); ++j)
-                    if (Doodads[j]->Bounds.isRectCollided(bounds))
-                    {
-                        valid = false;
-                        break;
-                    }
-        }
-        if (valid) createDoodad(position, type);
-    }
-    recreateDoodadGrid();
-}
-
-void CWorld::recreateDoodadGrid()
-{
-    delete[] DoodadGrid;
-    DoodadGrid = 0;
-    if (Planet != 2) return;
-    DoodadGridArea = TargetGameField;
-    DoodadGridArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
-    DoodadGridArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
-    DoodadGridWidth = (int)(DoodadGridArea.getWidth() * .00390625f);
-    DoodadGridHeight = (int)(DoodadGridArea.getHeight() * .00390625f);
-    DoodadGrid = new ox::TArray<SDoodad*>[DoodadGridWidth * DoodadGridHeight];
-    for (int y = 0; y < DoodadGridHeight; ++y)
-    {
-        for (int x = 0; x < DoodadGridWidth; ++x)
-        {
-            ox::core::CRect<float> cellArea;
-            cellArea.UpperLeftCorner.Y = y * 256.0f + DoodadGridArea.UpperLeftCorner.Y;
-            cellArea.UpperLeftCorner.X = x * 256.0f + DoodadGridArea.UpperLeftCorner.X;
-            cellArea.LowerRightCorner.X = cellArea.UpperLeftCorner.X + 256;
-            cellArea.LowerRightCorner.Y = cellArea.UpperLeftCorner.Y + 256;
-            for (unsigned int i = 0; i < Doodads.size(); ++i)
-            {
-                const ox::core::CRect<float>& bounds = Doodads[i]->Bounds;
-                if (bounds.isRectCollided(cellArea))
-                    DoodadGrid[y * DoodadGridWidth + x].push_back(Doodads[i]);
-            }
-        }
-    }
-}
-
-bool CWorld::write(ox::io::IWriteFile* file)
-{
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeInt(file, Planet);
-    ox::io::CHelpIO::writeInt(file, Doodads.size());
-    for (unsigned int i = 0; i < (unsigned int)Doodads.size(); ++i)
-    {
-        ox::io::CHelpIO::writeInt(file, Doodads[i]->Type);
-        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.X);
-        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.Y);
-    }
-    return true;
-}
-
-ox::core::CRect<float> CWorld::expandWorld(int direction, float boundary, bool populate)
-{
-    ox::core::CRect<float> sceneryArea;
-    ox::core::CRect<float> addedArea;
-    switch (direction)
-    {
-    case 0:
-        sceneryArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, boundary - 512,
-            TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y - 512);
-        addedArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, boundary,
-            TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y);
-        TargetGameField.UpperLeftCorner.Y = boundary;
-        break;
-    case 1:
-        sceneryArea = ox::core::CRect<float>(boundary - 512, TargetGameField.UpperLeftCorner.Y,
-            TargetGameField.UpperLeftCorner.X - 512, TargetGameField.LowerRightCorner.Y);
-        addedArea = ox::core::CRect<float>(boundary, TargetGameField.UpperLeftCorner.Y,
-            TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y);
-        TargetGameField.UpperLeftCorner.X = boundary;
-        break;
-    case 2:
-        sceneryArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y + 512,
-            TargetGameField.LowerRightCorner.X, boundary + 512);
-        addedArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y,
-            TargetGameField.LowerRightCorner.X, boundary);
-        TargetGameField.LowerRightCorner.Y = boundary;
-        break;
-    case 3:
-        sceneryArea = ox::core::CRect<float>(TargetGameField.LowerRightCorner.X + 512, TargetGameField.UpperLeftCorner.Y,
-            boundary + 512, TargetGameField.LowerRightCorner.Y);
-        addedArea = ox::core::CRect<float>(TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y,
-            boundary, TargetGameField.LowerRightCorner.Y);
-        TargetGameField.LowerRightCorner.X = boundary;
-        break;
-    }
-    placeDoodads(sceneryArea, ((int)sceneryArea.getWidth() / 512) * ((int)sceneryArea.getHeight() / 512) * 8);
-    if (populate)
-        for (float y = addedArea.UpperLeftCorner.Y; y < addedArea.LowerRightCorner.Y; y += 512)
-            for (float x = addedArea.UpperLeftCorner.X; x < addedArea.LowerRightCorner.X; x += 512)
-            {
-                ox::core::CRect<float> cell(x, y, x + 512, y + 512);
-                float distance = ox::core::CMath::getEstimateDistance(
-                    ox::core::CPosition2d<float>((cell.UpperLeftCorner.X + cell.LowerRightCorner.X) * .5f,
-                        (cell.UpperLeftCorner.Y + cell.LowerRightCorner.Y) * .5f),
-                    ox::core::CPosition2d<float>(512, 512)) * .001953125f;
-                int minerals = (int)(30 - (distance * 4 + distance * .5f * distance));
-                // The native bonus applies to the inclusive range -24..-16.
-                if ((unsigned int)(minerals + 24) < 9 || minerals > 20) minerals = 20;
-                if (minerals < 2) minerals = 2;
-                entity::CMineralsEntity::fillAreaWithMinerals(cell, minerals, this);
-            }
-    if (GameMode == 0 && (TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048))
-    {
-        ox::event::SEvent event;
-        event.EventType = ox::event::EET_USER_EVENT;
-        event.UserEvent.UserData1 = 22;
-        event.UserEvent.UserData2 = 27;
-        event.UserEvent.UserData3 = 0;
-        event.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(event);
-    }
-    if (TargetGameField.getWidth() * TargetGameField.getHeight() >= 10485760)
-    {
-        ox::event::SEvent event;
-        event.EventType = ox::event::EET_USER_EVENT;
-        event.UserEvent.UserData1 = 21;
-        event.UserEvent.UserData2 = 15;
-        event.UserEvent.UserData3 = 0;
-        event.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(event);
-        ox::event::SEvent secondEvent;
-        secondEvent.EventType = ox::event::EET_USER_EVENT;
-        secondEvent.UserEvent.UserData1 = 21;
-        secondEvent.UserEvent.UserData2 = 16;
-        secondEvent.UserEvent.UserData3 = 0;
-        secondEvent.UserEvent.UserPointer = 0;
-        ox::event::gp_subscriberList->OnEvent(secondEvent);
-    }
-    if (gp_luaManager) gp_luaManager->hookMapExpanded(addedArea.UpperLeftCorner.X, addedArea.UpperLeftCorner.Y,
-        addedArea.LowerRightCorner.X, addedArea.LowerRightCorner.Y);
-    return ox::core::CRect<float>(addedArea);
-}
-
-void CWorld::expandWorldFromCurrent(int direction, bool populate)
-{
-    switch (direction)
-    {
-    case 0: expandWorld(0, ActualGameField.UpperLeftCorner.Y - 512, populate); break;
-    case 1: expandWorld(1, ActualGameField.UpperLeftCorner.X - 512, populate); break;
-    case 2: expandWorld(2, ActualGameField.LowerRightCorner.Y + 512, populate); break;
-    case 3: expandWorld(3, ActualGameField.LowerRightCorner.X + 512, populate); break;
-    }
-    ActualGameField = TargetGameField;
-    VisibleGameField = TargetGameField;
-}
-
 bool CWorld::initializeWorld(ox::video::IVideoDriver* driver, const ox::core::CDimension2d<int>& size)
 {
     if (!driver) return false;
@@ -475,6 +122,12 @@ bool CWorld::initializeWorld(ox::video::IVideoDriver* driver, const ox::core::CD
     return true;
 }
 
+void CWorld::changeViewSize(const ox::core::CDimension2d<int>& size)
+{
+    ViewSize.Width = size.Width;
+    ViewSize.Height = size.Height;
+}
+
 void CWorld::initializeNewGame(IScenario* scenario)
 {
     if (scenario) Random.setCurrent(scenario->getDoodadSeed());
@@ -493,6 +146,142 @@ void CWorld::initializeNewGame(IScenario* scenario)
             expandWorld(2, ActualGameField.LowerRightCorner.Y + 512, true);
             ActualGameField = TargetGameField;
         }
+}
+
+void CWorld::placeDoodads(const ox::core::CRect<float>& area, int count)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        int type = 0;
+        if (Planet == 2)
+        {
+            int choice = Random.nextInt(10);
+            if ((unsigned int)choice <= 9) type = DOODAD_TYPES[choice];
+            type = i == 0 ? 0 : type;
+        }
+        else if (Planet == 0) type = Random.nextInt(6) + 5;
+        else if (Planet == 1) type = Random.nextInt(12) + 11;
+        ox::core::CPosition2d<float> position;
+        bool valid = false;
+        for (int attempt = 0; attempt < 4 && !valid; ++attempt)
+        {
+            position.X = area.UpperLeftCorner.X + Random.nextInt((int)area.getWidth());
+            position.Y = area.UpperLeftCorner.Y + Random.nextInt((int)area.getHeight());
+            float halfHeight = DoodadSizes[type].Height >> 1;
+            float halfWidth = DoodadSizes[type].Width >> 1;
+            ox::core::CRect<float> bounds(position.X - halfWidth, position.Y - halfHeight,
+                position.X + halfWidth, position.Y + halfHeight);
+            if (bounds.isRectCollided(STARTING_AREA)) continue;
+            valid = true;
+            if (Planet == 2)
+                for (unsigned int j = 0; j < Doodads.size(); ++j)
+                    if (Doodads[j]->Bounds.isRectCollided(bounds))
+                    {
+                        valid = false;
+                        break;
+                    }
+        }
+        if (valid) createDoodad(position, type);
+    }
+    recreateDoodadGrid();
+}
+
+ox::core::CRect<float> CWorld::expandWorld(int direction, float boundary, bool populate)
+{
+    ox::core::CRect<float> sceneryArea;
+    ox::core::CRect<float> addedArea;
+    switch (direction)
+    {
+    case 0:
+        sceneryArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, boundary - 512,
+            TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y - 512);
+        addedArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, boundary,
+            TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y);
+        TargetGameField.UpperLeftCorner.Y = boundary;
+        break;
+    case 1:
+        sceneryArea = ox::core::CRect<float>(boundary - 512, TargetGameField.UpperLeftCorner.Y,
+            TargetGameField.UpperLeftCorner.X - 512, TargetGameField.LowerRightCorner.Y);
+        addedArea = ox::core::CRect<float>(boundary, TargetGameField.UpperLeftCorner.Y,
+            TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y);
+        TargetGameField.UpperLeftCorner.X = boundary;
+        break;
+    case 2:
+        sceneryArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y + 512,
+            TargetGameField.LowerRightCorner.X, boundary + 512);
+        addedArea = ox::core::CRect<float>(TargetGameField.UpperLeftCorner.X, TargetGameField.LowerRightCorner.Y,
+            TargetGameField.LowerRightCorner.X, boundary);
+        TargetGameField.LowerRightCorner.Y = boundary;
+        break;
+    case 3:
+        sceneryArea = ox::core::CRect<float>(TargetGameField.LowerRightCorner.X + 512, TargetGameField.UpperLeftCorner.Y,
+            boundary + 512, TargetGameField.LowerRightCorner.Y);
+        addedArea = ox::core::CRect<float>(TargetGameField.LowerRightCorner.X, TargetGameField.UpperLeftCorner.Y,
+            boundary, TargetGameField.LowerRightCorner.Y);
+        TargetGameField.LowerRightCorner.X = boundary;
+        break;
+    }
+    placeDoodads(sceneryArea, ((int)sceneryArea.getWidth() / 512) * ((int)sceneryArea.getHeight() / 512) * 8);
+    if (populate)
+        for (float y = addedArea.UpperLeftCorner.Y; y < addedArea.LowerRightCorner.Y; y += 512)
+            for (float x = addedArea.UpperLeftCorner.X; x < addedArea.LowerRightCorner.X; x += 512)
+            {
+                ox::core::CRect<float> cell(x, y, x + 512, y + 512);
+                float distance = ox::core::CMath::getEstimateDistance(
+                    ox::core::CPosition2d<float>((cell.UpperLeftCorner.X + cell.LowerRightCorner.X) * .5f,
+                        (cell.UpperLeftCorner.Y + cell.LowerRightCorner.Y) * .5f),
+                    ox::core::CPosition2d<float>(512, 512)) * .001953125f;
+                int minerals = (int)(30 - (distance * 4 + distance * .5f * distance));
+                if (minerals >= -24 && minerals <= -16) minerals = 20;
+                minerals = ox::core::clamp(minerals, 2, 20);
+                entity::CMineralsEntity::fillAreaWithMinerals(cell, minerals, this);
+            }
+    if (GameMode == 0)
+    {
+        if (TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048)
+        {
+            ox::event::SEvent event;
+            event.EventType = ox::event::EET_USER_EVENT;
+            event.UserEvent.UserData1 = 22;
+            event.UserEvent.UserData2 = 27;
+            event.UserEvent.UserData3 = 0;
+            event.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(event);
+        }
+        if (TargetGameField.getWidth() * TargetGameField.getHeight() >= 10485760)
+        {
+            ox::event::SEvent event;
+            event.EventType = ox::event::EET_USER_EVENT;
+            event.UserEvent.UserData1 = 21;
+            event.UserEvent.UserData2 = 15;
+            event.UserEvent.UserData3 = 0;
+            event.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(event);
+            ox::event::SEvent secondEvent;
+            secondEvent.EventType = ox::event::EET_USER_EVENT;
+            secondEvent.UserEvent.UserData1 = 21;
+            secondEvent.UserEvent.UserData2 = 16;
+            secondEvent.UserEvent.UserData3 = 0;
+            secondEvent.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(secondEvent);
+        }
+    }
+    if (gp_luaManager) gp_luaManager->hookMapExpanded(addedArea.UpperLeftCorner.X, addedArea.UpperLeftCorner.Y,
+        addedArea.LowerRightCorner.X, addedArea.LowerRightCorner.Y);
+    return ox::core::CRect<float>(addedArea);
+}
+
+void CWorld::expandWorldFromCurrent(int direction, bool populate)
+{
+    switch (direction)
+    {
+    case 0: expandWorld(0, ActualGameField.UpperLeftCorner.Y - 512, populate); break;
+    case 1: expandWorld(1, ActualGameField.UpperLeftCorner.X - 512, populate); break;
+    case 2: expandWorld(2, ActualGameField.LowerRightCorner.Y + 512, populate); break;
+    case 3: expandWorld(3, ActualGameField.LowerRightCorner.X + 512, populate); break;
+    }
+    ActualGameField = TargetGameField;
+    VisibleGameField = TargetGameField;
 }
 
 bool CWorld::readAndInitialize(ox::io::IReadFile* file, int version, ox::video::IVideoDriver* driver,
@@ -539,6 +328,331 @@ bool CWorld::readAndInitialize(ox::io::IReadFile* file, int version, ox::video::
     }
     recreateDoodadGrid();
     return true;
+}
+
+void CWorld::createDoodad(const ox::core::CPosition2d<float>& position, int type)
+{
+    SDoodad* doodad = new SDoodad;
+    doodad->Type = type;
+    doodad->Position = position;
+    float halfHeight = DoodadSizes[type].Height >> 1;
+    float halfWidth = DoodadSizes[type].Width >> 1;
+    doodad->Bounds = ox::core::CRect<float>(position.X - halfWidth, position.Y - halfHeight,
+        position.X + halfWidth, position.Y + halfHeight);
+    Doodads.push_back(doodad);
+}
+
+void CWorld::recreateDoodadGrid()
+{
+    delete[] DoodadGrid;
+    DoodadGrid = 0;
+    if (Planet != 2) return;
+    DoodadGridArea = TargetGameField;
+    DoodadGridArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
+    DoodadGridArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
+    DoodadGridWidth = (int)(DoodadGridArea.getWidth() * .00390625f);
+    DoodadGridHeight = (int)(DoodadGridArea.getHeight() * .00390625f);
+    DoodadGrid = new ox::TArray<SDoodad*>[DoodadGridWidth * DoodadGridHeight];
+    for (int y = 0; y < DoodadGridHeight; ++y)
+    {
+        for (int x = 0; x < DoodadGridWidth; ++x)
+        {
+            ox::core::CRect<float> cellArea;
+            cellArea.UpperLeftCorner.Y = y * 256.0f + DoodadGridArea.UpperLeftCorner.Y;
+            cellArea.UpperLeftCorner.X = x * 256.0f + DoodadGridArea.UpperLeftCorner.X;
+            cellArea.LowerRightCorner.X = cellArea.UpperLeftCorner.X + 256;
+            cellArea.LowerRightCorner.Y = cellArea.UpperLeftCorner.Y + 256;
+            for (unsigned int i = 0; i < Doodads.size(); ++i)
+            {
+                const ox::core::CRect<float>& bounds = Doodads[i]->Bounds;
+                if (bounds.isRectCollided(cellArea))
+                    DoodadGrid[y * DoodadGridWidth + x].push_back(Doodads[i]);
+            }
+        }
+    }
+}
+
+bool CWorld::write(ox::io::IWriteFile* file)
+{
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeInt(file, Planet);
+    ox::io::CHelpIO::writeInt(file, Doodads.size());
+    for (unsigned int i = 0; i < (unsigned int)Doodads.size(); ++i)
+    {
+        ox::io::CHelpIO::writeInt(file, Doodads[i]->Type);
+        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.X);
+        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.Y);
+    }
+    return true;
+}
+
+int CWorld::getPlanet() const { return Planet; }
+
+int CWorld::getGameMode() const { return GameMode; }
+
+const ox::core::CRect<float>& CWorld::getActualGameFieldSize() const { return ActualGameField; }
+
+bool CWorld::hasWorldExpandedAtLeastOnce()
+{
+    if (GameMode != 0) return true;
+    return TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048;
+}
+
+const ox::core::CRect<float>& CWorld::getVisibleGameFieldSize() const { return VisibleGameField; }
+
+void CWorld::applyWind(const ox::core::CVector3d<float>& position,
+    ox::core::CVector2d<float>& speed, float frameDelta) const
+{
+    if (Planet != 1) return;
+    for (unsigned int i = 0; i < WindPuffs.size(); ++i)
+    {
+        float distance = ox::core::CMath::getEstimateDistance(
+            ox::core::CPosition2d<float>(WindPuffs[i]->Position.X, WindPuffs[i]->Position.Y),
+            ox::core::CPosition2d<float>(position.X, position.Y));
+        if (distance < 200)
+        {
+            float amount = (1.0f - distance / 200.0f) * frameDelta;
+            speed.X += WindPuffs[i]->Speed.X * amount;
+            speed.Y += WindPuffs[i]->Speed.Y * amount;
+        }
+    }
+    speed.X -= 5.0f * frameDelta;
+}
+
+bool CWorld::checkCollisionWithDoodad(const SDoodad* doodad, const ox::core::CPosition2d<float>& position)
+{
+    if (!doodad->Bounds.isPointInside(position)) return false;
+    float x = position.X - doodad->Position.X;
+    float y = (position.Y - doodad->Position.Y) * 1.5f;
+    float radius = DoodadCollisionRadii[doodad->Type];
+    return x * x + y * y <= radius * radius;
+}
+
+bool CWorld::mayMoveHere(const ox::core::CPosition2d<float>& position)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return true;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
+    return true;
+}
+
+bool CWorld::mayPlaceObjectHere(const ox::core::CPosition2d<float>& position, bool building)
+{
+    if (building && STARTING_AREA.isPointInside(position)) return false;
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return true;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
+    return true;
+}
+
+ox::core::CPosition2d<float> CWorld::findRendezvousPoint(
+    const ox::core::CPosition2d<float>& position, const ox::core::CVector2d<float>& movement)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position))
+        return ox::core::CPosition2d<float>(0, 0);
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+    {
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position))
+        {
+            float angle = ox::core::CMath::getAngleIY(DoodadGrid[cellIndex][i]->Position, position);
+            if (angle <= 0 && angle > -.785398185f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 0;
+            }
+            else if (angle <= 1.57079637f && angle > 0)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 1.57079637f;
+                else angle = 0;
+            }
+            else if (angle <= 3.14159274f && angle > 1.57079637f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 1.57079637f;
+                else angle = 3.14159274f;
+            }
+            else if (angle <= 4.71238899f && angle > 3.14159274f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 3.14159274f;
+            }
+            else
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 0;
+            }
+            float radius = DoodadCollisionRadii[DoodadGrid[cellIndex][i]->Type];
+            return ox::core::CPosition2d<float>(DoodadGrid[cellIndex][i]->Position.X + cos((double)angle) * (radius + 40),
+                DoodadGrid[cellIndex][i]->Position.Y + sin((double)angle) * (radius * .691999972f + 40));
+        }
+    }
+    return ox::core::CPosition2d<float>(position);
+}
+
+float CWorld::getCollisionTangent(const ox::core::CPosition2d<float>& position)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return 0;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+    {
+        SDoodad* doodad = DoodadGrid[cellIndex][i];
+        if (checkCollisionWithDoodad(doodad, position))
+        {
+            float dx = position.X - doodad->Position.X;
+            float dy = (position.Y - doodad->Position.Y) * 1.5f;
+            if (dx == 0) return dy < 0 ? 4.71238899f : 1.57079637f;
+            float angle = atanf(dy / dx);
+            if (dx < 0) angle += 3.14159274f;
+            return angle;
+        }
+    }
+    return 0;
+}
+
+void CWorld::constrainViewPos(ox::core::CPosition2d<float>& position)
+{
+    if (ViewSize.Width > VisibleGameField.getWidth())
+        position.X = (VisibleGameField.getWidth() - ViewSize.Width) * .5f;
+    else
+    {
+        if (position.X <= VisibleGameField.UpperLeftCorner.X) position.X = VisibleGameField.UpperLeftCorner.X;
+        else if (position.X + ViewSize.Width >= VisibleGameField.LowerRightCorner.X)
+            position.X = VisibleGameField.LowerRightCorner.X - ViewSize.Width;
+    }
+    // The native oversize-height case writes X, rather than Y.
+    if (ViewSize.Height > VisibleGameField.getHeight())
+        position.X = (VisibleGameField.getHeight() - ViewSize.Height) * .5f;
+    else
+    {
+        if (position.Y <= VisibleGameField.UpperLeftCorner.Y) position.Y = VisibleGameField.UpperLeftCorner.Y;
+        else if (position.Y + ViewSize.Height >= VisibleGameField.LowerRightCorner.Y)
+            position.Y = VisibleGameField.LowerRightCorner.Y - ViewSize.Height;
+    }
+}
+
+bool CWorld::worldChangesSizeInThisGameMode() const
+{
+    if (GameMode == 3 || GameMode == 5) return !InitialWorld;
+    return true;
+}
+
+void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
+{
+    if (Planet == 1)
+    {
+        WindArea = ox::core::CRect<float>(VisibleGameField.UpperLeftCorner.X - 200,
+            VisibleGameField.UpperLeftCorner.Y - 200, VisibleGameField.LowerRightCorner.X + 200,
+            VisibleGameField.LowerRightCorner.Y + 200);
+        ox::TArray<SWindPuff*>::iterator it = WindPuffs.begin();
+        while (it != WindPuffs.end())
+        {
+            SWindPuff* puff = *it;
+            puff->Position += ox::core::CPosition2d<float>(puff->Speed.X * frameDelta, puff->Speed.Y * frameDelta);
+            if (!WindArea.isPointInside(puff->Position))
+            {
+                delete puff;
+                it = WindPuffs.erase(it);
+            }
+            else
+            {
+                float angle = (float)puff->Speed.getAngle() * .0174532905f;
+                float amount = puff->SpeedMagnitude * frameDelta * .00666666683f;
+                const float ANGLE_OFFS[5] = { 0, .3f, -.3f, .75f, -.75f };
+                const float SPEED_SCALES[5] = { 1.6f, 1.1f, 1.1f, .2f, .2f };
+                for (int i = 0; i < 5; ++i)
+                    if (puff->Particles[i])
+                    {
+                        float cs = cosf(angle + ANGLE_OFFS[i]);
+                        float sn = sinf(angle + ANGLE_OFFS[i]);
+                        ox::core::CVector3d<float> position(puff->Position.X + cs * 180, puff->Position.Y - sn * 180, 0);
+                        puff->Particles[i]->setCurrentSpeed(ox::core::CVector3d<float>(cs * amount, sn * -amount, 0));
+                        puff->Particles[i]->update(amount * SPEED_SCALES[i], position);
+                    }
+                ++it;
+            }
+        }
+        WindClock -= frameDelta;
+        if (WindClock <= 0)
+        {
+            WindClock += (ox::algo::CRand::rand() % 5000) * .001f /
+                (WindArea.getHeight() * .001953125f * .5f);
+            SWindPuff* puff = new SWindPuff;
+            puff->Position = ox::core::CPosition2d<float>(WindArea.LowerRightCorner.X - 1,
+                WindArea.UpperLeftCorner.Y + ox::algo::CRand::rand() % (int)WindArea.getHeight());
+            puff->Speed = ox::core::CVector2d<float>(-(float)(ox::algo::CRand::rand() % 300 + 50),
+                (float)(ox::algo::CRand::rand() % 50 - 25));
+            puff->SpeedMagnitude = puff->Speed.getLength();
+            for (int i = 0; i < 5; ++i)
+                puff->Particles[i] = entity::CEntity::gp_particlePackage->addNewParticleState("IceSpawner");
+            WindPuffs.push_back(puff);
+        }
+    }
+    if ((GameMode == 3 || GameMode == 5) && InitialWorld) ActualGameField = TargetGameField;
+    else
+    {
+        ActualGameField.UpperLeftCorner.X = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.X - 512) >> 9) * 512);
+        ActualGameField.UpperLeftCorner.Y = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.Y - 512) >> 9) * 512);
+        ActualGameField.LowerRightCorner.X = ox::core::max_(1024.0f, (float)((int)(area.LowerRightCorner.X + 1024) >> 9) * 512);
+        ActualGameField.LowerRightCorner.Y = ox::core::max_(1024.0f, (float)((int)(area.LowerRightCorner.Y + 1024) >> 9) * 512);
+        if (GameMode == 4 && gp_luaManager)
+        {
+            const ox::core::CRect<float>& borders = gp_luaManager->getMinimumWorldBorders();
+            ActualGameField.UpperLeftCorner.X = ox::core::min_(ActualGameField.UpperLeftCorner.X, borders.UpperLeftCorner.X);
+            ActualGameField.UpperLeftCorner.Y = ox::core::min_(ActualGameField.UpperLeftCorner.Y, borders.UpperLeftCorner.Y);
+            ActualGameField.LowerRightCorner.X = ox::core::max_(ActualGameField.LowerRightCorner.X, borders.LowerRightCorner.X);
+            ActualGameField.LowerRightCorner.Y = ox::core::max_(ActualGameField.LowerRightCorner.Y, borders.LowerRightCorner.Y);
+        }
+        ActualGameField.UpperLeftCorner.X = ox::core::max_(ActualGameField.UpperLeftCorner.X, -4096.0f);
+        ActualGameField.UpperLeftCorner.Y = ox::core::max_(ActualGameField.UpperLeftCorner.Y, -4096.0f);
+        ActualGameField.LowerRightCorner.X = ox::core::min_(ActualGameField.LowerRightCorner.X, 5120.0f);
+        ActualGameField.LowerRightCorner.Y = ox::core::min_(ActualGameField.LowerRightCorner.Y, 5120.0f);
+    }
+    if (ActualGameField.UpperLeftCorner.X < TargetGameField.UpperLeftCorner.X)
+        expandWorld(1, ActualGameField.UpperLeftCorner.X, true);
+    if (ActualGameField.UpperLeftCorner.Y < TargetGameField.UpperLeftCorner.Y)
+        expandWorld(0, ActualGameField.UpperLeftCorner.Y, true);
+    if (ActualGameField.LowerRightCorner.X > TargetGameField.LowerRightCorner.X)
+        expandWorld(3, ActualGameField.LowerRightCorner.X, true);
+    if (ActualGameField.LowerRightCorner.Y > TargetGameField.LowerRightCorner.Y)
+        expandWorld(2, ActualGameField.LowerRightCorner.Y, true);
+    float movement = frameDelta * 100;
+    if (VisibleGameField.UpperLeftCorner.X < ActualGameField.UpperLeftCorner.X)
+        VisibleGameField.UpperLeftCorner.X = ox::core::min_(VisibleGameField.UpperLeftCorner.X + movement, ActualGameField.UpperLeftCorner.X);
+    else if (VisibleGameField.UpperLeftCorner.X > ActualGameField.UpperLeftCorner.X)
+        VisibleGameField.UpperLeftCorner.X = ActualGameField.UpperLeftCorner.X;
+    if (VisibleGameField.UpperLeftCorner.Y < ActualGameField.UpperLeftCorner.Y)
+        VisibleGameField.UpperLeftCorner.Y = ox::core::min_(VisibleGameField.UpperLeftCorner.Y + movement, ActualGameField.UpperLeftCorner.Y);
+    else if (VisibleGameField.UpperLeftCorner.Y > ActualGameField.UpperLeftCorner.Y)
+        VisibleGameField.UpperLeftCorner.Y = ActualGameField.UpperLeftCorner.Y;
+    if (VisibleGameField.LowerRightCorner.X < ActualGameField.LowerRightCorner.X)
+        VisibleGameField.LowerRightCorner.X = ActualGameField.LowerRightCorner.X;
+    else if (VisibleGameField.LowerRightCorner.X > ActualGameField.LowerRightCorner.X)
+        VisibleGameField.LowerRightCorner.X = ox::core::max_(VisibleGameField.LowerRightCorner.X - movement, ActualGameField.LowerRightCorner.X);
+    if (VisibleGameField.LowerRightCorner.Y < ActualGameField.LowerRightCorner.Y)
+        VisibleGameField.LowerRightCorner.Y = ActualGameField.LowerRightCorner.Y;
+    else if (VisibleGameField.LowerRightCorner.Y > ActualGameField.LowerRightCorner.Y)
+        VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
 }
 
 void CWorld::renderBackground(const ox::core::CPosition2d<float>& position, ox::gui::IGUIFont* font,
@@ -610,104 +724,6 @@ void CWorld::renderEdgeShades(const ox::core::CPosition2d<float>& position)
             point.Y = y - position.Y;
             GroundSprites[1]->drawRotated(point + ox::core::CPosition2d<float>(0, 128), 4.71238899f, 1, 0x80000000);
         }
-}
-
-void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
-{
-    if (Planet == 1)
-    {
-        WindArea = ox::core::CRect<float>(VisibleGameField.UpperLeftCorner.X - 200,
-            VisibleGameField.UpperLeftCorner.Y - 200, VisibleGameField.LowerRightCorner.X + 200,
-            VisibleGameField.LowerRightCorner.Y + 200);
-        ox::TArray<SWindPuff*>::iterator it = WindPuffs.begin();
-        while (it != WindPuffs.end())
-        {
-            SWindPuff* puff = *it;
-            puff->Position += ox::core::CPosition2d<float>(puff->Speed.X * frameDelta, puff->Speed.Y * frameDelta);
-            if (!WindArea.isPointInside(puff->Position))
-            {
-                delete puff;
-                it = WindPuffs.erase(it);
-            }
-            else
-            {
-                float angle = (float)puff->Speed.getAngle() * .0174532905f;
-                float amount = puff->SpeedMagnitude * frameDelta * .00666666683f;
-                float ANGLE_OFFS[5] = { 0, .3f, -.3f, .75f, -.75f };
-                float SPEED_SCALES[5] = { 1.6f, 1.1f, 1.1f, .2f, .2f };
-                for (int i = 0; i < 5; ++i)
-                    if (puff->Particles[i])
-                    {
-                        float cs = cosf(angle + ANGLE_OFFS[i]);
-                        float sn = sinf(angle + ANGLE_OFFS[i]);
-                        ox::core::CVector3d<float> position(puff->Position.X + cs * 180, puff->Position.Y - sn * 180, 0);
-                        puff->Particles[i]->setCurrentSpeed(ox::core::CVector3d<float>(cs * amount, sn * -amount, 0));
-                        puff->Particles[i]->update(amount * SPEED_SCALES[i], position);
-                    }
-                ++it;
-            }
-        }
-        WindClock -= frameDelta;
-        if (WindClock <= 0)
-        {
-            WindClock += (ox::algo::CRand::rand() % 5000) * .001f /
-                (WindArea.getHeight() * .001953125f * .5f);
-            SWindPuff* puff = new SWindPuff;
-            puff->Position = ox::core::CPosition2d<float>(WindArea.LowerRightCorner.X - 1,
-                WindArea.UpperLeftCorner.Y + ox::algo::CRand::rand() % (int)WindArea.getHeight());
-            puff->Speed = ox::core::CVector2d<float>(-(float)(ox::algo::CRand::rand() % 300 + 50),
-                (float)(ox::algo::CRand::rand() % 50 - 25));
-            puff->SpeedMagnitude = puff->Speed.getLength();
-            for (int i = 0; i < 5; ++i)
-                puff->Particles[i] = entity::CEntity::gp_particlePackage->addNewParticleState("IceSpawner");
-            WindPuffs.push_back(puff);
-        }
-    }
-    if (!((GameMode == 3 || GameMode == 5) && InitialWorld))
-    {
-        ActualGameField.UpperLeftCorner.X = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.X - 512) >> 9) * 512);
-        ActualGameField.UpperLeftCorner.Y = ox::core::min_(0.0f, (float)((int)(area.UpperLeftCorner.Y - 512) >> 9) * 512);
-        ActualGameField.LowerRightCorner.X = ox::core::max_(1024.0f, (float)((int)(area.LowerRightCorner.X + 1024) >> 9) * 512);
-        ActualGameField.LowerRightCorner.Y = ox::core::max_(1024.0f, (float)((int)(area.LowerRightCorner.Y + 1024) >> 9) * 512);
-        if (GameMode == 4 && gp_luaManager)
-        {
-            const ox::core::CRect<float>& borders = gp_luaManager->getMinimumWorldBorders();
-            ActualGameField.UpperLeftCorner.X = ox::core::min_(ActualGameField.UpperLeftCorner.X, borders.UpperLeftCorner.X);
-            ActualGameField.UpperLeftCorner.Y = ox::core::min_(ActualGameField.UpperLeftCorner.Y, borders.UpperLeftCorner.Y);
-            ActualGameField.LowerRightCorner.X = ox::core::max_(ActualGameField.LowerRightCorner.X, borders.LowerRightCorner.X);
-            ActualGameField.LowerRightCorner.Y = ox::core::max_(ActualGameField.LowerRightCorner.Y, borders.LowerRightCorner.Y);
-        }
-        ActualGameField.UpperLeftCorner.X = ox::core::max_(ActualGameField.UpperLeftCorner.X, -4096.0f);
-        ActualGameField.UpperLeftCorner.Y = ox::core::max_(ActualGameField.UpperLeftCorner.Y, -4096.0f);
-        ActualGameField.LowerRightCorner.X = ox::core::min_(ActualGameField.LowerRightCorner.X, 5120.0f);
-        ActualGameField.LowerRightCorner.Y = ox::core::min_(ActualGameField.LowerRightCorner.Y, 5120.0f);
-    }
-    else ActualGameField = TargetGameField;
-    if (ActualGameField.UpperLeftCorner.X < TargetGameField.UpperLeftCorner.X)
-        expandWorld(1, ActualGameField.UpperLeftCorner.X, true);
-    if (ActualGameField.UpperLeftCorner.Y < TargetGameField.UpperLeftCorner.Y)
-        expandWorld(0, ActualGameField.UpperLeftCorner.Y, true);
-    if (ActualGameField.LowerRightCorner.X > TargetGameField.LowerRightCorner.X)
-        expandWorld(3, ActualGameField.LowerRightCorner.X, true);
-    if (ActualGameField.LowerRightCorner.Y > TargetGameField.LowerRightCorner.Y)
-        expandWorld(2, ActualGameField.LowerRightCorner.Y, true);
-    float movement = frameDelta * 100;
-    if (ActualGameField.UpperLeftCorner.X > VisibleGameField.UpperLeftCorner.X)
-        VisibleGameField.UpperLeftCorner.X = ox::core::min_(VisibleGameField.UpperLeftCorner.X + movement, ActualGameField.UpperLeftCorner.X);
-    else if (ActualGameField.UpperLeftCorner.X < VisibleGameField.UpperLeftCorner.X)
-        VisibleGameField.UpperLeftCorner.X = ActualGameField.UpperLeftCorner.X;
-    if (ActualGameField.UpperLeftCorner.Y > VisibleGameField.UpperLeftCorner.Y)
-        VisibleGameField.UpperLeftCorner.Y = ox::core::min_(VisibleGameField.UpperLeftCorner.Y + movement, ActualGameField.UpperLeftCorner.Y);
-    else if (ActualGameField.UpperLeftCorner.Y < VisibleGameField.UpperLeftCorner.Y)
-        VisibleGameField.UpperLeftCorner.Y = ActualGameField.UpperLeftCorner.Y;
-    if (ActualGameField.LowerRightCorner.X < VisibleGameField.LowerRightCorner.X)
-        VisibleGameField.LowerRightCorner.X = ox::core::max_(VisibleGameField.LowerRightCorner.X - movement, ActualGameField.LowerRightCorner.X);
-    else if (ActualGameField.LowerRightCorner.X > VisibleGameField.LowerRightCorner.X)
-        VisibleGameField.LowerRightCorner.X = ActualGameField.LowerRightCorner.X;
-    if (ActualGameField.LowerRightCorner.Y < VisibleGameField.LowerRightCorner.Y)
-        VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
-    else if (ActualGameField.LowerRightCorner.Y > VisibleGameField.LowerRightCorner.Y)
-        VisibleGameField.LowerRightCorner.Y = ActualGameField.LowerRightCorner.Y;
 }
 
 } // end namespace game
