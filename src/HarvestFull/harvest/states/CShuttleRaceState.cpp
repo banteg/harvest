@@ -163,8 +163,8 @@ int CShuttleRaceState::secondInit()
         {
             Finished[i] = false;
             const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
-            ViewPositions[i].X = (field.UpperLeftCorner.X + field.LowerRightCorner.X) * 0.5f;
-            ViewPositions[i].Y = (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * 0.5f;
+            ViewPositions[i] = ox::core::CPosition2d<float>((field.UpperLeftCorner.X + field.LowerRightCorner.X) * 0.5f,
+                (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * 0.5f);
             ViewPositions[i].X += ScreenSizeF.Width * -0.25f;
             ViewPositions[i].Y -= ScreenSizeF.Height * 0.5f;
         }
@@ -285,9 +285,8 @@ int CShuttleRaceState::updateState(float time)
         Shuttles[0]->setMovementFlag(4, JoystickDriver->isButtonPressed(0, 0) || Keys[ox::KEY_KEY_W]);
     }
 
-    switch (RaceState)
+    if (RaceState == RACE_COUNTDOWN)
     {
-    case RACE_COUNTDOWN:
         Countdown -= frameDelta;
         ShowMessage = true;
         if (Countdown > 2.0f)
@@ -301,8 +300,8 @@ int CShuttleRaceState::updateState(float time)
             Message = L"GO!";
             RaceState = RACE_RUNNING;
         }
-        break;
-    case RACE_RUNNING:
+    }
+    else if (RaceState == RACE_RUNNING)
     {
         Countdown -= frameDelta;
         ShowMessage = Countdown > -1.0f;
@@ -322,15 +321,14 @@ int CShuttleRaceState::updateState(float time)
                 }
             frameDelta -= step;
         }
-        break;
     }
-    case RACE_FINISHED:
+    else if (RaceState == RACE_FINISHED)
+    {
         ShowMessage = true;
         Message = L"We have a Winner! ";
         Message.append(ox::core::CString<wchar_t>(L"Time: "));
         Message.append(ox::core::CStringFunctions::millisecondsToWide(Shuttles[0]->getTotalTime(), false));
         SubMessage = L"Press N to Quit, or Y to Play Again";
-        break;
     }
 
     for (int i = 0; i < 2; ++i)
@@ -338,8 +336,7 @@ int CShuttleRaceState::updateState(float time)
         if (!Shuttles[i])
             continue;
         const ox::core::CVector3d<float>& shuttlePosition = Shuttles[i]->getPosition();
-        ViewPositions[i].X = shuttlePosition.X;
-        ViewPositions[i].Y = shuttlePosition.Y;
+        ViewPositions[i] = ox::core::CPosition2d<float>(shuttlePosition.X, shuttlePosition.Y);
         ViewPositions[i].X += Shuttles[i]->getCurrentSpeed().X * 0.5f;
         ViewPositions[i].Y += Shuttles[i]->getCurrentSpeed().Y * 0.5f;
         ViewPositions[i].X += ScreenSizeF.Width * -0.25f;
