@@ -1008,13 +1008,14 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
                         ox::core::CPosition2d<int>(position.X + 139, position.Y + 245), 0, 0xffffffff);
                     for (int i = 0; i < 4; ++i)
                     {
+                        int offset = 120 + i * 157;
                         Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
-                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 40), 0, 0xffffffff);
+                            ox::core::CPosition2d<int>(position.X + offset, position.Y + 40), 0, 0xffffffff);
                         Sprites[SPRITE_PROMOTE_MODE_BACKGROUND]->draw(
-                            ox::core::CPosition2d<int>(position.X + 120 + i * 157, position.Y + 235), 0, 0xffffffff);
+                            ox::core::CPosition2d<int>(position.X + offset, position.Y + 235), 0, 0xffffffff);
                         Sprites[SPRITE_MODE_ICON + i]->draw(ox::core::CPosition2d<int>(
                             (SpriteSizes[SPRITE_PROMOTE_MODE_BACKGROUND].X - SpriteSizes[SPRITE_MODE_ICON + i].X) / 2 +
-                                position.X + 120 + i * 157,
+                                position.X + offset,
                             position.Y + 35 - SpriteSizes[SPRITE_MODE_ICON + i].Y), 0, 0xffffffff);
                     }
                 }
