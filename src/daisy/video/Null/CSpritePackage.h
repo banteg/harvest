@@ -16,6 +16,9 @@ class IReadFile;
 namespace daisy {
 namespace video {
 
+//! The size of the package file header that precedes the texture data.
+const int SPRITE_PACKAGE_HEADER_SIZE = 28;
+
 //! Orders running animation states by address, for removeAnimationState.
 struct SAnimationPointerSearcher
 {

@@ -16,9 +16,6 @@
 namespace daisy {
 namespace video {
 
-//! The size of the package file header that precedes the texture data.
-const int SPRITE_PACKAGE_HEADER_SIZE = 28;
-
 CSpritePackage::CSpritePackage(ox::video::IVideoDriver* driver, bool keepStates)
     : TextureDataSize(0), HeaderSize(0), KeepStates(keepStates), StatesSorted(false)
 {
