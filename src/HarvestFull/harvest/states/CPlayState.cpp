@@ -24,6 +24,7 @@
 #include "harvest/game/CStatistics.h"
 #include "harvest/game/CThreatLevel.h"
 #include "harvest/game/SInfoLineMessage.h"
+#include "harvest/gui/CGuiEffects.h"
 #include "harvest/gui/CAchievementsScreen.h"
 #include "harvest/gui/CGuiInfoLines.h"
 #include "harvest/gui/CIngameMenuScreen.h"
@@ -137,10 +138,10 @@ CPlayState::CPlayState()
       Scenario(0), GameSpeed(3), m_2c0(0), GameOver(false), GameWon(false), GameOverTime(0), m_2d0(false), MinimapDot(0),
       MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), StatsTime(0), HarvestingCount(0), OverheatedCount(0), GameTime(0), Victory(false), LevelRecordShown(false),
       MineralsRecordShown(false), RecordCheckTime(0), DenialTime(0), CreditsText(0), HarvestersText(0), ThreatLevelText(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
-      MinimapHeight(0), RecycleButton(0), InfoText(0), BuildingsScrolling(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
+      MinimapHeight(0), RecycleButton(0), InfoText(0), BuildingsScrolling(false), HighlightActive(false), HighlightTime(0), HighlightEntityType(0), HighlightLayer(0), ShowAllRanges(false),
       m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
-      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), m_828(false), m_829(false), UpdateDuration(0),
-      m_830(0), m_838(0)
+      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), ShowDebugInfo(false), ShowMouseWorldPos(false), UpdateDuration(0),
+      RenderDuration(0), m_838(0)
 {
     for (int i = 0; i < 256; ++i)
         m_keys[i] = false;
@@ -1277,11 +1278,11 @@ int CPlayState::updateState(float time)
         StoryScreen->update(frameDelta);
     if (AchievementsScreen && AchievementsScreen->isVisible())
         AchievementsScreen->update(time);
-    if (m_764)
+    if (HighlightActive)
     {
-        m_768 -= frameDelta;
-        if (m_768 <= 0)
-            m_764 = false;
+        HighlightTime -= frameDelta;
+        if (HighlightTime <= 0)
+            HighlightActive = false;
     }
 
     entity::CEntity::g_screenSizeF = ScreenSizeF;
@@ -2763,6 +2764,288 @@ void CPlayState::renderFirst()
 {
     if (LoadingScreen)
         LoadingScreen->render(Device, Driver);
+}
+
+void CPlayState::render()
+{
+    unsigned int startTime = Device->getTimer()->getTime();
+    Driver->beginScene(true, true, ox::video::SColor(0xff000000));
+    if (game::gp_world)
+        game::gp_world->renderBackground(ViewPosition, BoldFont, 0);
+
+    ox::core::CRect<int> viewPort(0, 0, ScreenSize.Width, ScreenSize.Height);
+    if (ShowAllRanges && RangeCircle)
+    {
+        const std::list<ox::entity::COxEntity*>& entities = entity::gp_entityManager->getEntityList(0);
+        std::list<ox::entity::COxEntity*>::const_iterator it = entities.begin();
+        if (SelectedEntity)
+        {
+            // Only the buildings of the selected type.
+            int type = SelectedEntity->getEntityType();
+            for (; it != entities.end(); ++it)
+                if (type == (*it)->getEntityType())
+                    renderRangeCircleForEntity(*it, viewPort);
+        }
+        else
+        {
+            for (; it != entities.end(); ++it)
+                renderRangeCircleForEntity(*it, viewPort);
+        }
+    }
+
+    if (Action == 3)
+    {
+        if ((unsigned int)AlienSelection < WAVE_COUNT && m_488[AlienSelection])
+        {
+            ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
+            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + mouse.X - ViewPosition.X,
+                viewPort.UpperLeftCorner.Y + mouse.Y - ViewPosition.Y);
+            m_488[AlienSelection]->drawScaled(position, 1.0f, ox::video::SColor(0x80ffffff));
+        }
+    }
+    else if (Action != 1)
+    {
+        if (SelectedEntity)
+        {
+            if (RangeCircle)
+                renderRangeCircleForEntity(SelectedEntity, viewPort);
+            if (HasLastPlacement && SelectedEntity->getEntityType() == 1)
+            {
+                // The energy redirection being dragged from a spark mover.
+                const ox::core::CVector3d<float>& start = SelectedEntity->getPosition();
+                Beam1c8.Start = ox::core::CPosition2d<float>(start.X, start.Y);
+                Beam1c8.End = getWorldPos(GUIEnvironment->getMousePosition());
+                entity::gp_entityManager->renderEnergyBeam(&Beam1c8, ViewPosition, viewPort);
+            }
+        }
+    }
+    else
+    {
+        int entityType = BuildableItems.getEntityType(BuildSelection);
+        if (Beam180.Beam)
+        {
+            if (Beam210.Beam)
+            {
+                Beam180.Start = PlacementPosition;
+                Beam210.Start = PlacementPosition;
+                ox::TArray<ox::entity::COxEntity*> buildings;
+                entity::gp_entityManager->getAllRangeLineBuildings(buildings, PlacementPosition, entityType);
+                for (unsigned int i = 0; i < buildings.size(); ++i)
+                {
+                    if (buildings[i]->getEntityType() == 5)
+                    {
+                        const ox::core::CVector3d<float>& end = buildings[i]->getPosition();
+                        Beam210.End = ox::core::CPosition2d<float>(end.X, end.Y);
+                        entity::gp_entityManager->renderEnergyBeam(&Beam210, ViewPosition, viewPort);
+                    }
+                    else
+                    {
+                        const ox::core::CVector3d<float>& end = buildings[i]->getPosition();
+                        Beam180.End = ox::core::CPosition2d<float>(end.X, end.Y);
+                        entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
+                    }
+                }
+            }
+            if (Beam180.Beam && game::gp_world->worldChangesSizeInThisGameMode())
+            {
+                // Outlines the part of the field the world grows into.
+                const ox::core::CRect<float>& field = game::gp_world->getActualGameFieldSize();
+                float left = field.UpperLeftCorner.X + 512.0f;
+                float top = field.UpperLeftCorner.Y + 512.0f;
+                float right = field.LowerRightCorner.X - 512.0f;
+                float bottom = field.LowerRightCorner.Y - 512.0f;
+                Beam180.Start = ox::core::CPosition2d<float>(left, top);
+                Beam180.End = ox::core::CPosition2d<float>(right, top);
+                entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
+                Beam180.Start = Beam180.End;
+                Beam180.End = ox::core::CPosition2d<float>(right, bottom);
+                entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
+                Beam180.Start = Beam180.End;
+                Beam180.End = ox::core::CPosition2d<float>(left, bottom);
+                entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
+                Beam180.Start = Beam180.End;
+                Beam180.End = ox::core::CPosition2d<float>(left, top);
+                entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
+            }
+        }
+        if (PlacementOk && RangeCircle && m_2a0)
+        {
+            if (PlacementOk)
+                renderRangeCircle(PlacementPosition, 150.0f, RANGE_CIRCLE_COLOR, viewPort);
+            if (entityType == 7)
+                renderRangeCircle(PlacementPosition, 200.0f, LASER_CIRCLE_COLOR, viewPort);
+            else if (entityType == 4)
+                renderRangeCircle(PlacementPosition, 100.0f, MINING_CIRCLE_COLOR, viewPort);
+        }
+        if (PlacementOk && BuildableItems.getPreviewSprite(BuildSelection))
+        {
+            ox::core::CPosition2d<float> position(viewPort.UpperLeftCorner.X + PlacementPosition.X - ViewPosition.X,
+                viewPort.UpperLeftCorner.Y + PlacementPosition.Y - ViewPosition.Y);
+            BuildableItems.getPreviewSprite(BuildSelection)->drawScaled(position, 1.0f,
+                ox::video::SColor(0x80ffffff));
+        }
+    }
+
+    if (Selector)
+    {
+        if (SelectedEntity)
+        {
+            ox::core::CPosition2d<float> position(SelectedEntity->getPosition().X - ViewPosition.X,
+                SelectedEntity->getPosition().Y - ViewPosition.Y);
+            Selector->drawScaled(position, SelectedEntity->getCollisionSize() * 1.5f / 25.0f,
+                ox::video::SColor(0xffffffff));
+        }
+        else
+        {
+            for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin();
+                 it != MultiSelection.end(); ++it)
+            {
+                entity::CEntity* selected = (entity::CEntity*)(*it)->Entity;
+                ox::core::CPosition2d<float> position(selected->getPosition().X - ViewPosition.X,
+                    selected->getPosition().Y - ViewPosition.Y);
+                Selector->drawScaled(position, selected->getCollisionSize() * 1.5f / 25.0f,
+                    ox::video::SColor(0xffffffff));
+            }
+        }
+    }
+
+    if (entity::gp_entityManager)
+        entity::gp_entityManager->renderEntities(ViewPosition, viewPort);
+
+    if (m_131)
+    {
+        // The selection rectangle.
+        float offsetY = viewPort.UpperLeftCorner.Y - ViewPosition.Y;
+        float cornerY = LastPlacement.Y + offsetY;
+        float offsetX = viewPort.UpperLeftCorner.X - ViewPosition.X;
+        float cornerX = LastPlacement.X + offsetX;
+        ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
+        int x1 = (int)cornerX;
+        int y1 = (int)cornerY;
+        int x2 = (int)(mouse.X + offsetX);
+        int y2 = (int)(mouse.Y + offsetY);
+        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y1), ox::core::CPosition2d<int>(x2, y1), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y1), ox::core::CPosition2d<int>(x1, y2), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>(x1, y2), ox::core::CPosition2d<int>(x2, y2), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>(x2, y1), ox::core::CPosition2d<int>(x2, y2), RANGE_LINE_COLOR);
+    }
+
+    if (game::gp_world)
+        game::gp_world->renderEdgeShades(ViewPosition);
+
+    // Blacks out the screen beyond the edges of the field.
+    const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
+    if (ScreenSizeF.Width + ViewPosition.X > field.LowerRightCorner.X)
+        Driver->draw2DRectangle(ox::video::SColor(0xff000000),
+            ox::core::CRect<int>((int)(field.LowerRightCorner.X - ViewPosition.X), 0, ScreenSize.Width,
+                ScreenSize.Height), 0);
+    if (ScreenSizeF.Height + ViewPosition.Y > field.LowerRightCorner.Y)
+        Driver->draw2DRectangle(ox::video::SColor(0xff000000),
+            ox::core::CRect<int>(0, (int)(field.LowerRightCorner.Y - ViewPosition.Y), ScreenSize.Width,
+                ScreenSize.Height), 0);
+    if (field.UpperLeftCorner.X > ViewPosition.X)
+        Driver->draw2DRectangle(ox::video::SColor(0xff000000),
+            ox::core::CRect<int>(0, 0, (int)(field.UpperLeftCorner.X - ViewPosition.X), ScreenSize.Height), 0);
+    if (field.UpperLeftCorner.Y > ViewPosition.Y)
+        Driver->draw2DRectangle(ox::video::SColor(0xff000000),
+            ox::core::CRect<int>(0, 0, ScreenSize.Width, (int)(field.UpperLeftCorner.Y - ViewPosition.Y)), 0);
+
+    if (RecycleTarget && Action == 2 && RecycleSelector)
+    {
+        // The recycle selector and the minerals recycling gives.
+        float x = RecycleTarget->getPosition().X - ViewPosition.X;
+        float y = RecycleTarget->getPosition().Y - ViewPosition.Y;
+        RecycleSelector->drawScaled(ox::core::CPosition2d<float>(x - 21.5f, y - 17.0f), 1.0f,
+            ox::video::SColor(0xffffffff));
+        ox::core::CString<wchar_t> text(L"+");
+        text.append(RecycleTarget->getSellValue());
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>((int)x + 15, (int)y - 22, (int)x + 45, BoldFontHeight + (int)y - 22),
+            ox::video::SColor(0xffa7c0ff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+    }
+
+    if (HighlightActive)
+        gui::CGuiEffects::renderRecangleOverlay(Driver,
+            static_cast<const ox::TList<ox::entity::COxEntity*>&>(
+                entity::gp_entityManager->getEntityList(HighlightLayer)),
+            ViewPosition, HighlightEntityType, 40);
+
+    if (CreditsText && ThreatLevelText)
+    {
+        ox::core::CString<wchar_t> text;
+        text = ox::core::CString<wchar_t>(game::gp_mineralAmount->getValue());
+        CreditsText->setText(text.c_str());
+        if (GameMode != game::EGM_CREATIVE)
+            text = ox::core::CString<wchar_t>(ThreatLevel->getThreatLevel());
+        else if (LuaManager && LuaManager->isRunningMods())
+            text = ox::core::CString<wchar_t>(LuaManager->getThreatLevelValue());
+        else
+            // Creative games count the aliens.
+            text = ox::core::CString<wchar_t>((int)entity::gp_entityManager->getEntityList(1).size());
+        ThreatLevelText->setText(text.c_str());
+    }
+
+    if (GameOver)
+    {
+        int alpha = (int)((GameOverTime / -15.0f + 1.0f) * 255.0f);
+        ox::video::SColor color(0xff000000);
+        if (alpha <= 255)
+            color = ox::video::SColor(alpha >= 0 ? alpha << 24 : 0);
+        Driver->draw2DRectangle(color, ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height), 0);
+        ox::core::CString<wchar_t> text(L"--- ");
+        if (GameWon)
+            text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:victorySplash"));
+        else
+            text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:gameoverSplash"));
+        text.append(ox::core::CString<wchar_t>(L" ---"));
+        BoldFont->draw(text.c_str(), ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height),
+            WHITE_TEXT_COLOR, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
+    }
+    else if (GameSpeed == 0)
+    {
+        ox::core::CString<wchar_t> text(L"--- ");
+        text.append(settings::gp_systemConfig->getLocalizedText(L"ingame:pausedSplash"));
+        text.append(ox::core::CString<wchar_t>(L" ---"));
+        BoldFont->draw(text.c_str(), ox::core::CRect<int>(0, 0, ScreenSize.Width, ScreenSize.Height),
+            WHITE_TEXT_COLOR, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
+    }
+
+    if (LuaManager)
+        LuaManager->renderGuiObjects(Driver, SmallFont);
+    GUIEnvironment->drawAll();
+
+    if (ShowDebugInfo)
+    {
+        ox::core::CString<wchar_t> text(L"FPS:\t");
+        text.append(Driver->getFPS());
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>(10, ScreenSize.Height / 2 - 20, 210, ScreenSize.Height / 2),
+            ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+        text = L"Logic time (ms):\t";
+        text.append(UpdateDuration);
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>(10, ScreenSize.Height / 2, 210, ScreenSize.Height / 2 + 20),
+            ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+        text = L"Render time (ms):\t";
+        text.append(RenderDuration);
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>(10, ScreenSize.Height / 2 + 20, 210, ScreenSize.Height / 2 + 40),
+            ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+    }
+    if (ShowMouseWorldPos)
+    {
+        ox::core::CString<wchar_t> text(L"Mouse world pos:\t");
+        ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
+        text.append((int)mouse.X);
+        text.append(ox::core::CString<wchar_t>(L", "));
+        text.append((int)mouse.Y);
+        BoldFont->draw(text.c_str(),
+            ox::core::CRect<int>(10, ScreenSize.Height / 2 + 40, 210, ScreenSize.Height / 2 + 60),
+            ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
+    }
+
+    Driver->endScene();
+    RenderDuration = Device->getTimer()->getTime() - startTime;
 }
 
 void CPlayState::renderRangeCircleForEntity(ox::entity::COxEntity* entity, const ox::core::CRect<int>& viewPort)

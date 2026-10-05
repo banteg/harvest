@@ -354,11 +354,11 @@ private:
     bool BuildingsScrolling;
     float BuildingsScrollPosition;
     float BuildingsScrollTarget;
-    bool m_764;
-    float m_768;
-    int m_76c;
-    int m_770;
-    bool m_774;
+    bool HighlightActive;
+    float HighlightTime;
+    int HighlightEntityType;
+    int HighlightLayer;
+    bool ShowAllRanges;
     //! The wave and creative alien lists at the right edge, indexed by ELIST.
     ox::gui::IGUILayout* ListGroups[LIST_COUNT];
     ox::gui::IGUILayout* ListContents[LIST_COUNT];
@@ -380,11 +380,11 @@ private:
     ox::core::CString<wchar_t> PlayerGroup;
     int ParticleSetting;
     float ScrollSpeed;
-    bool m_828;
-    bool m_829;
+    bool ShowDebugInfo;
+    bool ShowMouseWorldPos;
     //! Milliseconds the last updateState took.
     int UpdateDuration;
-    int m_830;
+    int RenderDuration;
     void* m_838;
     game::CLuaManager* LuaManager;
 };
