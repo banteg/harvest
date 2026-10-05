@@ -187,9 +187,10 @@ int harvest_findBuildings(lua_State* L)
         return 0;
 
     const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
+    std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
     lua_newtable(L);
     int index = 1;
-    for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
+    for (; it != list.end(); ++it)
     {
         if (((entity::CEntity*)*it)->getEntityType() != 5)
         {
@@ -223,45 +224,36 @@ int harvest_findBuildings(lua_State* L)
 int harvest_findAliens(lua_State* L)
 {
     int top = lua_gettop(L);
-    int alienType;
-    float left, top_, right, bottom;
-    bool inRect, inCircle;
-    if (top == 5)
-    {
-        alienType = lua_tointeger(L, 5);
-    rect:
-        left = (float)lua_tonumber(L, 1);
-        top_ = (float)lua_tonumber(L, 2);
-        right = (float)lua_tonumber(L, 3);
-        bottom = (float)lua_tonumber(L, 4);
-        inCircle = false;
-        inRect = true;
-    }
+    int alienType = -1;
+    if (top == 1)
+        alienType = lua_tointeger(L, 1);
     else if (top == 4)
-    {
         alienType = lua_tointeger(L, 4);
-    circle:
-        left = (float)lua_tonumber(L, 1);
-        top_ = (float)lua_tonumber(L, 2);
-        float radius = (float)lua_tonumber(L, 3);
-        right = radius * radius;
+    else if (top == 5)
+        alienType = lua_tointeger(L, 5);
+
+    float x1, y1, x2, y2;
+    bool inRect, inCircle;
+    if (top == 3 || top == 4)
+    {
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        x2 *= x2;
         inCircle = true;
         inRect = false;
     }
-    else if (top == 1)
+    else if (top == 5)
     {
-        alienType = lua_tointeger(L, 1);
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        y2 = (float)lua_tonumber(L, 4);
         inCircle = false;
-        inRect = false;
+        inRect = true;
     }
     else
     {
-        alienType = -1;
-        if (top == 3 || top == 4)
-            goto circle;
-        alienType = -1;
-        if (top == 5)
-            goto rect;
         inCircle = false;
         inRect = false;
     }
@@ -270,29 +262,29 @@ int harvest_findAliens(lua_State* L)
         return 0;
 
     const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(1);
+    std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
     lua_newtable(L);
     int index = 1;
-    for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
+    for (; it != list.end(); ++it)
     {
-        entity::CAlienEntity* alien = (entity::CAlienEntity*)*it;
-        if (alienType >= 0 && alienType != alien->getAlienType())
+        if (alienType >= 0 && alienType != ((entity::CAlienEntity*)*it)->getAlienType())
             continue;
         if (inRect)
         {
-            const ox::core::CVector3d<float>& position = alien->getPosition();
-            if (left > position.X || position.X > right || top_ > position.Y || position.Y > bottom)
+            ox::core::CVector3d<float> position = (*it)->getPosition();
+            if (x1 > position.X || position.X > x2 || y1 > position.Y || position.Y > y2)
                 continue;
         }
         if (inCircle)
         {
-            const ox::core::CVector3d<float>& position = alien->getPosition();
-            float dx = position.X - left;
-            float dy = position.Y - top_;
-            if (dx * dx + dy * dy > right)
+            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            float dx = position.X - x1;
+            float dy = position.Y - y1;
+            if (dx * dx + dy * dy > x2)
                 continue;
         }
         lua_pushnumber(L, index);
-        Lunar<entity::CAlienLuaInfo>::push(L, alien->getLuaInfo());
+        Lunar<entity::CAlienLuaInfo>::push(L, ((entity::CAlienEntity*)*it)->getLuaInfo());
         lua_rawset(L, -3);
         ++index;
     }
