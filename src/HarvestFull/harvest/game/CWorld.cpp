@@ -63,168 +63,89 @@ CWorld::~CWorld()
     for (unsigned int i = 0; i < WindPuffs.size(); ++i) delete WindPuffs[i];
 }
 
+bool CWorld::initializeWorld(ox::video::IVideoDriver* driver, const ox::core::CDimension2d<int>& size)
+{
+    if (!driver) return false;
+    VideoDriver = driver;
+    ox::video::ISpritePackage* package = driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat", false);
+    if (!package) return false;
+    if (Planet == 2) GroundSprites[0] = package->addNewAnimationState("Background2");
+    else if (Planet == 1) GroundSprites[0] = package->addNewAnimationState("Background3");
+    else GroundSprites[0] = package->addNewAnimationState("Background");
+    if (!GroundSprites[0]) return false;
+    GroundSprites[1] = package->addNewAnimationState("MapShadeEdge");
+    if (Planet == 2)
+    {
+        DoodadSprites[0] = package->addNewAnimationState("Hole1");
+        DoodadSprites[1] = package->addNewAnimationState("Hole2");
+        DoodadSprites[2] = package->addNewAnimationState("Hole3");
+        DoodadSprites[3] = package->addNewAnimationState("Hole5");
+        DoodadSprites[4] = package->addNewAnimationState("Hole6");
+    }
+    else if (Planet == 0)
+    {
+        DoodadSprites[5] = package->addNewAnimationState("B1Detail1");
+        DoodadSprites[6] = package->addNewAnimationState("B1Detail2");
+        DoodadSprites[7] = package->addNewAnimationState("B1Detail3");
+        DoodadSprites[8] = package->addNewAnimationState("B1Detail4");
+        DoodadSprites[9] = package->addNewAnimationState("B1Detail5");
+        DoodadSprites[10] = package->addNewAnimationState("B1Detail6");
+    }
+    else if (Planet == 1)
+    {
+        DoodadSprites[11] = package->addNewAnimationState("B3Detail1");
+        DoodadSprites[12] = package->addNewAnimationState("B3Detail2");
+        DoodadSprites[13] = package->addNewAnimationState("B3Detail3");
+        DoodadSprites[14] = package->addNewAnimationState("B3Detail4");
+        DoodadSprites[15] = package->addNewAnimationState("B3Detail5");
+        DoodadSprites[16] = package->addNewAnimationState("B3Detail6");
+        DoodadSprites[17] = package->addNewAnimationState("B3Detail7");
+        DoodadSprites[18] = package->addNewAnimationState("B3Detail8");
+        DoodadSprites[19] = package->addNewAnimationState("B3Detail9");
+        DoodadSprites[20] = package->addNewAnimationState("B3Detail10");
+        DoodadSprites[21] = package->addNewAnimationState("B3Detail11");
+        DoodadSprites[22] = package->addNewAnimationState("B3Detail12");
+    }
+    for (int i = 0; i < 23; ++i)
+        if (DoodadSprites[i])
+        {
+            ox::core::CDimension2d<int> size = DoodadSprites[i]->getFrameSize(0);
+            DoodadSizes[i].Width = size.Width;
+            DoodadSizes[i].Height = size.Height;
+        }
+    DoodadCollisionRadii[0] = 214;
+    DoodadCollisionRadii[1] = 146;
+    DoodadCollisionRadii[2] = 109;
+    DoodadCollisionRadii[3] = 107;
+    DoodadCollisionRadii[4] = 89;
+    changeViewSize(size);
+    return true;
+}
+
 void CWorld::changeViewSize(const ox::core::CDimension2d<int>& size)
 {
     ViewSize.Width = size.Width;
     ViewSize.Height = size.Height;
 }
 
-int CWorld::getPlanet() const { return Planet; }
-int CWorld::getGameMode() const { return GameMode; }
-const ox::core::CRect<float>& CWorld::getActualGameFieldSize() const { return ActualGameField; }
-const ox::core::CRect<float>& CWorld::getVisibleGameFieldSize() const { return VisibleGameField; }
-
-bool CWorld::hasWorldExpandedAtLeastOnce()
+void CWorld::initializeNewGame(IScenario* scenario)
 {
-    if (GameMode != 0) return true;
-    return TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048;
-}
-
-bool CWorld::worldChangesSizeInThisGameMode() const
-{
-    if (GameMode == 3 || GameMode == 5) return !InitialWorld;
-    return true;
-}
-
-void CWorld::constrainViewPos(ox::core::CPosition2d<float>& position)
-{
-    if (ViewSize.Width > VisibleGameField.getWidth())
-        position.X = (VisibleGameField.getWidth() - ViewSize.Width) * .5f;
-    else
-    {
-        if (position.X <= VisibleGameField.UpperLeftCorner.X) position.X = VisibleGameField.UpperLeftCorner.X;
-        else if (position.X + ViewSize.Width >= VisibleGameField.LowerRightCorner.X)
-            position.X = VisibleGameField.LowerRightCorner.X - ViewSize.Width;
-    }
-    // The native oversize-height case writes X, rather than Y.
-    if (ViewSize.Height > VisibleGameField.getHeight())
-        position.X = (VisibleGameField.getHeight() - ViewSize.Height) * .5f;
-    else
-    {
-        if (position.Y <= VisibleGameField.UpperLeftCorner.Y) position.Y = VisibleGameField.UpperLeftCorner.Y;
-        else if (position.Y + ViewSize.Height >= VisibleGameField.LowerRightCorner.Y)
-            position.Y = VisibleGameField.LowerRightCorner.Y - ViewSize.Height;
-    }
-}
-
-bool CWorld::checkCollisionWithDoodad(const SDoodad* doodad, const ox::core::CPosition2d<float>& position)
-{
-    if (!doodad->Bounds.isPointInside(position)) return false;
-    float x = position.X - doodad->Position.X;
-    float y = (position.Y - doodad->Position.Y) * 1.5f;
-    float radius = DoodadCollisionRadii[doodad->Type];
-    return x * x + y * y <= radius * radius;
-}
-
-bool CWorld::mayMoveHere(const ox::core::CPosition2d<float>& position)
-{
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-            if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
-    }
-    return true;
-}
-
-bool CWorld::mayPlaceObjectHere(const ox::core::CPosition2d<float>& position, bool building)
-{
-    if (building && STARTING_AREA.isPointInside(position)) return false;
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-            if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
-    }
-    return true;
-}
-
-float CWorld::getCollisionTangent(const ox::core::CPosition2d<float>& position)
-{
-    if (DoodadGrid && DoodadGridArea.isPointInside(position))
-    {
-        int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-        int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-        int cellIndex = y * DoodadGridWidth + x;
-        for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+    if (scenario) Random.setCurrent(scenario->getDoodadSeed());
+    ox::core::CRect<float> sceneryArea = TargetGameField;
+    sceneryArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
+    sceneryArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
+    placeDoodads(sceneryArea, 128);
+    if (scenario) scenario->applyInitialExpansions(this);
+    else entity::CMineralsEntity::fillAreaWithMinerals(ActualGameField, 100, this);
+    if (GameMode == 3)
+        for (int i = 0; i < 4; ++i)
         {
-            SDoodad* doodad = DoodadGrid[cellIndex][i];
-            if (checkCollisionWithDoodad(doodad, position))
-            {
-                float dx = position.X - doodad->Position.X;
-                float dy = (position.Y - doodad->Position.Y) * 1.5f;
-                if (dx == 0) return dy < 0 ? 4.71238899f : 1.57079637f;
-                float angle = atanf(dy / dx);
-                if (dx < 0) angle += 3.14159274f;
-                return angle;
-            }
+            expandWorld(1, ActualGameField.UpperLeftCorner.X - 512, true);
+            expandWorld(3, ActualGameField.LowerRightCorner.X + 512, true);
+            expandWorld(0, ActualGameField.UpperLeftCorner.Y - 512, true);
+            expandWorld(2, ActualGameField.LowerRightCorner.Y + 512, true);
+            ActualGameField = TargetGameField;
         }
-    }
-    return 0;
-}
-
-ox::core::CPosition2d<float> CWorld::findRendezvousPoint(
-    const ox::core::CPosition2d<float>& position, const ox::core::CVector2d<float>& movement)
-{
-    if (!DoodadGrid || !DoodadGridArea.isPointInside(position))
-        return ox::core::CPosition2d<float>(0, 0);
-    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
-    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
-    int cellIndex = y * DoodadGridWidth + x;
-    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
-    {
-        if (!checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) continue;
-        float angle = ox::core::CMath::getAngleIY(DoodadGrid[cellIndex][i]->Position, position);
-        if (angle <= 0 && angle > -.785398185f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 0;
-        else if (angle <= 1.57079637f && angle > 0)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 1.57079637f : 0;
-        else if (angle <= 3.14159274f && angle > 1.57079637f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 1.57079637f : 3.14159274f;
-        else if (angle <= 4.71238899f && angle > 3.14159274f)
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 3.14159274f;
-        else
-            angle = ox::core::abs_(movement.X) > ox::core::abs_(movement.Y) ? 4.71238899f : 0;
-        float radius = DoodadCollisionRadii[DoodadGrid[cellIndex][i]->Type];
-        return ox::core::CPosition2d<float>(DoodadGrid[cellIndex][i]->Position.X + cos((double)angle) * (radius + 40),
-            DoodadGrid[cellIndex][i]->Position.Y + sin((double)angle) * (radius * .691999972f + 40));
-    }
-    return ox::core::CPosition2d<float>(position);
-}
-
-void CWorld::applyWind(const ox::core::CVector3d<float>& position,
-    ox::core::CVector2d<float>& speed, float frameDelta) const
-{
-    if (Planet != 1) return;
-    for (unsigned int i = 0; i < WindPuffs.size(); ++i)
-    {
-        float distance = ox::core::CMath::getEstimateDistance(
-            ox::core::CPosition2d<float>(WindPuffs[i]->Position.X, WindPuffs[i]->Position.Y),
-            ox::core::CPosition2d<float>(position.X, position.Y));
-        if (distance < 200)
-        {
-            float amount = (1.0f - distance / 200.0f) * frameDelta;
-            speed.X += WindPuffs[i]->Speed.X * amount;
-            speed.Y += WindPuffs[i]->Speed.Y * amount;
-        }
-    }
-    speed.X -= 5.0f * frameDelta;
-}
-
-void CWorld::createDoodad(const ox::core::CPosition2d<float>& position, int type)
-{
-    SDoodad* doodad = new SDoodad;
-    doodad->Type = type;
-    doodad->Position = position;
-    float halfHeight = DoodadSizes[type].Height >> 1;
-    float halfWidth = DoodadSizes[type].Width >> 1;
-    doodad->Bounds = ox::core::CRect<float>(position.X - halfWidth, position.Y - halfHeight,
-        position.X + halfWidth, position.Y + halfHeight);
-    Doodads.push_back(doodad);
 }
 
 void CWorld::placeDoodads(const ox::core::CRect<float>& area, int count)
@@ -263,61 +184,6 @@ void CWorld::placeDoodads(const ox::core::CRect<float>& area, int count)
         if (valid) createDoodad(position, type);
     }
     recreateDoodadGrid();
-}
-
-void CWorld::recreateDoodadGrid()
-{
-    delete[] DoodadGrid;
-    DoodadGrid = 0;
-    if (Planet != 2) return;
-    DoodadGridArea = TargetGameField;
-    DoodadGridArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
-    DoodadGridArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
-    DoodadGridWidth = (int)(DoodadGridArea.getWidth() * .00390625f);
-    DoodadGridHeight = (int)(DoodadGridArea.getHeight() * .00390625f);
-    DoodadGrid = new ox::TArray<SDoodad*>[DoodadGridWidth * DoodadGridHeight];
-    for (int y = 0; y < DoodadGridHeight; ++y)
-    {
-        for (int x = 0; x < DoodadGridWidth; ++x)
-        {
-            ox::core::CRect<float> cellArea;
-            cellArea.UpperLeftCorner.Y = y * 256.0f + DoodadGridArea.UpperLeftCorner.Y;
-            cellArea.UpperLeftCorner.X = x * 256.0f + DoodadGridArea.UpperLeftCorner.X;
-            cellArea.LowerRightCorner.X = cellArea.UpperLeftCorner.X + 256;
-            cellArea.LowerRightCorner.Y = cellArea.UpperLeftCorner.Y + 256;
-            for (unsigned int i = 0; i < Doodads.size(); ++i)
-            {
-                const ox::core::CRect<float>& bounds = Doodads[i]->Bounds;
-                if (bounds.isRectCollided(cellArea))
-                    DoodadGrid[y * DoodadGridWidth + x].push_back(Doodads[i]);
-            }
-        }
-    }
-}
-
-bool CWorld::write(ox::io::IWriteFile* file)
-{
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.X);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.Y);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.X);
-    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.Y);
-    ox::io::CHelpIO::writeInt(file, Planet);
-    ox::io::CHelpIO::writeInt(file, Doodads.size());
-    for (unsigned int i = 0; i < (unsigned int)Doodads.size(); ++i)
-    {
-        ox::io::CHelpIO::writeInt(file, Doodads[i]->Type);
-        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.X);
-        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.Y);
-    }
-    return true;
 }
 
 ox::core::CRect<float> CWorld::expandWorld(int direction, float boundary, bool populate)
@@ -416,85 +282,6 @@ void CWorld::expandWorldFromCurrent(int direction, bool populate)
     VisibleGameField = TargetGameField;
 }
 
-bool CWorld::initializeWorld(ox::video::IVideoDriver* driver, const ox::core::CDimension2d<int>& size)
-{
-    if (!driver) return false;
-    VideoDriver = driver;
-    ox::video::ISpritePackage* package = driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat", false);
-    if (!package) return false;
-    if (Planet == 2) GroundSprites[0] = package->addNewAnimationState("Background2");
-    else if (Planet == 1) GroundSprites[0] = package->addNewAnimationState("Background3");
-    else GroundSprites[0] = package->addNewAnimationState("Background");
-    if (!GroundSprites[0]) return false;
-    GroundSprites[1] = package->addNewAnimationState("MapShadeEdge");
-    if (Planet == 2)
-    {
-        DoodadSprites[0] = package->addNewAnimationState("Hole1");
-        DoodadSprites[1] = package->addNewAnimationState("Hole2");
-        DoodadSprites[2] = package->addNewAnimationState("Hole3");
-        DoodadSprites[3] = package->addNewAnimationState("Hole5");
-        DoodadSprites[4] = package->addNewAnimationState("Hole6");
-    }
-    else if (Planet == 0)
-    {
-        DoodadSprites[5] = package->addNewAnimationState("B1Detail1");
-        DoodadSprites[6] = package->addNewAnimationState("B1Detail2");
-        DoodadSprites[7] = package->addNewAnimationState("B1Detail3");
-        DoodadSprites[8] = package->addNewAnimationState("B1Detail4");
-        DoodadSprites[9] = package->addNewAnimationState("B1Detail5");
-        DoodadSprites[10] = package->addNewAnimationState("B1Detail6");
-    }
-    else if (Planet == 1)
-    {
-        DoodadSprites[11] = package->addNewAnimationState("B3Detail1");
-        DoodadSprites[12] = package->addNewAnimationState("B3Detail2");
-        DoodadSprites[13] = package->addNewAnimationState("B3Detail3");
-        DoodadSprites[14] = package->addNewAnimationState("B3Detail4");
-        DoodadSprites[15] = package->addNewAnimationState("B3Detail5");
-        DoodadSprites[16] = package->addNewAnimationState("B3Detail6");
-        DoodadSprites[17] = package->addNewAnimationState("B3Detail7");
-        DoodadSprites[18] = package->addNewAnimationState("B3Detail8");
-        DoodadSprites[19] = package->addNewAnimationState("B3Detail9");
-        DoodadSprites[20] = package->addNewAnimationState("B3Detail10");
-        DoodadSprites[21] = package->addNewAnimationState("B3Detail11");
-        DoodadSprites[22] = package->addNewAnimationState("B3Detail12");
-    }
-    for (int i = 0; i < 23; ++i)
-        if (DoodadSprites[i])
-        {
-            ox::core::CDimension2d<int> size = DoodadSprites[i]->getFrameSize(0);
-            DoodadSizes[i].Width = size.Width;
-            DoodadSizes[i].Height = size.Height;
-        }
-    DoodadCollisionRadii[0] = 214;
-    DoodadCollisionRadii[1] = 146;
-    DoodadCollisionRadii[2] = 109;
-    DoodadCollisionRadii[3] = 107;
-    DoodadCollisionRadii[4] = 89;
-    changeViewSize(size);
-    return true;
-}
-
-void CWorld::initializeNewGame(IScenario* scenario)
-{
-    if (scenario) Random.setCurrent(scenario->getDoodadSeed());
-    ox::core::CRect<float> sceneryArea = TargetGameField;
-    sceneryArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
-    sceneryArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
-    placeDoodads(sceneryArea, 128);
-    if (scenario) scenario->applyInitialExpansions(this);
-    else entity::CMineralsEntity::fillAreaWithMinerals(ActualGameField, 100, this);
-    if (GameMode == 3)
-        for (int i = 0; i < 4; ++i)
-        {
-            expandWorld(1, ActualGameField.UpperLeftCorner.X - 512, true);
-            expandWorld(3, ActualGameField.LowerRightCorner.X + 512, true);
-            expandWorld(0, ActualGameField.UpperLeftCorner.Y - 512, true);
-            expandWorld(2, ActualGameField.LowerRightCorner.Y + 512, true);
-            ActualGameField = TargetGameField;
-        }
-}
-
 bool CWorld::readAndInitialize(ox::io::IReadFile* file, int version, ox::video::IVideoDriver* driver,
     const ox::core::CDimension2d<int>& size)
 {
@@ -541,75 +328,231 @@ bool CWorld::readAndInitialize(ox::io::IReadFile* file, int version, ox::video::
     return true;
 }
 
-void CWorld::renderBackground(const ox::core::CPosition2d<float>& position, ox::gui::IGUIFont* font,
-    ox::core::CRect<int>* clip)
+void CWorld::createDoodad(const ox::core::CPosition2d<float>& position, int type)
 {
-    if (!GroundSprites[0]) return;
-    ox::core::CDimension2d<float> size = ViewSize;
-    int offsetX = 0, offsetY = 0;
-    if (clip)
+    SDoodad* doodad = new SDoodad;
+    doodad->Type = type;
+    doodad->Position = position;
+    float halfHeight = DoodadSizes[type].Height >> 1;
+    float halfWidth = DoodadSizes[type].Width >> 1;
+    doodad->Bounds = ox::core::CRect<float>(position.X - halfWidth, position.Y - halfHeight,
+        position.X + halfWidth, position.Y + halfHeight);
+    Doodads.push_back(doodad);
+}
+
+void CWorld::recreateDoodadGrid()
+{
+    delete[] DoodadGrid;
+    DoodadGrid = 0;
+    if (Planet != 2) return;
+    DoodadGridArea = TargetGameField;
+    DoodadGridArea.UpperLeftCorner -= ox::core::CPosition2d<float>(512, 512);
+    DoodadGridArea.LowerRightCorner += ox::core::CPosition2d<float>(512, 512);
+    DoodadGridWidth = (int)(DoodadGridArea.getWidth() * .00390625f);
+    DoodadGridHeight = (int)(DoodadGridArea.getHeight() * .00390625f);
+    DoodadGrid = new ox::TArray<SDoodad*>[DoodadGridWidth * DoodadGridHeight];
+    for (int y = 0; y < DoodadGridHeight; ++y)
     {
-        offsetY = clip->UpperLeftCorner.Y;
-        size.Height = clip->getHeight();
-        offsetX = clip->UpperLeftCorner.X;
-        size.Width = clip->getWidth();
-    }
-    int tileX = (int)(position.X - 256);
-    if (tileX < 0) tileX = ~(-tileX >> 9);
-    else tileX >>= 9;
-    int tileY = (int)(position.Y - 256);
-    if (tileY < 0) tileY = ~(-tileY >> 9);
-    else tileY >>= 9;
-    // The native renderer computes the tile origin once before drawing the grid.
-    ox::core::CPosition2d<int> start((int)(tileX * 512.0f - position.X),
-        (int)(tileY * 512.0f - position.Y));
-    for (int y = start.Y; y < size.Height; y += 512)
-        for (int x = start.X; x < size.Width; x += 512)
-            GroundSprites[0]->draw(ox::core::CPosition2d<int>(offsetX + x, offsetY + y), clip, 0xffffffff);
-    for (unsigned int i = 0; i < Doodads.size(); ++i)
-    {
-        SDoodad* doodad = Doodads[i];
-        if (DoodadSprites[doodad->Type])
-            DoodadSprites[doodad->Type]->draw(ox::core::CPosition2d<int>(offsetX + (int)(doodad->Position.X - position.X),
-                offsetY + (int)(doodad->Position.Y - position.Y)), clip, 0xffffffff);
+        for (int x = 0; x < DoodadGridWidth; ++x)
+        {
+            ox::core::CRect<float> cellArea;
+            cellArea.UpperLeftCorner.Y = y * 256.0f + DoodadGridArea.UpperLeftCorner.Y;
+            cellArea.UpperLeftCorner.X = x * 256.0f + DoodadGridArea.UpperLeftCorner.X;
+            cellArea.LowerRightCorner.X = cellArea.UpperLeftCorner.X + 256;
+            cellArea.LowerRightCorner.Y = cellArea.UpperLeftCorner.Y + 256;
+            for (unsigned int i = 0; i < Doodads.size(); ++i)
+            {
+                const ox::core::CRect<float>& bounds = Doodads[i]->Bounds;
+                if (bounds.isRectCollided(cellArea))
+                    DoodadGrid[y * DoodadGridWidth + x].push_back(Doodads[i]);
+            }
+        }
     }
 }
 
-void CWorld::renderEdgeShades(const ox::core::CPosition2d<float>& position)
+bool CWorld::write(ox::io::IWriteFile* file)
 {
-    if (!GroundSprites[1]) return;
-    ox::core::CPosition2d<float> upper = VisibleGameField.UpperLeftCorner + ox::core::CPosition2d<float>(-6, -6);
-    ox::core::CPosition2d<float> lower = VisibleGameField.LowerRightCorner + ox::core::CPosition2d<float>(6, 6);
-    ox::core::CRect<float> edges(upper, lower);
-    ox::core::CPosition2d<float> point;
-    point.Y = edges.UpperLeftCorner.Y - position.Y;
-    if (point.Y > -512)
-        for (float x = edges.UpperLeftCorner.X; x < edges.LowerRightCorner.X; x += 128)
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, TargetGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, VisibleGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.X);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.UpperLeftCorner.Y);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.X);
+    ox::io::CHelpIO::writeFloat(file, ActualGameField.LowerRightCorner.Y);
+    ox::io::CHelpIO::writeInt(file, Planet);
+    ox::io::CHelpIO::writeInt(file, Doodads.size());
+    for (unsigned int i = 0; i < (unsigned int)Doodads.size(); ++i)
+    {
+        ox::io::CHelpIO::writeInt(file, Doodads[i]->Type);
+        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.X);
+        ox::io::CHelpIO::writeFloat(file, Doodads[i]->Position.Y);
+    }
+    return true;
+}
+
+int CWorld::getPlanet() const { return Planet; }
+
+int CWorld::getGameMode() const { return GameMode; }
+
+const ox::core::CRect<float>& CWorld::getActualGameFieldSize() const { return ActualGameField; }
+
+bool CWorld::hasWorldExpandedAtLeastOnce()
+{
+    if (GameMode != 0) return true;
+    return TargetGameField.getWidth() > 2048 || TargetGameField.getHeight() > 2048;
+}
+
+const ox::core::CRect<float>& CWorld::getVisibleGameFieldSize() const { return VisibleGameField; }
+
+void CWorld::applyWind(const ox::core::CVector3d<float>& position,
+    ox::core::CVector2d<float>& speed, float frameDelta) const
+{
+    if (Planet != 1) return;
+    for (unsigned int i = 0; i < WindPuffs.size(); ++i)
+    {
+        float distance = ox::core::CMath::getEstimateDistance(
+            ox::core::CPosition2d<float>(WindPuffs[i]->Position.X, WindPuffs[i]->Position.Y),
+            ox::core::CPosition2d<float>(position.X, position.Y));
+        if (distance < 200)
         {
-            point.X = x - position.X;
-            GroundSprites[1]->drawRotated(point, 0, 1, 0x80000000);
+            float amount = (1.0f - distance / 200.0f) * frameDelta;
+            speed.X += WindPuffs[i]->Speed.X * amount;
+            speed.Y += WindPuffs[i]->Speed.Y * amount;
         }
-    point.X = edges.LowerRightCorner.X - position.X;
-    if (point.X < ViewSize.Width + 512)
-        for (float y = edges.UpperLeftCorner.Y; y < edges.LowerRightCorner.Y; y += 128)
+    }
+    speed.X -= 5.0f * frameDelta;
+}
+
+bool CWorld::checkCollisionWithDoodad(const SDoodad* doodad, const ox::core::CPosition2d<float>& position)
+{
+    if (!doodad->Bounds.isPointInside(position)) return false;
+    float x = position.X - doodad->Position.X;
+    float y = (position.Y - doodad->Position.Y) * 1.5f;
+    float radius = DoodadCollisionRadii[doodad->Type];
+    return x * x + y * y <= radius * radius;
+}
+
+bool CWorld::mayMoveHere(const ox::core::CPosition2d<float>& position)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return true;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
+    return true;
+}
+
+bool CWorld::mayPlaceObjectHere(const ox::core::CPosition2d<float>& position, bool building)
+{
+    if (building && STARTING_AREA.isPointInside(position)) return false;
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return true;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position)) return false;
+    return true;
+}
+
+ox::core::CPosition2d<float> CWorld::findRendezvousPoint(
+    const ox::core::CPosition2d<float>& position, const ox::core::CVector2d<float>& movement)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position))
+        return ox::core::CPosition2d<float>(0, 0);
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+    {
+        if (checkCollisionWithDoodad(DoodadGrid[cellIndex][i], position))
         {
-            point.Y = y - position.Y;
-            GroundSprites[1]->drawRotated(point, 1.57079637f, 1, 0x80000000);
+            float angle = ox::core::CMath::getAngleIY(DoodadGrid[cellIndex][i]->Position, position);
+            if (angle <= 0 && angle > -.785398185f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 0;
+            }
+            else if (angle <= 1.57079637f && angle > 0)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 1.57079637f;
+                else angle = 0;
+            }
+            else if (angle <= 3.14159274f && angle > 1.57079637f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 1.57079637f;
+                else angle = 3.14159274f;
+            }
+            else if (angle <= 4.71238899f && angle > 3.14159274f)
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 3.14159274f;
+            }
+            else
+            {
+                if (ox::core::abs_(movement.X) > ox::core::abs_(movement.Y)) angle = 4.71238899f;
+                else angle = 0;
+            }
+            float radius = DoodadCollisionRadii[DoodadGrid[cellIndex][i]->Type];
+            return ox::core::CPosition2d<float>(DoodadGrid[cellIndex][i]->Position.X + cos((double)angle) * (radius + 40),
+                DoodadGrid[cellIndex][i]->Position.Y + sin((double)angle) * (radius * .691999972f + 40));
         }
-    point.Y = edges.LowerRightCorner.Y - position.Y;
-    if (point.Y < ViewSize.Height + 512)
-        for (float x = edges.UpperLeftCorner.X; x < edges.LowerRightCorner.X; x += 128)
+    }
+    return ox::core::CPosition2d<float>(position);
+}
+
+float CWorld::getCollisionTangent(const ox::core::CPosition2d<float>& position)
+{
+    if (!DoodadGrid || !DoodadGridArea.isPointInside(position)) return 0;
+    int x = (int)((position.X - DoodadGridArea.UpperLeftCorner.X) * .00390625f);
+    int y = (int)((position.Y - DoodadGridArea.UpperLeftCorner.Y) * .00390625f);
+    int cellIndex = y * DoodadGridWidth + x;
+    for (unsigned int i = 0; i < DoodadGrid[cellIndex].size(); ++i)
+    {
+        SDoodad* doodad = DoodadGrid[cellIndex][i];
+        if (checkCollisionWithDoodad(doodad, position))
         {
-            point.X = x - position.X;
-            GroundSprites[1]->drawRotated(point + ox::core::CPosition2d<float>(128, 0), 3.14159274f, 1, 0x80000000);
+            float dx = position.X - doodad->Position.X;
+            float dy = (position.Y - doodad->Position.Y) * 1.5f;
+            if (dx == 0) return dy < 0 ? 4.71238899f : 1.57079637f;
+            float angle = atanf(dy / dx);
+            if (dx < 0) angle += 3.14159274f;
+            return angle;
         }
-    point.X = edges.UpperLeftCorner.X - position.X;
-    if (point.X > -512)
-        for (float y = edges.UpperLeftCorner.Y; y < edges.LowerRightCorner.Y; y += 128)
-        {
-            point.Y = y - position.Y;
-            GroundSprites[1]->drawRotated(point + ox::core::CPosition2d<float>(0, 128), 4.71238899f, 1, 0x80000000);
-        }
+    }
+    return 0;
+}
+
+void CWorld::constrainViewPos(ox::core::CPosition2d<float>& position)
+{
+    if (ViewSize.Width > VisibleGameField.getWidth())
+        position.X = (VisibleGameField.getWidth() - ViewSize.Width) * .5f;
+    else
+    {
+        if (position.X <= VisibleGameField.UpperLeftCorner.X) position.X = VisibleGameField.UpperLeftCorner.X;
+        else if (position.X + ViewSize.Width >= VisibleGameField.LowerRightCorner.X)
+            position.X = VisibleGameField.LowerRightCorner.X - ViewSize.Width;
+    }
+    // The native oversize-height case writes X, rather than Y.
+    if (ViewSize.Height > VisibleGameField.getHeight())
+        position.X = (VisibleGameField.getHeight() - ViewSize.Height) * .5f;
+    else
+    {
+        if (position.Y <= VisibleGameField.UpperLeftCorner.Y) position.Y = VisibleGameField.UpperLeftCorner.Y;
+        else if (position.Y + ViewSize.Height >= VisibleGameField.LowerRightCorner.Y)
+            position.Y = VisibleGameField.LowerRightCorner.Y - ViewSize.Height;
+    }
+}
+
+bool CWorld::worldChangesSizeInThisGameMode() const
+{
+    if (GameMode == 3 || GameMode == 5) return !InitialWorld;
+    return true;
 }
 
 void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
@@ -708,6 +651,77 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
         VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
     else if (ActualGameField.LowerRightCorner.Y > VisibleGameField.LowerRightCorner.Y)
         VisibleGameField.LowerRightCorner.Y = ActualGameField.LowerRightCorner.Y;
+}
+
+void CWorld::renderBackground(const ox::core::CPosition2d<float>& position, ox::gui::IGUIFont* font,
+    ox::core::CRect<int>* clip)
+{
+    if (!GroundSprites[0]) return;
+    ox::core::CDimension2d<float> size = ViewSize;
+    int offsetX = 0, offsetY = 0;
+    if (clip)
+    {
+        offsetY = clip->UpperLeftCorner.Y;
+        size.Height = clip->getHeight();
+        offsetX = clip->UpperLeftCorner.X;
+        size.Width = clip->getWidth();
+    }
+    int tileX = (int)(position.X - 256);
+    if (tileX < 0) tileX = ~(-tileX >> 9);
+    else tileX >>= 9;
+    int tileY = (int)(position.Y - 256);
+    if (tileY < 0) tileY = ~(-tileY >> 9);
+    else tileY >>= 9;
+    // The native renderer computes the tile origin once before drawing the grid.
+    ox::core::CPosition2d<int> start((int)(tileX * 512.0f - position.X),
+        (int)(tileY * 512.0f - position.Y));
+    for (int y = start.Y; y < size.Height; y += 512)
+        for (int x = start.X; x < size.Width; x += 512)
+            GroundSprites[0]->draw(ox::core::CPosition2d<int>(offsetX + x, offsetY + y), clip, 0xffffffff);
+    for (unsigned int i = 0; i < Doodads.size(); ++i)
+    {
+        SDoodad* doodad = Doodads[i];
+        if (DoodadSprites[doodad->Type])
+            DoodadSprites[doodad->Type]->draw(ox::core::CPosition2d<int>(offsetX + (int)(doodad->Position.X - position.X),
+                offsetY + (int)(doodad->Position.Y - position.Y)), clip, 0xffffffff);
+    }
+}
+
+void CWorld::renderEdgeShades(const ox::core::CPosition2d<float>& position)
+{
+    if (!GroundSprites[1]) return;
+    ox::core::CPosition2d<float> upper = VisibleGameField.UpperLeftCorner + ox::core::CPosition2d<float>(-6, -6);
+    ox::core::CPosition2d<float> lower = VisibleGameField.LowerRightCorner + ox::core::CPosition2d<float>(6, 6);
+    ox::core::CRect<float> edges(upper, lower);
+    ox::core::CPosition2d<float> point;
+    point.Y = edges.UpperLeftCorner.Y - position.Y;
+    if (point.Y > -512)
+        for (float x = edges.UpperLeftCorner.X; x < edges.LowerRightCorner.X; x += 128)
+        {
+            point.X = x - position.X;
+            GroundSprites[1]->drawRotated(point, 0, 1, 0x80000000);
+        }
+    point.X = edges.LowerRightCorner.X - position.X;
+    if (point.X < ViewSize.Width + 512)
+        for (float y = edges.UpperLeftCorner.Y; y < edges.LowerRightCorner.Y; y += 128)
+        {
+            point.Y = y - position.Y;
+            GroundSprites[1]->drawRotated(point, 1.57079637f, 1, 0x80000000);
+        }
+    point.Y = edges.LowerRightCorner.Y - position.Y;
+    if (point.Y < ViewSize.Height + 512)
+        for (float x = edges.UpperLeftCorner.X; x < edges.LowerRightCorner.X; x += 128)
+        {
+            point.X = x - position.X;
+            GroundSprites[1]->drawRotated(point + ox::core::CPosition2d<float>(128, 0), 3.14159274f, 1, 0x80000000);
+        }
+    point.X = edges.UpperLeftCorner.X - position.X;
+    if (point.X > -512)
+        for (float y = edges.UpperLeftCorner.Y; y < edges.LowerRightCorner.Y; y += 128)
+        {
+            point.Y = y - position.Y;
+            GroundSprites[1]->drawRotated(point + ox::core::CPosition2d<float>(0, 128), 4.71238899f, 1, 0x80000000);
+        }
 }
 
 } // end namespace game
