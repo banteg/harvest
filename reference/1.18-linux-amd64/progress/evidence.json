@@ -83881,17 +83881,17 @@
     },
     {
       "unit": "HarvestFull/harvest/settings/CSystemConfig.cpp",
-      "object_sha256": "41e7f20cb53d61e24069cb7f62845939bf563f28593c814548835abe49361a85",
+      "object_sha256": "5d10df6a0cf3ef75424f8943af8c7d7956692b250efea022397f3cf2da974ec2",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 10070,
+          "size": 11331,
           "placement": "explicit",
           "exact": false,
           "address": "0x491d00",
-          "first_difference": 2260,
-          "differing_bytes": 1461,
+          "first_difference": 2287,
+          "differing_bytes": 49,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig11setFirstRunEb",
@@ -83939,19 +83939,19 @@
               "placed": "0x492500"
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
-              "known": "0x492730",
-              "placed": "0x4925d0"
-            },
-            {
               "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
               "known": "0x4928a0",
-              "placed": "0x492680"
+              "placed": "0x4925d0"
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
               "known": "0x4927e0",
-              "placed": "0x492740"
+              "placed": "0x492690"
+            },
+            {
+              "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
+              "known": "0x492730",
+              "placed": "0x492750"
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig21getCurrentLanguageTagEv",
@@ -83962,608 +83962,27 @@
               "symbol": "_ZN7harvest8settings13CSystemConfig29getCurrentLanguageDisplayNameEv",
               "known": "0x492680",
               "placed": "0x4928b0"
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "known": "0x493080",
-              "placed": "0x492960"
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfig16openLanguageFileERKN2ox4core7CStringIcEE",
-              "known": "0x493c40",
-              "placed": "0x493030"
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-              "known": "0x493e90",
-              "placed": "0x493280"
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-              "known": "0x4943f0",
-              "placed": "0x4937e0"
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
-              "known": "0x492960",
-              "placed": "0x493d40"
             }
           ],
           "bad_references": [
             {
-              "offset": 2336,
+              "offset": 2290,
               "type": 2,
-              "symbol": "_Znam",
+              "symbol": ".LC12",
               "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
+              "reason": "unmapped or truncated range: -0x7ab6bffb+0x40",
               "matches": false
             },
             {
-              "offset": 2341,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x89480062+0x4",
-              "matches": false
-            },
-            {
-              "offset": 2712,
+              "offset": 2481,
               "type": 2,
-              "symbol": "_Znam",
+              "symbol": ".LC11",
               "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2717,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 816,
-              "reason": "unmapped or truncated range: 0x69d0beff+0x4c",
-              "matches": false
-            },
-            {
-              "offset": 3518,
-              "type": 2,
-              "symbol": ".LC21",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x3149491b+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3525,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 44,
-              "reason": "unmapped or truncated range: 0x10602484+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3612,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3625,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 44,
-              "reason": "unmapped or truncated range: 0xd231c931+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3654,
-              "type": 2,
-              "symbol": ".LC22",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x17824f97+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3661,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 56,
-              "reason": "unmapped or truncated range: 0x2484c748+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3732,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3745,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 56,
-              "reason": "unmapped or truncated range: 0xbe000010+0xc",
-              "matches": false
-            },
-            {
-              "offset": 3824,
-              "type": 2,
-              "symbol": "_ZN2ox4core10replaceAllIwEENS0_7CStringIT_EERKS4_S6_S6_",
-              "addend": -4,
-              "destination": "0x494980",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3842,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3877,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4178,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4278,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1424,
-              "reason": "unmapped or truncated range: 0xf7894c00+0x34",
-              "matches": false
-            },
-            {
-              "offset": 4294,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4313,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4324,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
-              "addend": -4,
-              "destination": "0x468fe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4340,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4345,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 4,
-              "reason": "unmapped or truncated range: 0x89480000+0x14",
-              "matches": false
-            },
-            {
-              "offset": 4353,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4364,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
-              "addend": -4,
-              "destination": "0x468fe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4372,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4383,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1ERKS2_",
-              "addend": -4,
-              "reason": "no target address for symbol",
-              "candidate": "0x1755c043",
-              "matches": false
-            },
-            {
-              "offset": 4391,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4427,
-              "type": 2,
-              "symbol": "_ZN2ox4game17CTextLocalization7getTextEPKw",
-              "addend": -4,
-              "destination": "0x5ea8f0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4445,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4480,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4549,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4578,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 24,
-              "reason": "unmapped or truncated range: 0x44c74100+0x14",
-              "matches": false
-            },
-            {
-              "offset": 4594,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4613,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
-              "addend": -4,
-              "destination": "0x468fe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4629,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4640,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4651,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
-              "addend": -4,
-              "destination": "0x468fe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4667,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4672,
-              "type": 10,
-              "symbol": ".rodata.str4.4",
-              "addend": 4,
-              "reason": "unmapped or truncated range: 0x7cf13904+0x14",
-              "matches": false
-            },
-            {
-              "offset": 4680,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1IwEEPKT_",
-              "addend": -4,
-              "destination": "0x468f20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4691,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
-              "addend": -4,
-              "destination": "0x468fe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4699,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4710,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEC1ERKS2_",
-              "addend": -4,
-              "reason": "no target address for symbol",
-              "candidate": "0x24cdfdd2",
-              "matches": false
-            },
-            {
-              "offset": 4726,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4734,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4742,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4750,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4761,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4777,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4790,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4817,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4862,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4886,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5258,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5267,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 1480,
-              "reason": "unmapped or truncated range: 0xd2310060+0x48",
-              "matches": false
-            },
-            {
-              "offset": 6124,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9849,
-              "type": 2,
-              "symbol": "_ZNSt6vectorIN7harvest8settings13SLanguageFileESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-              "addend": -4,
-              "destination": "0x495420",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9904,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9952,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9960,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9971,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9986,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10001,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10049,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10064,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
+              "reason": "unmapped or truncated range: 0x178af21a+0x4c",
               "matches": false
             }
           ],
-          "references": 405,
+          "references": 413,
           "functions": [
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig18getCurrentLanguageEv",
@@ -84798,20 +84217,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
-              "address": "0x492730",
-              "size": 165,
-              "fde": true,
-              "global": true,
-              "exact": false
-            },
-            {
               "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
               "address": "0x4928a0",
               "size": 192,
               "fde": true,
               "global": true,
-              "exact": true
+              "exact": false
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
@@ -84820,6 +84231,14 @@
               "fde": true,
               "global": true,
               "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
+              "address": "0x492730",
+              "size": 165,
+              "fde": true,
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig21getCurrentLanguageTagEv",
@@ -84838,12 +84257,20 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-              "address": "0x493080",
-              "size": 1730,
-              "fde": false,
+              "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
+              "address": "0x492960",
+              "size": 1812,
+              "fde": true,
               "global": true,
               "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
+              "address": "0x493080",
+              "size": 2998,
+              "fde": true,
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig16openLanguageFileERKN2ox4core7CStringIcEE",
@@ -84851,7 +84278,7 @@
               "size": 582,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
@@ -84866,14 +84293,6 @@
               "address": "0x4943f0",
               "size": 1363,
               "fde": true,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
-              "address": "0x492960",
-              "size": 1814,
-              "fde": false,
               "global": true,
               "exact": false
             }
@@ -85010,6 +84429,31 @@
               "kind": "merged string"
             },
             {
+              "address": "0x6068c0",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6068c0",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6069d0",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6069d0",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            },
+            {
               "address": "0x622838",
               "size": 4,
               "kind": "merged string"
@@ -85022,31 +84466,6 @@
             {
               "address": "0x606ac0",
               "size": 96,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6068c0",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6068c0",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6068c0",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6069d0",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6069d0",
-              "size": 76,
               "kind": "merged string"
             },
             {
@@ -85087,266 +84506,6 @@
             {
               "address": "0x606a70",
               "size": 80,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606730",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6067e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6066e0",
-              "size": 80,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6066e0",
-              "size": 80,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606880",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x5eeef4",
-              "size": 16,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606880",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6065e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x5ef0c8",
-              "size": 4,
-              "kind": "merged constant"
-            },
-            {
-              "address": "0x6065e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606788",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x602160",
-              "size": 72,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606900",
-              "size": 208,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606730",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6067e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6066e0",
-              "size": 80,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6066e0",
-              "size": 80,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606880",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x5eeef4",
-              "size": 16,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606880",
-              "size": 64,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6065e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6020b8",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606638",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606690",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x5ef0c8",
-              "size": 4,
-              "kind": "merged constant"
-            },
-            {
-              "address": "0x6065e0",
-              "size": 84,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x606788",
-              "size": 84,
               "kind": "merged string"
             },
             {
@@ -85392,6 +84551,341 @@
             {
               "address": "0x606a70",
               "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b7c",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b7c",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b7c",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b88",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b88",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b88",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b54",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b68",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b20",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b20",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b20",
+              "size": 52,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b68",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b68",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606b68",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606730",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6067e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6066e0",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6066e0",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606880",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606880",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6065e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6065e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606788",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x602160",
+              "size": 72,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606900",
+              "size": 208,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606730",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6067e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6066e0",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6066e0",
+              "size": 80,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606880",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eeef4",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606880",
+              "size": 64,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6065e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6020b8",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606638",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606690",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6065e0",
+              "size": 84,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606788",
+              "size": 84,
               "kind": "merged string"
             }
           ]
@@ -85752,8 +85246,7 @@
         }
       ],
       "unplaced_sections": [
-        ".gcc_except_table",
-        ".text._ZN2ox4core7CStringIwEC1ERKS2_"
+        ".gcc_except_table"
       ],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
@@ -85774,7 +85267,7 @@
           "/out/HarvestFull__harvest__settings__CSystemConfig.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/settings/CSystemConfig.cpp": "c4cd71a323d2a9bcb0dce7e04612254442955e4bf779af51085f2316c58b0bd1",
+          "src/HarvestFull/harvest/settings/CSystemConfig.cpp": "bef7e5febe489a4f3120f131e2e9718aebecc31f776089183d5fec8919e0559f",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -85829,9 +85322,9 @@
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef"
         },
         "system_headers": 150,
-        "object_sha256": "41e7f20cb53d61e24069cb7f62845939bf563f28593c814548835abe49361a85"
+        "object_sha256": "5d10df6a0cf3ef75424f8943af8c7d7956692b250efea022397f3cf2da974ec2"
       },
-      "fuzzy_target_sha256": "d868d8ab3c57e0a5bbb7f98c9118c7e690c67db7f845022f522b53e7759b346e",
+      "fuzzy_target_sha256": "89ab1aa80b453fc5c5d52cfdfa383ba7e1c3736afea4f5d3ca68a9989b163869",
       "fuzzy_functions": [
         {
           "address": "0x491d00",
@@ -86008,22 +85501,22 @@
           "percent": 99.745766
         },
         {
-          "address": "0x492730",
-          "size": 165,
-          "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
-          "percent": 97.88461
-        },
-        {
           "address": "0x4928a0",
           "size": 192,
           "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
-          "percent": 99.73214
+          "percent": 98.125
         },
         {
           "address": "0x4927e0",
           "size": 192,
           "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
-          "percent": 99.10714
+          "percent": 98.125
+        },
+        {
+          "address": "0x492730",
+          "size": 165,
+          "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
+          "percent": 99.61539
         },
         {
           "address": "0x4925d0",
@@ -86038,34 +85531,34 @@
           "percent": 99.61539
         },
         {
+          "address": "0x492960",
+          "size": 1812,
+          "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
+          "percent": 99.82143
+        },
+        {
           "address": "0x493080",
           "size": 2998,
           "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-          "percent": 49.065052
+          "percent": 99.886536
         },
         {
           "address": "0x493c40",
           "size": 582,
           "symbol": "_ZN7harvest8settings13CSystemConfig16openLanguageFileERKN2ox4core7CStringIcEE",
-          "percent": 99.34375
+          "percent": 99.90625
         },
         {
           "address": "0x493e90",
           "size": 1363,
           "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-          "percent": 98.83136
+          "percent": 99.02367
         },
         {
           "address": "0x4943f0",
           "size": 1363,
           "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-          "percent": 98.93491
-        },
-        {
-          "address": "0x492960",
-          "size": 1812,
-          "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
-          "percent": 93.36384
+          "percent": 99.02367
         },
         {
           "address": "0x409c40",
@@ -88610,89 +88103,15 @@
     },
     {
       "unit": "HarvestFull/harvest/CHarvestFullMain.cpp",
-      "object_sha256": "f0688d6d008299eec40f52d20836724e66630304b2e30d5c8d4dc5bcd7d52d09",
-      "exact": false,
+      "object_sha256": "b7fcb078790f90aa89846deee4b314286eb8af2c96c0139e8aa020a7bcef0f48",
+      "exact": true,
       "sections": [
         {
           "name": ".text",
           "size": 4874,
           "placement": "symbol: _ZN7harvest16CHarvestFullMain10updateMainEf",
-          "exact": false,
+          "exact": true,
           "address": "0x4088e0",
-          "first_difference": 88,
-          "differing_bytes": 21,
-          "misplaced_symbols": [
-            {
-              "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
-              "known": "0x408ee0",
-              "placed": "0x4088f0"
-            },
-            {
-              "symbol": "_ZN7harvest21CHarvestSuperReceiver7OnEventERKN2ox5event6SEventE",
-              "known": "0x4088f0",
-              "placed": "0x408980"
-            },
-            {
-              "symbol": "_ZN7harvest21CHarvestSuperReceiverC1EPN2ox9IOxDeviceE",
-              "known": "0x408ae0",
-              "placed": "0x408b70"
-            },
-            {
-              "symbol": "_ZN7harvest21CHarvestSuperReceiverC2EPN2ox9IOxDeviceE",
-              "known": "0x408b30",
-              "placed": "0x408bc0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMain12stateFactoryEi",
-              "known": "0x408b80",
-              "placed": "0x408c10"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainD2Ev",
-              "known": "0x408c60",
-              "placed": "0x408cf0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainC1Ev",
-              "known": "0x408d20",
-              "placed": "0x408db0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainC2Ev",
-              "known": "0x408d40",
-              "placed": "0x408dd0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainD0Ev",
-              "known": "0x408d60",
-              "placed": "0x408df0"
-            },
-            {
-              "symbol": "_ZN7harvest16CHarvestFullMainD1Ev",
-              "known": "0x408e20",
-              "placed": "0x408eb0"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 88,
-              "type": 2,
-              "symbol": "_ZN7harvest18g_loadGameFilenameE",
-              "addend": 0,
-              "destination": "0x86b4e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 98,
-              "type": 2,
-              "symbol": "_ZN7harvest18g_loadGameFilenameE",
-              "addend": 4,
-              "destination": "0x86b4e0",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
           "references": 190,
           "functions": [
             {
@@ -88704,20 +88123,12 @@
               "exact": true
             },
             {
-              "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
-              "address": "0x408ee0",
-              "size": 129,
-              "fde": true,
-              "global": false,
-              "exact": false
-            },
-            {
               "symbol": "_ZN7harvest21CHarvestSuperReceiver7OnEventERKN2ox5event6SEventE",
               "address": "0x4088f0",
               "size": 487,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest21CHarvestSuperReceiverC1EPN2ox9IOxDeviceE",
@@ -88781,6 +88192,14 @@
               "size": 177,
               "fde": true,
               "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
+              "address": "0x408ee0",
+              "size": 129,
+              "fde": true,
+              "global": false,
               "exact": true
             },
             {
@@ -89117,10 +88536,8 @@
           "name": ".text._ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
           "size": 1468,
           "placement": "symbol: _ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
-          "exact": false,
+          "exact": true,
           "address": "0x409d10",
-          "first_difference": 929,
-          "differing_bytes": 2,
           "references": 30,
           "functions": [
             {
@@ -89129,7 +88546,7 @@
               "size": 1468,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             }
           ]
         },
@@ -89244,7 +88661,7 @@
           "/out/HarvestFull__harvest__CHarvestFullMain.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/CHarvestFullMain.cpp": "e2ef26de3e859282a4b58fb1c655df6bcb746862073b49675fbcdf4fa8c7f3fe",
+          "src/HarvestFull/harvest/CHarvestFullMain.cpp": "4e026a72e540f1c71fbd5b89456c02c2bab1b4b1f1cbb09b7a26add3da9265a4",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -89315,9 +88732,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 124,
-        "object_sha256": "f0688d6d008299eec40f52d20836724e66630304b2e30d5c8d4dc5bcd7d52d09"
+        "object_sha256": "b7fcb078790f90aa89846deee4b314286eb8af2c96c0139e8aa020a7bcef0f48"
       },
-      "fuzzy_target_sha256": "4c1dace75d03bab217cdc48b01bdb3b06e8c320c549da3b22ea00ebc2934a6ee",
+      "fuzzy_target_sha256": "ad24bfa1c0334c375ff854f130372ac51922907b45319f227c9a38b4fe168f59",
       "fuzzy_functions": [
         {
           "address": "0x4088e0",
@@ -89326,16 +88743,10 @@
           "percent": 100.0
         },
         {
-          "address": "0x408ee0",
-          "size": 129,
-          "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
-          "percent": 100.0
-        },
-        {
           "address": "0x4088f0",
           "size": 487,
           "symbol": "_ZN7harvest21CHarvestSuperReceiver7OnEventERKN2ox5event6SEventE",
-          "percent": 94.50407
+          "percent": 100.0
         },
         {
           "address": "0x408ae0",
@@ -89386,6 +88797,12 @@
           "percent": 100.0
         },
         {
+          "address": "0x408ee0",
+          "size": 129,
+          "symbol": "_GLOBAL__I__ZN7harvest10g_gameModeE",
+          "percent": 100.0
+        },
+        {
           "address": "0x408f70",
           "size": 3194,
           "symbol": "_ZN7harvest16CHarvestFullMain4initEv",
@@ -89431,7 +88848,7 @@
           "address": "0x409d10",
           "size": 1468,
           "symbol": "_ZNSt6vectorIN2ox4core7CStringIwEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
-          "percent": 99.97409
+          "percent": 100.0
         }
       ]
     },
@@ -146010,7 +145427,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "bbbb820d74850f1cf487fac02aa3d094611210ad4c9874ba522bab35d7dd2348"
+    "report_sha256": "f9be0c74999393ffbf40ea5ffae59434ce3e0647bb049fd560fd08bddac44595"
   },
   "link": {
     "status": "unavailable",
