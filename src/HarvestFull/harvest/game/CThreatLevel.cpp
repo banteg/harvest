@@ -365,24 +365,24 @@ void CThreatLevelLogic::spawnAliensInArea(const ox::core::CRect<float>& area1,
     switch (gp_world->getPlanet())
     {
     case 0:
-        if (attack & 1)
+        if (attack % 2 == 0)
         {
-            aliens[5] = ox::core::min_(ox::core::max_((count - 7) / 2, 0), 15);
-            aliens[3] = ox::core::min_(ox::core::max_((count - 31) / 4, 0), 300);
-            aliens[1] = ox::core::min_(ox::core::max_((count - 43) / 2, 0), 1000);
-            aliens[8] = ox::core::min_(ox::core::max_((count - 54) / 8, 0), 1000);
+            aliens[5] = ox::core::clamp((count - 13) / 5, 0, 15);
+            aliens[3] = ox::core::clamp((count - 38) / 4, 0, 100);
+            aliens[1] = ox::core::clamp((count - 43) / 4, 0, 1000);
+            aliens[8] = ox::core::clamp((count - 70) / 10, 0, 100);
+
+            if (count > 100)
+                aliens[5] += ox::core::clamp((count - 100) / 2, 0, 100);
+            if (count > 150)
+                aliens[2] += ox::core::clamp(count - 140, 0, 1000);
         }
         else
         {
-            aliens[5] = ox::core::min_(ox::core::max_((count - 13) / 5, 0), 15);
-            aliens[3] = ox::core::min_(ox::core::max_((count - 38) / 4, 0), 100);
-            aliens[1] = ox::core::min_(ox::core::max_((count - 43) / 4, 0), 1000);
-            aliens[8] = ox::core::min_(ox::core::max_((count - 70) / 10, 0), 100);
-
-            if (count > 100)
-                aliens[5] += ox::core::min_((count - 100) / 2, 100);
-            if (count > 150)
-                aliens[2] += ox::core::min_(count - 140, 1000);
+            aliens[5] = ox::core::clamp((count - 7) / 2, 0, 15);
+            aliens[3] = ox::core::clamp((count - 31) / 4, 0, 300);
+            aliens[1] = ox::core::clamp((count - 43) / 2, 0, 1000);
+            aliens[8] = ox::core::clamp((count - 54) / 8, 0, 1000);
         }
 
         switch (count)
@@ -402,15 +402,15 @@ void CThreatLevelLogic::spawnAliensInArea(const ox::core::CRect<float>& area1,
     case 1:
         if (attack & 1)
         {
-            aliens[4] = ox::core::min_(ox::core::max_((count - 13) / 2, 0), 15);
-            aliens[3] = ox::core::min_(ox::core::max_((count - 31) / 4, 0), 150);
-            aliens[1] = ox::core::min_(ox::core::max_((count - 43) / 2, 0), 100);
+            aliens[4] = ox::core::clamp((count - 13) / 2, 0, 15);
+            aliens[3] = ox::core::clamp((count - 31) / 4, 0, 150);
+            aliens[1] = ox::core::clamp((count - 43) / 2, 0, 100);
         }
         else
         {
-            aliens[4] = ox::core::min_(ox::core::max_((count - 13) / 5, 0), 150);
-            aliens[3] = ox::core::min_(ox::core::max_((count - 38) / 4, 0), 100);
-            aliens[1] = ox::core::min_(ox::core::max_((count - 43) / 4, 0), 1000);
+            aliens[4] = ox::core::clamp((count - 13) / 5, 0, 150);
+            aliens[3] = ox::core::clamp((count - 38) / 4, 0, 100);
+            aliens[1] = ox::core::clamp((count - 43) / 4, 0, 1000);
         }
 
         if (count % 11 == 0 && count > 20)
@@ -418,20 +418,15 @@ void CThreatLevelLogic::spawnAliensInArea(const ox::core::CRect<float>& area1,
         break;
 
     case 2:
-        aliens[8] = (count & 1) ? ox::core::min_(ox::core::max_((count - 25) / 8, 0), 500) : 0;
-        aliens[1] = ox::core::min_(ox::core::max_((count - 20) / 3, 0), 100);
-        aliens[4] = ox::core::min_(ox::core::max_((count - 38) / 4, 0), 1000);
+        aliens[8] = (count & 1) ? ox::core::clamp((count - 25) / 8, 0, 500) : 0;
+        aliens[1] = ox::core::clamp((count - 20) / 3, 0, 100);
+        aliens[4] = ox::core::clamp((count - 38) / 4, 0, 1000);
         aliens[6] = (count > 50 && count % 3 == 0) ? count / 25 : 0;
 
-        switch (count)
-        {
-        case 13:
+        if (count == 13)
             aliens[8] = 1;
-            break;
-        case 22:
+        else if (count == 22)
             aliens[4] = 2;
-            break;
-        }
         break;
     }
 
