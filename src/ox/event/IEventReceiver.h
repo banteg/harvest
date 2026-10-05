@@ -19,6 +19,8 @@ enum EGUI_EVENT_TYPE
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
+    //! A list box item was selected again by a double click.
+    EGET_LISTBOX_SELECTED_AGAIN = 12,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! An element that reports drawing has been drawn.

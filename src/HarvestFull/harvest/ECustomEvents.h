@@ -13,10 +13,14 @@ enum ECUSTOM_EVENT
 {
     //! The in-game menu was closed to continue the game.
     ECE_CONTINUE_GAME = 4,
+    //! Save the game to the file chosen in the save screen.
+    ECE_SAVE_GAME = 5,
     //! The first attack of a threat level has been spawned.
     ECE_ATTACK_STARTED = 7,
     //! Leave the game for the new game selection.
     ECE_NEW_GAME = 11,
+    //! Start a game, loading harvest::g_loadGameFilename when it is set.
+    ECE_START_GAME = 12,
     //! Leave the game.
     ECE_EXIT_GAME = 14,
     ECE_SHOW_SAVE_SCREEN = 17,
