@@ -167,23 +167,16 @@ void CSpriteAnimationImage::draw3d(const ox::core::CVector3d<float>& position, f
     material.Lighting = false;
     material.BackfaceCulling = false;
 
-    const ox::core::CDimension2d<int>& textureSize = Texture->getSize();
-    if (mirrored)
-    {
-        vertices[0].TCoords.X = (float)SourceRect.LowerRightCorner.X / textureSize.Width;
-        vertices[1].TCoords.X = (float)SourceRect.UpperLeftCorner.X / textureSize.Width;
-    }
-    else
-    {
-        vertices[0].TCoords.X = (float)SourceRect.UpperLeftCorner.X / textureSize.Width;
-        vertices[1].TCoords.X = (float)SourceRect.LowerRightCorner.X / textureSize.Width;
-    }
-    vertices[0].TCoords.Y = (float)SourceRect.LowerRightCorner.Y / textureSize.Height;
-    vertices[1].TCoords.Y = vertices[0].TCoords.Y;
-    vertices[2].TCoords.X = vertices[1].TCoords.X;
-    vertices[2].TCoords.Y = (float)SourceRect.UpperLeftCorner.Y / textureSize.Height;
-    vertices[3].TCoords.X = vertices[0].TCoords.X;
-    vertices[3].TCoords.Y = vertices[2].TCoords.Y;
+    ox::core::CDimension2d<int> textureSize = Texture->getSize();
+    vertices[0].TCoords = ox::core::CVector2d<float>(
+        (float)(mirrored ? SourceRect.LowerRightCorner.X : SourceRect.UpperLeftCorner.X) / textureSize.Width,
+        (float)SourceRect.LowerRightCorner.Y / textureSize.Height);
+    vertices[1].TCoords = ox::core::CVector2d<float>(
+        (float)(mirrored ? SourceRect.UpperLeftCorner.X : SourceRect.LowerRightCorner.X) / textureSize.Width,
+        (float)SourceRect.LowerRightCorner.Y / textureSize.Height);
+    vertices[2].TCoords = ox::core::CVector2d<float>(vertices[1].TCoords.X,
+        (float)SourceRect.UpperLeftCorner.Y / textureSize.Height);
+    vertices[3].TCoords = ox::core::CVector2d<float>(vertices[0].TCoords.X, vertices[2].TCoords.Y);
     vertices[0].Color = color;
     vertices[1].Color = color;
     vertices[2].Color = color;
@@ -191,7 +184,9 @@ void CSpriteAnimationImage::draw3d(const ox::core::CVector3d<float>& position, f
 
     float c = cos(rotation) * scale;
     float s = sin(rotation) * scale;
-    float x = mirrored ? 1 - Offset.X - SourceRect.getWidth() : Offset.X;
+    float x = Offset.X;
+    if (mirrored)
+        x = 1 - (Offset.X + SourceRect.getWidth());
     float y = Offset.Y;
     float right = SourceRect.getWidth() + x;
     float bottom = SourceRect.getHeight() + y;
