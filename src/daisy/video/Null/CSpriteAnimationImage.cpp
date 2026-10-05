@@ -86,26 +86,34 @@ void CSpriteAnimationImage::drawMultipleColors(const ox::core::CAffineRect<float
         (rect.LowerLeftCorner.Y + rect.LowerRightCorner.Y) * 0.5f);
     int halfWidth = SourceRect.getWidth() >> 1;
     int halfHeight = SourceRect.getHeight() >> 1;
+    const ox::core::CPosition2d<int>& from = SourceRect.UpperLeftCorner;
+    const ox::core::CPosition2d<int>& to = SourceRect.LowerRightCorner;
 
-    ox::video::SColorArray quadColors(colors.Colors[0], colors.Colors[3], colors.Colors[4], colors.Colors[1]);
-    ox::core::CRect<int> source(SourceRect.UpperLeftCorner.X, SourceRect.UpperLeftCorner.Y,
-        SourceRect.UpperLeftCorner.X + halfWidth, SourceRect.UpperLeftCorner.Y + halfHeight);
-    Driver->draw2DImage(Texture, rect.UpperLeftCorner, top, left, center, source, &quadColors, true);
-
-    quadColors = ox::video::SColorArray(colors.Colors[1], colors.Colors[4], colors.Colors[5], colors.Colors[2]);
-    source = ox::core::CRect<int>(SourceRect.UpperLeftCorner.X + halfWidth, SourceRect.UpperLeftCorner.Y,
-        SourceRect.LowerRightCorner.X, SourceRect.UpperLeftCorner.Y + halfHeight);
-    Driver->draw2DImage(Texture, top, rect.UpperRightCorner, center, right, source, &quadColors, true);
-
-    quadColors = ox::video::SColorArray(colors.Colors[3], colors.Colors[6], colors.Colors[7], colors.Colors[4]);
-    source = ox::core::CRect<int>(SourceRect.UpperLeftCorner.X, SourceRect.UpperLeftCorner.Y + halfHeight,
-        SourceRect.UpperLeftCorner.X + halfWidth, SourceRect.LowerRightCorner.Y);
-    Driver->draw2DImage(Texture, left, center, rect.LowerLeftCorner, bottom, source, &quadColors, true);
-
-    quadColors = ox::video::SColorArray(colors.Colors[4], colors.Colors[7], colors.Colors[8], colors.Colors[5]);
-    source = ox::core::CRect<int>(SourceRect.UpperLeftCorner.X + halfWidth, SourceRect.UpperLeftCorner.Y + halfHeight,
-        SourceRect.LowerRightCorner.X, SourceRect.LowerRightCorner.Y);
-    Driver->draw2DImage(Texture, center, right, bottom, rect.LowerRightCorner, source, &quadColors, true);
+    ox::video::SColorArray quadColors;
+    quadColors.Colors[0] = colors.Colors[0];
+    quadColors.Colors[3] = colors.Colors[1];
+    quadColors.Colors[1] = colors.Colors[3];
+    quadColors.Colors[2] = colors.Colors[4];
+    Driver->draw2DImage(Texture, rect.UpperLeftCorner, top, left, center,
+        ox::core::CRect<int>(from.X, from.Y, from.X + halfWidth, from.Y + halfHeight), &quadColors, true);
+    quadColors.Colors[0] = colors.Colors[1];
+    quadColors.Colors[3] = colors.Colors[2];
+    quadColors.Colors[1] = colors.Colors[4];
+    quadColors.Colors[2] = colors.Colors[5];
+    Driver->draw2DImage(Texture, top, rect.UpperRightCorner, center, right,
+        ox::core::CRect<int>(from.X + halfWidth, from.Y, to.X, from.Y + halfHeight), &quadColors, true);
+    quadColors.Colors[0] = colors.Colors[3];
+    quadColors.Colors[3] = colors.Colors[4];
+    quadColors.Colors[1] = colors.Colors[6];
+    quadColors.Colors[2] = colors.Colors[7];
+    Driver->draw2DImage(Texture, left, center, rect.LowerLeftCorner, bottom,
+        ox::core::CRect<int>(from.X, from.Y + halfHeight, from.X + halfWidth, to.Y), &quadColors, true);
+    quadColors.Colors[0] = colors.Colors[4];
+    quadColors.Colors[3] = colors.Colors[5];
+    quadColors.Colors[1] = colors.Colors[7];
+    quadColors.Colors[2] = colors.Colors[8];
+    Driver->draw2DImage(Texture, center, right, bottom, rect.LowerRightCorner,
+        ox::core::CRect<int>(from.X + halfWidth, from.Y + halfHeight, to.X, to.Y), &quadColors, true);
 }
 
 void CSpriteAnimationImage::drawScaled(const ox::core::CPosition2d<float>& position, float scale,
@@ -130,10 +138,10 @@ void CSpriteAnimationImage::drawRotated(const ox::core::CPosition2d<float>& posi
     float s = sin(rotation) * scale;
     float x = Offset.X;
     float y = Offset.Y;
-    float right = Offset.X + SourceRect.getWidth();
-    float bottom = Offset.Y + SourceRect.getHeight();
     ox::core::CPosition2d<float> upperLeft(x * c - y * s + position.X, y * c + x * s + position.Y);
+    float right = Offset.X + SourceRect.getWidth();
     ox::core::CPosition2d<float> upperRight(right * c - y * s + position.X, y * c + right * s + position.Y);
+    float bottom = Offset.Y + SourceRect.getHeight();
     ox::core::CPosition2d<float> lowerLeft(x * c - bottom * s + position.X, x * s + bottom * c + position.Y);
     ox::core::CPosition2d<float> lowerRight(right * c - bottom * s + position.X, bottom * c + right * s + position.Y);
     ox::video::SColorArray colors(color);

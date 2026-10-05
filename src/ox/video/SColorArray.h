@@ -21,12 +21,12 @@ struct SColorArray
         Colors[3] = color;
     }
 
-    SColorArray(SColor upperLeft, SColor lowerLeft, SColor lowerRight, SColor upperRight)
+    SColorArray(SColor upperLeft, SColor upperRight, SColor lowerLeft, SColor lowerRight)
     {
         Colors[0] = upperLeft;
+        Colors[3] = upperRight;
         Colors[1] = lowerLeft;
         Colors[2] = lowerRight;
-        Colors[3] = upperRight;
     }
 
     SColor Colors[4];
