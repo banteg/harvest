@@ -984,6 +984,8 @@ void CPlayState::realignGui()
     BottomBar->setRelativePosition(
         ox::core::CRect<int>(0, ScreenSize.Height - bottomLeftSize.Height, ScreenSize.Width, ScreenSize.Height));
     ox::core::CRect<int> bar = BottomBar->getAbsolutePosition();
+    int barWidth = bar.getWidth();
+    int barHeight = bar.getHeight();
     BarLeftArea = ox::core::CRect<int>(bar.UpperLeftCorner, bottomLeftSize);
     ox::core::CPosition2d<int> rightCorner(bar.LowerRightCorner.X - bottomRightSize.Width,
         bar.LowerRightCorner.Y - bottomRightSize.Height);
@@ -991,8 +993,6 @@ void CPlayState::realignGui()
     BarCenterArea = ox::core::CRect<int>(BarLeftArea.LowerRightCorner.X, BarLeftArea.UpperLeftCorner.Y,
         BarRightArea.UpperLeftCorner.X, BarLeftArea.LowerRightCorner.Y);
 
-    int barWidth = bar.getWidth();
-    int barHeight = bar.getHeight();
     GuiElements[GUI_ID_PRIORITIES]->moveTo(ox::core::CPosition2d<int>(8, barHeight - 49));
     GuiElements[GUI_ID_SPEED_PAUSE]->moveTo(ox::core::CPosition2d<int>(8, barHeight - 23));
     GuiElements[GUI_ID_SPEED_SLOW]->moveTo(ox::core::CPosition2d<int>(46, barHeight - 23));
