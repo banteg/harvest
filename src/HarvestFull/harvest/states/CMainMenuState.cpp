@@ -600,14 +600,14 @@ int CMainMenuState::updateState(float time)
         for (int i = 0; i < PLANET_COUNT; ++i)
         {
             ox::core::CVector3d<float> planetPosition = PlanetNodes[i * 2]->getAbsolutePosition();
-            float distance = line.getClosestPoint(planetPosition).getDistanceFromSQ(planetPosition);
+            double distance = planetPosition.getDistanceFromSQ(line.getClosestPoint(planetPosition));
             if (distance < 121.0)
             {
-                float offset = sqrt(distance) * 10.0;
+                double offset = sqrt(distance) * 10.0;
                 if (planetPosition.Y > target.Y)
-                    target.Y = CameraPosition.Y - offset;
+                    target.Y = CameraPosition.Y - (float)offset;
                 else
-                    target.Y = CameraPosition.Y + offset;
+                    target.Y = CameraPosition.Y + (float)offset;
             }
         }
         ox::algo::C3dRegulator::fakeSpeedRegulation(CameraSpeed, CameraPosition, target, 20.0f, 0.5f, frameDelta);
@@ -619,15 +619,13 @@ int CMainMenuState::updateState(float time)
         if (!Sun->getAutomaticCulling())
         {
             // Hide the sun behind the planets.
-            ox::core::CVector3d<float> sunPosition = Sun->getAbsolutePosition();
-            ox::core::CVector3d<float> cameraPosition = Camera->getAbsolutePosition();
+            ox::core::CLine3d<float> sunLine(Camera->getAbsolutePosition(), Sun->getAbsolutePosition());
             Sun->setVisible(true);
             Sun->setSize(SUN_OUTER_FLARE_SIZE);
-            ox::core::CLine3d<float> sunLine(cameraPosition, sunPosition);
             for (int i = 0; i < PLANET_COUNT; ++i)
             {
                 ox::core::CVector3d<float> planetPosition = PlanetNodes[i * 2]->getAbsolutePosition();
-                float distance = sunLine.getClosestPoint(planetPosition).getDistanceFromSQ(planetPosition);
+                double distance = planetPosition.getDistanceFromSQ(sunLine.getClosestPoint(planetPosition));
                 if (distance < 121.0)
                 {
                     if (distance < 100.0)
