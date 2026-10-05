@@ -3877,8 +3877,8 @@ void CPlayState::addInfoLine(game::SInfoLineMessage* message, bool sound)
 {
     if (InfoLines)
     {
-        InfoLines->addInfoLine(message->Name.c_str(), message->Text.c_str(), sound ? MenuPackage : IngamePackage,
-            message->Portrait.c_str());
+        ox::video::ISpritePackage* package = sound ? MenuPackage : IngamePackage;
+        InfoLines->addInfoLine(message->Name.c_str(), message->Text.c_str(), package, message->Portrait.c_str());
         if (AudioDriver)
         {
             if (message->Sound.size() > 0)
