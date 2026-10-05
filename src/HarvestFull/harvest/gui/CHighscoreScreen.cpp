@@ -544,8 +544,8 @@ void CHighscoreScreen::setVisible(bool visible)
 
             int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].X) / 2;
             ListFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(margin,
-                margin + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + 5, SpriteSizes[SPRITE_ALL_BACKGROUND].X + margin,
-                SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + 5), Background);
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y, margin + SpriteSizes[SPRITE_ALL_BACKGROUND].X,
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y), Background);
             ListFrame->setReportOnDraw(1);
             ListFrame->setID(ID_LIST_FRAME);
             ListFrame->LayoutFlags = "br center";
@@ -555,19 +555,20 @@ void CHighscoreScreen::setVisible(bool visible)
             int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].X + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].X;
             int summaryLeft = (800 - summaryWidth) / 2;
             SummaryFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(summaryLeft, summaryTop,
-                summaryLeft + summaryWidth, SpriteSizes[SPRITE_ALL_BACKGROUND].Y + summaryTop), Background);
+                summaryLeft + summaryWidth, summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Y), Background);
             SummaryFrame->setReportOnDraw(1);
             SummaryFrame->setID(ID_SUMMARY_FRAME);
             SummaryFrame->LayoutFlags = "br center";
             StatusText = 0;
 
+            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Y + SpriteSizes[SPRITE_ALL_BACKGROUND].Y + margin * 2 + 5;
             ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background, ID_BACK,
                 settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
             back->LayoutFlags = "br";
             back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
             back->centerOnParent();
             back->moveTo(ox::core::CPosition2d<int>(back->getRelativePosition().UpperLeftCorner.X,
-                SpriteSizes[SPRITE_ALL_BACKGROUND].Y + SpriteSizes[SPRITE_TOP_BACKGROUND].Y + margin * 2 + 5));
+                backY));
         }
         Background->centerOnParent();
         Window->setVisible(true);
