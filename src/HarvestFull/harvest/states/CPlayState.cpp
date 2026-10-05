@@ -4403,8 +4403,8 @@ void CPlayState::displayWelcomeMessage()
             game::gp_world->getPlanet());
         if (time)
         {
-            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeTimeScores",
-                ox::core::CStringFunctions::millisecondsToWide(time * 0.001f, true).c_str());
+            ox::core::CString<wchar_t> record = ox::core::CStringFunctions::millisecondsToWide(time * 0.001f, true);
+            message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:welcomeTimeScores", record.c_str());
             message.Sound = "welcomeLevelScores.ogg";
         }
         else
