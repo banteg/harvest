@@ -234,11 +234,9 @@ ox::video::ITexture* CSpritePackage::readTexture(int index)
     int* pixels = (int*)image->lock();
     for (int y = 0; y < TextureSize; ++y)
     {
+        int row = y * TextureSize;
         for (int x = 0; x < TextureSize; ++x)
-        {
-            int i = y * TextureSize + x;
-            pixels[i] = alpha[i] << 24 | red[i] << 16 | green[i] << 8 | blue[i];
-        }
+            pixels[row + x] = alpha[row + x] << 24 | red[row + x] << 16 | green[row + x] << 8 | blue[row + x];
     }
     image->unlock();
 
