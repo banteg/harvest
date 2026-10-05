@@ -10,7 +10,9 @@ namespace ox {
 
 enum EKEY_CODE
 {
+    KEY_RETURN = 0x0D,
     KEY_ESCAPE = 0x1B,
+    KEY_SPACE = 0x20,
     KEY_KEY_T = 0x54
 };
 

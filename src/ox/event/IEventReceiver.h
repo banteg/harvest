@@ -48,7 +48,14 @@ enum EEVENT_TYPE
 //! Mouse input events, in SEvent::MouseInput.Event.
 enum EMOUSE_INPUT_EVENT
 {
-    EMIE_LMOUSE_LEFT_UP = 3
+    EMIE_LMOUSE_PRESSED_DOWN = 0,
+    EMIE_RMOUSE_PRESSED_DOWN,
+    EMIE_MMOUSE_PRESSED_DOWN,
+    EMIE_LMOUSE_LEFT_UP,
+    EMIE_RMOUSE_LEFT_UP,
+    EMIE_MMOUSE_LEFT_UP,
+    EMIE_MOUSE_MOVED,
+    EMIE_MOUSE_WHEEL
 };
 
 //! Keyboard input events, in SEvent::KeyInput.Event.

@@ -24,7 +24,9 @@ enum ECUSTOM_EVENT
     ECE_SHOW_SETTINGS_SCREEN = 19,
     ECE_SHOW_AWARDS_SCREEN = 20,
     //! A tutorial hint of the normal game mode, numbered by UserData2.
-    ECE_TUTORIAL_HINT = 22
+    ECE_TUTORIAL_HINT = 22,
+    //! Return or space was pressed on the story screen.
+    ECE_SKIP_STORY = 25
 };
 
 //! Sends a game event to the subscribers right away.
