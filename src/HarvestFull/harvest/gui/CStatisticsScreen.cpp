@@ -300,7 +300,7 @@ void CStatisticsScreen::setVisible(bool visible)
             ox::gui::IGUILayout* layout = (ox::gui::IGUILayout*)GUIEnvironment->addLayoutGroup(
                 ox::core::CRect<int>(0, 0, 800, 600), Window);
             ox::core::CRect<int> rect(0, 0, SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].X,
-                SpriteSizes[SPRITE_TOP].Y + SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Y + SpriteSizes[SPRITE_BOTTOM].Y);
+                SpriteSizes[SPRITE_DIAGRAM_BACKGROUND].Y + SpriteSizes[SPRITE_TOP].Y + SpriteSizes[SPRITE_BOTTOM].Y);
             Frame = GUIEnvironment->addLayoutGroup(rect, layout);
             Frame->setReportOnDraw(true);
             Frame->setID(ID_WINDOW);
@@ -371,9 +371,13 @@ void CStatisticsScreen::setVisible(bool visible)
                         logs[i].Value));
                     break;
                 case 1:
+                {
+                    ox::core::CString<wchar_t> award =
+                        settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_NAMES[logs[i].Value]);
                     addInfoString(settings::gp_systemConfig->getLocalizedText(L"statistics:logAward", time.c_str(),
-                        settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_NAMES[logs[i].Value]).c_str()));
+                        award.c_str()));
                     break;
+                }
                 }
             }
             for (int i = 1; i < 7; ++i)
