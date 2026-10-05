@@ -3144,8 +3144,8 @@ address	size	symbol	evidence
 0x5ec740	229	_ZN2ox3net22CHTTPConnectionHandlerD0Ev	mac-vtable:_ZTVN2ox3net22CHTTPConnectionHandlerE:4
 0x5ec830	221	_ZN2ox3net22CHTTPConnectionHandlerD1Ev	mac-vtable:_ZTVN2ox3net22CHTTPConnectionHandlerE:3
 0x5ec910	221	_ZN2ox3net22CHTTPConnectionHandlerD2Ev	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
-0x5ec9f0	391	_ZN2ox3net22CHTTPConnectionHandlerC2Ev	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
-0x5ecb80	391	_ZN2ox3net22CHTTPConnectionHandlerC1Ev	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
+0x5ec9f0	391	_ZN2ox3net22CHTTPConnectionHandlerC1Ev	native-calls:new-CHTTPConnectionHandler-in-CHighscoreScreen-and-0x487950
+0x5ecb80	391	_ZN2ox3net22CHTTPConnectionHandlerC2Ev	manual:FDE layout of the CHTTPConnectionHandler object (the twin of C1)
 0x5ecd10	712	_ZN2ox3net22CHTTPConnectionHandler10joinThreadEPv	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
 0x5ed120	954	_ZN2ox3net22CHTTPConnectionHandler5doGetERKNS_4core7CStringIcEERKNS3_IwEEj	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
 0x5ed4e0	695	_ZN2ox3net22CHTTPConnectionHandler16getContentLengthERNS_4core7CStringIcEE	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)

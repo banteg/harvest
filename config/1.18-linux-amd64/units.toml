@@ -254,3 +254,5 @@
 ["HarvestFull/harvest/gui/CHighscoreScreen.cpp"]
 # iostream initializer, the world grid offset, STATUS_LABEL_AREA and the function-local delimiters.
 ".bss" = 0x86b9b0
+# OnEvent's jump tables and the sprite and localization key tables.
+".rodata" = 0x5ff7e0

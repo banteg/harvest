@@ -450,123 +450,6 @@ void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
     SummaryLoaded[SummaryCategory] = true;
 }
 
-void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
-{
-    static ox::core::CString<char> rowDelimiter = "<br>";
-    static ox::core::CString<char> colDelimiter = "|";
-
-    ox::TArray<ox::core::CString<char> > rows;
-    ox::core::splitString(rows, page, rowDelimiter);
-    ListFrame->removeAllChildren();
-    StatusText = 0;
-    for (int i = 0; i < 20; ++i)
-        for (int j = 0; j < 7; ++j)
-            Cells[i][j] = 0;
-
-    const ox::core::CRect<int> TEXT_AREA_COORDS[7] =
-    {
-        ox::core::CRect<int>(16, 63, 54, 77),
-        ox::core::CRect<int>(58, 63, 202, 77),
-        ox::core::CRect<int>(206, 63, 276, 77),
-        ox::core::CRect<int>(280, 63, 350, 77),
-        ox::core::CRect<int>(354, 63, 443, 77),
-        ox::core::CRect<int>(447, 63, 591, 77),
-        ox::core::CRect<int>(595, 63, 713, 77)
-    };
-    ox::video::ISpritePackage* package =
-        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true);
-
-    for (int i = 0; i < (int)rows.size() && i < 20; ++i)
-    {
-        int rowOffset = i * 15;
-        ox::TArray<ox::core::CString<char> > columns;
-        ox::core::splitString(columns, rows[i], colDelimiter);
-        if (columns.size() != 7)
-            continue;
-
-        ox::video::SColor color = 0xffffffff;
-        if (i == 0 && strtol(columns[0].c_str(), 0, 10) == 1)
-            color = 0xffffffc0;
-
-        for (int j = 0; j < 7; ++j)
-        {
-            ox::core::CString<wchar_t> text = columns[j].c_str();
-            if (j == 1 || j == 5)
-                text = createUCS2FromBase64UTF2(columns[j]);
-            else if (j == 6)
-                text = parseRelativeTimeFormat(columns[j]);
-
-            if (j == 4)
-            {
-                int mode = strtol(columns[j].c_str(), 0, 10);
-                int sprite = SPRITE_MODE_ICON + mode;
-                if ((unsigned int)mode > 4)
-                    sprite = SPRITE_MODE_ICON;
-                const ox::core::CPosition2d<int>& size = SpriteSizes[sprite];
-                int left = (TEXT_AREA_COORDS[j].getWidth() - size.X) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.X;
-                int top = (TEXT_AREA_COORDS[j].getHeight() - size.Y) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.Y +
-                    rowOffset;
-                GUIEnvironment->addImage(ox::core::CRect<int>(left, top, left + size.X, top + size.Y), ListFrame, -1,
-                    0)->setAnimation(HIGHSCORE_SPRITE_NAMES[sprite], package);
-            }
-            else
-            {
-                ox::gui::IGUIStaticText* cell = GUIEnvironment->addStaticText(text.c_str(),
-                    ox::core::CRect<int>(TEXT_AREA_COORDS[j].UpperLeftCorner.X,
-                        TEXT_AREA_COORDS[j].UpperLeftCorner.Y + rowOffset, TEXT_AREA_COORDS[j].LowerRightCorner.X,
-                        TEXT_AREA_COORDS[j].LowerRightCorner.Y + rowOffset),
-                    false, false, ListFrame, -1, L"");
-                cell->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
-                cell->setOverrideColor(color);
-                Cells[i][j] = cell;
-            }
-        }
-    }
-
-    const char* BUTTON_SPRITE_NAMES[10] = {"BtnOrdinal", "BtnName", "BtnScore", "BtnScore", "BtnPlanets1",
-        "BtnName", "BtnUpdate", "BtnScoreModes", "BtnPageUp", "BtnPageDown"};
-    const wchar_t* BUTTON_CAPTIONS[10] = {L"Rank", L"Name", L"Score", L"Credits", 0, L"Group", L"Last Update", 0,
-        0, 0};
-    const int BUTTON_X[10] = {16, 58, 206, 280, 354, 447, 595, 16, 207, 250};
-    const int BUTTON_Y[10] = {39, 39, 39, 39, 39, 39, 39, 389, 389, 389};
-    const char* PLANET_BTN_SPRITES[5] = {"BtnPlanets1", "BtnPlanets2", "BtnPlanets3", "BtnPlanetsEither",
-        "BtnPlanetsTotal"};
-    for (int i = 0; i < 10; ++i)
-    {
-        const char* sprite = BUTTON_SPRITE_NAMES[i];
-        if (i == 4)
-            sprite = PLANET_BTN_SPRITES[Planet];
-        ox::gui::IGUIButton* button = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 10, 10), ListFrame,
-            ID_LIST_BUTTON + i, BUTTON_CAPTIONS[i]);
-        button->setAnimations(package, sprite, true);
-        button->moveTo(ox::core::CPosition2d<int>(BUTTON_X[i], BUTTON_Y[i]));
-        if (i == 7)
-            button->setReportOnDraw(2);
-    }
-
-    ox::core::CString<wchar_t> mode = settings::gp_systemConfig->getLocalizedText(GAME_MODE_NAMES[GameMode]);
-    ox::core::CString<wchar_t> planet = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_PLANET_NAMES[Planet]);
-    ox::core::CString<wchar_t> sort = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_SORT_MODES[SortMode]);
-    if (NameFilter.size() > 0)
-    {
-        if (GroupFilter.size() > 0)
-            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoBothFilter",
-                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str(), GroupFilter.c_str()).c_str());
-        else
-            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNameFilter",
-                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str()).c_str());
-    }
-    else if (GroupFilter.size() > 0)
-        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoGroupFilter",
-            mode.c_str(), planet.c_str(), sort.c_str(), GroupFilter.c_str()).c_str());
-    else
-        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNormal",
-            mode.c_str(), planet.c_str(), sort.c_str()).c_str());
-
-    SummaryFrame->setVisible(false);
-    ListFrame->setVisible(true);
-    SelectedType = ID_TYPE_BUTTON + 3;
-}
 
 void CHighscoreScreen::update(float frameDelta)
 {
@@ -702,6 +585,124 @@ void CHighscoreScreen::setVisible(bool visible)
     Background->centerOnParent();
     Window->setVisible(true);
     loadSummaryPage(0);
+}
+
+void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
+{
+    static ox::core::CString<char> rowDelimiter = "<br>";
+    static ox::core::CString<char> colDelimiter = "|";
+
+    ox::TArray<ox::core::CString<char> > rows;
+    ox::core::splitString(rows, page, rowDelimiter);
+    ListFrame->removeAllChildren();
+    StatusText = 0;
+    for (int i = 0; i < 20; ++i)
+        for (int j = 0; j < 7; ++j)
+            Cells[i][j] = 0;
+
+    const ox::core::CRect<int> TEXT_AREA_COORDS[7] =
+    {
+        ox::core::CRect<int>(16, 63, 54, 77),
+        ox::core::CRect<int>(58, 63, 202, 77),
+        ox::core::CRect<int>(206, 63, 276, 77),
+        ox::core::CRect<int>(280, 63, 350, 77),
+        ox::core::CRect<int>(354, 63, 443, 77),
+        ox::core::CRect<int>(447, 63, 591, 77),
+        ox::core::CRect<int>(595, 63, 713, 77)
+    };
+    ox::video::ISpritePackage* package =
+        Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat", true);
+
+    for (int i = 0; i < (int)rows.size() && i < 20; ++i)
+    {
+        int rowOffset = i * 15;
+        ox::TArray<ox::core::CString<char> > columns;
+        ox::core::splitString(columns, rows[i], colDelimiter);
+        if (columns.size() != 7)
+            continue;
+
+        ox::video::SColor color = 0xffffffff;
+        if (i == 0 && strtol(columns[0].c_str(), 0, 10) == 1)
+            color = 0xffffffc0;
+
+        for (int j = 0; j < 7; ++j)
+        {
+            ox::core::CString<wchar_t> text = columns[j].c_str();
+            if (j == 1 || j == 5)
+                text = createUCS2FromBase64UTF2(columns[j]);
+            else if (j == 6)
+                text = parseRelativeTimeFormat(columns[j]);
+
+            if (j == 4)
+            {
+                int mode = strtol(columns[j].c_str(), 0, 10);
+                int sprite = SPRITE_MODE_ICON + mode;
+                if ((unsigned int)mode > 4)
+                    sprite = SPRITE_MODE_ICON;
+                const ox::core::CPosition2d<int>& size = SpriteSizes[sprite];
+                int left = (TEXT_AREA_COORDS[j].getWidth() - size.X) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.X;
+                int top = (TEXT_AREA_COORDS[j].getHeight() - size.Y) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.Y +
+                    rowOffset;
+                GUIEnvironment->addImage(ox::core::CRect<int>(left, top, left + size.X, top + size.Y), ListFrame, -1,
+                    0)->setAnimation(HIGHSCORE_SPRITE_NAMES[sprite], package);
+            }
+            else
+            {
+                ox::gui::IGUIStaticText* cell = GUIEnvironment->addStaticText(text.c_str(),
+                    ox::core::CRect<int>(TEXT_AREA_COORDS[j].UpperLeftCorner.X,
+                        TEXT_AREA_COORDS[j].UpperLeftCorner.Y + rowOffset, TEXT_AREA_COORDS[j].LowerRightCorner.X,
+                        TEXT_AREA_COORDS[j].LowerRightCorner.Y + rowOffset),
+                    false, false, ListFrame, -1, L"");
+                cell->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
+                cell->setOverrideColor(color);
+                Cells[i][j] = cell;
+            }
+        }
+    }
+
+    const char* BUTTON_SPRITE_NAMES[10] = {"BtnOrdinal", "BtnName", "BtnScore", "BtnScore", "BtnPlanets1",
+        "BtnName", "BtnUpdate", "BtnScoreModes", "BtnPageUp", "BtnPageDown"};
+    const wchar_t* BUTTON_CAPTIONS[10] = {L"Rank", L"Name", L"Score", L"Credits", 0, L"Group", L"Last Update", 0,
+        0, 0};
+    const int BUTTON_X[10] = {16, 58, 206, 280, 354, 447, 595, 16, 207, 250};
+    const int BUTTON_Y[10] = {39, 39, 39, 39, 39, 39, 39, 389, 389, 389};
+    const char* PLANET_BTN_SPRITES[5] = {"BtnPlanets1", "BtnPlanets2", "BtnPlanets3", "BtnPlanetsEither",
+        "BtnPlanetsTotal"};
+    for (int i = 0; i < 10; ++i)
+    {
+        const char* sprite = BUTTON_SPRITE_NAMES[i];
+        if (i == 4)
+            sprite = PLANET_BTN_SPRITES[Planet];
+        ox::gui::IGUIButton* button = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 10, 10), ListFrame,
+            ID_LIST_BUTTON + i, BUTTON_CAPTIONS[i]);
+        button->setAnimations(package, sprite, true);
+        button->moveTo(ox::core::CPosition2d<int>(BUTTON_X[i], BUTTON_Y[i]));
+        if (i == 7)
+            button->setReportOnDraw(2);
+    }
+
+    ox::core::CString<wchar_t> mode = settings::gp_systemConfig->getLocalizedText(GAME_MODE_NAMES[GameMode]);
+    ox::core::CString<wchar_t> planet = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_PLANET_NAMES[Planet]);
+    ox::core::CString<wchar_t> sort = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_SORT_MODES[SortMode]);
+    if (NameFilter.size() > 0)
+    {
+        if (GroupFilter.size() > 0)
+            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoBothFilter",
+                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str(), GroupFilter.c_str()).c_str());
+        else
+            createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNameFilter",
+                mode.c_str(), planet.c_str(), sort.c_str(), NameFilter.c_str()).c_str());
+    }
+    else if (GroupFilter.size() > 0)
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoGroupFilter",
+            mode.c_str(), planet.c_str(), sort.c_str(), GroupFilter.c_str()).c_str());
+    else
+        createStatusString(settings::gp_systemConfig->getLocalizedText(L"highscores:infoNormal",
+            mode.c_str(), planet.c_str(), sort.c_str()).c_str());
+
+    SummaryFrame->setVisible(false);
+    ListFrame->setVisible(true);
+    SelectedType = ID_TYPE_BUTTON + 3;
 }
 
 bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
