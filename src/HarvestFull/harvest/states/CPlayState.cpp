@@ -2162,14 +2162,11 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 return true;
             case GUI_ID_WAVE_SEND:
                 if (GameMode == game::EGM_WAVE || GameMode == game::EGM_CREATIVE)
-                {
-                    setWaveListToggle(!ListVisible[LIST_WAVES]);
-                    return true;
-                }
+                    toggleWaveList();
                 return true;
             case GUI_ID_CREATIVE_PLACE:
                 if (GameMode == game::EGM_CREATIVE)
-                    setCreativeListToggle(!ListVisible[LIST_CREATIVE]);
+                    toggleCreativeList();
                 return true;
             case GUI_ID_FIRST_WAVE: case GUI_ID_FIRST_WAVE + 1: case GUI_ID_FIRST_WAVE + 2: case GUI_ID_FIRST_WAVE + 3:
             case GUI_ID_FIRST_WAVE + 4: case GUI_ID_FIRST_WAVE + 5: case GUI_ID_FIRST_WAVE + 6:
@@ -3180,8 +3177,9 @@ void CPlayState::launchWaveLevel(int wave)
         message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningMessage", aliens.c_str());
         addInfoLine(&message, false);
     }
-    setWaveListToggle(!ListVisible[LIST_WAVES]);
-    setWaveListToggle(!ListVisible[LIST_WAVES]);
+    // Rebuilds the wave list without the launched wave.
+    toggleWaveList();
+    toggleWaveList();
     BuildingAttacked = false;
 }
 
