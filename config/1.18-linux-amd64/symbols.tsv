@@ -2345,6 +2345,7 @@ address	size	symbol	evidence
 0x5220e0	6	_ZThn24_N5daisy3gui16CGUITabButtonRowD0Ev	manual:non-virtual-thunk-adjusts-by-0x18
 0x5220f0	185	_ZN5daisy3gui16CGUITabButtonRowD0Ev	mac-vtable:_ZTVN5daisy3gui16CGUITabButtonRowE:3
 0x5221b0	1177	_ZN5daisy3gui14CGUITabControlC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementERKNS2_4core5CRectIiEEbbi	native-calls:CGUIEnvironment::addTabControl-new
+0x522650	61	_ZSt13__copy_move_aILb0EPPN5daisy3gui14STabRowTabInfoES4_ET1_T0_S6_S5_	native-calls:CGUITabButtonRow::OnEvent-vector-erase
 0x522690	6	_ZThn24_N2ox3gui14IGUITabControlD0Ev	manual:non-virtual-thunk-adjusts-by-0x18
 0x5226a0	33	_ZN2ox3gui14IGUITabControlD0Ev	mac-vtable:_ZTVN2ox3gui14IGUITabControlE:3
 0x5226d0	6	_ZThn24_N2ox3gui14IGUITabControlD1Ev	manual:non-virtual-thunk-adjusts-by-0x18

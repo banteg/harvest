@@ -427,22 +427,22 @@ void CGUITabControl::draw()
         ox::core::CRect<int> r(Rects[ETCA_BOTTOM].UpperLeftCorner.X + x, Rects[ETCA_BOTTOM].UpperLeftCorner.Y + y,
             Rects[ETCA_BOTTOM].LowerRightCorner.X + x, Rects[ETCA_BOTTOM].LowerRightCorner.Y + y);
         clipAgainst(r, AbsoluteClippingRect);
-        ox::core::CDimension2d<int> size = Animations[ETCA_BOTTOM]->getFrameSize(0);
-        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += size.Width)
+        int step = Animations[ETCA_BOTTOM]->getFrameSize(0).Width;
+        for (int i = r.UpperLeftCorner.X; i < r.LowerRightCorner.X; i += step)
             Animations[ETCA_BOTTOM]->draw(ox::core::CPosition2d<int>(i, r.UpperLeftCorner.Y), &r, white);
 
         r = ox::core::CRect<int>(Rects[ETCA_LEFT].UpperLeftCorner.X + x, Rects[ETCA_LEFT].UpperLeftCorner.Y + y,
             Rects[ETCA_LEFT].LowerRightCorner.X + x, Rects[ETCA_LEFT].LowerRightCorner.Y + y);
         clipAgainst(r, AbsoluteClippingRect);
-        size = Animations[ETCA_LEFT]->getFrameSize(0);
-        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += size.Height)
+        step = Animations[ETCA_LEFT]->getFrameSize(0).Height;
+        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
             Animations[ETCA_LEFT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
 
         r = ox::core::CRect<int>(Rects[ETCA_RIGHT].UpperLeftCorner.X + x, Rects[ETCA_RIGHT].UpperLeftCorner.Y + y,
             Rects[ETCA_RIGHT].LowerRightCorner.X + x, Rects[ETCA_RIGHT].LowerRightCorner.Y + y);
         clipAgainst(r, AbsoluteClippingRect);
-        size = Animations[ETCA_RIGHT]->getFrameSize(0);
-        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += size.Height)
+        step = Animations[ETCA_RIGHT]->getFrameSize(0).Height;
+        for (int i = r.UpperLeftCorner.Y; i < r.LowerRightCorner.Y; i += step)
             Animations[ETCA_RIGHT]->draw(ox::core::CPosition2d<int>(r.UpperLeftCorner.X, i), &r, white);
 
         r = ox::core::CRect<int>(Rects[ETCA_BACKGROUND].UpperLeftCorner.X + x,
@@ -673,19 +673,32 @@ void CGUITabButtonRow::repositionTabs()
     int step = Rects[ETBRA_TAB_NORMAL].getWidth();
     int count = Tabs.size();
     int width = RelativeRect.getWidth();
-    if (count * step > width && Tabs.size() > 1)
+    if (count * step > width)
     {
-        int space = width - step;
-        if (space < 0)
-            space = 0;
-        step = space / (count - 1);
-    }
+        // overlap the tabs to fit the row
+        if (Tabs.size() > 1)
+        {
+            int space = width - step;
+            if (space < 0)
+                space = 0;
+            step = space / (count - 1);
+        }
 
-    int x = 0;
-    for (unsigned int i = 0; i < Tabs.size(); ++i)
+        int x = 0;
+        for (unsigned int i = 0; i < Tabs.size(); ++i)
+        {
+            Tabs[i]->X = x;
+            x += step;
+        }
+    }
+    else
     {
-        Tabs[i]->X = x;
-        x += step;
+        int x = 0;
+        for (unsigned int i = 0; i < Tabs.size(); ++i)
+        {
+            Tabs[i]->X = x;
+            x += step;
+        }
     }
 }
 
@@ -726,8 +739,11 @@ int CGUITabButtonRow::getActiveTabButton()
 
 bool CGUITabButtonRow::OnEvent(const ox::event::SEvent& event)
 {
-    if (EventReceiver && EventReceiver->OnEvent(event))
-        return true;
+    if (EventReceiver)
+    {
+        if (EventReceiver->OnEvent(event))
+            return true;
+    }
 
     if (event.EventType == ox::event::EET_GUI_EVENT)
     {
@@ -755,7 +771,7 @@ bool CGUITabButtonRow::OnEvent(const ox::event::SEvent& event)
                         continue;
 
                     HoverTab = i;
-                    HoverClose = x - Tabs[i]->X > ClosePosition.X;
+                    HoverClose = ClosePosition.X < x - Tabs[i]->X;
                     return true;
                 }
             }
