@@ -17,6 +17,7 @@
 #include "harvest/entity/CDropshipEntity.h"
 #include "harvest/entity/CEntityManager.h"
 #include "harvest/entity/CMinerEntity.h"
+#include "harvest/entity/CSparkMoverEntity.h"
 #include "harvest/entity/CSparkProducerEntity.h"
 #include "harvest/game/CLuaManager.h"
 #include "harvest/game/CScenario.h"
@@ -36,6 +37,7 @@
 #include "harvest/settings/CSavestateInfo.h"
 #include "harvest/settings/CAlienPriorities.h"
 #include "ox/IOxDevice.h"
+#include "ox/ITimer.h"
 #include "ox/audio/IAudioDriver.h"
 #include "ox/algo/CRand.h"
 #include "ox/core/CAes.h"
@@ -58,6 +60,7 @@
 #include "ox/io/IReadFile.h"
 #include "ox/io/IWriteFile.h"
 #include "ox/video/IParticleState.h"
+#include "ox/video/IParticlePackage.h"
 #include "ox/video/ISpriteAnimationState.h"
 #include "ox/video/ISpritePackage.h"
 #include "ox/video/ITexture.h"
@@ -100,7 +103,9 @@ const ox::video::SColor MINIMAP_MARKER_COLOR(0xa0dcdcdc);
 
 //! The localization keys of the game speeds.
 const wchar_t* const GAME_SPEED_NAMES[] = {L"gamespeed:pause", L"gamespeed:half", L"gamespeed:threequarter",
-    L"gamespeed:normal", L"gamespeed:threehalfs", L"gamespeed:double"};
+    L"gamespeed:normal", L"gamespeed:threehalfs", L"gamespeed:double", L"gamespeed:quadruple"};
+//! How fast the game runs at each game speed.
+const float GAME_SPEED_MULTIPLIERS[] = {0.0f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 4.0f};
 
 bool CPlayState::m_keys[256];
 
@@ -119,16 +124,16 @@ bool displayTimerForGameMode(int gameMode)
 
 CPlayState::CPlayState()
     : m_054(false), LoadingScreen(0), InitStep(0), BoldFont(0), SmallFont(0), NumberFont(0), IngamePackage(0),
-      MenuPackage(0), m_0c0(1), m_0c4(1), Action(0), SelectedEntity(0),
-      RecycleTarget(0), m_0f0(0), m_0f8(-1), m_0fc(0), m_104(false), HasLastPlacement(false), m_111(false),
+      MenuPackage(0), MousePosition(1, 1), Action(0), SelectedEntity(0),
+      RecycleTarget(0), FollowJump(false), HasLastPlacement(false), m_111(false),
       m_130(false), m_131(false), PlacementOk(false), BuildSelection(0), RangeCircle(0), Selector(0),
       RecycleSelector(0), Beam180(6.0f), Beam1c8(2.0f), Beam210(6.0f), Beam258(6.0f), m_2a0(false), ThreatLevel(0),
-      Scenario(0), GameSpeed(3), m_2c0(0), m_2c4(false), m_2c5(false), m_2c8(0), m_2d0(false), MinimapDot(0),
-      MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), m_310(0), m_314(0), m_318(0), GameTime(0), m_320(false), m_321(false),
-      m_322(false), m_324(0), DenialTime(0), m_340(0), m_348(0), m_350(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
-      MinimapHeight(0), RecycleButton(0), m_728(0), m_758(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
+      Scenario(0), GameSpeed(3), m_2c0(0), GameOver(false), GameWon(false), GameOverTime(0), m_2d0(false), MinimapDot(0),
+      MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), StatsTime(0), HarvestingCount(0), OverheatedCount(0), GameTime(0), Victory(false), LevelRecordShown(false),
+      MineralsRecordShown(false), RecordCheckTime(0), DenialTime(0), CreditsText(0), HarvestersText(0), ThreatLevelText(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
+      MinimapHeight(0), RecycleButton(0), InfoText(0), BuildingsScrolling(false), m_764(false), m_768(0), m_76c(0), m_770(0), m_774(false),
       m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
-      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), m_828(false), m_829(false), m_82c(0),
+      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), m_828(false), m_829(false), UpdateDuration(0),
       m_830(0), m_838(0)
 {
     for (int i = 0; i < 256; ++i)
@@ -405,16 +410,16 @@ bool CPlayState::readStateFromFile(const char* filename)
     if (header.Version > 18)
     {
         GameTime = ox::io::CHelpIO::readFloat(memFile);
-        m_320 = ox::io::CHelpIO::readInt(memFile) != 0;
+        Victory = ox::io::CHelpIO::readInt(memFile) != 0;
     }
     else
-        m_320 = false;
+        Victory = false;
     if (header.Version > 19)
         m_328 = ox::io::CHelpIO::readInt(memFile) != 0;
     else
         m_328 = false;
-    m_321 = false;
-    m_322 = false;
+    LevelRecordShown = false;
+    MineralsRecordShown = false;
 
     if (header.Version > 28 && ox::io::CHelpIO::readByte(memFile))
     {
@@ -476,9 +481,9 @@ bool CPlayState::initializeNewGame()
 
     GameMode = g_gameMode;
     GameTime = 0;
-    m_320 = false;
-    m_321 = false;
-    m_322 = false;
+    Victory = false;
+    LevelRecordShown = false;
+    MineralsRecordShown = false;
     m_328 = false;
     if (GameMode != game::EGM_CAMPAIGN)
     {
@@ -660,12 +665,12 @@ void CPlayState::realignGui()
         GuiElements[GUI_ID_BUILDINGS_RIGHT]->setEnabled(true);
     }
 
-    m_758 = false;
+    BuildingsScrolling = false;
     ActionPanel->setRelativePosition(ox::core::CRect<int>(0, 0, topLeftSize.X, topLeftSize.Y + 120));
-    m_728->setRelativePosition(ox::core::CRect<int>(115, 5, 392, 27));
+    InfoText->setRelativePosition(ox::core::CRect<int>(115, 5, 392, 27));
     SelectedNameText->setRelativePosition(ox::core::CRect<int>(7, 6, 107, 18));
-    m_738->setRelativePosition(ox::core::CRect<int>(7, 20, 107, 30));
-    m_740->setRelativePosition(ox::core::CRect<int>(7, 69, 107, 79));
+    OperatorText->setRelativePosition(ox::core::CRect<int>(7, 20, 107, 30));
+    MiniStatText->setRelativePosition(ox::core::CRect<int>(7, 69, 107, 79));
     GuiElements[GUI_ID_DESELECT]->moveTo(ox::core::CPosition2d<int>(6, 86));
     GuiElements[GUI_ID_UNLINK]->moveTo(ox::core::CPosition2d<int>(40, 86));
     GuiElements[GUI_ID_OVERCHARGE]->moveTo(ox::core::CPosition2d<int>(74, 86));
@@ -688,25 +693,25 @@ void CPlayState::realignGui()
         int y = top.UpperLeftCorner.Y + GuiSprites[GS_MINIMAP_TOP]->getFrameSize(0).Y;
         MinimapRect = ox::core::CRect<int>(x, y, x + minimapSize, y + minimapSize);
         int right = topRightSize.X - MinimapWidth;
-        m_340->setRelativePosition(ox::core::CRect<int>(right - 87, 5, right - 41, 27));
+        CreditsText->setRelativePosition(ox::core::CRect<int>(right - 87, 5, right - 41, 27));
         right = topRightSize.X - MinimapWidth;
-        m_348->setRelativePosition(ox::core::CRect<int>(right - 41, 5, right - 11, 27));
+        HarvestersText->setRelativePosition(ox::core::CRect<int>(right - 41, 5, right - 11, 27));
         right = topRightSize.X - MinimapWidth - GuiSprites[GS_MINERALS_BACKGROUND]->getFrameSize(0).X;
-        m_350->setRelativePosition(ox::core::CRect<int>(right - 53, 5, right - 27, 27));
+        ThreatLevelText->setRelativePosition(ox::core::CRect<int>(right - 53, 5, right - 27, 27));
     }
     else
     {
         MinimapRect = ox::core::CRect<int>(top.LowerRightCorner.X - 105, top.UpperLeftCorner.Y + 14,
             top.LowerRightCorner.X - 6, top.UpperLeftCorner.Y + 115);
-        m_340->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 193, 5, topRightSize.X - 147, 27));
-        m_348->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 147, 5, topRightSize.X - 117, 27));
-        m_350->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 289, 5, topRightSize.X - 252, 27));
+        CreditsText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 193, 5, topRightSize.X - 147, 27));
+        HarvestersText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 147, 5, topRightSize.X - 117, 27));
+        ThreatLevelText->setRelativePosition(ox::core::CRect<int>(topRightSize.X - 289, 5, topRightSize.X - 252, 27));
     }
 
     if (game::gp_world)
         game::gp_world->changeViewSize(getViewSize());
     if (!displayThreatLevelForGameMode(GameMode))
-        m_350->setVisible(false);
+        ThreatLevelText->setVisible(false);
 
     if (GameMode == game::EGM_WAVE)
     {
@@ -760,7 +765,435 @@ void CPlayState::playPlanetMusic()
             break;
         }
     }
-    m_330 = 1200.0f;
+    MusicTime = 1200.0f;
+}
+
+int CPlayState::updateState(float time)
+{
+    if (!Device->run() || !Driver)
+        return 1;
+
+    unsigned int startTime = Device->getTimer()->getTime();
+    if (m_keys[ox::KEY_DOWN])
+    {
+        ViewPosition.Y += 200.0f * time * ScrollSpeed;
+        CursorMoved = true;
+    }
+    if (m_keys[ox::KEY_UP])
+    {
+        ViewPosition.Y += -200.0f * time * ScrollSpeed;
+        CursorMoved = true;
+    }
+    if (m_keys[ox::KEY_LEFT])
+    {
+        ViewPosition.X += -200.0f * time * ScrollSpeed;
+        CursorMoved = true;
+    }
+    if (m_keys[ox::KEY_RIGHT])
+    {
+        ViewPosition.X += 200.0f * time * ScrollSpeed;
+        CursorMoved = true;
+    }
+    // In fullscreen the view scrolls when the mouse touches the screen edges.
+    if (Driver->isFullscreen() && Follow.Id < 0)
+    {
+        if (MousePosition.X == 0)
+            ViewPosition.X += -400.0f * time * ScrollSpeed;
+        else if (MousePosition.X >= ScreenSize.Width - 1)
+            ViewPosition.X += 400.0f * time * ScrollSpeed;
+        if (MousePosition.Y == 0)
+            ViewPosition.Y += -400.0f * time * ScrollSpeed;
+        else if (MousePosition.Y >= ScreenSize.Height - 1)
+            ViewPosition.Y += 400.0f * time * ScrollSpeed;
+    }
+    if (game::gp_world)
+        game::gp_world->constrainViewPos(ViewPosition);
+
+    if (BuildingsScrolling)
+    {
+        BuildingsScrollPosition += (BuildingsScrollTarget - BuildingsScrollPosition) * time * 5.0f;
+        BuildingsList->moveTo(ox::core::CPosition2d<int>((int)BuildingsScrollPosition, 0));
+    }
+
+    DenialTime -= time;
+    MinimapUpdateTime -= time;
+    MusicTime -= time;
+    if (MusicTime < 0)
+        playPlanetMusic();
+
+    float frameDelta = ox::core::clamp(GAME_SPEED_MULTIPLIERS[GameSpeed] * time, 0.0f, GameSpeed < 5 ? 0.06f : 0.5f);
+    if (GameMode == game::EGM_WAVE)
+    {
+        if (!Victory && !GameOver)
+        {
+            float previousTime = GameTime;
+            GameTime += frameDelta;
+            if (entity::gp_entityManager->getNumAliens() <= 0 && ThreatLevel->getThreatLevel() >= 10 &&
+                ThreatLevel->allowVictory())
+            {
+                Victory = true;
+                displayTimeVictoryMessage();
+                GameOver = true;
+                GameWon = true;
+                GameOverTime = 15.0f;
+                g_scenarioResult = 3;
+                g_scenarioResultGameMode = GameMode;
+                g_scenarioResultPlanet = game::gp_world->getPlanet();
+                if (game::gp_statistics)
+                    game::gp_statistics->reportNewThreatLevel((int)GameTime / 300 + 1, GameTime);
+                sendCustomEvent((ECUSTOM_EVENT)21, 6);
+                if (GameTime < 3600.0f)
+                    sendCustomEvent((ECUSTOM_EVENT)21, 7);
+            }
+            else if ((int)previousTime / 300 != (int)GameTime / 300)
+                game::gp_statistics->reportNewThreatLevel((int)GameTime / 300, GameTime);
+        }
+    }
+    else if (GameMode == game::EGM_RUSH)
+    {
+        if (!Victory && !GameOver)
+        {
+            float previousTime = GameTime;
+            GameTime += frameDelta;
+            if (game::gp_statistics && game::gp_statistics->getRushModeDamage() >= 50000.0f)
+            {
+                Victory = true;
+                displayTimeVictoryMessage();
+                GameOver = true;
+                GameWon = true;
+                GameOverTime = 15.0f;
+                g_scenarioResult = 3;
+                g_scenarioResultGameMode = GameMode;
+                g_scenarioResultPlanet = game::gp_world->getPlanet();
+                if (game::gp_statistics)
+                    game::gp_statistics->reportNewThreatLevel((int)GameTime / 60 + 1, GameTime);
+                sendCustomEvent((ECUSTOM_EVENT)21, 4);
+                sendCustomEvent((ECUSTOM_EVENT)21, 5);
+                if (!m_328)
+                    sendCustomEvent((ECUSTOM_EVENT)21, 13);
+            }
+            else if ((int)previousTime / 60 != (int)GameTime / 60)
+                game::gp_statistics->reportNewThreatLevel((int)GameTime / 60, GameTime);
+        }
+    }
+    else if (GameMode == game::EGM_CREATIVE)
+    {
+        float previousTime = GameTime;
+        GameTime += frameDelta;
+        if (game::gp_statistics && (int)previousTime / 300 != (int)GameTime / 300)
+            game::gp_statistics->reportNewThreatLevel((int)GameTime / 300 + 1, GameTime);
+        if (LuaManager)
+        {
+            LuaManager->setViewPosition(ViewPosition);
+            LuaManager->runFrameFunctions(frameDelta);
+        }
+    }
+    else
+        GameTime += frameDelta;
+
+    // Keep the local records of the normal and insane games up to date.
+    RecordCheckTime -= frameDelta;
+    if ((GameMode == game::EGM_NORMAL || GameMode == game::EGM_INSANE) && RecordCheckTime <= 0)
+    {
+        RecordCheckTime = 5.0f;
+        if (PlayerName == settings::gp_profileManager->getCurrentProfile()->getPlayerName())
+        {
+            int levelRecord = settings::gp_profileManager->getCurrentProfile()->getLocalScore(0, GameMode,
+                game::gp_world->getPlanet());
+            int level = ThreatLevel->getThreatLevel();
+            if (level > levelRecord)
+            {
+                settings::gp_profileManager->getCurrentProfile()->updateLocalScore(0, GameMode,
+                    game::gp_world->getPlanet(), level);
+                if (!LevelRecordShown)
+                {
+                    displayRecordMessage(level, false);
+                    LevelRecordShown = true;
+                }
+            }
+            int mineralsRecord = settings::gp_profileManager->getCurrentProfile()->getLocalScore(1, GameMode,
+                game::gp_world->getPlanet());
+            int minerals = game::gp_statistics->getGameStatValue(1);
+            if (minerals > mineralsRecord)
+            {
+                settings::gp_profileManager->getCurrentProfile()->updateLocalScore(1, GameMode,
+                    game::gp_world->getPlanet(), minerals);
+                if (!MineralsRecordShown)
+                {
+                    displayRecordMessage(minerals, true);
+                    MineralsRecordShown = true;
+                }
+            }
+        }
+    }
+
+    if (Scenario)
+        Scenario->update(frameDelta);
+    if (StoryScreen)
+        StoryScreen->update(frameDelta);
+    if (AchievementsScreen && AchievementsScreen->isVisible())
+        AchievementsScreen->update(time);
+    if (m_764)
+    {
+        m_768 -= frameDelta;
+        if (m_768 <= 0)
+            m_764 = false;
+    }
+
+    entity::CEntity::g_screenSizeF = ScreenSizeF;
+    entity::CEntity::g_screenCenterPos =
+        ox::core::CPosition2d<float>(ScreenSizeF.Width * 0.5f + ViewPosition.X, ScreenSizeF.Height * 0.5f + ViewPosition.Y);
+
+    // Repair the credits now and then if they were edited in memory.
+    if (ox::algo::CRand::rand() % 10 == 0 && game::gp_mineralAmount && game::gp_negatedMineralAmount)
+    {
+        int credits = game::gp_mineralAmount->getValue();
+        int negated = -game::gp_negatedMineralAmount->getValue();
+        if (credits != negated)
+        {
+            game::gp_mineralAmount->setValue(credits < negated ? credits : negated);
+            game::gp_negatedMineralAmount->setValue(-game::gp_mineralAmount->getValue());
+        }
+    }
+
+    for (std::list<SMinimapMarker>::iterator it = MinimapMarkers.begin(); it != MinimapMarkers.end();)
+    {
+        it->Time -= frameDelta;
+        if (it->Time <= 0)
+            it = MinimapMarkers.erase(it);
+        else
+            ++it;
+    }
+
+    float remaining = frameDelta;
+    do
+    {
+        float step = ox::core::clamp(remaining, 0.0f, 0.06f);
+        if (ThreatLevel && game::gp_world && !GameOver && ThreatLevel->update(step))
+        {
+            if (game::gp_statistics)
+                game::gp_statistics->reportNewThreatLevel(ThreatLevel->getThreatLevel(), GameTime);
+            // Insane games pay a bonus every ten threat levels.
+            if (GameMode == game::EGM_INSANE && ThreatLevel->getThreatLevel() % 10 == 0)
+            {
+                game::gp_mineralAmount->modifyValue(250);
+                game::gp_negatedMineralAmount->modifyValue(-250);
+                displayInsaneRewardMessage();
+            }
+        }
+
+        if (entity::gp_entityManager)
+        {
+            VisibleArea = ox::core::CRect<float>(ViewPosition.X - 100.0f, ViewPosition.Y - 100.0f,
+                ScreenSize.Width + 200.0f + (ViewPosition.X - 100.0f), ScreenSize.Height + 200.0f + (ViewPosition.Y - 100.0f));
+            entity::gp_entityManager->update(step, VisibleArea);
+            Minerals = game::gp_mineralAmount->getValue();
+            if (game::gp_statistics)
+            {
+                game::gp_statistics->setHighest(1, entity::gp_entityManager->getNumBuildings());
+                game::gp_statistics->setHighest(0, game::gp_mineralAmount->getValue());
+            }
+
+            if (SelectedEntity)
+            {
+                SelectedEntity = entity::gp_entityManager->updateClickableReference(SelectedEntityId, SelectedEntity);
+                if (SelectedEntity)
+                {
+                    if (SelectedEntity->getEntityType() != SelectedEntityType)
+                        newSelectedEntity();
+                    InfoText->setText(SelectedEntity->getInfoString().c_str());
+                    OperatorText->setText(SelectedEntity->getOperatorString().c_str());
+                    MiniStatText->setText(SelectedEntity->getMiniStatString().c_str());
+                }
+                else
+                    clearSelectedEntity();
+            }
+            updateMultiSelectionReferences();
+            if (LuaManager)
+                LuaManager->updateSelectedBuildings(&MultiSelection);
+            if (RecycleTarget)
+                RecycleTarget = entity::gp_entityManager->updateClickableReference(RecycleTargetId, RecycleTarget);
+
+            if (Follow.Id >= 0)
+            {
+                entity::gp_entityManager->updateReference(Follow, FollowLayer, true);
+                if (Follow.Entity)
+                {
+                    float x = Follow.Entity->getPosition().X - ScreenSizeF.Width * 0.5f;
+                    float y = Follow.Entity->getPosition().Y - Follow.Entity->getPosition().Z - ScreenSizeF.Height * 0.5f;
+                    if (FollowJump)
+                    {
+                        ViewPosition.X = x;
+                        ViewPosition.Y = y;
+                        FollowJump = false;
+                    }
+                    else
+                    {
+                        ViewPosition.X += (x - ViewPosition.X) * 4.0f * step;
+                        ViewPosition.Y += (y - ViewPosition.Y) * 4.0f * step;
+                    }
+                    game::gp_world->constrainViewPos(ViewPosition);
+                }
+            }
+
+            if (entity::gp_entityManager->getNumBuildings() <= 0 && !GameOver)
+            {
+                GameOver = true;
+                GameWon = false;
+                GameOverTime = 15.0f;
+                g_scenarioResult = 4;
+                g_scenarioResultGameMode = GameMode;
+                g_scenarioResultPlanet = game::gp_world->getPlanet();
+                if (game::gp_statistics)
+                    game::gp_statistics->reportNewThreatLevel(ThreatLevel->getThreatLevel() + 1, GameTime);
+            }
+        }
+
+        if (Selector)
+            Selector->update(step);
+        if (game::gp_world)
+            game::gp_world->update(step, entity::gp_entityManager->getBuildingsBoundingBox());
+        if (entity::gp_entityManager->getNumAliens() == 0 && GameMode == game::EGM_WAVE)
+            checkWaveReward();
+        remaining -= step;
+    } while (remaining > 0);
+
+    if (GameMode == game::EGM_RUSH)
+    {
+        if (game::gp_statistics->getRushModeDamage() > 0 && game::gp_statistics->getRushModeDamage() < 510.0f)
+            sendCustomEvent((ECUSTOM_EVENT)22, 32);
+    }
+    else if (GameMode == game::EGM_INSANE)
+    {
+        if (ThreatLevel->getThreatLevel() == 50)
+        {
+            sendCustomEvent((ECUSTOM_EVENT)21, 9);
+            sendCustomEvent((ECUSTOM_EVENT)21, 8);
+        }
+    }
+    else if (GameMode == game::EGM_NORMAL)
+    {
+        if (game::gp_statistics->getGameStatValue(2) == 1)
+            sendCustomEvent((ECUSTOM_EVENT)22, 26);
+        if (ThreatLevel->getThreatLevel() == 11)
+            sendCustomEvent((ECUSTOM_EVENT)22, 30);
+        if (ThreatLevel->getThreatLevel() == 50)
+            sendCustomEvent((ECUSTOM_EVENT)21, 1);
+        if (ThreatLevel->getThreatLevel() == 100)
+        {
+            sendCustomEvent((ECUSTOM_EVENT)21, 2);
+            sendCustomEvent((ECUSTOM_EVENT)21, 3);
+        }
+        if (ThreatLevel->getThreatLevel() == 15 && !m_328 && game::gp_world->getPlanet() == 0)
+            sendCustomEvent((ECUSTOM_EVENT)21, 0);
+        if (ThreatLevel->getThreatLevel() <= 10 && HarvestingCount >= 20)
+            sendCustomEvent((ECUSTOM_EVENT)21, 17);
+        if (HarvestingCount >= 50)
+            sendCustomEvent((ECUSTOM_EVENT)21, 12);
+        if (OverheatedCount >= 50)
+            sendCustomEvent((ECUSTOM_EVENT)21, 18);
+    }
+
+    if (GameOver)
+    {
+        GameOverTime -= time;
+        if (GameOverTime <= 0)
+        {
+            NextState = 3;
+            if (GameMode != game::EGM_CAMPAIGN)
+            {
+                game::CHighscoreInfo* info;
+                if (GameWon ? GameMode != game::EGM_CREATIVE : GameMode == game::EGM_NORMAL || GameMode == game::EGM_INSANE)
+                    info = new game::CHighscoreInfo(PlayerName.c_str(), PlayerGroup.c_str(), RandomValue, StartTime,
+                        GameMode, game::gp_world->getPlanet(), game::gp_statistics->getGameStatValue(1),
+                        ThreatLevel->getThreatLevel(), GameTime);
+                else
+                    info = 0;
+                game::CHighscoreInfo::setNewHighscoreInfo(info);
+            }
+        }
+    }
+
+    if (InfoLines)
+        InfoLines->update(time, BarLeftArea.UpperLeftCorner.Y);
+
+    StatsTime -= time;
+    if (StatsTime < 0)
+    {
+        StatsTime = 1.0f;
+        HarvestingCount = 0;
+        OverheatedCount = 0;
+        const std::list<ox::entity::COxEntity*>& buildings = entity::gp_entityManager->getEntityList(0);
+        for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); ++it)
+        {
+            if ((*it)->getEntityType() == 4)
+            {
+                if (((entity::CMineralGatherEntity*)*it)->isAbleToHarvest())
+                    ++HarvestingCount;
+            }
+            else if ((*it)->getEntityType() == 1 && ((entity::CSparkMoverEntity*)*it)->isOverheated())
+                ++OverheatedCount;
+        }
+        if (HarvestersText)
+        {
+            ox::core::CString<wchar_t> text(L"+");
+            text.append(HarvestingCount);
+            HarvestersText->setText(text.c_str());
+        }
+    }
+
+    if (Action == 2)
+    {
+        if (CursorMoved)
+            updateRecycleBuilding();
+    }
+    else if (Action == 1 && CursorMoved)
+    {
+        updatePlacementPosition();
+        // Dragging places a chain of buildings a link's reach apart.
+        if (HasLastPlacement && PlacementOk)
+        {
+            float distance = ox::core::CMath::getExactDistance(PlacementPosition, LastPlacement);
+            if (distance > 140.0f && distance < 150.0f)
+                buyBuildingAtPlacementPos();
+        }
+    }
+
+    // Spawn fewer particles while the frame rate is low.
+    int fps = Driver->getFPS();
+    int quality = entity::CEntity::gp_particlePackage->Quality;
+    if (fps > 54)
+        quality = 2;
+    else if (fps >= 30 && fps < 40)
+        quality = 1;
+    else if (fps < 20)
+        quality = 0;
+    if (quality > ParticleSetting)
+        quality = ParticleSetting;
+    entity::CEntity::gp_particlePackage->Quality = quality;
+
+    if (!SelectedEntity)
+        ActionPanel->setVisible(false);
+    else if (ActionPanel)
+    {
+        int type = SelectedEntity->getEntityType();
+        GuiElements[GUI_ID_DEATHSTAR]->setVisible(
+            type == 7 && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setVisible(
+            type == 7 && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0);
+        GuiElements[GUI_ID_END_LASER]->setVisible(type == 7 && ((entity::CDefenseTowerEntity*)SelectedEntity)->isLinked());
+        GuiElements[GUI_ID_SPEED_BUILD]->setVisible(
+            type == 3 && !((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setVisible(
+            type == 3 && ((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setVisible(
+            type == 4 && !((entity::CMineralGatherEntity*)SelectedEntity)->hasMoreMinerals());
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setVisible(
+            type == 0 && ((entity::CSparkProducerEntity*)SelectedEntity)->isExpired());
+    }
+
+    UpdateDuration = Device->getTimer()->getTime() - startTime;
+    return NextState;
 }
 
 void CPlayState::displayTimeVictoryMessage()
@@ -809,14 +1242,14 @@ void CPlayState::clearSelectedEntity()
 {
     SelectedEntity = 0;
     MultiSelection.clear();
-    if (m_728)
-        m_728->setText(L"");
+    if (InfoText)
+        InfoText->setText(L"");
     if (SelectedNameText)
         SelectedNameText->setText(L"");
-    if (m_738)
-        m_738->setText(L"");
-    if (m_740)
-        m_740->setText(L"");
+    if (OperatorText)
+        OperatorText->setText(L"");
+    if (MiniStatText)
+        MiniStatText->setText(L"");
     if (ActionPanel)
         ActionPanel->setVisible(false);
     if (LuaManager)
@@ -961,7 +1394,7 @@ void CPlayState::updateMultiSelectionReferences()
 void CPlayState::checkWaveReward()
 {
     int reward = ThreatLevel->getWaveReward();
-    if (reward <= 0 || m_2c4)
+    if (reward <= 0 || GameOver)
         return;
 
     game::SInfoLineMessage message;
@@ -986,7 +1419,7 @@ void CPlayState::checkWaveReward()
 
 void CPlayState::updatePlacementPosition()
 {
-    m_133 = false;
+    CursorMoved = false;
     PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
     PlacementOk = false;
     if (HasLastPlacement && ox::core::CMath::getSquaredDistance(LastPlacement, PlacementPosition) > 22500.0f)
@@ -1034,7 +1467,7 @@ void CPlayState::buyBuildingAtPlacementPos()
 
 void CPlayState::updateRecycleBuilding()
 {
-    m_133 = false;
+    CursorMoved = false;
     ox::core::CPosition2d<float> position = getWorldPos(GUIEnvironment->getMousePosition());
     RecycleTarget = 0;
     RecycleTarget = entity::gp_entityManager->findClickableEntity(position);
@@ -1059,7 +1492,7 @@ void CPlayState::setBuildAction(int index)
         if (RecycleButton)
             RecycleButton->setChecked(false);
         PlacementOk = false;
-        m_133 = true;
+        CursorMoved = true;
         BuildSelection = index;
     }
 }
@@ -1197,7 +1630,7 @@ void CPlayState::setPlaceAlienAction(int alienType)
     RecycleTarget = 0;
     clearSelectedEntity();
     PlacementOk = false;
-    m_133 = true;
+    CursorMoved = true;
     AlienSelection = alienType;
 }
 
@@ -1368,9 +1801,9 @@ void CPlayState::renderMinimap()
     }
 
     // Flash the credits while there are not enough of them.
-    if (DenialTime > 0 && (int)(DenialTime * 1000.0f) / 250 % 2 && m_340)
+    if (DenialTime > 0 && (int)(DenialTime * 1000.0f) / 250 % 2 && CreditsText)
     {
-        ox::core::CRect<int> area = m_340->getAbsolutePosition();
+        ox::core::CRect<int> area = CreditsText->getAbsolutePosition();
         area.UpperLeftCorner.X -= 24;
         area.LowerRightCorner.X += 28;
         Driver->draw2DRectangle(ox::video::SColor(0x806060cc), area, 0);
@@ -1544,7 +1977,7 @@ void CPlayState::setRecycleAction()
     RecycleTarget = 0;
     clearSelectedEntity();
     PlacementOk = false;
-    m_133 = true;
+    CursorMoved = true;
 }
 
 ox::core::CPosition2d<float> CPlayState::getWorldPos(ox::core::CPosition2d<int> position)
@@ -1909,7 +2342,7 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
     ox::io::CHelpIO::writeInt(file, entity::g_nextEntityId);
     game::gp_mineralAmount->write(file);
     ox::io::CHelpIO::writeFloat(file, GameTime);
-    ox::io::CHelpIO::writeInt(file, m_320);
+    ox::io::CHelpIO::writeInt(file, Victory);
     ox::io::CHelpIO::writeInt(file, m_328);
     if (LuaManager)
     {
@@ -2089,7 +2522,7 @@ void CPlayState::eraseGameObjects()
     ThreatLevel = 0;
     game::gp_statistics = 0;
     PlacementOk = false;
-    m_2c4 = false;
+    GameOver = false;
     HasLastPlacement = false;
     m_111 = false;
     setNoneAction(true);

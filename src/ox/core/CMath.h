@@ -17,6 +17,7 @@ public:
     static float getAngleIY(const CPosition2d<float>& a, const CPosition2d<float>& b);
     static bool clockWiseClosestIY(float a, float b);
     static float getSquaredDistance(const CPosition2d<float>& a, const CPosition2d<float>& b);
+    static float getExactDistance(const CPosition2d<float>& a, const CPosition2d<float>& b);
 };
 
 } // end namespace core

@@ -235,7 +235,8 @@ private:
         GUI_ID_MINERALS_POPUP = 1240
     };
 
-    int m_050;
+    //! The state updateState returns: 0 to stay, 3 for the main menu.
+    int NextState;
     bool m_054;
     ox::core::CDimension2d<int> ScreenSize;
     ox::core::CDimension2d<float> ScreenSizeF;
@@ -251,20 +252,19 @@ private:
     ox::core::CPosition2d<float> ViewPosition;
     //! The part of the world on screen.
     ox::core::CRect<float> VisibleArea;
-    int m_0c0;
-    int m_0c4;
+    //! The last mouse position, for scrolling at the screen edges.
+    ox::core::CPosition2d<int> MousePosition;
     int Action;
     entity::CEntity* SelectedEntity;
     //! The building under the cursor while recycling.
     entity::CEntity* RecycleTarget;
-    int m_0e0;
+    int SelectedEntityId;
     int SelectedEntityType;
     int RecycleTargetId;
-    ox::entity::COxEntity* m_0f0;
-    int m_0f8;
-    int m_0fc;
-    int m_100;
-    bool m_104;
+    //! The entity the view follows, in the entity layer FollowLayer; FollowJump moves the view at once.
+    ox::entity::SEntityReference Follow;
+    int FollowLayer;
+    bool FollowJump;
     //! Where the last building was placed; the next one is kept within a link's reach of it.
     ox::core::CPosition2d<float> LastPlacement;
     bool HasLastPlacement;
@@ -274,7 +274,8 @@ private:
     bool m_130;
     bool m_131;
     bool PlacementOk;
-    bool m_133;
+    //! Set when the cursor moved over the world, so the placement must be updated.
+    bool CursorMoved;
     ox::core::CPosition2d<float> PlacementPosition;
     int BuildSelection;
     entity::CBuildableItems BuildableItems;
@@ -291,9 +292,10 @@ private:
     int GameMode;
     int GameSpeed;
     int m_2c0;
-    bool m_2c4;
-    bool m_2c5;
-    int m_2c8;
+    bool GameOver;
+    bool GameWon;
+    //! Counts down after the game is over until the state returns to the menu.
+    float GameOverTime;
     //! The credits when the game ended.
     int Minerals;
     bool m_2d0;
@@ -304,22 +306,22 @@ private:
     bool UseMinimapTexture;
     float MinimapUpdateTime;
     std::list<SMinimapMarker> MinimapMarkers;
-    int m_310;
-    int m_314;
-    int m_318;
+    float StatsTime;
+    int HarvestingCount;
+    int OverheatedCount;
     float GameTime;
-    bool m_320;
-    bool m_321;
-    bool m_322;
-    int m_324;
+    bool Victory;
+    bool LevelRecordShown;
+    bool MineralsRecordShown;
+    float RecordCheckTime;
     bool m_328;
     //! Counts down while the not-enough-credits warning flashes.
     float DenialTime;
-    float m_330;
+    float MusicTime;
     void* m_338;
-    ox::gui::IGUIStaticText* m_340;
-    ox::gui::IGUIStaticText* m_348;
-    ox::gui::IGUIStaticText* m_350;
+    ox::gui::IGUIStaticText* CreditsText;
+    ox::gui::IGUIStaticText* HarvestersText;
+    ox::gui::IGUIStaticText* ThreatLevelText;
     ox::video::ISpriteAnimationState* GuiSprites[GS_COUNT];
     //! The alien icons of the wave buttons, by alien type.
     ox::video::ISpriteAnimationState* WaveIcons[WAVE_COUNT];
@@ -340,18 +342,19 @@ private:
     ox::core::CRect<int> BarCenterArea;
     ox::gui::IGUIElement* GuiElements[GUI_ELEMENT_COUNT];
     ox::gui::IGUICheckBox* RecycleButton;
-    ox::gui::IGUIElement* m_728;
+    ox::gui::IGUIStaticText* InfoText;
     ox::gui::IGUIStaticText* SelectedNameText;
-    ox::gui::IGUIElement* m_738;
-    ox::gui::IGUIElement* m_740;
+    ox::gui::IGUIStaticText* OperatorText;
+    ox::gui::IGUIStaticText* MiniStatText;
     //! The build buttons, which scroll inside BuildingsArea.
     ox::gui::IGUILayout* BuildingsArea;
     ox::gui::IGUILayout* BuildingsList;
-    bool m_758;
-    int m_75c;
-    int m_760;
+    //! The build buttons slide to BuildingsScrollTarget while BuildingsScrolling.
+    bool BuildingsScrolling;
+    float BuildingsScrollPosition;
+    float BuildingsScrollTarget;
     bool m_764;
-    int m_768;
+    float m_768;
     int m_76c;
     int m_770;
     bool m_774;
@@ -378,7 +381,8 @@ private:
     float ScrollSpeed;
     bool m_828;
     bool m_829;
-    int m_82c;
+    //! Milliseconds the last updateState took.
+    int UpdateDuration;
     int m_830;
     void* m_838;
     game::CLuaManager* LuaManager;

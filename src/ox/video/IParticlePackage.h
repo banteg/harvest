@@ -33,6 +33,11 @@ public:
     virtual void setCallbackEngine(IParticleEngineCallback* callback);
     virtual IParticleEngineCallback* getCallbackEngine();
     virtual bool spriteFulfillsImportance(const core::CString<char>& name) = 0;
+
+    // Not recovered yet.
+    void* Unrecovered;
+    //! The particle detail, 0 to 2; particles less important than it are not spawned.
+    int Quality;
 };
 
 } // end namespace video
