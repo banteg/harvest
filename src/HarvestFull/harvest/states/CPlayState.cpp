@@ -950,7 +950,7 @@ void CPlayState::realignGui()
     // The minimap needs a screen larger than 800x600.
     int extraWidth = ScreenSize.Width - 800;
     int extraHeight = ScreenSize.Height - 600;
-    if (extraHeight > 40 && extraWidth > 40 && GuiSprites[GS_MINIMAP_BACKGROUND])
+    if (extraWidth > 40 && extraHeight > 40 && GuiSprites[GS_MINIMAP_BACKGROUND])
     {
         ShowMinimap = true;
         minimapSize = (extraWidth > extraHeight ? extraHeight : extraWidth) + 100;
