@@ -1537,18 +1537,15 @@ int CPlayState::updateState(float time)
         }
     }
 
-    if (Action == 1)
+    if (Action == 1 && CursorMoved)
     {
-        if (CursorMoved)
+        updatePlacementPosition();
+        // Dragging places a chain of buildings a link's reach apart.
+        if (HasLastPlacement && PlacementOk)
         {
-            updatePlacementPosition();
-            // Dragging places a chain of buildings a link's reach apart.
-            if (HasLastPlacement && PlacementOk)
-            {
-                float distance = ox::core::CMath::getExactDistance(PlacementPosition, LastPlacement);
-                if (distance > 140.0f && distance < 150.0f)
-                    buyBuildingAtPlacementPos();
-            }
+            float distance = ox::core::CMath::getExactDistance(PlacementPosition, LastPlacement);
+            if (distance > 140.0f && distance < 150.0f)
+                buyBuildingAtPlacementPos();
         }
     }
     else if (Action == 2 && CursorMoved)
