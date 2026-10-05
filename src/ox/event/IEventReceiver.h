@@ -18,6 +18,8 @@ class IGUIElement;
 //! GUI events, in SEvent::GUIEvent.EventType.
 enum EGUI_EVENT_TYPE
 {
+    //! The element lost the focus.
+    EGET_ELEMENT_FOCUS_LOST = 0,
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
@@ -35,6 +37,8 @@ enum EGUI_EVENT_TYPE
     EGET_MESSAGEBOX_NO = 16,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
+    //! A context menu item was clicked; IGUIContextMenu::getSelectedItem returns it.
+    EGET_MENU_ITEM_SELECTED = 23,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
