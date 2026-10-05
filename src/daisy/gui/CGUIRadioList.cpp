@@ -1,6 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 
 #include "CGUIRadioList.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "CGUICheckBox.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"

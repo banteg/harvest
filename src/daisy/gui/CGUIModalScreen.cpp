@@ -5,6 +5,7 @@
 // parent with EGET_MODAL_SCREEN_BLOCKED.
 
 #include "CGUIModalScreen.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/video/IVideoDriver.h"

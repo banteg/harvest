@@ -4,6 +4,7 @@
 // Oxeye puts the buttons in a layout group, sorts the box vertically and answers return and escape.
 
 #include "CGUIMessageBox.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"
 // The object has an iostream initializer; the original including header is unidentified.

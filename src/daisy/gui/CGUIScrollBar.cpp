@@ -5,6 +5,7 @@
 // with clicks beside the thumb and highlights the thumb under the mouse.
 
 #include "CGUIScrollBar.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "CGUIButton.h"
 #include "GUIIcons.h"
 #include "ox/gui/IGUIEnvironment.h"

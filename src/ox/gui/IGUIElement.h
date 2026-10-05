@@ -36,19 +36,8 @@ class IGUIElement : public IUnknown, public event::IEventReceiver
 public:
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
     // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
-    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
-        : Parent(parent), RelativeRect(rectangle), RelativeSizeChanged(false), AbsoluteRect(0, 0, 0, 0),
-          AbsoluteClippingRect(0, 0, 0, 0), IsVisible(true), IsEnabled(true), IsFixed(false), IsInvisible(false),
-          NoClip(false), ReportOnDraw(0), ID(id), Type(0), Environment(environment), HoverItem(0), LayoutFlags(0),
-          EventReceiver(0)
-    {
-        AbsoluteRect = RelativeRect;
-        AbsoluteClippingRect = AbsoluteRect;
-        updateAbsolutePosition();
-
-        if (Parent)
-            Parent->addChild(this);
-    }
+    //! Defined in IGUIElementInline.h, which only the element implementations include.
+    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle);
 
     virtual ~IGUIElement()
     {
@@ -199,22 +188,20 @@ public:
     virtual void setInvisible(bool invisible);
     virtual bool doesReportOnDraw();
     virtual void setReportOnDraw(int report);
-    virtual void setText(const wchar_t* text)
-    {
-        Text = text;
-    }
-
+    //! Defined in IGUIElementInline.h.
+    virtual void setText(const wchar_t* text);
     virtual const wchar_t* getText() const;
     virtual int getID();
     virtual void setID(int id);
     virtual int getType();
     virtual bool OnEvent(const event::SEvent& event)
     {
-        if (EventReceiver && EventReceiver->OnEvent(event))
+        if (EventReceiver)
+            if (EventReceiver->OnEvent(event))
+                return true;
+        if (!Parent)
             return true;
-        if (Parent)
-            return Parent->OnEvent(event);
-        return true;
+        return Parent->OnEvent(event);
     }
 
     virtual bool OnEventInNonFocusState(const event::SEvent& event);

@@ -3,6 +3,7 @@
 // See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
 
 #include "CGUIMeshViewer.h"
+#include "ox/gui/IGUIElementInline.h"
 #include "daisy/os.h"
 #include "ox/core/CMatrix4.h"
 #include "ox/gui/IGUIEnvironment.h"
