@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/IGUIEnvironment.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::gui namespace; not the original source. Partial: the virtual order
-// follows the Mac 1.18 vtable of daisy::gui::CGUIEnvironment through addClickArea.
+// Recovered for Harvest's ox::gui namespace; not the original source. The virtual order follows the
+// Mac 1.18 vtable of daisy::gui::CGUIEnvironment.
 
 #ifndef OX_GUI_IGUIENVIRONMENT_H
 #define OX_GUI_IGUIENVIRONMENT_H
@@ -54,8 +54,8 @@ public:
 
     virtual void clearElements() = 0;
     virtual void drawAll() = 0;
-    virtual bool setFocus(IGUIElement* element) = 0;
-    virtual bool removeFocus(IGUIElement* element) = 0;
+    virtual void setFocus(IGUIElement* element) = 0;
+    virtual void removeFocus(IGUIElement* element) = 0;
     virtual bool hasFocus(IGUIElement* element) = 0;
     virtual video::IVideoDriver* getVideoDriver() = 0;
     virtual bool postEventFromUser(event::SEvent event) = 0;
@@ -69,7 +69,8 @@ public:
     virtual IGUIElement* addModalScreen() = 0;
     virtual IGUIButton* addButton(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         const wchar_t* text) = 0;
-    virtual IGUIButton* addTextButton(const wchar_t* text, const char* sprite, char* hoverSprite,
+    //! daisy::gui::CGUITextButton is not an IGUIButton (its vtable continues with setTextColor).
+    virtual IGUIElement* addTextButton(const wchar_t* text, const char* sprite, char* hoverSprite,
         IGUIFont* font, video::SColor color, IGUIElement* parent, int id) = 0;
     virtual IGUILayout* addWindow(const core::CRect<int>& rectangle, bool modal, const wchar_t* text,
         IGUIElement* parent, int id) = 0;
@@ -77,7 +78,8 @@ public:
     virtual IGUILayout* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         unsigned int flags, bool detached, bool visible) = 0;
     virtual IGUILayout* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
-    virtual void addHoverDescription(IGUIElement* element, const wchar_t* text, video::SColor* color) = 0;
+    //! Gives element a hover item with the text in a frame and returns the frame.
+    virtual IGUILayout* addHoverDescription(IGUIElement* element, const wchar_t* text, video::SColor* color) = 0;
     virtual IGUIElement* addMessageBox(const wchar_t* caption, const wchar_t* text, bool modal, int flags,
         IGUIElement* parent, int id) = 0;
     virtual IGUIScrollBar* addScrollBar(bool horizontal, const core::CRect<int>& rectangle, IGUIElement* parent,

@@ -61,6 +61,23 @@ int linearSearchIf(TIterator first, TIterator last, TPredicate predicate, const 
     return -1;
 }
 
+//! Returns the index of value in the sorted range [begin, end), or -1.
+template <class I, class T>
+int binarySearchPos(I begin, I end, const T& value)
+{
+    I it = std::lower_bound(begin, end, value);
+    if (it != end && !(value < *it))
+        return it - begin;
+    return -1;
+}
+
+//! Sorts [begin, end) by operator<.
+template <class I>
+void sort(I begin, I end)
+{
+    std::sort(begin, end);
+}
+
 } // end namespace algo
 } // end namespace ox
 

@@ -56,6 +56,9 @@ private:
     ox::video::ISpritePackage* SpritePackage;
 };
 
+//! creates a color skin
+ox::gui::IGUISkin* createSkin(ox::gui::EGUI_SKIN_TYPE type);
+
 } // end namespace gui
 } // end namespace daisy
 

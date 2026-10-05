@@ -4,6 +4,7 @@
 #define OX_CORE_CSTRINGFUNCTIONS_H
 
 #include <cstdlib>
+#include <ctype.h>
 #include "CString.h"
 #include "../TArray.h"
 
@@ -38,6 +39,13 @@ public:
     // Defined inline in CStringConversions.h.
     static float wideToFloat(const wchar_t* str);
     static CString<wchar_t> floatToWide(float value, char* format = 0);
+
+    //! Lowers the case of str with tolower.
+    static void ansiMakeLower(CString<char>& str)
+    {
+        for (int i = 0; i <= str.size(); ++i)
+            str[i] = tolower(str[i]);
+    }
 };
 
 //! A copy of source with every occurrence of find replaced by replacement.
