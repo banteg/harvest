@@ -263,8 +263,8 @@ void CCreativeEntity::render(const ox::core::CPosition2d<float>& camera, const o
 }
 
 ox::video::ISpriteAnimationState* CCreativeEntity::getCurrentDisplaySprite() { return Sprite; }
-ox::core::CString<wchar_t> CCreativeEntity::getInfoString() { return L""; }
 ox::core::CString<wchar_t> CCreativeEntity::getMiniStatString() { return L""; }
+ox::core::CString<wchar_t> CCreativeEntity::getInfoString() { return L""; }
 
 void CCreativeEntity::writeEntityData(ox::io::IWriteFile* file)
 {
