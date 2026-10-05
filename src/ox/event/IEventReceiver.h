@@ -27,6 +27,8 @@ enum EGUI_EVENT_TYPE
     EGET_SCROLL_BAR_CHANGED = 7,
     //! Sent by daisy::gui::CGUICheckBox when it is clicked.
     EGET_CHECKBOX_TOGGLED = 8,
+    //! Sent by daisy::gui::CGUIRadioList when another button is checked (name inferred).
+    EGET_RADIOLIST_CHANGED = 9,
     //! The selection of a list box changed.
     EGET_LISTBOX_CHANGED = 10,
     //! The selected list box item was selected again.
@@ -39,6 +41,10 @@ enum EGUI_EVENT_TYPE
     EGET_EDITBOX_ENTER = 19,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
+    //! A popup menu closed (name inferred).
+    EGET_POPUP_MENU_CLOSED = 27,
+    //! A popup menu option was chosen; the caller is the option's element (name inferred).
+    EGET_POPUP_MENU_OPTION_CHOSEN = 28,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
     EGET_MODAL_SCREEN_BLOCKED = 30
 };

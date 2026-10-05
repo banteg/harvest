@@ -36,9 +36,13 @@ enum EGUI_DEFAULT_COLOR
     EGDC_SCROLLBAR,
     EGDC_WINDOW,
     //! The tint a modal screen draws over the elements behind it (name inferred).
-    EGDC_MODAL_SCREEN
+    EGDC_MODAL_SCREEN,
+    //! The fill of the option under the mouse in a popup menu (name inferred).
+    EGDC_POPUP_MENU_HIGHLIGHT,
+    //! The frame of the option under the mouse in a popup menu (name inferred).
+    EGDC_POPUP_MENU_HIGHLIGHT_BORDER
 };
-//! The default sizes, as in Irrlicht 0.7.
+//! The default sizes, as in Irrlicht 0.7 with Oxeye additions.
 enum EGUI_DEFAULT_SIZE
 {
     EGDS_SCROLLBAR_SIZE = 0,
@@ -48,7 +52,11 @@ enum EGUI_DEFAULT_SIZE
     EGDS_MESSAGE_BOX_WIDTH,
     EGDS_MESSAGE_BOX_HEIGHT,
     EGDS_BUTTON_WIDTH,
-    EGDS_BUTTON_HEIGHT
+    EGDS_BUTTON_HEIGHT,
+    //! The least height of a radio button (Oxeye; name inferred).
+    EGDS_RADIO_BUTTON_HEIGHT,
+    //! The gap between the buttons of a radio list (Oxeye; name inferred).
+    EGDS_RADIO_BUTTON_SPACING
 };
 //! The default texts of message box buttons, as in Irrlicht 0.7.
 enum EGUI_DEFAULT_TEXT

@@ -432,3 +432,11 @@
 ["daisy/gui/CGUIScrollBar.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0b0
+
+["daisy/gui/CGUIPopupMenu.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0a8
+
+["daisy/gui/CGUIRadioList.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0ac

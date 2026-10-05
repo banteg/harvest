@@ -25,6 +25,7 @@ enum EGUI_ELEMENT_TYPE
 {
     EGUIET_SCROLL_BAR = 3,
     EGUIET_CHECK_BOX = 6,
+    EGUIET_RADIO_LIST = 7,
     EGUIET_LIST_BOX = 8,
     EGUIET_MODAL_SCREEN = 19
 };
@@ -159,7 +160,13 @@ public:
             return;
 
         if (ReportOnDraw == 1)
-            reportDrawn();
+        {
+            event::SEvent event;
+            event.EventType = event::EET_GUI_EVENT;
+            event.GUIEvent.Caller = this;
+            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
+            OnEvent(event);
+        }
 
         for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
         {
@@ -169,7 +176,13 @@ public:
         }
 
         if (ReportOnDraw == 2)
-            reportDrawn();
+        {
+            event::SEvent event;
+            event.EventType = event::EET_GUI_EVENT;
+            event.GUIEvent.Caller = this;
+            event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
+            OnEvent(event);
+        }
     }
 
     virtual void move(core::CPosition2d<int> offset);
@@ -211,17 +224,6 @@ public:
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
     core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
-
-private:
-    //! Sends EGET_ELEMENT_DRAWN to this element, before or after the children are drawn.
-    void reportDrawn()
-    {
-        event::SEvent event;
-        event.EventType = event::EET_GUI_EVENT;
-        event.GUIEvent.Caller = this;
-        event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
-        OnEvent(event);
-    }
 
 protected:
     std::list<IGUIElement*> Children;
