@@ -482,6 +482,14 @@ int CDefenseTowerEntity::getBackTargetCount(bool shooting)
     return shooting ? ShootingBackTargetCount : BackTargetCount;
 }
 
+inline void CDefenseTowerEntity::stopShootingAndClearTarget()
+{
+    Target.Entity = 0;
+    Target.Id = -1;
+    Shooting = false;
+    TargetPosition.Z = -1;
+}
+
 float CDefenseTowerEntity::getTotalRange()
 {
     if (!BackTargets.empty())
@@ -502,6 +510,11 @@ float CDefenseTowerEntity::getTotalDamage(bool shooting)
     if (BackTargets.empty())
         return 11.0f;
     return (getBackTargetCount(shooting) - 1) * 5.5f + 11.0f;
+}
+
+inline int CDefenseTowerEntity::getAlienKillCount()
+{
+    return Kills;
 }
 
 void CDefenseTowerEntity::updateBackTargetCount()
@@ -549,6 +562,13 @@ void CDefenseTowerEntity::updateSprite(float frameDelta)
         Beam.Beam->update(frameDelta);
     if (Sprites[SpriteIndex])
         Sprites[SpriteIndex]->update(frameDelta);
+}
+
+bool CDefenseTowerEntity::addToRenderList(const ox::core::CRect<float>& visibleArea)
+{
+    if (visibleArea.isPointInside(ox::core::CPosition2d<float>(Position.X, Position.Y)))
+        return true;
+    return visibleArea.isPointInside(ox::core::CPosition2d<float>(Beam.End.X, Beam.End.Y));
 }
 
 void CDefenseTowerEntity::handleRightClickAction(const ox::core::CPosition2d<float>& position)
@@ -714,11 +734,9 @@ bool CDefenseTowerEntity::wantsSpark()
     return Energy.getValue() + 2.75f <= 20.0f;
 }
 
-bool CDefenseTowerEntity::addToRenderList(const ox::core::CRect<float>& visibleArea)
+inline void CDefenseTowerEntity::renderGroundLayer(const ox::core::CPosition2d<float>& camera,
+    const ox::core::CRect<int>& viewPort)
 {
-    if (visibleArea.isPointInside(ox::core::CPosition2d<float>(Position.X, Position.Y)))
-        return true;
-    return visibleArea.isPointInside(ox::core::CPosition2d<float>(Beam.End.X, Beam.End.Y));
 }
 
 void CDefenseTowerEntity::render(const ox::core::CPosition2d<float>& camera,

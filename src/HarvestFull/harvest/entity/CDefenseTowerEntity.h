@@ -25,7 +25,7 @@ public:
     virtual bool addToRenderList(const ox::core::CRect<float>& visibleArea);
     virtual void render(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort);
     virtual void renderGroundLayer(const ox::core::CPosition2d<float>& camera,
-        const ox::core::CRect<int>& viewPort) {}
+        const ox::core::CRect<int>& viewPort);
     virtual ox::video::ISpriteAnimationState* getCurrentDisplaySprite();
     virtual int onSpark(CSparkEntity* spark);
     virtual bool wantsSpark();
@@ -42,16 +42,10 @@ public:
     bool rotateTowardsTarget(float frameDelta);
     bool isForwardTargetShooting();
     int getBackTargetCount(bool shooting);
-    void stopShootingAndClearTarget()
-    {
-        Target.Entity = 0;
-        Target.Id = -1;
-        Shooting = false;
-        TargetPosition.Z = -1;
-    }
+    void stopShootingAndClearTarget();
     float getTotalRange();
     float getTotalDamage(bool shooting);
-    int getAlienKillCount() { return Kills; }
+    int getAlienKillCount();
     void updateBackTargetCount();
     void updateForwardTargetShooting();
     void notifyRemoveBackTarget(CDefenseTowerEntity* tower);
