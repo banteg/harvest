@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/SColor.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::video namespace; not the original source. Partial: only the
-// constructors, component getters and alpha setter are recovered.
+// constructors and the component getters and setters are recovered.
 
 #ifndef OX_VIDEO_SCOLOR_H
 #define OX_VIDEO_SCOLOR_H
@@ -38,22 +38,23 @@ public:
     //! Sets the red component, from 0 to 255.
     void setRed(int r)
     {
-        color = ((r & 0xff) << 16) | (((color >> 24) & 0xff) << 24) | (((color >> 8) & 0xff) << 8) |
+        color = (((color >> 24) & 0xff) << 24) | ((r & 0xff) << 16) | (((color >> 8) & 0xff) << 8) |
             (color & 0xff);
     }
 
     //! Sets the green component, from 0 to 255.
     void setGreen(int g)
     {
-        color = ((g & 0xff) << 8) | (((color >> 24) & 0xff) << 24) | (((color >> 16) & 0xff) << 16) |
+        color = (((color >> 24) & 0xff) << 24) | (((color >> 16) & 0xff) << 16) | ((g & 0xff) << 8) |
             (color & 0xff);
     }
 
     //! Sets the blue component, from 0 to 255.
+    /** Written in the later Irrlicht form: the 0.7 form compiles the same lua color code but shifts
+        instruction order in CPlayState::readStateFromFile. */
     void setBlue(int b)
     {
-        color = (b & 0xff) | (((color >> 24) & 0xff) << 24) | (((color >> 16) & 0xff) << 16) |
-            (((color >> 8) & 0xff) << 8);
+        color = (b & 0xff) | (color & 0xffffff00);
     }
 
     //! Signed like Irrlicht's s32: CParticleState::update extracts components with arithmetic shifts.

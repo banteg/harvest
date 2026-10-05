@@ -183,22 +183,29 @@ int harvest_findBuildings(lua_State* L)
         inRect = false;
     }
 
-    if (!entity::gp_entityManager)
-        return 0;
-
-    const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
-    lua_newtable(L);
-    int index = 1;
-    for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
+    int result = 0;
+    if (entity::gp_entityManager)
     {
-        if (((entity::CEntity*)*it)->getEntityType() != 5)
+        const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(0);
+        std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
+        lua_newtable(L);
+        int index = 1;
+        for (; it != list.end(); ++it)
         {
-            if (type < 0 || (type == ((entity::CEntity*)*it)->getEntityType() &&
-                (type != 16 || buildingId == ox::core::CString<char>(((entity::CCreativeEntity*)*it)->getBuildingId()))))
+            if (((entity::CEntity*)*it)->getEntityType() == 5)
+                continue;
+            bool match = true;
+            if (type >= 0)
+            {
+                match = type == ((entity::CEntity*)*it)->getEntityType();
+                if (match && type == 16)
+                    match = buildingId == ox::core::CString<char>(((entity::CCreativeEntity*)*it)->getBuildingId());
+            }
+            if (match)
             {
                 if (inRect)
                 {
-                    const ox::core::CVector3d<float>& position = (*it)->getPosition();
+                    ox::core::CVector3d<float> position = (*it)->getPosition();
                     if (x1 > position.X || position.X > x2 || y1 > position.Y || position.Y > y2)
                         continue;
                 }
@@ -216,52 +223,44 @@ int harvest_findBuildings(lua_State* L)
                 ++index;
             }
         }
+        result = 1;
     }
-    return 1;
+    return result;
 }
 
 int harvest_findAliens(lua_State* L)
 {
     int top = lua_gettop(L);
-    int alienType;
-    float left, top_, right, bottom;
-    bool inRect, inCircle;
-    if (top == 5)
-    {
-        alienType = lua_tointeger(L, 5);
-    rect:
-        left = (float)lua_tonumber(L, 1);
-        top_ = (float)lua_tonumber(L, 2);
-        right = (float)lua_tonumber(L, 3);
-        bottom = (float)lua_tonumber(L, 4);
-        inCircle = false;
-        inRect = true;
-    }
+    int alienType = -1;
+    if (top == 1)
+        alienType = lua_tointeger(L, 1);
     else if (top == 4)
-    {
         alienType = lua_tointeger(L, 4);
-    circle:
-        left = (float)lua_tonumber(L, 1);
-        top_ = (float)lua_tonumber(L, 2);
-        float radius = (float)lua_tonumber(L, 3);
-        right = radius * radius;
+    else if (top == 5)
+        alienType = lua_tointeger(L, 5);
+
+    float x1, y1, x2, y2;
+    bool inRect, inCircle;
+    if (top == 3 || top == 4)
+    {
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        x2 *= x2;
         inCircle = true;
         inRect = false;
     }
-    else if (top == 1)
+    else if (top == 5)
     {
-        alienType = lua_tointeger(L, 1);
+        x1 = (float)lua_tonumber(L, 1);
+        y1 = (float)lua_tonumber(L, 2);
+        x2 = (float)lua_tonumber(L, 3);
+        y2 = (float)lua_tonumber(L, 4);
         inCircle = false;
-        inRect = false;
+        inRect = true;
     }
     else
     {
-        alienType = -1;
-        if (top == 3 || top == 4)
-            goto circle;
-        alienType = -1;
-        if (top == 5)
-            goto rect;
         inCircle = false;
         inRect = false;
     }
@@ -270,29 +269,29 @@ int harvest_findAliens(lua_State* L)
         return 0;
 
     const std::list<ox::entity::COxEntity*>& list = entity::gp_entityManager->getEntityList(1);
+    std::list<ox::entity::COxEntity*>::const_iterator it = list.begin();
     lua_newtable(L);
     int index = 1;
-    for (std::list<ox::entity::COxEntity*>::const_iterator it = list.begin(); it != list.end(); ++it)
+    for (; it != list.end(); ++it)
     {
-        entity::CAlienEntity* alien = (entity::CAlienEntity*)*it;
-        if (alienType >= 0 && alienType != alien->getAlienType())
+        if (alienType >= 0 && alienType != ((entity::CAlienEntity*)*it)->getAlienType())
             continue;
         if (inRect)
         {
-            const ox::core::CVector3d<float>& position = alien->getPosition();
-            if (left > position.X || position.X > right || top_ > position.Y || position.Y > bottom)
+            ox::core::CVector3d<float> position = (*it)->getPosition();
+            if (x1 > position.X || position.X > x2 || y1 > position.Y || position.Y > y2)
                 continue;
         }
         if (inCircle)
         {
-            const ox::core::CVector3d<float>& position = alien->getPosition();
-            float dx = position.X - left;
-            float dy = position.Y - top_;
-            if (dx * dx + dy * dy > right)
+            const ox::core::CVector3d<float>& position = (*it)->getPosition();
+            float dx = position.X - x1;
+            float dy = position.Y - y1;
+            if (dx * dx + dy * dy > x2)
                 continue;
         }
         lua_pushnumber(L, index);
-        Lunar<entity::CAlienLuaInfo>::push(L, alien->getLuaInfo());
+        Lunar<entity::CAlienLuaInfo>::push(L, ((entity::CAlienEntity*)*it)->getLuaInfo());
         lua_rawset(L, -3);
         ++index;
     }
@@ -545,15 +544,11 @@ int harvest_showInfoMessage(lua_State* L)
         SInfoLineMessage message;
         message.Text = lua_tostring(L, 1);
         if (top >= 2)
-        {
             message.Name = lua_tostring(L, 2);
-            if (top >= 3)
-            {
-                message.Portrait = lua_tostring(L, 3);
-                if (top >= 4)
-                    message.Sound = lua_tostring(L, 4);
-            }
-        }
+        if (top >= 3)
+            message.Portrait = lua_tostring(L, 3);
+        if (top >= 4)
+            message.Sound = lua_tostring(L, 4);
         ox::event::SEvent event;
         event.EventType = ox::event::EET_USER_EVENT;
         event.UserEvent.UserData1 = 32;
@@ -676,53 +671,51 @@ ox::io::IFileSystem* CLuaManager::getFileSystem()
 
 int harvest_addSpriteState(lua_State* L)
 {
-    if (lua_gettop(L) <= 0)
+    if (lua_gettop(L) > 0)
     {
+        ox::core::CString<char> packageFile;
+        if (lua_gettop(L) >= 2)
+        {
+            packageFile = extractLuaPath(L);
+            packageFile.append(ox::core::CString<char>(lua_tostring(L, 2)));
+        }
+        lua_pushinteger(L, gp_luaManager->createSpriteState(lua_tostring(L, 1), packageFile));
+    }
+    else
         lua_pushinteger(L, -1);
-        return 1;
-    }
-    ox::core::CString<char> packageFile;
-    if (lua_gettop(L) >= 2)
-    {
-        packageFile = extractLuaPath(L);
-        packageFile.append(ox::core::CString<char>(lua_tostring(L, 2)));
-    }
-    lua_pushinteger(L, gp_luaManager->createSpriteState(lua_tostring(L, 1), packageFile));
     return 1;
 }
 
 int CLuaManager::createSpriteState(const char* name, const ox::core::CString<char>& packageFile)
 {
-    ox::video::ISpritePackage* package;
+    ox::video::ISpritePackage* package = entity::CEntity::gp_spritePackage;
     if (packageFile.size() >= 5)
     {
         package = Device->getVideoDriver()->getSpritePackage(packageFile.c_str(), false);
         if (!package)
             return -1;
     }
-    else
-        package = entity::CEntity::gp_spritePackage;
 
     ox::video::ISpriteAnimationState* state = package->addNewAnimationState(ox::core::CString<char>(name));
     if (!state)
         return -1;
 
-    if (FreeSpriteState >= (int)SpriteStates.size())
+    if (FreeSpriteState < (int)SpriteStates.size())
     {
-        SpriteStates.push_back(state);
-        FreeSpriteState = SpriteStates.size();
-        return FreeSpriteState - 1;
+        int index = FreeSpriteState++;
+        SpriteStates[index] = state;
+        while (FreeSpriteState < (int)SpriteStates.size())
+        {
+            if (!SpriteStates[FreeSpriteState])
+                break;
+            ++FreeSpriteState;
+        }
+        return index;
     }
 
-    int index = FreeSpriteState++;
-    SpriteStates[index] = state;
-    while (FreeSpriteState < (int)SpriteStates.size())
-    {
-        if (!SpriteStates[FreeSpriteState])
-            break;
-        ++FreeSpriteState;
-    }
-    return index;
+    SpriteStates.push_back(state);
+    FreeSpriteState = SpriteStates.size();
+    return FreeSpriteState - 1;
 }
 
 int harvest_removeSpriteState(lua_State* L)
@@ -750,26 +743,18 @@ int harvest_renderSpriteState(lua_State* L)
         float rotation = 0.0f;
         ox::video::SColor color(0xffffffff);
         if (top >= 4)
-        {
             z = (float)lua_tonumber(L, 4);
-            if (top >= 5)
-            {
-                scale = (float)lua_tonumber(L, 5);
-                if (top >= 6)
-                {
-                    rotation = (float)lua_tonumber(L, 6);
-                    if (top >= 7)
-                    {
-                        color.setAlpha(lua_tointeger(L, 7));
-                        if (top >= 10)
-                        {
-                            color.setRed(lua_tointeger(L, 8));
-                            color.setGreen(lua_tointeger(L, 9));
-                            color.setBlue(lua_tointeger(L, 10));
-                        }
-                    }
-                }
-            }
+        if (top >= 5)
+            scale = (float)lua_tonumber(L, 5);
+        if (top >= 6)
+            rotation = (float)lua_tonumber(L, 6);
+        if (top >= 7)
+            color.setAlpha(lua_tointeger(L, 7));
+        if (top >= 10)
+        {
+            color.setRed(lua_tointeger(L, 8));
+            color.setGreen(lua_tointeger(L, 9));
+            color.setBlue(lua_tointeger(L, 10));
         }
         entity::CSpecialEffectEntity* effect = new entity::CSpecialEffectEntity((float)x, (float)y, z,
             gp_luaManager->getSpriteState(index), scale, rotation, color);
@@ -791,31 +776,31 @@ int harvest_renderSpriteStateFreeShape(lua_State* L)
     if (top >= 10)
     {
         int index = lua_tointeger(L, 1);
-        float y = (float)lua_tonumber(L, 2);
-        float x1 = (float)lua_tonumber(L, 3);
-        float y1 = (float)lua_tonumber(L, 4);
-        float x2 = (float)lua_tonumber(L, 5);
-        float y2 = (float)lua_tonumber(L, 6);
-        float x3 = (float)lua_tonumber(L, 7);
-        float y3 = (float)lua_tonumber(L, 8);
-        float x4 = (float)lua_tonumber(L, 9);
-        float y4 = (float)lua_tonumber(L, 10);
-        ox::video::SColor color;
+        lua_Number x1 = lua_tonumber(L, 2);
+        lua_Number y1 = lua_tonumber(L, 3);
+        lua_Number x2 = lua_tonumber(L, 4);
+        lua_Number y2 = lua_tonumber(L, 5);
+        lua_Number x3 = lua_tonumber(L, 6);
+        lua_Number y3 = lua_tonumber(L, 7);
+        lua_Number x4 = lua_tonumber(L, 8);
+        lua_Number y4 = lua_tonumber(L, 9);
+        // The entity's y, which orders it among the other entities.
+        lua_Number y = lua_tonumber(L, 10);
+        ox::video::SColor color(0xffffffff);
         if (top >= 11)
-            color = ox::video::SColor(lua_tointeger(L, 11), 255, 255, 255);
-        else
-            color = 0xffffffff;
+            color.setAlpha(lua_tointeger(L, 11));
         if (top >= 14)
         {
-            int red = lua_tointeger(L, 12);
-            int green = lua_tointeger(L, 13);
-            int blue = lua_tointeger(L, 14);
-            color = ox::video::SColor(color.getAlpha(), red, green, blue);
+            color.setRed(lua_tointeger(L, 12));
+            color.setGreen(lua_tointeger(L, 13));
+            color.setBlue(lua_tointeger(L, 14));
         }
-        entity::gp_entityManager->appendEntity(new entity::CSpecialEffectEntity(
-            ox::core::CPosition2d<float>(x1, y1), ox::core::CPosition2d<float>(x2, y2),
-            ox::core::CPosition2d<float>(x3, y3), ox::core::CPosition2d<float>(x4, y4), y,
-            gp_luaManager->getSpriteState(index), color), 4);
+        ox::video::ISpriteAnimationState* sprite = gp_luaManager->getSpriteState(index);
+        entity::CSpecialEffectEntity* effect = new entity::CSpecialEffectEntity(
+            ox::core::CPosition2d<float>((float)x1, (float)y1), ox::core::CPosition2d<float>((float)x2, (float)y2),
+            ox::core::CPosition2d<float>((float)x3, (float)y3), ox::core::CPosition2d<float>((float)x4, (float)y4),
+            (float)y, sprite, color);
+        entity::gp_entityManager->appendEntity(effect, 4);
     }
     return 0;
 }
@@ -1413,10 +1398,9 @@ int harvest_drawText(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = ox::video::SColor(255, red, green, blue);
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1437,10 +1421,9 @@ int harvest_drawLine(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = (blue & 0xff) | ((green & 0xff) << 8) | ((red & 0xff) << 16) | 0xff000000;
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1461,10 +1444,9 @@ int harvest_drawRectangle(lua_State* L)
         ox::video::SColor color(0xffffffff);
         if (lua_gettop(L) >= 7)
         {
-            int red = lua_tointeger(L, 5);
-            int green = lua_tointeger(L, 6);
-            int blue = lua_tointeger(L, 7);
-            color = ox::video::SColor(255, red, green, blue);
+            color.setRed(lua_tointeger(L, 5));
+            color.setGreen(lua_tointeger(L, 6));
+            color.setBlue(lua_tointeger(L, 7));
         }
         if (lua_gettop(L) >= 8)
             color.setAlpha(lua_tointeger(L, 8));
@@ -1733,14 +1715,11 @@ void CLuaFileValues::getLuaTableVars(lua_State* L, int table, const ox::core::CS
             continue;
         }
 
-        int dot = 0;
-        while (start + dot < it->Key.String.size() && it->Key.String[start + dot] != '.')
-            ++dot;
-
-        if (start + dot < it->Key.String.size())
+        int dot = it->Key.String.findNext('.', start);
+        if (dot != -1)
         {
-            ox::core::CString<char> subPrefix = it->Key.String.subString(0, start + dot + 1);
-            ox::core::CString<char> key = it->Key.String.subString(start, dot);
+            ox::core::CString<char> subPrefix = it->Key.String.subString(0, dot + 1);
+            ox::core::CString<char> key = it->Key.String.subString(start, dot - start);
             int number = strtol(key.c_str(), 0, 10);
             if (number != 0 || key == ox::core::CString<char>("0"))
                 lua_pushnumber(L, number);
@@ -1784,10 +1763,7 @@ bool CLuaManager::writeLuaStates(ox::io::IWriteFile* file)
     CLuaFileValues::addLuaTableVars(gp_luaState, ox::core::CString<char>(""), values);
     ox::io::CHelpIO::writeInt(file, values.size());
     for (unsigned int i = 0; i < values.size(); ++i)
-    {
-        CLuaFileValues::writeLuaAttribute(file, values[i].Key);
-        CLuaFileValues::writeLuaAttribute(file, values[i].Value);
-    }
+        CLuaFileValues::writeLuaFilePair(file, values[i]);
     luaL_unref(L, LUA_REGISTRYINDEX, table);
     return true;
 }
@@ -2308,28 +2284,29 @@ void CLuaManager::renderGuiObjects(ox::video::IVideoDriver* driver, ox::gui::IGU
 {
     for (unsigned int i = 0; i < GuiObjects.size(); ++i)
     {
-        SLuaGuiObject* object = GuiObjects[i];
-        if (object->Type == 2)
+        switch (GuiObjects[i]->Type)
         {
-            driver->draw2DRectangle(object->Color, ox::core::CRect<int>(object->X, object->Y,
-                object->X + object->Extent1, object->Y + object->Extent2), 0);
-        }
-        else if (object->Type == 1)
+        case 0:
         {
-            driver->draw2DLine(ox::core::CPosition2d<int>(object->X, object->Y),
-                ox::core::CPosition2d<int>(object->Extent1, object->Extent2), object->Color);
-        }
-        else if (object->Type == 0)
-        {
-            int x = object->X;
-            int y = object->Y;
-            ox::core::CDimension2d<int> size = font->getDimension(object->Text.c_str());
+            ox::core::CPosition2d<int> position(GuiObjects[i]->X, GuiObjects[i]->Y);
+            ox::core::CDimension2d<int> size = font->getDimension(GuiObjects[i]->Text.c_str());
             if (GuiObjects[i]->Extent1 == 1)
-                x -= size.Width / 2;
+                position.X -= size.Width / 2;
             else if (GuiObjects[i]->Extent1 == 2)
-                x -= size.Width;
-            font->draw(GuiObjects[i]->Text.c_str(), ox::core::CRect<int>(x, y, x + size.Width, y + size.Height),
+                position.X -= size.Width;
+            font->draw(GuiObjects[i]->Text.c_str(), ox::core::CRect<int>(position, size),
                 GuiObjects[i]->Color, (ox::gui::EFontHorizontalAlign)0, (ox::gui::EFontVerticalAlign)0, 0);
+            break;
+        }
+        case 1:
+            driver->draw2DLine(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
+                ox::core::CPosition2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2), GuiObjects[i]->Color);
+            break;
+        case 2:
+            driver->draw2DRectangle(GuiObjects[i]->Color,
+                ox::core::CRect<int>(ox::core::CPosition2d<int>(GuiObjects[i]->X, GuiObjects[i]->Y),
+                    ox::core::CDimension2d<int>(GuiObjects[i]->Extent1, GuiObjects[i]->Extent2)), 0);
+            break;
         }
         delete GuiObjects[i];
     }
@@ -2388,9 +2365,12 @@ const ox::core::CRect<float>& CLuaManager::getMinimumWorldBorders()
 
 void CLuaManager::removeSpriteState(int index)
 {
-    if (index < 0 || index >= (int)SpriteStates.size() || !SpriteStates[index])
+    if (index < 0 || index >= (int)SpriteStates.size())
         return;
-    SpriteStates[index]->remove();
+    ox::video::ISpriteAnimationState* state = SpriteStates[index];
+    if (!state)
+        return;
+    state->remove();
     SpriteStates[index] = 0;
     if (FreeSpriteState > index)
         FreeSpriteState = index;
@@ -2411,11 +2391,13 @@ SLuaEntityActionButton* CLuaManager::getNextEntityActionButton(const char* entit
     unsigned int i = 0;
     if (previous)
     {
-        while (i < EntityActionButtons.size())
+        for (; i < EntityActionButtons.size(); ++i)
         {
-            ++i;
-            if (&EntityActionButtons[i - 1] == previous)
+            if (&EntityActionButtons[i] == previous)
+            {
+                ++i;
                 break;
+            }
         }
     }
     for (; i < EntityActionButtons.size(); ++i)
