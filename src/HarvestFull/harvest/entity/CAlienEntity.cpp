@@ -48,6 +48,11 @@ Lunar<CAlienLuaInfo>::RegType CAlienLuaInfo::methods[] =
 static const bool BUILDING_TARGET_TYPES[] =
 { true, true, false, true, true, false, false, true, true, false, false, true, false, true, true, false, true };
 
+static inline ox::core::CPosition2d<float> position2d(const ox::core::CVector3d<float>& v)
+{
+    return ox::core::CPosition2d<float>(v.X, v.Y);
+}
+
 static const bool FLYING_IMMUNITY[] = { true, true, false, false, true, true, false };
 
 static const float ALIEN_DAMAGE_MODIFIERS[14][7] =
@@ -108,8 +113,6 @@ CAlienEntity::CAlienEntity(float x, float y, int alienType)
     }
     SpawnCooldown = (ox::algo::CRand::rand() % 2000) * 0.001f;
 }
-
-CAlienLuaInfo::CAlienLuaInfo(lua_State* L) : Entity(0) {}
 
 void CAlienEntity::replaceWithJammerSprite()
 {
@@ -549,7 +552,7 @@ int CAlienEntity::updateLogic(float frameDelta)
                 Sprites[3]->reset();
             }
         }
-        if (AlienType == 7)
+        else if (AlienType == 7)
         {
             SummonerCharging = false;
             PendingSummon = false;
@@ -566,9 +569,11 @@ int CAlienEntity::updateLogic(float frameDelta)
         if (game::gp_world)
         {
             const ox::core::CRect<float>& field = game::gp_world->getVisibleGameFieldSize();
+            ox::core::CPosition2d<float> center((field.UpperLeftCorner.X + field.LowerRightCorner.X) * .5f,
+                (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * .5f);
             float angle = Id * 10.0f * .0174532905f;
-            target.X = cos((double)angle) * 450.0 + (field.UpperLeftCorner.X + field.LowerRightCorner.X) * .5f;
-            target.Y = sin((double)angle) * 450.0 + (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * .5f;
+            target.X = cos((double)angle) * 450.0 + center.X;
+            target.Y = sin((double)angle) * 450.0 + center.Y;
         }
     }
     if (SpawnCooldown > 0)
@@ -613,12 +618,7 @@ int CAlienEntity::updateLogic(float frameDelta)
         break;
     }
     movement += Speed * frameDelta;
-    if (AlienType == 8)
-    {
-        Position.X += movement.X;
-        Position.Y += movement.Y;
-    }
-    else
+    if (AlienType != 8)
     {
         ox::core::CPosition2d<float> position(Position.X + movement.X, Position.Y + movement.Y);
         if (game::gp_world->mayMoveHere(position))
@@ -642,14 +642,21 @@ int CAlienEntity::updateLogic(float frameDelta)
             JumpSpeed.Z = 0;
         }
     }
+    else
+    {
+        Position.X += movement.X;
+        Position.Y += movement.Y;
+    }
     gp_entityManager->updateGridEntity(this, oldPosition, 1);
     if (AlienType == 2)
         Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * .5f);
     else
         Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * 5.0f);
-    if (AlienType != 5 && AlienType != 8 && !Invisible && Target.Entity)
+    if (AlienType != 8 && AlienType != 5 && !Invisible && Target.Entity)
     {
-        if (ox::core::abs_(target.X - Position.X) < 5.0f && ox::core::abs_(target.Y - Position.Y) < 5.0f)
+        float dx = target.X - Position.X;
+        float dy = target.Y - Position.Y;
+        if (ox::core::abs_(dx) < 5.0f && ox::core::abs_(dy) < 5.0f)
         {
             Target.Entity->killEntity();
             placeBuildingParticle(Target.Entity);
@@ -661,11 +668,16 @@ int CAlienEntity::updateLogic(float frameDelta)
     }
     else if (Invisible)
     {
-        if (ox::core::abs_(target.X - Position.X) < 5.0f && ox::core::abs_(target.Y - Position.Y) < 5.0f)
+        float dx = target.X - Position.X;
+        float dy = target.Y - Position.Y;
+        if (ox::core::abs_(dx) < 5.0f && ox::core::abs_(dy) < 5.0f)
             Invisible = false;
     }
-    if (ShieldSprite && ShieldSprite->update(frameDelta))
-        ShieldSprite->setFlag(1, true);
+    if (ShieldSprite)
+    {
+        if (ShieldSprite->update(frameDelta))
+            ShieldSprite->setFlag(1, true);
+    }
     return 0;
 }
 
@@ -679,17 +691,16 @@ void CAlienEntity::locateTargetBuilding()
         const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
         for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
         {
-            CEntity* building = (CEntity*)*it;
-            if (building->getEntityType() == 5 && !building->isKilled() &&
-                ((CMineralsEntity*)building)->getHoggerId() == -1)
+            if (((CEntity*)*it)->getEntityType() == 5 && !((CEntity*)*it)->isKilled() &&
+                ((CMineralsEntity*)*it)->getHoggerId() == -1)
             {
-                float x = building->getPosition().X - Position.X;
-                float y = building->getPosition().Y - Position.Y;
+                float x = (*it)->getPosition().X - Position.X;
+                float y = (*it)->getPosition().Y - Position.Y;
                 float distance = x * x + y * y;
                 if (distance < bestDistance)
                 {
-                    Target.Entity = building;
-                    Target.Id = building->getId();
+                    Target.Entity = *it;
+                    Target.Id = Target.Entity->getId();
                     Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                     bestDistance = distance;
                 }
@@ -702,12 +713,10 @@ void CAlienEntity::locateTargetBuilding()
     const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
     for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        CEntity* building = (CEntity*)*it;
-        int type = building->getEntityType();
-        if (BUILDING_TARGET_TYPES[type] && !building->isKilled())
+        if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()] && !((CEntity*)*it)->isKilled())
         {
             targets.push_back(*it);
-            if (building->getEntityType() == 1 && !((CSparkMoverEntity*)building)->isAlienWaypointed())
+            if (((CEntity*)*it)->getEntityType() == 1 && !((CSparkMoverEntity*)*it)->isAlienWaypointed())
                 availableLink = true;
         }
     }
@@ -718,16 +727,16 @@ void CAlienEntity::locateTargetBuilding()
             float bestDistance = 1000000000.0f;
             for (unsigned int i = 0; i < targets.size(); ++i)
             {
-                CEntity* building = (CEntity*)targets[i];
-                if (building->getEntityType() == 1 && !((CSparkMoverEntity*)building)->isAlienWaypointed())
+                if (((CEntity*)targets[i])->getEntityType() == 1 &&
+                    !((CSparkMoverEntity*)targets[i])->isAlienWaypointed())
                 {
-                    float x = building->getPosition().X - Position.X;
-                    float y = building->getPosition().Y - Position.Y;
+                    float x = targets[i]->getPosition().X - Position.X;
+                    float y = targets[i]->getPosition().Y - Position.Y;
                     float distance = x * x + y * y;
                     if (distance < bestDistance)
                     {
-                        Target.Entity = building;
-                        Target.Id = building->getId();
+                        Target.Entity = targets[i];
+                        Target.Id = Target.Entity->getId();
                         Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                         bestDistance = distance;
                     }
@@ -739,42 +748,44 @@ void CAlienEntity::locateTargetBuilding()
             ox::entity::COxEntity* first = targets[ox::algo::CRand::rand() % targets.size()];
             ox::entity::COxEntity* second = targets[ox::algo::CRand::rand() % targets.size()];
             float firstDistance = ox::core::CMath::getSquaredDistance(
-                ox::core::CPosition2d<float>(first->getPosition().X, first->getPosition().Y),
+                position2d(first->getPosition()),
                 ox::core::CPosition2d<float>(Position.X, Position.Y));
             float secondDistance = ox::core::CMath::getSquaredDistance(
-                ox::core::CPosition2d<float>(second->getPosition().X, second->getPosition().Y),
+                position2d(second->getPosition()),
                 ox::core::CPosition2d<float>(Position.X, Position.Y));
             float distance;
-            if (secondDistance <= firstDistance)
-            {
-                Target.Entity = second;
-                distance = secondDistance;
-            }
-            else
+            if (firstDistance < secondDistance)
             {
                 Target.Entity = first;
                 distance = firstDistance;
             }
+            else
+            {
+                Target.Entity = second;
+                distance = secondDistance;
+            }
+            //! Widen the accepted range each time a random pick is not closer.
             float range = 1500.0f;
             int attempts = 10;
             while (distance > range * range && attempts > 0)
             {
                 ox::entity::COxEntity* candidate = targets[ox::algo::CRand::rand() % targets.size()];
                 float candidateDistance = ox::core::CMath::getSquaredDistance(
-                    ox::core::CPosition2d<float>(candidate->getPosition().X, candidate->getPosition().Y),
+                    position2d(candidate->getPosition()),
                     ox::core::CPosition2d<float>(Position.X, Position.Y));
                 if (candidateDistance < distance)
                 {
                     Target.Entity = candidate;
                     distance = candidateDistance;
                 }
-                range += 500.0f;
+                else
+                    range += 500.0f;
                 --attempts;
             }
         }
         if (Target.Id == -1 && AlienType == 4)
             TargetAngle = ox::core::CMath::getAngleIY(ox::core::CPosition2d<float>(Position.X, Position.Y),
-                ox::core::CPosition2d<float>(Target.Entity->getPosition().X, Target.Entity->getPosition().Y));
+                position2d(Target.Entity->getPosition()));
         Target.Id = Target.Entity->getId();
         Target.UpdateCounter = gp_entityManager->getUpdateCounter();
     }
@@ -865,7 +876,7 @@ void CAlienEntity::updateSummonerMovement(float frameDelta, ox::core::CVector3d<
                     }
                 }
             }
-            if (SummonerCharging)
+            else if (SummonerCharging)
             {
                 PendingSummon = true;
                 StateTimer = 4.0f;
@@ -875,8 +886,9 @@ void CAlienEntity::updateSummonerMovement(float frameDelta, ox::core::CVector3d<
                     float angle = i * 2.09439516f + StateAngle;
                     double sine = sin((double)angle);
                     double cosine = cos((double)angle);
-                    gp_entityManager->appendEntity(new CParticleEntity(cosine * 60.0 + Position.X,
-                        sine * 50.0 + Position.Y, 5.0f, 0, "AlienTeleportation"), 4);
+                    float x = Position.X + cosine * 60.0;
+                    float y = Position.Y + sine * 50.0;
+                    gp_entityManager->appendEntity(new CParticleEntity(x, y, 5.0f, 0, "AlienTeleportation"), 4);
                 }
             }
         }
@@ -967,7 +979,10 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
         return;
     }
     movement.normalize();
-    movement *= (HoggerAttached == 1 ? 25.0f : 15.0f) * frameDelta;
+    if (HoggerAttached == 1)
+        movement *= 25.0f * frameDelta;
+    else
+        movement *= 15.0f * frameDelta;
     if (HoggerAttached == 0 && Health < 75.0f)
     {
         ox::entity::COxEntity* oldEntity = Target.Entity;
@@ -994,33 +1009,35 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
                 Target.Entity = 0;
                 Target.Id = -1;
                 locateTargetBuilding();
-            }
-        }
-        if (!Target.Entity)
-        {
-            HoggerAttached = 2;
-            locateTargetBuilding();
-        }
-        else
-        {
-            ox::core::CVector3d<float> position = Target.Entity->getPosition();
-            if (ox::core::abs_(position.X - Position.X) < 2.0f &&
-                ox::core::abs_(position.Y - Position.Y) < 2.0f)
-            {
-                Position = position;
-                Position.Y += 1.0f;
-                ((CMineralsEntity*)Target.Entity)->setHogStatus(Id);
-                MinerLanding = true;
+                if (!Target.Entity)
+                {
+                    HoggerAttached = 2;
+                    locateTargetBuilding();
+                }
             }
             else
-                MinerLanding = false;
+            {
+                ox::core::CVector3d<float> position = Target.Entity->getPosition();
+                float dx = position.X - Position.X;
+                float dy = position.Y - Position.Y;
+                if (ox::core::abs_(dx) < 2.0f && ox::core::abs_(dy) < 2.0f)
+                {
+                    Position = position;
+                    Position.Y += 1.0f;
+                    ((CMineralsEntity*)Target.Entity)->setHogStatus(Id);
+                    MinerLanding = true;
+                }
+                else
+                    MinerLanding = false;
+            }
         }
     }
     else if (Target.Entity)
     {
         ox::core::CVector3d<float> position = Target.Entity->getPosition();
-        if (ox::core::abs_(position.X - Position.X) < 2.0f &&
-            ox::core::abs_(position.Y - Position.Y) < 2.0f)
+        float dx = position.X - Position.X;
+        float dy = position.Y - Position.Y;
+        if (ox::core::abs_(dx) < 2.0f && ox::core::abs_(dy) < 2.0f)
         {
             Position = position;
             Position.Y += 1.0f;
@@ -1040,18 +1057,16 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
                 const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
                 for (std::list<ox::entity::COxEntity*>::const_reverse_iterator it = buildings.rbegin(); it != buildings.rend(); it++)
                 {
-                    int type = ((CEntity*)*it)->getEntityType();
-                    if (BUILDING_TARGET_TYPES[type] && !((CEntity*)*it)->isKilled())
+                    if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()] && !((CEntity*)*it)->isKilled())
                     {
-                        CEntity* building = (CEntity*)*it;
-                        ox::core::CVector3d<float> candidatePosition = building->getPosition();
+                        ox::core::CVector3d<float> candidatePosition = (*it)->getPosition();
                         float candidate = ox::core::CMath::getEstimateDistance(
                             ox::core::CPosition2d<float>(Position.X, Position.Y),
                             ox::core::CPosition2d<float>(candidatePosition.X, candidatePosition.Y));
                         if (candidate < distance && ox::algo::CRand::rand() % 3 == 0)
                         {
-                            Target.Entity = building;
-                            Target.Id = building->getId();
+                            Target.Entity = *it;
+                            Target.Id = Target.Entity->getId();
                             Target.UpdateCounter = gp_entityManager->getUpdateCounter();
                             break;
                         }
@@ -1167,7 +1182,8 @@ void CAlienEntity::updateMagnetoMovement(float frameDelta, ox::core::CVector3d<f
                 gp_entityManager->appendEntity(new CParticleEntity(Target.Entity->getPosition().X,
                     Target.Entity->getPosition().Y, 1.0f, 0, "BrainBuildingTarget"), 4);
                 const std::list<ox::entity::COxEntity*>& aliens = gp_entityManager->getEntityList(1);
-                for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); aliens.end() != it; it++)
+                std::list<ox::entity::COxEntity*>::const_iterator end = aliens.end();
+                for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != end; it++)
                 {
                     if (((CEntity*)*it)->getEntityType() != 6)
                         continue;
@@ -1212,16 +1228,18 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             const std::list<ox::entity::COxEntity*>& aliens = gp_entityManager->getEntityList(1);
             for (std::list<ox::entity::COxEntity*>::const_iterator it = aliens.begin(); it != aliens.end(); it++)
             {
-                CAlienEntity* alien = (CAlienEntity*)*it;
-                if (alien->getEntityType() == 6 && alien->AlienType != 8)
+                if ((*it)->getEntityType() == 6)
                 {
-                    float distance = ox::core::CMath::getSquaredDistance(
-                        ox::core::CPosition2d<float>(Position.X, Position.Y),
-                        ox::core::CPosition2d<float>(alien->getPosition().X, alien->getPosition().Y));
-                    if (distance < 2500.0f)
+                    CAlienEntity* alien = (CAlienEntity*)*it;
+                    if (alien->AlienType != 8)
                     {
-                        float damage = (distance / -2500.0f + 1.0f) * 15.0f;
-                        alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 8.0f, 5);
+                        float distance = ox::core::CMath::getSquaredDistance(
+                            ox::core::CPosition2d<float>(Position.X, Position.Y), position2d(alien->getPosition()));
+                        if (distance < 2500.0f)
+                        {
+                            float damage = (distance / -2500.0f + 1.0f) * 15.0f;
+                            alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 8.0f, 5);
+                        }
                     }
                 }
             }
@@ -1229,17 +1247,22 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
             for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
             {
-                if ((*it)->getEntityType() != 5 &&
-                    ox::core::CMath::getSquaredDistance(ox::core::CPosition2d<float>(Position.X, Position.Y),
-                        ox::core::CPosition2d<float>((*it)->getPosition().X, (*it)->getPosition().Y)) < 900.0f)
+                if ((*it)->getEntityType() != 5)
                 {
-                    (*it)->killEntity();
-                    placeBuildingParticle(*it);
-                    killed = true;
+                    float distance = ox::core::CMath::getSquaredDistance(ox::core::CPosition2d<float>(Position.X, Position.Y),
+                        position2d((*it)->getPosition()));
+                    if (distance < 900.0f)
+                    {
+                        (*it)->killEntity();
+                        placeBuildingParticle(*it);
+                        killed = true;
+                    }
                 }
             }
-            gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0,
-                killed ? "MegaLandKill" : "MegaLand"), 4);
+            if (killed)
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0, "MegaLandKill"), 4);
+            else
+                gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, 1.0f, 0, "MegaLand"), 4);
         }
         else
         {
@@ -1259,8 +1282,9 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
             speed = length / 115.0f * 100.0f;
         else
         {
-            ox::core::CPosition2d<float> position(movement.X * 115.0f + Position.X,
-                movement.Y * 115.0f + Position.Y);
+            ox::core::CPosition2d<float> position;
+            position.X = movement.X * 115.0f + Position.X;
+            position.Y = movement.Y * 115.0f + Position.Y;
             if (game::gp_world->mayMoveHere(position))
                 speed = 100.0f;
             else
@@ -1279,17 +1303,20 @@ void CAlienEntity::updateMegaMovement(float frameDelta, ox::core::CVector3d<floa
                     {
                         ox::core::CVector2d<float> original = movement;
                         const float ATTEMPT_ANGLES_DEGREES[] = { -20, 20, -45, 45, -90, 90, -135, 135, 180 };
-                        int i;
-                        for (i = 0; i < 9; ++i)
+                        bool found = false;
+                        for (int i = 0; i < 9; ++i)
                         {
                             movement = original;
                             movement.rotateBy(ATTEMPT_ANGLES_DEGREES[i]);
                             position.X = movement.X * 115.0f + Position.X;
                             position.Y = movement.Y * 115.0f + Position.Y;
                             if (game::gp_world->mayMoveHere(position))
+                            {
+                                found = true;
                                 break;
+                            }
                         }
-                        if (i == 9)
+                        if (!found)
                         {
                             movement.X = 0;
                             movement.Y = 0;
@@ -1383,14 +1410,28 @@ bool CAlienEntity::dealDamage(float& damage, const ox::core::CPosition2d<float>&
     return killed;
 }
 
+int CAlienEntity::onSpark(CSparkEntity* spark)
+{
+    return 0;
+}
+
+bool CAlienEntity::wantsSpark()
+{
+    return false;
+}
+
 void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort)
 {
     if (AlienType == 2)
     {
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
         if (Particle)
-            Particle->render2D(ox::core::CPosition2d<float>(viewPort.UpperLeftCorner.X + Position.X - camera.X,
-                viewPort.UpperLeftCorner.Y + Position.Y - camera.Y), 1.0f);
+        {
+            ox::core::CPosition2d<float> position;
+            position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+            position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
+            Particle->render2D(position, 1.0f);
+        }
     }
     else if (AlienType == 3 || AlienType == 4 || AlienType == 5)
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
@@ -1405,7 +1446,7 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
         if (Position.Z > 0)
         {
             renderSprite(camera, viewPort, Sprites[4]);
-            renderSprite(ox::core::CPosition2d<float>(camera.X + 0.0f, camera.Y + Position.Z),
+            renderSprite(ox::core::CPosition2d<float>(0, Position.Z) + camera,
                 viewPort, Sprites[SpriteIndex]);
         }
         else
@@ -1413,12 +1454,14 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
     }
     else
         renderSprite(camera, viewPort, Sprites[0]);
-    ox::core::CPosition2d<float> position(Position.X - camera.X, Position.Y - camera.Y);
+    ox::core::CPosition2d<float> position;
+    position.X = Position.X - camera.X;
+    position.Y = Position.Y - camera.Y;
     if (viewPort.UpperLeftCorner.X > position.X || position.X > viewPort.LowerRightCorner.X ||
         viewPort.UpperLeftCorner.Y > position.Y || position.Y > viewPort.LowerRightCorner.Y)
     {
-        position.X = position.X > viewPort.LowerRightCorner.X - 3.0f ? viewPort.LowerRightCorner.X - 3.0f : ox::core::max_(viewPort.UpperLeftCorner.X + 3.0f, position.X);
-        position.Y = position.Y > viewPort.LowerRightCorner.Y - 3.0f ? viewPort.LowerRightCorner.Y - 3.0f : ox::core::max_(viewPort.UpperLeftCorner.Y + 3.0f, position.Y);
+        position.X = ox::core::clamp(position.X, viewPort.UpperLeftCorner.X + 3.0f, viewPort.LowerRightCorner.X - 3.0f);
+        position.Y = ox::core::clamp(position.Y, viewPort.UpperLeftCorner.Y + 3.0f, viewPort.LowerRightCorner.Y - 3.0f);
     }
     else
     {
@@ -1440,13 +1483,13 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
             maximumHealth += (value * value + value) * 50.0f;
         }
         if (Health < maximumHealth && maximumHealth > 0)
-            renderSelfProgress(ox::core::CPosition2d<float>(camera.X + 0.0f, camera.Y + Position.Z),
+            renderSelfProgress(ox::core::CPosition2d<float>(0, Position.Z) + camera,
                 viewPort, Health / maximumHealth, ox::video::SColor(0xff40c020));
     }
     if (ShieldSprite && !ShieldSprite->hasFlag(1))
     {
-        position.X = viewPort.UpperLeftCorner.X + Position.X - camera.X;
-        position.Y = viewPort.UpperLeftCorner.Y + Position.Y - camera.Y;
+        position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+        position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
         ShieldSprite->drawScaled(position, 1.0f, Color);
     }
     if (Chant && m_nextChantTime < 0 && gp_alienChantFont)
@@ -1455,11 +1498,10 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
         key.append(m_currentChantLine);
         ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(key.c_str());
         ox::core::CDimension2d<int> size = gp_alienChantFont->getDimension(text.c_str());
-        position.X = viewPort.UpperLeftCorner.X + Position.X - camera.X;
-        position.Y = viewPort.UpperLeftCorner.Y + Position.Y - camera.Y;
-        int x = (int)position.X - size.Width / 2;
-        int y = (int)position.Y - 30;
-        gp_alienChantFont->draw(text.c_str(), ox::core::CRect<int>(x, y, x + size.Width, y + size.Height),
+        position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+        position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
+        ox::core::CPosition2d<int> corner((int)position.X - size.Width / 2, (int)position.Y - 30);
+        gp_alienChantFont->draw(text.c_str(), ox::core::CRect<int>(corner, size),
             ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
     }
 }
@@ -1537,6 +1579,10 @@ void CAlienEntity::readEntityData(ox::io::IReadFile* file, int version)
         Chant = ox::io::CHelpIO::readByte(file);
     SpawnCooldown = 0;
 }
+
+CAlienLuaInfo::CAlienLuaInfo(lua_State* L) : Entity(0) {}
+
+CAlienLuaInfo::~CAlienLuaInfo() {}
 
 int CAlienLuaInfo::getId(lua_State* L)
 {
@@ -1623,10 +1669,6 @@ int CAlienLuaInfo::setTargetBuilding(lua_State* L)
     return 0;
 }
 
-CAlienLuaInfo::~CAlienLuaInfo() {}
-
-void CAlienEntity::renderGroundLayer(const ox::core::CPosition2d<float>& camera,
-    const ox::core::CRect<int>& viewPort) {}
 
 } // end namespace entity
 } // end namespace harvest

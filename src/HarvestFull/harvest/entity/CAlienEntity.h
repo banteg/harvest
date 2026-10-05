@@ -68,13 +68,13 @@ public:
 
     virtual void writeEntityData(ox::io::IWriteFile* file);
     virtual void readEntityData(ox::io::IReadFile* file, int version);
-    virtual int onSpark(CSparkEntity* spark) { return 0; }
-    virtual bool wantsSpark() { return false; }
+    virtual int onSpark(CSparkEntity* spark);
+    virtual bool wantsSpark();
     virtual void updateSprite(float frameDelta);
     virtual int updateLogic(float frameDelta);
     virtual void render(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort);
     virtual void renderGroundLayer(const ox::core::CPosition2d<float>& camera,
-        const ox::core::CRect<int>& viewPort);
+        const ox::core::CRect<int>& viewPort) {}
 
     //! Applies damage and knockback; returns true when the alien dies.
     bool dealDamage(float& damage, const ox::core::CPosition2d<float>& source, float force, int weapon);

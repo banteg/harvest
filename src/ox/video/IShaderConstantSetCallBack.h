@@ -16,6 +16,8 @@ class IMaterialRendererServices;
 class IShaderConstantSetCallBack : public virtual IUnknown
 {
 public:
+    virtual ~IShaderConstantSetCallBack() {}
+
     virtual void OnSetConstants(IMaterialRendererServices* services, int userData) = 0;
 };
 

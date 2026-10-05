@@ -20,6 +20,8 @@
 namespace harvest {
 namespace settings {
 
+CSystemConfig* gp_systemConfig;
+
 CSystemConfig::CSystemConfig(ox::io::IFileSystem* fileSystem, const char* filename)
     : FileSystem(fileSystem), Filename(filename), Config(0), Language(0), DefaultLanguage(0)
 {
@@ -167,6 +169,11 @@ ox::core::CString<wchar_t> CSystemConfig::getLicenseKeySetting()
 void CSystemConfig::addLicenseKeySetting(const ox::core::CString<wchar_t>& key)
 {
     Config->setAttributeAsBase64(ox::core::CString<wchar_t>(L"settings:system"), key);
+}
+
+ox::game::CTextLocalization* CSystemConfig::getCurrentLanguage()
+{
+    return Language;
 }
 
 bool CSystemConfig::getFullscreen()

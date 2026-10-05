@@ -49,7 +49,7 @@ public:
     void setRecentProfile(const ox::core::CString<wchar_t>& profile);
     ox::core::CString<wchar_t> getLicenseKeySetting();
     void addLicenseKeySetting(const ox::core::CString<wchar_t>& key);
-    ox::game::CTextLocalization* getCurrentLanguage() { return Language; }
+    ox::game::CTextLocalization* getCurrentLanguage();
     bool getFullscreen();
     ox::core::CString<wchar_t> getVideoDriver();
     int getSfxVolume();
