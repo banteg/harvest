@@ -149,12 +149,15 @@ void CProfileScreen::createEditProfileWindow(bool newProfile)
     ox::gui::IGUILayout* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 300, 500), Window, -1);
 
     ox::core::CString<wchar_t> title;
-    if (!settings::gp_profileManager->getCurrentProfile())
-        title = settings::gp_systemConfig->getLocalizedText(L"profile:newProfileFirstTitle");
-    else if (newProfile)
-        title = settings::gp_systemConfig->getLocalizedText(L"profile:newProfileTitle");
+    if (settings::gp_profileManager->getCurrentProfile())
+    {
+        if (newProfile)
+            title = settings::gp_systemConfig->getLocalizedText(L"profile:newProfileTitle");
+        else
+            title = settings::gp_systemConfig->getLocalizedText(L"profile:editProfileTitle");
+    }
     else
-        title = settings::gp_systemConfig->getLocalizedText(L"profile:editProfileTitle");
+        title = settings::gp_systemConfig->getLocalizedText(L"profile:newProfileFirstTitle");
     GUIEnvironment->addStaticText(title.c_str(), "br center", frame,
         GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt"), -1);
 
@@ -359,14 +362,15 @@ bool CProfileScreen::isVisible()
 void CProfileScreen::stripIllegalCharacters(ox::core::CString<wchar_t>& text)
 {
     text.replace(L';', L'_');
+    const wchar_t* chars = text.c_str();
     int start = -1;
     do
         ++start;
-    while (text[start] == L' ');
+    while (chars[start] == L' ');
     int end = text.size();
     do
         --end;
-    while (text[end] == L' ');
+    while (chars[end] == L' ');
     text = text.subString(start, end - start + 1);
 }
 
