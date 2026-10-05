@@ -256,3 +256,7 @@
 ".bss" = 0x86bc54
 # Rating levels, attribute name tables and switch tables.
 ".rodata" = 0x606480
+
+["HarvestFull/harvest/settings/CProfileManager.cpp"]
+# gp_profileManager, the iostream initializer and the world grid offset.
+".bss" = 0x86bc60
