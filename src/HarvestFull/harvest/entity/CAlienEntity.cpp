@@ -1394,8 +1394,8 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
     {
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
         if (Particle)
-            Particle->render2D(ox::core::CPosition2d<float>(viewPort.UpperLeftCorner.X + Position.X - camera.X,
-                viewPort.UpperLeftCorner.Y + Position.Y - camera.Y), 1.0f);
+            Particle->render2D(ox::core::CPosition2d<float>(Position.X - camera.X + viewPort.UpperLeftCorner.X,
+                Position.Y - camera.Y + viewPort.UpperLeftCorner.Y), 1.0f);
     }
     else if (AlienType == 3 || AlienType == 4 || AlienType == 5)
         renderSprite(camera, viewPort, Sprites[SpriteIndex]);
@@ -1410,7 +1410,7 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
         if (Position.Z > 0)
         {
             renderSprite(camera, viewPort, Sprites[4]);
-            renderSprite(ox::core::CPosition2d<float>(camera.X + 0.0f, camera.Y + Position.Z),
+            renderSprite(ox::core::CPosition2d<float>(0, Position.Z) + camera,
                 viewPort, Sprites[SpriteIndex]);
         }
         else
@@ -1418,12 +1418,14 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
     }
     else
         renderSprite(camera, viewPort, Sprites[0]);
-    ox::core::CPosition2d<float> position(Position.X - camera.X, Position.Y - camera.Y);
+    ox::core::CPosition2d<float> position;
+    position.X = Position.X - camera.X;
+    position.Y = Position.Y - camera.Y;
     if (viewPort.UpperLeftCorner.X > position.X || position.X > viewPort.LowerRightCorner.X ||
         viewPort.UpperLeftCorner.Y > position.Y || position.Y > viewPort.LowerRightCorner.Y)
     {
-        position.X = position.X > viewPort.LowerRightCorner.X - 3.0f ? viewPort.LowerRightCorner.X - 3.0f : ox::core::max_(viewPort.UpperLeftCorner.X + 3.0f, position.X);
-        position.Y = position.Y > viewPort.LowerRightCorner.Y - 3.0f ? viewPort.LowerRightCorner.Y - 3.0f : ox::core::max_(viewPort.UpperLeftCorner.Y + 3.0f, position.Y);
+        position.X = ox::core::clamp(position.X, viewPort.UpperLeftCorner.X + 3.0f, viewPort.LowerRightCorner.X - 3.0f);
+        position.Y = ox::core::clamp(position.Y, viewPort.UpperLeftCorner.Y + 3.0f, viewPort.LowerRightCorner.Y - 3.0f);
     }
     else
     {
@@ -1445,13 +1447,13 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
             maximumHealth += (value * value + value) * 50.0f;
         }
         if (Health < maximumHealth && maximumHealth > 0)
-            renderSelfProgress(ox::core::CPosition2d<float>(camera.X + 0.0f, camera.Y + Position.Z),
+            renderSelfProgress(ox::core::CPosition2d<float>(0, Position.Z) + camera,
                 viewPort, Health / maximumHealth, ox::video::SColor(0xff40c020));
     }
     if (ShieldSprite && !ShieldSprite->hasFlag(1))
     {
-        position.X = viewPort.UpperLeftCorner.X + Position.X - camera.X;
-        position.Y = viewPort.UpperLeftCorner.Y + Position.Y - camera.Y;
+        position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+        position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
         ShieldSprite->drawScaled(position, 1.0f, Color);
     }
     if (Chant && m_nextChantTime < 0 && gp_alienChantFont)
@@ -1460,11 +1462,10 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
         key.append(m_currentChantLine);
         ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(key.c_str());
         ox::core::CDimension2d<int> size = gp_alienChantFont->getDimension(text.c_str());
-        position.X = viewPort.UpperLeftCorner.X + Position.X - camera.X;
-        position.Y = viewPort.UpperLeftCorner.Y + Position.Y - camera.Y;
-        int x = (int)position.X - size.Width / 2;
-        int y = (int)position.Y - 30;
-        gp_alienChantFont->draw(text.c_str(), ox::core::CRect<int>(x, y, x + size.Width, y + size.Height),
+        position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
+        position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
+        ox::core::CPosition2d<int> corner((int)position.X - size.Width / 2, (int)position.Y - 30);
+        gp_alienChantFont->draw(text.c_str(), ox::core::CRect<int>(corner, size),
             ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
     }
 }
