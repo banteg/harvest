@@ -175,7 +175,7 @@ void CHighscoreScreen::createStatusString(const wchar_t* text)
 ox::core::CString<wchar_t> CHighscoreScreen::parseRelativeTimeFormat(const ox::core::CString<char>& seconds)
 {
     time(0);
-    int age = strtol(seconds.c_str(), 0, 10);
+    int age = atoi(seconds.c_str());
     if (age < 60)
         return settings::gp_systemConfig->getLocalizedText(L"highscores:secondsAgo", age);
     if (age < 120)
@@ -610,9 +610,8 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
         ox::core::splitString(columns, rows[i], colDelimiter);
         if (columns.size() != 7)
             continue;
-
         ox::video::SColor color = 0xffffffff;
-        if (i == 0 && strtol(columns[0].c_str(), 0, 10) == 1)
+        if (i == 0 && atoi(columns[0].c_str()) == 1)
             color = 0xffffffc0;
 
         for (int j = 0; j < 7; ++j)
@@ -625,10 +624,10 @@ void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
 
             if (j == 4)
             {
-                int mode = strtol(columns[j].c_str(), 0, 10);
-                int sprite = SPRITE_MODE_ICON + mode;
-                if ((unsigned int)mode > 4)
-                    sprite = SPRITE_MODE_ICON;
+                int planet = atoi(columns[j].c_str());
+                int sprite = SPRITE_TINY_PLANET_ICON + planet;
+                if ((unsigned int)planet > 4)
+                    sprite = SPRITE_TINY_PLANET_ICON;
                 const ox::core::CPosition2d<int>& size = SpriteSizes[sprite];
                 int left = (TEXT_AREA_COORDS[j].getWidth() - size.X) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.X;
                 int top = (TEXT_AREA_COORDS[j].getHeight() - size.Y) / 2 + TEXT_AREA_COORDS[j].UpperLeftCorner.Y +
