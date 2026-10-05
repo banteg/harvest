@@ -112,12 +112,11 @@ static bool isColorCode(const wchar_t* text)
 void CUnicodeFont::draw(const wchar_t* text, const ox::core::CRect<int>& position, ox::video::SColor color,
     ox::gui::EFontHorizontalAlign horizontal, ox::gui::EFontVerticalAlign vertical, const ox::core::CRect<int>* clip)
 {
-    ox::core::CDimension2d<int> textDimension;
     ox::core::CPosition2d<int> offset = position.UpperLeftCorner;
 
     if (horizontal != ox::gui::EFHA_LEFT || vertical != ox::gui::EFVA_TOP)
     {
-        textDimension = getDimension(text);
+        ox::core::CDimension2d<int> textDimension = getDimension(text);
 
         if (horizontal == ox::gui::EFHA_CENTER)
             offset.X += (position.getWidth() - textDimension.Width) >> 1;
@@ -136,27 +135,19 @@ void CUnicodeFont::draw(const wchar_t* text, const ox::core::CRect<int>& positio
     {
         if (*text == L'#')
         {
-            bool code = true;
             switch (text[1])
             {
-            case L'0': currentColor = ox::video::SColor(color.getAlpha(), 0x00, 0x00, 0x00); break;
-            case L'1': currentColor = ox::video::SColor(color.getAlpha(), 0xd5, 0x88, 0x7a); break;
-            case L'2': currentColor = ox::video::SColor(color.getAlpha(), 0xbd, 0xcd, 0x6f); break;
-            case L'3': currentColor = ox::video::SColor(color.getAlpha(), 0xda, 0xd5, 0x78); break;
-            case L'4': currentColor = ox::video::SColor(color.getAlpha(), 0xd1, 0xa7, 0x44); break;
-            case L'5': currentColor = ox::video::SColor(color.getAlpha(), 0xa0, 0x80, 0x9a); break;
-            case L'6': currentColor = ox::video::SColor(color.getAlpha(), 0xb5, 0xc7, 0xee); break;
-            case L'7': currentColor = ox::video::SColor(color.getAlpha(), 0xff, 0xff, 0xff); break;
-            case L'8': currentColor = ox::video::SColor(color.getAlpha(), 0x9f, 0x6a, 0x5c); break;
-            case L'9': currentColor = ox::video::SColor(color.getAlpha(), 0xf0, 0xe7, 0xb7); break;
-            case L'o': currentColor = OriginalColor; break;
-            default: code = false; break;
-            }
-
-            if (code)
-            {
-                text += 2;
-                continue;
+            case L'0': currentColor = ox::video::SColor(color.getAlpha(), 0x00, 0x00, 0x00); text += 2; continue;
+            case L'1': currentColor = ox::video::SColor(color.getAlpha(), 0xd5, 0x88, 0x7a); text += 2; continue;
+            case L'2': currentColor = ox::video::SColor(color.getAlpha(), 0xbd, 0xcd, 0x6f); text += 2; continue;
+            case L'3': currentColor = ox::video::SColor(color.getAlpha(), 0xda, 0xd5, 0x78); text += 2; continue;
+            case L'4': currentColor = ox::video::SColor(color.getAlpha(), 0xd1, 0xa7, 0x44); text += 2; continue;
+            case L'5': currentColor = ox::video::SColor(color.getAlpha(), 0xa0, 0x80, 0x9a); text += 2; continue;
+            case L'6': currentColor = ox::video::SColor(color.getAlpha(), 0xb5, 0xc7, 0xee); text += 2; continue;
+            case L'7': currentColor = ox::video::SColor(color.getAlpha(), 0xff, 0xff, 0xff); text += 2; continue;
+            case L'8': currentColor = ox::video::SColor(color.getAlpha(), 0x9f, 0x6a, 0x5c); text += 2; continue;
+            case L'9': currentColor = ox::video::SColor(color.getAlpha(), 0xf0, 0xe7, 0xb7); text += 2; continue;
+            case L'o': currentColor = OriginalColor; text += 2; continue;
             }
         }
 
