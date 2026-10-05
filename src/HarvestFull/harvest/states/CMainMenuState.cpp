@@ -32,6 +32,7 @@
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUIImage.h"
 #include "ox/gui/IGUILayout.h"
+#include "ox/gui/IGUIWindow.h"
 #include "ox/gui/IGUIListBox.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/gui/IGUIStaticText.h"
@@ -758,7 +759,7 @@ void CMainMenuState::updatePopupPlanet(bool recreate, const ox::core::CPosition2
     if (!PopupPlanet)
     {
         ox::gui::IGUILayout* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 200, 200), RootElement, -1);
-        popup->setAnimations(MenuPackage, "Black");
+        static_cast<ox::gui::IGUIWindow*>(popup)->setAnimations(MenuPackage, "Black");
         PopupPlanet = popup;
         fillLayoutWithPlanetInfo(popup, SelectedPlanet, true);
     }
@@ -1267,7 +1268,7 @@ void CMainMenuState::enterGameModeSelectMode(int planet)
     back->moveTo(ox::core::CPosition2d<int>(0, backY));
 
     ox::gui::IGUILayout* info = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 200, 200), GameModeWindow, -1);
-    info->setAnimations(MenuPackage, "Black");
+    static_cast<ox::gui::IGUIWindow*>(info)->setAnimations(MenuPackage, "Black");
     fillLayoutWithPlanetInfo(info, SelectedPlanet, false);
     info->moveTo(ox::core::CPosition2d<int>(0, bottom - info->getRelativePosition().getHeight()));
 
