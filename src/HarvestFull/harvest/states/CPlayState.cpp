@@ -4460,7 +4460,7 @@ void CPlayState::addToSelection(entity::CEntity* building)
     MultiSelection.push_back(reference);
 }
 
-int CPlayState::getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position)
+const char* CPlayState::getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position)
 {
     return 0;
 }

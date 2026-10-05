@@ -47,7 +47,7 @@ public:
     virtual void render();
 
     virtual void addParticleEntity(ox::video::IParticleState* state, const ox::core::CVector3d<float>& position);
-    virtual int getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position) { return 0; }
+    virtual const char* getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position) { return 0; }
     virtual void playParticleSound(const char* name, const ox::core::CVector3d<float>& position);
     virtual int getDoodadSeed() const;
     virtual void applyInitialExpansions(game::CWorld* world);

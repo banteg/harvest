@@ -334,3 +334,11 @@
 ["HarvestFull/harvest/gui/CSaveGameScreen.cpp"]
 # iostream initializer and the world grid offset.
 ".bss" = 0x86baa0
+
+["daisy/video/Null/CParticlePackage.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c178
+
+["daisy/video/Null/CParticleState.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c17c

@@ -89,7 +89,7 @@ public:
     virtual void render();
 
     virtual void addParticleEntity(ox::video::IParticleState* state, const ox::core::CVector3d<float>& position);
-    virtual int getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position);
+    virtual const char* getOnDieMarkerAtPos(const ox::core::CVector3d<float>& position);
     virtual void playParticleSound(const char* sound, const ox::core::CVector3d<float>& position);
 
     ox::gui::IGUILayout* getPopupForGuiButton(const wchar_t* text);

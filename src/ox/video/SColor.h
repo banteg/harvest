@@ -56,7 +56,8 @@ public:
             (((color >> 8) & 0xff) << 8);
     }
 
-    unsigned int color;
+    //! Signed like Irrlicht's s32: CParticleState::update extracts components with arithmetic shifts.
+    int color;
 };
 
 } // end namespace video
