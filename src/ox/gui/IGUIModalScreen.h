@@ -13,6 +13,12 @@ namespace gui {
 class IGUIModalScreen : public IGUILayout
 {
 public:
+    IGUIModalScreen(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUILayout(environment, parent, id, rectangle)
+    {
+        Type = EGUIET_MODAL_SCREEN;
+    }
+
     //! The event of the last EGET_MODAL_SCREEN_BLOCKED notification.
     virtual event::SEvent getLastBlockedEvent() = 0;
 };

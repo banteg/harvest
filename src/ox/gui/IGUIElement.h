@@ -25,7 +25,8 @@ enum EGUI_ELEMENT_TYPE
 {
     EGUIET_SCROLL_BAR = 3,
     EGUIET_CHECK_BOX = 6,
-    EGUIET_LIST_BOX = 8
+    EGUIET_LIST_BOX = 8,
+    EGUIET_MODAL_SCREEN = 19
 };
 
 //! Base class of all GUI elements.
@@ -34,6 +35,20 @@ class IGUIElement : public IUnknown, public event::IEventReceiver
 public:
     // The methods up to remove() are inline, as in Irrlicht, so that remove() is the key function
     // and the vtable and destructors are emitted in IGUIElement.cpp, as in the Linux build.
+    IGUIElement(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : Parent(parent), RelativeRect(rectangle), RelativeSizeChanged(false), AbsoluteRect(0, 0, 0, 0),
+          AbsoluteClippingRect(0, 0, 0, 0), IsVisible(true), IsEnabled(true), IsFixed(false), IsInvisible(false),
+          NoClip(false), ReportOnDraw(0), ID(id), Type(0), Environment(environment), HoverItem(0), LayoutFlags(0),
+          EventReceiver(0)
+    {
+        AbsoluteRect = RelativeRect;
+        AbsoluteClippingRect = AbsoluteRect;
+        updateAbsolutePosition();
+
+        if (Parent)
+            Parent->addChild(this);
+    }
+
     virtual ~IGUIElement()
     {
         for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
@@ -138,7 +153,25 @@ public:
 
     //! Removes this element from its parent.
     virtual void remove();
-    virtual void draw();
+    virtual void draw()
+    {
+        if (!IsVisible)
+            return;
+
+        if (ReportOnDraw == 1)
+            reportDrawn();
+
+        for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+        {
+            // children outside their clipping rectangle are skipped unless they are fixed
+            if ((*it)->AbsoluteRect.isRectCollided((*it)->AbsoluteClippingRect) || !(*it)->isFixed())
+                (*it)->draw();
+        }
+
+        if (ReportOnDraw == 2)
+            reportDrawn();
+    }
+
     virtual void move(core::CPosition2d<int> offset);
     virtual void moveTo(core::CPosition2d<int> position);
     virtual void centerOnRect(const core::CRect<int>& rect);
@@ -158,7 +191,15 @@ public:
     virtual int getID();
     virtual void setID(int id);
     virtual int getType();
-    virtual bool OnEvent(const event::SEvent& event);
+    virtual bool OnEvent(const event::SEvent& event)
+    {
+        if (EventReceiver && EventReceiver->OnEvent(event))
+            return true;
+        if (Parent)
+            return Parent->OnEvent(event);
+        return true;
+    }
+
     virtual bool OnEventInNonFocusState(const event::SEvent& event);
     virtual bool bringToFront(IGUIElement* element);
     virtual const std::list<IGUIElement*>& getChildren();
@@ -170,6 +211,17 @@ public:
     core::CRect<int> getAbsolutePosition() { return AbsoluteRect; }
     core::CRect<int> getRelativePosition() { return RelativeRect; }
     core::CRect<int> getAbsoluteClippingRect() { return AbsoluteClippingRect; }
+
+private:
+    //! Sends EGET_ELEMENT_DRAWN to this element, before or after the children are drawn.
+    void reportDrawn()
+    {
+        event::SEvent event;
+        event.EventType = event::EET_GUI_EVENT;
+        event.GUIEvent.Caller = this;
+        event.GUIEvent.EventType = EGET_ELEMENT_DRAWN;
+        OnEvent(event);
+    }
 
 protected:
     std::list<IGUIElement*> Children;
@@ -194,6 +246,8 @@ protected:
 public:
     //! Layout hints read by the IGUILayout sorters, such as "center br" or "tab".
     const char* LayoutFlags;
+    //! Gets the element's events before its parent does.
+    event::IEventReceiver* EventReceiver;
 };
 
 } // end namespace gui

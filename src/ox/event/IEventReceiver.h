@@ -18,6 +18,8 @@ class IGUIElement;
 //! GUI events, in SEvent::GUIEvent.EventType.
 enum EGUI_EVENT_TYPE
 {
+    //! The element lost the focus.
+    EGET_ELEMENT_FOCUS_LOST = 0,
     EGET_BUTTON_CLICKED = 3,
     EGET_TEXT_BUTTON_CLICKED = 4,
     EGET_CHECKBOX_CHANGED = 5,
