@@ -979,7 +979,10 @@ void CAlienEntity::updateMinerMovement(float frameDelta, ox::core::CVector3d<flo
         return;
     }
     movement.normalize();
-    movement *= (HoggerAttached == 1 ? 25.0f : 15.0f) * frameDelta;
+    if (HoggerAttached == 1)
+        movement *= 25.0f * frameDelta;
+    else
+        movement *= 15.0f * frameDelta;
     if (HoggerAttached == 0 && Health < 75.0f)
     {
         ox::entity::COxEntity* oldEntity = Target.Entity;
