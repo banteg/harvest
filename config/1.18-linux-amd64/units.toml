@@ -239,3 +239,14 @@
 ".text" = 0x473c00
 # iostream initializer and the world grid offset.
 ".bss" = 0x86ba38
+
+["HarvestFull/main.cpp"]
+".text" = 0x408830
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86b4c8
+
+["HarvestFull/harvest/CHarvestFullMain.cpp"]
+# The game-wide globals, the iostream initializer and the game-header statics.
+".bss" = 0x86b4d0
+# g_scenarioResult
+".data" = 0x868b30

@@ -16,6 +16,7 @@
 
 namespace ox {
 namespace io {
+class IFileSystem;
 class IReadFile;
 } // end namespace io
 
@@ -180,6 +181,16 @@ public:
     virtual void* getExposedVideoData() = 0;
     virtual int getDriverType() = 0;
     virtual bool isFullscreen() = 0;
+    virtual void setFullscreen(bool fullscreen) = 0;
+    virtual void setScissorRect(core::CRect<int>* rect) = 0;
+    virtual void setRenderScreenSize(int width, int height) = 0;
+    virtual void setForcePointSampling(bool force) = 0;
+    // Provisional: the service types are not recovered yet.
+    virtual void* getGPUProgrammingServices() = 0;
+    virtual void* getPostProcessingServices() = 0;
+    virtual io::IFileSystem* getFileSystem() = 0;
+    //! Saves the screen as a JPEG into directory, under a generated name when name is null.
+    virtual bool saveJpegScreenshot(const char* directory, const char* name) = 0;
 };
 
 } // end namespace video

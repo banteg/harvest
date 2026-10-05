@@ -17,6 +17,8 @@ class IGUIElement;
 enum EGUI_EVENT_TYPE
 {
     EGET_BUTTON_CLICKED = 3,
+    EGET_TEXT_BUTTON_CLICKED = 4,
+    EGET_CHECKBOX_CHANGED = 5,
     //! The yes button of a message box was pressed.
     EGET_MESSAGEBOX_YES = 15,
     //! An element that reports drawing has been drawn.
@@ -37,6 +39,8 @@ enum EEVENT_TYPE
     EET_KEY_INPUT_EVENT = 2,
     //! A network device event.
     EET_NETWORK_EVENT = 5,
+    //! A device event, in SEvent::DeviceEvent.
+    EET_DEVICE_EVENT = 6,
     //! A game-defined event, in SEvent::UserEvent.
     EET_USER_EVENT = 7
 };
@@ -51,7 +55,16 @@ enum EMOUSE_INPUT_EVENT
 enum EKEY_INPUT_EVENT
 {
     EKIE_KEY_PRESSED_DOWN = 0,
-    EKIE_KEY_LEFT_UP = 1
+    EKIE_KEY_LEFT_UP = 1,
+    //! The fullscreen toggle combination was pressed.
+    EKIE_TOGGLE_FULLSCREEN = 4
+};
+
+//! Device events, in SEvent::DeviceEvent.Type.
+enum EDEVICE_EVENT_TYPE
+{
+    //! The window switched between fullscreen and windowed mode.
+    EDE_FULLSCREEN_TOGGLED = 3
 };
 
 //! Network device events, in SEvent::NetworkEvent.Type.
@@ -93,7 +106,14 @@ struct SEvent
             wchar_t Char;
             EKEY_CODE Key;
             EKEY_INPUT_EVENT Event;
+            bool Shift;
+            bool Control;
         } KeyInput;
+
+        struct
+        {
+            EDEVICE_EVENT_TYPE Type;
+        } DeviceEvent;
 
         struct
         {
