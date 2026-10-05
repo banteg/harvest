@@ -32,6 +32,20 @@ struct SSavestateHeader
     //! Seconds since the epoch.
     int Time;
     ox::core::CString<wchar_t> Description;
+
+    SSavestateHeader& operator=(const SSavestateHeader& other)
+    {
+        Magic = other.Magic;
+        Version = other.Version;
+        PlayerName = other.PlayerName;
+        GameMode = other.GameMode;
+        ThreatLevel = other.ThreatLevel;
+        Unknown = other.Unknown;
+        Planet = other.Planet;
+        Time = other.Time;
+        Description = other.Description;
+        return *this;
+    }
 };
 
 //! Reads and writes save game headers.

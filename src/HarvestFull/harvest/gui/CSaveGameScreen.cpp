@@ -52,6 +52,38 @@ CSaveGameScreen::~CSaveGameScreen()
             PlanetIcons[i]->remove();
 }
 
+void CSaveGameScreen::createSaveGameBox()
+{
+    if (SaveBox)
+    {
+        SaveBox->remove();
+        SaveBox = 0;
+    }
+
+    SaveBox = GUIEnvironment->addModalScreen();
+    ox::gui::IGUILayout* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 300, 50), SaveBox, -1);
+    GUIEnvironment->addStaticText(settings::gp_systemConfig->getLocalizedText(L"menu:saveDescription").c_str(),
+        "br center", frame, 0, -1);
+
+    DescriptionBox = GUIEnvironment->addEditBox(SelectedDescription.c_str(), ox::core::CRect<int>(0, 0, 250, 20),
+        true, frame, -1);
+    DescriptionBox->LayoutFlags = "br";
+    DescriptionBox->setAssociatedButton(ID_SAVE);
+
+    ox::gui::IGUIButton* cancelButton = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), frame,
+        ID_CANCEL, settings::gp_systemConfig->getLocalizedText(L"profile:cancel").c_str());
+    cancelButton->LayoutFlags = "br center";
+    cancelButton->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
+
+    ox::gui::IGUIButton* saveButton = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), frame,
+        ID_SAVE, settings::gp_systemConfig->getLocalizedText(L"menu:save").c_str());
+    saveButton->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
+
+    frame->sortRiver(true, 5, 5, false);
+    frame->centerOnParent();
+    GUIEnvironment->setFocus(DescriptionBox);
+}
+
 bool CSaveGameScreen::OnEvent(const ox::event::SEvent& event)
 {
     switch (event.EventType)
@@ -216,7 +248,13 @@ void CSaveGameScreen::performListAction()
         if (!newSlot)
         {
             g_loadGameFilename = filename;
-            sendCustomEvent(ECE_START_GAME);
+            ox::event::SEvent startEvent;
+            startEvent.EventType = ox::event::EET_USER_EVENT;
+            startEvent.UserEvent.UserData1 = ECE_START_GAME;
+            startEvent.UserEvent.UserData2 = 0;
+            startEvent.UserEvent.UserData3 = 0;
+            startEvent.UserEvent.UserPointer = 0;
+            ox::event::gp_subscriberList->OnEvent(startEvent);
         }
         return;
     }
@@ -361,38 +399,6 @@ void CSaveGameScreen::loadSaveGames()
     if (!Loading)
         addEmptySlot();
     ListBox->sortItems(false);
-}
-
-void CSaveGameScreen::createSaveGameBox()
-{
-    if (SaveBox)
-    {
-        SaveBox->remove();
-        SaveBox = 0;
-    }
-
-    SaveBox = GUIEnvironment->addModalScreen();
-    ox::gui::IGUILayout* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 300, 50), SaveBox, -1);
-    GUIEnvironment->addStaticText(settings::gp_systemConfig->getLocalizedText(L"menu:saveDescription").c_str(),
-        "br center", frame, 0, -1);
-
-    DescriptionBox = GUIEnvironment->addEditBox(SelectedDescription.c_str(), ox::core::CRect<int>(0, 0, 250, 20),
-        true, frame, -1);
-    DescriptionBox->LayoutFlags = "br";
-    DescriptionBox->setAssociatedButton(ID_SAVE);
-
-    ox::gui::IGUIButton* cancelButton = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), frame,
-        ID_CANCEL, settings::gp_systemConfig->getLocalizedText(L"profile:cancel").c_str());
-    cancelButton->LayoutFlags = "br center";
-    cancelButton->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
-
-    ox::gui::IGUIButton* saveButton = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), frame,
-        ID_SAVE, settings::gp_systemConfig->getLocalizedText(L"menu:save").c_str());
-    saveButton->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
-
-    frame->sortRiver(true, 5, 5, false);
-    frame->centerOnParent();
-    GUIEnvironment->setFocus(DescriptionBox);
 }
 
 bool CSaveGameScreen::isVisible()
