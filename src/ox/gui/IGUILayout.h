@@ -1,5 +1,5 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: the virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIWindow up to setAnimations.
+// Partial: the virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIWindow up to updateChildrenForContentArea.
 
 #ifndef OX_GUI_IGUILAYOUT_H
 #define OX_GUI_IGUILAYOUT_H
@@ -20,12 +20,6 @@ public:
     virtual void sortRiver(bool resize, int spacingX, int spacingY, bool sortHidden);
     virtual core::CRect<int> getContentArea();
     virtual void updateChildrenForContentArea();
-    // The return types of the next three are not verified.
-    virtual IGUIElement* getCloseButton();
-    virtual IGUIElement* getMinimizeButton();
-    virtual IGUIElement* getMaximizeButton();
-    //! Draws the background with a sprite animation of the package.
-    virtual void setAnimations(video::ISpritePackage* package, const char* name);
 };
 
 } // end namespace gui

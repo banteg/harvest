@@ -925,10 +925,13 @@ void CPlayState::realignGui()
     ScreenSizeF.Width = ScreenSize.Width;
     ShowMinimap = false;
     int minimapSize = 0;
-    if (ScreenSize.Height - 600 > 40 && ScreenSize.Width - 800 > 40 && GuiSprites[GS_MINIMAP_BACKGROUND])
+    // The minimap needs a screen larger than 800x600.
+    int extraWidth = ScreenSize.Width - 800;
+    int extraHeight = ScreenSize.Height - 600;
+    if (extraHeight > 40 && extraWidth > 40 && GuiSprites[GS_MINIMAP_BACKGROUND])
     {
         ShowMinimap = true;
-        minimapSize = ScreenSize.Width - 800 > ScreenSize.Height - 600 ? ScreenSize.Height - 500 : ScreenSize.Width - 700;
+        minimapSize = (extraWidth > extraHeight ? extraHeight : extraWidth) + 100;
         ox::core::CDimension2d<int> backgroundSize = GuiSprites[GS_MINIMAP_BACKGROUND]->getFrameSize(0);
         if (minimapSize > backgroundSize.Height)
             minimapSize = backgroundSize.Height;
