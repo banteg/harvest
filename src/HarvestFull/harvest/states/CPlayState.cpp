@@ -3174,7 +3174,7 @@ void CPlayState::launchWaveLevel(int wave)
         message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningTitle");
         message.Portrait = "PortraitCommunications";
         message.Sound = "ingame_infoWave.ogg";
-        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningMessage", aliens.c_str());
+        message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveWarningMessage");
         addInfoLine(&message, false);
     }
     // Rebuilds the wave list without the launched wave.
