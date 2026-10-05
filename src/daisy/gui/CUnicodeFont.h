@@ -15,7 +15,7 @@ namespace gui {
 //! A character of a unicode font: one sprite animation of the font's package, named by its code.
 struct SUnicodeChar
 {
-    wchar_t Character;
+    unsigned int Character;
     ox::core::CDimension2d<int> Size;
     //! Created on first use, except for the first character, whose height sets the font's.
     ox::video::ISpriteAnimationState* Animation;

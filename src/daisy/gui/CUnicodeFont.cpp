@@ -60,7 +60,7 @@ bool CUnicodeFont::load(const char* filename)
             Height = character.Size.Height;
         }
 
-        Characters[(unsigned int)character.Character % CHARACTER_BUCKETS].push_back(character);
+        Characters[character.Character % CHARACTER_BUCKETS].push_back(character);
     }
 
     MissingCharacterWidth = Height / 2;
