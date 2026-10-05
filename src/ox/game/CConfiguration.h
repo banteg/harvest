@@ -19,9 +19,10 @@ class CConfigBlock;
 //!     {
 //!         attribute = value;
 //!     }
-//! where block and attribute names are letters, digits and spaces, and a backslash escapes a
-//! following ';', '{' or '}' in a value. Files are 16-bit characters after a 0xfeff byte order
-//! mark (as write writes them) or text in the current locale.
+//! Block and attribute names are letters and digits; spaces and comments between them are
+//! skipped. A value runs to the ';' without its leading spaces; tabs and line breaks are
+//! dropped, and a backslash escapes a following ';'. Files are 16-bit characters after a 0xfeff
+//! byte order mark (as write writes them) or text in the current locale.
 class CConfiguration
 {
 public:
