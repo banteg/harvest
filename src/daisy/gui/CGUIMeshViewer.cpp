@@ -18,6 +18,9 @@
 namespace daisy {
 namespace gui {
 
+//! Irrlicht's world transformation state; IVideoDriver.h does not name the states.
+static const ox::video::E_TRANSFORMATION_STATE ETS_WORLD = (ox::video::E_TRANSFORMATION_STATE)1;
+
 //! constructor
 CGUIMeshViewer::CGUIMeshViewer(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
     ox::core::CRect<int> rectangle)
@@ -128,7 +131,7 @@ void CGUIMeshViewer::draw()
 
         mat.makeIdentity();
         mat.setTranslation(ox::core::CVector3d<float>(0, 0, 0));
-        driver->setTransform(ox::video::ETS_WORLD, mat);
+        driver->setTransform(ETS_WORLD, mat);
 
         driver->setMaterial(Material);
 
