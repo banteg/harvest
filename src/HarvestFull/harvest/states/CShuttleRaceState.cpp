@@ -343,10 +343,8 @@ int CShuttleRaceState::updateState(float time)
         ViewPositions[i].Y -= ScreenSizeF.Height * 0.5f;
         if (game::gp_world)
             game::gp_world->constrainViewPos(ViewPositions[i]);
-        ViewRects[i].UpperLeftCorner.X = ViewPositions[i].X - 100.0f;
-        ViewRects[i].UpperLeftCorner.Y = ViewPositions[i].Y - 100.0f;
-        ViewRects[i].LowerRightCorner.X = ScreenSize.Width * 0.5f + 200.0f + ViewRects[i].UpperLeftCorner.X;
-        ViewRects[i].LowerRightCorner.Y = ScreenSize.Height + 200.0f + ViewRects[i].UpperLeftCorner.Y;
+        ViewRects[i] = ox::core::CRect<float>(ViewPositions[i] + ox::core::CPosition2d<float>(-100.0f, -100.0f),
+            ox::core::CDimension2d<float>(ScreenSize.Width * 0.5f + 200.0f, ScreenSize.Height + 200.0f));
     }
     return NextState;
 }
