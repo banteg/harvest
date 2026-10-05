@@ -152,18 +152,20 @@ bool displayTimerForGameMode(int gameMode)
 }
 
 CPlayState::CPlayState()
-    : MiddleMouseScrolling(false), LoadingScreen(0), InitStep(0), BoldFont(0), SmallFont(0), NumberFont(0), IngamePackage(0),
-      MenuPackage(0), MousePosition(1, 1), Action(0), SelectedEntity(0),
-      RecycleTarget(0), FollowJump(false), HasLastPlacement(false), DraggingFromSelection(false),
-      SelectionClickPending(false), RectangleSelecting(false), PlacementOk(false), BuildSelection(0), RangeCircle(0), Selector(0),
-      RecycleSelector(0), Beam180(6.0f), Beam1c8(2.0f), Beam210(6.0f), Beam258(6.0f), m_2a0(false), ThreatLevel(0),
-      Scenario(0), GameSpeed(3), m_2c0(0), GameOver(false), GameWon(false), GameOverTime(0), MinimapDragging(false), MinimapDot(0),
-      MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), StatsTime(0), HarvestingCount(0), OverheatedCount(0), GameTime(0), Victory(false), LevelRecordShown(false),
-      MineralsRecordShown(false), RecordCheckTime(0), DenialTime(0), CreditsText(0), HarvestersText(0), ThreatLevelText(0), BottomBar(0), ActionPanel(0), TopBar(0), MinimapWidth(0),
-      MinimapHeight(0), RecycleButton(0), InfoText(0), BuildingsScrolling(false), HighlightActive(false), HighlightTime(0), HighlightEntityType(0), HighlightLayer(0), ShowAllRanges(false),
-      m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0), StoryScreen(0),
-      AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f), ShowDebugInfo(false), ShowMouseWorldPos(false), UpdateDuration(0),
-      RenderDuration(0), BuyMessageBox(0)
+    : MiddleMouseScrolling(false), LoadingScreen(0), InitStep(0), BoldFont(0), SmallFont(0), NumberFont(0),
+      IngamePackage(0), MenuPackage(0), MousePosition(1, 1), Action(0), SelectedEntity(0), RecycleTarget(0),
+      FollowJump(false), HasLastPlacement(false), DraggingFromSelection(false), SelectionClickPending(false),
+      RectangleSelecting(false), PlacementOk(false), BuildSelection(0), RangeCircle(0), Selector(0), RecycleSelector(0),
+      Beam180(6.0f), Beam1c8(2.0f), Beam210(6.0f), Beam258(6.0f), m_2a0(false), ThreatLevel(0), Scenario(0),
+      GameSpeed(3), m_2c0(0), GameOver(false), GameWon(false), GameOverTime(0), MinimapDragging(false), MinimapDot(0),
+      MinimapTexture(0), UseMinimapTexture(false), MinimapUpdateTime(0), StatsTime(0), HarvestingCount(0),
+      OverheatedCount(0), GameTime(0), Victory(false), LevelRecordShown(false), MineralsRecordShown(false),
+      RecordCheckTime(0), DenialTime(0), CreditsText(0), HarvestersText(0), ThreatLevelText(0), BottomBar(0),
+      ActionPanel(0), TopBar(0), MinimapWidth(0), MinimapHeight(0), RecycleButton(0), InfoText(0),
+      BuildingsScrolling(false), HighlightActive(false), HighlightTime(0), HighlightEntityType(0), HighlightLayer(0),
+      ShowAllRanges(false), m_7b0(0), SettingsScreen(0), PriorityScreen(0), IngameMenuScreen(0), SaveGameScreen(0),
+      StoryScreen(0), AchievementsScreen(0), InfoLines(0), Profile(0), ParticleSetting(2), ScrollSpeed(1.0f),
+      ShowDebugInfo(false), ShowMouseWorldPos(false), UpdateDuration(0), RenderDuration(0), BuyMessageBox(0)
 {
     for (int i = 0; i < 256; ++i)
         m_keys[i] = false;
