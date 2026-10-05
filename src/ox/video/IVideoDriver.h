@@ -32,6 +32,10 @@ class IMeshBuffer;
 namespace video {
 
 class IImage;
+class IImageLoader;
+class IMaterialRenderer;
+struct SLight;
+class SColorf;
 class IParticlePackage;
 class ISpritePackage;
 class ITexture;
@@ -51,6 +55,9 @@ enum E_TRANSFORMATION_STATE
 };
 
 //! Texture color formats. The enumerators are not recovered.
+//! Flags for texture creation; the enumerators are not recovered yet.
+enum E_TEXTURE_CREATION_FLAG {};
+
 enum ECOLOR_FORMAT
 {
 };
@@ -146,6 +153,33 @@ public:
         bool pixelFog, bool rangeFog) = 0;
     //! The size of the screen or render window.
     virtual core::CDimension2d<int> getScreenSize() = 0;
+    virtual core::CDimension2d<int> getPhysicalScreenSize() = 0;
+    virtual int getFPS() = 0;
+    virtual int getNumStatusSwitches() = 0;
+    virtual int getPrimitiveCountDrawn() = 0;
+    virtual void deleteAllDynamicLights() = 0;
+    virtual void addDynamicLight(const SLight& light) = 0;
+    virtual void setAmbientLight(const SColorf& color) = 0;
+    virtual int getMaximalDynamicLightAmount() = 0;
+    virtual int getDynamicLightCount() = 0;
+    virtual const SLight& getDynamicLight(int index) = 0;
+    virtual const wchar_t* getName() = 0;
+    virtual void addExternalImageLoader(IImageLoader* loader) = 0;
+    virtual int getMaximalPrimitiveCount() = 0;
+    virtual void setTextureCreationFlag(E_TEXTURE_CREATION_FLAG flag, bool enabled) = 0;
+    virtual bool getTextureCreationFlag(E_TEXTURE_CREATION_FLAG flag) = 0;
+    virtual IImage* createImageFromFile(const char* filename) = 0;
+    virtual IImage* createImageFromFile(io::IReadFile* file) = 0;
+    virtual IImage* createImageFromData(ECOLOR_FORMAT format, const core::CDimension2d<int>& size,
+        void* data) = 0;
+    virtual void OnResize(const core::CDimension2d<int>& size) = 0;
+    virtual int addMaterialRenderer(IMaterialRenderer* renderer, const char* name) = 0;
+    virtual void setMaterialRendererName(int index, const char* name) = 0;
+    virtual IMaterialRenderer* getMaterialRenderer(int index) = 0;
+    // Provisional: the exposed data's type is not recovered yet.
+    virtual void* getExposedVideoData() = 0;
+    virtual int getDriverType() = 0;
+    virtual bool isFullscreen() = 0;
 };
 
 } // end namespace video

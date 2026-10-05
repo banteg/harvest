@@ -18,9 +18,19 @@ public:
     CConfiguration(io::IFileSystem* fileSystem);
     virtual ~CConfiguration();
 
+    bool read(const char* filename);
     bool read(io::IReadFile* file);
+    void write(const char* filename);
     bool attributeExists(const wchar_t* name);
     bool getAttribute(const wchar_t* name, core::CString<wchar_t>& value);
+    bool getAttributeFromBase64(const wchar_t* name, core::CString<wchar_t>& value);
+    int getAttributeAsInt(const wchar_t* name);
+    float getAttributeAsFloat(const wchar_t* name);
+    void setAttribute(const core::CString<wchar_t>& name, const core::CString<wchar_t>& value);
+    void setAttribute(const wchar_t* name, const wchar_t* value);
+    void setAttribute(const wchar_t* name, int value);
+    void setAttribute(const wchar_t* name, float value);
+    void setAttributeAsBase64(const core::CString<wchar_t>& name, const core::CString<wchar_t>& value);
 
 private:
     io::IFileSystem* FileSystem;

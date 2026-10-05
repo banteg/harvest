@@ -36,6 +36,27 @@ public:
     static CString<wchar_t> millisecondsToWide(float milliseconds, bool showHours);
 };
 
+//! A copy of source with every occurrence of find replaced by replacement.
+template <class T>
+CString<T> replaceAll(const CString<T>& source, const CString<T>& find, const CString<T>& replacement)
+{
+    CString<T> result;
+    int position = 0;
+    int found = source.findNext(find.c_str(), 0);
+    while (found != -1)
+    {
+        result.append(source.subString(position, found - position));
+        result.append(replacement);
+        position = found + find.size();
+        int next = source.subStringToEnd(position).findNext(find.c_str(), 0);
+        found = next + position;
+        if (next == -1)
+            found = -1;
+    }
+    result.append(source.subStringToEnd(position));
+    return result;
+}
+
 //! Splits str at every occurrence of separator into parts.
 template <class T>
 void splitString(TArray<CString<T> >& parts, const CString<T>& str, const CString<T>& separator);

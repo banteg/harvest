@@ -212,3 +212,8 @@
 ".text" = 0x4431c0
 # s_availableLuaScriptFiles, gp_luaState, gp_luaManager, iostream and game-header statics.
 ".bss" = 0x86b8e0
+
+["HarvestFull/harvest/settings/CSystemConfig.cpp"]
+".text" = 0x491d50
+# iostream initializer and the game-header statics; gp_systemConfig lives in an earlier object.
+".bss" = 0x86bc94
