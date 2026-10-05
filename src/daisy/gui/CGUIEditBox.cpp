@@ -37,6 +37,33 @@ static inline void clipAgainst(core::CRect<int>& rect, const core::CRect<int>& o
         rect.UpperLeftCorner.Y = other.UpperLeftCorner.Y;
 }
 
+//! constructor
+CGUIEditBox::CGUIEditBox(const wchar_t* text, bool border, IGUIEnvironment* environment, IGUIElement* parent,
+    int id, const core::CRect<int>& rectangle, IOSOperator* op)
+    : IGUIEditBox(environment, parent, id, rectangle), MouseMarking(false), Border(border),
+      OverrideColorEnabled(false), MarkBegin(0), MarkEnd(0), OverrideFont(0), Operator(op), CursorPos(0),
+      ScrollPos(0), Max(0), Hidden(false), AssociatedButton(-1)
+{
+    Type = EGUIET_EDIT_BOX;
+    OverrideColor = video::SColor(101, 255, 255, 255);
+    Text = text;
+
+    for (int i = 0; i < EEBA_COUNT; ++i)
+        Animations[i] = 0;
+
+    int width = rectangle.getWidth();
+    int height = rectangle.getHeight();
+    AnimationRects[EEBA_LEFT] = core::CRect<int>(0, 0, 3, height);
+    AnimationRects[EEBA_RIGHT] = core::CRect<int>(width - 3, 0, width, height);
+    AnimationRects[EEBA_BACKGROUND] = core::CRect<int>(3, 0, width - 3, height);
+
+    if (Border && Environment && Environment->getSkin() && Environment->getSkin()->getSpritePackage())
+        setAnimations(Environment->getSkin()->getSpritePackage(), "EditBox");
+
+    if (Operator)
+        Operator->grab();
+}
+
 //! destructor
 CGUIEditBox::~CGUIEditBox()
 {
@@ -767,33 +794,6 @@ void CGUIEditBox::setAnimations(video::ISpritePackage* package, const char* name
     RelativeRect.LowerRightCorner.Y = RelativeRect.UpperLeftCorner.Y +
         AnimationRects[EEBA_BACKGROUND].LowerRightCorner.Y - AnimationRects[EEBA_BACKGROUND].UpperLeftCorner.Y;
     setRelativePosition(RelativeRect);
-}
-
-//! constructor
-CGUIEditBox::CGUIEditBox(const wchar_t* text, bool border, IGUIEnvironment* environment, IGUIElement* parent,
-    int id, const core::CRect<int>& rectangle, IOSOperator* op)
-    : IGUIEditBox(environment, parent, id, rectangle), MouseMarking(false), Border(border),
-      OverrideColorEnabled(false), MarkBegin(0), MarkEnd(0), OverrideFont(0), Operator(op), CursorPos(0),
-      ScrollPos(0), Max(0), Hidden(false), AssociatedButton(-1)
-{
-    Type = EGUIET_EDIT_BOX;
-    OverrideColor = video::SColor(101, 255, 255, 255);
-    Text = text;
-
-    for (int i = 0; i < EEBA_COUNT; ++i)
-        Animations[i] = 0;
-
-    int width = rectangle.getWidth();
-    int height = rectangle.getHeight();
-    AnimationRects[EEBA_LEFT] = core::CRect<int>(0, 0, 3, height);
-    AnimationRects[EEBA_RIGHT] = core::CRect<int>(width - 3, 0, width, height);
-    AnimationRects[EEBA_BACKGROUND] = core::CRect<int>(3, 0, width - 3, height);
-
-    if (Border && Environment && Environment->getSkin() && Environment->getSkin()->getSpritePackage())
-        setAnimations(Environment->getSkin()->getSpritePackage(), "EditBox");
-
-    if (Operator)
-        Operator->grab();
 }
 
 } // end namespace gui
