@@ -1207,10 +1207,10 @@ int CPlayState::updateState(float time)
 
     // The game steps at most 0.06 seconds per frame, or 0.5 seconds at the fastest speeds.
     float frameDelta;
-    if (GameSpeed < 5)
-        frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.06f);
-    else
+    if (GameSpeed > 4)
         frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.5f);
+    else
+        frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.06f);
     switch (GameMode)
     {
     case game::EGM_WAVE:
@@ -1409,20 +1409,20 @@ int CPlayState::updateState(float time)
             if (Follow.Id >= 0)
             {
                 entity::gp_entityManager->updateReference(Follow, FollowLayer, true);
-                if (Follow.Entity)
+                ox::entity::COxEntity* entity = Follow.Entity;
+                if (entity)
                 {
-                    ox::core::CPosition2d<float> target(Follow.Entity->getPosition().X - ScreenSizeF.Width * 0.5f,
-                        Follow.Entity->getPosition().Y - Follow.Entity->getPosition().Z - ScreenSizeF.Height * 0.5f);
+                    ox::core::CPosition2d<float> target =
+                        ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y - entity->getPosition().Z) -
+                        ox::core::CPosition2d<float>(ScreenSizeF.Width * 0.5f, ScreenSizeF.Height * 0.5f);
                     if (FollowJump)
                     {
                         ViewPosition = target;
                         FollowJump = false;
                     }
                     else
-                    {
-                        ViewPosition.X += (target.X - ViewPosition.X) * 4.0f * step;
-                        ViewPosition.Y += (target.Y - ViewPosition.Y) * 4.0f * step;
-                    }
+                        ViewPosition += ox::core::CPosition2d<float>((target.X - ViewPosition.X) * 4.0f * step,
+                            (target.Y - ViewPosition.Y) * 4.0f * step);
                     game::gp_world->constrainViewPos(ViewPosition);
                 }
             }
@@ -1493,14 +1493,17 @@ int CPlayState::updateState(float time)
             NextState = 3;
             if (GameMode != game::EGM_CAMPAIGN)
             {
-                game::CHighscoreInfo* info;
-                if (GameWon ? GameMode != game::EGM_CREATIVE : GameMode == game::EGM_NORMAL || GameMode == game::EGM_INSANE)
-                    info = new game::CHighscoreInfo(PlayerName.c_str(), PlayerGroup.c_str(), RandomValue, StartTime,
-                        GameMode, game::gp_world->getPlanet(), game::gp_statistics->getGameStatValue(1),
-                        ThreatLevel->getThreatLevel(), GameTime);
+                bool highscore;
+                if (GameWon)
+                    highscore = GameMode != game::EGM_CREATIVE;
                 else
-                    info = 0;
-                game::CHighscoreInfo::setNewHighscoreInfo(info);
+                    highscore = GameMode == game::EGM_NORMAL || GameMode == game::EGM_INSANE;
+                if (highscore)
+                    game::CHighscoreInfo::setNewHighscoreInfo(new game::CHighscoreInfo(PlayerName.c_str(), PlayerGroup.c_str(), RandomValue, StartTime,
+                        GameMode, game::gp_world->getPlanet(), game::gp_statistics->getGameStatValue(1),
+                        ThreatLevel->getThreatLevel(), GameTime));
+                else
+                    game::CHighscoreInfo::setNewHighscoreInfo(0);
             }
         }
     }
