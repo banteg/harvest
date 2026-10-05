@@ -19,11 +19,11 @@ CSpriteAnimationImage::CSpriteAnimationImage(ox::video::ISpritePackage* package,
                                              ox::video::IVideoDriver* driver)
     : ox::video::ISpriteAnimationImage(package), Driver(driver)
 {
-    Offset.X = image->OffsetX;
-    Offset.Y = image->OffsetY;
-    OriginalOffset.X = image->OriginalOffsetX;
-    OriginalOffset.Y = image->OriginalOffsetY;
-    ImageId = image->Id;
+    Offset.X = image->Header.OffsetX;
+    Offset.Y = image->Header.OffsetY;
+    OriginalOffset.X = image->Header.OriginalOffsetX;
+    OriginalOffset.Y = image->Header.OriginalOffsetY;
+    ImageId = image->Header.Id;
     OriginalSize.Width = image->OriginalWidth;
     OriginalSize.Height = image->OriginalHeight;
     Texture = Package->getTexture(image->TextureIndex);

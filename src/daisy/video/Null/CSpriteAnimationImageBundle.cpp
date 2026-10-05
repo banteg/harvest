@@ -12,11 +12,11 @@ CSpriteAnimationImageBundle::CSpriteAnimationImageBundle(ox::video::ISpritePacka
                                                          ox::video::IVideoDriver* driver)
     : ox::video::ISpriteAnimationImage(package), Driver(driver)
 {
-    Offset.X = bundle->OffsetX;
-    Offset.Y = bundle->OffsetY;
-    OriginalOffset.X = bundle->OriginalOffsetX;
-    OriginalOffset.Y = bundle->OriginalOffsetY;
-    ImageId = bundle->Id;
+    Offset.X = bundle->Header.OffsetX;
+    Offset.Y = bundle->Header.OffsetY;
+    OriginalOffset.X = bundle->Header.OriginalOffsetX;
+    OriginalOffset.Y = bundle->Header.OriginalOffsetY;
+    ImageId = bundle->Header.Id;
     Columns = bundle->Columns;
     for (unsigned int i = 0; i < bundle->Images.size(); ++i)
     {

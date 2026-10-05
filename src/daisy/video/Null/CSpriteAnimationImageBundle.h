@@ -13,8 +13,9 @@ namespace video {
 const int SPRITE_BUNDLE_FIRST_ID = 100000;
 
 //! A sprite package record for an image too large for one texture: a grid of sprite images, row by row.
-struct SSpriteBundle : public SSpriteImageHeader
+struct SSpriteBundle
 {
+    SSpriteImageHeader Header;
     int Columns;
     ox::TArray<SSpriteImage> Images;
 };

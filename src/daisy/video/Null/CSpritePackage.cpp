@@ -297,7 +297,7 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
     for (int i = 0; i < BundleCount; ++i)
     {
         SSpriteBundle bundle;
-        readSpriteHeader(bundle, file, version);
+        readSpriteHeader(bundle.Header, file, version);
         bundle.Columns = ox::io::CHelpIO::readInt(file);
         int count = ox::io::CHelpIO::readInt(file);
         for (int j = 0; j < count; ++j)
@@ -340,7 +340,7 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
 
 void CSpritePackage::readSprite(SSpriteImage& image, ox::io::IReadFile* file, int version)
 {
-    readSpriteHeader(image, file, version);
+    readSpriteHeader(image.Header, file, version);
     image.TextureIndex = ox::io::CHelpIO::readInt(file);
     image.X = ox::io::CHelpIO::readInt(file);
     image.Y = ox::io::CHelpIO::readInt(file);

@@ -28,8 +28,9 @@ struct SSpriteImageHeader
 };
 
 //! A sprite image of a package: a rectangle of one of its textures.
-struct SSpriteImage : public SSpriteImageHeader
+struct SSpriteImage
 {
+    SSpriteImageHeader Header;
     int TextureIndex;
     int X;
     int Y;

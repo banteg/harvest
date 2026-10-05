@@ -45,7 +45,7 @@ struct SImageIdSearcher
 {
     int operator()(int id, const T& image) const
     {
-        return id - image.Id;
+        return id - image.Header.Id;
     }
 };
 
@@ -55,7 +55,7 @@ struct SImageIdSortFunctor
 {
     bool operator()(const T& a, const T& b) const
     {
-        return a.Id < b.Id;
+        return a.Header.Id < b.Header.Id;
     }
 };
 
