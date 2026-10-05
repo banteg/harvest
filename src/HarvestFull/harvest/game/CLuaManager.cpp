@@ -671,18 +671,18 @@ ox::io::IFileSystem* CLuaManager::getFileSystem()
 
 int harvest_addSpriteState(lua_State* L)
 {
-    if (lua_gettop(L) <= 0)
+    if (lua_gettop(L) > 0)
     {
+        ox::core::CString<char> packageFile;
+        if (lua_gettop(L) >= 2)
+        {
+            packageFile = extractLuaPath(L);
+            packageFile.append(ox::core::CString<char>(lua_tostring(L, 2)));
+        }
+        lua_pushinteger(L, gp_luaManager->createSpriteState(lua_tostring(L, 1), packageFile));
+    }
+    else
         lua_pushinteger(L, -1);
-        return 1;
-    }
-    ox::core::CString<char> packageFile;
-    if (lua_gettop(L) >= 2)
-    {
-        packageFile = extractLuaPath(L);
-        packageFile.append(ox::core::CString<char>(lua_tostring(L, 2)));
-    }
-    lua_pushinteger(L, gp_luaManager->createSpriteState(lua_tostring(L, 1), packageFile));
     return 1;
 }
 
