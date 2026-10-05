@@ -47,6 +47,10 @@ enum EGUI_EVENT_TYPE
     EGET_MESSAGEBOX_NO = 16,
     //! Enter was pressed in an edit box.
     EGET_EDITBOX_ENTER = 19,
+    //! The text of an edit box changed.
+    EGET_EDITBOX_CHANGED = 20,
+    //! A context menu item was clicked; IGUIContextMenu::getSelectedItem returns it.
+    EGET_MENU_ITEM_SELECTED = 23,
     //! An element that reports drawing has been drawn.
     EGET_ELEMENT_DRAWN = 26,
     //! A modal screen blocked an event; IGUIModalScreen::getLastBlockedEvent returns it.
@@ -101,6 +105,10 @@ enum EKEY_INPUT_EVENT
 {
     EKIE_KEY_PRESSED_DOWN = 0,
     EKIE_KEY_LEFT_UP = 1,
+    //! A character was typed, in KeyInput.Char.
+    EKIE_CHARACTER = 2,
+    //! The paste shortcut was pressed; the clipboard is read from the IOSOperator.
+    EKIE_PASTE = 3,
     //! The fullscreen toggle combination was pressed.
     EKIE_TOGGLE_FULLSCREEN = 4
 };

@@ -6,12 +6,13 @@
 #ifndef OX_IOSOPERATOR_H
 #define OX_IOSOPERATOR_H
 
+#include "IUnknown.h"
 #include "core/CString.h"
 
 namespace ox {
 
 //! Operating system services.
-class IOSOperator
+class IOSOperator : public IUnknown
 {
 public:
     virtual ~IOSOperator() {}

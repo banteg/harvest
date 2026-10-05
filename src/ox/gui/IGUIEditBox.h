@@ -17,6 +17,11 @@ class IGUIFont;
 class IGUIEditBox : public IGUIElement
 {
 public:
+    IGUIEditBox(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+    }
+
     virtual void setFocus() = 0;
     virtual void setOverrideFont(IGUIFont* font) = 0;
     virtual void setOverrideColor(video::SColor color) = 0;
