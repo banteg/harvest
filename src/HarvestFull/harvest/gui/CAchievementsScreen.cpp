@@ -439,8 +439,8 @@ void CAchievementsScreen::setVisible(bool visible)
 
 ox::gui::IGUIWindow* CAchievementsScreen::getAwardPopup(int achievement, int planet)
 {
-    ox::gui::IGUIWindow* popup = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 90, 10),
-        GUIEnvironment->getHoverParentElement(), -1);
+    ox::gui::IGUIWindow* popup = static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(
+        ox::core::CRect<int>(0, 0, 90, 10), GUIEnvironment->getHoverParentElement(), -1));
     popup->setAnimations(Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/ingame.dat", false), "Tooltip");
     ox::core::CString<wchar_t> title = settings::gp_systemConfig->getLocalizedText(settings::ACHIEVEMENT_NAMES[achievement]);
     ox::core::CString<wchar_t> description =

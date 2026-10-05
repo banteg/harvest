@@ -64,7 +64,7 @@ private:
     ox::gui::IGUIElement* AwardAreas[AWARD_COUNT];
     bool Achieved[AWARD_COUNT];
     ox::gui::IGUIElement* Window;
-    ox::gui::IGUIWindow* Frame;
+    ox::gui::IGUILayout* Frame;
     float Time;
     //! The award under the mouse, or -1.
     int Hovered;

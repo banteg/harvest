@@ -79,7 +79,8 @@ void CGuiInfoLines::addInfoLine(const wchar_t* title, const wchar_t* text, ox::v
 {
     if (!BoldFont || !sprites)
         return;
-    ox::gui::IGUIWindow* frame = GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50), Container, -1);
+    ox::gui::IGUIWindow* frame =
+        static_cast<ox::gui::IGUIWindow*>(GUIEnvironment->addFrame(ox::core::CRect<int>(0, 0, 50, 50), Container, -1));
     frame->LayoutFlags = "br";
     frame->setAnimations(GUIEnvironment->getSkin()->getSpritePackage(), "Black");
     GUIEnvironment->addStaticText(L" ", 100, frame, SmallFont, -1, L"")->setParagraphIcon(icon, sprites, true);

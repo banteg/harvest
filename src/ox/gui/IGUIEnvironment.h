@@ -19,7 +19,6 @@ namespace gui {
 class IGUIElement;
 class IGUIButton;
 class IGUILayout;
-class IGUIWindow;
 class IGUIScrollBar;
 class IGUIImage;
 class IGUICheckBox;
@@ -74,7 +73,7 @@ public:
         IGUIFont* font, video::SColor color, IGUIElement* parent, int id) = 0;
     virtual IGUILayout* addWindow(const core::CRect<int>& rectangle, bool modal, const wchar_t* text,
         IGUIElement* parent, int id) = 0;
-    virtual IGUIWindow* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
+    virtual IGUILayout* addFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id) = 0;
     virtual IGUILayout* addDetachableFrame(const core::CRect<int>& rectangle, IGUIElement* parent, int id,
         unsigned int flags, bool detached, bool visible) = 0;
     virtual IGUILayout* addLayoutGroup(const core::CRect<int>& rectangle, IGUIElement* parent) = 0;
