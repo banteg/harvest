@@ -160,16 +160,16 @@ int CConfiguration::parseString(const wchar_t* text, core::CString<wchar_t>& res
         {
             result.append(c);
             // spaces before the string are skipped
-            if (start == -1 && c != L' ')
+            if (c != L' ' && start == -1)
                 start = result.size() - 1;
             end = result.size();
             escaped = false;
         }
-        else if ((c >= L'A' && c <= L'Z') || (c >= L'a' && c <= L'z') || (c >= L'0' && c <= L'9'))
+        else if ((c >= L'a' && c <= L'z') || (c >= L'A' && c <= L'Z') || (c >= L'0' && c <= L'9'))
         {
             result.append(c);
             // spaces before the string are skipped
-            if (start == -1 && c != L' ')
+            if (c != L' ' && start == -1)
                 start = result.size() - 1;
             end = result.size();
             escaped = false;
