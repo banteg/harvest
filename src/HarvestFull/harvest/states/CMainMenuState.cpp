@@ -988,8 +988,10 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                             ox::gui::EMBF_YES | ox::gui::EMBF_NO, 0, ID_SHUTTLE_RACE_BOX);
                     }
 
-                    CameraPositionTarget = planet->getAbsolutePosition() + ox::core::CVector3d<float>(13.0f, 0.0f, -10.0f);
-                    CameraTargetTarget = planet->getAbsolutePosition() + ox::core::CVector3d<float>(13.0f, 0.0f, 0.0f);
+                    CameraPositionTarget =
+                        planet->getAbsolutePosition() + ox::core::CVector3d<float>(13.0f, 0.0f, -10.0f);
+                    CameraTargetTarget =
+                        planet->getAbsolutePosition() + ox::core::CVector3d<float>(13.0f, 0.0f, 0.0f);
                 }
                 else if (HoveredGameMode >= 0 && Mode == MODE_GAME_MODE_SELECT && GameModeButtons[HoveredGameMode] &&
                     GameModeButtons[HoveredGameMode]->getAbsolutePosition().isPointInside(mouse))
@@ -1070,55 +1072,59 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                         if (i != HoveredGameMode && GameModeButtons[i] &&
                             GameModeButtons[i]->getAbsolutePosition().isPointInside(mouse))
                         {
-                        HoveredGameMode = i;
-                        if (GameModeTitle)
-                        {
-                            GameModeTitle->setText(L" ");
-                            GameModeTitle->setParagraphIcon(GAME_MODE_ICONS[i],
-                                Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
-                                true), true);
-                            GameModeTitle->activateProgressiveReveal(0);
-                        }
-                        if (GameModeDescription)
-                            GameModeDescription->setText(
-                                settings::gp_systemConfig->getLocalizedText(GAME_MODE_DESCRIPTIONS[i]).c_str());
-                        if (GameModeStats[0])
-                        {
-                            ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(MODE_STATS[0]);
-                            GameModeStats[0]->setText(text.c_str());
-                            GameModeStats[0]->setParagraphIcon(MODE_STRATEGY_ICONS[i],
-                                Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
-                                true), true);
-                            GameModeStats[0]->activateProgressiveReveal(0);
-                        }
-                        if (GameModeStats[1])
-                        {
-                            ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(MODE_STATS[1]);
-                            GameModeStats[1]->setText(text.c_str());
-                            GameModeStats[1]->setParagraphIcon(MODE_TACTICS_ICONS[i],
-                                Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
-                                true), true);
-                            GameModeStats[1]->activateProgressiveReveal(0);
-                        }
-                        if (GameModeStats[2])
-                        {
-                            ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(MODE_STATS[2]);
-                            GameModeStats[2]->setText(text.c_str());
-                            GameModeStats[2]->setParagraphIcon(MODE_PRESSURE_ICONS[i],
-                                Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
-                                true), true);
-                            GameModeStats[2]->activateProgressiveReveal(0);
-                        }
-                        if (GameModeStats[3])
-                        {
-                            ox::core::CString<wchar_t> text = settings::gp_systemConfig->getLocalizedText(MODE_STATS[3]);
-                            GameModeStats[3]->setText(text.c_str());
-                            GameModeStats[3]->setParagraphIcon(MODE_DESIGN_ICONS[i],
-                                Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
-                                true), true);
-                            GameModeStats[3]->activateProgressiveReveal(0);
-                        }
-                        return false;
+                            HoveredGameMode = i;
+                            if (GameModeTitle)
+                            {
+                                GameModeTitle->setText(L" ");
+                                GameModeTitle->setParagraphIcon(GAME_MODE_ICONS[i],
+                                    Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
+                                    true), true);
+                                GameModeTitle->activateProgressiveReveal(0);
+                            }
+                            if (GameModeDescription)
+                                GameModeDescription->setText(
+                                    settings::gp_systemConfig->getLocalizedText(GAME_MODE_DESCRIPTIONS[i]).c_str());
+                            if (GameModeStats[0])
+                            {
+                                ox::core::CString<wchar_t> text =
+                                    settings::gp_systemConfig->getLocalizedText(MODE_STATS[0]);
+                                GameModeStats[0]->setText(text.c_str());
+                                GameModeStats[0]->setParagraphIcon(MODE_STRATEGY_ICONS[i],
+                                    Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
+                                    true), true);
+                                GameModeStats[0]->activateProgressiveReveal(0);
+                            }
+                            if (GameModeStats[1])
+                            {
+                                ox::core::CString<wchar_t> text =
+                                    settings::gp_systemConfig->getLocalizedText(MODE_STATS[1]);
+                                GameModeStats[1]->setText(text.c_str());
+                                GameModeStats[1]->setParagraphIcon(MODE_TACTICS_ICONS[i],
+                                    Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
+                                    true), true);
+                                GameModeStats[1]->activateProgressiveReveal(0);
+                            }
+                            if (GameModeStats[2])
+                            {
+                                ox::core::CString<wchar_t> text =
+                                    settings::gp_systemConfig->getLocalizedText(MODE_STATS[2]);
+                                GameModeStats[2]->setText(text.c_str());
+                                GameModeStats[2]->setParagraphIcon(MODE_PRESSURE_ICONS[i],
+                                    Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
+                                    true), true);
+                                GameModeStats[2]->activateProgressiveReveal(0);
+                            }
+                            if (GameModeStats[3])
+                            {
+                                ox::core::CString<wchar_t> text =
+                                    settings::gp_systemConfig->getLocalizedText(MODE_STATS[3]);
+                                GameModeStats[3]->setText(text.c_str());
+                                GameModeStats[3]->setParagraphIcon(MODE_DESIGN_ICONS[i],
+                                    Driver->getSpritePackage("$GAME_RESOURCES$/harvestClientData/gfx/harvestMenu.dat",
+                                    true), true);
+                                GameModeStats[3]->activateProgressiveReveal(0);
+                            }
+                            return false;
                         }
                     }
                 }
@@ -1299,7 +1305,8 @@ void CMainMenuState::enterGameModeSelectMode(int planet)
     ((ox::gui::IGUILayout*)modes)->sortRiver(true, 0, 0, false);
     ox::core::CRect<int> modesRect = modes->getRelativePosition();
     modes->moveTo(ox::core::CPosition2d<int>(700 - modesRect.getWidth(), bottom - modesRect.getHeight()));
-    buttons->moveTo(ox::core::CPosition2d<int>(0, (modesRect.getHeight() - buttons->getRelativePosition().getHeight()) / 2));
+    buttons->moveTo(
+        ox::core::CPosition2d<int>(0, (modesRect.getHeight() - buttons->getRelativePosition().getHeight()) / 2));
     GameModeWindow->setVisible(true);
 }
 
@@ -1352,8 +1359,8 @@ void CMainMenuState::createLuaSelectionWindow()
     list->LayoutFlags = "br";
     list->sortItems(true);
 
-    GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 400, 400), ModalWindow, ID_MODS_CANCEL, L"Cancel")->LayoutFlags =
-        "br";
+    GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 400, 400), ModalWindow, ID_MODS_CANCEL,
+        L"Cancel")->LayoutFlags = "br";
     GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 400, 400), ModalWindow, ID_MODS_OK, L"Ok");
     ModalWindow->sortRiver(true, 5, 5, false);
     ModalWindow->centerOnParent();
@@ -1374,7 +1381,8 @@ void CMainMenuState::render()
     if (Mode == MODE_NEUTRAL && Sprites[SPRITE_LOGO])
     {
         int y = (ScreenSize.Height - 600) / 2 + 30;
-        Sprites[SPRITE_LOGO]->draw(ox::core::CPosition2d<int>(ScreenSize.Width / 2, y), 0, ox::video::SColor(0xffffffff));
+        Sprites[SPRITE_LOGO]->draw(ox::core::CPosition2d<int>(ScreenSize.Width / 2, y), 0,
+            ox::video::SColor(0xffffffff));
     }
 
     GUIEnvironment->drawAll();
