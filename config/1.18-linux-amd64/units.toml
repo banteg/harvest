@@ -342,3 +342,11 @@
 ["daisy/video/Null/CParticleState.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c17c
+
+["ox/game/CConfigBlock.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874264
+
+["ox/game/CConfiguration.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x874268

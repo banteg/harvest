@@ -34,6 +34,9 @@ public:
 
     static CString<wchar_t> ansiToWide(const CString<char>& str);
     static CString<wchar_t> millisecondsToWide(float milliseconds, bool showHours);
+    // Defined inline in CStringConversions.h.
+    static float wideToFloat(const wchar_t* str);
+    static CString<wchar_t> floatToWide(float value, char* format = 0);
 };
 
 //! A copy of source with every occurrence of find replaced by replacement.
