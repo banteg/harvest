@@ -174,8 +174,9 @@ bool CGUIButton::OnEvent(const event::SEvent& event)
 }
 
 //! switches to a state and restarts its animation
-void CGUIButton::setNewState(EButtonStates state)
+void CGUIButton::setNewState(EButtonStates newState)
 {
+    EButtonStates state = newState;
     if (State == state)
         return;
 
@@ -425,48 +426,48 @@ void CGUITextButton::setTextColor(video::SColor color)
 //! called if an event happened.
 bool CGUITextButton::OnEvent(const event::SEvent& event)
 {
-    if (isEnabled())
+    if (!isEnabled())
+        return Parent ? Parent->OnEvent(event) : false;
+
+    switch (event.EventType)
     {
-        switch (event.EventType)
+    case event::EET_KEY_INPUT_EVENT:
+        if ((event.KeyInput.Key == KEY_RETURN || event.KeyInput.Key == KEY_SPACE) &&
+            event.KeyInput.Event == event::EKIE_KEY_LEFT_UP)
         {
-        case event::EET_KEY_INPUT_EVENT:
-            if ((event.KeyInput.Key == KEY_RETURN || event.KeyInput.Key == KEY_SPACE) &&
-                event.KeyInput.Event == event::EKIE_KEY_LEFT_UP)
-            {
-                Environment->removeFocus(this);
+            Environment->removeFocus(this);
 
-                if (Parent)
-                {
-                    event::SEvent e;
-                    e.EventType = event::EET_GUI_EVENT;
-                    e.GUIEvent.Caller = this;
-                    e.GUIEvent.EventType = EGET_BUTTON_CLICKED;
-                    Parent->OnEvent(e);
-                }
-                return true;
-            }
-            break;
-        case event::EET_MOUSE_INPUT_EVENT:
-            if (event.MouseInput.Event == event::EMIE_LMOUSE_LEFT_UP ||
-                event.MouseInput.Event == event::EMIE_RMOUSE_LEFT_UP)
+            if (Parent)
             {
-                Environment->removeFocus(this);
-
-                if (Parent)
-                {
-                    event::SEvent e;
-                    e.EventType = event::EET_GUI_EVENT;
-                    e.GUIEvent.Caller = this;
-                    e.GUIEvent.EventType = event.MouseInput.Event == event::EMIE_LMOUSE_LEFT_UP ?
-                        EGET_BUTTON_CLICKED : EGET_TEXT_BUTTON_CLICKED;
-                    Parent->OnEvent(e);
-                }
-                return true;
+                event::SEvent e;
+                e.EventType = event::EET_GUI_EVENT;
+                e.GUIEvent.Caller = this;
+                e.GUIEvent.EventType = EGET_BUTTON_CLICKED;
+                Parent->OnEvent(e);
             }
-            break;
-        default:
-            break;
+            return true;
         }
+        break;
+    case event::EET_MOUSE_INPUT_EVENT:
+        if (event.MouseInput.Event == event::EMIE_LMOUSE_LEFT_UP ||
+            event.MouseInput.Event == event::EMIE_RMOUSE_LEFT_UP)
+        {
+            Environment->removeFocus(this);
+
+            if (Parent)
+            {
+                event::SEvent e;
+                e.EventType = event::EET_GUI_EVENT;
+                e.GUIEvent.Caller = this;
+                e.GUIEvent.EventType = event.MouseInput.Event == event::EMIE_LMOUSE_LEFT_UP ?
+                    EGET_BUTTON_CLICKED : EGET_TEXT_BUTTON_CLICKED;
+                Parent->OnEvent(e);
+            }
+            return true;
+        }
+        break;
+    default:
+        break;
     }
 
     return Parent ? Parent->OnEvent(event) : false;
@@ -482,7 +483,11 @@ void CGUITextButton::draw()
 
     bool hovered = false;
     if (isEnabled())
-        hovered = AbsoluteClippingRect.isPointInside(Environment->getMousePosition());
+    {
+        const core::CPosition2d<int>& mouse = Environment->getMousePosition();
+        hovered = AbsoluteClippingRect.UpperLeftCorner.X <= mouse.X && AbsoluteClippingRect.UpperLeftCorner.Y <= mouse.Y &&
+            AbsoluteClippingRect.LowerRightCorner.X > mouse.X && AbsoluteClippingRect.LowerRightCorner.Y > mouse.Y;
+    }
 
     int topHeight = 0;
     if (Sprites[ES_TOP])
@@ -498,12 +503,10 @@ void CGUITextButton::draw()
 
     if (Font)
     {
-        core::CRect<int> rect;
-        rect.UpperLeftCorner.X = AbsoluteRect.UpperLeftCorner.X + (AbsoluteRect.getWidth() - TextSize.Width) / 2;
-        rect.UpperLeftCorner.Y = AbsoluteRect.UpperLeftCorner.Y + topHeight + (textHeight - TextSize.Height) / 2;
-        rect.LowerRightCorner.X = rect.UpperLeftCorner.X + TextSize.Width;
-        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + TextSize.Height;
-        Font->draw(ButtonText.c_str(), rect, Color, EFHA_LEFT, EFVA_TOP, clip);
+        int x = AbsoluteRect.UpperLeftCorner.X + (AbsoluteRect.getWidth() - TextSize.Width) / 2;
+        int y = AbsoluteRect.UpperLeftCorner.Y + topHeight + (textHeight - TextSize.Height) / 2;
+        Font->draw(ButtonText.c_str(), core::CRect<int>(x, y, x + TextSize.Width, y + TextSize.Height), Color,
+            EFHA_LEFT, EFVA_TOP, clip);
     }
 
     if (Sprites[ES_SIDE] && hovered)

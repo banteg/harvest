@@ -25,6 +25,7 @@ bool CClickArea::OnEvent(const event::SEvent& event)
     if (event.EventType == event::EET_MOUSE_INPUT_EVENT)
     {
         event::SEvent e;
+        bool send = true;
 
         switch (event.MouseInput.Event)
         {
@@ -47,10 +48,11 @@ bool CClickArea::OnEvent(const event::SEvent& event)
             e.GUIEvent.EventType = EGET_CLICK_AREA_MIDDLE_UP;
             break;
         default:
-            return Parent ? Parent->OnEvent(event) : false;
+            send = false;
+            break;
         }
 
-        if (Parent)
+        if (send && Parent)
         {
             e.EventType = event::EET_GUI_EVENT;
             e.GUIEvent.Caller = this;
