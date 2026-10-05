@@ -25,7 +25,8 @@ enum EGUI_ELEMENT_TYPE
 {
     EGUIET_SCROLL_BAR = 3,
     EGUIET_CHECK_BOX = 6,
-    EGUIET_LIST_BOX = 8
+    EGUIET_LIST_BOX = 8,
+    EGUIET_STATIC_TEXT = 11
 };
 
 //! Base class of all GUI elements.

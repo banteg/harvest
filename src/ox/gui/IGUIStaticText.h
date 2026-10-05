@@ -9,6 +9,7 @@
 #include "IGUIElement.h"
 #include "IGUIFont.h"
 #include "../video/SColor.h"
+#include "../TArray.h"
 
 namespace ox {
 namespace video { class ISpritePackage; }
@@ -18,6 +19,19 @@ namespace gui {
 class IGUIStaticText : public IGUIElement
 {
 public:
+    IGUIStaticText(IGUIEnvironment* environment, IGUIElement* parent, int id, core::CRect<int> rectangle)
+        : IGUIElement(environment, parent, id, rectangle)
+    {
+        Type = EGUIET_STATIC_TEXT;
+    }
+
+    //! Breaks text into lines no wider than width; each line starts with prefix.
+    static void breakText(const core::CString<wchar_t>& text, IGUIFont* font,
+        TArray<core::CString<wchar_t> >& lines, int width, const wchar_t* prefix);
+    //! The height of text broken into lines no wider than width.
+    static int getMultilineHeight(const core::CString<wchar_t>& text, IGUIFont* font, int width,
+        const wchar_t* prefix);
+
     virtual void setOverrideFont(IGUIFont* font) = 0;
     virtual void setOverrideColor(video::SColor color) = 0;
     virtual video::SColor getOverrideColor() = 0;
