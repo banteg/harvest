@@ -4193,13 +4193,16 @@ void CPlayState::render()
         ox::core::CString<wchar_t> text;
         text = ox::core::CString<wchar_t>(game::gp_mineralAmount->getValue());
         CreditsText->setText(text.c_str());
-        if (GameMode != game::EGM_CREATIVE)
-            text = ox::core::CString<wchar_t>(ThreatLevel->getThreatLevel());
-        else if (LuaManager && LuaManager->isRunningMods())
-            text = ox::core::CString<wchar_t>(LuaManager->getThreatLevelValue());
+        if (GameMode == game::EGM_CREATIVE)
+        {
+            if (LuaManager && LuaManager->isRunningMods())
+                text = ox::core::CString<wchar_t>(LuaManager->getThreatLevelValue());
+            else
+                // Creative games count the aliens.
+                text = ox::core::CString<wchar_t>((int)entity::gp_entityManager->getEntityList(1).size());
+        }
         else
-            // Creative games count the aliens.
-            text = ox::core::CString<wchar_t>((int)entity::gp_entityManager->getEntityList(1).size());
+            text = ox::core::CString<wchar_t>(ThreatLevel->getThreatLevel());
         ThreatLevelText->setText(text.c_str());
     }
 
