@@ -186,49 +186,56 @@ bool CGUIMessageBox::OnEventInNonFocusState(const ox::event::SEvent& event)
     {
         if (event.KeyInput.Event == ox::event::EKIE_KEY_PRESSED_DOWN)
         {
-            if (event.KeyInput.Key == ox::KEY_RETURN || event.KeyInput.Key == ox::KEY_ESCAPE)
+            switch (event.KeyInput.Key)
             {
+            case ox::KEY_RETURN:
                 KeyPressed = true;
                 return true;
+            case ox::KEY_ESCAPE:
+                KeyPressed = true;
+                return true;
+            default:
+                break;
             }
         }
         else if (event.KeyInput.Event == ox::event::EKIE_KEY_LEFT_UP && KeyPressed)
         {
-            if (event.KeyInput.Key == ox::KEY_RETURN)
+            switch (event.KeyInput.Key)
             {
+            case ox::KEY_RETURN:
                 if (YesButton)
                 {
                     outevent.GUIEvent.EventType = ox::gui::EGET_MESSAGEBOX_YES;
-                    Parent->OnEvent(outevent);
-                    remove();
-                    return true;
+                Parent->OnEvent(outevent);
+                remove();
+                return true;
                 }
                 if (OkButton)
                 {
                     outevent.GUIEvent.EventType = ox::gui::EGET_MESSAGEBOX_OK;
-                    Parent->OnEvent(outevent);
-                    remove();
-                    return true;
+                Parent->OnEvent(outevent);
+                remove();
+                return true;
                 }
                 return true;
-            }
-            else if (event.KeyInput.Key == ox::KEY_ESCAPE)
-            {
+            case ox::KEY_ESCAPE:
                 if (CancelButton)
                 {
                     outevent.GUIEvent.EventType = ox::gui::EGET_MESSAGEBOX_CANCEL;
-                    Parent->OnEvent(outevent);
-                    remove();
-                    return true;
+                Parent->OnEvent(outevent);
+                remove();
+                return true;
                 }
                 if (NoButton)
                 {
                     outevent.GUIEvent.EventType = ox::gui::EGET_MESSAGEBOX_NO;
-                    Parent->OnEvent(outevent);
-                    remove();
-                    return true;
+                Parent->OnEvent(outevent);
+                remove();
+                return true;
                 }
                 return true;
+            default:
+                break;
             }
         }
     }
