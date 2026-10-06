@@ -41,3 +41,8 @@ small part of it:
 The executable links these libraries dynamically, so their work is not in the binary: zlib, libjpeg,
 libogg, libvorbis and libvorbisfile, OpenAL and ALUT, Cg and CgGL, OpenGL and GLU, SFML 2 (window,
 input, joysticks), GTK 2 (clipboard only), X11 and LuaJIT.
+
+## Original bugs
+
+[original-bugs.md](original-bugs.md) lists behaviours of the original executables that read as bugs,
+what they affect, and what a port should do about each.
