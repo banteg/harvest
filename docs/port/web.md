@@ -33,13 +33,16 @@ on `PATH`, 6.0.10 in CI) only provides the sysroot and links.
 
 - The player drops their install onto the disc (or picks the folder). Any folder that contains
   `harvestClientData` works: the Windows, Mac and Linux releases ship the same 168 data files byte for
-  byte (the Mac app adds two stray copies), and a dropped `.app` is walked like a folder. Only
-  `harvestClientData` is copied.
+  byte (the Mac app adds two stray copies), and a dropped `.app` is walked like a folder. A zip of
+  any of these works the same way (Finder's Compress included): the page reads the central directory
+  itself and inflates entries with the browser's `DecompressionStream`, skipping `__MACOSX`; zips
+  inside `harvestClientData` are the game's mods and stay zipped. Only `harvestClientData` is copied.
 - The data and the user data folder (`/libsdl/Harvest`: settings, profiles, saves) live in IndexedDB
   through IDBFS. The data is kept for the next visit (the page asks the browser not to evict it), and
   the user data is written back every 3 seconds and when the page is hidden. Eject forgets the data.
-- `?data=<url>` loads a data folder from `<url>/manifest.json` for development, only when the page is
-  served from localhost, so a link to the published page cannot hand players someone else's copy.
+- `?data=<url>` loads a data folder from `<url>/manifest.json` (or a zip, for a `<url>` ending in
+  `.zip`) for development, only when the page is served from localhost, so a link to the published
+  page cannot hand players someone else's copy.
 - The game's fatal messages go to the page through `port::showErrorMessage`
   ([`Message.h`](../../port/src/platform/Message.h)) instead of a native dialog. On the web the
   window fills the page and Ctrl+Q does nothing.
