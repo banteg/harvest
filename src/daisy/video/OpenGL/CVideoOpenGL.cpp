@@ -16,7 +16,7 @@
 #include "COpenGLTexture.h"
 #include "daisy/os.h"
 #include "daisy/video/Null/CImageLoaderJPG.h"
-#include "ox/IOxDevice.h"
+#include "daisy/other/CIrrDeviceLinux.h"
 #include "ox/TArray.h"
 #include "ox/core/CBasic.h"
 #include "ox/core/CStringFunctions.h"
@@ -67,7 +67,7 @@ inline void clipAgainst(ox::core::CRect<int>& rect, const ox::core::CRect<int>& 
 
 } // end anonymous namespace
 
-CVideoOpenGL::CVideoOpenGL(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice* device, bool fullscreen,
+CVideoOpenGL::CVideoOpenGL(const ox::core::CDimension2d<int>& screenSize, CIrrDeviceLinux* device, bool fullscreen,
     bool stencilBuffer, ox::io::IFileSystem* io)
     : CVideoNull(io, screenSize), CurrentRenderMode(ERM_NONE), ResetRenderStates(true),
       Transformation3DChanged(true), MultiTextureExtension(false), StencilBuffer(stencilBuffer),
@@ -2287,7 +2287,7 @@ bool CVideoOpenGL::saveJpegScreenshot(const char* directory, const char* name)
     return false;
 }
 
-ox::video::IVideoDriver* createOpenGLDriver(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice* device,
+ox::video::IVideoDriver* createOpenGLDriver(const ox::core::CDimension2d<int>& screenSize, CIrrDeviceLinux* device,
     bool fullscreen, bool stencilBuffer, ox::io::IFileSystem* io)
 {
     return new CVideoOpenGL(screenSize, device, fullscreen, stencilBuffer, io);

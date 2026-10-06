@@ -491,6 +491,32 @@ public:
         append(CString<T>(i));
     }
 
+    //! Appends a C string in place and returns this string. An Oxeye addition (Mac
+    //! CString<char>::operator+<char>(const char*)); unlike std::string it modifies the left side.
+    template <class B>
+    CString<T>& operator+(const B* c)
+    {
+        --used;
+
+        int len = 0;
+        const B* p = c;
+        while (*p)
+        {
+            ++len;
+            ++p;
+        }
+        ++len;
+
+        if (used + len > allocated)
+            reallocate(used + len);
+
+        for (int l = 0; l < len; ++l)
+            array[used + l] = (T)c[l];
+
+        used += len;
+        return *this;
+    }
+
 private:
     //! Returns a character converted to lower case
     T toLower(const T& t) const

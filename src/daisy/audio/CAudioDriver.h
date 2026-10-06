@@ -15,6 +15,7 @@ namespace audio {
 class CSoundInfoStub
 {
 public:
+    CSoundInfoStub() : LastPlayTime(0) {}
     virtual ~CSoundInfoStub() {}
     //! Timer time of the last start, to drop repeats within 50 ms.
     unsigned int LastPlayTime;
@@ -24,6 +25,7 @@ public:
 class CMusicInfoStub
 {
 public:
+    CMusicInfoStub() : Volume(1.0f) {}
     virtual ~CMusicInfoStub() {}
     float Volume;
 };
@@ -32,7 +34,10 @@ public:
 class CTrackedSoundInfoStub
 {
 public:
+    CTrackedSoundInfoStub(CSoundInfoStub* sound) : Sound(sound) {}
     virtual ~CTrackedSoundInfoStub() {}
+    //! The sound effect being played.
+    CSoundInfoStub* Sound;
 };
 
 class CAudioDriver : public ox::audio::IAudioDriver

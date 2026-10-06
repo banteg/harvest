@@ -195,6 +195,10 @@ struct SEvent
         struct
         {
             EDEVICE_EVENT_TYPE Type;
+            //! The new window size; the Linux device sends EDE_FULLSCREEN_TOGGLED with it after every
+            //! resize and mode switch.
+            int Width;
+            int Height;
         } DeviceEvent;
 
         struct

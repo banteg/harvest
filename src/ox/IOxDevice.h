@@ -63,7 +63,8 @@ public:
     //! Presents the back buffer; CVideoOpenGL::endScene returns the result.
     virtual bool swapBuffers() = 0;
     virtual video::IVideoDriver* getVideoDriver() = 0;
-    virtual void setFullscreenMode(bool fullscreen) = 0;
+    //! Returns false when the device already is in the requested mode.
+    virtual bool setFullscreenMode(bool fullscreen) = 0;
     virtual void resizeDeviceWindow(const core::CDimension2d<int>& size) = 0;
     virtual io::IFileSystem* getFileSystem() = 0;
     virtual gui::IGUIEnvironment* getGUIEnvironment() = 0;

@@ -19,11 +19,9 @@
 #undef GL_GLEXT_LEGACY
 #include <GL/glext.h>
 
-namespace ox {
-class IOxDevice;
-} // end namespace ox
-
 namespace daisy {
+class CIrrDeviceLinux;
+
 namespace video {
 
 class CVideoOpenGL : public CVideoNull, public ox::video::IMaterialRendererServices
@@ -31,7 +29,7 @@ class CVideoOpenGL : public CVideoNull, public ox::video::IMaterialRendererServi
 public:
     //! device is the window device (CIrrDeviceLinux); endScene presents through it. The fullscreen
     //! argument is ignored on Linux.
-    CVideoOpenGL(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice* device, bool fullscreen,
+    CVideoOpenGL(const ox::core::CDimension2d<int>& screenSize, CIrrDeviceLinux* device, bool fullscreen,
         bool stencilBuffer, ox::io::IFileSystem* io);
 
     virtual ~CVideoOpenGL();
@@ -312,11 +310,11 @@ private:
     PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC pGlFramebufferRenderbufferEXT;
 
     // 0x434c0
-    ox::IOxDevice* Device;
+    CIrrDeviceLinux* Device;
 };
 
 //! Creates the OpenGL driver for the device's window.
-ox::video::IVideoDriver* createOpenGLDriver(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice* device,
+ox::video::IVideoDriver* createOpenGLDriver(const ox::core::CDimension2d<int>& screenSize, CIrrDeviceLinux* device,
     bool fullscreen, bool stencilBuffer, ox::io::IFileSystem* io);
 
 } // end namespace video
