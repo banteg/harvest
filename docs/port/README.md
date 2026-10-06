@@ -9,7 +9,7 @@ the data formats the game ships.
 The plan for the port itself (targets, libraries, milestones) is in
 [porting-plan.md](porting-plan.md). The port's build lives in [`port/`](../../port/README.md), and
 [census.md](census.md) lists which units it compiles and every symbol and interface the platform
-layer still has to provide.
+layer still has to provide. Release packages are described in [packaging.md](packaging.md).
 
 ## Data the game ships
 

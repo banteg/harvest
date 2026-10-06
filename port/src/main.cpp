@@ -11,10 +11,12 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
+#include <string>
 #include <vector>
 #include "device/CIrrDeviceSDL.h"
 #include "device/InputScript.h"
 #include "device/Options.h"
+#include "platform/Paths.h"
 #include "harvest/CHarvestFullMain.h"
 
 namespace {
@@ -62,6 +64,16 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv)
 {
     if (!port::parseOptions(argc, argv))
         return SDL_APP_FAILURE;
+
+    // Without the data the game cannot show anything, so say so where a player will see it (a
+    // release build on Windows has no console) and stop.
+    std::string problem;
+    if (!port::findGameData(problem))
+    {
+        SDL_Log("%s", problem.c_str());
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Harvest", problem.c_str(), 0);
+        return SDL_APP_FAILURE;
+    }
 
     SApp* app = new SApp();
     *appstate = app;

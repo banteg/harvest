@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- The port's own icon: a cluster of mineral crystals on a planet's horizon. Drawn for the port,
+       not taken from the game's data. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1630"/>
+      <stop offset="1" stop-color="#1b2f5a"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4a6b"/>
+      <stop offset="1" stop-color="#1a2338"/>
+    </linearGradient>
+    <linearGradient id="lit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8ffcf"/>
+      <stop offset="0.5" stop-color="#3ddc84"/>
+      <stop offset="1" stop-color="#138a4e"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2bb36a"/>
+      <stop offset="1" stop-color="#0c5c34"/>
+    </linearGradient>
+    <clipPath id="tile">
+      <rect x="100" y="100" width="824" height="824" rx="185"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#sky)"/>
+    <circle cx="300" cy="280" r="10" fill="#ffffff" opacity="0.8"/>
+    <circle cx="720" cy="230" r="7" fill="#ffffff" opacity="0.6"/>
+    <circle cx="820" cy="420" r="6" fill="#ffffff" opacity="0.5"/>
+    <circle cx="210" cy="470" r="6" fill="#ffffff" opacity="0.5"/>
+    <ellipse cx="512" cy="1180" rx="760" ry="470" fill="url(#ground)"/>
+    <ellipse cx="512" cy="1180" rx="760" ry="470" fill="none" stroke="#7fb4ff" stroke-width="10" opacity="0.5"/>
+    <!-- three crystals, each a lit and a shaded face -->
+    <polygon points="512,250 590,420 560,760 512,780" fill="url(#lit)"/>
+    <polygon points="512,250 434,420 464,760 512,780" fill="url(#shade)"/>
+    <polygon points="360,430 420,540 405,770 360,785" fill="url(#lit)"/>
+    <polygon points="360,430 300,540 315,770 360,785" fill="url(#shade)"/>
+    <polygon points="664,400 726,520 708,775 664,790" fill="url(#lit)"/>
+    <polygon points="664,400 602,520 620,775 664,790" fill="url(#shade)"/>
+  </g>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="8"/>
+</svg>

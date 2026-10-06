@@ -1,6 +1,7 @@
 #include "device/CSDLOperator.h"
 
 #include <wchar.h>
+#include "platform/Paths.h"
 
 namespace port {
 
@@ -87,21 +88,7 @@ bool CSDLOperator::runApplication(const wchar_t* application, const wchar_t* arg
 //! Windows), without the trailing separator.
 ox::core::CString<char> CSDLOperator::getApplicationSupportPath(const char* application)
 {
-#if defined(SDL_PLATFORM_LINUX)
-    const char* home = SDL_getenv("HOME");
-    if (home && *home)
-        return ox::core::CString<char>(home) + "/." + application;
-#endif
-
-    char* pref = SDL_GetPrefPath("", application);
-    if (!pref)
-    {
-        SDL_Log("cannot find a user data directory: %s", SDL_GetError());
-        return ox::core::CString<char>(application);
-    }
-    ox::core::CString<char> path(pref);
-    SDL_free(pref);
-    return path.subString(0, path.size() - 1);
+    return ox::core::CString<char>(getUserDataPath(application).c_str());
 }
 
 } // end namespace port
