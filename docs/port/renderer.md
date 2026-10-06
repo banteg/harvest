@@ -42,4 +42,65 @@ loaded twice. Removal matches case-insensitively.
   passes it to the driver. The driver base creates the Cg context and destroys it on exit.
 - **Frame counting.** `endScene` registers the frame with the FPS counter.
 
-The OpenGL driver's drawing, blending and projection rules will be added here from its recovery.
+## OpenGL drawing
+
+The Linux driver is `CVideoOpenGL` with its material renderers
+([`src/daisy/video/OpenGL/`](../../src/daisy/video/OpenGL/)), all fixed-function OpenGL.
+
+### 2D images
+
+- The 2D matrices are identity; vertices are placed with the mapping above, so integer coordinates
+  fall on pixel edges.
+- `draw2DImage(texture, position, sourceRect, clipRect, color, useAlpha)` clips to the clip rectangle
+  and then to the render size, as Irrlicht 0.7 does. Texture coordinates are inset by half a texel
+  (`(sx + 0.5) / W` to `(sx + w − 0.5) / W`, the same for v); positions are not shifted; filtering is
+  nearest.
+- The colour-array variant uses texture coordinates `(sx + 0.5) / W` to `(sx + w + 0.5) / W`, shifts
+  positions by +0.5 px, and assigns the colours to the corners in the order c[0], c[3], c[2], c[1]
+  (default white).
+- The corner variants take upper-left, upper-right, lower-left and lower-right colours (default
+  `0x00FFFFFF`, transparent white) with half-texel-inset texture coordinates. The integer version
+  shifts by +0.5 px and filters linearly only when the quad is an axis-aligned rectangle; the float
+  version always filters linearly and does not shift. `drawScaled2DImage` uses the float corner
+  version with one colour.
+- Quads are batched, up to 1024 per batch. A batch is flushed when the texture, the alpha-channel
+  setting or the filter changes, when it is full, or when the scissor changes. With an alpha channel
+  a batch draws with `GL_MODULATE`, blending `SRC_ALPHA / ONE_MINUS_SRC_ALPHA` and alpha test > 0;
+  without one, blending stays on with whatever blend function was set last. `setForcePointSampling`
+  forces nearest filtering.
+- Untextured rectangles and lines blend with `SRC_ALPHA` only when the colour's alpha is below 255.
+  Lines are always 1 px wide (see [original-bugs.md](original-bugs.md)).
+
+### Render targets and scissor
+
+- `setRenderTarget` returns true and does nothing: there are no render targets on Linux, so the
+  minimap, which `CPlayState` renders "into" a texture, is drawn straight to the screen.
+  `createScreenTexture` returns an empty texture.
+- `setScissorRect` uses a wrong y (see [original-bugs.md](original-bugs.md)); the shuttle race's split
+  screen is the only user and passes full-height rectangles.
+
+### 3D state
+
+- Setting the view or world matrix loads modelview = view · world; the projection matrix is loaded
+  with its z column negated. `setViewPort` clips to the render size, with y measured from the bottom.
+- Materials: `EMT_SOLID` uses `GL_DECAL`, so lighting does not show on solid textured objects. Every
+  `EMT_TRANSPARENT_*` type blends `GL_ONE / GL_ONE_MINUS_SRC_COLOR` with depth writes off
+  (`TRANSPARENT_VERTEX_ALPHA` is the same as `ADD_COLOR`); `ALPHA_CHANNEL` adds alpha test > 0. The
+  two-layer, light-map and sphere-map types follow Irrlicht 0.7.
+- Material flags: 6 sets `glFrontFace` to counter-clockwise (the menu atmosphere uses it), 7 is the
+  magnification filter, 9 is fog, 10 and 11 are mirrored repeat in u and v.
+- Lights are directional (w = 0) or positional (w = 1) with linear attenuation 1 / radius.
+
+### Textures
+
+- Uploaded padded to a power of two and always as RGBA8; the 16/32-bit creation flags are ignored.
+  Filters are linear. Mip maps are built (`GL_LINEAR_MIPMAP_NEAREST`) only with flag `0x10`, which the
+  game clears at start-up, so in practice there are none.
+
+### Cg
+
+On a change of material type the Cg material renderer calls the shader callback's
+`OnSetConstants(services, 0)`, binds the programs with the latest profiles, applies the base material
+and the basic render states; every draw calls `OnSetConstants(this, userData)` again. Programs compile
+from source (`CG_SOURCE`), or from object code when the precompiled flag is set. See
+[menu-scene.md](menu-scene.md) for the shaders.

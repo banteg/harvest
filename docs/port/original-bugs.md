@@ -129,6 +129,23 @@ Port recommendation:
 - Size the output with `deflateBound` and require `Z_STREAM_END`. (The original also skips
   `deflateEnd`/`inflateEnd` on its error paths, leaking the zlib stream.)
 
+### 7) Every 2D line is 1 px wide
+
+Native behaviour:
+
+- `CVideoOpenGL::draw2DLine` and `draw2DLineFloat` (about `0x4ed940` and `0x4ed7e0`,
+  [`CVideoOpenGL.cpp`](../../src/daisy/video/OpenGL/CVideoOpenGL.cpp)) call `glLineWidth(3.0)`
+  between `glBegin` and `glEnd`, where OpenGL rejects it with `GL_INVALID_OPERATION`.
+
+Impact:
+
+- Every 2D line the game draws (selection boxes, the minimap frame, the shuttle race's split line,
+  lines drawn by Lua scripts) is 1 px wide, not the intended 3 px.
+
+Port recommendation:
+
+- Draw 1 px lines: that is what players saw.
+
 ## Bugs without visible effects
 
 - **`CFileSystem::renameFile`** (`0x52f3e0`) calls `rename(newName, filename)`, the reverse of its
@@ -143,6 +160,20 @@ Port recommendation:
   `getDynamicLight` (`0x4dfa50`) returns a null reference for an out-of-range index; and
   `makeColorKeyTexture(pos)` (`0x4e07b0`, inherited from Irrlicht) reads the key pixel at
   `y * width` instead of using the pitch.
+
+- **Renderer, latent or harmless** ([`src/daisy/video/OpenGL/`](../../src/daisy/video/OpenGL/)):
+  `setScissorRect` (`0x4ec430`) computes y as `LRY − height` instead of `height − LRY` (the only caller
+  passes full-height rectangles, so y is 0); `setBasicRenderStates` (`0x4ec4c0`, from Irrlicht 0.7)
+  reads colours, shininess, the filter and lighting from the driver's current material instead of
+  its argument; `addDynamicLight` limits lights by the enum value `GL_MAX_LIGHTS` instead of the
+  queried count; `loadExtensions` leaves extension pointers uninitialised without
+  `ARB_multitexture`, opens an X display it never closes, compares GLU version characters with the
+  numbers 1 and 2, and loads `glUniform4fvARB` twice; the ARB shader renderer binds the fragment
+  program with the vertex program's name; the GLSL renderer binds texture stages 2 and 3 of a
+  two-texture material and uses a uniform's list index as its location; `COpenGLTexture::copyTexture`
+  (`0x5aaa70`) copies A8R8G8B8 data as one block of the padded size, so a non-power-of-two image
+  would be read past its end; and the Cg renderer never drops its callback. None of these affects the
+  shipped game.
 
 ## Linux device bugs
 
