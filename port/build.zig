@@ -112,6 +112,24 @@ pub fn build(b: *std.Build) void {
     run.addPassthruArgs();
     b.step("run", "Run the game").dependOn(&run.step);
 
+    // The renderer's test (tests/video_test.cpp): an SDL3 window with an OpenGL context, the GLES3
+    // driver and a frame drawn from the original data. It links the library, so it needs only the
+    // renderer's seam, not the device's.
+    const video_test_module = b.createModule(.{ .target = target, .optimize = optimize, .link_libcpp = true });
+    video_test_module.addIncludePath(b.path("../src"));
+    video_test_module.addIncludePath(b.path("../src/HarvestFull"));
+    video_test_module.addIncludePath(b.path("src"));
+    video_test_module.addCSourceFile(.{ .file = b.path("tests/video_test.cpp"), .flags = &cxx_flags });
+    video_test_module.linkLibrary(harvest_lib);
+    for (libs.all()) |lib| video_test_module.linkLibrary(lib);
+    const video_test = b.addExecutable(.{ .name = "video-test", .root_module = video_test_module });
+    const install_video_test = b.addInstallArtifact(video_test, .{});
+    b.step("video-test", "Build the renderer test").dependOn(&install_video_test.step);
+    const run_video_test = b.addRunArtifact(video_test);
+    run_video_test.step.dependOn(&install_video_test.step);
+    run_video_test.addPassthruArgs();
+    b.step("run-video-test", "Run the renderer test (arguments after --)").dependOn(&run_video_test.step);
+
     // The census links the same objects against the original's plain loop (census/main.cpp)
     // instead of the SDL3 entry point, so the linker lists exactly what the recovered code and the
     // port's sources still need.
@@ -180,8 +198,10 @@ fn buildStbImage(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.
     const module = cModule(b, target, optimize);
     module.addIncludePath(dep.path(""));
     module.addCSourceFile(.{ .file = b.path("src/thirdparty/stb_image.c"), .flags = &.{"-std=c99"} });
+    module.addCSourceFile(.{ .file = b.path("src/thirdparty/stb_image_write.c"), .flags = &.{"-std=c99"} });
     const lib = b.addLibrary(.{ .name = "stb_image", .root_module = module });
     lib.installHeader(dep.path("stb_image.h"), "stb_image.h");
+    lib.installHeader(dep.path("stb_image_write.h"), "stb_image_write.h");
     return lib;
 }
 
