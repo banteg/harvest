@@ -27,6 +27,7 @@ enum EKEY_CODE
     KEY_UP = 0x26,
     KEY_RIGHT = 0x27,
     KEY_DOWN = 0x28,
+    KEY_INSERT = 0x2D,
     KEY_DELETE = 0x2E,
     KEY_KEY_0 = 0x30,
     KEY_KEY_1 = 0x31,
