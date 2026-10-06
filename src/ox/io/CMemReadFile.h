@@ -20,7 +20,7 @@ public:
     virtual ~CMemReadFile();
 
     virtual int read(void* buffer, int sizeToRead);
-    virtual int readLine(char* buffer, int size) { return 0; }
+    virtual char* readLine(char* buffer, int size) { return 0; }
     virtual bool seek(int finalPos, bool relativeMovement = false);
     virtual int getSize();
     virtual int getPos();

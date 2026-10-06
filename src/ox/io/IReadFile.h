@@ -20,8 +20,9 @@ public:
     //! Reads an amount of bytes from the file. Returns how many bytes were read.
     virtual int read(void* buffer, int sizeToRead) = 0;
 
-    // Return type provisional: a 32-bit value on both Mac i386 and Linux amd64.
-    virtual int readLine(char* buffer, int size) = 0;
+    //! Reads one line like fgets; returns buffer, or 0 at the end or on error. Pointer-sized:
+    //! daisy::io::CReadFile tail-calls fgets.
+    virtual char* readLine(char* buffer, int size) = 0;
 
     //! Changes the position in the file. Returns true on success.
     virtual bool seek(int finalPos, bool relativeMovement = false) = 0;

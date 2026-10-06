@@ -519,6 +519,30 @@
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0c4
 
+["daisy/io/CFileSystem.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0d4
+
+["daisy/io/CMemoryReadFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0d8
+
+["daisy/io/CReadFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0dc
+
+["daisy/io/CWriteFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0e4
+
+["daisy/io/CFileList.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1d0
+
+["daisy/io/CLimitReadFile.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1d4
+
 ["daisy/io/CZipFileList.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0f0
