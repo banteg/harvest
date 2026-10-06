@@ -6,6 +6,9 @@ engine core are kept as source, the GUI toolkit is kept for its behaviour, and t
 what a port replaces. This section covers what a port still has to know about the platform layer, and
 the data formats the game ships.
 
+The plan for the port itself (targets, libraries, milestones) is in
+[porting-plan.md](porting-plan.md).
+
 ## Data the game ships
 
 | Data | Format | Where it is described |
