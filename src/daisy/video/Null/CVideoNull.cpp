@@ -73,15 +73,18 @@ static inline short toA1R5G5B5(SColor color)
 }
 
 CVideoNull::CVideoNull(io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
-    : Current2DTexture(0), Current2DQuadCount(0), InvHalfWidth(0), InvHalfHeight(0), ViewOffsetX(0),
+    : InvHalfWidth(0), InvHalfHeight(0), ViewOffsetX(0),
       ViewOffsetY(0), FileSystem(io), ViewPort(0, 0, 0, 0), ScreenSize(screenSize),
-      PhysicalScreenSize(screenSize), PrimitivesDrawn(0), TextureCreationFlags(0), NumPPSurfaces(0),
-      Unknown431b0(0), UseMaterialShaderFor2D(false), ForcePointSampling(false)
+      PhysicalScreenSize(screenSize), PrimitivesDrawn(0), TextureCreationFlags(0), UseMaterialShaderFor2D(false),
+      ForcePointSampling(false)
 {
+    // The 2d batch state (Current2DTexture up to StatusSwitches) is zeroed by the derived driver.
     for (int i = 0; i < 8; ++i)
         PPSurfaces[i] = 0;
     InputTextures[0] = 0;
     InputTextures[1] = 0;
+    NumPPSurfaces = 0;
+    Unknown431b0 = 0;
     DebugColors[0] = SColor(0xff0000);
     DebugColors[1] = SColor(0xffff00);
     DebugColors[2] = SColor(0xff00);
@@ -189,7 +192,7 @@ void CVideoNull::removeTexture(ITexture* texture)
         if (Textures[i].Surface == texture)
         {
             texture->drop();
-            Textures.erase(Textures.begin() + i);
+            Textures.erase(algo::advanceIterator(Textures.begin(), i));
             return;
         }
 }
@@ -200,7 +203,7 @@ void CVideoNull::removeTexture(const char* name)
         if (Textures[i].Filename.equals_ignore_case(core::CString<char>(name)))
         {
             Textures[i].Surface->drop();
-            Textures.erase(Textures.begin() + i);
+            Textures.erase(algo::advanceIterator(Textures.begin(), i));
             return;
         }
 }
@@ -284,7 +287,7 @@ void CVideoNull::removeSpritePackage(const char* filename)
         if (SpritePackages[i].Filename.equals_ignore_case(core::CString<char>(filename)))
         {
             SpritePackages[i].Package->drop();
-            SpritePackages.erase(SpritePackages.begin() + i);
+            SpritePackages.erase(algo::advanceIterator(SpritePackages.begin(), i));
             return;
         }
 }
@@ -295,7 +298,7 @@ void CVideoNull::removeParticlePackage(const char* filename)
         if (ParticlePackages[i].Filename.equals_ignore_case(core::CString<char>(filename)))
         {
             ParticlePackages[i].Package->drop();
-            ParticlePackages.erase(ParticlePackages.begin() + i);
+            ParticlePackages.erase(algo::advanceIterator(ParticlePackages.begin(), i));
             return;
         }
 }
@@ -436,12 +439,13 @@ ITexture* CVideoNull::getTexture(io::IReadFile* file)
         {
             addTexture(texture, file->getFileName());
             texture->drop(); // the cache holds the only reference now
-            return texture;
         }
     }
 
-    os::Printer::log("Could not load texture", file->getFileName(), ELL_ERROR);
-    return 0;
+    if (!texture)
+        os::Printer::log("Could not load texture", file->getFileName(), ELL_ERROR);
+
+    return texture;
 }
 
 int CVideoNull::getNumTextures()
@@ -481,8 +485,9 @@ ITexture* CVideoNull::createDeviceDependentTexture(IImage* surface)
     return new CSoftwareTexture(surface);
 }
 
-void CVideoNull::setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color)
+bool CVideoNull::setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color)
 {
+    return false;
 }
 
 ITexture* CVideoNull::createRenderTargetTexture(const core::CDimension2d<int>& size)
@@ -670,13 +675,13 @@ void CVideoNull::update2dViewValues(int offsetX, int offsetY)
     // The render size is rounded up to even so the 2d origin falls on a whole pixel.
     int width = ScreenSize.Width + (ScreenSize.Width & 1);
     int height = ScreenSize.Height + (ScreenSize.Height & 1);
-    int halfWidth = width / 2;
-    int halfHeight = height / 2;
+    int halfWidth = width >> 1;
+    int halfHeight = height >> 1;
 
     InvHalfWidth = 1.0f / halfWidth;
     InvHalfHeight = 1.0f / halfHeight;
     ViewOffsetX = offsetX - halfWidth;
-    ViewOffsetY = height - offsetY - halfHeight;
+    ViewOffsetY = height - halfHeight - offsetY;
 }
 
 core::CDimension2d<int> CVideoNull::getScreenSize()
@@ -1479,20 +1484,20 @@ void CVideoNull::runPPShader(int materialType, core::CRect<int>& destRect, core:
 
 void CVideoNull::setInputTexture(int stage, ITexture* texture)
 {
-    if (stage > 1)
+    if (stage < 2)
     {
-        os::Printer::log(L"Invalid texture stage to CVideoNull::setInputTexture", ELL_WARNING);
+        if (InputTextures[stage])
+            InputTextures[stage]->drop();
+
+        if (!texture)
+            texture = PPSurfaces[stage];
+
+        InputTextures[stage] = texture;
+        texture->grab();
         return;
     }
 
-    if (InputTextures[stage])
-        InputTextures[stage]->drop();
-
-    if (!texture)
-        texture = PPSurfaces[stage];
-
-    InputTextures[stage] = texture;
-    texture->grab();
+    os::Printer::log(L"Invalid texture stage to CVideoNull::setInputTexture", ELL_WARNING);
 }
 
 IVideoDriver* createNullDriver(io::IFileSystem* io, const core::CDimension2d<int>& screenSize)

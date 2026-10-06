@@ -78,7 +78,7 @@ public:
     virtual void makeColorKeyTexture(ox::video::ITexture* texture, ox::core::CPosition2d<int> colorKeyPixelPos);
     virtual ox::video::ITexture* createRenderTargetTexture(const ox::core::CDimension2d<int>& size);
     virtual ox::video::ITexture* createScreenTexture(const ox::core::CDimension2d<int>& size);
-    virtual void setRenderTarget(ox::video::ITexture* texture, bool clearBackBuffer, bool clearZBuffer,
+    virtual bool setRenderTarget(ox::video::ITexture* texture, bool clearBackBuffer, bool clearZBuffer,
         ox::video::SColor color);
     virtual void setViewPort(const ox::core::CRect<int>& area);
     virtual const ox::core::CRect<int>& getViewPort() const;
@@ -162,7 +162,7 @@ public:
     virtual ox::video::SExposedVideoData getExposedVideoData();
     virtual int getDriverType();
     virtual bool isFullscreen() { return false; }
-    virtual void setFullscreen(bool fullscreen) {}
+    virtual bool setFullscreen(bool fullscreen) { return false; }
     virtual void setScissorRect(ox::core::CRect<int>* rect) {}
     virtual void setRenderScreenSize(int width, int height);
     virtual void setForcePointSampling(bool force);

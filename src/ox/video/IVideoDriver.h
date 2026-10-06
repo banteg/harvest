@@ -117,7 +117,7 @@ public:
     virtual void makeColorKeyTexture(ITexture* texture, core::CPosition2d<int> colorKeyPixelPos) = 0;
     virtual ITexture* createRenderTargetTexture(const core::CDimension2d<int>& size) = 0;
     virtual ITexture* createScreenTexture(const core::CDimension2d<int>& size) = 0;
-    virtual void setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color) = 0;
+    virtual bool setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color) = 0;
     virtual void setViewPort(const core::CRect<int>& area) = 0;
     virtual const core::CRect<int>& getViewPort() const = 0;
 
@@ -200,7 +200,7 @@ public:
     virtual SExposedVideoData getExposedVideoData() = 0;
     virtual int getDriverType() = 0;
     virtual bool isFullscreen() = 0;
-    virtual void setFullscreen(bool fullscreen) = 0;
+    virtual bool setFullscreen(bool fullscreen) = 0;
     virtual void setScissorRect(core::CRect<int>* rect) = 0;
     virtual void setRenderScreenSize(int width, int height) = 0;
     virtual void setForcePointSampling(bool force) = 0;
