@@ -303,3 +303,7 @@ simply write the intended code.
 - **`COxEntity` 2D constructors** ([`COxEntity.cpp`](../../src/ox/entity/COxEntity.cpp)) initialise
   `Position.Y` from the member being constructed instead of the argument's `Y`. The game only uses the
   `(x, y, z)` constructor, so the bug is never reached.
+- **OBJ loader** (`CStaticMeshOBJ::loadFile`, Linux `0x57d1b0`) reads the file into `new char[size]`
+  without a terminating zero and parses until it meets a zero byte past the end of the buffer; the
+  shipped meshes only pick up ignored words from it. It also leaks the mesh buffer when the file is
+  empty. The port's loader zero-terminates.
