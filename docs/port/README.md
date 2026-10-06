@@ -7,7 +7,9 @@ what a port replaces. This section covers what a port still has to know about th
 the data formats the game ships.
 
 The plan for the port itself (targets, libraries, milestones) is in
-[porting-plan.md](porting-plan.md).
+[porting-plan.md](porting-plan.md). The port's build lives in [`port/`](../../port/README.md), and
+[census.md](census.md) lists which units it compiles and every symbol and interface the platform
+layer still has to provide.
 
 ## Data the game ships
 
