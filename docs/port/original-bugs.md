@@ -307,3 +307,16 @@ simply write the intended code.
   without a terminating zero and parses until it meets a zero byte past the end of the buffer; the
   shipped meshes only pick up ignored words from it. It also leaks the mesh buffer when the file is
   empty. The port's loader zero-terminates.
+- **`CGUIStaticText` constructor** ([`CGUIStaticText.cpp`](../../src/daisy/gui/CGUIStaticText.cpp))
+  leaves `IconRight` unset until `setParagraphIcon`, but a progressive reveal reads it on every draw.
+  The value only matters beside an icon, so nothing shows; UBSan traps on the `bool` load when the
+  heap hands back a byte other than 0 or 1, as glibc's does (the game-mode screen, on Linux). The
+  port initialises it to false.
+- **`CGUIScrollBar::setPos`** ([`CGUIScrollBar.cpp`](../../src/daisy/gui/CGUIScrollBar.cpp)) divides
+  the track by `Max`; for an empty list (`Max` 0) that is infinite, and `Pos * f` is NaN, converted to
+  `int` (x86 gives `INT_MIN`, ARM 0). The thumb is not drawn then, and `Pos` stays 0. UBSan traps on
+  it when the save-game screen opens with no saves; the port puts the thumb at the start.
+- **`CAes::expandKey`** ([`CAes.cpp`](../../src/ox/core/CAes.cpp)) reads and writes `RoundKeys` as
+  `unsigned int` words, but the array follows the cipher's two flags (offset 18 in the 64-bit
+  builds), so every access is misaligned. x86 and ARM64 do not mind; UBSan traps on the first save.
+  The port expands the key in an aligned copy.
