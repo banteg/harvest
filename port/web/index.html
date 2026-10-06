@@ -19,6 +19,13 @@
     padding: .5rem 1rem; cursor: pointer; }
   button.quiet { background: none; color: var(--dim); text-decoration: underline; padding: .5rem 0; }
   button:disabled { opacity: .4; cursor: default; }
+  #setup ol { padding-left: 1.25rem; color: var(--dim); }
+  #setup li { margin: .5rem 0; }
+  #setup li strong { color: var(--fg); font-weight: 600; }
+  .path { display: flex; gap: .5rem; align-items: center; margin-top: .35rem; }
+  .path code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: .3rem .5rem;
+    background: #10161d; border: 1px solid #2a3540; border-radius: 4px; color: var(--fg); }
+  .path button { padding: .3rem .7rem; }
   #status { margin: 1rem 0 .75rem; min-height: 1.5em; }
   .row { display: flex; gap: 1rem; align-items: center; }
   .message { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center;
@@ -32,12 +39,17 @@
 <body>
 <div id="setup">
   <h1>Harvest: Massive Encounter</h1>
-  <p>This page runs the game, but the game's data has to come from your own copy. Choose or drop the
-     <code>harvestClientData</code> folder from your install (or the folder that contains it). On a Mac,
-     right-click <code>Harvest Steam.app</code>, choose Show Package Contents, and look in
-     <code>Contents/Resources</code>. The data stays in this browser, so you only do this once.</p>
+  <p>This page runs the game, but the game's data comes from your own copy of Harvest. Give it the
+     game's install folder once; it stays in this browser after that.</p>
+  <ol>
+    <li><strong>Easiest, with Steam:</strong> in your Steam library, right-click Harvest: Massive
+      Encounter, then <em>Manage &rarr; Browse local files</em>. Drag what that window shows (on a Mac,
+      <code>Harvest Steam.app</code>) onto the box below.</li>
+    <li><strong>Or choose it:</strong> click <em>Choose folder</em> and go to
+      <span id="where"></span></li>
+  </ol>
   <div id="drop">
-    <p>Drop the folder here, or</p>
+    <p>Drop it here, or</p>
     <button id="choose">Choose folder…</button>
     <input id="picker" type="file" webkitdirectory class="hidden">
   </div>
@@ -150,6 +162,42 @@ function update() {
   $("start").disabled = !(storageReady && haveData);
   $("forget").classList.toggle("hidden", !(storageReady && haveData));
 }
+
+// ---- where the data is ----
+
+// Steam's default install folder for the game on each platform, and how to type a path into the
+// platform's folder picker.
+const STEAM_FOLDERS = {
+  mac: ["~/Library/Application Support/Steam/steamapps/common/Harvest Massive Encounter",
+        "That folder is hidden from the picker's sidebar: press \u2318\u21e7G (Go to Folder) and paste:"],
+  windows: ["C:\\Program Files (x86)\\Steam\\steamapps\\common\\Harvest Massive Encounter",
+            "Paste this into the picker's address bar:"],
+  linux: ["~/.local/share/Steam/steamapps/common/Harvest Massive Encounter",
+          "Press Ctrl+L in the picker and paste:"],
+};
+
+function platformName() {
+  const p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "").toLowerCase();
+  if (p.includes("mac")) return "mac";
+  if (p.includes("win")) return "windows";
+  return "linux";
+}
+
+(function showWhere() {
+  const [path, how] = STEAM_FOLDERS[platformName()];
+  const where = $("where");
+  where.textContent = `the Steam folder (or wherever you installed the game). ${how}`;
+  const row = document.createElement("div");
+  row.className = "path";
+  row.innerHTML = "<code></code><button>Copy</button>";
+  row.querySelector("code").textContent = path;
+  const copy = row.querySelector("button");
+  copy.onclick = () => navigator.clipboard.writeText(path).then(() => {
+    copy.textContent = "Copied";
+    setTimeout(() => { copy.textContent = "Copy"; }, 1500);
+  });
+  where.after(row);
+})();
 
 // ---- taking the player's data ----
 
