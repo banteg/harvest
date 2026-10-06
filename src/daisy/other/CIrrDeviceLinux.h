@@ -93,8 +93,9 @@ public:
         return MouseButtonStates[button];
     }
 
-    //! Opens a connection to the default X display; nothing calls it.
-    static Display* openDisplay();
+    //! Opens a new connection to the default X display; CVideoOpenGL::loadExtensions calls it
+    //! through the device pointer, so it is a member that ignores this.
+    Display* openDisplay();
     //! An empty member nothing calls; its name is not known.
     void unknownEmpty();
 

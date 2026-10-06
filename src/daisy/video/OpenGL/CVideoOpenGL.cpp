@@ -201,9 +201,9 @@ void CVideoOpenGL::loadExtensions()
 
     if (MultiTextureExtension)
     {
-        // The binary asks the device (CIrrDeviceLinux) for the display; its helper returns
-        // XOpenDisplay(0), a new connection that is never closed.
-        Display* display = XOpenDisplay(0);
+        // Original bug: openDisplay returns XOpenDisplay(0), a new X connection that is never
+        // closed.
+        Display* display = Device->openDisplay();
         int major = 0;
         int minor = 0;
         glXQueryVersion(display, &major, &minor);
