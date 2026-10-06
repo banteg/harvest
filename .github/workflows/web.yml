@@ -28,7 +28,7 @@ jobs:
       - name: Build
         run: nix build -L .#web
       - name: Collect the site
-        run: mkdir _site && cp -L result/* _site/
+        run: mkdir _site && cp -rL --no-preserve=mode result/. _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
