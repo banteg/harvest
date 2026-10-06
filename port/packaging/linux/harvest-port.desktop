@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Harvest: Massive Encounter
+GenericName=Real-time strategy
+Comment=A port of Oxeye Game Studio's tower defence strategy game (needs the original game's data)
+Exec=harvest
+Icon=harvest-port
+Terminal=false
+Categories=Game;StrategyGame;

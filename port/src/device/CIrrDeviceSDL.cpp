@@ -9,6 +9,7 @@
 #include "device/KeyMap.h"
 #include "device/NullDrivers.h"
 #include "device/Options.h"
+#include "platform/Paths.h"
 #include "platform/Seams.h"
 #include "ox/io/IFileSystem.h"
 #include "ox/gui/IGUIEnvironment.h"
@@ -32,19 +33,6 @@ const int VIDEO_MODES[][2] =
 
 const int MIN_WIDTH = 800;
 const int MIN_HEIGHT = 600;
-
-//! $GAME_RESOURCES$: --data or $HARVEST_DATA, else the executable's directory (the original used
-//! /proc/self/exe's), without a trailing separator.
-ox::core::CString<char> getDataDirectory()
-{
-    const char* directory = g_options.DataDirectory;
-    if (!directory)
-        directory = SDL_GetBasePath();
-    ox::core::CString<char> path(directory ? directory : ".");
-    while (path.size() > 1 && (path.c_str()[path.size() - 1] == '/' || path.c_str()[path.size() - 1] == '\\'))
-        path = path.subString(0, path.size() - 1);
-    return path;
-}
 
 //! The primary display's desktop mode; 0 (logged) when SDL cannot read it.
 const SDL_DisplayMode* getDesktopMode()
@@ -126,14 +114,8 @@ CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEv
     SDLJoystickDriver = new CJoystickSDLDriver();
     JoystickDriver = SDLJoystickDriver;
 
-    ox::core::CString<char> resources = getDataDirectory();
-    FileSystem->addDirectoryAlias("$GAME_RESOURCES$", resources.c_str());
-    ox::core::CString<char> clientData(resources);
-    clientData.append(ox::core::CString<char>("/harvestClientData"));
-    SDL_Log("game data: %s", resources.c_str());
-    if (!SDL_GetPathInfo(clientData.c_str(), 0))
-        SDL_Log("%s is missing: pass --data <dir> or set HARVEST_DATA to the directory that holds "
-                "harvestClientData/", clientData.c_str());
+    // main.cpp found the data before the game started (the original used /proc/self/exe's directory)
+    FileSystem->addDirectoryAlias("$GAME_RESOURCES$", getGameDataDirectory().c_str());
 
     // The modes strictly smaller than the desktop (in screen units) in both dimensions, all at 32 bits.
     ox::core::CDimension2d<int> desktop = getDesktopSize();

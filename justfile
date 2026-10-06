@@ -135,6 +135,10 @@ build-all:
     cd port && zig build harvest -Dtarget=x86_64-linux-gnu
     cd port && zig build harvest -Dtarget=x86_64-windows-gnu
 
+# build release packages of the port into port/zig-out/packages: macos, windows, linux or all
+package target="all":
+    bash port/tools/package.sh {{target}}
+
 # run one of the port's tests (audio, video, menu_scene) with the original data
 port-test name *args:
     #!/usr/bin/env bash

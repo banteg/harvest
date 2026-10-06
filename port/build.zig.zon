@@ -1,6 +1,6 @@
 .{
     .name = .harvest,
-    .version = "0.0.0",
+    .version = "0.1.0",
     .fingerprint = 0x36bddb374bbcb6fb,
     .minimum_zig_version = "0.17.0",
     .dependencies = .{
@@ -29,6 +29,7 @@
         "build.zig",
         "build.zig.zon",
         "census",
+        "packaging",
         "src",
     },
 }

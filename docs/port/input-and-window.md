@@ -254,11 +254,9 @@ zone of 10, since the shuttle race treats any deflection past 0.5 as a turn. But
 
 ### Paths and OS services
 
-- `$GAME_RESOURCES$` (the directory holding `harvestClientData/`) is `--data <dir>`, else the
-  `HARVEST_DATA` environment variable, else `SDL_GetBasePath()` (the executable's directory; on macOS
-  an app bundle's `Contents/Resources`), without a trailing separator. The device logs it and warns
-  when `harvestClientData/` is not there. To run against the original data:
-  `zig-out/bin/harvest --data orig/1.18-linux-amd64`.
+- `$GAME_RESOURCES$` is the directory holding `harvestClientData/`, found before the game starts
+  (see [Game data](#game-data) below), without a trailing separator. To run against the original
+  data: `zig-out/bin/harvest --data orig/1.18-linux-amd64`.
 - `$HARVEST_USERDATA$` is `$HOME/.Harvest` on Linux, as before, so existing profiles and saves are
   found. Elsewhere, and on Linux without `HOME`, it is `SDL_GetPrefPath("", "Harvest")`:
   `~/Library/Application Support/Harvest` on macOS (the Mac build's directory) and `%APPDATA%\Harvest`
@@ -271,6 +269,46 @@ zone of 10, since the shuttle race treats any deflection past 0.5 as a turn. But
   also the fallbacks while the renderer or audio backend is not linked
   ([`SeamFallbacks.cpp`](../../port/src/device/SeamFallbacks.cpp)), and the null audio driver is used
   when the backend cannot start.
+
+### Game data
+
+The original took `$GAME_RESOURCES$` from the executable's directory, where its installers put the
+data. The port ships without data, so `SDL_AppInit` searches for it
+([`platform/Paths.cpp`](../../port/src/platform/Paths.cpp)) before the game creates its device. A
+candidate folder is accepted when it holds `harvestClientData/`, when it is an app bundle whose
+`Contents/Resources` holds it, or when it contains such an app bundle (`*.app`): the Mac release
+keeps its data in `Harvest Steam.app/Contents/Resources` (Steam depot 15402), the Windows and Linux
+releases in the install folder itself. In order:
+
+1. `--data <dir>`, then the `HARVEST_DATA` environment variable. These are taken as given: a folder
+   without the data is an error, not a reason to look elsewhere. Relative paths are made absolute.
+2. The folder given with `--data` or `HARVEST_DATA` last time, kept as one line in
+   `data-directory.txt` in the user data folder (below). Only explicit folders are remembered (the
+   others are found again anyway), so after one `--data` a double-clicked app finds the data too.
+3. Next to the executable (`SDL_GetBasePath()`) and the folder above it; in a macOS app bundle,
+   instead, the bundle's `Contents/Resources` and the folder the bundle is in.
+4. Steam: `steamapps/common/Harvest Massive Encounter` (app 15400's `installdir`) in each Steam
+   installation's own library and in every `"path"` of its `steamapps/libraryfolders.vdf`. The Steam
+   installations looked for are:
+   - Windows: `SteamPath` in `HKCU\Software\Valve\Steam`, `InstallPath` in
+     `HKLM\SOFTWARE\WOW6432Node\Valve\Steam`, `%ProgramFiles(x86)%\Steam`, `%ProgramFiles%\Steam`;
+   - macOS: `~/Library/Application Support/Steam`;
+   - Linux: `$XDG_DATA_HOME/Steam` (`~/.local/share/Steam`), `~/.steam/steam`, Flatpak's
+     `~/.var/app/com.valvesoftware.Steam/.local/share/Steam` and Snap's
+     `~/snap/steam/common/.local/share/Steam`.
+5. Usual places for a DRM-free copy: on macOS `/Applications` and `~/Applications` (any app bundle
+   holding the data, such as the DRM-free `Harvest.app`); on Linux `~/Games/Harvest Massive Encounter`
+   and `~/Games/Harvest`. No GOG release is known, nor the DRM-free Windows installer's default
+   folder, so there are no GOG or Windows entries.
+6. The user data folder (`~/.Harvest`, `~/Library/Application Support/Harvest`,
+   `%APPDATA%\Harvest`), so the data can sit next to the saves.
+
+The search logs the folder and the rule that found it (`game data: <dir> (Steam)`). When nothing
+matches, the port logs and shows (`SDL_ShowSimpleMessageBox`) a message listing every folder it
+looked in, and how to fix it: copy `harvestClientData` next to the executable (next to the app on
+macOS), pass `--data`, or set `HARVEST_DATA`. Then `SDL_AppInit` fails and the program exits with
+status 1 before any window opens. On macOS, `-psn_…` arguments (from older Finder launches) are
+ignored.
 
 ### Input scripts
 

@@ -11,8 +11,9 @@ static void printUsage(const char* program)
 {
     SDL_Log("usage: %s [--data <dir>] [--null-video] [--no-audio] [--no-vsync] [--scale <factor>]\n"
             "       [--input-script <file>]\n"
-            "  --data <dir>   the directory holding harvestClientData/ (default: $HARVEST_DATA, else the\n"
-            "                 executable's directory)\n"
+            "  --data <dir>   the directory holding harvestClientData/, or an app bundle with it in\n"
+            "                 Contents/Resources (default: $HARVEST_DATA, else the last one given, else\n"
+            "                 a search next to the executable, in Steam libraries and the user data folder)\n"
             "  --null-video   use the null video driver (nothing is drawn)\n"
             "  --no-audio     play no sound\n"
             "  --no-vsync     present frames as fast as possible\n"
@@ -26,8 +27,6 @@ static void printUsage(const char* program)
 
 bool parseOptions(int argc, char** argv)
 {
-    g_options.DataDirectory = SDL_getenv("HARVEST_DATA");
-
     for (int i = 1; i < argc; ++i)
     {
         const char* arg = argv[i];
@@ -43,6 +42,9 @@ bool parseOptions(int argc, char** argv)
             g_options.Scale = (float)SDL_atof(argv[++i]);
         else if (!strcmp(arg, "--input-script") && i + 1 < argc)
             g_options.InputScript = argv[++i];
+        else if (!strncmp(arg, "-psn_", 5))
+            ; // the process serial number older macOS passes to apps started from the Finder
+
         else
         {
             printUsage(argv[0]);

@@ -37,14 +37,22 @@ From the repository root, `just` wraps the common commands (the game data defaul
     just build-all        # macOS, Linux and Windows builds from this machine
     just port-test audio  # also video, menu_scene
     just census           # unresolved symbols, if any
+    just package          # release packages in zig-out/packages (just package macos|windows|linux)
 
 Directly:
 
 The game needs the original's data, the directory that holds `harvestClientData/`:
 
-    zig-out/bin/harvest --data ../orig/1.18-linux-amd64   # or set HARVEST_DATA; default: next to the executable
+    zig-out/bin/harvest --data ../orig/1.18-linux-amd64   # or set HARVEST_DATA
     zig-out/bin/harvest --null-video --no-audio --no-vsync
     zig-out/bin/harvest --scale 1   # the game at the drawable's full resolution (default: the display's scale)
+
+Without `--data` or `HARVEST_DATA` the game uses the folder given last time, else searches next to
+the executable (or the app bundle), the Steam libraries (`steamapps/common/Harvest Massive
+Encounter`, including the Mac release's `Harvest Steam.app`), `/Applications` on macOS, `~/Games`
+on Linux and the user data folder, and when nothing is found it shows where it looked and exits.
+The full order is in
+[`docs/port/input-and-window.md`](../docs/port/input-and-window.md#game-data).
 
 User data goes to `~/.Harvest` on Linux, `~/Library/Application Support/Harvest` on macOS and
 `%APPDATA%\Harvest` on Windows. The device and its options are described in
@@ -82,10 +90,19 @@ flags. Debug builds keep zig's UBSan (trap mode); nothing in the kept units trip
 
 ## Targets
 
-From macOS: the host, `x86_64-linux-gnu` and `x86_64-windows-gnu` build and link (once the seams are
-stubbed). SDL3 needs Xcode for macOS targets; for a non-native macOS architecture pass the SDK paths
-as [castholm/SDL's README](https://github.com/castholm/SDL#macos) describes. Linux targets fetch
-castholm's `SDL_linux_deps` package on first use. The web build comes later (Emscripten).
+From macOS: the host, `aarch64-macos`, `x86_64-macos`, `x86_64-linux-gnu` and `x86_64-windows-gnu`
+build and link. SDL3 needs Xcode (or the Command Line Tools) for macOS targets; for an explicit
+macOS `-Dtarget`, which zig does not treat as native, `build.zig` takes the SDK from `xcrun`.
+Linux targets fetch castholm's `SDL_linux_deps` package on first use. Windows release builds use
+the GUI subsystem (debug builds keep the console) and carry an icon and version resource. The web
+build comes later (Emscripten).
+
+## Packages
+
+`just package` builds a universal, ad-hoc signed macOS app, a Windows zip and a Linux tarball into
+`zig-out/packages`, with the port's binary, a README and the libraries' licences, never game data.
+See [`docs/port/packaging.md`](../docs/port/packaging.md), and [`packaging/`](packaging) for the
+Info.plist, resource script, desktop entry and icon.
 
 ## Source rules
 

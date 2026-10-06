@@ -9,8 +9,8 @@ struct SOptions
 {
     SOptions() : DataDirectory(0), NullVideo(false), NoAudio(false), VSync(true), Scale(0), InputScript(0) {}
 
-    //! The directory holding harvestClientData/ ($GAME_RESOURCES$): --data, else $HARVEST_DATA,
-    //! else 0 for the executable's directory.
+    //! --data <dir>: the directory holding harvestClientData/, or 0 to search for it
+    //! (platform/Paths.h has the search and the folder it settles on).
     const char* DataDirectory;
     //! --null-video: daisy's null driver instead of the renderer; the window is only cleared.
     bool NullVideo;

@@ -73,19 +73,20 @@ The `replaced` list in `build.zig`:
 
 | File | Provides | Notes |
 |---|---|---|
-| `main.cpp` | `SDL_AppInit`/`Iterate`/`Event`/`Quit` | parses the command line, creates `CHarvestFullMain`, calls `init`, then one `update` per iteration until `isRunning` is false, `clear` on quit. Events go to the device in `SDL_AppEvent`; input that arrives while a state loads is held and replayed when it is ready ([input-and-window.md](input-and-window.md#the-ports-device)) |
+| `main.cpp` | `SDL_AppInit`/`Iterate`/`Event`/`Quit` | parses the command line, finds the game data (a message box and exit when there is none), creates `CHarvestFullMain`, calls `init`, then one `update` per iteration until `isRunning` is false, `clear` on quit. Events go to the device in `SDL_AppEvent`; input that arrives while a state loads is held and replayed when it is ready ([input-and-window.md](input-and-window.md#the-ports-device)) |
 | `device/CIrrDeviceSDL.{h,cpp}` | `createDevice`, `port::CIrrDeviceSDL` (`CIrrDeviceStub` and `ICursorControl`) | window, GL context, events, fullscreen, resizes, video modes, `$GAME_RESOURCES$` |
 | `device/KeyMap.{h,cpp}` | SDL key codes to ox codes | the Linux table plus Windows codes for the keys it left uninitialised |
 | `device/CJoystickSDLDriver.{h,cpp}` | `IJoystickDriver` | SDL gamepads with the Linux/xpad numbering, raw joysticks otherwise |
 | `device/CSDLOperator.{h,cpp}` | `IOSOperator` | clipboard, `SDL_OpenURL`, message boxes, the user data directory |
 | `device/CSDLTimer.h` | `ITimer` | wall-clock `getTime`, monotonic `getFloatTime` |
-| `device/Options.{h,cpp}` | `port::g_options` | `--data`, `HARVEST_DATA`, `--null-video`, `--no-audio`, `--no-vsync` |
+| `device/Options.{h,cpp}` | `port::g_options` | `--data`, `--null-video`, `--no-audio`, `--no-vsync`, `--scale`, `--input-script` |
 | `device/NullDrivers.{h,cpp}` | the null video driver (clears and presents) and null audio driver | `--null-video`, `--no-audio` |
 | `device/SeamFallbacks.cpp` | weak `port::createVideoDriver`, `port::createAudioDriver`, `daisy::scene::createSceneManager` (a scene manager that creates nothing) | temporary: a strong definition replaces each; delete the file once the renderer, audio backend and scene manager exist |
 | `net/CWinsockNetworkDevice.{h,cpp}` | `daisy::net::CWinsockNetworkDevice` | never connects; failures reach the receiver on the next `pollDevice` |
 | `gui/BuildInFont.cpp` | `daisy::gui::BuildInFontData`, `BuildInFontDataSize` | the 8310 bytes from Irrlicht 0.7's `BuildInFont.h` (identical to Linux `0x868fe0`), unpacked little-endian from its 32-bit words at static initialisation |
 | `game/EntityGlobals.cpp` | `harvest::entity::g_nextEntityId` (`int`, 1) | until its defining game unit is recovered |
 | `io/XMLStubs.cpp` | `CTextReader`, `CXMLReader`, `CXMLWriter` constructors | the game never uses XML; the objects do nothing |
+| `platform/Paths.{h,cpp}` | `port::findGameData`, `getGameDataDirectory`, `getUserDataPath` | the game data search (`--data`, `HARVEST_DATA`, the remembered folder, next to the executable, Steam, the user data folder) and the user data directory ([input-and-window.md](input-and-window.md#game-data)) |
 | `platform/glob.{h,cpp}` | `port::glob`/`globfree`/`glob_t`/`GLOB_MARK` | used by `CFileList` instead of `<glob.h>`; see [file-system.md](file-system.md) |
 | `video/CImage.cpp` | `daisy::video::CImage` | Irrlicht 0.7's, with the Linux build's formats (0, 1, 2, `0x08101800`) and its `getPixel` (no R5G6B5 case) |
 | `video/ColorFormats.h` | `port::ECF_R5G6B5`, `port::ECF_R8G8B8`, `A1R5G5B5toA8R8G8B8` | the formats the recovered enum leaves out |

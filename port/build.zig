@@ -63,6 +63,16 @@ const lua_sources = [_][]const u8{
 
 const lua_headers = [_][]const u8{ "src/lua.h", "src/luaconf.h", "src/lualib.h", "src/lauxlib.h", "etc/lua.hpp" };
 
+/// Each dependency's licence files (a trailing '/' marks a directory).
+const license_files = [_][2][]const u8{
+    .{ "zlib", "LICENSE" },
+    .{ "lua", "COPYRIGHT" },
+    .{ "stb", "LICENSE" },
+    .{ "miniaudio", "LICENSE" },
+    .{ "sdl", "LICENSE.txt" },
+    .{ "sdl", "LICENSES/" },
+};
+
 /// The third-party libraries every game module links.
 const Libraries = struct {
     zlib: *std.Build.Step.Compile,
@@ -79,17 +89,14 @@ const Libraries = struct {
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+    const version = std.SemanticVersion.parse(@import("build.zig.zon").version) catch @panic("bad version in build.zig.zon");
 
     const libs: Libraries = .{
         .zlib = buildZlib(b, target, optimize),
         .lua = buildLua(b, target, optimize),
         .stb_image = buildStbImage(b, target, optimize),
         .miniaudio = buildMiniaudio(b, target, optimize),
-        .sdl = b.dependency("sdl", .{
-            .target = target,
-            .optimize = optimize,
-            .preferred_linkage = .static,
-        }).artifact("SDL3"),
+        .sdl = buildSdl(b, target, optimize),
     };
     for (libs.all()) |lib| b.installArtifact(lib);
 
@@ -108,7 +115,22 @@ pub fn build(b: *std.Build) void {
     // exists; until then `zig build harvest` lists what is missing, like the census.
     const exe_module = gameModule(b, target, optimize, libs, units, port_sources);
     exe_module.addCSourceFile(.{ .file = b.path("src/main.cpp"), .flags = &cxx_flags });
+    exe_module.strip = b.option(bool, "strip", "Leave the debug information out of the game executable (packages do)");
     const exe = b.addExecutable(.{ .name = "harvest", .root_module = exe_module });
+    if (target.result.os.tag == .windows) {
+        // Release builds are GUI programs (no console window); debug builds keep the console for
+        // the log.
+        exe.subsystem = if (optimize == .debug) .console else .windows;
+        // The icon and version information.
+        exe_module.addWin32ResourceFile(.{
+            .file = b.path("packaging/windows/harvest.rc"),
+            .flags = &.{
+                b.fmt("/DVERSION_MAJOR={d}", .{version.major}),
+                b.fmt("/DVERSION_MINOR={d}", .{version.minor}),
+                b.fmt("/DVERSION_PATCH={d}", .{version.patch}),
+            },
+        });
+    }
     const install_exe = b.addInstallArtifact(exe, .{});
     b.step("harvest", "Build the game executable").dependOn(&install_exe.step);
 
@@ -116,6 +138,18 @@ pub fn build(b: *std.Build) void {
     run.step.dependOn(&install_exe.step);
     run.addPassthruArgs();
     b.step("run", "Run the game").dependOn(&run.step);
+
+    // The licences of the libraries linked into the game, for packages (tools/package.sh).
+    const licenses = b.step("licenses", "Install the linked libraries' licences into share/licenses");
+    for (license_files) |license| {
+        const path = std.mem.trimEnd(u8, license[1], "/");
+        const source = b.dependency(license[0], .{}).path(path);
+        const name = b.fmt("{s}/{s}", .{ license[0], path });
+        licenses.dependOn(if (std.mem.endsWith(u8, license[1], "/"))
+            &b.addInstallDirectory(.{ .source_dir = source, .install_dir = .{ .custom = "share/licenses" }, .install_subdir = name }).step
+        else
+            &b.addInstallFileWithDir(source, .{ .custom = "share/licenses" }, name).step);
+    }
 
     // The census links the same objects against the original's plain loop (census/main.cpp)
     // instead of the SDL3 entry point, so the linker lists exactly what the recovered code and the
@@ -149,6 +183,7 @@ fn addIncludePaths(b: *std.Build, module: *std.Build.Module) void {
     module.addIncludePath(b.path("../src"));
     module.addIncludePath(b.path("../src/HarvestFull"));
     module.addIncludePath(b.path("src"));
+    addMacosSdk(b, module);
 }
 
 /// The .cpp files directly in tests/.
@@ -189,8 +224,45 @@ fn gameModule(
     return module;
 }
 
+/// SDL3 as a static library, given the macOS SDK where zig does not find it itself.
+fn buildSdl(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    const dep = if (macosSdk(b, target)) |sdk| b.dependency("sdl", .{
+        .target = target,
+        .optimize = optimize,
+        .preferred_linkage = .static,
+        .system_include_path = std.Build.LazyPath{ .cwd_relative = b.pathJoin(&.{ sdk, "usr/include" }) },
+        .system_framework_path = std.Build.LazyPath{ .cwd_relative = b.pathJoin(&.{ sdk, "System/Library/Frameworks" }) },
+        .library_path = std.Build.LazyPath{ .cwd_relative = b.pathJoin(&.{ sdk, "usr/lib" }) },
+    }) else b.dependency("sdl", .{
+        .target = target,
+        .optimize = optimize,
+        .preferred_linkage = .static,
+    });
+    return dep.artifact("SDL3");
+}
+
+/// The macOS SDK's path, from xcrun, for a macOS target zig does not treat as native (any
+/// -Dtarget, such as x86_64-macos on an arm64 Mac): zig only finds the SDK by itself for the host,
+/// and the system headers and frameworks come from it. Null for other targets.
+fn macosSdk(b: *std.Build, target: std.Build.ResolvedTarget) ?[]const u8 {
+    if (target.result.os.tag != .macos or target.query.isNative()) return null;
+    const cache = struct {
+        var path: ?[]const u8 = null;
+    };
+    if (cache.path == null)
+        cache.path = std.mem.trim(u8, b.run(&.{ "xcrun", "--sdk", "macosx", "--show-sdk-path" }), " \t\r\n");
+    return cache.path;
+}
+
+fn addMacosSdk(b: *std.Build, module: *std.Build.Module) void {
+    const sdk = macosSdk(b, module.resolved_target.?) orelse return;
+    module.addSystemIncludePath(.{ .cwd_relative = b.pathJoin(&.{ sdk, "usr/include" }) });
+    module.addSystemFrameworkPath(.{ .cwd_relative = b.pathJoin(&.{ sdk, "System/Library/Frameworks" }) });
+    module.addLibraryPath(.{ .cwd_relative = b.pathJoin(&.{ sdk, "usr/lib" }) });
+}
+
 fn cModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Module {
-    return b.createModule(.{
+    const module = b.createModule(.{
         .target = target,
         .optimize = optimize,
         .link_libc = true,
@@ -198,6 +270,8 @@ fn cModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builti
         // on for the game code.
         .sanitize_c = .off,
     });
+    addMacosSdk(b, module);
+    return module;
 }
 
 fn buildZlib(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
