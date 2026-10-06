@@ -99,9 +99,9 @@ Undoing the duck when the voice ends is not in `CAudioDriver`; it is up to the b
 **Positional sounds.**
 
 - `playOrientedSound(name, volume, pitch, position, velocity)` has the same gain, repeat and duck
-  rules as `playSound`. The base `devicePlayOrientedSound` does not do 3D. It plays the sound
-  panned **+0.5** if the source's x is less than the listener's, **−0.5** if greater, and 0 if
-  equal.
+  rules as `playSound`. The base `devicePlayOrientedSound` (`0x5b16e0`) only pans ±0.5 by which side
+  of the listener the source is on, but the OpenAL backend overrides it with a real 3D source
+  (`0x4f9000`), so the base version is never used on Linux.
 - `startTrackedSound(…)` returns a handle: 1, 2, 3 … in order, or −1 on failure.
   `stopAllTrackedSounds` restarts the numbering at 1. `updateTrackedSound(handle, …)` and
   `stopTrackedSound(handle)` act on that sound.
@@ -145,6 +145,25 @@ Linux backend under `CAudioDriver`.
 - **Music and voice lines** stream with 10 buffers of 4096 bytes, decoded with `ov_read` as 16-bit
   signed little-endian and refilled by `periodicStreamUpdate` every frame. Looping is done by seeking
   the stream back to the start; the source itself never loops.
-- **Parameters.** The gain is the volume passed in; the pitch is the pitch times the global pitch
-  modifier. Oriented sounds are panned by source position (see the pan quirk in
-  [original-bugs.md](original-bugs.md)).
+- **Parameters.** The gain is the volume passed in (the volume settings are not applied; see
+  [original-bugs.md](original-bugs.md)); the pitch is the pitch times the global pitch modifier.
+- **Placement.** `playSound` puts the source relative to the listener at (2·pan, 0, 0.1) with
+  rolloff 1, so pan is positive to the right and very wide (pan 0.1 is already 89 % of the way to one
+  side), and the default inverse-clamped distance model attenuates an effect at pan p by
+  1 / max(1, √(4p² + 0.01)), about −6 dB at the screen edge. Loops use the same position with the
+  global rolloff and a 30°/75° cone facing −z with outer gain 0. Oriented and tracked sounds are
+  absolute, with the same cone, so they are audible only in front of the 2D listener (forward +z,
+  up −y). Mono sources at the centre, music included, get √½ per channel.
+- **`deviceDampenAllSounds`** does nothing; the only ducking is `CAudioDriver`'s ×0.25 on effects
+  started while a voice line plays. `stopAllSounds` stops only looping effects; one-shots play out.
+
+## Port backend
+
+The port's backend is `port::audio::CMiniaudioDriver` ([`port/src/audio/`](../../port/src/audio/)), a
+`CAudioDriver` over miniaudio's low-level device with its own small mixer that reproduces the parts of
+OpenAL the original used: the 32-source pool, the six distance models with OpenAL 1.1 cones,
+constant-power stereo panning, linear resampling, and streaming in 4096-byte pieces with a queue as
+long as the original's (about 0.46 s). Files are read through the game's file system, so sounds in mod
+archives work. `zig build test-audio -- <sfx dir>` checks it against the rules above. Differences:
+no Doppler (the game never moves sounds), no HRTF, effects are decoded whole without the original's
+bitrate-based truncation (no shipped file is affected), and pitch 0 freezes a source.
