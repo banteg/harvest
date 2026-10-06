@@ -112,24 +112,6 @@ pub fn build(b: *std.Build) void {
     run.addPassthruArgs();
     b.step("run", "Run the game").dependOn(&run.step);
 
-    // The renderer's test (tests/video_test.cpp): an SDL3 window with an OpenGL context, the GLES3
-    // driver and a frame drawn from the original data. It links the library, so it needs only the
-    // renderer's seam, not the device's.
-    const video_test_module = b.createModule(.{ .target = target, .optimize = optimize, .link_libcpp = true });
-    video_test_module.addIncludePath(b.path("../src"));
-    video_test_module.addIncludePath(b.path("../src/HarvestFull"));
-    video_test_module.addIncludePath(b.path("src"));
-    video_test_module.addCSourceFile(.{ .file = b.path("tests/video_test.cpp"), .flags = &cxx_flags });
-    video_test_module.linkLibrary(harvest_lib);
-    for (libs.all()) |lib| video_test_module.linkLibrary(lib);
-    const video_test = b.addExecutable(.{ .name = "video-test", .root_module = video_test_module });
-    const install_video_test = b.addInstallArtifact(video_test, .{});
-    b.step("video-test", "Build the renderer test").dependOn(&install_video_test.step);
-    const run_video_test = b.addRunArtifact(video_test);
-    run_video_test.step.dependOn(&install_video_test.step);
-    run_video_test.addPassthruArgs();
-    b.step("run-video-test", "Run the renderer test (arguments after --)").dependOn(&run_video_test.step);
-
     // The census links the same objects against the original's plain loop (census/main.cpp)
     // instead of the SDL3 entry point, so the linker lists exactly what the recovered code and the
     // port's sources still need.

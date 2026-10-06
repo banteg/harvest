@@ -1,20 +1,24 @@
 // A standalone test of the renderer (port/src/video/): opens an SDL3 window with an OpenGL 3.3 core
 // (or, with --gles, OpenGL ES 3.0) context, creates the driver through port::createVideoDriver, and
-// draws two scenes from the original game data:
+// draws three scenes from the original game data:
 // - 2D: the sprites of harvestMenu.dat and two fonts, every draw2DImage variant, rectangles, lines
 //   and a scissor rectangle;
 // - 3D: the main menu's three planet materials (the Cg scattering shaders through their GLSL
 //   translations, and EMT_SOLID), an atmosphere shell and an additive billboard, under a 2D overlay.
-//   The scattering constants are set by a copy of CScatterShader::OnSetConstants, since the scene
-//   nodes it reads belong to the scene manager.
+//   The scattering constants are set by a copy of CScatterShader::OnSetConstants over hand-made
+//   meshes, so this scene needs nothing but the driver;
+// - menu: the main menu's scene as CMainMenuState builds it (tests/menu_scene.cpp), on the port's
+//   scene manager with the real CScatterShader, at --level 0, 1 or 2 (default 2), from the menu's
+//   opening camera (and, every other two seconds, the camera after picking Poseidon).
 //
-//     video-test <data directory> [--screenshot <directory>] [--frames <n>] [--scene 2d|3d|both]
-//                [--gles] [--size WxH]
+//     zig build test-video -- <data directory> [--screenshot <directory>] [--frames <n>]
+//         [--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH]
 //
 // The data directory is the one holding harvestClientData (orig/1.18-linux-amd64). With
 // --screenshot each scene is saved through IVideoDriver::saveJpegScreenshot as
-// <directory>/video-test-2d-<yymmdd>-NN.jpg (and -3d-) after --frames frames (default 3), and the
-// program exits; otherwise it runs until the window is closed, and space switches the scene.
+// <directory>/video-test-2d-<yymmdd>-NN.jpg (and -3d-, -menu-) after --frames frames (default 3),
+// and the program exits; otherwise it runs until the window is closed, and space switches the
+// scene.
 
 #define SDL_MAIN_HANDLED 1
 #include <SDL3/SDL.h>
@@ -36,12 +40,28 @@
 #include "ox/video/SColorArray.h"
 #include "ox/video/SLight.h"
 #include "ox/video/SMaterial.h"
+#include "harvest/gfx/CScatterShader.h"
+#include "ox/scene/IAnimatedMesh.h"
+#include "ox/scene/IAnimatedMeshSceneNode.h"
+#include "ox/scene/IBillboardSceneNode.h"
+#include "ox/scene/ICameraSceneNode.h"
+#include "ox/scene/ILightSceneNode.h"
+#include "ox/scene/ISceneManager.h"
+#include "ox/scene/ISceneNodeAnimator.h"
 #include "platform/Seams.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
+
+namespace daisy {
+namespace scene {
+//! The scene manager's factory (port/src/scene/), declared by CIrrDeviceStub.cpp.
+ox::scene::ISceneManager* createSceneManager(ox::video::IVideoDriver* driver, ox::io::IFileSystem* fs,
+    ox::gui::ICursorControl* cursorControl);
+} // end namespace scene
+} // end namespace daisy
 
 using namespace ox;
 using ox::core::CDimension2d;
@@ -312,6 +332,119 @@ struct SFont
     }
 };
 
+//! The main menu's scene as CMainMenuState::secondInit steps 8 to 12 build it (see
+//! tests/menu_scene.cpp), on the port's scene manager and this driver.
+struct SMenuScene
+{
+    scene::ISceneManager* SceneManager;
+    scene::ICameraSceneNode* Camera;
+    std::vector<harvest::gfx::CScatterShader*> Shaders;
+
+    bool build(video::IVideoDriver* driver, io::IFileSystem* fileSystem, int shaderLevel)
+    {
+        static const CVector3d<float> positions[3] = {CVector3d<float>(-250.0f, 0.0f, 0.0f),
+            CVector3d<float>(-200.0f, 20.0f, 80.0f), CVector3d<float>(-150.0f, -10.0f, -30.0f)};
+        static const char* const planets[3] = {"Heph", "Pos", "Ares"};
+        const char* gfx = "$GAME_RESOURCES$/harvestClientData/gfx/";
+
+        SceneManager = daisy::scene::createSceneManager(driver, fileSystem, 0);
+        core::CString<char> path = gfx;
+        path.append(core::CString<char>("planetSphere_24.obj"));
+        scene::IAnimatedMesh* planetMesh = SceneManager->getMesh(path.c_str());
+        path = fileSystem->getDirectoryFromAlias("$GAME_RESOURCES$");
+        path.append(core::CString<char>("/harvestClientData/gfx/atmoSphere_48.obj"));
+        scene::IAnimatedMesh* atmosphereMesh = SceneManager->getMesh(path.c_str());
+        if (!planetMesh || !atmosphereMesh)
+            return false;
+
+        scene::IAnimatedMeshSceneNode* nodes[6] = {0};
+        for (int i = 0; i < 3; ++i)
+        {
+            nodes[i * 2] = SceneManager->addAnimatedMeshSceneNode(planetMesh, 0, 1458 + i);
+            path = gfx;
+            path.append(core::CString<char>("shaders/"));
+            path.append(core::CString<char>(planets[i]));
+            core::CString<char> name = path;
+            if (shaderLevel == 0)
+            {
+                name.append(core::CString<char>("NoShader.jpg"));
+                nodes[i * 2]->setMaterialTexture(0, driver->getTexture(name.c_str()));
+            }
+            else
+            {
+                name.append(core::CString<char>("DiffSpec.tga"));
+                nodes[i * 2]->setMaterialTexture(0, driver->getTexture(name.c_str()));
+                name = path;
+                name.append(core::CString<char>("NormGlow.tga"));
+                nodes[i * 2]->setMaterialTexture(1, driver->getTexture(name.c_str()));
+                if (shaderLevel == 2)
+                {
+                    nodes[i * 2 + 1] = SceneManager->addAnimatedMeshSceneNode(atmosphereMesh, nodes[i * 2], 1458 + i);
+                    nodes[i * 2 + 1]->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+                    nodes[i * 2 + 1]->setVisible(false);
+                }
+            }
+            nodes[i * 2]->setMaterialType(video::EMT_SOLID);
+            nodes[i * 2]->setPosition(positions[i]);
+            scene::ISceneNodeAnimator* animator =
+                SceneManager->createRotationAnimator(CVector3d<float>(0.0f, (i + 5) * -0.001f, 0.0f));
+            nodes[i * 2]->addAnimator(animator);
+            animator->drop();
+        }
+
+        path = gfx;
+        path.append(core::CString<char>("skyboxRoof.jpg"));
+        scene::IAnimatedMeshSceneNode* atrum = SceneManager->addAnimatedMeshSceneNode(planetMesh, 0, 1461);
+        atrum->setMaterialTexture(0, driver->getTexture(path.c_str()));
+        atrum->setMaterialType(video::EMT_SOLID);
+        atrum->setPosition(CVector3d<float>(-900.0f, -35.0f, 25.0f));
+
+        Camera = SceneManager->addCameraSceneNode();
+        SceneManager->setActiveCamera(Camera);
+
+        driver->setAmbientLight(video::SColorf(SColor(0, 32, 32, 32)));
+        scene::ILightSceneNode* light = SceneManager->addLightSceneNode(0, CVector3d<float>(800.0f, 0.0f, 0.0f),
+            video::SColorf(1.0f, 1.0f, 1.0f, 1.0f), 100.0f);
+        light->getLightData().Radius = 7500.0f;
+        light->getLightData().DiffuseColor = video::SColorf(SColor(0, 117, 117, 117));
+
+        if (shaderLevel != 0)
+            for (int i = 0; i < 6; ++i)
+            {
+                if (!nodes[i])
+                    continue;
+                harvest::gfx::CScatterShader* shader = new harvest::gfx::CScatterShader(driver, Camera, nodes[i]);
+                if (i % 2)
+                    shader->initAtmo();
+                else
+                    shader->initGround(shaderLevel == 2);
+                Shaders.push_back(shader);
+            }
+
+        const char* sky[6] = {"skyboxRoof.jpg", "skyboxFloor.jpg", "skyboxEast.jpg", "skyboxWest.jpg",
+            "skyboxSouth.jpg", "skyboxNorth.jpg"};
+        video::ITexture* textures[6];
+        for (int i = 0; i < 6; ++i)
+        {
+            path = gfx;
+            path.append(core::CString<char>(sky[i]));
+            textures[i] = driver->getTexture(path.c_str());
+        }
+        SceneManager->addSkyBoxSceneNode(textures[0], textures[1], textures[2], textures[3], textures[4],
+            textures[5]);
+
+        scene::IBillboardSceneNode* sun = SceneManager->addBillboardSceneNode(0, CDimension2d<float>(500.0f, 500.0f),
+            CVector3d<float>(800.0f, 0.0f, 0.0f));
+        sun->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+        sun->getMaterial(0).Lighting = false;
+        sun->getMaterial(0).ZBuffer = false;
+        path = gfx;
+        path.append(core::CString<char>("particlewhite.jpg"));
+        sun->setMaterialTexture(0, driver->getTexture(path.c_str()));
+        return true;
+    }
+};
+
 } // end anonymous namespace
 
 int main(int argc, char** argv)
@@ -321,8 +454,9 @@ int main(int argc, char** argv)
     int frames = 3;
     bool gles = false;
     int width = 1024, height = 768;
-    // 0: 2D, 1: 3D, -1: both
+    // 0: 2D, 1: 3D, 2: the main menu's scene, -1: all of them
     int sceneArgument = -1;
+    int shaderLevel = 2;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -337,15 +471,17 @@ int main(int argc, char** argv)
         else if (!strcmp(argv[i], "--scene") && i + 1 < argc)
         {
             ++i;
-            sceneArgument = !strcmp(argv[i], "2d") ? 0 : !strcmp(argv[i], "3d") ? 1 : -1;
+            sceneArgument = !strcmp(argv[i], "2d") ? 0 : !strcmp(argv[i], "3d") ? 1 : !strcmp(argv[i], "menu") ? 2 : -1;
         }
+        else if (!strcmp(argv[i], "--level") && i + 1 < argc)
+            shaderLevel = atoi(argv[++i]);
         else
             dataDirectory = argv[i];
     }
     if (!dataDirectory || frames < 1)
     {
-        fprintf(stderr, "usage: video-test <data directory> [--screenshot <directory>] [--frames <n>] "
-                        "[--scene 2d|3d|both] [--gles] [--size WxH]\n");
+        fprintf(stderr, "usage: harvest-test-video <data directory> [--screenshot <directory>] [--frames <n>] "
+                        "[--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH]\n");
         return 2;
     }
 
@@ -545,7 +681,12 @@ int main(int argc, char** argv)
     sun.Material.Texture1 = driver->getTexture("$GAME_RESOURCES$/harvestClientData/gfx/particlewhite.jpg");
 
 
-    // Scene 0 is the 2D one, scene 1 the 3D one; space switches between them.
+    SMenuScene menuScene;
+    if (!menuScene.build(driver, fileSystem, shaderLevel))
+        fprintf(stderr, "cannot load the menu's meshes\n");
+
+    // Scene 0 is the 2D one, 1 the 3D one, 2 the menu; space switches between them.
+    const int sceneCount = 3;
     int scene = sceneArgument;
     bool running = true;
     for (int frame = 0; running; ++frame)
@@ -556,10 +697,10 @@ int main(int argc, char** argv)
             if (event.type == SDL_EVENT_QUIT)
                 running = false;
             else if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_SPACE)
-                scene ^= 1;
+                scene = (scene + 1) % sceneCount;
         }
         if (screenshotDirectory && sceneArgument < 0)
-            scene = frame < frames ? 0 : 1;
+            scene = frame / frames;
         else if (sceneArgument < 0 && frame == 0)
             scene = 0;
 
@@ -568,7 +709,24 @@ int main(int argc, char** argv)
 
         driver->beginScene(true, true, SColor(255, 0, 0, 0));
 
-        if (scene == 1)
+        if (scene == 2)
+        {
+            // the menu's camera targets: planet selection, the opening view, after picking Poseidon
+            // (screenshots show the first)
+            static const CVector3d<float> views[3][2] = {
+                {CVector3d<float>(-200.0f, 40.0f, -100.0f), CVector3d<float>(-200.0f, 0.0f, 0.0f)},
+                {CVector3d<float>(-200.0f, -20.0f, -150.0f), CVector3d<float>(-350.0f, 0.0f, -70.0f)},
+                {CVector3d<float>(-187.0f, 20.0f, 70.0f), CVector3d<float>(-187.0f, 20.0f, 80.0f)},
+            };
+            const int view = screenshotDirectory ? 0 : (frame / 120) % 3;
+            menuScene.Camera->setPosition(views[view][0]);
+            menuScene.Camera->setTarget(views[view][1]);
+            menuScene.SceneManager->drawAll();
+            char text[64];
+            snprintf(text, sizeof(text), "main menu scene, shader level %d", shaderLevel);
+            smallFont.draw(text, CPosition2d<int>(16, 12), SColor(0xffffd040));
+        }
+        else if (scene == 1)
         {
             for (int i = 0; i < 3; ++i)
                 planets[i].Angle = t * (i + 5) * 0.1f;
@@ -707,8 +865,9 @@ int main(int argc, char** argv)
             core::CString<char> directory = screenshotDirectory;
             if (directory.size() > 1 && directory[directory.size() - 2] != '/')
                 directory.append('/');
-            driver->saveJpegScreenshot(directory.c_str(), scene == 0 ? "video-test-2d-" : "video-test-3d-");
-            if (sceneArgument >= 0 || scene == 1)
+            const char* names[sceneCount] = {"video-test-2d-", "video-test-3d-", "video-test-menu-"};
+            driver->saveJpegScreenshot(directory.c_str(), names[scene]);
+            if (sceneArgument >= 0 || scene == sceneCount - 1)
                 running = false;
         }
         driver->endScene();
