@@ -14,8 +14,12 @@ namespace os {
 class Printer
 {
 public:
+    //! Logs a text followed by a hint (usually a file name).
+    static void log(const char* text, const char* hint, ox::event::ELOG_LEVEL level);
     //! Logs a printf-style message.
     static void log(const char* format, ox::event::ELOG_LEVEL level, ...);
+    //! Logs a printf-style wide message.
+    static void log(const wchar_t* format, ox::event::ELOG_LEVEL level, ...);
 };
 
 class Timer

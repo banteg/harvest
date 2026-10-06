@@ -518,3 +518,7 @@
 ["daisy/gui/CGUIWindow.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0c4
+
+["daisy/video/Null/CVideoNull.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c068
