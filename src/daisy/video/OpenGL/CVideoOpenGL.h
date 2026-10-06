@@ -109,6 +109,8 @@ public:
     virtual int getDriverType();
     virtual bool isFullscreen();
     virtual bool setFullscreen(bool fullscreen);
+    //! Mac only: a full screen presentation mode; does nothing here.
+    bool setPresentationForFullscreen(bool presentation);
     virtual void setScissorRect(ox::core::CRect<int>* rect);
     virtual void* getGPUProgrammingServices();
     virtual void* getPostProcessingServices();

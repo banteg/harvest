@@ -26,6 +26,9 @@ struct S3DVertex
 {
     S3DVertex() {}
 
+    S3DVertex(float x, float y, float z, float nx, float ny, float nz, SColor c, float tu, float tv)
+        : Pos(x, y, z), Normal(nx, ny, nz), Color(c), TCoords(tu, tv) {}
+
     core::CVector3d<float> Pos;
     core::CVector3d<float> Normal;
     SColor Color;
