@@ -41,10 +41,8 @@
 #include "CGUIToolBar.h"
 #include "CGUIWindow.h"
 #include "CUnicodeFont.h"
-#ifdef HARVEST_PORT
-// The original emits IGUIStaticText::breakText here; the matching build does not include it yet.
+// The original emits IGUIStaticText::breakText in this object.
 #include "ox/gui/IGUIStaticTextInline.h"
-#endif
 #include <iostream>
 
 namespace daisy {
