@@ -60,9 +60,10 @@ public:
     virtual int getSelectedLanguageIndex() = 0;
     virtual bool setVideoDriver(video::E_DRIVER_TYPE type) = 0;
     virtual bool run() = 0;
-    virtual void swapBuffers() = 0;
+    virtual bool swapBuffers() = 0;
     virtual video::IVideoDriver* getVideoDriver() = 0;
-    virtual void setFullscreenMode(bool fullscreen) = 0;
+    //! Returns false when the device already is in the requested mode.
+    virtual bool setFullscreenMode(bool fullscreen) = 0;
     virtual void resizeDeviceWindow(const core::CDimension2d<int>& size) = 0;
     virtual io::IFileSystem* getFileSystem() = 0;
     virtual gui::IGUIEnvironment* getGUIEnvironment() = 0;
