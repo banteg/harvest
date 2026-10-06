@@ -1,7 +1,8 @@
 # The Windows smoke test's input (port/smoke/smoke-windows.sh, --input-script): intro, a new
 # profile with a non-ASCII name, the main menu, the settings and back, the profile list, a second
 # profile, and the introduction (the tutorial game). Frames count only while no state loads.
-# Positions are for a 1024x768 window at scale 1 (Wine reports 96 DPI).
+# Positions are for a 1024x768 window at scale 1 (Wine reports 96 DPI). Frames come at the display's
+# refresh rate (vsync), so the gaps leave time for fades at 60 to 120 Hz.
 0 size 1024 768
 
 # the Oxeye splash (the intro's second phase), then skip the intro
@@ -37,6 +38,6 @@
 # this time play the introduction: the tutorial game
 1600 screenshot introduction-question
 1610 click 438 515
-1900 screenshot game
-2300 screenshot game-later
-2310 quit
+2600 screenshot game
+3400 screenshot game-later
+3410 quit
