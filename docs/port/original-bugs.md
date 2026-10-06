@@ -288,7 +288,7 @@ simply write the intended code.
   ([`CHighscoreScreen.cpp`](../../src/HarvestFull/harvest/gui/CHighscoreScreen.cpp)) clears
   `PromoteButtons[4][2][4]` as if it were `[4][4][4]`; the flat index reaches 39 of 32, zeroing the
   seven member pointers after the array (all set later) and the first word of an already initialised
-  mutex.
+  mutex. UBSan traps on it when the main menu loads, so the port clears only the array.
 - **`ansiToWide`** ([`CStringConversions.h`](../../src/ox/core/CStringConversions.h)) frees its
   temporary `wchar_t` array with scalar `delete` instead of `delete[]`.
 - **Zip file listings** ([`CZipFileList.cpp`](../../src/daisy/io/CZipFileList.cpp)): the getters accept

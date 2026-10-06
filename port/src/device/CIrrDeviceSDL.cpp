@@ -1,0 +1,607 @@
+// CIrrDeviceLinux (src/daisy/other/CIrrDeviceLinux.cpp) is the behavioural reference; the Linux
+// device's bugs (docs/port/original-bugs.md, "Linux device bugs") are not reproduced.
+
+#include "device/CIrrDeviceSDL.h"
+
+#include "device/CJoystickSDLDriver.h"
+#include "device/CSDLOperator.h"
+#include "device/CSDLTimer.h"
+#include "device/KeyMap.h"
+#include "device/NullDrivers.h"
+#include "device/Options.h"
+#include "platform/Seams.h"
+#include "ox/io/IFileSystem.h"
+#include "ox/gui/IGUIEnvironment.h"
+#include "ox/scene/ICameraSceneNode.h"
+#include "ox/scene/ISceneManager.h"
+#include "ox/video/IVideoDriver.h"
+
+namespace port {
+
+CIrrDeviceSDL* CIrrDeviceSDL::Instance = 0;
+
+namespace {
+
+//! The resolutions the settings screen offers, as on Linux.
+const int VIDEO_MODES[][2] =
+{
+    { 2048, 1536 }, { 1900, 1200 }, { 1920, 1080 }, { 1600, 1200 }, { 1680, 1050 }, { 1440, 1050 },
+    { 1440, 960 }, { 1440, 900 }, { 1280, 800 }, { 1280, 768 }, { 1280, 720 }, { 1152, 768 },
+    { 1024, 768 }, { 800, 600 }
+};
+
+const int MIN_WIDTH = 800;
+const int MIN_HEIGHT = 600;
+
+//! $GAME_RESOURCES$: --data or $HARVEST_DATA, else the executable's directory (the original used
+//! /proc/self/exe's), without a trailing separator.
+ox::core::CString<char> getDataDirectory()
+{
+    const char* directory = g_options.DataDirectory;
+    if (!directory)
+        directory = SDL_GetBasePath();
+    ox::core::CString<char> path(directory ? directory : ".");
+    while (path.size() > 1 && (path.c_str()[path.size() - 1] == '/' || path.c_str()[path.size() - 1] == '\\'))
+        path = path.subString(0, path.size() - 1);
+    return path;
+}
+
+ox::core::CDimension2d<int> getDesktopSize()
+{
+    const SDL_DisplayMode* mode = SDL_GetDesktopDisplayMode(SDL_GetPrimaryDisplay());
+    if (!mode)
+    {
+        SDL_Log("cannot read the desktop mode: %s", SDL_GetError());
+        return ox::core::CDimension2d<int>(1024, 768);
+    }
+    return ox::core::CDimension2d<int>(mode->w, mode->h);
+}
+
+const char* profileName(int profile)
+{
+    return profile == SDL_GL_CONTEXT_PROFILE_ES ? "OpenGL ES" : "OpenGL core";
+}
+
+} // end namespace
+
+//! Declared in ox/IOxDevice.h; C linkage makes this the same function as ox::createDevice.
+extern "C" ox::IOxDevice* createDevice(ox::video::E_DRIVER_TYPE driverType, ox::event::IEventReceiver* receiver,
+    const wchar_t* version)
+{
+    return new CIrrDeviceSDL(driverType, receiver, version);
+}
+
+CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEventReceiver* receiver,
+    const wchar_t* version)
+    : CIrrDeviceStub(version, receiver), DriverType(driverType), Window(0), Context(0), SDLOperator(0),
+      SDLJoystickDriver(0), CursorPos(0, 0), RelativeCursorPos(0, 0), ScreenSize(0, 0), WindowedSize(0, 0),
+      CursorVisible(true), SelectedLanguageIndex(0), WindowActive(false), Fullscreen(false), Closed(false)
+{
+    Instance = this;
+
+    if (!SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD))
+        SDL_Log("cannot initialise SDL: %s", SDL_GetError());
+
+    Timer->drop();
+    Timer = new CSDLTimer();
+
+    // The stub drops CursorControl too, so the device holds a second reference to that base.
+    static_cast<ox::gui::ICursorControl*>(this)->grab();
+    CursorControl = this;
+    MouseButtonStates[0] = false;
+    MouseButtonStates[1] = false;
+    MouseButtonStates[2] = false;
+
+    SDLOperator = new CSDLOperator();
+    Operator = SDLOperator;
+
+    // Joysticks are tracked from the start, so connections during loading are not missed.
+    SDLJoystickDriver = new CJoystickSDLDriver();
+    JoystickDriver = SDLJoystickDriver;
+
+    ox::core::CString<char> resources = getDataDirectory();
+    FileSystem->addDirectoryAlias("$GAME_RESOURCES$", resources.c_str());
+    ox::core::CString<char> clientData(resources);
+    clientData.append(ox::core::CString<char>("/harvestClientData"));
+    SDL_Log("game data: %s", resources.c_str());
+    if (!SDL_GetPathInfo(clientData.c_str(), 0))
+        SDL_Log("%s is missing: pass --data <dir> or set HARVEST_DATA to the directory that holds "
+                "harvestClientData/", clientData.c_str());
+
+    // The modes strictly smaller than the desktop in both dimensions, all at 32 bits.
+    ox::core::CDimension2d<int> desktop = getDesktopSize();
+    VideoModeList.setDesktop(32, desktop);
+    for (unsigned int m = 0; m < SDL_arraysize(VIDEO_MODES); ++m)
+        if (VIDEO_MODES[m][0] < desktop.Width && VIDEO_MODES[m][1] < desktop.Height)
+            VideoModeList.addMode(ox::core::CDimension2d<int>(VIDEO_MODES[m][0], VIDEO_MODES[m][1]), 32);
+}
+
+//! The GUI, scene manager and video driver go before the context they draw with; the stub's
+//! destructor drops the rest.
+CIrrDeviceSDL::~CIrrDeviceSDL()
+{
+    if (GUIEnvironment)
+    {
+        GUIEnvironment->drop();
+        GUIEnvironment = 0;
+    }
+    if (SceneManager)
+    {
+        SceneManager->drop();
+        SceneManager = 0;
+    }
+    if (VideoDriver)
+    {
+        VideoDriver->drop();
+        VideoDriver = 0;
+    }
+    if (Context)
+        SDL_GL_DestroyContext(Context);
+    if (Window)
+        SDL_DestroyWindow(Window);
+    if (Instance == this)
+        Instance = 0;
+}
+
+//! There is no options dialog, as on Linux: the window is 3/4 of the largest 4:3 box that fits the
+//! desktop, windowed, and the language is English (its index, or the array size when it is missing).
+bool CIrrDeviceSDL::createUserSelectedDeviceWindow(const ox::TArray<ox::core::CString<wchar_t> >* languages,
+    unsigned int flags)
+{
+    ox::core::CDimension2d<int> desktop = getDesktopSize();
+    int width = desktop.Width;
+    int height = desktop.Height;
+    if (width > height)
+        width = (int)(height * (4.0 / 3.0));
+    else
+        height = (int)(width * 0.75);
+
+    ox::core::CString<wchar_t> english(L"English");
+    for (SelectedLanguageIndex = 0; SelectedLanguageIndex < (int)languages->size(); ++SelectedLanguageIndex)
+        if ((*languages)[SelectedLanguageIndex] == english)
+            break;
+
+    return createDeviceWindow(ox::core::CDimension2d<int>((int)(width * 0.75), (int)(height * 0.75)), 32, false,
+        false, false, flags);
+}
+
+bool CIrrDeviceSDL::createWindowAndContext(const ox::core::CDimension2d<int>& size, bool fullscreen,
+    bool stencilBuffer, int profile, int major, int minor)
+{
+    SDL_GL_ResetAttributes();
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, profile);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+    if (profile == SDL_GL_CONTEXT_PROFILE_CORE)
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, stencilBuffer ? 8 : 0);
+
+    SDL_WindowFlags flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+    if (fullscreen)
+        flags |= SDL_WINDOW_FULLSCREEN;
+    Window = SDL_CreateWindow(Title.c_str(), size.Width, size.Height, flags);
+    if (!Window)
+    {
+        SDL_Log("cannot create a %s %d.%d window: %s", profileName(profile), major, minor, SDL_GetError());
+        return false;
+    }
+
+    Context = SDL_GL_CreateContext(Window);
+    if (!Context)
+    {
+        SDL_Log("cannot create a %s %d.%d context: %s", profileName(profile), major, minor, SDL_GetError());
+        SDL_DestroyWindow(Window);
+        Window = 0;
+        return false;
+    }
+
+    typedef const unsigned char* (SDLCALL * GetStringFunc)(unsigned int);
+    GetStringFunc getString = (GetStringFunc)SDL_GL_GetProcAddress("glGetString");
+    if (getString)
+        SDL_Log("%s context: %s, %s", profileName(profile), getString(0x1F02 /* GL_VERSION */),
+            getString(0x1F01 /* GL_RENDERER */));
+    return true;
+}
+
+//! Creates the window (windowed or fullscreen as asked, so there is no mode switch afterwards) with
+//! an OpenGL ES 3.0 context, or OpenGL 3.3 core where ES is unavailable (always on macOS), then the
+//! renderer, the GUI and the scene manager. The null driver type creates no window, as on Linux.
+//! bits and antiAlias are ignored; vsync is on unless --no-vsync (the game always passes false).
+bool CIrrDeviceSDL::createDeviceWindow(const ox::core::CDimension2d<int>& windowSize, unsigned int bits,
+    bool fullscreen, bool stencilBuffer, bool vsync, unsigned int antiAlias)
+{
+    if (DriverType == ox::video::EDT_NULL || Window)
+        return false;
+
+#if defined(SDL_PLATFORM_MACOS)
+    bool created = createWindowAndContext(windowSize, fullscreen, stencilBuffer, SDL_GL_CONTEXT_PROFILE_CORE, 3, 3);
+#elif defined(SDL_PLATFORM_EMSCRIPTEN)
+    bool created = createWindowAndContext(windowSize, fullscreen, stencilBuffer, SDL_GL_CONTEXT_PROFILE_ES, 3, 0);
+#else
+    bool created = createWindowAndContext(windowSize, fullscreen, stencilBuffer, SDL_GL_CONTEXT_PROFILE_ES, 3, 0)
+        || createWindowAndContext(windowSize, fullscreen, stencilBuffer, SDL_GL_CONTEXT_PROFILE_CORE, 3, 3);
+#endif
+    if (!created)
+        return false;
+
+    if (!SDL_GL_SetSwapInterval(vsync || g_options.VSync ? 1 : 0))
+        SDL_Log("cannot set the swap interval: %s", SDL_GetError());
+
+    // No SDL_SetWindowAspectRatio: on macOS (SDL 3.4.16) AppKit traps when such a window leaves
+    // fullscreen. onResized clamps the aspect instead, as the Linux device did.
+    SDL_SetWindowMinimumSize(Window, MIN_WIDTH, MIN_HEIGHT);
+    SDL_StartTextInput(Window);
+    SDLOperator->setWindow(Window);
+    WindowActive = (SDL_GetWindowFlags(Window) & SDL_WINDOW_INPUT_FOCUS) != 0;
+    Fullscreen = fullscreen;
+    WindowedSize = windowSize;
+    ScreenSize = getPixelSize();
+
+    VideoDriver = g_options.NullVideo ? createNullVideoDriver(this, FileSystem, ScreenSize)
+                                      : port::createVideoDriver(this, FileSystem, ScreenSize);
+    if (!VideoDriver)
+        return false;
+    // ETCF_CREATE_MIP_MAPS, off as in the Linux build.
+    VideoDriver->setTextureCreationFlag((ox::video::E_TEXTURE_CREATION_FLAG)0x10, false);
+    VideoDriver->setFullscreen(fullscreen);
+
+    createGUIAndScene();
+    return true;
+}
+
+ox::core::CDimension2d<int> CIrrDeviceSDL::getPixelSize()
+{
+    int width = 0;
+    int height = 0;
+    SDL_GetWindowSizeInPixels(Window, &width, &height);
+    return ox::core::CDimension2d<int>(width, height);
+}
+
+ox::core::CPosition2d<int> CIrrDeviceSDL::toPixels(float x, float y)
+{
+    float density = SDL_GetWindowPixelDensity(Window);
+    return ox::core::CPosition2d<int>((int)(x * density), (int)(y * density));
+}
+
+bool CIrrDeviceSDL::run()
+{
+    return !Closed;
+}
+
+bool CIrrDeviceSDL::swapBuffers()
+{
+    return SDL_GL_SwapWindow(Window);
+}
+
+//! Borderless fullscreen on the window's display (no mode switch). The new size arrives as a pixel
+//! size event and goes through onResized; leaving fullscreen restores the windowed size, including
+//! one set by resizeDeviceWindow while in fullscreen.
+bool CIrrDeviceSDL::setFullscreenMode(bool fullscreen)
+{
+    if (!Window || Fullscreen == fullscreen)
+        return false;
+
+    Fullscreen = fullscreen;
+    SDL_SetWindowFullscreen(Window, fullscreen);
+    VideoDriver->setFullscreen(fullscreen);
+    return true;
+}
+
+//! In fullscreen only the size to restore is recorded; windowed, the window is asked for the size
+//! (the granted size comes back through onResized).
+void CIrrDeviceSDL::resizeDeviceWindow(const ox::core::CDimension2d<int>& size)
+{
+    WindowedSize = size;
+    if (Window && !Fullscreen)
+    {
+        float density = SDL_GetWindowPixelDensity(Window);
+        SDL_SetWindowSize(Window, (int)(size.Width / density), (int)(size.Height / density));
+    }
+}
+
+//! A windowed size outside aspect ratios 4:3 to 16:9 or below 800x600 is clamped as on Linux (a
+//! narrower window gets its height cut to width * 3/4, a wider one its width cut to height * 16/9)
+//! and the window is asked for the clamped size (its minimum size already keeps it from going
+//! below 800x600). The size the window has is applied either way, so the frame always matches the
+//! drawable; when the window grants the clamped size, that arrives as another resize.
+void CIrrDeviceSDL::onResized(const ox::core::CDimension2d<int>& size)
+{
+    if (ScreenSize == size)
+        return;
+
+    ScreenSize = size;
+
+    if (!Fullscreen)
+    {
+        ox::core::CDimension2d<int> clamped = size;
+        float aspect = (float)size.Width / (float)size.Height;
+        if (aspect < 4.0 / 3.0)
+            clamped.Height = (int)(size.Width * 0.75);
+        else if (aspect > 16.0 / 9.0)
+            clamped.Width = (int)(size.Height * (16.0 / 9.0));
+        clamped.Width = clamped.Width < MIN_WIDTH ? MIN_WIDTH : clamped.Width;
+        clamped.Height = clamped.Height < MIN_HEIGHT ? MIN_HEIGHT : clamped.Height;
+        if (clamped != size)
+            resizeDeviceWindow(clamped);
+    }
+
+    updateScreenSize();
+}
+
+void CIrrDeviceSDL::updateScreenSize()
+{
+    // The camera's aspect ratio is height / width, as the camera expects (docs/port/menu-scene.md).
+    if (SceneManager && SceneManager->getActiveCamera())
+        SceneManager->getActiveCamera()->setAspectRatio((float)ScreenSize.Height / (float)ScreenSize.Width);
+
+    RelativeCursorPos.X = CursorPos.X / (float)ScreenSize.Width;
+    RelativeCursorPos.Y = CursorPos.Y / (float)ScreenSize.Height;
+
+    VideoDriver->OnResize(ScreenSize);
+
+    ox::event::SEvent ev;
+    ev.EventType = ox::event::EET_DEVICE_EVENT;
+    ev.DeviceEvent.Type = ox::event::EDE_FULLSCREEN_TOGGLED;
+    ev.DeviceEvent.Width = ScreenSize.Width;
+    ev.DeviceEvent.Height = ScreenSize.Height;
+    postEventFromUser(ev);
+
+    if (!Fullscreen)
+        WindowedSize = ScreenSize;
+}
+
+void CIrrDeviceSDL::handleEvent(const SDL_Event& event)
+{
+    switch (event.type)
+    {
+    case SDL_EVENT_QUIT:
+    case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+        closeDevice();
+        return;
+    default:
+        break;
+    }
+
+    if (!Window)
+        return;
+
+    switch (event.type)
+    {
+    case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
+        onResized(ox::core::CDimension2d<int>(event.window.data1, event.window.data2));
+        break;
+    case SDL_EVENT_WINDOW_FOCUS_GAINED:
+        WindowActive = true;
+        break;
+    case SDL_EVENT_WINDOW_FOCUS_LOST:
+        WindowActive = false;
+        break;
+    case SDL_EVENT_WINDOW_ENTER_FULLSCREEN:
+        // Also reached when the user switches through the window manager.
+        if (!Fullscreen)
+        {
+            Fullscreen = true;
+            VideoDriver->setFullscreen(true);
+        }
+        break;
+    case SDL_EVENT_WINDOW_LEAVE_FULLSCREEN:
+        if (Fullscreen)
+        {
+            Fullscreen = false;
+            VideoDriver->setFullscreen(false);
+        }
+        if (WindowedSize.Width > 0)
+            resizeDeviceWindow(WindowedSize);
+        break;
+    case SDL_EVENT_KEY_DOWN:
+    case SDL_EVENT_KEY_UP:
+        postKeyEvent(event.key);
+        break;
+    case SDL_EVENT_TEXT_INPUT:
+        postTextEvent(event.text);
+        break;
+    case SDL_EVENT_MOUSE_MOTION:
+    case SDL_EVENT_MOUSE_BUTTON_DOWN:
+    case SDL_EVENT_MOUSE_BUTTON_UP:
+    case SDL_EVENT_MOUSE_WHEEL:
+        postMouseEvent(event);
+        break;
+    default:
+    {
+        ox::event::SEvent ev;
+        if (SDLJoystickDriver->translateEvent(event, ev))
+            postEventFromUser(ev);
+        break;
+    }
+    }
+}
+
+//! KeyInput.Key is the ox code (0 for keys without one) and Char is 0. With Control held (or Command
+//! on macOS), a press of V becomes EKIE_PASTE, F becomes EKIE_TOGGLE_FULLSCREEN (not repeated) and
+//! Q closes the device without an event; any other key is a normal press (Linux left the event type
+//! unset). Held keys repeat as presses, as SFML's key repeat did.
+void CIrrDeviceSDL::postKeyEvent(const SDL_KeyboardEvent& event)
+{
+    bool control = (event.mod & SDL_KMOD_CTRL) != 0;
+#if defined(SDL_PLATFORM_MACOS)
+    control = control || (event.mod & SDL_KMOD_GUI) != 0;
+#endif
+
+    ox::event::SEvent ev;
+    ev.EventType = ox::event::EET_KEY_INPUT_EVENT;
+    ev.KeyInput.Char = 0;
+    ev.KeyInput.Key = toOxKey(event.key);
+    ev.KeyInput.Event = event.down ? ox::event::EKIE_KEY_PRESSED_DOWN : ox::event::EKIE_KEY_LEFT_UP;
+    ev.KeyInput.Shift = (event.mod & SDL_KMOD_SHIFT) != 0;
+    ev.KeyInput.Control = control;
+
+    if (control && event.down)
+    {
+        if (ev.KeyInput.Key == ox::KEY_KEY_V)
+            ev.KeyInput.Event = ox::event::EKIE_PASTE;
+        else if (ev.KeyInput.Key == ox::KEY_KEY_F)
+        {
+            if (event.repeat)
+                return;
+            ev.KeyInput.Event = ox::event::EKIE_TOGGLE_FULLSCREEN;
+        }
+        else if (ev.KeyInput.Key == ox::KEY_KEY_Q)
+        {
+            closeDevice();
+            return;
+        }
+    }
+
+    postEventFromUser(ev);
+}
+
+//! Each code point of the UTF-8 text becomes an EKIE_CHARACTER event with the character in Char.
+//! Control characters (below 32) and DEL are dropped, and so are characters outside the BMP where
+//! wchar_t is 16 bits (Windows).
+void CIrrDeviceSDL::postTextEvent(const SDL_TextInputEvent& event)
+{
+    const char* text = event.text;
+    while (*text)
+    {
+        Uint32 character = SDL_StepUTF8(&text, 0);
+        if (character < 32 || character == 127 || (sizeof(wchar_t) == 2 && character > 0xFFFF))
+            continue;
+
+        ox::event::SEvent ev;
+        ev.EventType = ox::event::EET_KEY_INPUT_EVENT;
+        ev.KeyInput.Char = (wchar_t)character;
+        ev.KeyInput.Key = (ox::EKEY_CODE)0;
+        ev.KeyInput.Event = ox::event::EKIE_CHARACTER;
+        ev.KeyInput.Shift = false;
+        ev.KeyInput.Control = false;
+        postEventFromUser(ev);
+    }
+}
+
+//! Positions are render pixels from the top left. The left, right and middle buttons send the
+//! pressed events 0-2 with the click count of getClickCount (250 ms, 10 px) and the released events
+//! 3-5 with the current count; other buttons are ignored. The wheel sends EMIE_MOUSE_WHEEL with
+//! ScrollY (and ScrollX) = whole notches * 10 at the pointer. Every event updates the cursor
+//! position; motion, presses and the wheel are posted only inside the window, releases always (SDL
+//! captures the mouse while a button is held, so a drag that ends outside still ends).
+void CIrrDeviceSDL::postMouseEvent(const SDL_Event& event)
+{
+    ox::event::SEvent ev;
+    ev.EventType = ox::event::EET_MOUSE_INPUT_EVENT;
+    ev.MouseInput.Clicks = 0;
+    ev.MouseInput.ScrollX = 0;
+    ev.MouseInput.ScrollY = 0;
+
+    ox::core::CPosition2d<int> pos;
+    bool release = false;
+    switch (event.type)
+    {
+    case SDL_EVENT_MOUSE_MOTION:
+        pos = toPixels(event.motion.x, event.motion.y);
+        ev.MouseInput.Event = ox::event::EMIE_MOUSE_MOVED;
+        break;
+
+    case SDL_EVENT_MOUSE_BUTTON_DOWN:
+    case SDL_EVENT_MOUSE_BUTTON_UP:
+    {
+        int button;
+        switch (event.button.button)
+        {
+        case SDL_BUTTON_LEFT: button = 0; break;
+        case SDL_BUTTON_RIGHT: button = 1; break;
+        case SDL_BUTTON_MIDDLE: button = 2; break;
+        default: return;
+        }
+        pos = toPixels(event.button.x, event.button.y);
+        release = !event.button.down;
+        MouseButtonStates[button] = event.button.down;
+        if (event.button.down)
+        {
+            ev.MouseInput.Event = (ox::event::EMOUSE_INPUT_EVENT)(ox::event::EMIE_LMOUSE_PRESSED_DOWN + button);
+            ev.MouseInput.Clicks = getClickCount(button, pos);
+        }
+        else
+        {
+            ev.MouseInput.Event = (ox::event::EMOUSE_INPUT_EVENT)(ox::event::EMIE_LMOUSE_LEFT_UP + button);
+            ev.MouseInput.Clicks = ClickCount;
+        }
+        break;
+    }
+
+    case SDL_EVENT_MOUSE_WHEEL:
+    {
+        if (!event.wheel.integer_x && !event.wheel.integer_y)
+            return;
+        float direction = event.wheel.direction == SDL_MOUSEWHEEL_FLIPPED ? -10.0f : 10.0f;
+        pos = toPixels(event.wheel.mouse_x, event.wheel.mouse_y);
+        ev.MouseInput.Event = ox::event::EMIE_MOUSE_WHEEL;
+        ev.MouseInput.ScrollY = event.wheel.integer_y * direction;
+        ev.MouseInput.ScrollX = event.wheel.integer_x * direction;
+        break;
+    }
+
+    default:
+        return;
+    }
+
+    ev.MouseInput.X = pos.X;
+    ev.MouseInput.Y = pos.Y;
+    CursorPos = pos;
+    RelativeCursorPos.X = pos.X / (float)ScreenSize.Width;
+    RelativeCursorPos.Y = pos.Y / (float)ScreenSize.Height;
+
+    if (release || (pos.X >= 0 && pos.Y >= 0 && pos.X < ScreenSize.Width && pos.Y < ScreenSize.Height))
+        postEventFromUser(ev);
+}
+
+//! The caption as UTF-8 (Linux narrowed each character).
+void CIrrDeviceSDL::setWindowCaption(const wchar_t* text)
+{
+    char* utf8 = wideToUtf8(text);
+    Title = utf8;
+    SDL_free(utf8);
+    if (Window)
+        SDL_SetWindowTitle(Window, Title.c_str());
+}
+
+//! Stops the device: run() returns false from now on, so the game loop ends and the game drops the
+//! device, which destroys the window.
+void CIrrDeviceSDL::closeDevice()
+{
+    Closed = true;
+}
+
+void CIrrDeviceSDL::setVisible(bool visible)
+{
+    CursorVisible = visible;
+    if (visible)
+        SDL_ShowCursor();
+    else
+        SDL_HideCursor();
+}
+
+void CIrrDeviceSDL::setPosition(int x, int y)
+{
+    float density = SDL_GetWindowPixelDensity(Window);
+    SDL_WarpMouseInWindow(Window, x / density, y / density);
+}
+
+//! The audio backend (or, with --no-audio or when it cannot start, a driver that plays nothing),
+//! created on first use.
+ox::audio::IAudioDriver* CIrrDeviceSDL::createAudioDriver()
+{
+    if (!AudioDriver && !g_options.NoAudio)
+        AudioDriver = port::createAudioDriver(FileSystem);
+    if (!AudioDriver)
+        AudioDriver = createNullAudioDriver();
+    return AudioDriver;
+}
+
+ox::input::IJoystickDriver* CIrrDeviceSDL::createJoystickDriver()
+{
+    return JoystickDriver;
+}
+
+} // end namespace port

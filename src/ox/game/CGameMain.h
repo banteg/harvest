@@ -33,15 +33,28 @@ public:
     void setState(int state);
     CGameState* getState();
     bool isRunning();
+#ifdef HARVEST_PORT
+    //! Whether the current state is still loading (the port loads one step per update).
+    bool isLoading();
+#endif
 
 protected:
     float getNewTimeStep();
+#ifdef HARVEST_PORT
+    //! Runs one renderFirst/secondInit step of the loading state.
+    void loadStep();
+    //! Logs the state's error message and stops the game.
+    void failState();
+#endif
 
     bool Running;
     CGameState* State;
     IOxDevice* Device;
     bool SleepWhenInactive;
     double LastTime;
+#ifdef HARVEST_PORT
+    bool Loading;
+#endif
 };
 
 } // end namespace game

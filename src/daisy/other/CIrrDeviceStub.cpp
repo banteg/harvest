@@ -18,6 +18,10 @@
 #include "ox/net/INetworkDevice.h"
 #include "ox/scene/ISceneManager.h"
 #include "ox/video/IVideoDriver.h"
+#ifdef HARVEST_PORT
+// The port implements the network device (port/src/net/) against this declaration.
+#include "net/CWinsockNetworkDevice.h"
+#endif
 // The object has an iostream initializer; the original including header is unidentified.
 #include <iostream>
 
@@ -43,6 +47,7 @@ namespace scene
         ox::gui::ICursorControl* cursorControl);
 } // end namespace scene
 
+#ifndef HARVEST_PORT
 namespace net
 {
     //! Provisional: only what the stub needs (the constructor and the Linux size, 0xc0) until the
@@ -68,6 +73,7 @@ namespace net
         char Unrecovered[0xc0 - sizeof(ox::net::INetworkDevice)];
     };
 } // end namespace net
+#endif
 
 //! Creates the logger (it becomes os::Printer::Logger), logs "Daisy version 0.7" at ELL_NONE so it
 //! always prints, warns when the application's version differs, then creates the timer and the file
