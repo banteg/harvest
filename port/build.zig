@@ -39,6 +39,11 @@ const cxx_flags = [_][]const u8{
     // sprintf and friends in the original source, and string literals bound to char*.
     "-Wno-deprecated-declarations",
     "-Wno-c++11-compat-deprecated-writable-strings",
+    // The original relies on two's-complement wrapping in its integer arithmetic (hashes, random
+    // numbers, colour packing), which GCC 4.4 compiled as plain wrapping instructions. Make it
+    // defined, and keep UBSan's other checks.
+    "-fwrapv",
+    "-fno-sanitize=signed-integer-overflow,shift-base",
 };
 
 /// The core of zlib: the game only uses deflate and inflate on memory (no gz* file API).
