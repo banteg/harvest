@@ -26,7 +26,8 @@ GROUPS = [
     (
         "platform",
         r"^createDevice$|^daisy::os::|^daisy::C(IrrDevice|LinuxOperator|Logger)|^daisy::input::|"
-        r"^daisy::audio::COpenAL|^daisy::video::(COpenGL|CVideoOpenGL|createOpenGLDriver)",
+        r"^daisy::audio::COpenAL|^daisy::video::(COpenGL|CVideoOpenGL|createOpenGLDriver)|"
+        r"^daisy::scene::createSceneManager|^daisy::net::CWinsockNetworkDevice",
     ),
     ("unrecovered", r"^daisy::|^ox::|^harvest::|^irr::"),
     ("lua", r"^luaL?_"),
@@ -39,7 +40,7 @@ GROUPS = [
 # Groups listed one line per symbol, with the referencing units only.
 LIBRARY_GROUPS = {"lua", "zlib", "libraries", "cxxrt", "libc"}
 GROUP_TITLES = {
-    "platform": "Platform seams (defined by the replaced units)",
+    "platform": "Platform seams (the replaced units, the scene manager and the network device)",
     "unrecovered": "Unrecovered daisy/ox/game code",
     "lua": "Lua 5.1 C API",
     "zlib": "zlib",

@@ -3,7 +3,16 @@
 // See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
 
 #include "CFileList.h"
+#ifdef HARVEST_PORT
+// A portable glob with the same interface; it sorts by byte order (port/src/platform/glob.h).
+#include "platform/glob.h"
+using port::glob;
+using port::glob_t;
+using port::globfree;
+using port::GLOB_MARK;
+#else
 #include <glob.h>
+#endif
 #include <string.h>
 // The object has an iostream initializer; the original including header is unidentified.
 #include <iostream>

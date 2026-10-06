@@ -1,7 +1,10 @@
-//! Builds the modern port of Harvest from the recovered source in ../src.
+//! Builds the modern port of Harvest from the recovered source in ../src and the port's own
+//! sources in src/.
 //!
 //! The kept units are every unit in config/1.18-linux-amd64/units.toml except the platform units the
 //! port replaces (`replaced` below), so newly recovered units join the build without edits here.
+//! Port sources are every .cpp under src/ except src/main.cpp, so new platform code joins the same
+//! way. Dependencies are pinned in build.zig.zon and built from source for the target.
 
 const std = @import("std");
 
@@ -9,11 +12,13 @@ const units_toml = "../config/1.18-linux-amd64/units.toml";
 
 /// Recovered units the port replaces with its own implementations, as path prefixes under src/.
 const replaced = [_][]const u8{
-    // Linux device (X11/SFML window and events), the device stub, OS operator (GTK clipboard),
-    // logger and os helpers (printer, timer): the SDL3 device replaces them.
-    "daisy/other/",
-    // Linux joystick driver and the null driver: SDL3 gamepads replace them.
-    "daisy/input/",
+    // Linux device (X11/SFML window and events) and OS operator (GTK clipboard): the SDL3 device
+    // replaces them. The device stub, logger and os helpers are kept: the SDL3 device derives from
+    // CIrrDeviceStub as the Linux device did.
+    "daisy/other/CIrrDeviceLinux.cpp",
+    "daisy/other/CLinuxOperator.cpp",
+    // SFML joysticks: SDL3 gamepads replace them. The null driver is kept.
+    "daisy/input/CJoystickLinuxDriver.cpp",
     // OpenAL/ALUT backend: miniaudio replaces it.
     "daisy/audio/COpenALDriver.cpp",
     // OpenGL 1.x driver, its textures and Cg/GLSL/ARB material renderers: the GLES3 renderer
@@ -26,7 +31,8 @@ const replaced = [_][]const u8{
     "HarvestFull/main.cpp",
 };
 
-/// Flags for the recovered C++. GCC 4.4 defaulted to gnu++98, which needs no source changes.
+/// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no
+/// source changes.
 const cxx_flags = [_][]const u8{
     "-std=gnu++98",
     "-DHARVEST_PORT",
@@ -35,31 +41,93 @@ const cxx_flags = [_][]const u8{
     "-Wno-c++11-compat-deprecated-writable-strings",
 };
 
+/// The core of zlib: the game only uses deflate and inflate on memory (no gz* file API).
+const zlib_sources = [_][]const u8{
+    "adler32.c", "compress.c", "crc32.c",   "deflate.c", "infback.c", "inffast.c",
+    "inflate.c", "inftrees.c", "trees.c",   "uncompr.c", "zutil.c",
+};
+
+/// PUC Lua 5.1.5's core and standard libraries (src/ without the lua and luac programs).
+const lua_sources = [_][]const u8{
+    "lapi.c",    "lcode.c",   "ldebug.c",   "ldo.c",      "ldump.c",   "lfunc.c",   "lgc.c",
+    "llex.c",    "lmem.c",    "lobject.c",  "lopcodes.c", "lparser.c", "lstate.c",  "lstring.c",
+    "ltable.c",  "ltm.c",     "lundump.c",  "lvm.c",      "lzio.c",    "lauxlib.c", "lbaselib.c",
+    "ldblib.c",  "liolib.c",  "lmathlib.c", "loslib.c",   "ltablib.c", "lstrlib.c", "loadlib.c",
+    "linit.c",
+};
+
+const lua_headers = [_][]const u8{ "src/lua.h", "src/luaconf.h", "src/lualib.h", "src/lauxlib.h", "etc/lua.hpp" };
+
+/// The third-party libraries every game module links.
+const Libraries = struct {
+    zlib: *std.Build.Step.Compile,
+    lua: *std.Build.Step.Compile,
+    stb_image: *std.Build.Step.Compile,
+    miniaudio: *std.Build.Step.Compile,
+    sdl: *std.Build.Step.Compile,
+
+    fn all(libs: Libraries) [5]*std.Build.Step.Compile {
+        return .{ libs.zlib, libs.lua, libs.stb_image, libs.miniaudio, libs.sdl };
+    }
+};
+
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const libs: Libraries = .{
+        .zlib = buildZlib(b, target, optimize),
+        .lua = buildLua(b, target, optimize),
+        .stb_image = buildStbImage(b, target, optimize),
+        .miniaudio = buildMiniaudio(b, target, optimize),
+        .sdl = b.dependency("sdl", .{
+            .target = target,
+            .optimize = optimize,
+            .preferred_linkage = .static,
+        }).artifact("SDL3"),
+    };
+    for (libs.all()) |lib| b.installArtifact(lib);
+
     const units = keptUnits(b);
+    const port_sources = portSources(b);
 
-    const harvest = b.addLibrary(.{
+    // The recovered code and the port's sources as a library: the default step, which builds while
+    // the platform seams are still missing.
+    const harvest_lib = b.addLibrary(.{
         .name = "harvest",
-        .root_module = recoveredModule(b, target, optimize, units),
+        .root_module = gameModule(b, target, optimize, libs, units, port_sources),
     });
-    b.installArtifact(harvest);
+    b.installArtifact(harvest_lib);
 
-    // The census links every kept object (not only those a main pulls from the archive) against a
-    // stub entry point, so the linker lists every symbol the port still has to provide.
-    const census_module = recoveredModule(b, target, optimize, units);
+    // The game. It links every kept object and port source, so it only links once every seam
+    // exists; until then `zig build harvest` lists what is missing, like the census.
+    const exe_module = gameModule(b, target, optimize, libs, units, port_sources);
+    exe_module.addCSourceFile(.{ .file = b.path("src/main.cpp"), .flags = &cxx_flags });
+    const exe = b.addExecutable(.{ .name = "harvest", .root_module = exe_module });
+    const install_exe = b.addInstallArtifact(exe, .{});
+    b.step("harvest", "Build the game executable").dependOn(&install_exe.step);
+
+    const run = b.addRunArtifact(exe);
+    run.step.dependOn(&install_exe.step);
+    run.addPassthruArgs();
+    b.step("run", "Run the game").dependOn(&run.step);
+
+    // The census links the same objects against the original's plain loop (census/main.cpp)
+    // instead of the SDL3 entry point, so the linker lists exactly what the recovered code and the
+    // port's sources still need.
+    const census_module = gameModule(b, target, optimize, libs, units, port_sources);
     census_module.addCSourceFile(.{ .file = b.path("census/main.cpp"), .flags = &cxx_flags });
     const census = b.addExecutable(.{ .name = "harvest-census", .root_module = census_module });
     b.step("census", "Link every kept unit and report unresolved symbols").dependOn(&b.addInstallArtifact(census, .{}).step);
 }
 
-fn recoveredModule(
+fn gameModule(
     b: *std.Build,
     target: std.Build.ResolvedTarget,
     optimize: std.builtin.OptimizeMode,
+    libs: Libraries,
     units: []const []const u8,
+    port_sources: []const []const u8,
 ) *std.Build.Module {
     const module = b.createModule(.{
         .target = target,
@@ -68,10 +136,69 @@ fn recoveredModule(
     });
     module.addIncludePath(b.path("../src"));
     module.addIncludePath(b.path("../src/HarvestFull"));
-    // Lua 5.1 API headers; PUC Lua 5.1.5 replaces LuaJIT when it is vendored.
-    module.addIncludePath(b.path("../third_party/luajit-2.0.0-beta8/include"));
+    module.addIncludePath(b.path("src"));
     module.addCSourceFiles(.{ .root = b.path("../src"), .files = units, .flags = &cxx_flags });
+    module.addCSourceFiles(.{ .root = b.path("src"), .files = port_sources, .flags = &cxx_flags });
+    for (libs.all()) |lib| module.linkLibrary(lib);
     return module;
+}
+
+fn cModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Module {
+    return b.createModule(.{
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        // Third-party C keeps its own (well-defined in practice) undefined behaviour; UBSan stays
+        // on for the game code.
+        .sanitize_c = .off,
+    });
+}
+
+fn buildZlib(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    const dep = b.dependency("zlib", .{});
+    const module = cModule(b, target, optimize);
+    module.addCSourceFiles(.{ .root = dep.path(""), .files = &zlib_sources, .flags = &.{"-std=c11"} });
+    const lib = b.addLibrary(.{ .name = "z", .root_module = module });
+    lib.installHeader(dep.path("zlib.h"), "zlib.h");
+    lib.installHeader(dep.path("zconf.h"), "zconf.h");
+    return lib;
+}
+
+fn buildLua(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    const dep = b.dependency("lua", .{});
+    const module = cModule(b, target, optimize);
+    // POSIX extras (mkstemp, popen, isatty) everywhere but Windows; no dynamic C modules.
+    if (target.result.os.tag != .windows) module.addCMacro("LUA_USE_POSIX", "1");
+    module.addCSourceFiles(.{ .root = dep.path("src"), .files = &lua_sources, .flags = &.{"-std=gnu99"} });
+    const lib = b.addLibrary(.{ .name = "lua", .root_module = module });
+    for (lua_headers) |header| lib.installHeader(dep.path(header), std.fs.path.basename(header));
+    return lib;
+}
+
+fn buildStbImage(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    const dep = b.dependency("stb", .{});
+    const module = cModule(b, target, optimize);
+    module.addIncludePath(dep.path(""));
+    module.addCSourceFile(.{ .file = b.path("src/thirdparty/stb_image.c"), .flags = &.{"-std=c99"} });
+    const lib = b.addLibrary(.{ .name = "stb_image", .root_module = module });
+    lib.installHeader(dep.path("stb_image.h"), "stb_image.h");
+    return lib;
+}
+
+fn buildMiniaudio(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    const dep = b.dependency("miniaudio", .{});
+    const module = cModule(b, target, optimize);
+    module.addIncludePath(dep.path(""));
+    module.addCSourceFile(.{ .file = b.path("src/thirdparty/miniaudio.c"), .flags = &.{"-std=c99"} });
+    // miniaudio loads the platform audio libraries at run time; on Linux that needs libdl.
+    if (target.result.os.tag == .linux) {
+        module.linkSystemLibrary("dl", .{});
+        module.linkSystemLibrary("pthread", .{});
+        module.linkSystemLibrary("m", .{});
+    }
+    const lib = b.addLibrary(.{ .name = "miniaudio", .root_module = module });
+    lib.installHeader(dep.path("miniaudio.h"), "miniaudio.h");
+    return lib;
 }
 
 /// The units listed in units.toml (`["path.cpp"]` table headers) minus the replaced ones.
@@ -99,4 +226,35 @@ fn isReplaced(unit: []const u8) bool {
         if (std.mem.startsWith(u8, unit, prefix)) return true;
     }
     return false;
+}
+
+/// Every .cpp file under src/ (paths relative to it), except the entry point.
+fn portSources(b: *std.Build) []const []const u8 {
+    const io = b.graph.io;
+    const root = b.root.join(b.allocator, "src") catch @panic("OOM");
+    var dir = root.root_dir.handle.openDir(io, root.sub_path, .{ .iterate = true }) catch |err|
+        std.debug.panic("cannot open src: {t}", .{err});
+    defer dir.close(io);
+    b.dependOnDirectoryContents(b.path("src"));
+
+    var sources: std.ArrayList([]const u8) = .empty;
+    var walker = dir.walk(b.allocator) catch @panic("OOM");
+    defer walker.deinit();
+    while (walker.next(io) catch |err| std.debug.panic("cannot list src: {t}", .{err})) |entry| {
+        const path = b.dupe(entry.path);
+        switch (entry.kind) {
+            // Reconfigure when files are added to or removed from any directory.
+            .directory => b.dependOnDirectoryContents(b.path(b.pathJoin(&.{ "src", path }))),
+            .file => if (std.mem.endsWith(u8, path, ".cpp") and !std.mem.eql(u8, path, "main.cpp"))
+                sources.append(b.allocator, path) catch @panic("OOM"),
+            else => {},
+        }
+    }
+    // Directory order is unspecified; sort so the configuration is stable.
+    std.mem.sort([]const u8, sources.items, {}, lessThan);
+    return sources.items;
+}
+
+fn lessThan(_: void, a: []const u8, b: []const u8) bool {
+    return std.mem.lessThan(u8, a, b);
 }

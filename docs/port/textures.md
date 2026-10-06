@@ -102,6 +102,12 @@ the system libjpeg (`jpeg_CreateDecompress` with version 62, i.e. libjpeg 6b):
 The shipped TGAs are all 32-bit, uncompressed, origin bottom-left (descriptor `0x08`): the six
 1024 × 512 planet maps in `gfx/shaders/` and the 32 × 32 mod icons (`favicon.tga`).
 
+**In the port** ([`port/src/video/ImageLoaderStb.cpp`](../../port/src/video/ImageLoaderStb.cpp)) both
+loaders decode with stb_image and keep the rules above: the name and content tests, R8G8B8 JPEGs, TGA
+types 2 and 10 at 16/24/32 bits only, and the always-bottom-up orientation (a top-left-origin file
+is flipped back to how the original shows it). Grayscale JPEGs decode correctly, and 16-bit TGAs
+load opaque. The BMP, PSD and PCX loaders accept nothing.
+
 ## Colour formats
 
 daisy keeps Irrlicht's `ECOLOR_FORMAT` numbers for the 16-bit and 24-bit formats, but stores

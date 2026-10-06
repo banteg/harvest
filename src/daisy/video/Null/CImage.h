@@ -1,6 +1,9 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// Partial: only the constructor that allocates an empty image is declared; the members are not
-// recovered, the tail keeps the Linux object size.
+// Irrlicht 0.7's CImage (third_party/irrlicht-0.7/source/Irrlicht/CImage.h). Partial: the copy,
+// drawing and scaling methods are not declared. The members are Irrlicht's, at the offsets the
+// Linux accessors read (Data 0x18, Size 0x20, BitsPerPixel 0x28, BytesPerPixel 0x2c, Format 0x30,
+// masks 0x34..0x40; 0x48 bytes). Only the port declares them: in the matching build they change
+// CVideoNull's code, so it keeps the sized placeholder.
 
 #ifndef DAISY_VIDEO_NULL_CIMAGE_H
 #define DAISY_VIDEO_NULL_CIMAGE_H
@@ -36,7 +39,25 @@ public:
     virtual unsigned int getAlphaMask();
 
 private:
+#ifdef HARVEST_PORT
+    //! Sets the bits and bytes per pixel and allocates Data unless it is already set.
+    void initData();
+    //! Sets the channel masks for Format and returns its bits per pixel (0 if unknown).
+    int getBitsPerPixelFromFormat();
+
+    void* Data;
+    ox::core::CDimension2d<int> Size;
+    int BitsPerPixel;
+    int BytesPerPixel;
+    ox::video::ECOLOR_FORMAT Format;
+
+    unsigned int RedMask;
+    unsigned int GreenMask;
+    unsigned int BlueMask;
+    unsigned int AlphaMask;
+#else
     char Unrecovered[0x48 - sizeof(ox::video::IImage)];
+#endif
 };
 
 } // end namespace video

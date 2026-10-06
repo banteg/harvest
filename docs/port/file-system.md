@@ -54,6 +54,12 @@ directory, builds the list and changes back.
   trailing `/`, which is also what marks them as directories. Modes: 0 lists everything, 1 files only,
   2 directories only. A full name is the unresolved directory, a `/` unless it already ends in one,
   and the name.
+- **The port** replaces glob with its own (`port/src/platform/glob.cpp`, through `#ifdef HARVEST_PORT`
+  in `CFileList.cpp`), since Windows has none: the same shell-style, case-sensitive match with the
+  leading-dot rule, `/` after directory names (symbolic links followed), and **byte order** (`strcmp`)
+  instead of `strcoll`. The original's order follows the user's locale (`CLinuxOperator`'s
+  constructor calls `gtk_init`, which calls `setlocale(LC_ALL, "")`; under `en_US.UTF-8` case is
+  mostly ignored); the port's is the "C" locale's, the same everywhere. Patterns containing `/` are not supported (the game passes none).
 - **In an archive** (`CZipFileList`): see [zip-archives.md](zip-archives.md). The mode is ignored.
 - If the directory can be entered neither on disk nor as an archive, the current working directory
   is listed instead. On a fresh install `$HARVEST_USERDATA$/mods/` does not exist, so the scan for
@@ -68,6 +74,7 @@ follows these sort orders.
 - `zipDeflateData` and `zipInflateData` make a zlib stream with header (`deflateInit` at the default
   level, plain `inflateInit`) in a single call; the written size is `total_out`. The first buffer
   argument is the output. Save games use them (see [save-games.md](save-games.md)).
-- `createDirectory` is `mkdir(resolved, 0755)`; `deleteFile` is `remove(resolved)`.
+- `createDirectory` is `mkdir(resolved, 0755)` (the port's Windows build calls `mkdir(resolved)`);
+  `deleteFile` is `remove(resolved)`.
 - `readFileIntoMemory` reads the whole file into a `CMemoryReadFile` named after the unresolved name.
 - Read files open with `"rb"`, write files with `"wb"` or `"ab"`. `getModifiedDate` is `st_mtime`.

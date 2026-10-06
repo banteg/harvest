@@ -107,7 +107,12 @@ CVideoNull::CVideoNull(ox::io::IFileSystem* io, const core::CDimension2d<int>& s
     SurfaceLoader.push_back(createImageLoaderPCX());
 
     memset(&ExposedData, 0, sizeof(ExposedData));
+#ifdef HARVEST_PORT
+    // The port has no Cg runtime: its renderer translates the Cg shaders to GLSL.
+    CgContext = 0;
+#else
     CgContext = cgCreateContext();
+#endif
 }
 
 CVideoNull::~CVideoNull()
@@ -124,7 +129,9 @@ CVideoNull::~CVideoNull()
 
     freePPSurfaces();
     deleteMaterialRenders();
+#ifndef HARVEST_PORT
     cgDestroyContext(CgContext);
+#endif
 }
 
 void CVideoNull::deleteAllTextures()

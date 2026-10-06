@@ -298,7 +298,12 @@ bool CFileSystem::changeWorkingDirectoryTo(const char* directory)
 
 bool CFileSystem::createDirectory(const char* directory)
 {
+#if defined(HARVEST_PORT) && defined(_WIN32)
+    // The Windows C library's mkdir takes no mode.
+    return mkdir(intern_resolveAliases(directory).c_str()) == 0;
+#else
     return mkdir(intern_resolveAliases(directory).c_str(), 0755) == 0;
+#endif
 }
 
 //! Lists filter matches in directory (aliases resolved for the change of directory). The working

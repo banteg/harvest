@@ -19,3 +19,4 @@ __pycache__/
 # zig build outputs of the port
 /port/.zig-cache/
 /port/zig-out/
+/port/zig-pkg/
