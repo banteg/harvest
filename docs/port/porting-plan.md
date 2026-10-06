@@ -39,7 +39,9 @@ underneath it. It targets macOS, Linux, Windows and the web.
 - **UBSan** is on in zig's debug builds and will trap on the original's undefined behaviour (see the
   ledger); fix or exclude those spots.
 - **`wchar_t` is 2 bytes on Windows.** File formats are safe (wide strings are stored as 16-bit
-  units), but wide `printf` formats and conversions need checking there.
+  units). Wide `printf` formats and the multibyte conversions are handled (mingw-w64's C99 `printf`
+  and a UTF-8 locale, see [input-and-window.md](input-and-window.md#paths-and-os-services)) and
+  checked by `port/tests/text.cpp`, which `just smoke-windows` runs under Wine.
 
 ## Milestones
 
