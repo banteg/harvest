@@ -11,7 +11,8 @@ underneath it. It targets macOS, Linux, Windows and the web.
 - **Shared source stays matching.** Every edit to `src/` must leave the GCC 4.4 build byte-identical
   (`just match` is the guard). Port-only code in shared files goes inside `#ifdef HARVEST_PORT`, which
   the matching build never defines; prefer replacing a whole platform unit in `port/` over patching it.
-- **Compiler: `zig c++`** (clang with libc++), driven by `port/build.zig`. Dependencies are pinned in
+- **Compiler: `zig c++`** (clang with libc++) from zig 0.17.0 (`just zig` downloads the pinned build into
+  `build/tools/zig`), driven by `port/build.zig`. Dependencies are pinned in
   `build.zig.zon` and built from source, so every target cross-compiles from one machine.
 - **Libraries:**
   - SDL3 for the window, events, text input, gamepads, clipboard, video modes, paths, directory
