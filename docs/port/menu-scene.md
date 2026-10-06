@@ -77,8 +77,11 @@ per second. Atmospheres are children, so they turn with their planet. Animators 
 
 `setAmbientLight(32, 32, 32)` sets the GL light-model ambient, and `addLightSceneNode(0, (800, 0, 0),
 white, 100)` adds the light, whose radius is then raised to 7500 and diffuse colour set to
-117/255 grey. daisy's light keeps the constructor colour as specular, which Irrlicht 0.7 does not
-(Mac `CLightSceneNode` ctor `0xfe1ea`). `CVideoOpenGL::addDynamicLight` (Mac `0x1571d0`) uses
+117/255 grey. Both colours come from an `SColor` with alpha 0, so their alpha is 0. daisy's light
+keeps the constructor colour as specular, which Irrlicht 0.7 does not (Mac `CLightSceneNode` ctor
+`0xfe1ea`). The rest of the light is Irrlicht's `SLight` default: ambient (0, 0, 0, 1), shadows on,
+and daisy's `Directional` flag off. Each frame the light's `render` sets its position to its
+absolute position and calls `addDynamicLight`, after `drawAll` has called `deleteAllDynamicLights`. `CVideoOpenGL::addDynamicLight` (Mac `0x1571d0`) uses
 constant attenuation 0, linear 1/radius and quadratic 0.
 
 The light has no visible effect in this scene. The Cg materials do not read fixed-function
@@ -103,7 +106,13 @@ The loader is Irrlicht 0.7's, unchanged:
 - **Lines.** It walks the file word by word. `v x y z`, `vt u v` and `vn x y z` fill three arrays.
   `f` lines are read to the end of the line. Lines starting with `#`, `u` (`usemtl`) or `g` are
   skipped. Anything else (`s 1`, `o`, `mtllib`) is ignored word by word. CRLF line ends are
-  harmless.
+  harmless. The file is read into a buffer of exactly its size with no terminating zero (Mac:
+  `operator new[](size)`), so the walk runs on into whatever heap bytes follow until it meets a
+  zero; with the shipped files that only adds ignored words. The port zero-terminates.
+- **Numbers** go through Irrlicht's `fast_atof` (Mac uses its `fast_atof_table`): the integer
+  part and the fraction digits are each read with `strtol` and the fraction is scaled by a table
+  of powers of ten, all in float. The results can differ from `strtod` in the last bit, so a port
+  that wants identical vertices uses the same routine (the port's loader does).
 - **Faces.** Each corner is `v`, `v/vt` or `v/vt/vn`, with 1-based indices. Negative (relative)
   indices are not supported, and an index that is out of range or missing gives a zero position,
   UV or normal. More than 39 corners rejects the whole file. Every corner becomes its own vertex:
@@ -175,22 +184,52 @@ shader, and a port must reproduce it: cull front faces for the atmosphere, not b
 
 ### Draw order
 
-`CSceneManager::drawAll` (Linux `0x4c3000`, Mac `0x1126e0`) is Irrlicht 0.7's:
+`CSceneManager::drawAll` (Linux `0x4c3000`, Mac `0x1126e0`) is Irrlicht 0.7's, with `std::vector`
+render lists sorted by `std::sort`:
 
-1. Nodes register in `OnPreRender`: camera and light at time 0, skybox at 1, the rest at 2.
-2. The camera's `render` sets the view matrix, and the light is added.
+1. It stores the active camera's absolute position, then calls `OnPreRender` on the root. Nodes
+   register in tree order (children right after their parent): camera and light at time 0
+   (`SNRT_LIGHT_AND_CAMERA`), skybox at 1 (`SNRT_SKY_BOX`), the rest at 2 (`SNRT_DEFAULT`); 3 is
+   `SNRT_SHADOW`. The camera uploads the projection here (see [Camera](#camera)).
+2. `deleteAllDynamicLights`, then the camera's `render` sets the view matrix and the light's
+   `render` adds the light.
 3. The skybox is drawn.
-4. Opaque nodes are sorted (Irrlicht sorts by texture) and drawn.
+4. Opaque nodes are sorted by the first texture of their first material (the pointer value,
+   unsigned) and drawn. The order between planets is therefore arbitrary, which only matters
+   for equal depths.
 5. Shadow volumes would be drawn here; there are none.
-6. Transparent nodes are drawn: any node whose material renderer reports `isTransparent()`. They
-   are sorted by distance from the camera to the node's absolute position. Irrlicht 0.7 sorts
-   nearest first; daisy's comparison was not re-checked.
-7. Animators run (`OnPostRender`).
+6. Transparent nodes are drawn: any node with a material whose renderer reports
+   `isTransparent()`. They are sorted by the distance from the stored camera position to the
+   translation of the node's absolute transformation, computed in double and stored as float,
+   **nearest first** (daisy's `operator<` compares the distances, Mac `__insertion_sort` at
+   `0x114224`).
+7. `OnPostRender(os::Timer::getTime())` runs the animators, then the deletion queue is emptied.
 
-Registration at time 2 also drops nodes whose transformed bounding box is outside the view frustum
-(`isCulled`). Planets are opaque. Atmospheres (base material `EMT_TRANSPARENT_ADD_COLOR`) and the
-sun are transparent. `CMainMenuState::render` clears to black, calls `drawAll`, then draws the logo
-sprite (neutral mode only), the GUI and the fade rectangle.
+Registration at time 2 also drops nodes whose transformed bounding box misses the view frustum's
+axis-aligned bounding box (`isCulled`, Mac `0x1122ee`; only nodes with automatic culling on, so
+never the sun). Planets are opaque. Atmospheres (base material `EMT_TRANSPARENT_ADD_COLOR`) and
+the sun are transparent. `CMainMenuState::render` clears to black, calls `drawAll`, then draws the
+logo sprite (neutral mode only), the GUI and the fade rectangle.
+
+**Transform updates.** daisy moved the absolute-transformation update: `ISceneNode::OnPreRender`
+(Mac `0x1136dc`) updates a visible node's absolute transformation before recursing into its
+children, the camera's `OnPreRender` updates its own first, and `CAnimatedMeshSceneNode::OnPostRender`
+(Mac `0xf59ea`) runs the animators and the children without updating it (Irrlicht 0.7 updates in
+`OnPostRender` only). A node registers before its own update, so culling and the transparent
+distance use the node's transformation from the previous frame (rotation included), the camera
+position from the previous frame and, for nodes ahead of the camera in the tree (all the menu's
+planets and atmospheres), the frustum from the previous frame; what is drawn uses this frame's. In the first `drawAll` after `secondInit` the planets still have the transformation
+of their constructor (at the origin, since `setPosition` came after) and the camera's frustum is
+the default one, whose box is (−1, −1, −1)–(1, 1, 1). The planets' boxes at the origin intersect
+it, so nothing is culled in that frame, and all transparent distances but the sun's are 0.
+
+Per frame, the driver therefore sees: `setTransform(PROJECTION)`, `deleteAllDynamicLights`,
+`setTransform(VIEW)`, `addDynamicLight`; the skybox's `setTransform(WORLD)` and six
+`setMaterial` + `drawIndexedTriangleList` (4 vertices, 2 triangles); per opaque node
+`setTransform(WORLD, absolute)`, `setMaterial` and `drawMeshBuffer`; the same for the
+atmospheres; and the sun's `setTransform(WORLD, identity)`, `setMaterial` and
+`drawIndexedTriangleList` with world-space vertices. `port/tests/menu_scene.cpp` prints this
+sequence with all matrices, materials and shader constants.
 
 ## Skybox
 
@@ -204,9 +243,13 @@ sprite (neutral mode only), the GUI and the fade rectangle.
 - Material: lighting off, z-buffer off, z-write off, back-face culling on, front face `GL_CW`, and
   the remaining flags at daisy's `SMaterial` defaults.
 - The bounding box is (−1, −1, −1)–(1, 1, 1), not empty.
-- Texture coordinates use `o = 1 / (1.5 × W)` and `t = 1 − o`, where W is the width of the first
-  non-null texture of front, left, back, right, top and bottom. For the shipped 1024² JPEGs,
-  o = 1/1536. The half-pixel inset hides seams with clamping off.
+- Texture coordinates use `o = 1 / (1.5 × W)` and `t = 1 − o`, where W is `getSize().Width` (the
+  texture's size, not the image's) of the first non-null texture of front, left, back, right,
+  top and bottom; without any texture o = 0. For the shipped 1024² JPEGs, o = 1/1536. The
+  half-pixel inset hides seams with clamping off.
+- Normals point into the cube: front (0, 0, 1), left (−1, 0, 0), back (0, 0, −1), right
+  (1, 0, 0), top (0, −1, 0), bottom (0, 1, 0). Vertex colours are white. The six materials are
+  `getMaterial(0..5)` in the order front, left, back, right, top, bottom, one draw each.
 
 | Face | Texture | Corners (x, y, z) | daisy UVs | Irrlicht 0.7 UVs |
 |---|---|---|---|---|
@@ -251,8 +294,11 @@ The constructor (Linux `0x554980`, Mac `0xfb9ca`) is Irrlicht 0.7's:
   aspect is not updated on resize.
 - `recalculateProjectionMatrix` (Linux `0x5519a0`, called by `setFOV`, `setAspectRatio`,
   `setNearValue` and `setFarValue`) builds Irrlicht 0.7's `buildProjectionMatrixPerspectiveFovLH`.
-  With h = cot(fov/2) and w = h / aspect, in Irrlicht's (row, column) indexing:
-  `M(0,0) = 2n/w`, `M(1,1) = 2n/h`, `M(2,2) = f/(f−n)`, `M(2,3) = 1`, `M(3,2) = n·f/(n−f)`.
+  With h = cot(fov/2) and w = h / aspect, as indices into the 16 floats `M[]` of `CMatrix4`:
+  `M[0] = 2n/w`, `M[5] = 2n/h`, `M[10] = f/(f−n)`, `M[11] = 1`, `M[14] = n·f/(n−f)`, and 0
+  elsewhere (`M[15]` too). In Irrlicht's `operator()(row, col)`, which reads `M[col·4 + row]`,
+  the last two are `(3,2)` and `(2,3)`. At 1024 × 768 the default camera's matrix is
+  `M[0] = 1.0898137`, `M[5] = 1.4530849`, `M[10] = 1.0003334`, `M[14] = −1.0003334`.
   This is not a standard perspective matrix. The y scale is 2n·tan(fov/2), where a standard matrix
   has cot(fov/2), and the x scale is the y scale times height/width. With n = 1 the effective
   vertical field of view is `2·atan(1 / (2·tan(fov/2)))`:
@@ -265,9 +311,16 @@ The constructor (Linux `0x554980`, Mac `0xfb9ca`) is Irrlicht 0.7's:
 
   A larger FOV value therefore zooms in. A port should either reproduce this matrix or convert
   each FOV value with the formula above.
-- Each frame `OnPreRender` (Mac `0xfc162`) uploads the projection, builds the view with
-  `buildCameraLookAtMatrixLH(absolutePosition, target, up)`, and adds 1 to `up.X` if the view
-  direction is within 1e-4 of parallel to the up vector. `render` sets the view transform.
+- Each frame `OnPreRender` (Mac `0xfc162`) first updates the camera's absolute transformation
+  (daisy; Irrlicht 0.7 does not), so the position the game set during `updateState` is used in
+  the same frame. If the camera is the active one, it builds the view with
+  `buildCameraLookAtMatrixLH(absolutePosition, target, up)`, adding 1 to `up.X` of the normalised
+  up vector if the view direction is within 1e-4 of parallel to it, rebuilds the view frustum
+  from projection × view, then uploads the projection (Irrlicht 0.7 uploads it before building
+  the view) and registers for rendering. `render` sets the view transform.
+- The view frustum is Irrlicht 0.7's `SViewFrustrum`: six planes taken from projection × view,
+  the camera position, and the axis-aligned box around the camera position and the four far
+  corners. Culling and picking only use that box and the far corners.
 
 ### Animation
 
@@ -457,3 +510,22 @@ id, which is returned, or −1 on failure.
 - Blending and depth come from the base materials. For the atmosphere: blend
   `ONE, ONE_MINUS_SRC_COLOR`, depth test on, depth write off, cull front faces (flag 6), drawn after
   opaque geometry. For the ground: opaque, depth test and write on, cull back faces.
+
+## The port's scene manager
+
+`port/src/scene/` implements `daisy::scene::createSceneManager` with the subset above, adapted from
+the Irrlicht 0.7 sources with daisy's changes: the scene manager and root node, `ISceneNode`'s
+bodies (declared under `HARVEST_PORT` in [`ISceneNode.h`](../../src/ox/scene/ISceneNode.h)), the
+animated mesh, camera, light, billboard and skybox nodes, the rotation animator, bounding-box
+picking and projection, and the OBJ loader. Every other `ISceneManager` function returns null or
+does nothing. Rendering goes through `IVideoDriver` only.
+
+`port/tests/menu_scene.cpp` builds the scene as `secondInit` does on a recording null driver and
+prints the meshes, every driver call of three `drawAll` frames (with the constants
+`CScatterShader` sets for each draw), the picking and projection results and the teardown:
+
+    cd port && zig build test-menu_scene -- <directory with harvestClientData> [shader level] [width height]
+
+The planets' rotation animators run on the wall clock, so the test sets the planet rotations
+before each frame. The opaque draw order follows texture addresses and can differ between runs
+on other platforms.

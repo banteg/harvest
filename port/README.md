@@ -17,6 +17,7 @@ network access to fetch the dependencies (github.com, www.lua.org). From this di
     zig build census               # links every kept unit with the original's plain loop
     zig build tests                # the test programs in tests/, without running them
     zig build test-audio -- ../orig/1.18-linux-amd64/harvestClientData/sfx/ [--wav out.wav] [--play]
+    zig build test-menu_scene -- ../orig/1.18-linux-amd64 [shader level] [width height]
 
 `harvest` and `census` link every kept unit and port source, so they fail until the platform seams
 exist: their linker errors are the census. For the grouped report with callers, from the repository

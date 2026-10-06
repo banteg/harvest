@@ -83,6 +83,7 @@ The `replaced` list in `build.zig`:
 | `video/CSoftwareTexture.cpp` | `daisy::video::CSoftwareTexture` | empty: the renderer overrides `createDeviceDependentTexture` |
 | `video/ImageLoaderStb.cpp` | `createImageLoaderJPG`, `createImageLoaderTGA` | stb_image with the original's rules ([textures.md](textures.md)) |
 | `video/ImageLoaderStubs.cpp` | `createImageLoaderBmp`, `createImageLoaderPSD`, `createImageLoaderPCX` | loaders that accept nothing (they must not be null: `CVideoNull` calls and drops every loader) |
+| `scene/` | `daisy::scene::createSceneManager`, the bodies of `ox::scene::ISceneNode` | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, light, billboard and skybox nodes, rotation animator, bounding-box picking, OBJ loader; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
 | `thirdparty/stb_image.c`, `thirdparty/miniaudio.c` | the libraries' implementations | stb_image: JPEG, TGA, PNG, from memory only; miniaudio with stb_vorbis |
 
 ## Source changes for the port
@@ -98,6 +99,9 @@ every one of the 135 objects byte-identical (`sha256`) before and after.
 | [`daisy/io/CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp) | `createDirectory` calls `mkdir(path)` on Windows | the Windows C library's `mkdir` takes no mode |
 | [`daisy/video/Null/CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp) | no `cgCreateContext`/`cgDestroyContext`; `CgContext` stays 0 | no Cg runtime in the port |
 | [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | Irrlicht's members instead of the sized placeholder | the port implements `CImage`. Declaring them for GCC changes `CVideoNull`'s code (one function stops matching), so the matching build keeps the placeholder |
+| [`ox/scene/ISceneNode.h`](../../src/ox/scene/ISceneNode.h) | Irrlicht 0.7's members (in the Mac constructor's order) instead of the sized placeholder, the constructor and destructor, `getTransformedBoundingBox`, `getChildren`, `setAutomaticCulling` (port only) | the port implements the scene graph (`port/src/scene/`) |
+| [`ox/scene/ICameraSceneNode.h`](../../src/ox/scene/ICameraSceneNode.h), [`IAnimatedMeshSceneNode.h`](../../src/ox/scene/IAnimatedMeshSceneNode.h), [`ILightSceneNode.h`](../../src/ox/scene/ILightSceneNode.h), [`IBillboardSceneNode.h`](../../src/ox/scene/IBillboardSceneNode.h) | Irrlicht 0.7's constructors forwarding to `ISceneNode` (port only) | the port's nodes derive from these interfaces |
+| [`ox/scene/ISceneManager.h`](../../src/ox/scene/ISceneManager.h) | the `E_SCENE_NODE_RENDER_TIME` enumerators (both builds) | recovered from the Mac `registerNodeForRendering`; the matching build is unchanged by them |
 | [`daisy/gui/CGUIEnvironment.cpp`](../../src/daisy/gui/CGUIEnvironment.cpp) | includes `ox/gui/IGUIStaticTextInline.h` (port only) | `IGUIStaticText::breakText` is defined only in that header and the original emits it in this object (`0x500ca0`). Including it in the matching build too takes the unit from 95/145 to 116/155 exact functions (the constructors, `loadBuidInFont`, `addWindow`, `addMessageBox` and more line up) but `std::__insertion_sort<SFont>` stops matching (`r11d` instead of `r12d` in one load), at every include position tried, so it stays port-only for now |
 
 ## Compiler diagnostics worth knowing
@@ -120,7 +124,7 @@ Three symbols are unresolved, the same on every target. They are the seams the n
 | Symbol | Caller | Port |
 |---|---|---|
 | `extern "C" ox::IOxDevice* createDevice(ox::video::E_DRIVER_TYPE, ox::event::IEventReceiver*, const wchar_t*)` (declared in `ox/IOxDevice.h`) | `CHarvestFullMain::init` (`EDT_OPENGL`, no receiver, `L"0.7"`) | the SDL3 device: a `daisy::CIrrDeviceStub` subclass that creates the video driver, cursor control, OS operator and video mode list, and implements `createAudioDriver`/`createJoystickDriver` |
-| `ox::scene::ISceneManager* daisy::scene::createSceneManager(ox::video::IVideoDriver*, ox::io::IFileSystem*, ox::gui::ICursorControl*)` | `CIrrDeviceStub::createGUIAndScene` | the menu scene subset, per [menu-scene.md](menu-scene.md) |
+| `ox::scene::ISceneManager* daisy::scene::createSceneManager(ox::video::IVideoDriver*, ox::io::IFileSystem*, ox::gui::ICursorControl*)` | `CIrrDeviceStub::createGUIAndScene` | **implemented** in `port/src/scene/` (the menu scene subset, per [menu-scene.md](menu-scene.md)) |
 | `daisy::net::CWinsockNetworkDevice::CWinsockNetworkDevice(bool, const char*)` | `CIrrDeviceStub::createNetworkDevice` | a network device whose connects fail. The class is declared inside `CIrrDeviceStub.cpp` (with a placeholder sized `0xc0`); the implementation must use that exact declaration (move it to a header under `#ifdef HARVEST_PORT`, or define the members against it) so the size `new` allocates and the vtable agree |
 
 Seams that are not link symbols (the device creates them and hands them out through virtuals):

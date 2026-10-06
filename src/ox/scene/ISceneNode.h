@@ -2,7 +2,9 @@
 // Adapted from Irrlicht 0.7 include/ISceneNode.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::scene namespace; not the original source. Partial: the virtual order
 // follows the Mac 1.18 vtables of the daisy::scene nodes, and only the members up to the culling
-// flag's Linux amd64 offset (0xd0) are laid out; the inline virtual bodies are not recovered.
+// flag's Linux amd64 offset (0xd0) are laid out; the inline virtual bodies are not recovered. The
+// port (HARVEST_PORT) declares Irrlicht 0.7's members in that space, in the order the Mac build's
+// ISceneNode constructor (0x112f5e) stores them.
 
 #ifndef OX_SCENE_ISCENENODE_H
 #define OX_SCENE_ISCENENODE_H
@@ -12,6 +14,9 @@
 #include "../core/CString.h"
 #include "../core/CVector3d.h"
 #include "../video/SMaterial.h"
+#ifdef HARVEST_PORT
+#include "../TList.h"
+#endif
 
 namespace ox {
 namespace core {
@@ -21,11 +26,36 @@ namespace scene {
 
 class ISceneNodeAnimator;
 class ITriangleSelector;
+#ifdef HARVEST_PORT
+class ISceneManager;
+#endif
 
 //! A node of the scene graph.
 class ISceneNode : public IUnknown
 {
 public:
+#ifdef HARVEST_PORT
+    // The port's scene manager (port/src/scene/) defines these and the virtuals below, after
+    // Irrlicht 0.7's inline ISceneNode and the Mac 1.18 build's copies of it.
+    ISceneNode(ISceneNode* parent, ISceneManager* mgr, int id = -1,
+        const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0),
+        const core::CVector3d<float>& rotation = core::CVector3d<float>(0, 0, 0),
+        const core::CVector3d<float>& scale = core::CVector3d<float>(1.0f, 1.0f, 1.0f));
+    virtual ~ISceneNode();
+
+    //! The bounding box transformed by the absolute transformation, re-boxed.
+    core::CAabbox3d<float> getTransformedBoundingBox();
+
+    const TList<ISceneNode*>& getChildren() const
+    {
+        return Children;
+    }
+
+    void setAutomaticCulling(bool enabled)
+    {
+        AutomaticCullingEnabled = enabled;
+    }
+#endif
     virtual void OnPreRender();
     virtual void OnPostRender(unsigned int timeMs);
     virtual void render() = 0;
@@ -88,9 +118,22 @@ public:
 protected:
     core::CString<wchar_t> Name;
     core::CMatrix4 AbsoluteTransformation;
+#ifdef HARVEST_PORT
+    core::CVector3d<float> RelativeTranslation;
+    //! In degrees.
+    core::CVector3d<float> RelativeRotation;
+    core::CVector3d<float> RelativeScale;
+    ISceneNode* Parent;
+    TList<ISceneNode*> Children;
+    TList<ISceneNodeAnimator*> Animators;
+    int ID;
+    ISceneManager* SceneManager;
+    ITriangleSelector* TriangleSelector;
+#else
     // Not recovered yet: the relative transformation, parent, children, animators, id, scene manager
     // and triangle selector.
     char Unrecovered[0xd0 - sizeof(IUnknown) - sizeof(core::CString<wchar_t>) - sizeof(core::CMatrix4)];
+#endif
     bool AutomaticCullingEnabled;
     bool DebugDataVisible;
     bool IsVisible;

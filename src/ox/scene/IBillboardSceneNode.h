@@ -15,6 +15,14 @@ namespace scene {
 class IBillboardSceneNode : public ISceneNode
 {
 public:
+#ifdef HARVEST_PORT
+    IBillboardSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
+        const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0))
+        : ISceneNode(parent, mgr, id, position)
+    {
+    }
+
+#endif
     virtual void setSize(const core::CDimension2d<float>& size) = 0;
     virtual const core::CDimension2d<float>& getSize() = 0;
 };
