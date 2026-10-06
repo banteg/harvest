@@ -15,10 +15,15 @@ namespace port {
 //! - move <x> <y>: the pointer moves there (a motion event; the system pointer stays put)
 //! - click <x> <y>: left button pressed and released there
 //! - wheel <x> <y> [flipped]: SDL's precise wheel amounts at the pointer, as a trackpad sends them
+//! - text <words>: a text input event with the words joined by single spaces
 //! - key <name>: a key pressed and released; SDL key names, "ctrl+" for Control (Command on macOS)
 //! - size <w> <h>: SDL_SetWindowSize
 //! - display <n>: the window moves to the middle of the n-th display
 //! - fullscreen on|off: SDL_SetWindowFullscreen
+//! - clock <rate>|real: the game clock advances 1/rate seconds per frame from now on, so the script
+//!   plays the same at any frame rate; "real" returns to the monotonic clock
+//! - screenshot <name>: the next frame drawn (after the events of the same frame's commands) as
+//!   $HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg (saveJpegScreenshot, as Ctrl+T calls it)
 //! - quit: a quit request
 class CInputScript
 {
@@ -37,6 +42,8 @@ private:
         unsigned int Frame;
         std::string Name;
         std::vector<std::string> Arguments;
+        //! The arguments joined by single spaces (text's string).
+        std::string Text;
     };
 
     void run(const SCommand& command, SDL_Window* window);

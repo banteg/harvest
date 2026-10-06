@@ -1,5 +1,9 @@
 #include "device/InputScript.h"
 
+#include "device/CIrrDeviceSDL.h"
+#include "device/CSDLTimer.h"
+#include "ox/video/IVideoDriver.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -59,7 +63,10 @@ bool CInputScript::load(const char* path)
         command.Frame = (unsigned int)SDL_atoi(frame);
         command.Name = name;
         for (char* word = SDL_strtok_r(0, " \t\r", &wordSave); word; word = SDL_strtok_r(0, " \t\r", &wordSave))
+        {
+            command.Text += (command.Arguments.empty() ? "" : " ") + std::string(word);
             command.Arguments.push_back(word);
+        }
         Commands.push_back(command);
     }
 
@@ -126,6 +133,12 @@ void CInputScript::run(const SCommand& command, SDL_Window* window)
         event.key.down = false;
         push(event, window, SDL_EVENT_KEY_UP);
     }
+    else if (command.Name == "text" && !args.empty())
+    {
+        // the script keeps the string for as long as SDL needs it
+        event.text.text = command.Text.c_str();
+        push(event, window, SDL_EVENT_TEXT_INPUT);
+    }
     else if (command.Name == "size" && args.size() == 2)
         SDL_SetWindowSize(window, SDL_atoi(args[0].c_str()), SDL_atoi(args[1].c_str()));
     else if (command.Name == "display" && args.size() == 1)
@@ -147,6 +160,18 @@ void CInputScript::run(const SCommand& command, SDL_Window* window)
     }
     else if (command.Name == "fullscreen" && args.size() == 1)
         SDL_SetWindowFullscreen(window, args[0] == "on");
+    else if (command.Name == "clock" && args.size() == 1)
+    {
+        // "clock 60": a fixed 60 steps per game second; "clock real": the monotonic clock again
+        double rate = args[0] == "real" ? 0.0 : SDL_atof(args[0].c_str());
+        static_cast<CSDLTimer*>(CIrrDeviceSDL::getInstance()->getTimer())->setFixedStep(rate > 0 ? 1.0 / rate : 0.0);
+    }
+    else if (command.Name == "screenshot" && args.size() == 1)
+    {
+        // the game's own Ctrl+T path, named: <name>-<yymmdd>-NN.jpg in the screenshots folder
+        ox::video::IVideoDriver* driver = CIrrDeviceSDL::getInstance()->getVideoDriver();
+        driver->saveJpegScreenshot("$HARVEST_USERDATA$/screenshots/", (args[0] + "-").c_str());
+    }
     else if (command.Name == "quit")
         push(event, window, SDL_EVENT_QUIT);
     else

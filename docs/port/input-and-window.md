@@ -286,9 +286,12 @@ macOS):
 | `click <x> <y>` | left button down and up |
 | `wheel <x> <y> [flipped]` | a wheel event with SDL's precise amounts, at the last position |
 | `key <name>` | key down and up; SDL key names, `ctrl+` for Control (`key ctrl+t` takes a screenshot) |
+| `text <words>` | a text input event with the words joined by single spaces (typing into an edit box) |
 | `size <w> <h>` | `SDL_SetWindowSize` |
 | `display <n>` | moves the window to the middle of the n-th display (`SDL_GetDisplays`) |
 | `fullscreen on\|off` | `SDL_SetWindowFullscreen` |
+| `clock <rate>\|real` | none: from then on each frame advances the game clock (`getFloatTime`) by 1/rate seconds, so the script plays the same at any frame rate (a software renderer, an emulated CPU); `real` goes back to the monotonic clock |
+| `screenshot <name>` | none: the next frame drawn, after the events of the commands of the same frame, is saved as `$HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg`, as Ctrl+T saves it |
 | `quit` | a quit request |
 
 ### Network
