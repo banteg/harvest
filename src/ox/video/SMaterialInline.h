@@ -22,9 +22,9 @@ inline bool SMaterial::operator!=(const SMaterial& other) const
     for (int i = 0; i < MATERIAL_MAX_TEXTURES; ++i)
         sameTextures &= Textures[i] == other.Textures[i];
 
-    return MaterialType != other.MaterialType || colorsDiffer(other.AmbientColor, AmbientColor) ||
-        colorsDiffer(other.DiffuseColor, DiffuseColor) || colorsDiffer(other.EmissiveColor, EmissiveColor) ||
-        colorsDiffer(other.SpecularColor, SpecularColor) || Shininess != other.Shininess ||
+    return MaterialType != other.MaterialType || colorsDiffer(AmbientColor, other.AmbientColor) ||
+        colorsDiffer(DiffuseColor, other.DiffuseColor) || colorsDiffer(EmissiveColor, other.EmissiveColor) ||
+        colorsDiffer(SpecularColor, other.SpecularColor) || Shininess != other.Shininess ||
         Wireframe != other.Wireframe || GouraudShading != other.GouraudShading || Lighting != other.Lighting ||
         ZBuffer != other.ZBuffer || ZWriteEnable != other.ZWriteEnable || BackfaceCulling != other.BackfaceCulling ||
         FrontFaceCCW != other.FrontFaceCCW || BilinearFilter != other.BilinearFilter ||

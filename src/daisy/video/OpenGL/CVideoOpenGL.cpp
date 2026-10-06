@@ -1437,10 +1437,10 @@ void CVideoOpenGL::setMaterial(const ox::video::SMaterial& material)
 void CVideoOpenGL::setBasicRenderStates(const ox::video::SMaterial& material, const ox::video::SMaterial& lastmaterial,
     bool resetAllRenderstates)
 {
-    if (resetAllRenderstates || lastmaterial.AmbientColor.color != material.AmbientColor.color ||
-        lastmaterial.DiffuseColor.color != material.DiffuseColor.color ||
-        lastmaterial.SpecularColor.color != material.SpecularColor.color ||
-        lastmaterial.EmissiveColor.color != material.EmissiveColor.color ||
+    if (resetAllRenderstates || ox::video::colorsDiffer(lastmaterial.AmbientColor, material.AmbientColor) ||
+        ox::video::colorsDiffer(lastmaterial.DiffuseColor, material.DiffuseColor) ||
+        ox::video::colorsDiffer(lastmaterial.SpecularColor, material.SpecularColor) ||
+        ox::video::colorsDiffer(lastmaterial.EmissiveColor, material.EmissiveColor) ||
         lastmaterial.Shininess != material.Shininess)
     {
         GLfloat color[4];
