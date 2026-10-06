@@ -50,6 +50,38 @@ User data goes to `~/.Harvest` on Linux, `~/Library/Application Support/Harvest`
 `%APPDATA%\Harvest` on Windows. The device and its options are described in
 [`docs/port/input-and-window.md`](../docs/port/input-and-window.md#the-ports-device).
 
+## Linux smoke test
+
+`just smoke-linux` ([`smoke/smoke-linux.sh`](smoke/smoke-linux.sh)) cross-builds the debug port and
+its tests for Linux, builds a Debian container ([`smoke/Dockerfile`](smoke/Dockerfile): Xvfb, a
+headless Weston, Mesa's llvmpipe, PulseAudio, PipeWire, ALSA; no game files) and runs the game in it
+against the data mounted read-only. [`smoke/menu.script`](smoke/menu.script), an input script on a
+fixed 60 Hz clock, walks from the intro through a new profile (its name partly pasted with Ctrl+V on
+X11), settings, the creative-mode mod list and a normal game to saving it and loading it again,
+taking a screenshot at each step; then the renderer test draws its scenes in both OpenGL profiles.
+It fails when the game exits badly or reports a UBSan check, when the OpenGL context or audio
+backend is not the one asked for, when `~/.Harvest` has no profile or the paste did not arrive, or
+when a screenshot is missing or blank.
+
+    just smoke-linux                                  # the Docker host's architecture, X11, PulseAudio, ES
+    just smoke-linux --display wayland --audio pipewire --gl core
+    just smoke-linux --arch x86_64                    # under emulation
+    just smoke-linux --matrix                         # X11 and Wayland, every sound path, both profiles, both architectures
+    just smoke-linux --original                       # also: the port on the original build's ~/.Harvest
+
+Each configuration's report, log, screenshots, `~/.Harvest` and renderer-test frames land in
+`build/smoke/linux/<arch>-<display>-<audio>-<gl>/`. `--gl core` makes Mesa refuse OpenGL ES 3.0
+(`MESA_GLES_VERSION_OVERRIDE=2.0`), so the device falls back to OpenGL 3.3 core. Loose mods with
+names that sort differently in byte order and in a locale are put in `~/.Harvest/mods` first, so
+`09-mods.jpg` shows the order.
+
+`--original` also builds an x86-64 image with the original 1.18 Linux build's libraries
+([`smoke/original/Dockerfile`](smoke/original/Dockerfile): NVIDIA Cg from Debian non-free, GTK 2,
+OpenAL) and plays the original from `orig/1.18-linux-amd64` with xdotool on the wall clock: a new
+profile, a normal game, a save (`build/smoke/linux/original/`, with its screenshots). The port then
+runs on that `~/.Harvest` with [`smoke/original.script`](smoke/original.script), picks the profile and
+loads the save (`<configuration>-original/`).
+
 ## What is compiled
 
 - **Kept units:** every unit in [`config/1.18-linux-amd64/units.toml`](../config/1.18-linux-amd64/units.toml)

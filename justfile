@@ -144,6 +144,10 @@ port-test name *args:
     if [ "{{name}}" = audio ]; then path="$path/harvestClientData/sfx/"; fi
     cd port && zig build "test-{{name}}" -- "$path" {{args}}
 
+# cross-build the port for Linux and smoke-test it in a container (port/smoke/smoke-linux.sh --help)
+smoke-linux *args:
+    port/smoke/smoke-linux.sh {{args}}
+
 # show the port's unresolved-symbol census
 census:
     uv run python port/tools/census.py
