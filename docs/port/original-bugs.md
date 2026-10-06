@@ -265,3 +265,6 @@ simply write the intended code.
 - **Image loaders** (see [textures.md](textures.md)): the JPEG loader assumes three components, so a
   grayscale JPEG would decode garbled, and the TGA RLE decoder has no bounds check. No shipped file
   triggers either.
+- **`COxEntity` 2D constructors** ([`COxEntity.cpp`](../../src/ox/entity/COxEntity.cpp)) initialise
+  `Position.Y` from the member being constructed instead of the argument's `Y`. The game only uses the
+  `(x, y, z)` constructor, so the bug is never reached.
