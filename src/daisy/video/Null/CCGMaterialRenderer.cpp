@@ -69,6 +69,23 @@ bool CCGMaterialRenderer::setVariable(bool vertex, const char* name, const float
     return false;
 }
 
+bool CCGMaterialRenderer::checkForError(const char* message)
+{
+    bool error = false;
+
+    for (CGerror e = cgGetError(); e != CG_NO_ERROR; e = cgGetError())
+    {
+        ox::core::CString<char> text(message);
+        text.append(ox::core::CString<char>(": '"));
+        text.append(ox::core::CString<char>(cgGetErrorString(e)));
+        text.append(ox::core::CString<char>("'"));
+        os::Printer::log(text.c_str(), ox::event::ELL_WARNING);
+        error = true;
+    }
+
+    return error;
+}
+
 void CCGMaterialRenderer::printVariables()
 {
     os::Printer::log("Vertex program parameters:", ox::event::ELL_WARNING);
@@ -99,23 +116,6 @@ void CCGMaterialRenderer::printVariables()
         line.append(cgGetParameterColumns(parameter));
         os::Printer::log(line.c_str(), ox::event::ELL_WARNING);
     }
-}
-
-bool CCGMaterialRenderer::checkForError(const char* message)
-{
-    bool error = false;
-
-    for (CGerror e = cgGetError(); e != CG_NO_ERROR; e = cgGetError())
-    {
-        ox::core::CString<char> text(message);
-        text.append(ox::core::CString<char>(": '"));
-        text.append(ox::core::CString<char>(cgGetErrorString(e)));
-        text.append(ox::core::CString<char>("'"));
-        os::Printer::log(text.c_str(), ox::event::ELL_WARNING);
-        error = true;
-    }
-
-    return error;
 }
 
 bool CCGMaterialRenderer::OnRender(ox::video::IMaterialRendererServices* service, ox::video::E_VERTEX_TYPE vtxtype)
