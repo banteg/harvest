@@ -138,8 +138,9 @@ The first four are exclusive: enabling one clears the other three.
   `OPTIMIZED_FOR_QUALITY` before an alpha plane. The flags are global state, so they stay as the
   last caller left them.
 - **Who reads them.** The OpenGL driver's `createDeviceDependentTexture` (Linux `0x4eb630`) reads
-  only `ETCF_CREATE_MIP_MAPS`. Nothing on the OpenGL path was found reading the 16/32-bit and
-  quality/speed flags; their effect, if any, is left to the `CVideoOpenGL` notes.
+  only `ETCF_CREATE_MIP_MAPS`, and the recovered `CVideoNull` confirms nothing else reads the
+  16/32-bit and quality/speed flags, so the main menu's and sprite packages' flag changes have no
+  effect on the textures they create.
 
 ## Textures the game loads by name
 

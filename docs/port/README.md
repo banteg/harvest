@@ -21,7 +21,8 @@ the data formats the game ships.
 | `gfx/*.obj` | the two planet spheres, Irrlicht's OBJ loader | [menu-scene.md](menu-scene.md) |
 | `gfx/shaders/*.vsh`, `*.psh` | Cg atmospheric scattering (Sean O'Neil, GPU Gems 2) | [menu-scene.md](menu-scene.md) |
 
-Paths, aliases and file lists: [file-system.md](file-system.md).
+Paths, aliases and file lists: [file-system.md](file-system.md). Driver caches, screen size and 2D
+coordinates: [renderer.md](renderer.md).
 
 ## The platform layer
 

@@ -137,6 +137,13 @@ Port recommendation:
   `createFileList` and `existFile` by the resolved one, so each mod archive ends up open twice. It
   costs a file handle and memory. A port should key the cache by the resolved path.
 
+- **Driver null checks** ([`CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp)), all on paths
+  the game never takes: `getTexture(IReadFile*)` (`0x4e4940`) dereferences a null file while logging;
+  `setInputTexture` (`0x4e1ad0`) grabs a null texture when there are no post-processing surfaces;
+  `getDynamicLight` (`0x4dfa50`) returns a null reference for an out-of-range index; and
+  `makeColorKeyTexture(pos)` (`0x4e07b0`, inherited from Irrlicht) reads the key pixel at
+  `y * width` instead of using the pitch.
+
 ## Mod API quirks to keep
 
 Mods depend on these, so a port should keep them and document them for modders (see
