@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harvest: Massive Encounter</title>
+<style>
+  :root { color-scheme: dark; --bg: #05070a; --fg: #c8d3dc; --dim: #6b7884; --accent: #7fc4ff; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 14px/1.5 system-ui, sans-serif; }
+  #canvas { display: block; margin: 0 auto; outline: none; }
+  #setup { max-width: 34rem; margin: 12vh auto 0; padding: 0 16px; }
+  #setup h1 { font-size: 1.4rem; font-weight: 600; margin: 0 0 .5rem; }
+  #setup p { color: var(--dim); margin: .5rem 0; }
+  #drop { margin-top: 1.25rem; border: 1px dashed var(--dim); border-radius: 8px; padding: 2rem 1rem;
+    text-align: center; }
+  #drop.over { border-color: var(--accent); color: var(--accent); }
+  button { font: inherit; color: var(--bg); background: var(--accent); border: 0; border-radius: 6px;
+    padding: .5rem 1rem; cursor: pointer; }
+  button:disabled { opacity: .4; cursor: default; }
+  #status { margin-top: 1rem; min-height: 1.5em; }
+  #log { max-height: 30vh; overflow: auto; color: var(--dim); font: 12px/1.4 ui-monospace, monospace;
+    white-space: pre-wrap; margin: 1rem 16px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="setup">
+  <h1>Harvest: Massive Encounter</h1>
+  <p>This page runs the game, but the game's data has to come from your own copy. Choose or drop the
+     <code>harvestClientData</code> folder from your install (or the folder that contains it). On a Mac,
+     right-click <code>Harvest Steam.app</code>, choose Show Package Contents, and look in
+     <code>Contents/Resources</code>.</p>
+  <div id="drop">
+    <p>Drop the folder here, or</p>
+    <button id="choose">Choose folder…</button>
+    <input id="picker" type="file" webkitdirectory class="hidden">
+  </div>
+  <div id="status"></div>
+  <button id="start" disabled>Start</button>
+</div>
+<canvas id="canvas" class="hidden" tabindex="-1" oncontextmenu="event.preventDefault()"></canvas>
+<pre id="log"></pre>
+
+<script>
+"use strict";
+const DATA_ROOT = "/data";
+const CLIENT_DATA = "harvestClientData";
+
+const $ = (id) => document.getElementById(id);
+const log = (text) => { $("log").textContent += text + "\n"; $("log").scrollTop = 1e9; };
+const status = (text) => { $("status").textContent = text; };
+
+let runtimeReady = false;
+let files = null; // [{ path: "harvestClientData/...", data: Uint8Array }]
+
+var Module = {
+  canvas: $("canvas"),
+  print: log,
+  printErr: log,
+  onRuntimeInitialized() { runtimeReady = true; update(); },
+};
+
+function update() {
+  $("start").disabled = !(runtimeReady && files);
+}
+
+// The path from harvestClientData/ on, or null for files outside it.
+function clientDataPath(path) {
+  const parts = path.split("/").filter(Boolean);
+  const at = parts.indexOf(CLIENT_DATA);
+  return at < 0 ? null : parts.slice(at).join("/");
+}
+
+async function accept(entries) {
+  // entries: [{ path, read: () => Promise<ArrayBuffer> }]
+  const wanted = entries
+    .map((e) => ({ ...e, path: clientDataPath(e.path) }))
+    .filter((e) => e.path && !e.path.split("/").some((p) => p.startsWith(".")));
+  if (!wanted.length) {
+    status(`No ${CLIENT_DATA} folder in what was given.`);
+    return;
+  }
+  const loaded = [];
+  let bytes = 0;
+  for (const e of wanted) {
+    const data = new Uint8Array(await e.read());
+    bytes += data.length;
+    loaded.push({ path: e.path, data });
+    if (loaded.length % 20 === 0) status(`Reading ${loaded.length} / ${wanted.length} files…`);
+  }
+  files = loaded;
+  status(`${files.length} files, ${(bytes / 1048576).toFixed(1)} MB. Ready.`);
+  update();
+}
+
+// Folder picker.
+$("choose").onclick = () => $("picker").click();
+$("picker").onchange = () => accept([...$("picker").files].map((f) => ({
+  path: f.webkitRelativePath, read: () => f.arrayBuffer(),
+})));
+
+// Drag and drop, walking dropped directories.
+async function walk(entry, out) {
+  if (entry.isFile) {
+    out.push({ path: entry.fullPath, read: () => new Promise((ok, fail) =>
+      entry.file((f) => f.arrayBuffer().then(ok, fail), fail)) });
+  } else if (entry.isDirectory) {
+    const reader = entry.createReader();
+    for (;;) {
+      const batch = await new Promise((ok, fail) => reader.readEntries(ok, fail));
+      if (!batch.length) break;
+      for (const child of batch) await walk(child, out);
+    }
+  }
+}
+const drop = $("drop");
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = async (e) => {
+  e.preventDefault();
+  drop.classList.remove("over");
+  const out = [];
+  for (const item of e.dataTransfer.items) {
+    const entry = item.webkitGetAsEntry && item.webkitGetAsEntry();
+    if (entry) await walk(entry, out);
+  }
+  accept(out);
+};
+
+// Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file.
+const dataUrl = new URLSearchParams(location.search).get("data");
+if (dataUrl) {
+  const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
+  status("Fetching the game data…");
+  fetch(base + "manifest.json").then((r) => r.json()).then((paths) => accept(paths.map((p) => ({
+    path: p, read: () => fetch(base + p.split("/").map(encodeURIComponent).join("/")).then((r) => r.arrayBuffer()),
+  })))).catch((err) => status("Cannot fetch the data: " + err));
+}
+
+$("start").onclick = () => {
+  const FS = Module.FS;
+  for (const f of files) {
+    const path = `${DATA_ROOT}/${f.path}`;
+    FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
+    FS.writeFile(path, f.data);
+  }
+  files = null;
+  $("setup").classList.add("hidden");
+  $("canvas").classList.remove("hidden");
+  $("canvas").focus();
+  Module.callMain(["--data", DATA_ROOT]);
+};
+</script>
+<script async src="harvest.js"></script>
+</body>
+</html>

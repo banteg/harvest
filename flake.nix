@@ -59,6 +59,7 @@
                 ./src
                 ./port/src
                 ./port/CMakeLists.txt
+                ./port/web
                 ./config/1.18-linux-amd64/units.toml
                 # the GUI's built-in font bitmap, which port/src/gui/BuildInFont.cpp includes
                 ./third_party/irrlicht-0.7/source/Irrlicht/BuildInFont.h
@@ -89,9 +90,65 @@
               platforms = systems;
             };
           };
+          # The web build: SDL3 and the game compiled with Emscripten. The emscripten package's cache
+          # is read-only, so each build works on a writable copy of it.
+          emscriptenEnv = ''
+            export HOME=$TMPDIR
+            export EM_CACHE=$TMPDIR/emcache
+            cp -r ${pkgs.emscripten}/share/emscripten/cache $EM_CACHE
+            chmod -R u+w $EM_CACHE
+          '';
+
+          sdl3-web = pkgs.stdenvNoCC.mkDerivation {
+            pname = "sdl3-web";
+            version = "3.4.16";
+            src = inputs.sdl;
+            nativeBuildInputs = [
+              pkgs.emscripten
+              pkgs.cmake
+              pkgs.ninja
+            ];
+            dontUseCmakeConfigure = true;
+            configurePhase = ''
+              runHook preConfigure
+              ${emscriptenEnv}
+              emcmake cmake -S . -B build -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=$out \
+                -DSDL_SHARED=OFF -DSDL_STATIC=ON -DSDL_TESTS=OFF -DSDL_EXAMPLES=OFF
+              runHook postConfigure
+            '';
+            buildPhase = "ninja -C build";
+            installPhase = "ninja -C build install";
+          };
+
+          web = pkgs.stdenvNoCC.mkDerivation {
+            pname = "harvest-web";
+            version = "0.1.0";
+            inherit (harvest) src;
+            nativeBuildInputs = [
+              pkgs.emscripten
+              pkgs.cmake
+              pkgs.ninja
+            ];
+            dontUseCmakeConfigure = true;
+            configurePhase = ''
+              runHook preConfigure
+              ${emscriptenEnv}
+              emcmake cmake -S port -B build -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=$out \
+                -DCMAKE_FIND_ROOT_PATH=${sdl3-web} \
+                -DSDL3_DIR=${sdl3-web}/lib/cmake/SDL3 \
+                ${lib.concatStringsSep " " harvest.cmakeFlags}
+              runHook postConfigure
+            '';
+            buildPhase = "ninja -C build";
+            installPhase = "ninja -C build install";
+          };
         in
         {
-          inherit harvest sdl3;
+          inherit harvest sdl3 sdl3-web web;
           default = harvest;
         }
       );

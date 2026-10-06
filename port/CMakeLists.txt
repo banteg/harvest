@@ -105,4 +105,27 @@ endif()
 target_link_libraries(harvest PRIVATE
   harvest_zlib harvest_lua harvest_stb harvest_miniaudio SDL3::SDL3)
 
-install(TARGETS harvest RUNTIME DESTINATION bin)
+if(EMSCRIPTEN)
+  # The web build: harvest.js and harvest.wasm next to web/index.html, which takes the player's game
+  # data into the in-memory file system and then calls main (see web/index.html).
+  set_target_properties(harvest PROPERTIES SUFFIX ".js")
+  target_link_options(harvest PRIVATE
+    -sMIN_WEBGL_VERSION=2
+    -sMAX_WEBGL_VERSION=2
+    # The renderer loads every GL entry point through SDL_GL_GetProcAddress.
+    -sGL_ENABLE_GET_PROC_ADDRESS=1
+    -sALLOW_MEMORY_GROWTH=1
+    -sSTACK_SIZE=1MB
+    -sFORCE_FILESYSTEM=1
+    -sINVOKE_RUN=0
+    -sEXIT_RUNTIME=0
+    -sEXPORTED_RUNTIME_METHODS=callMain,FS
+    -lidbfs.js)
+  install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/harvest.js"
+    "${CMAKE_CURRENT_BINARY_DIR}/harvest.wasm"
+    web/index.html
+    DESTINATION .)
+else()
+  install(TARGETS harvest RUNTIME DESTINATION bin)
+endif()
