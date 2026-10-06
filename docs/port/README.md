@@ -15,7 +15,7 @@ the data formats the game ships.
 | `gfx/*.fnt` | sprite-package font, loaded as `CUnicodeFont` | [`CUnicodeFont.h`](../../src/daisy/gui/CUnicodeFont.h) |
 | `lang/*.cfg`, `*.hmd`, profiles, settings | configuration text format | [`CConfiguration.h`](../../src/ox/game/CConfiguration.h) |
 | save games | zlib stream (default level) of the `CPlayState` writer | [save-games.md](save-games.md) |
-| `mods/*.zip` | zip archives holding a `.hmd`, `main.lua`, an icon and data | [mods-and-files.md](mods-and-files.md) |
+| `mods/*.zip` | zip archives holding a `.hmd`, `main.lua`, an icon and data | [mods-and-files.md](mods-and-files.md), [zip-archives.md](zip-archives.md) |
 | `sfx/*.ogg` | Ogg Vorbis, decoded with libvorbisfile | [audio.md](audio.md) |
 | `gfx/*.jpg`, `*.tga` | JPEG (libjpeg) and Irrlicht's TGA loader | [textures.md](textures.md) |
 | `gfx/*.obj` | the two planet spheres, Irrlicht's OBJ loader | [menu-scene.md](menu-scene.md) |
