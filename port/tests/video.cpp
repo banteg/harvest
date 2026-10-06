@@ -24,7 +24,10 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
+#include "daisy/gui/BuildInFont.h"
 #include "daisy/io/CFileSystem.h"
+#include "daisy/io/CMemoryReadFile.h"
+#include "ox/io/IReadFile.h"
 #include "daisy/os.h"
 #include "daisy/other/CLogger.h"
 #include "ox/IOxDevice.h"
@@ -557,6 +560,10 @@ int main(int argc, char** argv)
     }
     SFont font;
     font.load(driver, "$GAME_RESOURCES$/harvestClientData/gfx/largeFont.fnt");
+    io::IReadFile* builtInFontFile = daisy::io::createMemoryReadFile(daisy::gui::BuildInFontData,
+        daisy::gui::BuildInFontDataSize, "#DefaultFont", false);
+    video::ITexture* builtInFont = driver->getTexture(builtInFontFile);
+    builtInFontFile->drop();
     SFont smallFont;
     smallFont.load(driver, "$GAME_RESOURCES$/harvestClientData/gfx/smallFont.fnt");
 
@@ -835,6 +842,10 @@ int main(int argc, char** argv)
                 // rotated
                 sample->drawRotated(CPosition2d<float>((float)px + w, (float)baseY + h), t, 1.0f, SColor(0xffffffff));
             }
+
+            // the GUI's built-in font, a 4-bit BMP, as CGUIEnvironment loads it
+            if (builtInFont)
+                driver->draw2DImage(builtInFont, CPosition2d<int>(screen.Width - 132, screen.Height - 132));
 
             // rectangles and lines
             const int lineY = screen.Height - 110;
