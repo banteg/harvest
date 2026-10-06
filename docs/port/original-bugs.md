@@ -144,6 +144,41 @@ Port recommendation:
   `makeColorKeyTexture(pos)` (`0x4e07b0`, inherited from Irrlicht) reads the key pixel at
   `y * width` instead of using the pitch.
 
+## Linux device bugs
+
+These are in the Linux-only device code ([`src/daisy/other/`](../../src/daisy/other/)). A port replaces
+this layer, so it only needs to avoid them; the key-code ones also explain odd key bindings in Linux
+profiles.
+
+- **Unmapped keys report garbage.** The key table (built in the `CIrrDeviceLinux` constructor,
+  `0x4bbc40`) never initialises the entries for Insert, Pause, Control, Alt, System, RShift, Menu,
+  brackets, semicolon, quote, slash, backslash, tilde and equals, so those keys report whatever was in
+  the heap (usually 0) and cannot be bound reliably. `postKeyEvent` (`0x4baff0`) also indexes the table
+  without a bounds check, so SFML's `Unknown` key (−1) reads the neighbouring field. A port should map
+  unknown keys to 0.
+- **Ctrl with another key sends an undefined event.** In `postKeyEvent`, Ctrl plus a key other than
+  V, F or Q leaves the key event type uninitialised, so handlers see a stack-garbage type. It should be
+  a normal key press.
+- **Joystick button releases also report a connection.** In `CIrrDeviceLinux::run` (`0x4bb6a0`) the
+  button-released case falls through into the joystick-connected case, so every release also posts a
+  "connected" event (type 3).
+- **Ctrl+Q frees the window twice.** `closeDevice` (`0x4badd0`) deletes the SFML window without
+  clearing the pointer; `run()` then polls the freed window and the destructor deletes it again.
+- **The fullscreen flag starts uninitialised.** If it happens to read as windowed, the first
+  `setFullscreenMode(false)` returns early and the render size stays 0×0 until a resize event, so the
+  relative cursor position divides by zero.
+- **Formatted engine logs print garbage.** `os::Printer::log` and `logWithInfo` (`0x4c1ea0`–`0x4c2060`)
+  pass their `va_list` as the first variadic argument, so the first `%` argument of every formatted
+  log line is garbage. `CLogger::logWithInfo` reuses a `va_list`, and messages over 128 characters go
+  through a buffer that is freed before use.
+- **No error dialogs on Linux.** `CLinuxOperator::messageBox` and the other value-returning OS stubs
+  (OS version, computer name, registry, process id and name, `runApplication`) have empty bodies, so
+  `CGameMain`'s missing-file error box shows nothing and the others return garbage. `openURL` passes
+  the URL to `system("xdg-open …")` without quoting.
+- Smaller ones: `swapBuffers` is declared to return `bool` but returns nothing (no caller uses it);
+  the `/proc/self/exe` path is read without terminating or checking it; `getApplicationSupportPath`
+  gives `/.Harvest` when `HOME` is unset; and the video mode list's getters accept `index == count`.
+
 ## Mod API quirks to keep
 
 Mods depend on these, so a port should keep them and document them for modders (see

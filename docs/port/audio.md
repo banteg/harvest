@@ -132,13 +132,19 @@ The game itself uses none of the positional calls; it pans by hand (below).
 
 ## OpenAL backend
 
-Placeholder: this section will be filled from the OpenAL backend notes. It should cover:
+`daisy::audio::COpenALDriver` ([`COpenALDriver.cpp`](../../src/daisy/audio/COpenALDriver.cpp)) is the
+Linux backend under `CAudioDriver`.
 
-- how a name is joined to the sound path and decoded (libvorbisfile);
-- which sounds are decoded whole and which are streamed, with buffer sizes and the refill done in
-  `periodicStreamUpdate`;
-- how gain, pan and pitch map to OpenAL source parameters;
-- the source pool and what happens when it runs out;
-- how `deviceDampenAllSounds` ducks and restores;
-- what `deviceUpdateMusic` returns;
-- the distance model and roll-off.
+- **Start-up.** `alutInit`. `setOpenAlDistanceModel(m)` calls `alDistanceModel(0xD000 + m)`; the other
+  distance settings stay at OpenAL's defaults.
+- **Sources.** A pool of 32 sources, searched round-robin for a free one; when none is free, a source
+  playing a lower-priority sound is taken over.
+- **Effects** are decoded whole into one buffer: `.ogg` through libvorbisfile with memory callbacks,
+  `.wav` through `alutCreateBufferFromFile`. The decode buffer is sized as bitrate × duration, which
+  can cut off the end of a file whose bitrate varies.
+- **Music and voice lines** stream with 10 buffers of 4096 bytes, decoded with `ov_read` as 16-bit
+  signed little-endian and refilled by `periodicStreamUpdate` every frame. Looping is done by seeking
+  the stream back to the start; the source itself never loops.
+- **Parameters.** The gain is the volume passed in; the pitch is the pitch times the global pitch
+  modifier. Oriented sounds are panned by source position (see the pan quirk in
+  [original-bugs.md](original-bugs.md)).

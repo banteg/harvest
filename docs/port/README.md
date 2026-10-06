@@ -22,7 +22,8 @@ the data formats the game ships.
 | `gfx/shaders/*.vsh`, `*.psh` | Cg atmospheric scattering (Sean O'Neil, GPU Gems 2) | [menu-scene.md](menu-scene.md) |
 
 Paths, aliases and file lists: [file-system.md](file-system.md). Driver caches, screen size and 2D
-coordinates: [renderer.md](renderer.md).
+coordinates: [renderer.md](renderer.md). Keys, mouse, joysticks, window modes and timing:
+[input-and-window.md](input-and-window.md).
 
 ## The platform layer
 
