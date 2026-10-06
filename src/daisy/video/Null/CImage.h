@@ -17,6 +17,8 @@ class CImage : public ox::video::IImage
 public:
     //! Allocates an uninitialized image of the given format and size.
     CImage(ox::video::ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size);
+    //! Creates an image over data, which it takes ownership of (freed with delete[]).
+    CImage(ox::video::ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size, void* data);
     virtual ~CImage();
 
     virtual void* lock();

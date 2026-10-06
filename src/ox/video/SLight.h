@@ -46,6 +46,8 @@ struct SLight
     core::CVector3d<float> Position;
     float Radius;
     bool CastShadows;
+    //! Added by Oxeye: the OpenGL driver treats Position as a direction (w = 0) when set.
+    bool Directional;
 };
 
 } // end namespace video
