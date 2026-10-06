@@ -126,6 +126,7 @@ if(EMSCRIPTEN)
     "${CMAKE_CURRENT_BINARY_DIR}/harvest.wasm"
     web/index.html
     DESTINATION .)
+  install(FILES web/assets/cd-rom.webp web/assets/load-flow.webp DESTINATION assets)
 else()
   install(TARGETS harvest RUNTIME DESTINATION bin)
 endif()

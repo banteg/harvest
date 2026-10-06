@@ -4,61 +4,86 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harvest: Massive Encounter</title>
+<link rel="preload" href="assets/cd-rom.webp" as="image">
 <style>
-  :root { color-scheme: dark; --bg: #05070a; --fg: #c8d3dc; --dim: #6b7884; --accent: #7fc4ff; }
-  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
-    font: 14px/1.5 system-ui, sans-serif; }
+  :root { color-scheme: dark; --bg: #07090c; --dim: #6b7884; --glow: #ff8a2a; }
+  html, body { margin: 0; height: 100%; color: #c8d3dc; font: 14px/1.5 system-ui, sans-serif; }
+  body { background: radial-gradient(ellipse at 50% 60%, #121820 0%, var(--bg) 70%) var(--bg); }
   #canvas { display: block; outline: none; }
-  #setup { max-width: 34rem; margin: 12vh auto 0; padding: 0 16px; }
-  #setup h1 { font-size: 1.4rem; font-weight: 600; margin: 0 0 .5rem; }
-  #setup p { color: var(--dim); margin: .5rem 0; }
-  #drop { margin-top: 1.25rem; border: 1px dashed var(--dim); border-radius: 8px; padding: 1.5rem 1rem;
-    text-align: center; }
-  #drop.over { border-color: var(--accent); color: var(--accent); }
-  button { font: inherit; color: var(--bg); background: var(--accent); border: 0; border-radius: 6px;
-    padding: .5rem 1rem; cursor: pointer; }
-  button.quiet { background: none; color: var(--dim); text-decoration: underline; padding: .5rem 0; }
-  button:disabled { opacity: .4; cursor: default; }
-  #setup ol { padding-left: 1.25rem; color: var(--dim); }
-  #setup li { margin: .5rem 0; }
-  #setup li strong { color: var(--fg); font-weight: 600; }
-  .path { display: flex; gap: .5rem; align-items: center; margin-top: .35rem; }
-  .path code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: .3rem .5rem;
-    background: #10161d; border: 1px solid #2a3540; border-radius: 4px; color: var(--fg); }
-  .path button { padding: .3rem .7rem; }
-  #status { margin: 1rem 0 .75rem; min-height: 1.5em; }
-  .row { display: flex; gap: 1rem; align-items: center; }
+
+  #setup { min-height: 100%; box-sizing: border-box; padding: 24px 16px;
+    display: flex; align-items: center; justify-content: center; gap: clamp(16px, 4vw, 56px);
+    transition: opacity .6s ease, transform .6s ease; }
+  @media (max-width: 860px) { #setup { flex-direction: column; } .flow-wrap { margin-bottom: 2.75rem; } }
+
+  .flow-wrap { position: relative; width: min(640px, 100%); line-height: 0; transition: opacity .4s; }
+  #flow { width: 100%; height: auto; }
+  /* the Steam window half of the picture opens Harvest in the Steam library */
+  #steam { position: absolute; left: 2%; top: 9%; width: 44%; height: 80%; border-radius: 16px; }
+  #steam:hover { box-shadow: 0 0 0 2px rgb(127 196 255 / .5); }
+  #open-steam { position: absolute; left: 24%; top: 100%; transform: translate(-50%, 6px);
+    line-height: 1.5; white-space: nowrap; padding: .3rem .85rem; border-radius: 999px;
+    color: #c8d3dc; text-decoration: none; background: #10161d; border: 1px solid #2a3540; }
+  #open-steam:hover { color: #fff; border-color: #4b8fd0; }
+
+  #drive { position: relative; width: min(320px, 70vw); aspect-ratio: 1; flex: none; cursor: pointer;
+    border-radius: 50%; outline: none; }
+  #disc { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%;
+    filter: grayscale(1) brightness(.42) contrast(.95); opacity: .85;
+    transition: filter .5s ease, opacity .5s ease, box-shadow .5s ease;
+    animation: idle 3.2s ease-in-out infinite; }
+  @keyframes idle { 50% { filter: grayscale(1) brightness(.55) contrast(.95); } }
+  #drive:hover #disc, body.over #disc { filter: grayscale(.4) brightness(.8); opacity: 1; animation: none; }
+  body.over #disc { box-shadow: 0 0 60px rgb(255 138 42 / .35); }
+  body.loading #disc, body.ready #disc, body.playing #disc {
+    filter: none; opacity: 1; animation: none; box-shadow: 0 0 70px rgb(255 138 42 / .28); }
+  body.ready #drive:hover #disc { box-shadow: 0 0 90px rgb(255 138 42 / .5); }
+
+  #ring { position: absolute; inset: -10px; width: calc(100% + 20px); height: calc(100% + 20px);
+    transform: rotate(-90deg); opacity: 0; transition: opacity .3s; pointer-events: none; }
+  #ring circle { fill: none; stroke: var(--glow); stroke-width: 1.2; stroke-linecap: round;
+    stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .2s linear; }
+  body.loading #ring { opacity: .9; }
+
+  #eject { position: absolute; right: 2%; bottom: 2%; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid #2a3540; background: #10161d; color: var(--dim); font-size: 15px; cursor: pointer;
+    display: none; padding: 0; }
+  #eject:hover { color: #c8d3dc; }
+  body.ready #eject { display: block; }
+
+  #note { position: fixed; left: 0; right: 0; bottom: 24px; text-align: center; color: var(--dim); margin: 0; }
+
+  body.ready .flow-wrap, body.playing .flow-wrap { display: none; }
+  body.loading .flow-wrap { opacity: .2; }
+  body.playing #setup { opacity: 0; transform: scale(1.06); }
+  body.error #drive { animation: shake .4s; }
+  @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+  .hidden { display: none !important; }
   .message { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center;
     background: rgb(0 0 0 / .6); }
   .message div { max-width: 30rem; margin: 16px; padding: 1.25rem 1.5rem; border-radius: 8px;
     background: #10161d; border: 1px solid #2a3540; white-space: pre-wrap; }
   .message h2 { margin: 0 0 .5rem; font-size: 1.1rem; }
-  .hidden { display: none !important; }
+  .message button { font: inherit; padding: .4rem 1rem; }
 </style>
 </head>
-<body>
-<div id="setup">
-  <h1>Harvest: Massive Encounter</h1>
-  <p>This page runs the game, but the game's data comes from your own copy of Harvest. Give it the
-     game's install folder once; it stays in this browser after that.</p>
-  <ol>
-    <li><strong>Easiest, with Steam:</strong> in your Steam library, right-click Harvest: Massive
-      Encounter, then <em>Manage &rarr; Browse local files</em>. Drag what that window shows (on a Mac,
-      <code>Harvest Steam.app</code>) onto the box below.</li>
-    <li><strong>Or choose it:</strong> click <em>Choose folder</em> and go to
-      <span id="where"></span></li>
-  </ol>
-  <div id="drop">
-    <p>Drop it here, or</p>
-    <button id="choose">Choose folder…</button>
-    <input id="picker" type="file" webkitdirectory class="hidden">
+<body class="empty">
+<main id="setup">
+  <div class="flow-wrap">
+    <img id="flow" src="assets/load-flow.webp" width="1400" height="569"
+         alt="In Steam, right-click Harvest, Manage, Browse local files; then drag Harvest Steam.app onto the disc">
+    <a id="steam" href="steam://nav/games/details/15400" title="Open Harvest in Steam"></a>
+    <a id="open-steam" href="steam://nav/games/details/15400">Open in Steam</a>
   </div>
-  <div id="status">Loading…</div>
-  <div class="row">
-    <button id="start" disabled>Start</button>
-    <button id="forget" class="quiet hidden">Forget the saved game data</button>
+  <div id="drive" role="button" tabindex="0" title="Drop the game here, or click to choose its folder">
+    <img id="disc" src="assets/cd-rom.webp" alt="">
+    <svg id="ring" viewBox="-1 -1 102 102"><circle cx="50" cy="50" r="50" pathLength="100"/></svg>
+    <button id="eject" title="Eject (forget the game data)">&#x23CF;</button>
   </div>
-</div>
+  <input id="picker" type="file" webkitdirectory class="hidden">
+</main>
+<p id="note"></p>
 <canvas id="canvas" class="hidden" tabindex="-1" oncontextmenu="event.preventDefault()"></canvas>
 
 <script>
@@ -70,11 +95,12 @@ const USER_ROOT = "/libsdl";
 const CLIENT_DATA = "harvestClientData";
 
 const $ = (id) => document.getElementById(id);
-const status = (text) => { $("status").textContent = text; };
+const note = (text) => { $("note").textContent = text || ""; };
+const setState = (s) => { document.body.className = s; };
+const state = () => document.body.className;
 
-let started = false;
 let storageReady = false;
-let haveData = false;
+let started = false;
 
 var Module = {
   canvas: $("canvas"),
@@ -92,19 +118,47 @@ var Module = {
   },
 };
 
+// ---- the disc ----
+
+// Spins the disc up to speed and down again, like a drive, by advancing its angle every frame.
+let angle = 0, speed = 0, targetSpeed = 0, lastFrame = 0, spinning = false;
+function spinFrame(now) {
+  const dt = lastFrame ? Math.min(0.05, (now - lastFrame) / 1000) : 0;
+  lastFrame = now;
+  speed += (targetSpeed - speed) * Math.min(1, dt * 1.5);
+  angle = (angle + speed * dt) % 360;
+  $("disc").style.transform = `rotate(${angle}deg)`;
+  if (targetSpeed > 0 || speed > 1) requestAnimationFrame(spinFrame);
+  else { spinning = false; lastFrame = 0; }
+}
+function spin(degreesPerSecond) {
+  targetSpeed = degreesPerSecond;
+  if (!spinning && degreesPerSecond > 0) { spinning = true; requestAnimationFrame(spinFrame); }
+}
+function progress(fraction) {
+  $("ring").querySelector("circle").style.strokeDashoffset = String(100 - 100 * fraction);
+}
+function fail(text) {
+  spin(0);
+  setState("error");
+  note(text);
+  setTimeout(() => { if (state() === "error") setState(haveData() ? "ready" : "empty"); }, 600);
+}
+
 // ---- storage ----
 
 function mountOf(path) { return Module.FS.lookupPath(path).node.mount; }
 
 // Syncs one IDBFS mount: populate=true loads IndexedDB into memory, false writes memory back.
 function sync(path, populate) {
-  return new Promise((ok, fail) => Module.FS.filesystems.IDBFS.syncfs(mountOf(path), populate,
-    (err) => err ? fail(err) : ok()));
+  return new Promise((ok, no) => Module.FS.filesystems.IDBFS.syncfs(mountOf(path), populate,
+    (err) => err ? no(err) : ok()));
 }
 
 function exists(path) {
   try { Module.FS.stat(path); return true; } catch { return false; }
 }
+const haveData = () => storageReady && exists(`${DATA_ROOT}/${CLIENT_DATA}`);
 
 function removeTree(path) {
   const FS = Module.FS;
@@ -118,14 +172,7 @@ function removeTree(path) {
   }
 }
 
-function countFiles(path) {
-  const FS = Module.FS;
-  if (!FS.isDir(FS.stat(path).mode)) return 1;
-  let n = 0;
-  for (const name of FS.readdir(path))
-    if (name !== "." && name !== "..") n += countFiles(path + "/" + name);
-  return n;
-}
+let pending = null; // data given before the storage was open
 
 async function openStorage() {
   const FS = Module.FS;
@@ -139,12 +186,9 @@ async function openStorage() {
     console.warn("cannot read the browser's storage:", err);
   }
   storageReady = true;
-  haveData = exists(`${DATA_ROOT}/${CLIENT_DATA}`);
-  if (haveData)
-    status(`Using the game data saved in this browser (${countFiles(`${DATA_ROOT}/${CLIENT_DATA}`)} files).`);
-  else if (!devData())
-    status("");
-  update();
+  if (pending) { const entries = pending; pending = null; accept(entries); }
+  else if (haveData()) setState("ready");
+  else devData();
 }
 
 // Writes the user data folder back now and then while the game runs, and when the page goes away.
@@ -158,47 +202,6 @@ setInterval(saveUserData, 3000);
 addEventListener("pagehide", saveUserData);
 document.addEventListener("visibilitychange", () => { if (document.hidden) saveUserData(); });
 
-function update() {
-  $("start").disabled = !(storageReady && haveData);
-  $("forget").classList.toggle("hidden", !(storageReady && haveData));
-}
-
-// ---- where the data is ----
-
-// Steam's default install folder for the game on each platform, and how to type a path into the
-// platform's folder picker.
-const STEAM_FOLDERS = {
-  mac: ["~/Library/Application Support/Steam/steamapps/common/Harvest Massive Encounter",
-        "That folder is hidden from the picker's sidebar: press \u2318\u21e7G (Go to Folder) and paste:"],
-  windows: ["C:\\Program Files (x86)\\Steam\\steamapps\\common\\Harvest Massive Encounter",
-            "Paste this into the picker's address bar:"],
-  linux: ["~/.local/share/Steam/steamapps/common/Harvest Massive Encounter",
-          "Press Ctrl+L in the picker and paste:"],
-};
-
-function platformName() {
-  const p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "").toLowerCase();
-  if (p.includes("mac")) return "mac";
-  if (p.includes("win")) return "windows";
-  return "linux";
-}
-
-(function showWhere() {
-  const [path, how] = STEAM_FOLDERS[platformName()];
-  const where = $("where");
-  where.textContent = `the Steam folder (or wherever you installed the game). ${how}`;
-  const row = document.createElement("div");
-  row.className = "path";
-  row.innerHTML = "<code></code><button>Copy</button>";
-  row.querySelector("code").textContent = path;
-  const copy = row.querySelector("button");
-  copy.onclick = () => navigator.clipboard.writeText(path).then(() => {
-    copy.textContent = "Copied";
-    setTimeout(() => { copy.textContent = "Copy"; }, 1500);
-  });
-  where.after(row);
-})();
-
 // ---- taking the player's data ----
 
 // The path from harvestClientData/ on, or null for files outside it.
@@ -210,98 +213,115 @@ function clientDataPath(path) {
 
 async function accept(entries) {
   // entries: [{ path, read: () => Promise<ArrayBuffer> }]
-  if (!storageReady) { status("Still loading, try again in a moment."); return; }
+  if (!storageReady) { pending = entries; setState("loading"); spin(240); return; }
   const wanted = entries
     .map((e) => ({ ...e, path: clientDataPath(e.path) }))
     .filter((e) => e.path && !e.path.split("/").some((p) => p.startsWith(".")));
-  if (!wanted.length) {
-    status(`No ${CLIENT_DATA} folder in what was given.`);
-    return;
-  }
+  if (!wanted.length) return fail("No Harvest data in that.");
+
+  note("");
+  setState("loading");
+  progress(0);
+  spin(540);
+  const begun = performance.now();
   const FS = Module.FS;
-  haveData = false;
-  update();
   removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
-  let bytes = 0;
   for (let i = 0; i < wanted.length; i++) {
     const data = new Uint8Array(await wanted[i].read());
     const path = `${DATA_ROOT}/${wanted[i].path}`;
     FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
     FS.writeFile(path, data);
-    bytes += data.length;
-    if (i % 20 === 0) status(`Reading ${i} / ${wanted.length} files…`);
+    progress((i + 1) / wanted.length);
   }
-  haveData = true;
-  update();
-  const summary = `${wanted.length} files, ${(bytes / 1048576).toFixed(1)} MB`;
-  status(`${summary}. Saving it in this browser…`);
-  // Ask the browser not to evict the data under storage pressure (it may say no).
+  // Keep it for next time, in the background, and ask the browser not to evict it.
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
-  sync(DATA_ROOT, false)
-    .then(() => { if (!started) status(`${summary}, saved in this browser. Ready.`); })
-    .catch((err) => { if (!started) status(`${summary}. Ready (but it could not be saved: ${err}).`); });
+  sync(DATA_ROOT, false).catch((err) => console.warn("cannot keep the game data:", err));
+
+  // Let the disc get up to speed before the game takes over.
+  setTimeout(play, Math.max(0, 1400 - (performance.now() - begun)));
 }
 
-// Folder picker.
-$("choose").onclick = () => $("picker").click();
+function play() {
+  if (started || !haveData()) return;
+  started = true;
+  spin(1080);
+  setState("playing");
+  setTimeout(() => {
+    spin(0);
+    $("setup").classList.add("hidden");
+    $("canvas").classList.remove("hidden");
+    $("canvas").focus();
+    Module.callMain(["--data", DATA_ROOT]);
+  }, 650);
+}
+
+// Clicking the disc: play when there is data, else choose the folder.
+$("drive").onclick = (e) => {
+  if (e.target === $("eject")) return;
+  if (state() === "ready") play();
+  else if (state() === "empty") $("picker").click();
+};
+$("drive").onkeydown = (e) => {
+  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("drive").click(); }
+};
 $("picker").onchange = () => accept([...$("picker").files].map((f) => ({
   path: f.webkitRelativePath, read: () => f.arrayBuffer(),
 })));
 
-// Drag and drop, walking dropped directories.
+$("eject").onclick = () => {
+  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
+  sync(DATA_ROOT, false);
+  setState("empty");
+};
+
+// Drag and drop anywhere on the page, walking dropped directories (an .app is one).
 async function walk(entry, out) {
   if (entry.isFile) {
-    out.push({ path: entry.fullPath, read: () => new Promise((ok, fail) =>
-      entry.file((f) => f.arrayBuffer().then(ok, fail), fail)) });
+    out.push({ path: entry.fullPath, read: () => new Promise((ok, no) =>
+      entry.file((f) => f.arrayBuffer().then(ok, no), no)) });
   } else if (entry.isDirectory) {
     const reader = entry.createReader();
     for (;;) {
-      const batch = await new Promise((ok, fail) => reader.readEntries(ok, fail));
+      const batch = await new Promise((ok, no) => reader.readEntries(ok, no));
       if (!batch.length) break;
       for (const child of batch) await walk(child, out);
     }
   }
 }
-const drop = $("drop");
-drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
-drop.ondragleave = () => drop.classList.remove("over");
-drop.ondrop = async (e) => {
+let dragDepth = 0;
+let stateBeforeDrag = "empty";
+const droppable = () => !started && ["empty", "ready", "over"].includes(state());
+addEventListener("dragenter", (e) => {
+  if (!droppable()) return;
   e.preventDefault();
-  drop.classList.remove("over");
+  if (dragDepth++ === 0) { stateBeforeDrag = state(); setState("over"); }
+});
+addEventListener("dragover", (e) => { if (droppable()) e.preventDefault(); });
+addEventListener("dragleave", () => {
+  if (state() === "over" && --dragDepth === 0) setState(stateBeforeDrag);
+});
+addEventListener("drop", async (e) => {
+  if (!droppable()) return;
+  e.preventDefault();
+  dragDepth = 0;
+  // The entries have to be taken while the event lasts.
+  const entries = [...e.dataTransfer.items].map((i) => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+  setState("loading");
+  spin(240);
   const out = [];
-  for (const item of e.dataTransfer.items) {
-    const entry = item.webkitGetAsEntry && item.webkitGetAsEntry();
-    if (entry) await walk(entry, out);
-  }
+  for (const entry of entries) await walk(entry, out);
   accept(out);
-};
+});
 
 // Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file.
 function devData() {
   const dataUrl = new URLSearchParams(location.search).get("data");
-  if (!dataUrl) return false;
+  if (!dataUrl) return;
   const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
-  status("Fetching the game data…");
   fetch(base + "manifest.json").then((r) => r.json()).then((paths) => accept(paths.map((p) => ({
     path: p, read: () => fetch(base + p.split("/").map(encodeURIComponent).join("/")).then((r) => r.arrayBuffer()),
-  })))).catch((err) => status("Cannot fetch the data: " + err));
-  return true;
+  })))).catch((err) => fail("Cannot fetch the data: " + err));
 }
-
-$("forget").onclick = () => {
-  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
-  haveData = false;
-  update();
-  sync(DATA_ROOT, false).then(() => status("Forgotten. Choose the folder again to play."));
-};
-
-$("start").onclick = () => {
-  started = true;
-  $("setup").classList.add("hidden");
-  $("canvas").classList.remove("hidden");
-  $("canvas").focus();
-  Module.callMain(["--data", DATA_ROOT]);
-};
 </script>
 <script async src="harvest.js"></script>
 </body>
