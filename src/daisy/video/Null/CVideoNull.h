@@ -230,7 +230,9 @@ public:
     }
     //! Draws and empties the current 2d batch.
     virtual void flush2dRendering() {}
-    //! Recomputes the 2d projection values from the render screen size and an offset.
+    //! Recomputes the 2d projection from the render size (ScreenSize, rounded up to even) so that a
+    //! 2d pixel (x, y) lands at clip-space ((x + offsetX - w/2) / (w/2), (h/2 - offsetY - y) / (h/2)):
+    //! the origin is the top-left corner moved by (offsetX, offsetY) and y grows downwards.
     virtual void update2dViewValues(int offsetX, int offsetY);
     //! The cached sprite package for filename, or null; never loads.
     virtual ox::video::ISpritePackage* findSpritePackage(const char* filename);
@@ -299,7 +301,8 @@ protected:
         ox::video::IParticlePackage* Package;
     };
 
-    // The 2d batch, filled and drawn by the derived driver.
+    // The 2d batch, filled and drawn by the derived driver; CVideoOpenGL zeroes everything from
+    // Current2DTexture up to StatusSwitches in its constructor.
     ox::video::ITexture* Current2DTexture;
     int Current2DQuadCount;
     //! Room for MAX_2D_QUADS quads of two triangles; no recovered code reads it.
@@ -313,8 +316,8 @@ protected:
     //! Batches drawn in the current frame; NumStatusSwitches keeps the last frame's count.
     int StatusSwitches;
     int NumStatusSwitches;
-    //! 2 / render width and 2 / render height, and the pixel offset of the 2d origin; see
-    //! update2dViewValues.
+    //! 1 / half the render width and height, and ViewOffsetX = offsetX - w/2,
+    //! ViewOffsetY = h/2 - offsetY; see update2dViewValues.
     float InvHalfWidth;
     float InvHalfHeight;
     int ViewOffsetX;
@@ -329,9 +332,10 @@ protected:
     ox::io::IFileSystem* FileSystem;
 
     ox::core::CRect<int> ViewPort;
-    //! The size the game renders at; 2d coordinates are in this space.
+    //! The size the game renders at, returned by getScreenSize; 2d coordinates are in this space.
+    //! setRenderScreenSize(w, h) sets it (w <= 0 restores the physical size); OnResize resets it.
     ox::core::CDimension2d<int> ScreenSize;
-    //! The size of the window or screen; equals ScreenSize unless setRenderScreenSize changed it.
+    //! The window or screen size, returned by getPhysicalScreenSize; set at creation and by OnResize.
     ox::core::CDimension2d<int> PhysicalScreenSize;
     CFPSCounter FPSCounter;
 
