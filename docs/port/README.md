@@ -14,7 +14,7 @@ the data formats the game ships.
 | `gfx/particles.pfx` | Oxeye particle package | [`CParticlePackage.cpp`](../../src/daisy/video/Null/CParticlePackage.cpp) |
 | `gfx/*.fnt` | sprite-package font, loaded as `CUnicodeFont` | [`CUnicodeFont.h`](../../src/daisy/gui/CUnicodeFont.h) |
 | `lang/*.cfg`, `*.hmd`, profiles, settings | configuration text format | [`CConfiguration.h`](../../src/ox/game/CConfiguration.h) |
-| save games | zlib stream (default level) of the `CPlayState` writer | [save-games.md](save-games.md) |
+| save games (`*.hsg`), profiles | a plain header, then the `CPlayState` payload as a zlib stream encrypted with AES-256 under a fixed key; profiles are configuration text | [save-games.md](save-games.md) |
 | `mods/*.zip` | zip archives holding a `.hmd`, `main.lua`, an icon and data | [mods-and-files.md](mods-and-files.md), [zip-archives.md](zip-archives.md) |
 | `sfx/*.ogg` | Ogg Vorbis, decoded with libvorbisfile | [audio.md](audio.md) |
 | `gfx/*.jpg`, `*.tga` | JPEG (libjpeg) and Irrlicht's TGA loader | [textures.md](textures.md) |

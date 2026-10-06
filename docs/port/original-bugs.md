@@ -73,6 +73,76 @@ Port recommendation:
 - Keep the one-frame delay by default, since all gameplay timing was tuned with it. Offer the
   intended behaviour (reset the iterator before the second loop) only as an option.
 
+### 4) A pending charge-bomb explosion breaks the rest of the save
+
+Native behaviour:
+
+- `CEntityManager::writeEntities` saves layers 0 to 3, which includes the perimeter bomb's explosion
+  (type 12, layer 3, alive for 3 s). `CPerimeterBombExplosion::writeEntityData` writes three floats.
+- `CEntity::readNextEntity` (`0x432a60`, [`CHarvestEntity.cpp`](../../src/HarvestFull/harvest/entity/CHarvestEntity.cpp))
+  has no case for type 12, so it creates nothing and leaves those three floats unread.
+
+Impact:
+
+- A game saved during the three seconds of a charge-bomb explosion is misread from that record on:
+  every following entity and the rest of the file are read 12 bytes out of step.
+
+Port recommendation:
+
+- Read the type 12 record and restore the explosion (or at least skip its three floats). Saves made by
+  the original in that window are already damaged; a port can detect them by the misread.
+
+### 5) A mod section with no mods shifts the rest of the load
+
+Native behaviour:
+
+- `CLuaManager::writeLuaStates` always writes a mod count followed by a value count.
+  `CLuaManager::initLuaBySaveFile` (`0x44fe70`, [`CLuaManager.cpp`](../../src/HarvestFull/harvest/game/CLuaManager.cpp))
+  returns as soon as it reads a mod count of 0, without reading the value count.
+
+Impact:
+
+- A save from a creative game with mods available but none ticked (they start unticked) would load
+  4 bytes out of step after the Lua section. Found in the code, not reproduced in the game.
+
+Port recommendation:
+
+- Read the value count even when the mod count is 0.
+
+### 6) A save that does not compress is silently truncated
+
+Native behaviour:
+
+- `CFileSystem::zipDeflateData` and `zipInflateData` (`0x52c760`, `0x52c6c0`) make a single
+  `deflate`/`inflate` call with `Z_FINISH` and accept `Z_OK` as success. The deflate output buffer is
+  only as large as the input.
+
+Impact:
+
+- A payload that does not shrink would be written truncated with no error. Game states compress well,
+  so this is latent.
+
+Port recommendation:
+
+- Size the output with `deflateBound` and require `Z_STREAM_END`.
+
+## Mod API quirks to keep
+
+Mods depend on these, so a port should keep them and document them for modders (see
+[mods-and-files.md](mods-and-files.md)).
+
+- **`harvest.isPositionBlocked`** with a building id (`0x445740`) returns true when the building fits.
+- **`harvest.findAliens`** compares the type with the internal 0-based value, while `spawnAlien` and
+  `getAlienType` use 1-based types.
+- **Hooks** that have no handler the first time they fire are never called again in that game.
+
+## Audio quirks
+
+- **`CAudioDriver::loopSound`** (`0x5b3830`) ducks by 0.25 even when voice ducking is turned off.
+- **Oriented sounds**: `COpenALDriver::devicePlayOrientedSound` pans +0.5 when the source is to the left,
+  while `playParticleSound` passes positive for the right, so particle sounds appear to pan to the
+  opposite side (inferred from the code, not checked by ear).
+
 ## Layout quirks kept for parity
 
 These are visible but small, and the game's art was made against them, so a port should keep them.
@@ -108,3 +178,6 @@ simply write the intended code.
   ignored, so a truncated deflated entry still opens with partial data; and the data-descriptor search
   does not retry a mismatched byte as the start of the signature (a `PK` immediately followed by
   `PK\7\8` is missed). Neither occurs with the shipped archives.
+- **Image loaders** (see [textures.md](textures.md)): the JPEG loader assumes three components, so a
+  grayscale JPEG would decode garbled, and the TGA RLE decoder has no bounds check. No shipped file
+  triggers either.
