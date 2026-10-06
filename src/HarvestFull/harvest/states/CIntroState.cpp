@@ -252,6 +252,11 @@ void CIntroState::render()
     ox::video::SColor background =
         Phase != 0 && FadeState != 0 && Phase != 1 ? ox::video::SColor(0xffffffff) : ox::video::SColor(0xff000000);
     Driver->beginScene(true, true, background);
+#ifdef HARVEST_PORT
+    // The original read the screen size once while loading; the port's window can still change size
+    // (display scale, fullscreen) during the intro, so keep the splash centred and the fade covering it.
+    ScreenSize = Driver->getScreenSize();
+#endif
 
     if (Phase == 2 && Sprites[SPRITE_OXEYE_SPLASH] && FadeState != 0)
     {
