@@ -263,6 +263,18 @@ zone of 10, since the shuttle race treats any deflection past 0.5 as a turn. But
   found. Elsewhere, and on Linux without `HOME`, it is `SDL_GetPrefPath("", "Harvest")`:
   `~/Library/Application Support/Harvest` on macOS (the Mac build's directory) and `%APPDATA%\Harvest`
   on Windows.
+- **Narrow strings are UTF-8.** Before anything else the port sets the C library's character type
+  locale to UTF-8 (`C.UTF-8`, `.UTF-8` on Windows; [`locale.h`](../../port/src/platform/locale.h)),
+  the encoding of everything SDL hands over: paths, the command line, the clipboard, text input. So
+  `ansiToWide`/`wideToAnsi` (`mbstowcs`, `wcstombs`) convert UTF-8, Windows' narrow file functions
+  take UTF-8 names (a non-ASCII user or data folder works), and macOS's wide `printf` accepts
+  characters past U+00FF (in the C locale it failed, so every Korean text came out empty). The
+  original's Linux build ran in the user's locale (`gtk_init`). Numbers keep the C locale.
+- **Wide formats follow glibc on every platform.** The game formats localized texts with
+  `vswprintf`, turning their `%s` into `%S` for a wide argument. The Windows build compiles with
+  `__USE_MINGW_ANSI_STDIO=1`, mingw-w64's own C99 `printf` family, because the CRT's legacy wide
+  specifiers swap `%s` and `%S` (every localized `%s` printed one character). `wchar_t` is 16 bits
+  there; the files store 16-bit units anyway.
 - The clipboard is SDL's (UTF-8; `CGUIEditBox` widens it with `ansiToWide`). `openURL` is
   `SDL_OpenURL`, `messageBox` a modal `SDL_ShowSimpleMessageBox` (the Linux one showed nothing). The
   unused services return empty values.
@@ -286,9 +298,11 @@ macOS):
 | `click <x> <y>` | left button down and up |
 | `wheel <x> <y> [flipped]` | a wheel event with SDL's precise amounts, at the last position |
 | `key <name>` | key down and up; SDL key names, `ctrl+` for Control (`key ctrl+t` takes a screenshot) |
+| `text <words>` | typed text (UTF-8) as `SDL_EVENT_TEXT_INPUT`, the words joined by one space |
 | `size <w> <h>` | `SDL_SetWindowSize` |
 | `display <n>` | moves the window to the middle of the n-th display (`SDL_GetDisplays`) |
 | `fullscreen on\|off` | `SDL_SetWindowFullscreen` |
+| `screenshot <name>` | none: the next frame is saved as `$HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg`, as Ctrl+T saves it |
 | `quit` | a quit request |
 
 ### Network

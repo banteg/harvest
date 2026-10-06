@@ -1,5 +1,8 @@
 #include "device/InputScript.h"
 
+#include "device/CIrrDeviceSDL.h"
+#include "ox/video/IVideoDriver.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -126,6 +129,21 @@ void CInputScript::run(const SCommand& command, SDL_Window* window)
         event.key.down = false;
         push(event, window, SDL_EVENT_KEY_UP);
     }
+    else if (command.Name == "text" && !args.empty())
+    {
+        // typed text, one event per word with the spaces between them; the event points into the
+        // command, which lives as long as the script
+        for (size_t i = 0; i < args.size(); ++i)
+        {
+            if (i > 0)
+            {
+                event.text.text = " ";
+                push(event, window, SDL_EVENT_TEXT_INPUT);
+            }
+            event.text.text = args[i].c_str();
+            push(event, window, SDL_EVENT_TEXT_INPUT);
+        }
+    }
     else if (command.Name == "size" && args.size() == 2)
         SDL_SetWindowSize(window, SDL_atoi(args[0].c_str()), SDL_atoi(args[1].c_str()));
     else if (command.Name == "display" && args.size() == 1)
@@ -147,6 +165,12 @@ void CInputScript::run(const SCommand& command, SDL_Window* window)
     }
     else if (command.Name == "fullscreen" && args.size() == 1)
         SDL_SetWindowFullscreen(window, args[0] == "on");
+    else if (command.Name == "screenshot" && args.size() == 1)
+    {
+        // the game's own Ctrl+T path, named: <name>-<yymmdd>-NN.jpg in the screenshots folder
+        ox::video::IVideoDriver* driver = CIrrDeviceSDL::getInstance()->getVideoDriver();
+        driver->saveJpegScreenshot("$HARVEST_USERDATA$/screenshots/", (args[0] + "-").c_str());
+    }
     else if (command.Name == "quit")
         push(event, window, SDL_EVENT_QUIT);
     else
