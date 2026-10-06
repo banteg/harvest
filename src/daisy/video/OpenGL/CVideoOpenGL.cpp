@@ -22,6 +22,8 @@
 #include "ox/core/CStringFunctions.h"
 #include "ox/io/IFileSystem.h"
 #include "ox/io/IWriteFile.h"
+#include "ox/video/S3DVertex2TCoords.h"
+#include "ox/video/S3DVertexInline.h"
 #include "ox/video/SColorArray.h"
 #include "ox/video/SLight.h"
 #include "ox/video/SMaterialInline.h"

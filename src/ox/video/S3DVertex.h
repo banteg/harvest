@@ -26,25 +26,13 @@ struct S3DVertex
 {
     S3DVertex() {}
 
-    S3DVertex(float x, float y, float z, float nx, float ny, float nz, SColor c, float tu, float tv)
-        : Pos(x, y, z), Normal(nx, ny, nz), Color(c), TCoords(tu, tv) {}
+    //! Defined in S3DVertexInline.h.
+    S3DVertex(float x, float y, float z, float nx, float ny, float nz, SColor c, float tu, float tv);
 
     core::CVector3d<float> Pos;
     core::CVector3d<float> Normal;
     SColor Color;
     core::CVector2d<float> TCoords;
-};
-
-//! Vertex with a second set of texture coordinates, for lightmaps and two layer materials.
-struct S3DVertex2TCoords
-{
-    S3DVertex2TCoords() {}
-
-    core::CVector3d<float> Pos;
-    core::CVector3d<float> Normal;
-    SColor Color;
-    core::CVector2d<float> TCoords;
-    core::CVector2d<float> TCoords2;
 };
 
 } // end namespace video
