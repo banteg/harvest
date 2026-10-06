@@ -518,3 +518,27 @@
 ["daisy/gui/CGUIWindow.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c0c4
+
+["daisy/video/OpenGL/CVideoOpenGL.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c06c
+
+["daisy/video/OpenGL/COpenGLCGMaterialRenderer.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c184
+
+["daisy/video/OpenGL/COpenGLSLMaterialRenderer.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c188
+
+["daisy/video/OpenGL/COpenGLShaderMaterialRenderer.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c18c
+
+["daisy/video/OpenGL/COpenGLTexture.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c190
+
+["daisy/video/Null/CCGMaterialRenderer.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c1f4

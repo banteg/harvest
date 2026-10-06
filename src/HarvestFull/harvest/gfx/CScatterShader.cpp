@@ -44,7 +44,9 @@ void CScatterShader::initAtmo()
     if (material != -1)
     {
         Node->getMaterial(0).MaterialType = (ox::video::E_MATERIAL_TYPE)material;
-        Node->getMaterial(0).BilinearFilter = true;
+        // The atmosphere shell is drawn with its front face winding flipped to counterclockwise, so
+        // back face culling removes the other side of the sphere than for the planet itself.
+        Node->getMaterial(0).FrontFaceCCW = true;
         Node->setVisible(true);
         Type = ESST_ATMOSPHERE;
     }

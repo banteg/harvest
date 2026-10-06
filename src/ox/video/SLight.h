@@ -1,7 +1,7 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/SLight.h and SColor.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest's ox::video namespace; not the original source. The Linux amd64 offsets of
-// DiffuseColor (0x10) and Radius (0x3c) are verified.
+// DiffuseColor (0x10), Radius (0x3c) and Directional (0x41) are verified.
 
 #ifndef OX_VIDEO_SLIGHT_H
 #define OX_VIDEO_SLIGHT_H
@@ -46,6 +46,8 @@ struct SLight
     core::CVector3d<float> Position;
     float Radius;
     bool CastShadows;
+    //! A directional light shines along Position from infinitely far away (w = 0 in OpenGL).
+    bool Directional;
 };
 
 } // end namespace video

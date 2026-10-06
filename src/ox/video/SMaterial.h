@@ -1,8 +1,8 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/SMaterial.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::video namespace; not the original source. Partial: the Linux amd64
-// offsets of the textures (0x18) and the lighting and z-buffer flags (0x2a, 0x2b) are verified; the
-// Oxeye material has no MaterialTypeParam before the textures.
+// Recovered for Harvest's ox::video namespace; not the original source. The Linux amd64 offsets of
+// the textures (0x18) and of all twelve flags (0x28..0x33) are verified against CVideoOpenGL's
+// setBasicRenderStates; the Oxeye material has no MaterialTypeParam before the textures.
 
 #ifndef OX_VIDEO_SMATERIAL_H
 #define OX_VIDEO_SMATERIAL_H
@@ -38,7 +38,7 @@ enum E_MATERIAL_TYPE
 //! Maximal number of textures of a material.
 const int MATERIAL_MAX_TEXTURES = 2;
 
-//! Material flags, as in Irrlicht 0.7.
+//! Material flags: Irrlicht 0.7's, with Oxeye's front face flag and texture mirroring added.
 enum E_MATERIAL_FLAG
 {
     EMF_WIREFRAME = 0,
@@ -47,17 +47,20 @@ enum E_MATERIAL_FLAG
     EMF_ZBUFFER,
     EMF_ZWRITE_ENABLE,
     EMF_BACK_FACE_CULLING,
+    EMF_FRONT_FACE_CCW,
     EMF_BILINEAR_FILTER,
     EMF_TRILINEAR_FILTER,
     EMF_FOG_ENABLE,
+    EMF_TEXTURE_MIRROR_U,
+    EMF_TEXTURE_MIRROR_V,
     EMF_MATERIAL_FLAG_COUNT
 };
 
 //! Material of a mesh buffer or scene node.
 struct SMaterial
 {
-    //! The defaults are the values the Linux and Mac CGUIMeshViewer constructors store; the filter
-    //! defaults differ from Irrlicht 0.7 and the textures are cleared after the flags.
+    //! The defaults are the values the Linux and Mac CGUIMeshViewer and CVideoOpenGL constructors
+    //! store; the textures are cleared after the flags.
     SMaterial()
         : MaterialType(EMT_SOLID), AmbientColor(0xffffffff), DiffuseColor(0xffffffff), EmissiveColor(0),
           SpecularColor(0), Shininess(0.0f)
@@ -68,12 +71,12 @@ struct SMaterial
         ZBuffer = true;
         ZWriteEnable = true;
         BackfaceCulling = true;
-        BilinearFilter = false;
-        TrilinearFilter = true;
+        FrontFaceCCW = false;
+        BilinearFilter = true;
+        TrilinearFilter = false;
         FogEnable = false;
-        ExtraFlags[0] = false;
-        ExtraFlags[1] = false;
-        ExtraFlags[2] = false;
+        TextureMirrorU = false;
+        TextureMirrorV = false;
         Texture1 = 0;
         Texture2 = 0;
     }
@@ -105,15 +108,22 @@ struct SMaterial
             bool ZBuffer;
             bool ZWriteEnable;
             bool BackfaceCulling;
+            //! Oxeye: front faces wind counterclockwise (glFrontFace(GL_CCW)) instead of the
+            //! Direct3D-style clockwise default, so back face culling removes the other side.
+            bool FrontFaceCCW;
+            //! Linear magnification filter; nearest when off.
             bool BilinearFilter;
             bool TrilinearFilter;
             bool FogEnable;
+            //! Oxeye: GL_MIRRORED_REPEAT instead of GL_REPEAT along u (s) and v (t).
+            bool TextureMirrorU;
+            bool TextureMirrorV;
         };
         bool Flags[EMF_MATERIAL_FLAG_COUNT];
     };
 
-    //! Oxeye flags after the Irrlicht ones; their meaning is not recovered.
-    bool ExtraFlags[3];
+    //! True if anything the video driver applies differs; defined in SMaterialInline.h.
+    bool operator!=(const SMaterial& other) const;
 };
 
 } // end namespace video

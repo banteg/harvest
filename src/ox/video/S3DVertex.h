@@ -1,7 +1,6 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/S3DVertex.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's ox::video namespace; not the original source. Partial: only the standard
-// vertex is recovered.
+// Recovered for Harvest's ox::video namespace; not the original source.
 
 #ifndef OX_VIDEO_S3DVERTEX_H
 #define OX_VIDEO_S3DVERTEX_H
@@ -31,6 +30,18 @@ struct S3DVertex
     core::CVector3d<float> Normal;
     SColor Color;
     core::CVector2d<float> TCoords;
+};
+
+//! Vertex with a second set of texture coordinates, for lightmaps and two layer materials.
+struct S3DVertex2TCoords
+{
+    S3DVertex2TCoords() {}
+
+    core::CVector3d<float> Pos;
+    core::CVector3d<float> Normal;
+    SColor Color;
+    core::CVector2d<float> TCoords;
+    core::CVector2d<float> TCoords2;
 };
 
 } // end namespace video

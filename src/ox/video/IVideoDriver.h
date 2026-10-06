@@ -45,18 +45,53 @@ struct S3DVertex2TCoords;
 struct SColorArray;
 struct SMaterial;
 
-//! Features a driver can be asked about. The enumerators are not recovered.
+//! Features a driver can be asked about. The values are the ones CVideoOpenGL::queryFeature
+//! switches on; the list matches Irrlicht 1.3.
 enum E_VIDEO_DRIVER_FEATURE
 {
+    EVDF_RENDER_TO_TARGET = 0,
+    EVDF_HARDWARE_TL,
+    EVDF_MULTITEXTURE,
+    EVDF_BILINEAR_FILTER,
+    EVDF_MIP_MAP,
+    EVDF_MIP_MAP_AUTO_UPDATE,
+    EVDF_STENCIL_BUFFER,
+    EVDF_VERTEX_SHADER_1_1,
+    EVDF_VERTEX_SHADER_2_0,
+    EVDF_VERTEX_SHADER_3_0,
+    EVDF_PIXEL_SHADER_1_1,
+    EVDF_PIXEL_SHADER_1_2,
+    EVDF_PIXEL_SHADER_1_3,
+    EVDF_PIXEL_SHADER_1_4,
+    EVDF_PIXEL_SHADER_2_0,
+    EVDF_PIXEL_SHADER_3_0,
+    EVDF_ARB_VERTEX_PROGRAM_1,
+    EVDF_ARB_FRAGMENT_PROGRAM_1,
+    EVDF_ARB_GLSL,
+    EVDF_HLSL,
+    EVDF_TEXTURE_NPOT,
+    EVDF_FRAMEBUFFER_OBJECT
 };
 
-//! Geometry transformation states. The enumerators are not recovered.
+//! Geometry transformation states, as in Irrlicht 0.7.
 enum E_TRANSFORMATION_STATE
 {
+    ETS_VIEW = 0,
+    ETS_WORLD,
+    ETS_PROJECTION,
+    ETS_COUNT
 };
 
-//! Flags for texture creation; the enumerators are not recovered yet.
-enum E_TEXTURE_CREATION_FLAG {};
+//! Flags for texture creation, as in Irrlicht 0.7. The 16/32 bit and quality/speed pairs are
+//! mutually exclusive: setting one clears the other three.
+enum E_TEXTURE_CREATION_FLAG
+{
+    ETCF_ALWAYS_16_BIT = 0x00000001,
+    ETCF_ALWAYS_32_BIT = 0x00000002,
+    ETCF_OPTIMIZED_FOR_QUALITY = 0x00000004,
+    ETCF_OPTIMIZED_FOR_SPEED = 0x00000008,
+    ETCF_CREATE_MIP_MAPS = 0x00000010
+};
 
 //! Texture color formats. Partial: only the ones CGUIFont reads; the 32 bit value is the one the
 //! binaries compare against.
@@ -100,7 +135,9 @@ public:
     virtual void makeColorKeyTexture(ITexture* texture, core::CPosition2d<int> colorKeyPixelPos) = 0;
     virtual ITexture* createRenderTargetTexture(const core::CDimension2d<int>& size) = 0;
     virtual ITexture* createScreenTexture(const core::CDimension2d<int>& size) = 0;
-    virtual void setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color) = 0;
+    //! Returns true on success; the Linux OpenGL driver does not support render targets and
+    //! returns true without doing anything.
+    virtual bool setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color) = 0;
     virtual void setViewPort(const core::CRect<int>& area) = 0;
     virtual const core::CRect<int>& getViewPort() const = 0;
 
@@ -184,7 +221,7 @@ public:
     virtual void* getExposedVideoData() = 0;
     virtual int getDriverType() = 0;
     virtual bool isFullscreen() = 0;
-    virtual void setFullscreen(bool fullscreen) = 0;
+    virtual bool setFullscreen(bool fullscreen) = 0;
     virtual void setScissorRect(core::CRect<int>* rect) = 0;
     virtual void setRenderScreenSize(int width, int height) = 0;
     virtual void setForcePointSampling(bool force) = 0;
