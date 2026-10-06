@@ -76,7 +76,7 @@
     <a id="steam" href="steam://nav/games/details/15400" title="Open Harvest in Steam"></a>
     <a id="open-steam" href="steam://nav/games/details/15400">Open in Steam</a>
   </div>
-  <div id="drive" role="button" tabindex="0" title="Drop the game here, or click to choose its folder">
+  <div id="drive" role="button" tabindex="0" title="Drop the game (its folder or a zip of it) here, or click to choose its folder">
     <img id="disc" src="assets/cd-rom.webp" alt="">
     <svg id="ring" viewBox="-1 -1 102 102"><circle cx="50" cy="50" r="50" pathLength="100"/></svg>
     <button id="eject" title="Eject (forget the game data)">&#x23CF;</button>
@@ -211,9 +211,62 @@ function clientDataPath(path) {
   return at < 0 ? null : parts.slice(at).join("/");
 }
 
+// ---- zip files ----
+
+// A zip given instead of a folder (a zipped install, Harvest Steam.app or harvestClientData) is read
+// here: its central directory lists the entries, and DecompressionStream inflates them. Zips inside
+// harvestClientData are the game's own mods and stay as they are.
+const isOuterZip = (e) => /\.zip$/i.test(e.path) && clientDataPath(e.path) === null;
+
+async function expandZips(entries) {
+  const out = [];
+  for (const e of entries) {
+    if (isOuterZip(e)) out.push(...zipEntries(await e.read()));
+    else out.push(e);
+  }
+  return out;
+}
+
+function zipEntries(buffer) {
+  const view = new DataView(buffer);
+  const u16 = (at) => view.getUint16(at, true);
+  const u32 = (at) => view.getUint32(at, true);
+  // The end of central directory record, within the last 64 KB (its comment can be that long).
+  let end = -1;
+  for (let at = buffer.byteLength - 22; at >= Math.max(0, buffer.byteLength - 65557); at--)
+    if (u32(at) === 0x06054b50) { end = at; break; }
+  if (end < 0) throw new Error("not a zip file");
+  const count = u16(end + 10);
+  let at = u32(end + 16);
+  if (at === 0xffffffff) throw new Error("zip64 archives are not supported");
+  const utf8 = new TextDecoder();
+  const entries = [];
+  for (let i = 0; i < count; i++) {
+    if (u32(at) !== 0x02014b50) throw new Error("damaged central directory");
+    const method = u16(at + 10);
+    const size = u32(at + 20);
+    const nameLength = u16(at + 28);
+    const local = u32(at + 42);
+    const path = utf8.decode(new Uint8Array(buffer, at + 46, nameLength));
+    at += 46 + nameLength + u16(at + 30) + u16(at + 32);
+    if (path.endsWith("/") || path.startsWith("__MACOSX/")) continue;
+    if (method !== 0 && method !== 8) throw new Error(`${path} uses compression method ${method}`);
+    const data = local + 30 + u16(local + 26) + u16(local + 28);
+    const bytes = new Uint8Array(buffer, data, size);
+    entries.push({
+      path,
+      read: () => method === 0 ? Promise.resolve(bytes.slice().buffer)
+        : new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer(),
+    });
+  }
+  return entries;
+}
+
 async function accept(entries) {
   // entries: [{ path, read: () => Promise<ArrayBuffer> }]
   if (!storageReady) { pending = entries; setState("loading"); spin(240); return; }
+  try { entries = await expandZips(entries); }
+  catch (err) { return fail(`Cannot read that zip: ${err.message || err}`); }
   const wanted = entries
     .map((e) => ({ ...e, path: clientDataPath(e.path) }))
     .filter((e) => e.path && !e.path.split("/").some((p) => p.startsWith(".")));
@@ -313,10 +366,15 @@ addEventListener("drop", async (e) => {
   accept(out);
 });
 
-// Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file.
+// Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file,
+// or, for a <url> ending in .zip, that zip.
 function devData() {
   const dataUrl = new URLSearchParams(location.search).get("data");
   if (!dataUrl) return;
+  if (/\.zip$/i.test(dataUrl)) {
+    accept([{ path: dataUrl, read: () => fetch(dataUrl).then((r) => r.arrayBuffer()) }]);
+    return;
+  }
   const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
   fetch(base + "manifest.json").then((r) => r.json()).then((paths) => accept(paths.map((p) => ({
     path: p, read: () => fetch(base + p.split("/").map(encodeURIComponent).join("/")).then((r) => r.arrayBuffer()),
