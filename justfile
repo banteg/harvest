@@ -127,13 +127,21 @@ play *args:
     cd port && zig build harvest -Doptimize=ReleaseFast
     port/zig-out/bin/harvest --data "{{data}}" {{args}}
 
-# build the port for every desktop target from this machine, plus an optimized host build
+# build the port for every target from this machine, plus an optimized host build
 # (optimized builds inline more, so they catch inline functions that are declared but never defined)
-build-all:
+build-all: web
     cd port && zig build harvest
     cd port && zig build harvest -Doptimize=ReleaseFast
     cd port && zig build harvest -Dtarget=x86_64-linux-gnu -p zig-out/x86_64-linux
     cd port && zig build harvest -Dtarget=x86_64-windows-gnu -p zig-out/x86_64-windows
+
+# build the web port into port/zig-out/web (needs Emscripten: em-config and em++ on PATH)
+web *args:
+    cd port && zig build harvest -Dtarget=wasm32-emscripten -Doptimize=ReleaseFast -p zig-out/web {{args}}
+
+# serve the web port on localhost; drop your game folder onto the page
+serve-web port="8000": web
+    uv run python -m http.server {{port}} --bind 127.0.0.1 -d port/zig-out/web
 
 # build release packages of the port into port/zig-out/packages: macos, windows, linux or all
 package target="all":

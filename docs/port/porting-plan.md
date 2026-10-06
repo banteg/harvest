@@ -25,8 +25,9 @@ underneath it. It targets macOS, Linux, Windows and the web.
   - the menu's Cg shaders translated to GLSL ES 3.0.
 - **Dropped:** Cg, GTK, SFML, OpenAL and ALUT, X11, LuaJIT, the online highscores (the server is
   gone; the network device fails cleanly).
-- **Web:** Emscripten through zig. The main loop must not block, so the game's frame step runs from
-  SDL3's main callbacks on every platform.
+- **Web:** Emscripten through zig: zig compiles against Emscripten's sysroot and em++ links
+  ([web.md](web.md)). The main loop must not block, so the game's frame step runs from SDL3's main
+  callbacks on every platform.
 - **Original bugs** ([original-bugs.md](original-bugs.md)) are fixed in the port by default where they
   break things, with a switch to keep the original behaviour (as Crimsonland's rewrite does with
   `--preserve-bugs`). Quirks the game was tuned around stay as they are.

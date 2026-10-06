@@ -367,10 +367,12 @@ addEventListener("drop", async (e) => {
 });
 
 // Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file,
-// or, for a <url> ending in .zip, that zip.
+// or, for a <url> ending in .zip, that zip. Only on a local server, so a link to the published page
+// cannot hand players someone else's copy.
+const LOCAL_HOSTS = ["localhost", "127.0.0.1", "[::1]"];
 function devData() {
   const dataUrl = new URLSearchParams(location.search).get("data");
-  if (!dataUrl) return;
+  if (!dataUrl || !LOCAL_HOSTS.includes(location.hostname)) return;
   if (/\.zip$/i.test(dataUrl)) {
     accept([{ path: dataUrl, read: () => fetch(dataUrl).then((r) => r.arrayBuffer()) }]);
     return;

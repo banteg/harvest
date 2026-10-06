@@ -21,5 +21,3 @@ __pycache__/
 /port/zig-out/
 /port/zig-pkg/
 
-# nix build output links
-/result*

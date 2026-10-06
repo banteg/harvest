@@ -1,44 +1,52 @@
 name: Web build
 
-# Builds the port for the web with Nix (`nix build .#web`) and publishes it to GitHub Pages. The page
-# has no game data; players give it their own copy.
+# Builds the port for the web (zig compiles, Emscripten links; see docs/port/web.md) and publishes it
+# to GitHub Pages from master. The page has no game data; players give it their own copy.
 
 on:
   push:
     branches: [master]
-    paths: ['flake.nix', 'flake.lock', 'port/**', 'src/**', 'config/**', '.github/workflows/web.yml']
+    paths: ['port/**', 'src/**', 'config/**', '.github/workflows/web.yml']
+  pull_request:
+    paths: ['port/**', 'src/**', 'config/**', '.github/workflows/web.yml']
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v31
-      - name: Build
-        run: nix build -L .#web
-      - name: Collect the site
-        run: mkdir _site && cp -rL --no-preserve=mode result/. _site/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: mlugg/setup-zig@d1434d08867e3ee9daa34448df10607b98908d29 # v2.2.1
         with:
-          path: _site
+          version: 0.17.0
+      - uses: mymindstorm/setup-emsdk@4528d102f7230f0e7b276855c01ea1159be0e984 # v16
+        with:
+          version: 6.0.10
+          actions-cache-folder: emsdk-cache
+      - name: Build
+        working-directory: port
+        run: zig build harvest -Dtarget=wasm32-emscripten -Doptimize=ReleaseFast -p zig-out/web
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: port/zig-out/web
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
