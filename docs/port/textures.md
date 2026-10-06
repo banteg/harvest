@@ -106,7 +106,10 @@ The shipped TGAs are all 32-bit, uncompressed, origin bottom-left (descriptor `0
 loaders decode with stb_image and keep the rules above: the name and content tests, R8G8B8 JPEGs, TGA
 types 2 and 10 at 16/24/32 bits only, and the always-bottom-up orientation (a top-left-origin file
 is flipped back to how the original shows it). Grayscale JPEGs decode correctly, and 16-bit TGAs
-load opaque. The BMP, PSD and PCX loaders accept nothing.
+load opaque. The BMP loader ([`ImageLoaderBmp.cpp`](../../port/src/video/ImageLoaderBmp.cpp)) is
+Irrlicht 0.7's: `.bmp` name test, `BM` content test, uncompressed 1/4/8-bit (to A1R5G5B5 through the
+palette) and 24-bit files; its only user is the GUI's built-in font, a 128 × 128 4-bit BMP loaded from
+memory as `#DefaultFont`, which only the content test finds. The PSD and PCX loaders accept nothing.
 
 ## Colour formats
 

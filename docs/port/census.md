@@ -82,9 +82,11 @@ The `replaced` list in `build.zig`:
 | `video/ColorFormats.h` | `port::ECF_R5G6B5`, `port::ECF_R8G8B8`, `A1R5G5B5toA8R8G8B8` | the formats the recovered enum leaves out |
 | `video/CSoftwareTexture.cpp` | `daisy::video::CSoftwareTexture` | empty: the renderer overrides `createDeviceDependentTexture` |
 | `video/ImageLoaderStb.cpp` | `createImageLoaderJPG`, `createImageLoaderTGA` | stb_image with the original's rules ([textures.md](textures.md)) |
-| `video/ImageLoaderStubs.cpp` | `createImageLoaderBmp`, `createImageLoaderPSD`, `createImageLoaderPCX` | loaders that accept nothing (they must not be null: `CVideoNull` calls and drops every loader) |
+| `video/ImageLoaderBmp.cpp` | `createImageLoaderBmp` | Irrlicht 0.7's BMP loader (uncompressed 1/4/8/24-bit), for the GUI's built-in font |
+| `video/ImageLoaderStubs.cpp` | `createImageLoaderPSD`, `createImageLoaderPCX` | loaders that accept nothing (they must not be null: `CVideoNull` calls and drops every loader) |
+| `video/CVideoGL.{h,cpp}`, `CFixedFunction.*`, `CTextureGL.*`, `MaterialRenderers.h`, `CCgMaterialRendererGL.*`, `GL.*`, `Shaders.*`, `shaders/` | `port::createVideoDriver` | the OpenGL ES 3.0 / OpenGL 3.3 core renderer, per [renderer.md](renderer.md#in-the-port); `port/tests/video.cpp` draws the 2D primitives, the scattering materials and the menu scene and saves screenshots |
 | `scene/` | `daisy::scene::createSceneManager`, the bodies of `ox::scene::ISceneNode` | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, light, billboard and skybox nodes, rotation animator, bounding-box picking, OBJ loader; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
-| `thirdparty/stb_image.c`, `thirdparty/miniaudio.c` | the libraries' implementations | stb_image: JPEG, TGA, PNG, from memory only; miniaudio with stb_vorbis |
+| `thirdparty/stb_image.c`, `thirdparty/stb_image_write.c`, `thirdparty/miniaudio.c` | the libraries' implementations | stb_image: JPEG, TGA, PNG, from memory only; stb_image_write: JPEG to a callback (screenshots); miniaudio with stb_vorbis |
 
 ## Source changes for the port
 
