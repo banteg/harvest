@@ -33,6 +33,7 @@ int CCGMaterialRenderer::init(CGcontext context, const char* vertexProgram, cons
     return -1;
 }
 
+//! Original bug: the callback grabbed by the constructor is never dropped.
 CCGMaterialRenderer::~CCGMaterialRenderer()
 {
     if (VertexProgram)
