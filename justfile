@@ -127,9 +127,11 @@ play *args:
     cd port && zig build harvest -Doptimize=ReleaseFast
     port/zig-out/bin/harvest --data "{{data}}" {{args}}
 
-# build the port for every desktop target from this machine
+# build the port for every desktop target from this machine, plus an optimized host build
+# (optimized builds inline more, so they catch inline functions that are declared but never defined)
 build-all:
     cd port && zig build harvest
+    cd port && zig build harvest -Doptimize=ReleaseFast
     cd port && zig build harvest -Dtarget=x86_64-linux-gnu
     cd port && zig build harvest -Dtarget=x86_64-windows-gnu
 

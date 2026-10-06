@@ -6,6 +6,7 @@
 
 #include "CGUIModalScreen.h"
 #include "ox/gui/IGUIElementInline.h"
+#include "ox/gui/IGUILayoutInline.h"
 #include "ox/gui/IGUIEnvironment.h"
 #include "ox/gui/IGUISkin.h"
 #include "ox/video/IVideoDriver.h"

@@ -2,6 +2,7 @@
 
 #include "CGUIClickArea.h"
 #include "ox/gui/IGUIElementInline.h"
+#include "ox/gui/IGUILayoutInline.h"
 // The object has an iostream initializer; the original including header is unidentified.
 #include <iostream>
 
