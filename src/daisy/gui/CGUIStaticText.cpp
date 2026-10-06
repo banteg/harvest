@@ -50,6 +50,11 @@ CGUIStaticText::CGUIStaticText(const wchar_t* text, bool border, ox::gui::IGUIEn
 {
     OverrideColor = ox::video::SColor(101, 255, 255, 255);
     Text = text;
+#ifdef HARVEST_PORT
+    // only setParagraphIcon sets it, but draw reads it for every revealing text (harmlessly, since
+    // IconLines is 0 without an icon); UBSan traps on the uninitialised bool
+    IconRight = false;
+#endif
 }
 
 //! destructor

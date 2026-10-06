@@ -289,6 +289,17 @@ simply write the intended code.
   `PromoteButtons[4][2][4]` as if it were `[4][4][4]`; the flat index reaches 39 of 32, zeroing the
   seven member pointers after the array (all set later) and the first word of an already initialised
   mutex. UBSan traps on it when the main menu loads, so the port clears only the array.
+- **`CGUIStaticText::IconRight`** ([`CGUIStaticText.cpp`](../../src/daisy/gui/CGUIStaticText.cpp)) is
+  set only by `setParagraphIcon`, but `draw` reads it for every text with a progressive reveal (the
+  main menu's planet popup). Without an icon `IconLines` is 0, so the value never matters. UBSan
+  traps when the heap hands out non-zero memory (Windows), so the port clears it in the constructor.
+- **`COxEntityManager::ListChanged`** ([`COxEntityManager.cpp`](../../src/ox/entity/COxEntityManager.cpp))
+  is a `new bool[]` left uninitialised; `updateReference` can read a layer's flag before the first
+  update sets it, at worst locating an entity again. UBSan traps on it on Windows when a game starts,
+  so the port value-initialises the array.
+- **`wideToAnsi`** ([`CStringFunctions.h`](../../src/ox/core/CStringFunctions.h)) sizes its buffer
+  in characters, so a multibyte (UTF-8) result is cut short. Only log lines and the unused highscore
+  host are narrowed.
 - **`ansiToWide`** ([`CStringConversions.h`](../../src/ox/core/CStringConversions.h)) frees its
   temporary `wchar_t` array with scalar `delete` instead of `delete[]`.
 - **Zip file listings** ([`CZipFileList.cpp`](../../src/daisy/io/CZipFileList.cpp)): the getters accept

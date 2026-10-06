@@ -16,7 +16,13 @@ COxEntityManager::COxEntityManager(int layers)
 {
     EntityLists = new std::list<COxEntity*>[layers];
     PendingEntities = new std::list<COxEntity*>[layers];
+#ifdef HARVEST_PORT
+    // cleared: updateReference reads the flags before the first update sets them (the original's
+    // garbage only re-located the entity); UBSan traps on a bool that is neither 0 nor 1
+    ListChanged = new bool[layers]();
+#else
     ListChanged = new bool[layers];
+#endif
 }
 
 COxEntityManager::~COxEntityManager()
