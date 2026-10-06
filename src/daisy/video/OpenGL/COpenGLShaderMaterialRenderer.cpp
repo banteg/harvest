@@ -36,7 +36,7 @@ COpenGLShaderMaterialRenderer::COpenGLShaderMaterialRenderer(CVideoOpenGL* drive
         return;
 
     // register as a new material
-    outMaterialTypeNr = Driver->addMaterialRenderer(this, 0);
+    outMaterialTypeNr = driver->addMaterialRenderer(this, 0);
 }
 
 COpenGLShaderMaterialRenderer::~COpenGLShaderMaterialRenderer()
