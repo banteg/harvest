@@ -1,0 +1,42 @@
+# The Windows smoke test's input (port/smoke/smoke-windows.sh, --input-script): intro, a new
+# profile with a non-ASCII name, the main menu, the settings and back, the profile list, a second
+# profile, and the introduction (the tutorial game). Frames count only while no state loads.
+# Positions are for a 1024x768 window at scale 1 (Wine reports 96 DPI).
+0 size 1024 768
+
+# the Oxeye splash (the intro's second phase), then skip the intro
+200 screenshot intro
+210 key space
+220 key space
+
+# first run: the welcome dialog asks for a name
+450 screenshot welcome
+460 click 526 372
+470 text Zoë Ångström
+490 screenshot welcome-typed
+500 click 511 433
+
+# "Would you like to play the introduction?": skip, to the main menu
+600 click 583 515
+700 screenshot menu
+
+# settings (language list, resolutions), then Done
+710 click 295 672
+900 screenshot settings
+910 click 635 593
+
+# the profile list, then a second profile
+1000 click 210 680
+1200 screenshot profiles
+1210 click 618 298
+1400 screenshot profile-create
+1410 click 526 372
+1420 text Jörg Ærø
+1440 click 564 423
+
+# this time play the introduction: the tutorial game
+1600 screenshot introduction-question
+1610 click 438 515
+1900 screenshot game
+2300 screenshot game-later
+2310 quit

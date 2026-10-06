@@ -144,6 +144,10 @@ port-test name *args:
     if [ "{{name}}" = audio ]; then path="$path/harvestClientData/sfx/"; fi
     cd port && zig build "test-{{name}}" -- "$path" {{args}}
 
+# build the Windows port and run it under Wine through the menus into a game (screenshots in build/smoke/windows)
+smoke-windows *args:
+    port/smoke/smoke-windows.sh {{args}}
+
 # show the port's unresolved-symbol census
 census:
     uv run python port/tools/census.py
