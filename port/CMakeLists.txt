@@ -94,6 +94,10 @@ add_executable(harvest ${units} ${port_sources} src/main.cpp)
 # GCC 4.4's default dialect, which the recovered code needs no changes for.
 set_target_properties(harvest PROPERTIES CXX_STANDARD 98 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS ON)
 target_compile_definitions(harvest PRIVATE HARVEST_PORT)
+if(MINGW)
+  # mingw-w64's printf family, which formats wide strings with glibc's rules (see build.zig).
+  target_compile_definitions(harvest PRIVATE __USE_MINGW_ANSI_STDIO=1)
+endif()
 target_include_directories(harvest PRIVATE "${repo}/src" "${repo}/src/HarvestFull" src)
 # The original relies on two's-complement wrapping in its integer arithmetic.
 target_compile_options(harvest PRIVATE -fwrapv)
