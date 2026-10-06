@@ -95,16 +95,16 @@ bool CZipReader::scanLocalHeader()
         // The sizes follow the data: search for the descriptor signature "PK\7\8". A mismatch
         // restarts the search at the next byte without retrying it as the first signature byte.
         const char SEQUENCE[4] = { 'P', 'K', 7, 8 };
-        for (int i = 0; i < 4; )
+        int i = 0;
+        do
         {
             char c = 0;
             if (File->read(&c, 1) != 1)
                 break;
-            if (c == SEQUENCE[i])
-                ++i;
-            else
+            if (c != SEQUENCE[i++])
                 i = 0;
         }
+        while (i < 4);
 
         entry.header.DataDescriptor.CRC32 = ox::io::CHelpIO::readInt(File);
         entry.header.DataDescriptor.CompressedSize = ox::io::CHelpIO::readInt(File);
@@ -209,10 +209,13 @@ int CZipReader::findFile(const char* simpleFilename)
     int result = -1;
     for (unsigned int i = 0; i < FileList.size(); ++i)
     {
-        if (FileList[i].simpleFileName == entry.simpleFileName && FileList[i].path == entry.path)
+        if (FileList[i].simpleFileName == entry.simpleFileName)
         {
-            result = i;
-            break;
+            if (FileList[i].path == entry.path)
+            {
+                result = i;
+                break;
+            }
         }
     }
 
