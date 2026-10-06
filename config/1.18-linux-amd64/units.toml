@@ -554,3 +554,43 @@
 ["daisy/video/Null/CVideoNull.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c068
+
+["daisy/other/os.cpp"]
+# daisy::os::Printer::Logger, then the iostream initializer object and the timers' static timevals
+".bss" = 0x86bff0
+
+["daisy/audio/COpenALDriver.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c07c
+# exception tables, first the destructor's
+".gcc_except_table" = 0x6601c8
+
+["daisy/input/CJoystickLinuxDriver.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0cc
+
+["daisy/input/CJoystickNullDriver.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c0d0
+
+["daisy/other/CLinuxOperator.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86bfe0
+
+["daisy/other/CIrrDeviceStub.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86bfdc
+
+["daisy/other/CLogger.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86bfe4
+# logWithInfo's level-name table (a converted switch)
+".rodata" = 0x60c960
+
+["daisy/other/CIrrDeviceLinux.cpp"]
+# the static X display pointer, then the iostream initializer object
+".bss" = 0x86bfd0
+
+["daisy/video/CVideoModeList.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c060
