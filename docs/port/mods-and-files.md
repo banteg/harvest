@@ -227,10 +227,5 @@ deflated entries) are in [zip-archives.md](zip-archives.md). Lookups inside an a
 case-sensitive and use the full path, so `main.lua`, `favicon.tga` and the folder named in the
 `.hmd` must match the stored names exactly.
 
-Placeholder for the rest of the file system notes:
-
-- how `$GAME_RESOURCES$` and `$HARVEST_USERDATA$` are resolved;
-- how a path such as `…/mods/NormalMode.zip/normal/main.lua` is split into an archive and an entry;
-- how `createFileList("*.hmd", <dir or archive>, mode)` matches names (mode 1 lists a directory,
-  mode 0 an archive) and whether it descends into subfolders;
-- the exact meaning of `existFile`'s second argument (mod-level behaviour as observed above).
+Aliases, paths into archives, file lists and their sort order are described in
+[file-system.md](file-system.md).

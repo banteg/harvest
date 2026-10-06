@@ -17,8 +17,8 @@
     "tools/hv/objdiff.py": "42c9a70aa08710804f18a5f6afa2e6f939b91e801ab6ee4ba8f9bae38d971145",
     "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "ed1618e8f0a0185489fcf6edbf79ad4a3a4ab299b9156919c73cf6c8bbf0049f",
-    "config/1.18-linux-amd64/units.toml": "d089d5a9d8f843a382dc93df1d5409e6fa66c95fdb774ce7892089dd34b598cb"
+    "config/1.18-linux-amd64/symbols.tsv": "d3536ce07b0248dde439a908837e9bafbf0a405434215c7fe750f1ef228b9ba1",
+    "config/1.18-linux-amd64/units.toml": "42fa5284edef68aa756f0bd419f726cc15621c8c3c7ca1aa9ddb50d318aef38e"
   },
   "units": [
     {
@@ -2129,8 +2129,8 @@
         ],
         "inputs": {
           "src/ox/io/CMemReadFile.cpp": "85567b99bd8bfa6293720796c171e3a9e9cef9fcc7ded830e0ef96ee5cfbfbb7",
-          "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
         },
         "system_headers": 102,
@@ -5887,11 +5887,11 @@
           "src/ox/core/CHiddenFloat.h": "5030941eba704edd2d4d8d9e1236d29af77b85b05df0bbea1dd33b0c1d38b1e9",
           "src/ox/core/../algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/../io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/core/../io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/core/../io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/core/../io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/../io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/core/../io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/core/../io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/core/../io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 106,
         "object_sha256": "aed05d44e84fa61c3dabd0fe7696c91ebf3a6581d66367b2968b340972f30039"
@@ -6224,11 +6224,11 @@
           "src/ox/core/CHiddenInt.h": "939d3308395db3fc5ca12cb89e6627301452b30cfe8167f3b26115f46f5f33f6",
           "src/ox/core/../algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
           "src/ox/core/../io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/core/../io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/core/../io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/core/../io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/../io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/core/../io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/core/../io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/core/../io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 106,
         "object_sha256": "b5ee5f0158ecaed6ccc98aacde0139789441d64a54980986ed26a918cf5a7d9e"
@@ -6954,11 +6954,11 @@
         "inputs": {
           "src/ox/io/CHelpIO.cpp": "aa060f55d53f54a01e37ccbf93fea9debe0235d0ae6d31bc6981587910874a91",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 106,
         "object_sha256": "49b49033e96b209d69a58d659912f3335c164314dd5164ef7209c44c9f2e57b7"
@@ -9177,11 +9177,11 @@
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 150,
         "object_sha256": "56ca4b21f492b0c55e65c25807d84be7930c4d3ca35dd771a2c16f301e36c2bf"
@@ -11687,11 +11687,11 @@
           "src/HarvestFull/harvest/entity/CSparkProducerEntity.h": "a8226039c7a94c556d4756329968a89ef68e9183b14028751959cbb05fd9de44",
           "src/ox/entity/ITestEntityFunction.h": "b178c234a2902d6a14e5584e0870db48927a7a02e2fd3d12a01ff408ffa4f9af",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -13647,11 +13647,11 @@
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
@@ -14450,11 +14450,11 @@
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "b6c82e24b6f2820f2d3cc0e4756e954cb1999fef0fb68f41173d3cee3df52604",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
@@ -15265,11 +15265,11 @@
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "b6c82e24b6f2820f2d3cc0e4756e954cb1999fef0fb68f41173d3cee3df52604",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
@@ -16032,11 +16032,11 @@
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "b6c82e24b6f2820f2d3cc0e4756e954cb1999fef0fb68f41173d3cee3df52604",
           "src/ox/core/CMath.h": "638a6f202ae1063de58b70c3fd43d602eb53daea15e9ef292bd4834472a8ecba",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -17144,11 +17144,11 @@
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "b6c82e24b6f2820f2d3cc0e4756e954cb1999fef0fb68f41173d3cee3df52604",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -18339,11 +18339,11 @@
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CMath.h": "638a6f202ae1063de58b70c3fd43d602eb53daea15e9ef292bd4834472a8ecba",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -19221,11 +19221,11 @@
           "src/ox/event/../Keycodes.h": "a63451a6712cc89fb52f4af92239caf2db9f0f7d7f2876ec1c81bc64cf287997",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
@@ -19660,11 +19660,11 @@
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/settings/CAlienPriorities.h": "5142c1d66d9e1513171353b38b667aa34d2f70aabb0868b23570c189dc2938f3",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 121,
         "object_sha256": "552016e9b8d0e83ff2023b3773b7d8e2827cbad9f8a8109bf184adeea38a8b55"
@@ -36471,11 +36471,11 @@
           "src/ox/event/../Keycodes.h": "a63451a6712cc89fb52f4af92239caf2db9f0f7d7f2876ec1c81bc64cf287997",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -36791,7 +36791,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CMissileTurretEntity.cpp",
-      "object_sha256": "bf3abdd84dcc636433c568fbb439e1c5e64bbe9e74c7eb434bcc251ee640e0b5",
+      "object_sha256": "ec94b4d3605b0d953d824e1d64e63e59dd97304c815d77cd0d3d348a151e887c",
       "exact": false,
       "sections": [
         {
@@ -39936,11 +39936,11 @@
           "src/HarvestFull/harvest/settings/CAlienPriorities.h": "5142c1d66d9e1513171353b38b667aa34d2f70aabb0868b23570c189dc2938f3",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -39948,7 +39948,7 @@
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea"
         },
         "system_headers": 147,
-        "object_sha256": "bf3abdd84dcc636433c568fbb439e1c5e64bbe9e74c7eb434bcc251ee640e0b5"
+        "object_sha256": "ec94b4d3605b0d953d824e1d64e63e59dd97304c815d77cd0d3d348a151e887c"
       },
       "fuzzy_target_sha256": "e82e4ae644a45b303bc731e03413e8b0d73d7b024cabd9eafaede135512adf83",
       "fuzzy_functions": [
@@ -40184,7 +40184,7 @@
           "address": "0x437d50",
           "size": 2930,
           "symbol": "_ZN7harvest6entity14CMissileEntity11updateLogicEf",
-          "percent": 81.35267
+          "percent": 81.367935
         },
         {
           "address": "0x4388d0",
@@ -50297,11 +50297,11 @@
           "src/HarvestFull/harvest/entity/CBuildableItems.h": "23bf725f90672ecd931ea978334c9004eb04d5c39e9d75be4f3efbe92f8816eb",
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/video/IParticlePackage.h": "5c3da56d5012cdbc3fcff60e54ecfa2d01be30f258ffdc1bb291dcfcab53d501",
@@ -60399,11 +60399,11 @@
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/game/CLuaFileValues.h": "8d23ac8a9fed3947def984987e5041fcd3b1c0aacd019681b2aa4c3ea72c3efa",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/IVideoDriver.h": "ce4ff374323ab2c5de8df573c08d162b48dec3b09eddcd848953bd2ae6891640",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
@@ -61735,11 +61735,11 @@
         "inputs": {
           "src/HarvestFull/harvest/entity/CEntityManager.cpp": "16774a8b3a3d5e9464444a28506ffd641ed45b676e92064f487e32593f1c6b73",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -64246,11 +64246,11 @@
           "src/ox/core/CMath.h": "638a6f202ae1063de58b70c3fd43d602eb53daea15e9ef292bd4834472a8ecba",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 129,
         "object_sha256": "33f875378de01c74c195ec2754e05b75c5535061cf20c5cb6cebc10bd3e839dd"
@@ -65057,12 +65057,12 @@
           "src/ox/entity/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962",
           "src/ox/algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a"
         },
@@ -78447,11 +78447,11 @@
           "src/ox/gui/../event/IEventReceiver.h": "3f70bf291238698993e1aa9f84210496532e8ffc17fa70974977501ea3fbd5a1",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/IFilePath.h": "33f06e269f72865b54cac98b25f7314ed3b253305cda44406104f5351bf3d424",
           "src/ox/lua/lunar.h": "ae76261d81282629a4624e799851f955c0c92519695bcf7e28fd8d617b856504",
@@ -81134,9 +81134,9 @@
           "src/ox/game/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/video/IVideoDriver.h": "ce4ff374323ab2c5de8df573c08d162b48dec3b09eddcd848953bd2ae6891640",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -84446,9 +84446,9 @@
           "src/ox/gui/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/gui/../event/IEventReceiver.h": "3f70bf291238698993e1aa9f84210496532e8ffc17fa70974977501ea3fbd5a1",
           "src/ox/gui/IGUISkin.h": "f7d4a7096818a44ca922cc640054e90825bc01d6ade41f3e1536ab60b0924ed4",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/audio/IAudioDriver.h": "6c38ef5430ce026aa9d79d6b29b5dfd998dd0b7627813fe9efa877f41155cb32",
           "src/ox/audio/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -96966,11 +96966,11 @@
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/gui/IGUIWindow.h": "ef620b696de4833d9e278618f9dea881e75bd909b36006e70619108ddb63890c",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962",
           "src/ox/video/IParticleState.h": "b14f045c75fe33497d2c4c02f38a9efba845f32749f3d06e7d860ee814766b27",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -101552,7 +101552,7 @@
           "src/ox/IOxDevice.h": "5a6c54eeb707ffd797264eafcdb0e1dea958f208606fec11019863eacb9fbc42",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
           "src/ox/core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -101577,8 +101577,8 @@
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962",
           "src/ox/net/CHTTPConnectionHandler.h": "e2186dc016ece3cac85cac00699bfc6586a28c6d1fabdc0620b2c72216b6d9ca",
           "src/ox/net/../event/IEventReceiver.h": "3f70bf291238698993e1aa9f84210496532e8ffc17fa70974977501ea3fbd5a1",
@@ -103421,7 +103421,7 @@
           "src/HarvestFull/harvest/settings/CHarvestProfile.h": "daf3f0448033b7e80b0056644a09c2f1b78d4999469f4453b0c3b6b4599c236b",
           "src/ox/Keycodes.h": "a63451a6712cc89fb52f4af92239caf2db9f0f7d7f2876ec1c81bc64cf287997",
           "src/ox/algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
@@ -103431,8 +103431,8 @@
           "src/ox/game/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
-          "src/ox/io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/ox/io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962"
         },
         "system_headers": 131,
@@ -104612,9 +104612,9 @@
           "src/ox/game/CConfiguration.h": "7b4c5d5c6e6e93411d781b6415f5d1399941c3e5b2734ae74ab332d2b5c62945",
           "src/ox/game/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d"
         },
         "system_headers": 121,
@@ -114452,9 +114452,9 @@
           "src/ox/gui/../event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -121282,9 +121282,9 @@
           "src/ox/audio/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/core/CLine3d.h": "64f5b7775e1e68160606381c9f930286515268a91e928f52d358dda3597f6282",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/gui/IGUIButton.h": "c4bf143a453416f1607b8074ae3816c1452973a4e5d12ef5e098b07854043b78",
           "src/ox/gui/IGUIElement.h": "3b1a6381f8baf0d0e937f4f10a0a26efd3b529b6b1ac74ed58309321ffa93335",
@@ -123163,10 +123163,10 @@
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
@@ -124312,11 +124312,11 @@
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
           "src/ox/algo/SPointerSortFunctor.h": "0c29ef987a5d3d5572aae50cf8b634c510053e8059716acebd37f7a3f4416d72",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 139,
         "object_sha256": "08cc1db91013c477a6fb6ac58bf3f6f2505d1354d611ad1ff54bc5aa40243184"
@@ -125911,11 +125911,11 @@
           "src/ox/game/../core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
           "src/ox/game/../core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/game/../io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/game/../io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/game/../io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/game/../io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/game/../io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/game/../io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/game/../io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 124,
         "object_sha256": "2821ee0686736edef1f0dd9d5564dcb4c864dedfcc6fd5e7fcc434b1633a641f"
@@ -126064,7 +126064,7 @@
     },
     {
       "unit": "ox/game/CConfiguration.cpp",
-      "object_sha256": "5dd97b47d329ef676db61462307aff539883ead8333649347c7bfb6ad5439230",
+      "object_sha256": "f2b8eb58c55dc8f99787293c93983f13063dbb6a6c798a2bfde2fde376631a05",
       "exact": false,
       "sections": [
         {
@@ -126074,7 +126074,7 @@
           "exact": false,
           "address": "0x5e6530",
           "first_difference": 1854,
-          "differing_bytes": 2128,
+          "differing_bytes": 2129,
           "misplaced_symbols": [
             {
               "symbol": "_ZN2ox4game14CConfiguration8getBlockERKNS_4core7CStringIwEE",
@@ -127086,23 +127086,23 @@
           "src/ox/game/CConfigBlock.h": "b844ea34289f3eab0a7febf1f0e7ca9778d55da9851b4c6f04cf2e62dc2c8a4e",
           "src/ox/game/../algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/game/../core/CStringConversions.h": "d9d6d672227a18411b274adc5eeb604a9cb72d6781c05f6d238933344370c936",
           "src/ox/game/../core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
           "src/ox/game/../core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/game/../io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/game/../io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/game/../io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/game/../io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/game/../io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/game/../io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/game/../io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/game/../io/CMemReadFile.h": "c6687d5b69aca0859ddd42787a2bb922c08d09e795c70d239f7d4a3352dc2e98",
+          "src/ox/game/../io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/ox/game/../io/CMemWriteFile.h": "c48902575e05a448e02d4cb07f52d12cc3bee781a3510caf3ae267482fcdf962"
         },
         "system_headers": 124,
-        "object_sha256": "5dd97b47d329ef676db61462307aff539883ead8333649347c7bfb6ad5439230"
+        "object_sha256": "f2b8eb58c55dc8f99787293c93983f13063dbb6a6c798a2bfde2fde376631a05"
       },
       "fuzzy_target_sha256": "afdd933d2e834c3ae27663b9769fbfbe39d3deca829ff458104a4ca6667a330b",
       "fuzzy_functions": [
@@ -127284,7 +127284,7 @@
           "address": "0x5e8940",
           "size": 1991,
           "symbol": "_ZN2ox4game14CConfiguration11parseStringEPKwRNS_4core7CStringIwEERKS6_b",
-          "percent": 60.10546
+          "percent": 60.124294
         },
         {
           "address": "0x5e9110",
@@ -127636,10 +127636,10 @@
           "src/ox/audio/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/audio/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CThread.h": "25e5b4252bd09654f47a9a7cc9f89b36b41c37818f4be32ade879f9e796a4775",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/video/IVideoDriver.h": "ce4ff374323ab2c5de8df573c08d162b48dec3b09eddcd848953bd2ae6891640",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -131719,7 +131719,7 @@
           "src/ox/algo/CBase64url.cpp": "585565a4f1c9e7cb783cd31a8f3df8f1991f267fc0b07ef22270ee656617121c",
           "src/ox/algo/CBase64url.h": "6e92676d8ab3838aab68fe310b5554ae0382bc08b3629d0851d4c6ebb676427a",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d"
         },
@@ -136974,11 +136974,11 @@
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/video/ISpriteAnimationImage.h": "7ce4abfeb527993caa2a73ca0de1117bf8868885d93b01e7a2ca4408f6db62c2",
           "src/ox/video/ISpritePackage.h": "34ee49176bd1b91abeeddd5f98cf92d8d2cba7cce54f482b60e0a1adb681d9ea",
           "src/ox/video/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -139072,11 +139072,11 @@
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
           "src/ox/algo/SPointerSortFunctor.h": "0c29ef987a5d3d5572aae50cf8b634c510053e8059716acebd37f7a3f4416d72",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 141,
         "object_sha256": "047637043f70ab9b4e7a17044b0cf5b38e23c9a575f32bc8d814b168d4bbbb2b"
@@ -139611,11 +139611,11 @@
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/settings/CSavestateInfo.h": "eea61d981ebe27179dc4d7be38826788cfc50d6795ba360560bdd184b3250234",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562"
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 121,
         "object_sha256": "5cbad738f634e9c50cf077e1a354100676511234e265a3ea442b4ad61cfdde52"
@@ -160072,10 +160072,10 @@
           "src/ox/core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/gui/IGUIHoverItem.h": "9e17857e676c6392239728450dbc0feedc893ef8370cfd0ad3c423778097f791",
           "src/ox/gui/IGUISkin.h": "f7d4a7096818a44ca922cc640054e90825bc01d6ade41f3e1536ab60b0924ed4",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/video/IVideoDriver.h": "ce4ff374323ab2c5de8df573c08d162b48dec3b09eddcd848953bd2ae6891640",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -160085,7 +160085,8 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
-          "src/daisy/io/CMemoryReadFile.h": "a48c76c4bd7b30b0c7d4d8540d1a4e82f3868b7a211bb110d780bd4a29e074c6",
+          "src/daisy/io/CMemoryReadFile.h": "182b4cbfb68f9912b9bb76f6abc310d8c99fac316cfe7cee77fab2e0ea1d8de1",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/daisy/os.h": "223a265947f873c1ceec4351f2a82ce5ac4335860398484e3b6f090c759fc22b",
           "src/ox/event/ILogger.h": "0a30dbe9006cb43639e34eb899a1b8970b4a06468685578184ad6137c93d0444",
           "src/daisy/gui/BuildInFont.h": "bcf208289396d05e9da221d9f32c6691849821e22b8efeb514cba2f4ada17052",
@@ -178765,9 +178766,9 @@
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d"
         },
         "system_headers": 125,
@@ -191860,6 +191861,4121 @@
       ]
     },
     {
+      "unit": "daisy/io/CFileSystem.cpp",
+      "object_sha256": "05bbf510be9fa597098234c9a009d2f18e2e8a9036a388e80bcfd9850d7df863",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 18770,
+          "placement": "symbol: _ZN5daisy2io11CFileSystem19getWorkingDirectoryEv",
+          "exact": false,
+          "address": "0x52c630",
+          "first_difference": 2003,
+          "differing_bytes": 961,
+          "bad_references": [
+            {
+              "offset": 2237,
+              "type": 2,
+              "symbol": "_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base",
+              "addend": -4,
+              "destination": "0x407818",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2371,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2465,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2537,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2552,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2570,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2650,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2697,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2767,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2782,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2869,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 8,
+              "reason": "unmapped or truncated range: 0xfed85ff+0x1",
+              "matches": false
+            },
+            {
+              "offset": 2904,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+              "addend": -4,
+              "destination": "0x450390",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2928,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3038,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3062,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3107,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3115,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3125,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3133,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3161,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 411,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem19getWorkingDirectoryEv",
+              "address": "0x52c630",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io11CFileSystemC2Ev",
+              "address": "0x52c640",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem15createXMLWriterEPN2ox2io10IWriteFileE",
+              "address": "0x52c670",
+              "size": 78,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem14zipInflateDataEPhjS2_jRj",
+              "address": "0x52c6c0",
+              "size": 155,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem14zipDeflateDataEPhjS2_jRj",
+              "address": "0x52c760",
+              "size": 163,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem15createXMLWriterEPKc",
+              "address": "0x52c810",
+              "size": 75,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem15createXMLReaderEPKc",
+              "address": "0x52c860",
+              "size": 80,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem15createXMLReaderEPN2ox2io9IReadFileE",
+              "address": "0x52c8b0",
+              "size": 159,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem18readFileIntoMemoryEPKc",
+              "address": "0x52c950",
+              "size": 185,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem14dropZipReadersEv",
+              "address": "0x52ca10",
+              "size": 142,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystemD0Ev",
+              "address": "0x52caa0",
+              "size": 267,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystemD2Ev",
+              "address": "0x52cbb0",
+              "size": 260,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystemD1Ev",
+              "address": "0x52ccc0",
+              "size": 260,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem12getZipInPathEPKc",
+              "address": "0x52cdd0",
+              "size": 1215,
+              "fde": false,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem11addZipAliasEPKc",
+              "address": "0x52d290",
+              "size": 671,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem21getDirectoryFromAliasEPKc",
+              "address": "0x52d530",
+              "size": 843,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem17addDirectoryAliasEPKcS3_",
+              "address": "0x52d880",
+              "size": 1042,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystemC1Ev",
+              "address": "0x52dca0",
+              "size": 1507,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io16createFileSystemEv",
+              "address": "0x52e290",
+              "size": 61,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystemC2Ev",
+              "address": "0x52e2d0",
+              "size": 1507,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem21intern_resolveAliasesEPKc",
+              "address": "0x52e8c0",
+              "size": 2837,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem10renameFileEPKcS3_",
+              "address": "0x52f3e0",
+              "size": 147,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem10deleteFileEPKc",
+              "address": "0x52f480",
+              "size": 58,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem9existFileEPKcb",
+              "address": "0x52f4c0",
+              "size": 948,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem14resolveAliasesEPKc",
+              "address": "0x52f880",
+              "size": 315,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem14createFileListEPKcS3_N2ox2io9EFileListE",
+              "address": "0x52f9c0",
+              "size": 1336,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem15createDirectoryEPKc",
+              "address": "0x52ff00",
+              "size": 63,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem12getZipReaderEPKc",
+              "address": "0x52ff40",
+              "size": 1437,
+              "fde": true,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem18createAndWriteFileEPKcb",
+              "address": "0x5304e0",
+              "size": 95,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem24changeWorkingDirectoryToEPKc",
+              "address": "0x530540",
+              "size": 1450,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io11CFileSystem17createAndOpenFileEPKc",
+              "address": "0x530af0",
+              "size": 1170,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x617288",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617288",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56e2",
+              "size": 5,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x611708",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617290",
+              "size": 17,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6172a1",
+              "size": 23,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0d4",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0d4",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io11IFileSystemD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io11IFileSystemD1Ev",
+          "exact": true,
+          "address": "0x530fa0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io11IFileSystemD1Ev",
+              "address": "0x530fa0",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IFilePathD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io9IFilePathD1Ev",
+          "exact": true,
+          "address": "0x530f90",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IFilePathD1Ev",
+              "address": "0x530f90",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io9CFilePath7getPathEv",
+          "size": 5,
+          "placement": "symbol: _ZN5daisy2io9CFilePath7getPathEv",
+          "exact": true,
+          "address": "0x530fb0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CFilePath7getPathEv",
+              "address": "0x530fb0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IFilePathD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io9IFilePathD0Ev",
+          "exact": true,
+          "address": "0x530fc0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IFilePathD0Ev",
+              "address": "0x530fc0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io11IFileSystemD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io11IFileSystemD0Ev",
+          "exact": true,
+          "address": "0x530fd0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io11IFileSystemD0Ev",
+              "address": "0x530fd0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
+          "exact": true,
+          "address": "0x409c20",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "address": "0x409c20",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+          "size": 202,
+          "placement": "symbol: _ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+          "exact": true,
+          "address": "0x450390",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+              "address": "0x450390",
+              "size": 202,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
+          "size": 67,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
+          "exact": true,
+          "address": "0x530fe0",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
+              "address": "0x530fe0",
+              "size": 67,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEED1Ev",
+          "size": 26,
+          "placement": "symbol: _ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEED1Ev",
+          "exact": true,
+          "address": "0x531030",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEED1Ev",
+              "address": "0x531030",
+              "size": 26,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "size": 67,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "exact": true,
+          "address": "0x4bf930",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+              "address": "0x4bf930",
+              "size": 67,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt3mapIN2ox4core7CStringIcEEbSt4lessIS3_ESaISt4pairIKS3_bEEED1Ev",
+          "size": 26,
+          "placement": "symbol: _ZNSt3mapIN2ox4core7CStringIcEEbSt4lessIS3_ESaISt4pairIKS3_bEEED1Ev",
+          "exact": true,
+          "address": "0x4bf980",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEbSt4lessIS3_ESaISt4pairIKS3_bEEED1Ev",
+              "address": "0x4bf980",
+              "size": 26,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io9CFilePathD1Ev",
+          "size": 34,
+          "placement": "symbol: _ZN5daisy2io9CFilePathD1Ev",
+          "exact": true,
+          "address": "0x531080",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CFilePathD1Ev",
+              "address": "0x531080",
+              "size": 34,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt4pairIKN2ox4core7CStringIcEES3_ED1Ev",
+          "size": 34,
+          "placement": "symbol: _ZNSt4pairIKN2ox4core7CStringIcEES3_ED1Ev",
+          "exact": true,
+          "address": "0x5310b0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt4pairIKN2ox4core7CStringIcEES3_ED1Ev",
+              "address": "0x5310b0",
+              "size": 34,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io9CFilePathD0Ev",
+          "size": 41,
+          "placement": "symbol: _ZN5daisy2io9CFilePathD0Ev",
+          "exact": true,
+          "address": "0x531050",
+          "references": 4,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CFilePathD0Ev",
+              "address": "0x531050",
+              "size": 41,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "size": 81,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "exact": true,
+          "address": "0x5310e0",
+          "references": 4,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+              "address": "0x5310e0",
+              "size": 81,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt3mapIN2ox4core7CStringIcEES3_St4lessIS3_ESaISt4pairIKS3_S3_EEED1Ev",
+          "size": 26,
+          "placement": "symbol: _ZNSt3mapIN2ox4core7CStringIcEES3_St4lessIS3_ESaISt4pairIKS3_S3_EEED1Ev",
+          "exact": true,
+          "address": "0x531140",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt3mapIN2ox4core7CStringIcEES3_St4lessIS3_ESaISt4pairIKS3_S3_EEED1Ev",
+              "address": "0x531140",
+              "size": 26,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE10_M_insert_EPKSt18_Rb_tree_node_baseSJ_RKSA_",
+          "size": 359,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE10_M_insert_EPKSt18_Rb_tree_node_baseSJ_RKSA_",
+          "exact": true,
+          "address": "0x531160",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE10_M_insert_EPKSt18_Rb_tree_node_baseSJ_RKSA_",
+              "address": "0x531160",
+              "size": 359,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE16_M_insert_uniqueERKSA_",
+          "size": 354,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE16_M_insert_uniqueERKSA_",
+          "exact": true,
+          "address": "0x5312d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE16_M_insert_uniqueERKSA_",
+              "address": "0x5312d0",
+              "size": 354,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorISA_ERKSA_",
+          "size": 790,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorISA_ERKSA_",
+          "exact": true,
+          "address": "0x531440",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorISA_ERKSA_",
+              "address": "0x531440",
+              "size": 790,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "size": 359,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "exact": true,
+          "address": "0x4bf9f0",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+              "address": "0x4bf9f0",
+              "size": 359,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "size": 354,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "exact": true,
+          "address": "0x4bfb60",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+              "address": "0x4bfb60",
+              "size": 354,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "size": 790,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "exact": true,
+          "address": "0x4bfcd0",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+              "address": "0x4bfcd0",
+              "size": 790,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "size": 487,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "exact": false,
+          "address": "0x531760",
+          "first_difference": 355,
+          "differing_bytes": 1,
+          "references": 10,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+              "address": "0x531760",
+              "size": 487,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "size": 354,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "exact": true,
+          "address": "0x531950",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+              "address": "0x531950",
+              "size": 354,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "size": 790,
+          "placement": "symbol: _ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "exact": true,
+          "address": "0x531ac0",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+              "address": "0x531ac0",
+              "size": 790,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEEixERSB_",
+          "size": 473,
+          "placement": "symbol: _ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEEixERSB_",
+          "exact": false,
+          "address": "0x531de0",
+          "first_difference": 263,
+          "differing_bytes": 31,
+          "references": 5,
+          "functions": [
+            {
+              "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEEixERSB_",
+              "address": "0x531de0",
+              "size": 473,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io11CFileSystemE",
+          "size": 216,
+          "placement": "symbol: _ZTVN5daisy2io11CFileSystemE",
+          "exact": true,
+          "address": "0x6172c0",
+          "references": 26,
+          "data_ranges": [
+            {
+              "address": "0x6172c0",
+              "size": 216,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io11CFileSystemE",
+          "size": 25,
+          "placement": "symbol: _ZTSN5daisy2io11CFileSystemE",
+          "exact": true,
+          "address": "0x6173a0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6173a0",
+              "size": 25,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io11CFileSystemE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io11CFileSystemE",
+          "exact": true,
+          "address": "0x6173c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6173c0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io11IFileSystemE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io11IFileSystemE",
+          "exact": true,
+          "address": "0x6173e0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6173e0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io11IFileSystemE",
+          "size": 22,
+          "placement": "symbol: _ZTSN2ox2io11IFileSystemE",
+          "exact": true,
+          "address": "0x617400",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617400",
+              "size": 22,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io9CFilePathE",
+          "size": 40,
+          "placement": "symbol: _ZTVN5daisy2io9CFilePathE",
+          "exact": true,
+          "address": "0x617420",
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x617420",
+              "size": 40,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io9CFilePathE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io9CFilePathE",
+          "exact": true,
+          "address": "0x617450",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617450",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io9CFilePathE",
+          "size": 22,
+          "placement": "symbol: _ZTSN5daisy2io9CFilePathE",
+          "exact": true,
+          "address": "0x617470",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617470",
+              "size": 22,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io9IFilePathE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io9IFilePathE",
+          "exact": true,
+          "address": "0x617490",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617490",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io9IFilePathE",
+          "size": 19,
+          "placement": "symbol: _ZTSN2ox2io9IFilePathE",
+          "exact": true,
+          "address": "0x6174b0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6174b0",
+              "size": 19,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io9IFilePathE",
+          "size": 40,
+          "placement": "symbol: _ZTVN2ox2io9IFilePathE",
+          "exact": true,
+          "address": "0x6174e0",
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x6174e0",
+              "size": 40,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io11IFileSystemE",
+          "size": 216,
+          "placement": "symbol: _ZTVN2ox2io11IFileSystemE",
+          "exact": false,
+          "address": "0x617520",
+          "first_difference": 200,
+          "differing_bytes": 6,
+          "bad_references": [
+            {
+              "offset": 200,
+              "type": 1,
+              "symbol": "__cxa_pure_virtual",
+              "addend": 0,
+              "destination": "0x408648",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 208,
+              "type": 1,
+              "symbol": "__cxa_pure_virtual",
+              "addend": 0,
+              "destination": "0x408648",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 26
+        }
+      ],
+      "unplaced_sections": [
+        ".gcc_except_table"
+      ],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CFileSystem.d",
+          "-c",
+          "src/daisy/io/CFileSystem.cpp",
+          "-o",
+          "/out/daisy__io__CFileSystem.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CFileSystem.cpp": "8c5545729b153f5e80c7c9a97a8f22edf56e14c0328b692d4767c8ac45b85c0b",
+          "src/daisy/io/CFileSystem.h": "670fd87db9b1f127fc7e79c59445b6b16030cd19f505e342e30f6a90f31f486c",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/daisy/io/CFilePath.h": "22a38a081759f9e76a240005cf01b1d2dde4fac69314c6b2974e3e80db949216",
+          "src/ox/io/IFilePath.h": "33f06e269f72865b54cac98b25f7314ed3b253305cda44406104f5351bf3d424",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/daisy/io/CFileList.h": "1d214113848e62d291d9f3acd269e280469646d972da3032c18321f8f9c843b4",
+          "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
+          "src/daisy/io/CReadFile.h": "3d7fa02631d2ed23c638337d8776d7a185ba3ccc0d800c34159a068323ea515a",
+          "src/daisy/io/CWriteFile.h": "436f384fcb86d958b78dee1210578dba041b00e77ac472312f184235b080da62",
+          "src/daisy/io/CMemoryReadFile.h": "182b4cbfb68f9912b9bb76f6abc310d8c99fac316cfe7cee77fab2e0ea1d8de1",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
+          "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
+          "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
+          "src/daisy/io/CTextReader.h": "59e27f1f1db34f671fd27dbeee884241fab9f4c65876eed40c11d1b488348e7c",
+          "src/daisy/io/CXMLReader.h": "4f32ab6447283a345d4c137d4584da2b09d190648161319b20cc3b6acd5543b0",
+          "src/ox/io/IXMLReader.h": "73eeeb68ae5236f72ccc2f5b433fb022bb99bf921639253be3822a52d0295b6f",
+          "src/daisy/io/CXMLWriter.h": "77d4072b146d5e8d132d4c56b231c13e428421f3e1ea0c7aa4ae200a8a2edb84",
+          "src/ox/io/IXMLWriter.h": "6199093ef732d78d86679d49a31cf470d2bab275b3c42f1ce5cc12ee90de655b",
+          "src/daisy/os.h": "223a265947f873c1ceec4351f2a82ce5ac4335860398484e3b6f090c759fc22b",
+          "src/ox/event/ILogger.h": "0a30dbe9006cb43639e34eb899a1b8970b4a06468685578184ad6137c93d0444"
+        },
+        "system_headers": 125,
+        "object_sha256": "05bbf510be9fa597098234c9a009d2f18e2e8a9036a388e80bcfd9850d7df863"
+      },
+      "fuzzy_target_sha256": "a95d04871447c624dcdc8e73c69eec7fe2d3008d66f3055417b914ee68231f4e",
+      "fuzzy_functions": [
+        {
+          "address": "0x52c630",
+          "size": 5,
+          "symbol": "_ZN5daisy2io11CFileSystem19getWorkingDirectoryEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c640",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io11CFileSystemC2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c670",
+          "size": 78,
+          "symbol": "_ZN5daisy2io11CFileSystem15createXMLWriterEPN2ox2io10IWriteFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c6c0",
+          "size": 155,
+          "symbol": "_ZN5daisy2io11CFileSystem14zipInflateDataEPhjS2_jRj",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c760",
+          "size": 163,
+          "symbol": "_ZN5daisy2io11CFileSystem14zipDeflateDataEPhjS2_jRj",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c810",
+          "size": 75,
+          "symbol": "_ZN5daisy2io11CFileSystem15createXMLWriterEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c860",
+          "size": 80,
+          "symbol": "_ZN5daisy2io11CFileSystem15createXMLReaderEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c8b0",
+          "size": 159,
+          "symbol": "_ZN5daisy2io11CFileSystem15createXMLReaderEPN2ox2io9IReadFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52c950",
+          "size": 185,
+          "symbol": "_ZN5daisy2io11CFileSystem18readFileIntoMemoryEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52ca10",
+          "size": 142,
+          "symbol": "_ZN5daisy2io11CFileSystem14dropZipReadersEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52caa0",
+          "size": 267,
+          "symbol": "_ZN5daisy2io11CFileSystemD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52cbb0",
+          "size": 260,
+          "symbol": "_ZN5daisy2io11CFileSystemD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52ccc0",
+          "size": 260,
+          "symbol": "_ZN5daisy2io11CFileSystemD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52cdd0",
+          "size": 1214,
+          "symbol": "_ZN5daisy2io11CFileSystem12getZipInPathEPKc",
+          "percent": 91.98083
+        },
+        {
+          "address": "0x52d290",
+          "size": 671,
+          "symbol": "_ZN5daisy2io11CFileSystem11addZipAliasEPKc",
+          "percent": 99.946236
+        },
+        {
+          "address": "0x52d530",
+          "size": 843,
+          "symbol": "_ZN5daisy2io11CFileSystem21getDirectoryFromAliasEPKc",
+          "percent": 99.956894
+        },
+        {
+          "address": "0x52d880",
+          "size": 1042,
+          "symbol": "_ZN5daisy2io11CFileSystem17addDirectoryAliasEPKcS3_",
+          "percent": 99.965034
+        },
+        {
+          "address": "0x52dca0",
+          "size": 1507,
+          "symbol": "_ZN5daisy2io11CFileSystemC1Ev",
+          "percent": 99.9455
+        },
+        {
+          "address": "0x52e290",
+          "size": 61,
+          "symbol": "_ZN5daisy2io16createFileSystemEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52e2d0",
+          "size": 1507,
+          "symbol": "_ZN5daisy2io11CFileSystemC2Ev",
+          "percent": 99.9455
+        },
+        {
+          "address": "0x52e8c0",
+          "size": 2837,
+          "symbol": "_ZN5daisy2io11CFileSystem21intern_resolveAliasesEPKc",
+          "percent": 99.97869
+        },
+        {
+          "address": "0x52f3e0",
+          "size": 147,
+          "symbol": "_ZN5daisy2io11CFileSystem10renameFileEPKcS3_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52f480",
+          "size": 58,
+          "symbol": "_ZN5daisy2io11CFileSystem10deleteFileEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52f4c0",
+          "size": 948,
+          "symbol": "_ZN5daisy2io11CFileSystem9existFileEPKcb",
+          "percent": 99.978165
+        },
+        {
+          "address": "0x52f880",
+          "size": 315,
+          "symbol": "_ZN5daisy2io11CFileSystem14resolveAliasesEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52f9c0",
+          "size": 1336,
+          "symbol": "_ZN5daisy2io11CFileSystem14createFileListEPKcS3_N2ox2io9EFileListE",
+          "percent": 99.60784
+        },
+        {
+          "address": "0x52ff00",
+          "size": 63,
+          "symbol": "_ZN5daisy2io11CFileSystem15createDirectoryEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x52ff40",
+          "size": 1437,
+          "symbol": "_ZN5daisy2io11CFileSystem12getZipReaderEPKc",
+          "percent": 99.94898
+        },
+        {
+          "address": "0x5304e0",
+          "size": 95,
+          "symbol": "_ZN5daisy2io11CFileSystem18createAndWriteFileEPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530540",
+          "size": 1450,
+          "symbol": "_ZN5daisy2io11CFileSystem24changeWorkingDirectoryToEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530af0",
+          "size": 1170,
+          "symbol": "_ZN5daisy2io11CFileSystem17createAndOpenFileEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530fa0",
+          "size": 8,
+          "symbol": "_ZN2ox2io11IFileSystemD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530f90",
+          "size": 8,
+          "symbol": "_ZN2ox2io9IFilePathD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530fb0",
+          "size": 5,
+          "symbol": "_ZN5daisy2io9CFilePath7getPathEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530fc0",
+          "size": 12,
+          "symbol": "_ZN2ox2io9IFilePathD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530fd0",
+          "size": 12,
+          "symbol": "_ZN2ox2io11IFileSystemD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c20",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIcED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x450390",
+          "size": 202,
+          "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x530fe0",
+          "size": 67,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
+          "percent": 99.8
+        },
+        {
+          "address": "0x531030",
+          "size": 26,
+          "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4bf930",
+          "size": 67,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "percent": 99.8
+        },
+        {
+          "address": "0x4bf980",
+          "size": 26,
+          "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEbSt4lessIS3_ESaISt4pairIKS3_bEEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531080",
+          "size": 34,
+          "symbol": "_ZN5daisy2io9CFilePathD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5310b0",
+          "size": 34,
+          "symbol": "_ZNSt4pairIKN2ox4core7CStringIcEES3_ED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531050",
+          "size": 41,
+          "symbol": "_ZN5daisy2io9CFilePathD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5310e0",
+          "size": 81,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
+          "percent": 99.82758
+        },
+        {
+          "address": "0x531140",
+          "size": 26,
+          "symbol": "_ZNSt3mapIN2ox4core7CStringIcEES3_St4lessIS3_ESaISt4pairIKS3_S3_EEED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531160",
+          "size": 359,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE10_M_insert_EPKSt18_Rb_tree_node_baseSJ_RKSA_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5312d0",
+          "size": 354,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE16_M_insert_uniqueERKSA_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531440",
+          "size": 790,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorISA_ERKSA_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4bf9f0",
+          "size": 359,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4bfb60",
+          "size": 354,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4bfcd0",
+          "size": 790,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531760",
+          "size": 487,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE10_M_insert_EPKSt18_Rb_tree_node_baseSF_RKS6_",
+          "percent": 99.92481
+        },
+        {
+          "address": "0x531950",
+          "size": 354,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE16_M_insert_uniqueERKS6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531ac0",
+          "size": 790,
+          "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE17_M_insert_unique_ESt23_Rb_tree_const_iteratorIS6_ERKS6_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531de0",
+          "size": 473,
+          "symbol": "_ZNSt3mapIN2ox4core7CStringIcEEPN5daisy2io10CZipReaderESt4lessIS3_ESaISt4pairIKS3_S7_EEEixERSB_",
+          "percent": 96.91428
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CMemoryReadFile.cpp",
+      "object_sha256": "e1ac636b6a0bfcee21939ec5efe49294d0bedec99b1ac399ee6e14bc4fe13008",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 995,
+          "placement": "symbol: _ZN5daisy2io15CMemoryReadFile11getFileNameEv",
+          "exact": true,
+          "address": "0x531fc0",
+          "references": 38,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFile11getFileNameEv",
+              "address": "0x531fc0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io15CMemoryReadFileC2EPviPKcb",
+              "address": "0x531fd0",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFileD0Ev",
+              "address": "0x532000",
+              "size": 42,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFileD1Ev",
+              "address": "0x532030",
+              "size": 34,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFileD2Ev",
+              "address": "0x532060",
+              "size": 34,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFileC1EPviPKcb",
+              "address": "0x532090",
+              "size": 323,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io20createMemoryReadFileEPviPKcb",
+              "address": "0x5321e0",
+              "size": 126,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15CMemoryReadFileC2EPviPKcb",
+              "address": "0x532260",
+              "size": 323,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0d8",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0d8",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io12CMemReadFile8readLineEPci",
+          "size": 3,
+          "placement": "symbol: _ZN2ox2io12CMemReadFile8readLineEPci",
+          "exact": true,
+          "address": "0x5323b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io12CMemReadFile8readLineEPci",
+              "address": "0x5323b0",
+              "size": 3,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io12CMemReadFile15getModifiedDateEv",
+          "size": 3,
+          "placement": "symbol: _ZN2ox2io12CMemReadFile15getModifiedDateEv",
+          "exact": true,
+          "address": "0x5323c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io12CMemReadFile15getModifiedDateEv",
+              "address": "0x5323c0",
+              "size": 3,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 64,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x66251a",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x66251a",
+              "size": 64,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io15CMemoryReadFileE",
+          "size": 104,
+          "placement": "symbol: _ZTVN5daisy2io15CMemoryReadFileE",
+          "exact": true,
+          "address": "0x617600",
+          "references": 12,
+          "data_ranges": [
+            {
+              "address": "0x617600",
+              "size": 104,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io15CMemoryReadFileE",
+          "size": 29,
+          "placement": "symbol: _ZTSN5daisy2io15CMemoryReadFileE",
+          "exact": true,
+          "address": "0x617670",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617670",
+              "size": 29,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io15CMemoryReadFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io15CMemoryReadFileE",
+          "exact": true,
+          "address": "0x617690",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617690",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CMemoryReadFile.d",
+          "-c",
+          "src/daisy/io/CMemoryReadFile.cpp",
+          "-o",
+          "/out/daisy__io__CMemoryReadFile.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CMemoryReadFile.cpp": "277c51a07575f6099f96cb1c39329bd05cb3ce2bb233c687becb05b0b17ef0f8",
+          "src/daisy/io/CMemoryReadFile.h": "182b4cbfb68f9912b9bb76f6abc310d8c99fac316cfe7cee77fab2e0ea1d8de1",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
+        },
+        "system_headers": 99,
+        "object_sha256": "e1ac636b6a0bfcee21939ec5efe49294d0bedec99b1ac399ee6e14bc4fe13008"
+      },
+      "fuzzy_target_sha256": "2a18a03a58c8053a539d069f479dae8ce5b8c7a36f547afd1f99ba46c557d359",
+      "fuzzy_functions": [
+        {
+          "address": "0x531fc0",
+          "size": 5,
+          "symbol": "_ZN5daisy2io15CMemoryReadFile11getFileNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x531fd0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io15CMemoryReadFileC2EPviPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532000",
+          "size": 42,
+          "symbol": "_ZN5daisy2io15CMemoryReadFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532030",
+          "size": 34,
+          "symbol": "_ZN5daisy2io15CMemoryReadFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532060",
+          "size": 34,
+          "symbol": "_ZN5daisy2io15CMemoryReadFileD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532090",
+          "size": 323,
+          "symbol": "_ZN5daisy2io15CMemoryReadFileC1EPviPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5321e0",
+          "size": 126,
+          "symbol": "_ZN5daisy2io20createMemoryReadFileEPviPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532260",
+          "size": 323,
+          "symbol": "_ZN5daisy2io15CMemoryReadFileC2EPviPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5323b0",
+          "size": 3,
+          "symbol": "_ZN2ox2io12CMemReadFile8readLineEPci",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5323c0",
+          "size": 3,
+          "symbol": "_ZN2ox2io12CMemReadFile15getModifiedDateEv",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CReadFile.cpp",
+      "object_sha256": "f582e664eaeddaee6f9d7708f99ab530f6f3d6cebe8f322b6a0e3ccddef23963",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 1495,
+          "placement": "symbol: _ZN5daisy2io9CReadFile7getSizeEv",
+          "exact": true,
+          "address": "0x5323d0",
+          "references": 61,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CReadFile7getSizeEv",
+              "address": "0x5323d0",
+              "size": 4,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile11getFileNameEv",
+              "address": "0x5323e0",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io9CReadFileC2EPKc",
+              "address": "0x5323f0",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile4seekEib",
+              "address": "0x532420",
+              "size": 36,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile8openFileEv",
+              "address": "0x532450",
+              "size": 90,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile6getPosEv",
+              "address": "0x5324b0",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile15getModifiedDateEv",
+              "address": "0x5324d0",
+              "size": 44,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile8readLineEPci",
+              "address": "0x532500",
+              "size": 35,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFile4readEPvi",
+              "address": "0x532530",
+              "size": 39,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFileC2EPKc",
+              "address": "0x532560",
+              "size": 324,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFileD0Ev",
+              "address": "0x5326b0",
+              "size": 102,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFileD1Ev",
+              "address": "0x532720",
+              "size": 95,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFileD2Ev",
+              "address": "0x532780",
+              "size": 95,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CReadFileC1EPKc",
+              "address": "0x5327e0",
+              "size": 324,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14createReadFileEPKc",
+              "address": "0x532930",
+              "size": 119,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x611708",
+              "size": 3,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0dc",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0dc",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IReadFileD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io9IReadFileD1Ev",
+          "exact": true,
+          "address": "0x5329b0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IReadFileD1Ev",
+              "address": "0x5329b0",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IReadFileD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io9IReadFileD0Ev",
+          "exact": true,
+          "address": "0x5329c0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IReadFileD0Ev",
+              "address": "0x5329c0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 92,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x66255a",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x66255a",
+              "size": 92,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io9CReadFileE",
+          "size": 88,
+          "placement": "symbol: _ZTVN5daisy2io9CReadFileE",
+          "exact": true,
+          "address": "0x6176c0",
+          "references": 10,
+          "data_ranges": [
+            {
+              "address": "0x6176c0",
+              "size": 88,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io9CReadFileE",
+          "size": 22,
+          "placement": "symbol: _ZTSN5daisy2io9CReadFileE",
+          "exact": true,
+          "address": "0x617720",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617720",
+              "size": 22,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io9CReadFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io9CReadFileE",
+          "exact": true,
+          "address": "0x617740",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617740",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io9IReadFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x617760",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617760",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io9IReadFileE",
+          "size": 19,
+          "placement": "symbol: _ZTSN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x617780",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617780",
+              "size": 19,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io9IReadFileE",
+          "size": 88,
+          "placement": "symbol: _ZTVN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x6177a0",
+          "references": 10,
+          "data_ranges": [
+            {
+              "address": "0x6177a0",
+              "size": 88,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CReadFile.d",
+          "-c",
+          "src/daisy/io/CReadFile.cpp",
+          "-o",
+          "/out/daisy__io__CReadFile.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CReadFile.cpp": "d8e4452da865d763aa582618b6c39bc0d0b7603a39e6fbb1ae3474d43940a010",
+          "src/daisy/io/CReadFile.h": "3d7fa02631d2ed23c638337d8776d7a185ba3ccc0d800c34159a068323ea515a",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
+        },
+        "system_headers": 107,
+        "object_sha256": "f582e664eaeddaee6f9d7708f99ab530f6f3d6cebe8f322b6a0e3ccddef23963"
+      },
+      "fuzzy_target_sha256": "ec6731a4f145396455a87b6da50826e2f67eef90a00398062ba9c28d5480de75",
+      "fuzzy_functions": [
+        {
+          "address": "0x5323d0",
+          "size": 4,
+          "symbol": "_ZN5daisy2io9CReadFile7getSizeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5323e0",
+          "size": 5,
+          "symbol": "_ZN5daisy2io9CReadFile11getFileNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5323f0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io9CReadFileC2EPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532420",
+          "size": 36,
+          "symbol": "_ZN5daisy2io9CReadFile4seekEib",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532450",
+          "size": 90,
+          "symbol": "_ZN5daisy2io9CReadFile8openFileEv",
+          "percent": 99.80769
+        },
+        {
+          "address": "0x5324b0",
+          "size": 18,
+          "symbol": "_ZN5daisy2io9CReadFile6getPosEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5324d0",
+          "size": 44,
+          "symbol": "_ZN5daisy2io9CReadFile15getModifiedDateEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532500",
+          "size": 35,
+          "symbol": "_ZN5daisy2io9CReadFile8readLineEPci",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532530",
+          "size": 39,
+          "symbol": "_ZN5daisy2io9CReadFile4readEPvi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532560",
+          "size": 324,
+          "symbol": "_ZN5daisy2io9CReadFileC2EPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5326b0",
+          "size": 102,
+          "symbol": "_ZN5daisy2io9CReadFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532720",
+          "size": 95,
+          "symbol": "_ZN5daisy2io9CReadFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532780",
+          "size": 95,
+          "symbol": "_ZN5daisy2io9CReadFileD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5327e0",
+          "size": 324,
+          "symbol": "_ZN5daisy2io9CReadFileC1EPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532930",
+          "size": 119,
+          "symbol": "_ZN5daisy2io14createReadFileEPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5329b0",
+          "size": 8,
+          "symbol": "_ZN2ox2io9IReadFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5329c0",
+          "size": 12,
+          "symbol": "_ZN2ox2io9IReadFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CWriteFile.cpp",
+      "object_sha256": "6cfd90cbf3d308e393e1770e2c09ab1060badd2e83fa0e8366a7ca7af1e249cb",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 1447,
+          "placement": "symbol: _ZN5daisy2io10CWriteFile11getFileNameEv",
+          "exact": true,
+          "address": "0x532d80",
+          "references": 59,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile11getFileNameEv",
+              "address": "0x532d80",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io10CWriteFileC2EPKcb",
+              "address": "0x532d90",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile4seekEib",
+              "address": "0x532dc0",
+              "size": 36,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile8openFileEb",
+              "address": "0x532df0",
+              "size": 106,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile6getPosEv",
+              "address": "0x532e60",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile5writeEPKvi",
+              "address": "0x532e80",
+              "size": 39,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFileC2EPKcb",
+              "address": "0x532eb0",
+              "size": 348,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFileD0Ev",
+              "address": "0x533010",
+              "size": 102,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFileD1Ev",
+              "address": "0x533080",
+              "size": 95,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFileD2Ev",
+              "address": "0x5330e0",
+              "size": 95,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CWriteFileC1EPKcb",
+              "address": "0x533140",
+              "size": 348,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io15createWriteFileEPKcb",
+              "address": "0x5332a0",
+              "size": 135,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x617858",
+              "size": 3,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x615545",
+              "size": 3,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0e4",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0e4",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IWriteFileD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io10IWriteFileD1Ev",
+          "exact": true,
+          "address": "0x533330",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IWriteFileD1Ev",
+              "address": "0x533330",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io10CWriteFile12getStdioFileEv",
+          "size": 5,
+          "placement": "symbol: _ZN5daisy2io10CWriteFile12getStdioFileEv",
+          "exact": true,
+          "address": "0x533340",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io10CWriteFile12getStdioFileEv",
+              "address": "0x533340",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IWriteFileD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io10IWriteFileD0Ev",
+          "exact": true,
+          "address": "0x533350",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IWriteFileD0Ev",
+              "address": "0x533350",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 92,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x6625ce",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6625ce",
+              "size": 92,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io10CWriteFileE",
+          "size": 72,
+          "placement": "symbol: _ZTVN5daisy2io10CWriteFileE",
+          "exact": true,
+          "address": "0x617860",
+          "references": 8,
+          "data_ranges": [
+            {
+              "address": "0x617860",
+              "size": 72,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io10CWriteFileE",
+          "size": 24,
+          "placement": "symbol: _ZTSN5daisy2io10CWriteFileE",
+          "exact": true,
+          "address": "0x6178b0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6178b0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io10CWriteFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io10CWriteFileE",
+          "exact": true,
+          "address": "0x6178d0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6178d0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io10IWriteFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io10IWriteFileE",
+          "exact": true,
+          "address": "0x6178f0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6178f0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io10IWriteFileE",
+          "size": 21,
+          "placement": "symbol: _ZTSN2ox2io10IWriteFileE",
+          "exact": true,
+          "address": "0x617910",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617910",
+              "size": 21,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io10IWriteFileE",
+          "size": 72,
+          "placement": "symbol: _ZTVN2ox2io10IWriteFileE",
+          "exact": true,
+          "address": "0x617940",
+          "references": 8,
+          "data_ranges": [
+            {
+              "address": "0x617940",
+              "size": 72,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CWriteFile.d",
+          "-c",
+          "src/daisy/io/CWriteFile.cpp",
+          "-o",
+          "/out/daisy__io__CWriteFile.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CWriteFile.cpp": "8f84aa3a89f7ac4205347cdf5dafd5911ed496010ecb89f484a4b0962c5699a4",
+          "src/daisy/io/CWriteFile.h": "436f384fcb86d958b78dee1210578dba041b00e77ac472312f184235b080da62",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
+        },
+        "system_headers": 106,
+        "object_sha256": "6cfd90cbf3d308e393e1770e2c09ab1060badd2e83fa0e8366a7ca7af1e249cb"
+      },
+      "fuzzy_target_sha256": "5475cf6ccb7c712d590c2ffe561888667daea2e8b45f9a054c5a2a4312bcada8",
+      "fuzzy_functions": [
+        {
+          "address": "0x532d80",
+          "size": 5,
+          "symbol": "_ZN5daisy2io10CWriteFile11getFileNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532d90",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io10CWriteFileC2EPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532dc0",
+          "size": 36,
+          "symbol": "_ZN5daisy2io10CWriteFile4seekEib",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532df0",
+          "size": 106,
+          "symbol": "_ZN5daisy2io10CWriteFile8openFileEb",
+          "percent": 99.833336
+        },
+        {
+          "address": "0x532e60",
+          "size": 18,
+          "symbol": "_ZN5daisy2io10CWriteFile6getPosEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532e80",
+          "size": 39,
+          "symbol": "_ZN5daisy2io10CWriteFile5writeEPKvi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x532eb0",
+          "size": 348,
+          "symbol": "_ZN5daisy2io10CWriteFileC2EPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533010",
+          "size": 102,
+          "symbol": "_ZN5daisy2io10CWriteFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533080",
+          "size": 95,
+          "symbol": "_ZN5daisy2io10CWriteFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5330e0",
+          "size": 95,
+          "symbol": "_ZN5daisy2io10CWriteFileD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533140",
+          "size": 348,
+          "symbol": "_ZN5daisy2io10CWriteFileC1EPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5332a0",
+          "size": 135,
+          "symbol": "_ZN5daisy2io15createWriteFileEPKcb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533330",
+          "size": 8,
+          "symbol": "_ZN2ox2io10IWriteFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533340",
+          "size": 5,
+          "symbol": "_ZN5daisy2io10CWriteFile12getStdioFileEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533350",
+          "size": 12,
+          "symbol": "_ZN2ox2io10IWriteFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CFileList.cpp",
+      "object_sha256": "f437c387cacfd76187ef4a0b2ec5638b4b95a15b505f082ada728c5a37dff490",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 6178,
+          "placement": "symbol: _ZN5daisy2io9CFileList12getFileCountEv",
+          "exact": true,
+          "address": "0x5c6900",
+          "references": 107,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CFileList12getFileCountEv",
+              "address": "0x5c6900",
+              "size": 27,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileList11getFileNameEi",
+              "address": "0x5c6920",
+              "size": 60,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileList11isDirectoryEi",
+              "address": "0x5c6960",
+              "size": 61,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io9CFileListD2Ev",
+              "address": "0x5c69a0",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileList15getFullFileNameEi",
+              "address": "0x5c69d0",
+              "size": 1117,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileListD0Ev",
+              "address": "0x5c6e30",
+              "size": 118,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileListD1Ev",
+              "address": "0x5c6eb0",
+              "size": 111,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileListD2Ev",
+              "address": "0x5c6f20",
+              "size": 111,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileListC1EPKcS3_N2ox2io9EFileListE",
+              "address": "0x5c6f90",
+              "size": 2250,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io9CFileListC2EPKcS3_N2ox2io9EFileListE",
+              "address": "0x5c7860",
+              "size": 2242,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f56fe",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56fe",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56fe",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f56fe",
+              "size": 2,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c1d0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c1d0",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IFileListD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io9IFileListD1Ev",
+          "exact": true,
+          "address": "0x538da0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IFileListD1Ev",
+              "address": "0x538da0",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IFileListD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io9IFileListD0Ev",
+          "exact": true,
+          "address": "0x538db0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IFileListD0Ev",
+              "address": "0x538db0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
+          "exact": true,
+          "address": "0x409c20",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "address": "0x409c20",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io9CFileList9FileEntryD1Ev",
+          "size": 34,
+          "placement": "symbol: _ZN5daisy2io9CFileList9FileEntryD1Ev",
+          "exact": true,
+          "address": "0x5c8130",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io9CFileList9FileEntryD1Ev",
+              "address": "0x5c8130",
+              "size": 34,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 330,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x666250",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x666250",
+              "size": 330,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EED1Ev",
+          "size": 85,
+          "placement": "symbol: _ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EED1Ev",
+          "exact": true,
+          "address": "0x5c8160",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EED1Ev",
+              "address": "0x5c8160",
+              "size": 85,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "size": 2534,
+          "placement": "symbol: _ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "exact": true,
+          "address": "0x5c81c0",
+          "references": 46,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "address": "0x5c81c0",
+              "size": 2534,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io9CFileListE",
+          "size": 64,
+          "placement": "symbol: _ZTVN5daisy2io9CFileListE",
+          "exact": true,
+          "address": "0x61ffe0",
+          "references": 7,
+          "data_ranges": [
+            {
+              "address": "0x61ffe0",
+              "size": 64,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io9CFileListE",
+          "size": 22,
+          "placement": "symbol: _ZTSN5daisy2io9CFileListE",
+          "exact": true,
+          "address": "0x620020",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x620020",
+              "size": 22,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io9CFileListE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io9CFileListE",
+          "exact": true,
+          "address": "0x620040",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x620040",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io9IFileListE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io9IFileListE",
+          "exact": true,
+          "address": "0x617ee0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617ee0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io9IFileListE",
+          "size": 19,
+          "placement": "symbol: _ZTSN2ox2io9IFileListE",
+          "exact": true,
+          "address": "0x617f00",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617f00",
+              "size": 19,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io9IFileListE",
+          "size": 64,
+          "placement": "symbol: _ZTVN2ox2io9IFileListE",
+          "exact": true,
+          "address": "0x617f20",
+          "references": 7,
+          "data_ranges": [
+            {
+              "address": "0x617f20",
+              "size": 64,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CFileList.d",
+          "-c",
+          "src/daisy/io/CFileList.cpp",
+          "-o",
+          "/out/daisy__io__CFileList.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CFileList.cpp": "ad49a136358c1440b3bac80be5a95075e60ff5cf59afa8030009982c6de9180c",
+          "src/daisy/io/CFileList.h": "1d214113848e62d291d9f3acd269e280469646d972da3032c18321f8f9c843b4",
+          "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
+        },
+        "system_headers": 115,
+        "object_sha256": "f437c387cacfd76187ef4a0b2ec5638b4b95a15b505f082ada728c5a37dff490"
+      },
+      "fuzzy_target_sha256": "0313098043cfd8b717c739dfa4cac7307e5d9b065a984d784586c3585923fed6",
+      "fuzzy_functions": [
+        {
+          "address": "0x5c6900",
+          "size": 27,
+          "symbol": "_ZN5daisy2io9CFileList12getFileCountEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6920",
+          "size": 60,
+          "symbol": "_ZN5daisy2io9CFileList11getFileNameEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6960",
+          "size": 61,
+          "symbol": "_ZN5daisy2io9CFileList11isDirectoryEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c69a0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io9CFileListD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c69d0",
+          "size": 1117,
+          "symbol": "_ZN5daisy2io9CFileList15getFullFileNameEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6e30",
+          "size": 118,
+          "symbol": "_ZN5daisy2io9CFileListD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6eb0",
+          "size": 111,
+          "symbol": "_ZN5daisy2io9CFileListD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6f20",
+          "size": 111,
+          "symbol": "_ZN5daisy2io9CFileListD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c6f90",
+          "size": 2250,
+          "symbol": "_ZN5daisy2io9CFileListC1EPKcS3_N2ox2io9EFileListE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c7860",
+          "size": 2242,
+          "symbol": "_ZN5daisy2io9CFileListC2EPKcS3_N2ox2io9EFileListE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x538da0",
+          "size": 8,
+          "symbol": "_ZN2ox2io9IFileListD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x538db0",
+          "size": 12,
+          "symbol": "_ZN2ox2io9IFileListD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c20",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIcED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8130",
+          "size": 34,
+          "symbol": "_ZN5daisy2io9CFileList9FileEntryD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8160",
+          "size": 85,
+          "symbol": "_ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c81c0",
+          "size": 2534,
+          "symbol": "_ZNSt6vectorIN5daisy2io9CFileList9FileEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CLimitReadFile.cpp",
+      "object_sha256": "742ff1c67b8cd46ec96a26175946516993a9a4f05add2c27599a6cd7337ba7e6",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 1502,
+          "placement": "symbol: _ZN5daisy2io14CLimitReadFile4initEv",
+          "exact": true,
+          "address": "0x5c8bb0",
+          "references": 43,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile4initEv",
+              "address": "0x5c8bb0",
+              "size": 30,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile4readEPvi",
+              "address": "0x5c8bd0",
+              "size": 117,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile4seekEib",
+              "address": "0x5c8c50",
+              "size": 125,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile7getSizeEv",
+              "address": "0x5c8cd0",
+              "size": 4,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile6getPosEv",
+              "address": "0x5c8ce0",
+              "size": 19,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile11getFileNameEv",
+              "address": "0x5c8d00",
+              "size": 5,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io14CLimitReadFileC2EPN2ox2io9IReadFileEiPKc",
+              "address": "0x5c8d10",
+              "size": 38,
+              "fde": true,
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFileD1Ev",
+              "address": "0x5c8d40",
+              "size": 109,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFileD0Ev",
+              "address": "0x5c8db0",
+              "size": 116,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFileD2Ev",
+              "address": "0x5c8e30",
+              "size": 109,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFileC2EPN2ox2io9IReadFileEiPKc",
+              "address": "0x5c8ea0",
+              "size": 313,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFileC1EPN2ox2io9IReadFileEiPKc",
+              "address": "0x5c8fe0",
+              "size": 313,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io19createLimitReadFileEPKcPN2ox2io9IReadFileEi",
+              "address": "0x5c9120",
+              "size": 110,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c1d4",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c1d4",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IReadFileD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io9IReadFileD1Ev",
+          "exact": true,
+          "address": "0x5329b0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IReadFileD1Ev",
+              "address": "0x5329b0",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io14CLimitReadFile8readLineEPci",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy2io14CLimitReadFile8readLineEPci",
+          "exact": true,
+          "address": "0x5c9190",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile8readLineEPci",
+              "address": "0x5c9190",
+              "size": 3,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy2io14CLimitReadFile15getModifiedDateEv",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy2io14CLimitReadFile15getModifiedDateEv",
+          "exact": true,
+          "address": "0x5c91a0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io14CLimitReadFile15getModifiedDateEv",
+              "address": "0x5c91a0",
+              "size": 3,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io9IReadFileD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io9IReadFileD0Ev",
+          "exact": true,
+          "address": "0x5329c0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io9IReadFileD0Ev",
+              "address": "0x5329c0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 106,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x66639a",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x66639a",
+              "size": 106,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io14CLimitReadFileE",
+          "size": 88,
+          "placement": "symbol: _ZTVN5daisy2io14CLimitReadFileE",
+          "exact": true,
+          "address": "0x620060",
+          "references": 10,
+          "data_ranges": [
+            {
+              "address": "0x620060",
+              "size": 88,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io14CLimitReadFileE",
+          "size": 28,
+          "placement": "symbol: _ZTSN5daisy2io14CLimitReadFileE",
+          "exact": true,
+          "address": "0x6200c0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6200c0",
+              "size": 28,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io14CLimitReadFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io14CLimitReadFileE",
+          "exact": true,
+          "address": "0x6200e0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6200e0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io9IReadFileE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x617760",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617760",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io9IReadFileE",
+          "size": 19,
+          "placement": "symbol: _ZTSN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x617780",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617780",
+              "size": 19,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io9IReadFileE",
+          "size": 88,
+          "placement": "symbol: _ZTVN2ox2io9IReadFileE",
+          "exact": true,
+          "address": "0x6177a0",
+          "references": 10,
+          "data_ranges": [
+            {
+              "address": "0x6177a0",
+              "size": 88,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CLimitReadFile.d",
+          "-c",
+          "src/daisy/io/CLimitReadFile.cpp",
+          "-o",
+          "/out/daisy__io__CLimitReadFile.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CLimitReadFile.cpp": "6d861e580ca6676ead87d1452bb0a4b53fe6c8a7f2a736b776a09d8560dec0ed",
+          "src/daisy/io/CLimitReadFile.h": "1ec2edbc4d9c961906b08b12c0a094eb7d43cab69a2ff8a0262d2d0d18079ef9",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95"
+        },
+        "system_headers": 99,
+        "object_sha256": "742ff1c67b8cd46ec96a26175946516993a9a4f05add2c27599a6cd7337ba7e6"
+      },
+      "fuzzy_target_sha256": "96b56e14c85d7fb9c2d7e64d4683e25a8fa10f811133402b62787da61bc94e2f",
+      "fuzzy_functions": [
+        {
+          "address": "0x5c8bb0",
+          "size": 30,
+          "symbol": "_ZN5daisy2io14CLimitReadFile4initEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8bd0",
+          "size": 117,
+          "symbol": "_ZN5daisy2io14CLimitReadFile4readEPvi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8c50",
+          "size": 125,
+          "symbol": "_ZN5daisy2io14CLimitReadFile4seekEib",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8cd0",
+          "size": 4,
+          "symbol": "_ZN5daisy2io14CLimitReadFile7getSizeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8ce0",
+          "size": 19,
+          "symbol": "_ZN5daisy2io14CLimitReadFile6getPosEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8d00",
+          "size": 5,
+          "symbol": "_ZN5daisy2io14CLimitReadFile11getFileNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8d10",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io14CLimitReadFileC2EPN2ox2io9IReadFileEiPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8d40",
+          "size": 109,
+          "symbol": "_ZN5daisy2io14CLimitReadFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8db0",
+          "size": 116,
+          "symbol": "_ZN5daisy2io14CLimitReadFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8e30",
+          "size": 109,
+          "symbol": "_ZN5daisy2io14CLimitReadFileD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8ea0",
+          "size": 313,
+          "symbol": "_ZN5daisy2io14CLimitReadFileC2EPN2ox2io9IReadFileEiPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c8fe0",
+          "size": 313,
+          "symbol": "_ZN5daisy2io14CLimitReadFileC1EPN2ox2io9IReadFileEiPKc",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c9120",
+          "size": 110,
+          "symbol": "_ZN5daisy2io19createLimitReadFileEPKcPN2ox2io9IReadFileEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5329b0",
+          "size": 8,
+          "symbol": "_ZN2ox2io9IReadFileD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c9190",
+          "size": 3,
+          "symbol": "_ZN5daisy2io14CLimitReadFile8readLineEPci",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5c91a0",
+          "size": 3,
+          "symbol": "_ZN5daisy2io14CLimitReadFile15getModifiedDateEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5329c0",
+          "size": 12,
+          "symbol": "_ZN2ox2io9IReadFileD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
       "unit": "daisy/io/CZipFileList.cpp",
       "object_sha256": "9ee94a409abb4be316405cdac998742168d40800c48176da191aa89cb243ddbc",
       "exact": false,
@@ -192310,7 +196426,7 @@
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
           "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807"
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406"
         },
         "system_headers": 105,
         "object_sha256": "9ee94a409abb4be316405cdac998742168d40800c48176da191aa89cb243ddbc"
@@ -193687,17 +197803,18 @@
           "src/daisy/io/CZipReader.cpp": "ddc6e8036f46a3222fa1b178ba05a24538be748dd2460bed27549a01b6c6898d",
           "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/io/IReadFile.h": "be74749f72e89abb4f266c90eff56f1bab622147001b2cee148b6ef533021807",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/daisy/io/CLimitReadFile.h": "f39a228e001f30d670ecdabff62fcfe83eaca28d9fc290a3a3741754d91b35ec",
-          "src/daisy/io/CMemoryReadFile.h": "a48c76c4bd7b30b0c7d4d8540d1a4e82f3868b7a211bb110d780bd4a29e074c6",
+          "src/daisy/io/CLimitReadFile.h": "1ec2edbc4d9c961906b08b12c0a094eb7d43cab69a2ff8a0262d2d0d18079ef9",
+          "src/daisy/io/CMemoryReadFile.h": "182b4cbfb68f9912b9bb76f6abc310d8c99fac316cfe7cee77fab2e0ea1d8de1",
+          "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
           "src/daisy/os.h": "223a265947f873c1ceec4351f2a82ce5ac4335860398484e3b6f090c759fc22b",
           "src/ox/event/ILogger.h": "0a30dbe9006cb43639e34eb899a1b8970b4a06468685578184ad6137c93d0444",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../core/CString.h": "8dbabf6adef12e86d8c6b037e43623a2e026676297b590e62d3ccda018a50f95",
-          "src/ox/io/IFileSystem.h": "1c48174dd9c2f81304343a6f6e5675e071fb02a1b285fbc36ee7e33bd8442562",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
           "src/ox/core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5"
@@ -193896,7 +198013,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "9569a7cc91610b0f3cfeb631d959d605d0a96a8c1c946e9edbe71b0e2f4dd8c3"
+    "report_sha256": "a432ab23cbf55f079a26ad11b4f01cfc5337524c603f3ef226ddc098d71ec3ac"
   },
   "link": {
     "status": "unavailable",

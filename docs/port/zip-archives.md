@@ -42,11 +42,11 @@ So `rush/main.lua` finds the entry stored as `rush/main.lua`, and a bare `x` fin
 
 ## Changing into a folder of an archive
 
-`directoryExists` (which `changeWorkingDirectoryTo` uses on Linux) returns true for `""`. For any other
-folder it compares only the first entry's path with the argument, because its loop never advances the
-iterator: it returns true when the first sorted entry matches and hangs otherwise. The shipped mods
-each have exactly one folder entry (for example `rush/`), which sorts first, so changing into it works.
-A port should implement the intended rule: some entry's path starts with `dir/`.
+`directoryExists(dir)` returns true for `""`. For any other folder it compares only the first entry's
+path with the argument, because its loop never advances the iterator: it would return true when the
+first sorted entry matches and loop forever otherwise. In the shipped game it is only ever called with
+`""` (see the file system bug in [original-bugs.md](original-bugs.md)), so the hang cannot happen. A
+port should implement the intended rule: a folder exists when some entry's path starts with `dir/`.
 
 ## Listing a folder of an archive
 

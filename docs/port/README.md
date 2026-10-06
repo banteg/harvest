@@ -21,6 +21,8 @@ the data formats the game ships.
 | `gfx/*.obj` | the two planet spheres, Irrlicht's OBJ loader | [menu-scene.md](menu-scene.md) |
 | `gfx/shaders/*.vsh`, `*.psh` | Cg atmospheric scattering (Sean O'Neil, GPU Gems 2) | [menu-scene.md](menu-scene.md) |
 
+Paths, aliases and file lists: [file-system.md](file-system.md).
+
 ## The platform layer
 
 About 793 KB of the executable is the daisy platform layer (Irrlicht 0.7 derived). The game uses a

@@ -10,25 +10,27 @@ here with the address and the recovered file.
 
 ## Bugs with visible effects
 
-### 1) Changing into an archive folder other than the first one hangs
+### 1) Any path under a readable archive is accepted as a working directory
 
 Native behaviour:
 
-- `CZipReader::directoryExists` (`0x539f30`, [`CZipReader.cpp`](../../src/daisy/io/CZipReader.cpp))
-  returns true for `""`. For any other folder it compares only the first entry's path with the
-  argument, because its loop never advances the iterator.
-- So it returns true when the first sorted entry is that folder, and loops forever otherwise.
-  `CFileSystem::changeWorkingDirectoryTo` calls it on Linux.
+- `CFileSystem::changeWorkingDirectoryTo` (`0x530540`, [`CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp))
+  falls back to archives when `chdir` fails: it splits the path at the archive and asks the archive
+  whether the folder inside it exists. It takes that folder from the archive path itself instead of
+  from the requested directory, so `CZipReader::directoryExists` always receives `""` and always says
+  yes.
+- `directoryExists` (`0x539f30`, [`CZipReader.cpp`](../../src/daisy/io/CZipReader.cpp)) is broken as
+  well: for a non-empty folder its loop never advances and would hang. The bug above means it is never
+  reached with one.
 
 Impact:
 
-- None with the shipped mods: each has exactly one folder entry (such as `rush/`), which sorts first.
-  A mod archive with two top-level folders, or with a top-level file that sorts before its folder,
-  would hang the game while listing mods.
+- Changing into a folder that does not exist inside a mod archive succeeds, and the following list
+  is simply empty. The shipped mods never ask for one, so nothing visible happens.
 
 Port recommendation:
 
-- Implement the intended rule: a folder exists when some entry's path starts with `dir/`.
+- Check the real folder inside the archive: it exists when some entry's path starts with `dir/`.
 
 ### 2) A dropped highscore connection is never reported
 
@@ -124,7 +126,16 @@ Impact:
 
 Port recommendation:
 
-- Size the output with `deflateBound` and require `Z_STREAM_END`.
+- Size the output with `deflateBound` and require `Z_STREAM_END`. (The original also skips
+  `deflateEnd`/`inflateEnd` on its error paths, leaking the zlib stream.)
+
+## Bugs without visible effects
+
+- **`CFileSystem::renameFile`** (`0x52f3e0`) calls `rename(newName, filename)`, the reverse of its
+  parameters. Nothing in the game calls it; a port should use the obvious order.
+- **Archive readers opened twice**: `createAndOpenFile` caches archive readers by the unresolved path,
+  `createFileList` and `existFile` by the resolved one, so each mod archive ends up open twice. It
+  costs a file handle and memory. A port should key the cache by the resolved path.
 
 ## Mod API quirks to keep
 
