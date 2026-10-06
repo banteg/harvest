@@ -292,7 +292,8 @@ simply write the intended code.
 - **`CGUIStaticText::IconRight`** ([`CGUIStaticText.cpp`](../../src/daisy/gui/CGUIStaticText.cpp)) is
   set only by `setParagraphIcon`, but `draw` reads it for every text with a progressive reveal (the
   main menu's planet popup). Without an icon `IconLines` is 0, so the value never matters. UBSan
-  traps when the heap hands out non-zero memory (Windows), so the port clears it in the constructor.
+  traps on the `bool` load when the heap hands back a byte other than 0 or 1 (Windows' heap, and glibc's
+  on the game-mode screen), so the port clears it in the constructor.
 - **`COxEntityManager::ListChanged`** ([`COxEntityManager.cpp`](../../src/ox/entity/COxEntityManager.cpp))
   is a `new bool[]` left uninitialised; `updateReference` can read a layer's flag before the first
   update sets it, at worst locating an entity again. UBSan traps on it on Windows when a game starts,
@@ -318,3 +319,11 @@ simply write the intended code.
   without a terminating zero and parses until it meets a zero byte past the end of the buffer; the
   shipped meshes only pick up ignored words from it. It also leaks the mesh buffer when the file is
   empty. The port's loader zero-terminates.
+- **`CGUIScrollBar::setPos`** ([`CGUIScrollBar.cpp`](../../src/daisy/gui/CGUIScrollBar.cpp)) divides
+  the track by `Max`; for an empty list (`Max` 0) that is infinite, and `Pos * f` is NaN, converted to
+  `int` (x86 gives `INT_MIN`, ARM 0). The thumb is not drawn then, and `Pos` stays 0. UBSan traps on
+  it when the save-game screen opens with no saves; the port puts the thumb at the start.
+- **`CAes::expandKey`** ([`CAes.cpp`](../../src/ox/core/CAes.cpp)) reads and writes `RoundKeys` as
+  `unsigned int` words, but the array follows the cipher's two flags (offset 18 in the 64-bit
+  builds), so every access is misaligned. x86 and ARM64 do not mind; UBSan traps on the first save.
+  The port expands the key in an aligned copy.

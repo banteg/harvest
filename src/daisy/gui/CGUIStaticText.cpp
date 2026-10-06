@@ -45,16 +45,17 @@ CGUIStaticText::CGUIStaticText(const wchar_t* text, bool border, ox::gui::IGUIEn
     ox::gui::IGUIElement* parent, int id, const ox::core::CRect<int>& rectangle, const wchar_t* linePrefix)
     : IGUIStaticText(environment, parent, id, rectangle), Border(border), OverrideColorEnabled(false),
       WordWrap(false), HAlign(ox::gui::EFHA_LEFT), VAlign(ox::gui::EFVA_TOP), LinePrefix(linePrefix),
-      OverrideFont(0), LastBreakFont(0), ParagraphIcon(0), IconLines(0), ProgressiveReveal(false),
-      OffsetScrolling(false)
+      OverrideFont(0), LastBreakFont(0), ParagraphIcon(0), IconLines(0),
+#ifdef HARVEST_PORT
+      // The original leaves IconRight unset until setParagraphIcon, and a progressive reveal reads
+      // it before that. Harmless (IconLines is 0 without an icon), but UBSan traps on the load when
+      // the heap hands back a byte other than 0 or 1, as glibc's does.
+      IconRight(false),
+#endif
+      ProgressiveReveal(false), OffsetScrolling(false)
 {
     OverrideColor = ox::video::SColor(101, 255, 255, 255);
     Text = text;
-#ifdef HARVEST_PORT
-    // only setParagraphIcon sets it, but draw reads it for every revealing text (harmlessly, since
-    // IconLines is 0 without an icon); UBSan traps on the uninitialised bool
-    IconRight = false;
-#endif
 }
 
 //! destructor

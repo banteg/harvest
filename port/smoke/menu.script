@@ -1,0 +1,75 @@
+# The Linux smoke test's walk through the game (port/smoke/smoke-linux.sh): intro, a new profile,
+# settings, the creative-mode mod list, a normal game, saving it, and loading it again from the
+# main menu. Positions are window coordinates for the 1080x810 window the device opens on a
+# 1920x1080 desktop at scale 1. The clock is fixed at 60 steps a second, so the frames below are game
+# time, and the walk plays the same under a software renderer or an emulated CPU.
+0 clock 60
+
+# the Oxeye splash fades in over a second, then waits for a key
+100 screenshot 01-intro
+120 key space
+
+# a fresh ~/.Harvest: the main menu asks for a profile name, typed as text input and pasted with
+# Ctrl+V from the clipboard (run.sh puts " Test" there on X11)
+400 screenshot 02-new-profile
+410 text Smoke
+415 key ctrl+v
+420 screenshot 03-name-typed
+430 click 539 454
+
+# "Would you like to play the introduction?": skip it
+500 screenshot 04-introduction-offer
+510 click 611 537
+600 screenshot 05-main-menu
+
+# Settings, then Done
+620 click 322 712
+760 screenshot 06-settings
+780 click 663 614
+
+# New Game: hover the planet orbiting on the left (the menu picks on motion), then pick it
+860 click 536 703
+960 move 210 432
+962 move 212 432
+970 screenshot 07-destinations
+980 click 212 432
+
+# the game modes; creative lists the mods: the shipped ones, then ~/.Harvest/mods in byte order
+1300 move 619 550
+1340 screenshot 08-game-modes
+1360 click 619 550
+1500 screenshot 09-mods
+1510 click 471 628
+
+# a normal game: the dropship lands
+1560 move 619 390
+1620 click 619 390
+2400 screenshot 10-game
+
+# the map scrolls with the wheel (a trackpad's fractions included); Ctrl+T saves Screen-*.jpg
+2410 move 540 400
+2420 wheel 0 -2.5
+2430 wheel 1.5 0
+2440 screenshot 11-scrolled
+2460 key ctrl+t
+
+# Menu, Save Game, a new slot with a description
+2600 click 1025 783
+2640 screenshot 12-ingame-menu
+2700 click 540 368
+2760 click 441 193
+2780 click 721 179
+2800 click 538 401
+2810 text Smoke save
+2820 screenshot 13-save-description
+2830 click 606 433
+
+# Menu, Exit to the main menu, Load Game, the save, Load
+2900 click 1025 783
+2960 click 540 461
+3220 click 641 705
+3340 click 460 195
+3360 screenshot 14-load-game
+3380 click 721 179
+3700 screenshot 15-loaded-game
+3720 quit

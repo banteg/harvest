@@ -152,6 +152,10 @@ port-test name *args:
 smoke-windows *args:
     port/smoke/smoke-windows.sh {{args}}
 
+# cross-build the port for Linux and smoke-test it in a container (port/smoke/smoke-linux.sh --help)
+smoke-linux *args:
+    port/smoke/smoke-linux.sh {{args}}
+
 # show the port's unresolved-symbol census
 census:
     uv run python port/tools/census.py

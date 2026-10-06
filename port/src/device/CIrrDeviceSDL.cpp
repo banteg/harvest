@@ -119,6 +119,10 @@ CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEv
 
     // The modes strictly smaller than the desktop (in screen units) in both dimensions, all at 32 bits.
     ox::core::CDimension2d<int> desktop = getDesktopSize();
+    if (const SDL_DisplayMode* mode = getDesktopMode())
+        SDL_Log("%s desktop %dx%d, pixel density %g, content scale %g: %dx%d screen units",
+            SDL_GetCurrentVideoDriver(), mode->w, mode->h, mode->pixel_density,
+            SDL_GetDisplayContentScale(mode->displayID), desktop.Width, desktop.Height);
     VideoModeList.setDesktop(32, desktop);
     for (unsigned int m = 0; m < SDL_arraysize(VIDEO_MODES); ++m)
         if (VIDEO_MODES[m][0] < desktop.Width && VIDEO_MODES[m][1] < desktop.Height)

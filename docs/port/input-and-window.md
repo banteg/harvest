@@ -164,8 +164,9 @@ quarter of its intended size. The port separates the two sizes:
   viewport; the game sees no resize. The minimum window size follows the scale.
 - A window size in screen units (the remembered resolution, `resizeDeviceWindow`) becomes the window
   size that gives that screen at the scale of the window's display (the primary display before the
-  window exists). The device logs the screen and drawable sizes when it creates the window and when
-  only the drawable changes.
+  window exists). The device logs the primary display's desktop mode (size, pixel density, content
+  scale and the screen units they give) at startup, and the screen and drawable sizes when it creates
+  the window and when only the drawable changes.
 - The caption is UTF-8 (Linux narrowed each character).
 
 ### Keys
@@ -340,7 +341,8 @@ macOS):
 | `size <w> <h>` | `SDL_SetWindowSize` |
 | `display <n>` | moves the window to the middle of the n-th display (`SDL_GetDisplays`) |
 | `fullscreen on\|off` | `SDL_SetWindowFullscreen` |
-| `screenshot <name>` | none: the next frame is saved as `$HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg`, as Ctrl+T saves it |
+| `clock <rate>\|real` | none: from then on each frame advances the game clock (`getFloatTime`) by 1/rate seconds, so the script plays the same at any frame rate (a software renderer, an emulated CPU); `real` goes back to the monotonic clock |
+| `screenshot <name>` | none: the next frame drawn, after the events of the commands of the same frame, is saved as `$HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg`, as Ctrl+T saves it |
 | `quit` | a quit request |
 
 ### Network

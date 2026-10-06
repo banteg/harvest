@@ -117,9 +117,19 @@ bool CAes::encrypt(void* target, const void* source, int size)
 
 void CAes::expandKey()
 {
+#ifdef HARVEST_PORT
+    // RoundKeys follows the cipher's two flags, so its words are misaligned (offset 18 in the
+    // 64-bit builds) and UBSan traps on the loads below. The port expands the key in an aligned
+    // copy.
+    unsigned int words[sizeof(RoundKeys) / sizeof(unsigned int)];
+    memcpy(words, Key->getKey(), 32);
+
+    unsigned int* w = words;
+#else
     memcpy(RoundKeys, Key->getKey(), 32);
 
     unsigned int* w = (unsigned int*)RoundKeys;
+#endif
     unsigned int temp;
     for (int i = 1; i < 8; ++i)
     {
@@ -147,6 +157,9 @@ void CAes::expandKey()
             w[j] = temp;
         }
     }
+#ifdef HARVEST_PORT
+    memcpy(RoundKeys, words, sizeof(RoundKeys));
+#endif
 }
 
 //! Multiplication by 2 in GF(2^8).

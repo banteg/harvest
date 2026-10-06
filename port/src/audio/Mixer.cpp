@@ -1,4 +1,5 @@
 #include "audio/Mixer.h"
+#include <SDL3/SDL_log.h>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -123,15 +124,24 @@ bool Mixer::openDevice()
     config.sampleRate = 0;
     config.dataCallback = dataCallback;
     config.pUserData = this;
-    if (ma_device_init(0, &config, &Device) != MA_SUCCESS)
-        return false;
-    if (ma_device_start(&Device) != MA_SUCCESS)
+    ma_result result = ma_device_init(0, &config, &Device);
+    if (result != MA_SUCCESS)
     {
+        SDL_Log("cannot open an audio device: %s", ma_result_description(result));
+        return false;
+    }
+    result = ma_device_start(&Device);
+    if (result != MA_SUCCESS)
+    {
+        SDL_Log("cannot start the %s audio device: %s", ma_get_backend_name(Device.pContext->backend),
+            ma_result_description(result));
         ma_device_uninit(&Device);
         return false;
     }
     DeviceOpen = true;
     SampleRate = Device.sampleRate;
+    SDL_Log("audio: %s, %s, %u Hz", ma_get_backend_name(Device.pContext->backend), Device.playback.name,
+        SampleRate);
     return true;
 }
 

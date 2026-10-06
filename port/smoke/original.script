@@ -1,0 +1,16 @@
+# The port on the user data the original 1.18 Linux build left (smoke-linux.sh --original). The
+# original crashes on exit in the container before it records the recent profile, so the main menu
+# asks which profile to use: the original's, Done; then Load Game, the original's save, Load.
+# Positions as in menu.script.
+0 clock 60
+120 key space
+400 screenshot 01-select-profile
+410 click 450 336
+420 click 651 499
+500 screenshot 02-main-menu
+520 click 641 705
+660 click 460 195
+670 screenshot 03-load-game
+680 click 721 179
+1000 screenshot 04-loaded-game
+1020 quit

@@ -15,13 +15,15 @@ namespace port {
 //! - move <x> <y>: the pointer moves there (a motion event; the system pointer stays put)
 //! - click <x> <y>: left button pressed and released there
 //! - wheel <x> <y> [flipped]: SDL's precise wheel amounts at the pointer, as a trackpad sends them
+//! - text <words>: a text input event with the words joined by single spaces
 //! - key <name>: a key pressed and released; SDL key names, "ctrl+" for Control (Command on macOS)
-//! - text <words>: typed text (UTF-8), as SDL_EVENT_TEXT_INPUT; words are joined by one space
 //! - size <w> <h>: SDL_SetWindowSize
 //! - display <n>: the window moves to the middle of the n-th display
 //! - fullscreen on|off: SDL_SetWindowFullscreen
-//! - screenshot <name>: the frame as $HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg (the
-//!   video driver's saveJpegScreenshot, as Ctrl+T calls it)
+//! - clock <rate>|real: the game clock advances 1/rate seconds per frame from now on, so the script
+//!   plays the same at any frame rate; "real" returns to the monotonic clock
+//! - screenshot <name>: the next frame drawn (after the events of the same frame's commands) as
+//!   $HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg (saveJpegScreenshot, as Ctrl+T calls it)
 //! - quit: a quit request
 class CInputScript
 {
@@ -40,6 +42,8 @@ private:
         unsigned int Frame;
         std::string Name;
         std::vector<std::string> Arguments;
+        //! The arguments joined by single spaces (text's string).
+        std::string Text;
     };
 
     void run(const SCommand& command, SDL_Window* window);

@@ -417,6 +417,19 @@ void CGUIScrollBar::setPos(int pos)
     if (Pos > Max)
         Pos = Max;
 
+#ifdef HARVEST_PORT
+    // With Max 0 (an empty list) f below is infinite and Pos * f is NaN, whose conversion to int is
+    // undefined: x86 gives INT_MIN, ARM 0, and UBSan traps. The thumb is not drawn then and Pos
+    // stays 0, so the port puts it at the start.
+    if (Max == 0)
+    {
+        DrawHeight = Horizontal ? AnimationRects[ESBA_THUMB_NORMAL].getWidth()
+                                : AnimationRects[ESBA_THUMB_NORMAL].getHeight();
+        DrawPos = DrawHeight;
+        return;
+    }
+#endif
+
     if (Horizontal)
     {
         DrawHeight = AnimationRects[ESBA_THUMB_NORMAL].getWidth();
