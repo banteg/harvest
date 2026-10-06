@@ -72,7 +72,7 @@ static inline short toA1R5G5B5(SColor color)
     return (short)(((c & 0xff000000) ? 0x8000 : 0) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | ((c >> 3) & 0x1f));
 }
 
-CVideoNull::CVideoNull(io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
+CVideoNull::CVideoNull(ox::io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
     : InvHalfWidth(0), InvHalfHeight(0), ViewOffsetX(0),
       ViewOffsetY(0), FileSystem(io), ViewPort(0, 0, 0, 0), ScreenSize(screenSize),
       PhysicalScreenSize(screenSize), PrimitivesDrawn(0), TextureCreationFlags(0), UseMaterialShaderFor2D(false),
@@ -219,7 +219,7 @@ ISpritePackage* CVideoNull::getSpritePackage(const char* filename, bool keepStat
     if (package)
         return package;
 
-    io::IReadFile* file = FileSystem->createAndOpenFile(filename);
+    ox::io::IReadFile* file = FileSystem->createAndOpenFile(filename);
     if (file)
     {
         CSpritePackage* sprites = new CSpritePackage(this, keepStates);
@@ -253,7 +253,7 @@ IParticlePackage* CVideoNull::getParticlePackage(const char* filename)
     if (package)
         return package;
 
-    io::IReadFile* file = FileSystem->createAndOpenFile(filename);
+    ox::io::IReadFile* file = FileSystem->createAndOpenFile(filename);
     if (file)
     {
         CParticlePackage* particles = new CParticlePackage(this);
@@ -355,7 +355,7 @@ ITexture* CVideoNull::getTexture(const char* filename)
     if (texture)
         return texture;
 
-    io::IReadFile* file = FileSystem->createAndOpenFile(filename);
+    ox::io::IReadFile* file = FileSystem->createAndOpenFile(filename);
     if (file)
     {
         texture = loadTextureFromFile(file);
@@ -391,7 +391,7 @@ ITexture* CVideoNull::findTexture(const char* filename)
     return 0;
 }
 
-ITexture* CVideoNull::loadTextureFromFile(io::IReadFile* file)
+ITexture* CVideoNull::loadTextureFromFile(ox::io::IReadFile* file)
 {
     ITexture* texture = 0;
     IImage* image = createImageFromFile(file);
@@ -424,7 +424,7 @@ void CVideoNull::addTexture(ITexture* texture, const char* filename)
     }
 }
 
-ITexture* CVideoNull::getTexture(io::IReadFile* file)
+ITexture* CVideoNull::getTexture(ox::io::IReadFile* file)
 {
     ITexture* texture = 0;
 
@@ -942,7 +942,7 @@ bool CVideoNull::getTextureCreationFlag(E_TEXTURE_CREATION_FLAG flag)
 IImage* CVideoNull::createImageFromFile(const char* filename)
 {
     IImage* image = 0;
-    io::IReadFile* file = FileSystem->createAndOpenFile(filename);
+    ox::io::IReadFile* file = FileSystem->createAndOpenFile(filename);
 
     if (file)
     {
@@ -955,7 +955,7 @@ IImage* CVideoNull::createImageFromFile(const char* filename)
     return image;
 }
 
-IImage* CVideoNull::createImageFromFile(io::IReadFile* file)
+IImage* CVideoNull::createImageFromFile(ox::io::IReadFile* file)
 {
     IImage* image = 0;
 
@@ -1116,8 +1116,8 @@ int CVideoNull::addHighLevelShaderMaterialFromFiles(const char* vertexShaderProg
     const char* pixelShaderEntryPointName, E_PIXEL_SHADER_TYPE psCompileTarget,
     IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial, int userData)
 {
-    io::IReadFile* vsfile = 0;
-    io::IReadFile* psfile = 0;
+    ox::io::IReadFile* vsfile = 0;
+    ox::io::IReadFile* psfile = 0;
 
     if (vertexShaderProgramFile)
     {
@@ -1153,8 +1153,8 @@ int CVideoNull::addHighLevelShaderMaterialFromFiles(const char* vertexShaderProg
     return result;
 }
 
-int CVideoNull::addHighLevelShaderMaterialFromFiles(io::IReadFile* vertexShaderProgram,
-    const char* vertexShaderEntryPointName, E_VERTEX_SHADER_TYPE vsCompileTarget, io::IReadFile* pixelShaderProgram,
+int CVideoNull::addHighLevelShaderMaterialFromFiles(ox::io::IReadFile* vertexShaderProgram,
+    const char* vertexShaderEntryPointName, E_VERTEX_SHADER_TYPE vsCompileTarget, ox::io::IReadFile* pixelShaderProgram,
     const char* pixelShaderEntryPointName, E_PIXEL_SHADER_TYPE psCompileTarget,
     IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial, int userData)
 {
@@ -1199,7 +1199,7 @@ int CVideoNull::addShaderMaterial(const char* vertexShaderProgram, const char* p
     return -1;
 }
 
-int CVideoNull::addShaderMaterialFromFiles(io::IReadFile* vertexShaderProgram, io::IReadFile* pixelShaderProgram,
+int CVideoNull::addShaderMaterialFromFiles(ox::io::IReadFile* vertexShaderProgram, ox::io::IReadFile* pixelShaderProgram,
     IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial, int userData)
 {
     char* vs = 0;
@@ -1239,8 +1239,8 @@ int CVideoNull::addShaderMaterialFromFiles(const char* vertexShaderProgramFileNa
     const char* pixelShaderProgramFileName, IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial,
     int userData)
 {
-    io::IReadFile* vsfile = 0;
-    io::IReadFile* psfile = 0;
+    ox::io::IReadFile* vsfile = 0;
+    ox::io::IReadFile* psfile = 0;
 
     if (vertexShaderProgramFileName)
     {
@@ -1288,8 +1288,8 @@ int CVideoNull::addCgShaderMaterialFromFiles(const char* vertexShaderProgramFile
     const char* pixelShaderEntryPointName, IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial,
     bool flag, int userData)
 {
-    io::IReadFile* vsfile = 0;
-    io::IReadFile* psfile = 0;
+    ox::io::IReadFile* vsfile = 0;
+    ox::io::IReadFile* psfile = 0;
 
     if (vertexShaderProgramFileName)
     {
@@ -1325,8 +1325,8 @@ int CVideoNull::addCgShaderMaterialFromFiles(const char* vertexShaderProgramFile
     return result;
 }
 
-int CVideoNull::addCgShaderMaterialFromFiles(io::IReadFile* vertexShaderProgram,
-    const char* vertexShaderEntryPointName, io::IReadFile* pixelShaderProgram, const char* pixelShaderEntryPointName,
+int CVideoNull::addCgShaderMaterialFromFiles(ox::io::IReadFile* vertexShaderProgram,
+    const char* vertexShaderEntryPointName, ox::io::IReadFile* pixelShaderProgram, const char* pixelShaderEntryPointName,
     IShaderConstantSetCallBack* callback, E_MATERIAL_TYPE baseMaterial, bool flag, int userData)
 {
     char* vs = 0;
@@ -1500,7 +1500,7 @@ void CVideoNull::setInputTexture(int stage, ITexture* texture)
     os::Printer::log(L"Invalid texture stage to CVideoNull::setInputTexture", ELL_WARNING);
 }
 
-IVideoDriver* createNullDriver(io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
+IVideoDriver* createNullDriver(ox::io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
 {
     return new CVideoNull(io, screenSize);
 }
