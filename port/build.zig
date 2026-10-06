@@ -221,8 +221,10 @@ fn buildStbImage(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.
     const module = cModule(b, target, optimize);
     module.addIncludePath(dep.path(""));
     module.addCSourceFile(.{ .file = b.path("src/thirdparty/stb_image.c"), .flags = &.{"-std=c99"} });
+    module.addCSourceFile(.{ .file = b.path("src/thirdparty/stb_image_write.c"), .flags = &.{"-std=c99"} });
     const lib = b.addLibrary(.{ .name = "stb_image", .root_module = module });
     lib.installHeader(dep.path("stb_image.h"), "stb_image.h");
+    lib.installHeader(dep.path("stb_image_write.h"), "stb_image_write.h");
     return lib;
 }
 

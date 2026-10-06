@@ -1,5 +1,6 @@
-// The BMP, PSD and PCX loaders CVideoNull creates. The game ships no such files, so the port's
-// loaders accept nothing. They must be objects: CVideoNull calls every loader and drops them.
+// The PSD and PCX loaders CVideoNull creates. The game ships no such files, so the port's loaders
+// accept nothing. They must be objects: CVideoNull calls every loader and drops them. The BMP
+// loader, which the GUI's built-in font needs, is in ImageLoaderBmp.cpp.
 
 #include "ox/video/IImageLoader.h"
 
@@ -28,11 +29,6 @@ public:
 };
 
 } // end anonymous namespace
-
-ox::video::IImageLoader* createImageLoaderBmp()
-{
-    return new CNullImageLoader();
-}
 
 ox::video::IImageLoader* createImageLoaderPSD()
 {

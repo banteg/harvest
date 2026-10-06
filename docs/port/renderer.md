@@ -104,3 +104,61 @@ On a change of material type the Cg material renderer calls the shader callback'
 and the basic render states; every draw calls `OnSetConstants(this, userData)` again. Programs compile
 from source (`CG_SOURCE`), or from object code when the precompiled flag is set. See
 [menu-scene.md](menu-scene.md) for the shaders.
+
+## In the port
+
+The port's renderer ([`port/src/video/CVideoGL.cpp`](../../port/src/video/CVideoGL.cpp), created by
+`port::createVideoDriver`) is `CVideoOpenGL` function by function on OpenGL ES 3.0 / WebGL 2, or
+OpenGL 3.3 core on the desktop (macOS has no ES). It derives from `CVideoNull`, keeps the 2D batch,
+clipping, texel insets, half-pixel shifts, corner colour orders and per-batch filters above, and
+issues the original's state changes in the original's order, so state leaks between draws the same
+way.
+
+- **Fixed function.** What core OpenGL lacks is kept by
+  [`CFixedFunction`](../../port/src/video/CFixedFunction.h) as OpenGL 1.x would keep it and applied by
+  one shader ([`shaders/fixed.vert`](../../port/src/video/shaders/fixed.vert), `fixed.frag`): the
+  modelview and projection matrices, `GL_TEXTURE_2D` enables and texture environments per unit
+  (`MODULATE`, `DECAL`, `REPLACE`, `ADD`, the light map's `COMBINE`), the alpha test (`GREATER`),
+  per-vertex lighting (eight lights, no colour material, no `GL_NORMALIZE`, infinite viewer), sphere
+  map texture generation and fog. Blending, depth, culling, front face, scissor, viewport, texture
+  bindings and texture parameters stay in OpenGL, set where the original set them (including the
+  active texture unit, so filter and wrap changes land on the same texture as in the original).
+- **Draws.** Immediate mode and client arrays become one vertex array object with streamed
+  buffers; vertices are uploaded in their `S3DVertex` layout and the shader reads the `SColor` bytes
+  as BGRA. `GL_QUADS` become two triangles per quad, (0, 1, 2) and (0, 2, 3).
+- **Leaked state is real.** `EMT_SOLID_2_LAYER` (the scattering ground materials' base) does not
+  touch blending, so the planets draw with whatever blend the previous material left. In the menu
+  the skybox's `EMT_SOLID` turns blending off first; without it the 2D GUI's blend would darken the
+  low-level planets, whose alpha is below 1 on the night side.
+- **Textures** have the image's size (no power-of-two padding; both APIs take any size), so
+  `getSize` equals `getOriginalSize`; for the game's power-of-two images this changes nothing, and
+  the original's read past a non-power-of-two A8R8G8B8 image cannot happen. Pixels stay A8R8G8B8
+  for `lock` and upload as RGBA8. Mip maps only with `ETCF_CREATE_MIP_MAPS` (`glGenerateMipmap`,
+  `GL_LINEAR_MIPMAP_NEAREST`). Uploads put back the texture binding they change.
+- **Cg materials.** `addCgShaderMaterialFromFiles` still opens the files through the file system
+  (a missing file fails with −1), but compiles the GLSL translation chosen by the file's name
+  ([`shaders/scatter*.vert`/`.frag`](../../port/src/video/shaders/)). Uniforms keep Cg's separate
+  vertex and pixel namespaces through the prefixes `vs_` and `ps_`; a name counts as found when the
+  translation declares it, as Cg kept unreferenced parameters. Matrices upload column-major
+  (`cgSetParameterValuefc`), samplers `DiffSpec`/`NormGlow` are units 0/1 (Cg's `TEX0`/`TEX1`), and
+  the vertex shaders clamp `COLOR0`/`COLOR1` to [0, 1] as OpenGL's vertex colour clamping did. The
+  translations compile as GLSL ES 3.00 (checked in WebGL 2) and GLSL 3.30. The material reports its
+  base material's transparency. ARB assembly and GLSL 1.10 shader materials are not supported (the
+  game uses neither).
+- **Fixed original bugs:** the scissor's y is `height − LowerRightCorner.Y`; lights are limited to
+  the eight the shader evaluates (`getMaximalDynamicLightAmount` returns 8, not the enum value
+  `GL_MAX_LIGHTS`). Lines stay 1 px (OpenGL ES has no wide lines anyway).
+- **Unchanged on purpose:** render targets do nothing and the minimap draws to the screen;
+  `createScreenTexture` returns an empty texture; `setBasicRenderStates` reads colours, shininess,
+  the filter and lighting from the driver's material; the vertex-shader-constant forwarding bug;
+  the projection's element 12 (the x translation, 0 for the game's matrices) is negated; the Cg
+  callback is never dropped.
+- **Dropped:** polygon mode (wireframe; ES has none and the game never asks), stencil shadows (no
+  stencil buffer; the game draws none), `queryFeature` reports what this renderer supports.
+- **Screenshots.** `saveJpegScreenshot` picks the `Screen-yymmdd-NN.jpg` name at once and returns
+  false like the original, but reads the frame at the next `endScene`, before presenting: the game
+  calls it from an event handler, after the swap, when the back buffer is undefined on most
+  platforms. JPEG quality 100 through stb_image_write, written through the file system.
+- **Sizes.** `OnResize` and the creation size set the viewport, so the device should pass the
+  drawable size in pixels (`SDL_GetWindowSizeInPixels`), which differs from the window size on
+  high-density displays; the 2D mapping uses the render size and scales to the viewport.
