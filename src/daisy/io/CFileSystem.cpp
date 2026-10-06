@@ -129,6 +129,8 @@ bool CFileSystem::zipDeflateData(unsigned char* target, unsigned int targetSize,
     if (deflateInit(&stream, Z_DEFAULT_COMPRESSION) != Z_OK)
         return false;
 
+    // Original bug: Z_OK means the output buffer filled before the stream finished, yet it counts
+    // as success, so data that does not fit in target is truncated silently.
     int err = deflate(&stream, Z_FINISH);
     if (err != Z_OK && err != Z_STREAM_END)
         return false;
@@ -157,6 +159,7 @@ bool CFileSystem::zipInflateData(unsigned char* target, unsigned int targetSize,
     if (inflateInit(&stream) != Z_OK)
         return false;
 
+    // As in zipDeflateData, Z_OK (target full before the stream ended) counts as success.
     int err = inflate(&stream, Z_FINISH);
     if (err != Z_OK && err != Z_STREAM_END)
         return false;
@@ -269,6 +272,8 @@ bool CFileSystem::changeWorkingDirectoryTo(const char* directory)
             CZipReader* reader = getZipReader(zipPath.c_str());
             if (reader)
             {
+                // Original bug: the folder below the archive is cut from zipPath itself, not from
+                // directory, so directoryExists always gets "" and accepts any path in the archive.
                 ox::core::CString<char> inZip = zipPath.subStringToEnd(zipPath.size());
                 if (reader->directoryExists(inZip.c_str()) == true)
                 {
@@ -359,20 +364,6 @@ ox::io::IXMLReader* CFileSystem::createXMLReader(const char* filename)
     return reader;
 }
 
-//! Creates a XML Reader from a file.
-ox::io::IXMLReader* CFileSystem::createXMLReader(ox::io::IReadFile* file)
-{
-    if (!file)
-        return 0;
-
-    CTextReader* txtreader = new CTextReader(file);
-    CXMLReader* xmlreader = new CXMLReader(txtreader);
-
-    txtreader->drop();
-
-    return xmlreader;
-}
-
 //! Creates a XML Writer from a file.
 ox::io::IXMLWriter* CFileSystem::createXMLWriter(const char* filename)
 {
@@ -393,8 +384,8 @@ bool CFileSystem::deleteFile(const char* filename)
     return remove(intern_resolveAliases(filename).c_str()) == 0;
 }
 
-//! The resolved paths reach rename(3) the other way round: newName is renamed to filename. The game
-//! never calls this.
+//! Original bug: the resolved paths reach rename(3) the other way round, so newName is renamed to
+//! filename. The game never calls this.
 bool CFileSystem::renameFile(const char* filename, const char* newName)
 {
     ox::core::CString<char> oldPath = intern_resolveAliases(filename);
@@ -426,6 +417,20 @@ ox::io::IReadFile* CFileSystem::readFileIntoMemory(const char* filename)
     }
 
     return memoryFile;
+}
+
+//! Creates a XML Reader from a file.
+ox::io::IXMLReader* CFileSystem::createXMLReader(ox::io::IReadFile* file)
+{
+    if (!file)
+        return 0;
+
+    CTextReader* txtreader = new CTextReader(file);
+    CXMLReader* xmlreader = new CXMLReader(txtreader);
+
+    txtreader->drop();
+
+    return xmlreader;
 }
 
 } // end namespace io
