@@ -65,8 +65,14 @@ int CReadFile::getPos()
 
 long long CReadFile::getModifiedDate()
 {
+#ifdef HARVEST_PORT
+    // stat64 is glibc's large-file API; elsewhere stat is already 64-bit.
+    struct stat info;
+    fstat(fileno(File), &info);
+#else
     struct stat64 info;
     fstat64(fileno(File), &info);
+#endif
     return info.st_mtime;
 }
 
