@@ -110,3 +110,38 @@ lint:
 fix:
     uv run ruff check tools tests --fix --unsafe-fixes
     uv run ruff format tools tests
+
+# the port: game data defaults to the original Linux install in orig/
+data := justfile_directory() / "orig/1.18-linux-amd64"
+
+# build the port (debug, with UBSan; pass e.g. -Doptimize=ReleaseFast or -Dtarget=x86_64-windows-gnu)
+build *args:
+    cd port && zig build harvest {{args}}
+
+# build and run the debug port against the original data (extra args go to the game, e.g. --no-audio)
+run *args: build
+    port/zig-out/bin/harvest --data "{{data}}" {{args}}
+
+# build and run an optimized port, without UBSan stops, for playing
+play *args:
+    cd port && zig build harvest -Doptimize=ReleaseFast
+    port/zig-out/bin/harvest --data "{{data}}" {{args}}
+
+# build the port for every desktop target from this machine
+build-all:
+    cd port && zig build harvest
+    cd port && zig build harvest -Dtarget=x86_64-linux-gnu
+    cd port && zig build harvest -Dtarget=x86_64-windows-gnu
+
+# run one of the port's tests (audio, video, menu_scene) with the original data
+port-test name *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # the audio test takes the sound folder, the others the data root
+    path="{{data}}"
+    if [ "{{name}}" = audio ]; then path="$path/harvestClientData/sfx/"; fi
+    cd port && zig build "test-{{name}}" -- "$path" {{args}}
+
+# show the port's unresolved-symbol census
+census:
+    uv run python port/tools/census.py

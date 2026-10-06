@@ -28,6 +28,18 @@ error: those errors are the census. For the grouped report with callers, from th
 
 ## Running
 
+From the repository root, `just` wraps the common commands (the game data defaults to
+`orig/1.18-linux-amd64`):
+
+    just run              # debug build with UBSan, then run; extra args go to the game (just run --no-audio)
+    just play             # optimized build without UBSan stops, then run
+    just build            # debug build only; just build -Doptimize=ReleaseFast -Dtarget=x86_64-windows-gnu
+    just build-all        # macOS, Linux and Windows builds from this machine
+    just port-test audio  # also video, menu_scene
+    just census           # unresolved symbols, if any
+
+Directly:
+
 The game needs the original's data, the directory that holds `harvestClientData/`:
 
     zig-out/bin/harvest --data ../orig/1.18-linux-amd64   # or set HARVEST_DATA; default: next to the executable
