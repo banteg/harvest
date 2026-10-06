@@ -554,3 +554,7 @@
 ["daisy/other/CIrrDeviceLinux.cpp"]
 # the static X display pointer, then the iostream initializer object
 ".bss" = 0x86bfd0
+
+["daisy/video/CVideoModeList.cpp"]
+# std::ios_base::Init object of the iostream static initializer
+".bss" = 0x86c060
