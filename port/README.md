@@ -16,13 +16,23 @@ network access to fetch the dependencies (github.com, www.lua.org). From this di
     zig build run                  # build and run it (arguments after --)
     zig build census               # links every kept unit with the original's plain loop
 
-`harvest` and `census` link every kept unit and port source, so they fail until the platform seams
-exist: their linker errors are the census. For the grouped report with callers, from the repository
-root:
+`harvest` and `census` link every kept unit and port source, so a missing seam shows up as a linker
+error: those errors are the census. For the grouped report with callers, from the repository root:
 
     uv run python port/tools/census.py            # the port's unresolved symbols, by owner
     uv run python port/tools/census.py --libc     # plus the C library calls the kept units make
     uv run python port/tools/census.py --original # the matching build's objects (run `just match` first)
+
+## Running
+
+The game needs the original's data, the directory that holds `harvestClientData/`:
+
+    zig-out/bin/harvest --data ../orig/1.18-linux-amd64   # or set HARVEST_DATA; default: next to the executable
+    zig-out/bin/harvest --null-video --no-audio --no-vsync
+
+User data goes to `~/.Harvest` on Linux, `~/Library/Application Support/Harvest` on macOS and
+`%APPDATA%\Harvest` on Windows. The device and its options are described in
+[`docs/port/input-and-window.md`](../docs/port/input-and-window.md#the-ports-device).
 
 ## What is compiled
 

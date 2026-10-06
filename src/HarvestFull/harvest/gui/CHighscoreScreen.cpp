@@ -134,9 +134,14 @@ CHighscoreScreen::CHighscoreScreen(ox::IOxDevice* device)
         Sprites[i] = 0;
     for (int i = 0; i < 3; ++i)
         SummaryLoaded[i] = false;
-    // Clears past the end of each row, as in both builds.
+    // Clears past the end of each row, as in both builds. The port clears only the array (UBSan traps
+    // on the overrun, which also zeroes the first word of Lock).
     for (int i = 0; i < 4; ++i)
+#ifdef HARVEST_PORT
+        for (int j = 0; j < 2; ++j)
+#else
         for (int j = 0; j < 4; ++j)
+#endif
             for (int k = 0; k < 4; ++k)
                 PromoteButtons[i][j][k] = 0;
     for (int i = 0; i < 4; ++i)

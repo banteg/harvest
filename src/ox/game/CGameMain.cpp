@@ -11,6 +11,9 @@
 #include "ox/event/IEventReceiver.h"
 #include "ox/io/IFileSystem.h"
 #include "ox/io/IReadFile.h"
+#ifdef HARVEST_PORT
+#include "ox/event/ILogger.h"
+#endif
 #include "ox/video/IVideoDriver.h"
 // The native unit has an iostream static initializer, as do the other ox units.
 #include <iostream> // IWYU pragma: keep
@@ -23,6 +26,9 @@ static const int STATE_QUIT = 1;
 
 CGameMain::CGameMain()
     : Running(false), State(0), SleepWhenInactive(true), LastTime(0)
+#ifdef HARVEST_PORT
+    , Loading(false)
+#endif
 {
     if (!event::gp_subscriberList)
         event::gp_subscriberList = new event::CEventSubscriberList();
@@ -68,6 +74,13 @@ void CGameMain::setState(int state)
     {
         if (State->firstInit(Device) == 0)
         {
+#ifdef HARVEST_PORT
+            // The original loops over the steps below inside this call. The port runs one step per
+            // update (loadStep), so a frame never blocks for the whole load: the web build cannot
+            // block, and the window keeps answering its events.
+            Loading = true;
+            return;
+#endif
             while (true)
             {
                 State->renderFirst();
@@ -82,10 +95,47 @@ void CGameMain::setState(int state)
                 }
             }
         }
+#ifdef HARVEST_PORT
+        failState();
+        return;
+#endif
         State->getErrorMessage();
     }
     Running = false;
 }
+
+#ifdef HARVEST_PORT
+bool CGameMain::isLoading()
+{
+    return Loading;
+}
+
+//! One iteration of the original's loading loop in setState: secondInit returns 2 for more steps,
+//! 1 for a failure, anything else when the state is ready.
+void CGameMain::loadStep()
+{
+    State->renderFirst();
+    int result = State->secondInit();
+    if (result == 2)
+        return;
+
+    Loading = false;
+    if (result == 1)
+    {
+        failState();
+        return;
+    }
+    State->subscribe(event::gp_subscriberList);
+    Device->setEventReceiver(event::gp_subscriberList);
+}
+
+//! The original fetches the message and drops it; the port logs it.
+void CGameMain::failState()
+{
+    Device->getLogger()->log("The game state failed to load", State->getErrorMessage(), event::ELL_ERROR);
+    Running = false;
+}
+#endif
 
 CGameState* CGameMain::getState()
 {
@@ -119,6 +169,14 @@ void CGameMain::update()
         return;
     }
 
+#ifdef HARVEST_PORT
+    if (Loading)
+    {
+        loadStep();
+        return;
+    }
+#endif
+
     float time = getNewTimeStep();
 
     if (Device->getAudioDriver())
@@ -133,8 +191,11 @@ void CGameMain::update()
             State->render();
     }
 
+#if !defined(HARVEST_PORT) || !defined(__EMSCRIPTEN__)
+    // The web build must not block; the browser throttles hidden pages itself.
     if (!Device->isWindowActive() && SleepWhenInactive)
         core::CThread::sleep(20);
+#endif
 
     Device->pollNetworkDevices();
 

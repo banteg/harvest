@@ -20,8 +20,8 @@ reached, not when compiled.
 | Step | What | State |
 |---|---|---|
 | `zig build` | `libharvest.a` (kept units and port sources) and the five libraries, headers in `zig-out/include` | builds for all three targets |
-| `zig build harvest` | the game, entered through SDL3's main callbacks (`port/src/main.cpp`) | fails on the three seams below; with them stubbed it links for all three targets |
-| `zig build census` | the same objects with the original's plain loop (`port/census/main.cpp`) | fails on the same three seams |
+| `zig build harvest` | the game, entered through SDL3's main callbacks (`port/src/main.cpp`) | links for all three targets; on macOS it runs the intro and the main menu with the null video driver (the renderer, audio backend and scene manager come from weak fallbacks until they land) |
+| `zig build census` | the same objects with the original's plain loop (`port/census/main.cpp`) | links (it receives no events: the SDL3 device gets them from `SDL_AppEvent`) |
 
 ### Kept units (123)
 
@@ -73,7 +73,16 @@ The `replaced` list in `build.zig`:
 
 | File | Provides | Notes |
 |---|---|---|
-| `main.cpp` | `SDL_AppInit`/`Iterate`/`Event`/`Quit` | skeleton: creates `CHarvestFullMain`, calls `init`, then `update` per iteration until `isRunning` is false, `clear` on quit. Event delivery is the device's to fill in |
+| `main.cpp` | `SDL_AppInit`/`Iterate`/`Event`/`Quit` | parses the command line, creates `CHarvestFullMain`, calls `init`, then one `update` per iteration until `isRunning` is false, `clear` on quit. Events go to the device in `SDL_AppEvent`; input that arrives while a state loads is held and replayed when it is ready ([input-and-window.md](input-and-window.md#the-ports-device)) |
+| `device/CIrrDeviceSDL.{h,cpp}` | `createDevice`, `port::CIrrDeviceSDL` (`CIrrDeviceStub` and `ICursorControl`) | window, GL context, events, fullscreen, resizes, video modes, `$GAME_RESOURCES$` |
+| `device/KeyMap.{h,cpp}` | SDL key codes to ox codes | the Linux table plus Windows codes for the keys it left uninitialised |
+| `device/CJoystickSDLDriver.{h,cpp}` | `IJoystickDriver` | SDL gamepads with the Linux/xpad numbering, raw joysticks otherwise |
+| `device/CSDLOperator.{h,cpp}` | `IOSOperator` | clipboard, `SDL_OpenURL`, message boxes, the user data directory |
+| `device/CSDLTimer.h` | `ITimer` | wall-clock `getTime`, monotonic `getFloatTime` |
+| `device/Options.{h,cpp}` | `port::g_options` | `--data`, `HARVEST_DATA`, `--null-video`, `--no-audio`, `--no-vsync` |
+| `device/NullDrivers.{h,cpp}` | the null video driver (clears and presents) and null audio driver | `--null-video`, `--no-audio` |
+| `device/SeamFallbacks.cpp` | weak `port::createVideoDriver`, `port::createAudioDriver`, `daisy::scene::createSceneManager` (a scene manager that creates nothing) | temporary: a strong definition replaces each; delete the file once the renderer, audio backend and scene manager exist |
+| `net/CWinsockNetworkDevice.{h,cpp}` | `daisy::net::CWinsockNetworkDevice` | never connects; failures reach the receiver on the next `pollDevice` |
 | `gui/BuildInFont.cpp` | `daisy::gui::BuildInFontData`, `BuildInFontDataSize` | the 8310 bytes from Irrlicht 0.7's `BuildInFont.h` (identical to Linux `0x868fe0`), unpacked little-endian from its 32-bit words at static initialisation |
 | `game/EntityGlobals.cpp` | `harvest::entity::g_nextEntityId` (`int`, 1) | until its defining game unit is recovered |
 | `io/XMLStubs.cpp` | `CTextReader`, `CXMLReader`, `CXMLWriter` constructors | the game never uses XML; the objects do nothing |
@@ -89,7 +98,9 @@ The `replaced` list in `build.zig`:
 
 All port-only lines are inside `#ifdef HARVEST_PORT`, so the matching build preprocesses to the same
 tokens. The full match is unchanged by this step's edits: 4386 exact functions over 135 units, and
-every one of the 135 objects byte-identical (`sha256`) before and after.
+every one of the 135 objects byte-identical (`sha256`) before and after. The device step's edits
+(the three rows from `CIrrDeviceStub.cpp` on) leave it at 4407 exact functions, again with all 135
+objects byte-identical.
 
 | File | Change | Why |
 |---|---|---|
@@ -98,6 +109,9 @@ every one of the 135 objects byte-identical (`sha256`) before and after.
 | [`daisy/io/CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp) | `createDirectory` calls `mkdir(path)` on Windows | the Windows C library's `mkdir` takes no mode |
 | [`daisy/video/Null/CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp) | no `cgCreateContext`/`cgDestroyContext`; `CgContext` stays 0 | no Cg runtime in the port |
 | [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | Irrlicht's members instead of the sized placeholder | the port implements `CImage`. Declaring them for GCC changes `CVideoNull`'s code (one function stops matching), so the matching build keeps the placeholder |
+| [`daisy/other/CIrrDeviceStub.cpp`](../../src/daisy/other/CIrrDeviceStub.cpp) | includes `net/CWinsockNetworkDevice.h` instead of declaring the sized placeholder | the port implements the network device against one declaration |
+| [`ox/game/CGameMain.h`](../../src/ox/game/CGameMain.h), [`CGameMain.cpp`](../../src/ox/game/CGameMain.cpp) | `setState` starts a load and `update` runs one `renderFirst`/`secondInit` step per call (`isLoading`, `loadStep`); a failed load logs the state's message; no 20 ms inactive sleep under Emscripten | a frame must not block for a whole load (the web build cannot block) |
+| [`HarvestFull/harvest/gui/CHighscoreScreen.cpp`](../../src/HarvestFull/harvest/gui/CHighscoreScreen.cpp) | the constructor clears only `PromoteButtons` | UBSan traps on the original's overrun when the main menu loads ([original-bugs.md](original-bugs.md)) |
 | [`daisy/gui/CGUIEnvironment.cpp`](../../src/daisy/gui/CGUIEnvironment.cpp) | includes `ox/gui/IGUIStaticTextInline.h` (port only) | `IGUIStaticText::breakText` is defined only in that header and the original emits it in this object (`0x500ca0`). Including it in the matching build too takes the unit from 95/145 to 116/155 exact functions (the constructors, `loadBuidInFont`, `addWindow`, `addMessageBox` and more line up) but `std::__insertion_sort<SFont>` stops matching (`r11d` instead of `r12d` in one load), at every include position tried, so it stays port-only for now |
 
 ## Compiler diagnostics worth knowing
@@ -115,7 +129,9 @@ clang flags these in kept units (all already present in the original):
 
 ## Link census
 
-Three symbols are unresolved, the same on every target. They are the seams the next step implements:
+Before the device step three symbols were unresolved, the same on every target. `createDevice` and
+`CWinsockNetworkDevice` are now in `port/src/device/` and `port/src/net/`; `createSceneManager` has a
+weak fallback in `device/SeamFallbacks.cpp` until the menu scene lands:
 
 | Symbol | Caller | Port |
 |---|---|---|
@@ -160,15 +176,23 @@ platform:
 | `localtime`, `strftime`, `time` | `CBasic`, `CHighscoreScreen`, `CPlayState` | fine |
 | `mbstowcs`, `wcstombs`, `wcstol`, `vswprintf` | `CConfiguration`, `CConfigBlock`, `CGUIEditBox`, `CGUIFileOpenDialog`, `CHTTPConnectionHandler`, `CSystemConfig`, `CAlienPriorities`, `CHarvestProfile`, `CHighscoreScreen`, `CLogger` | `wchar_t` is 2 bytes on Windows; locale-dependent conversions |
 
-## Behaviour that will matter for the main-loop seam
+## The main-loop seam
 
-- `CGameMain::setState` loops `renderFirst`/`secondInit` until a state finishes loading, inside one
-  call; on the web that loop must yield between iterations.
-- `CGameMain::update` sleeps 20 ms when the window is inactive (`SleepWhenInactive`).
+How the port resolved it is in [input-and-window.md](input-and-window.md#the-ports-device):
+
+- `CGameMain::setState` looped `renderFirst`/`secondInit` until a state finished loading, inside one
+  call. Under `HARVEST_PORT` each `update` runs one step instead, and input is held until the state
+  is ready.
+- `CGameMain::update` sleeps 20 ms when the window is inactive (`SleepWhenInactive`); the port keeps
+  that on the desktop and compiles it out for Emscripten.
 - `CHarvestFullMain::init` creates the device with `EDT_OPENGL`, may call
-  `createUserSelectedDeviceWindow` (the original's launcher dialog), then `createDeviceWindow`.
-- The original's `CIrrDeviceLinux::run` pumped the window's events inside `CGameMain::update`; with
-  SDL3's main callbacks the events arrive in `SDL_AppEvent` instead, so the device either queues
-  them there or pumps them itself in `run` (and `main.cpp`'s `SDL_AppEvent` stays trivial).
+  `createUserSelectedDeviceWindow` (the original's launcher dialog), then `createDeviceWindow`. On a
+  first run it rejects a driver whose type is neither OpenGL nor DirectX 9, so the port's null
+  driver reports `EDT_OPENGL`.
+- Events arrive in `SDL_AppEvent`, which SDL calls on the main thread before each `SDL_AppIterate`;
+  the device's `run` only reports whether it is open. `CShuttleRaceState::updateState` and
+  `CIntroState::updateState` call `run` again themselves, which is harmless.
+- Still blocking on the web: `CHTTPConnectionHandler::doGet` starts a thread (`CThread`) for each
+  request, and `CGameMain::checkFiles` shows a modal message box.
 - The Windows executable is a console program (`/SUBSYSTEM:CONSOLE`); set `exe.subsystem = .windows`
   in `build.zig` when the device lands if the console window is unwanted.
