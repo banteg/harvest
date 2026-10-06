@@ -253,6 +253,7 @@ protected:
     struct SSurface
     {
         SSurface() : Surface(0) {}
+        SSurface(const SSurface& other) : Filename(other.Filename), Surface(other.Surface) {}
 
         bool operator<(const SSurface& other) const
         {

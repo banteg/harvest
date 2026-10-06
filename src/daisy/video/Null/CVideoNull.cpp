@@ -65,11 +65,11 @@ static const char* const sBuiltInMaterialTypeNames[] =
     0
 };
 
-//! The 15 bit RGB part of an A8R8G8B8 color.
+//! An A8R8G8B8 color as A1R5G5B5; any nonzero alpha sets the alpha bit.
 static inline short toA1R5G5B5(SColor color)
 {
-    return (short)(((color.color & 0x80000000) >> 16) | ((color.color & 0x00F80000) >> 9) |
-        ((color.color & 0x0000F800) >> 6) | ((color.color & 0x000000F8) >> 3));
+    unsigned int c = color.color;
+    return (short)(((c & 0xff000000) ? 0x8000 : 0) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | ((c >> 3) & 0x1f));
 }
 
 CVideoNull::CVideoNull(io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
@@ -1461,7 +1461,7 @@ void CVideoNull::runPPShader(int materialType, core::CRect<int>& destRect, core:
     if (sourceRect)
         source = *sourceRect;
 
-    if (ScreenSize.Width != PhysicalScreenSize.Width || ScreenSize.Height != PhysicalScreenSize.Height)
+    if (ScreenSize != PhysicalScreenSize)
     {
         float scaleX = (float)PhysicalScreenSize.Width / (float)ScreenSize.Width;
         source.UpperLeftCorner.X = (int)(source.UpperLeftCorner.X * scaleX);
