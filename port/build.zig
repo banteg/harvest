@@ -5,6 +5,10 @@
 //! port replaces (`replaced` below), so newly recovered units join the build without edits here.
 //! Port sources are every .cpp under src/ except src/main.cpp, so new platform code joins the same
 //! way. Dependencies are pinned in build.zig.zon and built from source for the target.
+//!
+//! For the web (-Dtarget=wasm32-emscripten) zig compiles everything against Emscripten's sysroot and
+//! Emscripten only links: the `harvest` step installs the page from web/, harvest.js and
+//! harvest.wasm. em-config and em++ come from PATH.
 
 const std = @import("std");
 
@@ -44,6 +48,23 @@ const cxx_flags = [_][]const u8{
     // defined, and keep UBSan's other checks.
     "-fwrapv",
     "-fno-sanitize=signed-integer-overflow,shift-base",
+};
+
+/// Emscripten's link settings for the game; web/index.html starts it with callMain once the
+/// player's data is in the file system.
+const emscripten_link_flags = [_][]const u8{
+    "-sMIN_WEBGL_VERSION=2",
+    "-sMAX_WEBGL_VERSION=2",
+    // The renderer loads every GL entry point through SDL_GL_GetProcAddress.
+    "-sGL_ENABLE_GET_PROC_ADDRESS=1",
+    "-sALLOW_MEMORY_GROWTH=1",
+    "-sSTACK_SIZE=1MB",
+    "-sFORCE_FILESYSTEM=1",
+    "-sINVOKE_RUN=0",
+    "-sEXIT_RUNTIME=0",
+    "-sEXPORTED_RUNTIME_METHODS=callMain,FS",
+    // The page keeps the game data and the user data folder in IndexedDB.
+    "-lidbfs.js",
 };
 
 /// The core of zlib: the game only uses deflate and inflate on memory (no gz* file API).
@@ -110,6 +131,11 @@ pub fn build(b: *std.Build) void {
         .root_module = gameModule(b, target, optimize, libs, units, port_sources),
     });
     b.installArtifact(harvest_lib);
+
+    if (target.result.os.tag == .emscripten) {
+        b.step("harvest", "Build the game for the web").dependOn(webSite(b, target, optimize, harvest_lib, libs));
+        return;
+    }
 
     // The game. It links every kept object and port source, so it only links once every seam
     // exists; until then `zig build harvest` lists what is missing, like the census.
@@ -180,11 +206,55 @@ pub fn build(b: *std.Build) void {
     }
 }
 
+/// The web build: harvest_lib and the libraries linked by em++ with src/main.cpp, next to the page.
+fn webSite(
+    b: *std.Build,
+    target: std.Build.ResolvedTarget,
+    optimize: std.builtin.OptimizeMode,
+    harvest_lib: *std.Build.Step.Compile,
+    libs: Libraries,
+) *std.Build.Step {
+    const main_module = b.createModule(.{ .target = target, .optimize = optimize });
+    addIncludePaths(b, main_module);
+    main_module.addCSourceFile(.{ .file = b.path("src/main.cpp"), .flags = &cxx_flags });
+    main_module.linkLibrary(libs.sdl);
+    const main_lib = b.addLibrary(.{ .name = "harvest-main", .root_module = main_module });
+
+    const link = b.addSystemCommand(&.{"em++"});
+    // The linker would not pull main out of an archive by itself.
+    link.addArg("-Wl,--whole-archive");
+    link.addArtifactArg(main_lib);
+    link.addArg("-Wl,--no-whole-archive");
+    link.addArtifactArg(harvest_lib);
+    for (libs.all()) |lib| link.addArtifactArg(lib);
+    link.addArgs(&emscripten_link_flags);
+    link.addArgs(switch (optimize) {
+        // The game code's UBSan checks call into the runtime Emscripten links with this.
+        .Debug => &.{ "-g", "-fsanitize=undefined" },
+        .ReleaseSafe, .ReleaseFast => &.{"-O3"},
+        .ReleaseSmall => &.{"-Oz"},
+    });
+    link.addArg("-o");
+    // harvest.wasm is written next to it.
+    const js = link.addOutputFileArg("harvest.js");
+
+    const step = b.step("web", "Install the page, harvest.js and harvest.wasm");
+    step.dependOn(&b.addInstallDirectory(.{ .source_dir = js.dirname(), .install_dir = .prefix, .install_subdir = "" }).step);
+    step.dependOn(&b.addInstallDirectory(.{ .source_dir = b.path("web"), .install_dir = .prefix, .install_subdir = "" }).step);
+    return step;
+}
+
 fn addIncludePaths(b: *std.Build, module: *std.Build.Module) void {
     module.addIncludePath(b.path("../src"));
     module.addIncludePath(b.path("../src/HarvestFull"));
     module.addIncludePath(b.path("src"));
     addMacosSdk(b, module);
+    if (emscriptenSysroot(b, module.resolved_target.?)) |sysroot| {
+        // Emscripten's libc++ in place of zig's, ahead of the compiler's own headers as libc++
+        // needs (zig puts those first among the system paths, so this one is not a system path).
+        module.addIncludePath(.{ .cwd_relative = b.pathJoin(&.{ sysroot, "include/c++/v1" }) });
+        addEmscriptenSysroot(b, module);
+    }
 }
 
 /// Target-dependent macros for the game's C++ (the recovered code, the port and the tests).
@@ -225,7 +295,8 @@ fn gameModule(
     const module = b.createModule(.{
         .target = target,
         .optimize = optimize,
-        .link_libcpp = true,
+        // Emscripten brings its own libc++ (see addIncludePaths), linked by em++.
+        .link_libcpp = target.result.os.tag != .emscripten,
     });
     addIncludePaths(b, module);
     addTargetMacros(module);
@@ -237,6 +308,12 @@ fn gameModule(
 
 /// SDL3 as a static library, given the macOS SDK where zig does not find it itself.
 fn buildSdl(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+    if (emscriptenSysroot(b, target)) |sysroot| return b.dependency("sdl", .{
+        .target = target,
+        .optimize = optimize,
+        .preferred_linkage = .static,
+        .system_include_path = std.Build.LazyPath{ .cwd_relative = b.pathJoin(&.{ sysroot, "include" }) },
+    }).artifact("SDL3");
     const dep = if (macosSdk(b, target)) |sdk| b.dependency("sdl", .{
         .target = target,
         .optimize = optimize,
@@ -272,6 +349,25 @@ fn addMacosSdk(b: *std.Build, module: *std.Build.Module) void {
     module.addLibraryPath(.{ .cwd_relative = b.pathJoin(&.{ sdk, "usr/lib" }) });
 }
 
+/// Emscripten's sysroot, from em-config, for the web target: zig has no libc for it. Null for
+/// other targets.
+fn emscriptenSysroot(b: *std.Build, target: std.Build.ResolvedTarget) ?[]const u8 {
+    if (target.result.os.tag != .emscripten) return null;
+    const cache = struct {
+        var path: ?[]const u8 = null;
+    };
+    if (cache.path == null)
+        cache.path = b.pathJoin(&.{ std.mem.trim(u8, b.run(&.{ "em-config", "CACHE" }), " \t\r\n"), "sysroot" });
+    return cache.path;
+}
+
+/// Emscripten's C headers and the compatibility headers its libc++ includes.
+fn addEmscriptenSysroot(b: *std.Build, module: *std.Build.Module) void {
+    const sysroot = emscriptenSysroot(b, module.resolved_target.?) orelse return;
+    module.addSystemIncludePath(.{ .cwd_relative = b.pathJoin(&.{ sysroot, "include/compat" }) });
+    module.addSystemIncludePath(.{ .cwd_relative = b.pathJoin(&.{ sysroot, "include" }) });
+}
+
 fn cModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode) *std.Build.Module {
     const module = b.createModule(.{
         .target = target,
@@ -282,6 +378,7 @@ fn cModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builti
         .sanitize_c = .off,
     });
     addMacosSdk(b, module);
+    addEmscriptenSysroot(b, module);
     return module;
 }
 
@@ -300,7 +397,16 @@ fn buildLua(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.built
     const module = cModule(b, target, optimize);
     // POSIX extras (mkstemp, popen, isatty) everywhere but Windows; no dynamic C modules.
     if (target.result.os.tag != .windows) module.addCMacro("LUA_USE_POSIX", "1");
-    module.addCSourceFiles(.{ .root = dep.path("src"), .files = &lua_sources, .flags = &.{"-std=gnu99"} });
+    module.addCSourceFiles(.{
+        .root = dep.path("src"),
+        .files = &lua_sources,
+        // Lua's errors are setjmp/longjmp, which on the web need Emscripten's lowering (em++ links its
+        // runtime).
+        .flags = if (target.result.os.tag == .emscripten)
+            &.{ "-std=gnu99", "-mllvm", "-enable-emscripten-sjlj" }
+        else
+            &.{"-std=gnu99"},
+    });
     const lib = b.addLibrary(.{ .name = "lua", .root_module = module });
     for (lua_headers) |header| lib.installHeader(dep.path(header), std.fs.path.basename(header));
     return lib;
@@ -322,7 +428,8 @@ fn buildMiniaudio(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std
     const dep = b.dependency("miniaudio", .{});
     const module = cModule(b, target, optimize);
     module.addIncludePath(dep.path(""));
-    module.addCSourceFile(.{ .file = b.path("src/thirdparty/miniaudio.c"), .flags = &.{"-std=c99"} });
+    // gnu99: its Web Audio backend uses Emscripten's EM_ASM, which needs GNU extensions.
+    module.addCSourceFile(.{ .file = b.path("src/thirdparty/miniaudio.c"), .flags = &.{"-std=gnu99"} });
     // miniaudio loads the platform audio libraries at run time; on Linux that needs libdl.
     if (target.result.os.tag == .linux) {
         module.linkSystemLibrary("dl", .{});

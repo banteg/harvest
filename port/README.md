@@ -35,7 +35,8 @@ From the repository root, `just` wraps the common commands (the game data defaul
     just run              # debug build with UBSan, then run; extra args go to the game (just run --no-audio)
     just play             # optimized build without UBSan stops, then run
     just build            # debug build only; just build -Doptimize=ReleaseFast -Dtarget=x86_64-windows-gnu
-    just build-all        # macOS, Linux and Windows builds from this machine
+    just build-all        # macOS, Linux, Windows and web builds from this machine
+    just serve-web        # the web build on http://127.0.0.1:8000 (needs Emscripten)
     just port-test audio  # also video, menu_scene, text
     just smoke-windows    # the Windows build under Wine, intro to a game; screenshots in build/smoke/windows
     just census           # unresolved symbols, if any
@@ -128,8 +129,9 @@ From macOS: the host, `aarch64-macos`, `x86_64-macos`, `x86_64-linux-gnu` and `x
 build and link. SDL3 needs Xcode (or the Command Line Tools) for macOS targets; for an explicit
 macOS `-Dtarget`, which zig does not treat as native, `build.zig` takes the SDK from `xcrun`.
 Linux targets fetch castholm's `SDL_linux_deps` package on first use. Windows release builds use
-the GUI subsystem (debug builds keep the console) and carry an icon and version resource. The web
-build comes later (Emscripten).
+the GUI subsystem (debug builds keep the console) and carry an icon and version resource.
+`wasm32-emscripten` builds the web page, `harvest.js` and `harvest.wasm` with Emscripten's sysroot
+and linker on `PATH` ([`docs/port/web.md`](../docs/port/web.md)).
 
 ## Packages
 
