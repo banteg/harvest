@@ -15,6 +15,9 @@ network access to fetch the dependencies (github.com, www.lua.org). From this di
     zig build harvest              # the game executable, zig-out/bin/harvest
     zig build run                  # build and run it (arguments after --)
     zig build census               # links every kept unit with the original's plain loop
+    zig build tests                # the test programs in tests/, without running them
+    zig build test-audio -- ../orig/1.18-linux-amd64/harvestClientData/sfx/ [--wav out.wav] [--play]
+    zig build test-menu_scene -- ../orig/1.18-linux-amd64 [shader level] [width height]
 
 `harvest` and `census` link every kept unit and port source, so they fail until the platform seams
 exist: their linker errors are the census. For the grouped report with callers, from the repository
@@ -34,6 +37,8 @@ root:
 - **Port sources:** every `.cpp` under [`src/`](src) except `src/main.cpp`, which only the `harvest`
   executable links (the census uses [`census/main.cpp`](census/main.cpp) instead). New files join the
   build automatically, so platform work needs no `build.zig` edits.
+- **Test programs:** every `.cpp` directly in [`tests/`](tests) is an executable linked against the
+  library (only the objects it uses), run with `zig build test-<name> -- args`.
 - **Dependencies** ([`build.zig.zon`](build.zig.zon), pinned by hash, built from source for the
   target, installed to `zig-out/lib` and `zig-out/include`):
 

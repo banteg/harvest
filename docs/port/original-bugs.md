@@ -146,6 +146,43 @@ Port recommendation:
 
 - Draw 1 px lines: that is what players saw.
 
+### 8) The volume settings have no effect except at 0
+
+Native behaviour:
+
+- `COpenALDriver` sets each effect's and music source's gain to the volume passed in, and
+  `setMusicVolume` re-sends the stored volume rather than volume × the music gain
+  ([`COpenALDriver.cpp`](../../src/daisy/audio/COpenALDriver.cpp)). The settings screen's effect and
+  music volumes are never multiplied in. `CAudioDriver` only checks them for 0, where new sounds are
+  not started.
+
+Impact:
+
+- Volume settings 1 to 5 all sound the same; only 0 mutes, and only for sounds started afterwards.
+
+Port recommendation:
+
+- Multiply by the effect and music gains in the backend by default, with the original behaviour behind
+  the preserve-bugs switch.
+
+### 9) The dropship engine loop is almost always silent
+
+Native behaviour:
+
+- `loopSound` places the loop relative to the listener at (2·pan, 0, 0.1) with a 30°/75° cone facing
+  −z and an outer gain of 0 (`COpenALDriver::deviceLoopSound`). Seen from the listener the source is
+  far outside the cone unless it is almost straight ahead.
+
+Impact:
+
+- The dropship engine is at full volume only within about 17 px of the screen centre (at 1280 px
+  wide) and silent beyond about 49 px. Measured with the port's OpenAL 1.1 cone model; if OpenAL Soft
+  1.13 read the angles as half-angles, silence starts nearer 240 px.
+
+Port recommendation:
+
+- Give loops no cone (360°/360°) by default, with the original behaviour behind the switch.
+
 ## Bugs without visible effects
 
 - **`CFileSystem::renameFile`** (`0x52f3e0`) calls `rename(newName, filename)`, the reverse of its
@@ -223,9 +260,7 @@ Mods depend on these, so a port should keep them and document them for modders (
 ## Audio quirks
 
 - **`CAudioDriver::loopSound`** (`0x5b3830`) ducks by 0.25 even when voice ducking is turned off.
-- **Oriented sounds**: `COpenALDriver::devicePlayOrientedSound` pans +0.5 when the source is to the left,
-  while `playParticleSound` passes positive for the right, so particle sounds appear to pan to the
-  opposite side (inferred from the code, not checked by ear).
+- **`stopAllSounds`** stops only looping effects; one-shots play out.
 
 ## Layout quirks kept for parity
 
@@ -268,3 +303,7 @@ simply write the intended code.
 - **`COxEntity` 2D constructors** ([`COxEntity.cpp`](../../src/ox/entity/COxEntity.cpp)) initialise
   `Position.Y` from the member being constructed instead of the argument's `Y`. The game only uses the
   `(x, y, z)` constructor, so the bug is never reached.
+- **OBJ loader** (`CStaticMeshOBJ::loadFile`, Linux `0x57d1b0`) reads the file into `new char[size]`
+  without a terminating zero and parses until it meets a zero byte past the end of the buffer; the
+  shipped meshes only pick up ignored words from it. It also leaks the mesh buffer when the file is
+  empty. The port's loader zero-terminates.

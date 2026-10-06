@@ -46,9 +46,14 @@ class ITerrainSceneNode;
 class ITextSceneNode;
 class ITriangleSelector;
 
-//! When a registered node is rendered; the enumerators are not recovered.
+//! When a registered node is rendered, in the order of daisy's CSceneManager::drawAll; the values
+//! are the cases of the Mac build's registerNodeForRendering (0x112530) and its callers.
 enum E_SCENE_NODE_RENDER_TIME
 {
+    SNRT_LIGHT_AND_CAMERA = 0,
+    SNRT_SKY_BOX,
+    SNRT_DEFAULT,
+    SNRT_SHADOW
 };
 
 //! Owns the scene graph and creates scene nodes, animators and triangle selectors.

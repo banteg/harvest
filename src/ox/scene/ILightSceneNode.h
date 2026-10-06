@@ -15,6 +15,14 @@ namespace scene {
 class ILightSceneNode : public ISceneNode
 {
 public:
+#ifdef HARVEST_PORT
+    ILightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
+        const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0))
+        : ISceneNode(parent, mgr, id, position)
+    {
+    }
+
+#endif
     virtual video::SLight& getLightData() = 0;
 };
 

@@ -137,6 +137,49 @@ pub fn build(b: *std.Build) void {
     census_module.addCSourceFile(.{ .file = b.path("census/main.cpp"), .flags = &cxx_flags });
     const census = b.addExecutable(.{ .name = "harvest-census", .root_module = census_module });
     b.step("census", "Link every kept unit and report unresolved symbols").dependOn(&b.addInstallArtifact(census, .{}).step);
+
+    // Test programs: tests/<name>.cpp links against the library (only the objects it needs) and
+    // runs with `zig build test-<name> -- args`; `zig build tests` builds them all without running.
+    const tests_step = b.step("tests", "Build the test programs");
+    for (testSources(b)) |source| {
+        const name = source[0 .. source.len - ".cpp".len];
+        const module = b.createModule(.{ .target = target, .optimize = optimize, .link_libcpp = true });
+        addIncludePaths(b, module);
+        module.addCSourceFile(.{ .file = b.path(b.pathJoin(&.{ "tests", source })), .flags = &cxx_flags });
+        module.linkLibrary(harvest_lib);
+        for (libs.all()) |lib| module.linkLibrary(lib);
+        const test_exe = b.addExecutable(.{ .name = b.fmt("harvest-test-{s}", .{name}), .root_module = module });
+        const install_test = b.addInstallArtifact(test_exe, .{});
+        tests_step.dependOn(&install_test.step);
+        const run_test = b.addRunArtifact(test_exe);
+        run_test.step.dependOn(&install_test.step);
+        run_test.addPassthruArgs();
+        b.step(b.fmt("test-{s}", .{name}), b.fmt("Build and run tests/{s}", .{source})).dependOn(&run_test.step);
+    }
+}
+
+fn addIncludePaths(b: *std.Build, module: *std.Build.Module) void {
+    module.addIncludePath(b.path("../src"));
+    module.addIncludePath(b.path("../src/HarvestFull"));
+    module.addIncludePath(b.path("src"));
+}
+
+/// The .cpp files directly in tests/.
+fn testSources(b: *std.Build) []const []const u8 {
+    const io = b.graph.io;
+    const root = b.root.join(b.allocator, "tests") catch @panic("OOM");
+    var dir = root.root_dir.handle.openDir(io, root.sub_path, .{ .iterate = true }) catch return &.{};
+    defer dir.close(io);
+    b.dependOnDirectoryContents(b.path("tests"));
+
+    var sources: std.ArrayList([]const u8) = .empty;
+    var it = dir.iterate();
+    while (it.next(io) catch |err| std.debug.panic("cannot list tests: {t}", .{err})) |entry| {
+        if (entry.kind == .file and std.mem.endsWith(u8, entry.name, ".cpp"))
+            sources.append(b.allocator, b.dupe(entry.name)) catch @panic("OOM");
+    }
+    std.mem.sort([]const u8, sources.items, {}, lessThan);
+    return sources.items;
 }
 
 fn gameModule(
@@ -152,9 +195,7 @@ fn gameModule(
         .optimize = optimize,
         .link_libcpp = true,
     });
-    module.addIncludePath(b.path("../src"));
-    module.addIncludePath(b.path("../src/HarvestFull"));
-    module.addIncludePath(b.path("src"));
+    addIncludePaths(b, module);
     module.addCSourceFiles(.{ .root = b.path("../src"), .files = units, .flags = &cxx_flags });
     module.addCSourceFiles(.{ .root = b.path("src"), .files = port_sources, .flags = &cxx_flags });
     for (libs.all()) |lib| module.linkLibrary(lib);
