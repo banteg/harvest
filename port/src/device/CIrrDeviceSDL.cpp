@@ -194,6 +194,11 @@ bool CIrrDeviceSDL::createWindowAndContext(const ox::core::CDimension2d<int>& si
     SDL_WindowFlags flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIGH_PIXEL_DENSITY;
     if (fullscreen)
         flags |= SDL_WINDOW_FULLSCREEN;
+#if defined(SDL_PLATFORM_EMSCRIPTEN)
+    // On the web the canvas fills the page and follows the browser window's size; the game's own
+    // window size only sets where it starts.
+    flags |= SDL_WINDOW_FILL_DOCUMENT;
+#endif
     Window = SDL_CreateWindow(Title.c_str(), size.Width, size.Height, flags);
     if (!Window)
     {
@@ -511,7 +516,7 @@ void CIrrDeviceSDL::handleEvent(const SDL_Event& event)
 
 //! KeyInput.Key is the ox code (0 for keys without one) and Char is 0. With Control held (or Command
 //! on macOS), a press of V becomes EKIE_PASTE, F becomes EKIE_TOGGLE_FULLSCREEN (not repeated) and
-//! Q closes the device without an event; any other key is a normal press (Linux left the event type
+//! Q closes the device without an event (on the web it does nothing); any other key is a normal press (Linux left the event type
 //! unset). Held keys repeat as presses, as SFML's key repeat did.
 void CIrrDeviceSDL::postKeyEvent(const SDL_KeyboardEvent& event)
 {
@@ -540,7 +545,10 @@ void CIrrDeviceSDL::postKeyEvent(const SDL_KeyboardEvent& event)
         }
         else if (ev.KeyInput.Key == ox::KEY_KEY_Q)
         {
+#if !defined(SDL_PLATFORM_EMSCRIPTEN)
+            // A page cannot close itself, so on the web quitting would only stop the game.
             closeDevice();
+#endif
             return;
         }
     }

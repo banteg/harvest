@@ -8,19 +8,24 @@
   :root { color-scheme: dark; --bg: #05070a; --fg: #c8d3dc; --dim: #6b7884; --accent: #7fc4ff; }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
     font: 14px/1.5 system-ui, sans-serif; }
-  #canvas { display: block; margin: 0 auto; outline: none; }
+  #canvas { display: block; outline: none; }
   #setup { max-width: 34rem; margin: 12vh auto 0; padding: 0 16px; }
   #setup h1 { font-size: 1.4rem; font-weight: 600; margin: 0 0 .5rem; }
   #setup p { color: var(--dim); margin: .5rem 0; }
-  #drop { margin-top: 1.25rem; border: 1px dashed var(--dim); border-radius: 8px; padding: 2rem 1rem;
+  #drop { margin-top: 1.25rem; border: 1px dashed var(--dim); border-radius: 8px; padding: 1.5rem 1rem;
     text-align: center; }
   #drop.over { border-color: var(--accent); color: var(--accent); }
   button { font: inherit; color: var(--bg); background: var(--accent); border: 0; border-radius: 6px;
     padding: .5rem 1rem; cursor: pointer; }
+  button.quiet { background: none; color: var(--dim); text-decoration: underline; padding: .5rem 0; }
   button:disabled { opacity: .4; cursor: default; }
-  #status { margin-top: 1rem; min-height: 1.5em; }
-  #log { max-height: 30vh; overflow: auto; color: var(--dim); font: 12px/1.4 ui-monospace, monospace;
-    white-space: pre-wrap; margin: 1rem 16px; }
+  #status { margin: 1rem 0 .75rem; min-height: 1.5em; }
+  .row { display: flex; gap: 1rem; align-items: center; }
+  .message { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center;
+    background: rgb(0 0 0 / .6); }
+  .message div { max-width: 30rem; margin: 16px; padding: 1.25rem 1.5rem; border-radius: 8px;
+    background: #10161d; border: 1px solid #2a3540; white-space: pre-wrap; }
+  .message h2 { margin: 0 0 .5rem; font-size: 1.1rem; }
   .hidden { display: none !important; }
 </style>
 </head>
@@ -30,40 +35,123 @@
   <p>This page runs the game, but the game's data has to come from your own copy. Choose or drop the
      <code>harvestClientData</code> folder from your install (or the folder that contains it). On a Mac,
      right-click <code>Harvest Steam.app</code>, choose Show Package Contents, and look in
-     <code>Contents/Resources</code>.</p>
+     <code>Contents/Resources</code>. The data stays in this browser, so you only do this once.</p>
   <div id="drop">
     <p>Drop the folder here, or</p>
     <button id="choose">Choose folder…</button>
     <input id="picker" type="file" webkitdirectory class="hidden">
   </div>
-  <div id="status"></div>
-  <button id="start" disabled>Start</button>
+  <div id="status">Loading…</div>
+  <div class="row">
+    <button id="start" disabled>Start</button>
+    <button id="forget" class="quiet hidden">Forget the saved game data</button>
+  </div>
 </div>
 <canvas id="canvas" class="hidden" tabindex="-1" oncontextmenu="event.preventDefault()"></canvas>
-<pre id="log"></pre>
 
 <script>
 "use strict";
+// Both folders live in IndexedDB (Emscripten's IDBFS): /data holds the player's harvestClientData,
+// /libsdl the user data folder SDL picks on the web (/libsdl/Harvest: settings, profiles, saves).
 const DATA_ROOT = "/data";
+const USER_ROOT = "/libsdl";
 const CLIENT_DATA = "harvestClientData";
 
 const $ = (id) => document.getElementById(id);
-const log = (text) => { $("log").textContent += text + "\n"; $("log").scrollTop = 1e9; };
 const status = (text) => { $("status").textContent = text; };
 
-let runtimeReady = false;
-let files = null; // [{ path: "harvestClientData/...", data: Uint8Array }]
+let started = false;
+let storageReady = false;
+let haveData = false;
 
 var Module = {
   canvas: $("canvas"),
-  print: log,
-  printErr: log,
-  onRuntimeInitialized() { runtimeReady = true; update(); },
+  print: (text) => console.log(text),
+  printErr: (text) => console.warn(text),
+  onRuntimeInitialized() { openStorage(); },
+  showGameMessage(title, text) {
+    const box = document.createElement("div");
+    box.className = "message";
+    box.innerHTML = "<div><h2></h2><p></p><button>OK</button></div>";
+    box.querySelector("h2").textContent = title;
+    box.querySelector("p").textContent = text;
+    box.querySelector("button").onclick = () => box.remove();
+    document.body.appendChild(box);
+  },
 };
 
-function update() {
-  $("start").disabled = !(runtimeReady && files);
+// ---- storage ----
+
+function mountOf(path) { return Module.FS.lookupPath(path).node.mount; }
+
+// Syncs one IDBFS mount: populate=true loads IndexedDB into memory, false writes memory back.
+function sync(path, populate) {
+  return new Promise((ok, fail) => Module.FS.filesystems.IDBFS.syncfs(mountOf(path), populate,
+    (err) => err ? fail(err) : ok()));
 }
+
+function exists(path) {
+  try { Module.FS.stat(path); return true; } catch { return false; }
+}
+
+function removeTree(path) {
+  const FS = Module.FS;
+  if (!exists(path)) return;
+  if (FS.isDir(FS.stat(path).mode)) {
+    for (const name of FS.readdir(path))
+      if (name !== "." && name !== "..") removeTree(path + "/" + name);
+    FS.rmdir(path);
+  } else {
+    FS.unlink(path);
+  }
+}
+
+function countFiles(path) {
+  const FS = Module.FS;
+  if (!FS.isDir(FS.stat(path).mode)) return 1;
+  let n = 0;
+  for (const name of FS.readdir(path))
+    if (name !== "." && name !== "..") n += countFiles(path + "/" + name);
+  return n;
+}
+
+async function openStorage() {
+  const FS = Module.FS;
+  for (const root of [DATA_ROOT, USER_ROOT]) {
+    FS.mkdir(root);
+    FS.mount(FS.filesystems.IDBFS, {}, root);
+  }
+  try {
+    await Promise.all([sync(DATA_ROOT, true), sync(USER_ROOT, true)]);
+  } catch (err) {
+    console.warn("cannot read the browser's storage:", err);
+  }
+  storageReady = true;
+  haveData = exists(`${DATA_ROOT}/${CLIENT_DATA}`);
+  if (haveData)
+    status(`Using the game data saved in this browser (${countFiles(`${DATA_ROOT}/${CLIENT_DATA}`)} files).`);
+  else if (!devData())
+    status("");
+  update();
+}
+
+// Writes the user data folder back now and then while the game runs, and when the page goes away.
+let userSync = null;
+function saveUserData() {
+  if (!started || userSync) return;
+  userSync = sync(USER_ROOT, false).catch((err) => console.warn("cannot save the user data:", err))
+    .finally(() => { userSync = null; });
+}
+setInterval(saveUserData, 3000);
+addEventListener("pagehide", saveUserData);
+document.addEventListener("visibilitychange", () => { if (document.hidden) saveUserData(); });
+
+function update() {
+  $("start").disabled = !(storageReady && haveData);
+  $("forget").classList.toggle("hidden", !(storageReady && haveData));
+}
+
+// ---- taking the player's data ----
 
 // The path from harvestClientData/ on, or null for files outside it.
 function clientDataPath(path) {
@@ -74,6 +162,7 @@ function clientDataPath(path) {
 
 async function accept(entries) {
   // entries: [{ path, read: () => Promise<ArrayBuffer> }]
+  if (!storageReady) { status("Still loading, try again in a moment."); return; }
   const wanted = entries
     .map((e) => ({ ...e, path: clientDataPath(e.path) }))
     .filter((e) => e.path && !e.path.split("/").some((p) => p.startsWith(".")));
@@ -81,17 +170,28 @@ async function accept(entries) {
     status(`No ${CLIENT_DATA} folder in what was given.`);
     return;
   }
-  const loaded = [];
-  let bytes = 0;
-  for (const e of wanted) {
-    const data = new Uint8Array(await e.read());
-    bytes += data.length;
-    loaded.push({ path: e.path, data });
-    if (loaded.length % 20 === 0) status(`Reading ${loaded.length} / ${wanted.length} files…`);
-  }
-  files = loaded;
-  status(`${files.length} files, ${(bytes / 1048576).toFixed(1)} MB. Ready.`);
+  const FS = Module.FS;
+  haveData = false;
   update();
+  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
+  let bytes = 0;
+  for (let i = 0; i < wanted.length; i++) {
+    const data = new Uint8Array(await wanted[i].read());
+    const path = `${DATA_ROOT}/${wanted[i].path}`;
+    FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
+    FS.writeFile(path, data);
+    bytes += data.length;
+    if (i % 20 === 0) status(`Reading ${i} / ${wanted.length} files…`);
+  }
+  haveData = true;
+  update();
+  const summary = `${wanted.length} files, ${(bytes / 1048576).toFixed(1)} MB`;
+  status(`${summary}. Saving it in this browser…`);
+  // Ask the browser not to evict the data under storage pressure (it may say no).
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+  sync(DATA_ROOT, false)
+    .then(() => { if (!started) status(`${summary}, saved in this browser. Ready.`); })
+    .catch((err) => { if (!started) status(`${summary}. Ready (but it could not be saved: ${err}).`); });
 }
 
 // Folder picker.
@@ -129,23 +229,26 @@ drop.ondrop = async (e) => {
 };
 
 // Development: ?data=<url> fetches <url>/manifest.json (paths under harvestClientData/) and each file.
-const dataUrl = new URLSearchParams(location.search).get("data");
-if (dataUrl) {
+function devData() {
+  const dataUrl = new URLSearchParams(location.search).get("data");
+  if (!dataUrl) return false;
   const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
   status("Fetching the game data…");
   fetch(base + "manifest.json").then((r) => r.json()).then((paths) => accept(paths.map((p) => ({
     path: p, read: () => fetch(base + p.split("/").map(encodeURIComponent).join("/")).then((r) => r.arrayBuffer()),
   })))).catch((err) => status("Cannot fetch the data: " + err));
+  return true;
 }
 
+$("forget").onclick = () => {
+  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
+  haveData = false;
+  update();
+  sync(DATA_ROOT, false).then(() => status("Forgotten. Choose the folder again to play."));
+};
+
 $("start").onclick = () => {
-  const FS = Module.FS;
-  for (const f of files) {
-    const path = `${DATA_ROOT}/${f.path}`;
-    FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
-    FS.writeFile(path, f.data);
-  }
-  files = null;
+  started = true;
   $("setup").classList.add("hidden");
   $("canvas").classList.remove("hidden");
   $("canvas").focus();
