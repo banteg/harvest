@@ -82,16 +82,16 @@ enum E_TRANSFORMATION_STATE
     ETS_COUNT
 };
 
-//! Flags for texture creation, as in Irrlicht 0.7. The 16/32 bit and quality/speed pairs are
-//! mutually exclusive: setting one clears the other three.
+//! Flags for texture creation (Irrlicht 0.7 names). Enabling one of the four format flags clears the
+//! other three. In Harvest only ETCF_CREATE_MIP_MAPS is read (by the OpenGL driver); the format flags
+//! that CSpritePackage and CMainMenuState set have no effect on the textures created.
 enum E_TEXTURE_CREATION_FLAG
 {
-    ETCF_ALWAYS_16_BIT = 0x00000001,
-    ETCF_ALWAYS_32_BIT = 0x00000002,
-    ETCF_OPTIMIZED_FOR_QUALITY = 0x00000004,
-    ETCF_OPTIMIZED_FOR_SPEED = 0x00000008,
-    ETCF_CREATE_MIP_MAPS = 0x00000010
-};
+    ETCF_ALWAYS_16_BIT = 0x1,
+    ETCF_ALWAYS_32_BIT = 0x2,
+    ETCF_OPTIMIZED_FOR_QUALITY = 0x4,
+    ETCF_OPTIMIZED_FOR_SPEED = 0x8,
+    ETCF_CREATE_MIP_MAPS = 0x10};
 
 //! Texture color formats. Partial: only the ones CGUIFont reads; the 32 bit value is the one the
 //! binaries compare against.
@@ -99,6 +99,14 @@ enum ECOLOR_FORMAT
 {
     ECF_A1R5G5B5 = 0,
     ECF_A8R8G8B8 = 0x8101800
+};
+
+//! Driver and window system specific handles; all null in the drivers Harvest uses.
+struct SExposedVideoData
+{
+    void* Data1;
+    void* Data2;
+    int Data3;
 };
 
 //! Performs the 2d and 3d drawing and owns textures, sprite packages and particle packages.
@@ -217,8 +225,7 @@ public:
     virtual int addMaterialRenderer(IMaterialRenderer* renderer, const char* name) = 0;
     virtual void setMaterialRendererName(int index, const char* name) = 0;
     virtual IMaterialRenderer* getMaterialRenderer(int index) = 0;
-    // Provisional: the exposed data's type is not recovered yet.
-    virtual void* getExposedVideoData() = 0;
+    virtual SExposedVideoData getExposedVideoData() = 0;
     virtual int getDriverType() = 0;
     virtual bool isFullscreen() = 0;
     virtual bool setFullscreen(bool fullscreen) = 0;

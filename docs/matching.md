@@ -21,9 +21,9 @@ toolchain container and compares the object with the target image, section by se
 Rows with other evidence (for example `manual:`) are kept when the generator reruns.
 
 Mac virtual-slot names need instruction-level validation when the layouts differ. Linux's
-`CFileSystem` inserts a path-cache-clearing virtual at slot 12, shifting subsequent Mac names by
-one. Manual rows correct those shifted names. The inserted method's original name is unavailable;
-the recovered interface uses the descriptive name `clearCachedFilePaths`. `existFile` is Linux
+`CFileSystem` inserts a virtual at slot 12, shifting subsequent Mac names by one. Manual rows
+correct those shifted names. The inserted method's original name is unavailable; it drops every
+cached zip reader, and the recovered interface calls it `dropZipReaders`. `existFile` is Linux
 slot 17 (`vptr + 0x78`), not Mac slot 16.
 
 ## Placement
@@ -184,6 +184,14 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `daisy/gui/CGUIPopupMenu.cpp` | 44/55 | Oxeye's popup menu (frame, title, options, highlight using the list highlight colours); every own function is exact |
 | `daisy/gui/CGUIRadioList.cpp` | 46/59 | Oxeye's radio list of check boxes; C1 and D1 inline the `IGUIElement` destructor in their exception cleanup where the build calls it |
 | `daisy/gui/CGUIScrollBar.cpp` | 54/66 | the sprite-skinned scroll bar with paging, thumb states and `setAnimations`; `OnEvent` differs only in when the mouse position is loaded |
+| `daisy/io/CZipFileList.cpp` | 16/18 | the zip folder listing (filter and directory constructor, getters, `FileEntry` vector copies); both constructor copies differ by one swapped `cmp` operand pair |
+| `daisy/io/CZipReader.cpp` | 24/30 | the zip reader: local-header scan with data-descriptor search, stored and inflated open, linear folder+name lookup, `directoryExists` (whose loop never advances; see `docs/port/zip-archives.md`), `SZipFileEntry` sort and vector copies; `scanLocalHeader` and five std sort/vector templates differ by register allocation only |
+| `daisy/io/CFileSystem.cpp` | 48/59 | the file system: aliases (`intern_resolveAliases`), zip-extension and zip-reader maps, paths into archives, changing directory into archives, folder and archive file lists, `existFile`, zlib inflate/deflate, the read/write/memory file factories, the inline `CFilePath` and the map copies; nine methods differ by a swapped `CString::operator<` operand in an inlined `lower_bound` or by registers, as do two map copies; audited against the target (rules in `docs/port/file-system.md`) |
+| `daisy/io/CMemoryReadFile.cpp` | 10/10 | exact; the memory read file with a file name, and `createMemoryReadFile` |
+| `daisy/io/CReadFile.cpp` | 19/19 | exact; the stdio read file (`fgets` `readLine`, `fstat64` modified date) and `createReadFile` |
+| `daisy/io/CWriteFile.cpp` | 17/17 | exact; the stdio write file (`ab`/`wb`) and `createWriteFile` |
+| `daisy/io/CFileList.cpp` | 18/18 | exact; the glob(3) folder listing with `GLOB_MARK` directory detection and the all/files/directories modes; the constructor is defined last to match the C1/C2 order |
+| `daisy/io/CLimitReadFile.cpp` | 19/19 | exact; the window over a file that serves stored zip entries, and `createLimitReadFile` |
 | `daisy/video/Null/CSpriteAnimationState.cpp` | 32/32 | exact; a running sprite animation: frame advance with per-frame jumps and millisecond durations (negative holds for 48 h), save/load, and per-frame forwarding to the shared images |
 | `daisy/video/Null/CSpriteAnimationImageBundle.cpp` | 26/27 | a bundle drawn as a grid of sprite images (only the plain draw is implemented); `getSize` differs in register allocation |
 | `daisy/video/Null/CSpriteAnimationImage.cpp` | 22/26 | one sprite image drawn plain, scaled, mirrored, rotated, free-shape, with corner or per-vertex colours, or as a 3D quad; all values match the target. `drawRotated` and `drawMultipleColors` differ in scheduling, `drawMirrored` in stack slot order and an alias reload of `position`, and `draw3d` (with the target's per-vertex `mirrored ?:` texture coordinates) in material store order and registers |

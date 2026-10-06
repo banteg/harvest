@@ -14,12 +14,14 @@ the data formats the game ships.
 | `gfx/particles.pfx` | Oxeye particle package | [`CParticlePackage.cpp`](../../src/daisy/video/Null/CParticlePackage.cpp) |
 | `gfx/*.fnt` | sprite-package font, loaded as `CUnicodeFont` | [`CUnicodeFont.h`](../../src/daisy/gui/CUnicodeFont.h) |
 | `lang/*.cfg`, `*.hmd`, profiles, settings | configuration text format | [`CConfiguration.h`](../../src/ox/game/CConfiguration.h) |
-| save games | zlib stream (default level) of the `CPlayState` writer | [save-games.md](save-games.md) |
-| `mods/*.zip` | zip archives holding a `.hmd`, `main.lua`, an icon and data | [mods-and-files.md](mods-and-files.md) |
+| save games (`*.hsg`), profiles | a plain header, then the `CPlayState` payload as a zlib stream encrypted with AES-256 under a fixed key; profiles are configuration text | [save-games.md](save-games.md) |
+| `mods/*.zip` | zip archives holding a `.hmd`, `main.lua`, an icon and data | [mods-and-files.md](mods-and-files.md), [zip-archives.md](zip-archives.md) |
 | `sfx/*.ogg` | Ogg Vorbis, decoded with libvorbisfile | [audio.md](audio.md) |
 | `gfx/*.jpg`, `*.tga` | JPEG (libjpeg) and Irrlicht's TGA loader | [textures.md](textures.md) |
 | `gfx/*.obj` | the two planet spheres, Irrlicht's OBJ loader | [menu-scene.md](menu-scene.md) |
 | `gfx/shaders/*.vsh`, `*.psh` | Cg atmospheric scattering (Sean O'Neil, GPU Gems 2) | [menu-scene.md](menu-scene.md) |
+
+Paths, aliases and file lists: [file-system.md](file-system.md).
 
 ## The platform layer
 
@@ -41,3 +43,8 @@ small part of it:
 The executable links these libraries dynamically, so their work is not in the binary: zlib, libjpeg,
 libogg, libvorbis and libvorbisfile, OpenAL and ALUT, Cg and CgGL, OpenGL and GLU, SFML 2 (window,
 input, joysticks), GTK 2 (clipboard only), X11 and LuaJIT.
+
+## Original bugs
+
+[original-bugs.md](original-bugs.md) lists behaviours of the original executables that read as bugs,
+what they affect, and what a port should do about each.

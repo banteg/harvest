@@ -1,72 +1,62 @@
-// Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
-// PROVISIONAL: written for CVideoOpenGL while CVideoNull is recovered in parallel. Only the layout
-// (Linux amd64 offsets in the comments), the virtual order (Mac 1.18 vtable of
-// daisy::video::CVideoNull) and the members CVideoOpenGL uses are recovered; the full header of the
-// CVideoNull unit replaces this one.
+// Copyright (C) 2002-2004 Nikolaus Gebhardt
+// Adapted from Irrlicht 0.7 source/Irrlicht/CVideoNull.h for Harvest; not the original Daisy source.
+// See third_party/irrlicht-0.7/readme.txt for the zlib/libpng license.
+// The member layout follows the Linux 1.18 build (object size 0x431c8); the virtual order follows
+// the Mac 1.18 vtable of daisy::video::CVideoNull.
 
 #ifndef DAISY_VIDEO_NULL_CVIDEONULL_H
 #define DAISY_VIDEO_NULL_CVIDEONULL_H
 
+#include "CFPSCounter.h"
 #include "ox/core/CString.h"
 #include "ox/video/IGPUProgrammingServices.h"
 #include "ox/video/IPostProcessingServices.h"
 #include "ox/video/IVideoDriver.h"
 #include "ox/video/S3DVertex.h"
-#include "daisy/video/CgApi.h"
+#include "ox/video/SLight.h"
 #include <vector>
 
-namespace ox {
-namespace io { class IFileSystem; }
-namespace video { class IMaterialRenderer; }
-} // end namespace ox
+typedef struct _CGcontext* CGcontext;
 
 namespace daisy {
 namespace video {
 
-//! 2D quads collected by the draw2DImage calls and drawn with one glBegin(GL_QUADS) when the
-//! texture or the blend mode changes, when the batch is full, or on flush2dRendering.
-struct S2DQuadBatch
-{
-    enum { MAX_QUADS = 0x400 };
+//! The most quads the 2d batch holds before the driver flushes it.
+const int MAX_2D_QUADS = 1024;
 
-    ox::video::ITexture* Texture;
-    int QuadCount;
-    unsigned short Indices[MAX_QUADS * 6];
-    //! Four vertices per quad, clockwise from the upper left corner.
-    ox::video::S3DVertex Vertices[MAX_QUADS * 4];
-    //! 4096 records of 28 bytes (three floats, a gap, two floats); not used by the OpenGL driver.
-    char Unrecovered[0x1c000];
-    //! Textured quads use alpha testing and SRC_ALPHA blending.
-    bool UseAlphaChannel;
-    //! Textured quads use linear filtering (unless point sampling is forced).
-    bool LinearFilter;
+//! A vertex of the second, unused 2d vertex array (see CVideoNull::Unused2DVertices).
+struct S2DVertex
+{
+    ox::core::CVector3d<float> Pos;
+    ox::video::SColor Color;
+    ox::video::SColor Color2;
+    ox::core::CVector2d<float> TCoords;
 };
 
-//! A material renderer and its name.
-struct SMaterialRenderer
-{
-    ox::core::CString<char> Name;
-    ox::video::IMaterialRenderer* Renderer;
-};
-
-//! The device-independent part of the video driver: texture, sprite and particle package caches,
-//! material renderers, the 2D quad batch and the 2D coordinate transform.
+//! The driver base class: the texture, sprite package, particle package and material renderer
+//! caches, image loading, the 2d view values and the frame statistics. It draws nothing itself;
+//! CVideoOpenGL (and the unused software driver) derive from it.
+//!
+//! Caches are keyed by the lower-cased name passed in (no path normalization), kept sorted, and
+//! hold one reference to each object. The getters return the cached object without granting a
+//! reference; the remove functions drop the cache's reference.
 class CVideoNull : public ox::video::IVideoDriver, public ox::video::IGPUProgrammingServices,
-                   public ox::video::IPostProcessingServices
+    public ox::video::IPostProcessingServices
 {
 public:
     CVideoNull(ox::io::IFileSystem* io, const ox::core::CDimension2d<int>& screenSize);
     virtual ~CVideoNull();
 
     virtual bool beginScene(bool backBuffer, bool zBuffer, ox::video::SColor color);
-    virtual void clearScreen(bool zBuffer, ox::video::SColor color);
+    virtual void clearScreen(bool zBuffer, ox::video::SColor color) {}
     virtual bool endScene();
     virtual bool queryFeature(ox::video::E_VIDEO_DRIVER_FEATURE feature);
     virtual void setTransform(ox::video::E_TRANSFORMATION_STATE state, const ox::core::CMatrix4& mat);
     virtual ox::core::CMatrix4 getTransform(ox::video::E_TRANSFORMATION_STATE state);
     virtual void setMaterial(const ox::video::SMaterial& material);
-    virtual void useMaterialShaderFor2D(bool enabled);
-    virtual void flushRender();
+    virtual void useMaterialShaderFor2D(bool enabled) {}
+    virtual void flushRender() {}
+
     virtual ox::video::ITexture* getTexture(const char* filename);
     virtual ox::video::ITexture* getTexture(ox::io::IReadFile* file);
     virtual ox::video::ITexture* addTexture(const ox::core::CDimension2d<int>& size, const char* name,
@@ -76,12 +66,14 @@ public:
     virtual void removeTexture(const char* name);
     virtual void removeAllTextures();
     virtual int getNumTextures();
-    virtual ox::video::ISpritePackage* getSpritePackage(const char* filename, bool load);
+
+    virtual ox::video::ISpritePackage* getSpritePackage(const char* filename, bool keepStates);
     virtual void removeSpritePackage(const char* filename);
     virtual void removeAllSpritePackages();
     virtual ox::video::IParticlePackage* getParticlePackage(const char* filename);
     virtual void removeParticlePackage(const char* filename);
     virtual void removeAllParticlePackages();
+
     virtual void makeColorKeyTexture(ox::video::ITexture* texture, ox::video::SColor color);
     virtual void makeColorKeyTexture(ox::video::ITexture* texture, ox::core::CPosition2d<int> colorKeyPixelPos);
     virtual ox::video::ITexture* createRenderTargetTexture(const ox::core::CDimension2d<int>& size);
@@ -90,6 +82,7 @@ public:
         ox::video::SColor color);
     virtual void setViewPort(const ox::core::CRect<int>& area);
     virtual const ox::core::CRect<int>& getViewPort() const;
+
     virtual void drawIndexedTriangleList(const ox::video::S3DVertex* vertices, int vertexCount,
         const unsigned short* indexList, int triangleCount);
     virtual void drawIndexedTriangleList(const ox::video::S3DVertex2TCoords* vertices, int vertexCount,
@@ -102,43 +95,44 @@ public:
         ox::video::SColor color);
     virtual void draw3DTriangle(const ox::core::CTriangle3d<float>& triangle, ox::video::SColor color);
     virtual void draw3DBox(ox::core::CAabbox3d<float> box, ox::video::SColor color);
+
     virtual void draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& destPos);
     virtual void draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& destPos,
         const ox::core::CRect<int>& sourceRect, const ox::core::CRect<int>* clipRect, ox::video::SColor color,
         bool useAlphaChannelOfTexture);
     virtual void drawScaled2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<float>& destPos,
         const ox::core::CRect<int>& sourceRect, float scale, ox::video::SColor color,
-        bool useAlphaChannelOfTexture);
+        bool useAlphaChannelOfTexture) {}
     virtual void draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& destPos,
         const ox::core::CRect<int>& sourceRect, const ox::core::CRect<int>* clipRect, ox::video::SColor* colors,
         bool useAlphaChannelOfTexture);
     virtual void draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& corner1,
         const ox::core::CPosition2d<int>& corner2, const ox::core::CPosition2d<int>& corner3,
-        const ox::core::CPosition2d<int>& corner4, const ox::core::CRect<int>& sourceRect,
-        ox::video::SColor* colors, bool useAlphaChannelOfTexture);
+        const ox::core::CPosition2d<int>& corner4, const ox::core::CRect<int>& sourceRect, ox::video::SColor* colors,
+        bool useAlphaChannelOfTexture) {}
     virtual void draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<float>& corner1,
         const ox::core::CPosition2d<float>& corner2, const ox::core::CPosition2d<float>& corner3,
         const ox::core::CPosition2d<float>& corner4, const ox::core::CRect<int>& sourceRect,
-        const ox::video::SColorArray* colors, bool useAlphaChannelOfTexture);
+        const ox::video::SColorArray* colors, bool useAlphaChannelOfTexture) {}
     virtual void draw2DRectangle(ox::video::SColor color, const ox::core::CRect<int>& pos,
         const ox::core::CRect<int>* clip);
     virtual void draw2DTriangleList(ox::video::ITexture* texture, ox::core::CPosition2d<float>* positions,
         ox::core::CPosition2d<float>* textureCoords, ox::video::SColor* colors, int* indices, int vertexCount,
-        int triangleCount);
+        int triangleCount) {}
     virtual void draw2DLine(const ox::core::CPosition2d<int>& start, const ox::core::CPosition2d<int>& end,
         ox::video::SColor color);
     virtual void draw2DLineFloat(const ox::core::CPosition2d<float>& start,
         const ox::core::CPosition2d<float>& end, ox::video::SColor color);
-    virtual void draw2DBezier(const ox::core::CVector2d<float>& start,
-        const ox::core::CVector2d<float>& control1, const ox::core::CVector2d<float>& control2,
-        const ox::core::CVector2d<float>& end, float step, ox::video::SColor color);
-    virtual void draw2DHermite(const ox::core::CVector2d<float>& start,
-        const ox::core::CVector2d<float>& tangent1, const ox::core::CVector2d<float>& end,
-        const ox::core::CVector2d<float>& tangent2, float step, ox::video::SColor color);
+    virtual void draw2DBezier(const ox::core::CVector2d<float>& start, const ox::core::CVector2d<float>& control1,
+        const ox::core::CVector2d<float>& control2, const ox::core::CVector2d<float>& end, float step,
+        ox::video::SColor color);
+    virtual void draw2DHermite(const ox::core::CVector2d<float>& start, const ox::core::CVector2d<float>& tangent1,
+        const ox::core::CVector2d<float>& end, const ox::core::CVector2d<float>& tangent2, float step,
+        ox::video::SColor color);
     virtual void drawStencilShadowVolume(const ox::core::CVector3d<float>* triangles, int count, bool zfail);
     virtual void drawStencilShadow(bool clearStencilBuffer, ox::video::SColor leftUpEdge,
         ox::video::SColor rightUpEdge, ox::video::SColor leftDownEdge, ox::video::SColor rightDownEdge);
-    virtual void drawMeshBuffer(ox::scene::IMeshBuffer* meshBuffer);
+    virtual void drawMeshBuffer(ox::scene::IMeshBuffer* mb);
     virtual void setFog(ox::video::SColor color, bool linearFog, float start, float end, float density,
         bool pixelFog, bool rangeFog);
     virtual ox::core::CDimension2d<int> getScreenSize();
@@ -151,7 +145,7 @@ public:
     virtual void setAmbientLight(const ox::video::SColorf& color);
     virtual int getMaximalDynamicLightAmount();
     virtual int getDynamicLightCount();
-    virtual const ox::video::SLight& getDynamicLight(int index);
+    virtual const ox::video::SLight& getDynamicLight(int idx);
     virtual const wchar_t* getName();
     virtual void addExternalImageLoader(ox::video::IImageLoader* loader);
     virtual int getMaximalPrimitiveCount();
@@ -164,18 +158,18 @@ public:
     virtual void OnResize(const ox::core::CDimension2d<int>& size);
     virtual int addMaterialRenderer(ox::video::IMaterialRenderer* renderer, const char* name);
     virtual void setMaterialRendererName(int index, const char* name);
-    virtual ox::video::IMaterialRenderer* getMaterialRenderer(int index);
-    virtual void* getExposedVideoData();
+    virtual ox::video::IMaterialRenderer* getMaterialRenderer(int idx);
+    virtual ox::video::SExposedVideoData getExposedVideoData();
     virtual int getDriverType();
-    virtual bool isFullscreen();
-    virtual bool setFullscreen(bool fullscreen);
-    virtual void setScissorRect(ox::core::CRect<int>* rect);
+    virtual bool isFullscreen() { return false; }
+    virtual bool setFullscreen(bool fullscreen) { return false; }
+    virtual void setScissorRect(ox::core::CRect<int>* rect) {}
     virtual void setRenderScreenSize(int width, int height);
     virtual void setForcePointSampling(bool force);
     virtual void* getGPUProgrammingServices();
     virtual void* getPostProcessingServices();
-    virtual ox::io::IFileSystem* getFileSystem();
-    virtual bool saveJpegScreenshot(const char* directory, const char* name);
+    virtual ox::io::IFileSystem* getFileSystem() { return FileSystem; }
+    virtual bool saveJpegScreenshot(const char* directory, const char* name) { return false; }
 
     // IGPUProgrammingServices
     virtual int addHighLevelShaderMaterial(const char* vertexShaderProgram, const char* vertexShaderEntryPointName,
@@ -214,71 +208,140 @@ public:
         ox::video::E_MATERIAL_TYPE baseMaterial, bool flag, int userData);
 
     // IPostProcessingServices
-    virtual bool allocatePPSurfaces(unsigned int count);
+    virtual void allocatePPSurfaces(unsigned int count);
     virtual void freePPSurfaces();
     virtual void captureScreenBuffer(unsigned int index);
     virtual void captureScreenBuffer(unsigned int index, const ox::core::CRect<int>& area);
     virtual ox::video::ITexture* getCapturedBuffer(unsigned int index);
-    virtual void runPPShader(int material);
-    virtual void runPPShader(int material, ox::core::CRect<int>& destRect, ox::core::CRect<int>* sourceRect,
-        ox::core::CRect<int>* clipRect, unsigned int index);
-    virtual void setInputTexture(int index, ox::video::ITexture* texture);
+    virtual void runPPShader(int materialType);
+    virtual void runPPShader(int materialType, ox::core::CRect<int>& destRect, ox::core::CRect<int>* sourceRect,
+        ox::core::CRect<int>* clipRect, unsigned int sizeTextureStage);
+    virtual void setInputTexture(int stage, ox::video::ITexture* texture);
 
+    //! Draws source part of a post-processing surface of surfaceSize into dest.
     virtual void drawPPImage(const ox::core::CRect<int>& destRect, const ox::core::CRect<int>& sourceRect,
-        const ox::core::CDimension2d<int>& textureSize, const ox::core::CRect<int>* clipRect,
-        ox::video::ITexture* texture);
-    virtual void renderStatusChanged(ox::video::ITexture* texture, bool useAlphaChannel, bool linearFilter,
-        int quads);
-    //! Draws the collected 2D quads.
-    virtual void flush2dRendering();
-    //! Recomputes the pixel to clip space transform of the 2D functions for the screen size, with
-    //! the origin moved by (x, y).
-    virtual void update2dViewValues(int x, int y);
+        const ox::core::CDimension2d<int>& surfaceSize, const ox::core::CRect<int>* clipRect,
+        const ox::core::CDimension2d<int>* textureSize);
+    //! Starts a new 2d batch when texture or the blend flags differ from the current batch, or when
+    //! quadCount more quads would not fit; returns whether it did.
+    virtual bool renderStatusChanged(ox::video::ITexture* texture, bool alphaChannel, bool flag2, int quadCount)
+    {
+        return false;
+    }
+    //! Draws and empties the current 2d batch.
+    virtual void flush2dRendering() {}
+    //! Recomputes the 2d projection from the render size (ScreenSize, rounded up to even) so that a
+    //! 2d pixel (x, y) lands at clip-space ((x + offsetX - w/2) / (w/2), (h/2 - offsetY - y) / (h/2)):
+    //! the origin is the top-left corner moved by (offsetX, offsetY) and y grows downwards.
+    virtual void update2dViewValues(int offsetX, int offsetY);
+    //! The cached sprite package for filename, or null; never loads.
     virtual ox::video::ISpritePackage* findSpritePackage(const char* filename);
+    //! The cached particle package for filename, or null; never loads.
     virtual ox::video::IParticlePackage* findParticlePackage(const char* filename);
-    //! Creates the driver's texture for an image; overridden by the drivers with their own textures.
-    virtual ox::video::ITexture* createDeviceDependentTexture(ox::video::IImage* surface);
 
 protected:
-    void deleteAllTextures();
-    void deleteMaterialRenders();
-    //! False (and a log message) if a draw call has more primitives than the driver allows.
-    bool checkPrimitiveCount(int vertexCount);
-    void addAndDropMaterialRenderer(ox::video::IMaterialRenderer* renderer);
+    //! Creates a texture of this driver from an image; the caller owns the returned reference.
+    virtual ox::video::ITexture* createDeviceDependentTexture(ox::video::IImage* surface);
 
-    // 0x28
-    S2DQuadBatch Batch;
-    // 0x43038: glBegin/glEnd pairs of the 2D batch
-    int BatchFlushCount;
-    // 0x4303c
+    void deleteAllTextures();
+    ox::video::ITexture* findTexture(const char* filename);
+    ox::video::ITexture* loadTextureFromFile(ox::io::IReadFile* file);
+    void addTexture(ox::video::ITexture* texture, const char* filename);
+    bool checkPrimitiveCount(int vertexCount);
+    int addAndDropMaterialRenderer(ox::video::IMaterialRenderer* renderer);
+    void deleteMaterialRenders();
+
+    //! A cached texture under its lower-cased name.
+    struct SSurface
+    {
+        SSurface() : Surface(0) {}
+        SSurface(const SSurface& other) : Filename(other.Filename), Surface(other.Surface) {}
+
+        bool operator<(const SSurface& other) const
+        {
+            return Filename < other.Filename;
+        }
+
+        ox::core::CString<char> Filename;
+        ox::video::ITexture* Surface;
+    };
+
+    //! A material renderer and its name (the E_MATERIAL_TYPE name for the built-in types).
+    struct SMaterialRenderer
+    {
+        ox::core::CString<char> Name;
+        ox::video::IMaterialRenderer* Renderer;
+    };
+
+    //! A cached sprite package under its lower-cased file name.
+    struct SSprites
+    {
+        SSprites() : Package(0) {}
+
+        bool operator<(const SSprites& other) const
+        {
+            return Filename < other.Filename;
+        }
+
+        ox::core::CString<char> Filename;
+        ox::video::ISpritePackage* Package;
+    };
+
+    //! A cached particle package under its lower-cased file name.
+    struct SParticles
+    {
+        SParticles() : Package(0) {}
+
+        bool operator<(const SParticles& other) const
+        {
+            return Filename < other.Filename;
+        }
+
+        ox::core::CString<char> Filename;
+        ox::video::IParticlePackage* Package;
+    };
+
+    // The 2d batch, filled and drawn by the derived driver; CVideoOpenGL zeroes everything from
+    // Current2DTexture up to StatusSwitches in its constructor.
+    ox::video::ITexture* Current2DTexture;
+    int Current2DQuadCount;
+    //! Room for MAX_2D_QUADS quads of two triangles; no recovered code reads it.
+    unsigned short Indices2D[MAX_2D_QUADS * 6];
+    //! Four vertices per quad, in screen pixels.
+    ox::video::S3DVertex Vertices2D[MAX_2D_QUADS * 4];
+    //! Constructed but never used by the recovered code.
+    S2DVertex Unused2DVertices[MAX_2D_QUADS * 4];
+    bool Current2DAlphaChannel;
+    bool Current2DFlag2;
+    //! Batches drawn in the current frame; NumStatusSwitches keeps the last frame's count.
     int StatusSwitches;
-    // 0x43040: a pixel position p maps to clip space ((p.X + ViewXOffset) * ViewXFactor,
-    // (ViewYOffset - p.Y) * ViewYFactor); see update2dViewValues.
-    float ViewXFactor;
-    float ViewYFactor;
-    int ViewXOffset;
-    int ViewYOffset;
-    // 0x43050: texture, surface loader and other caches
-    char Unrecovered43050[0x48];
-    // 0x43098
+    int NumStatusSwitches;
+    //! 1 / half the render width and height, and ViewOffsetX = offsetX - w/2,
+    //! ViewOffsetY = h/2 - offsetY; see update2dViewValues.
+    float InvHalfWidth;
+    float InvHalfHeight;
+    int ViewOffsetX;
+    int ViewOffsetY;
+
+    std::vector<SSurface> Textures;
+    std::vector<ox::video::IImageLoader*> SurfaceLoader;
+    std::vector<ox::video::SLight> Lights;
     std::vector<SMaterialRenderer> MaterialRenderers;
-    // 0x430b0
-    char Unrecovered430b0[0x30];
-    // 0x430e0
+    std::vector<SSprites> SpritePackages;
+    std::vector<SParticles> ParticlePackages;
     ox::io::IFileSystem* FileSystem;
-    // 0x430e8
+
     ox::core::CRect<int> ViewPort;
-    // 0x430f8: the size the 2D functions draw for (setRenderScreenSize)
+    //! The size the game renders at, returned by getScreenSize; 2d coordinates are in this space.
+    //! setRenderScreenSize(w, h) sets it (w <= 0 restores the physical size); OnResize resets it.
     ox::core::CDimension2d<int> ScreenSize;
-    // 0x43100: the window size
+    //! The window or screen size, returned by getPhysicalScreenSize; set at creation and by OnResize.
     ox::core::CDimension2d<int> PhysicalScreenSize;
-    // 0x43108
-    char Unrecovered43108[0xc];
-    // 0x43114
-    int PrimitivesDrawn;
-    // 0x43118: E_TEXTURE_CREATION_FLAG bits
+    CFPSCounter FPSCounter;
+
+    unsigned int PrimitivesDrawn;
     unsigned int TextureCreationFlags;
-    // 0x4311c
+
     bool LinearFog;
     float FogStart;
     float FogEnd;
@@ -286,15 +349,25 @@ protected:
     bool PixelFog;
     bool RangeFog;
     ox::video::SColor FogColor;
-    // 0x43138
-    char Unrecovered43138[0x18];
-    // 0x43150: shared by all Cg material renderers
+
+    ox::video::SExposedVideoData ExposedData;
     CGcontext CgContext;
-    // 0x43158
-    char Unrecovered43158[0x69];
-    // 0x431c1: nearest neighbour filtering for all 2D images
+
+    //! Post-processing surfaces; the first NumPPSurfaces are allocated.
+    ox::video::ITexture* PPSurfaces[8];
+    unsigned int NumPPSurfaces;
+    //! The textures of stages 0 and 1 of the post-processing material.
+    ox::video::ITexture* InputTextures[2];
+    int Unknown431b0;
+    //! Red, yellow and green; not read by the recovered code.
+    ox::video::SColor DebugColors[3];
+    //! Set by the derived driver's useMaterialShaderFor2D.
+    bool UseMaterialShaderFor2D;
     bool ForcePointSampling;
 };
+
+//! Creates the null driver.
+ox::video::IVideoDriver* createNullDriver(ox::io::IFileSystem* io, const ox::core::CDimension2d<int>& screenSize);
 
 } // end namespace video
 } // end namespace daisy

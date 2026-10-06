@@ -3,7 +3,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 //
 // 2D conventions (see CVideoNull::update2dViewValues): a pixel position (x, y), y down, maps to
-// clip space ((x + ViewXOffset) * ViewXFactor, (ViewYOffset - y) * ViewYFactor) with the projection
+// clip space ((x + ViewOffsetX) * InvHalfWidth, (ViewOffsetY - y) * InvHalfHeight) with the projection
 // and modelview matrices set to identity, so integer positions fall on pixel edges. Images are
 // collected in the 2D quad batch (switch2dRendering) and drawn as GL_QUADS when the texture or the
 // blend mode changes; rectangles and lines are drawn at once, after flushing the batch.
@@ -74,7 +74,7 @@ CVideoOpenGL::CVideoOpenGL(const ox::core::CDimension2d<int>& screenSize, ox::IO
       ARBVertexProgramExtension(false), ARBFragmentProgramExtension(false), LastSetLight(-1), MaxTextureUnits(1),
       Device(device)
 {
-    memset(&Batch, 0, sizeof(Batch));
+    memset(&Current2DTexture, 0, (char*)&StatusSwitches - (char*)&Current2DTexture);
 
     os::Printer::log("OpenGL Renderer.", ox::event::ELL_INFORMATION);
 
@@ -793,10 +793,10 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
 
     ox::core::CRect<int> poss(targetPos, sourceSize);
 
-    const float xFact = ViewXFactor;
-    const float yFact = ViewYFactor;
-    const int xPlus = ViewXOffset;
-    const int yPlus = ViewYOffset;
+    const float xFact = InvHalfWidth;
+    const float yFact = InvHalfHeight;
+    const int xPlus = ViewOffsetX;
+    const int yPlus = ViewOffsetY;
 
     const ox::core::CDimension2d<int>& ss = texture->getOriginalSize();
     ox::core::CRect<float> tcoords;
@@ -811,7 +811,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = (float)(poss.LowerRightCorner.X + xPlus) * xFact;
     npos.LowerRightCorner.Y = (float)(yPlus - poss.LowerRightCorner.Y) * yFact;
 
-    ox::video::S3DVertex* v = &Batch.Vertices[Batch.QuadCount * 4];
+    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
     v[0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
         tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
     v[1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
@@ -820,7 +820,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
     v[3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
         tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
-    ++Batch.QuadCount;
+    ++Current2DQuadCount;
 }
 
 //! Draws the quads of the batch when texture, useAlphaChannel or linearFilter differ from the
@@ -828,25 +828,25 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
 //! with blending on (see setRenderStates2DMode).
 void CVideoOpenGL::switch2dRendering(ox::video::ITexture* texture, bool useAlphaChannel, bool linearFilter, int quads)
 {
-    if (Batch.Texture != texture || Batch.UseAlphaChannel != useAlphaChannel ||
-        Batch.LinearFilter != linearFilter || Batch.QuadCount + quads >= S2DQuadBatch::MAX_QUADS)
+    if (Current2DTexture != texture || Current2DAlphaChannel != useAlphaChannel ||
+        Current2DFlag2 != linearFilter || Current2DQuadCount + quads >= MAX_2D_QUADS)
     {
         // no effect: quads are only batched with a texture
-        if (!Batch.Texture)
-            Batch.Texture = texture;
+        if (!Current2DTexture)
+            Current2DTexture = texture;
 
-        if (Batch.QuadCount > 0)
+        if (Current2DQuadCount > 0)
         {
-            setTexture(0, Batch.Texture);
-            setRenderStates2DMode(true, true, Batch.UseAlphaChannel, Batch.LinearFilter);
+            setTexture(0, Current2DTexture);
+            setRenderStates2DMode(true, true, Current2DAlphaChannel, Current2DFlag2);
 
             glBegin(GL_QUADS);
 
-            for (int i = 0; i < Batch.QuadCount * 4; i += 4)
+            for (int i = 0; i < Current2DQuadCount * 4; i += 4)
             {
                 for (int j = 0; j < 4; ++j)
                 {
-                    const ox::video::S3DVertex& vertex = Batch.Vertices[i + j];
+                    const ox::video::S3DVertex& vertex = Vertices2D[i + j];
                     glColor4ub(vertex.Color.getRed(), vertex.Color.getGreen(), vertex.Color.getBlue(),
                         vertex.Color.getAlpha());
                     glTexCoord2f(vertex.TCoords.X, vertex.TCoords.Y);
@@ -855,13 +855,13 @@ void CVideoOpenGL::switch2dRendering(ox::video::ITexture* texture, bool useAlpha
             }
 
             glEnd();
-            ++BatchFlushCount;
+            ++StatusSwitches;
         }
 
-        Batch.Texture = texture;
-        Batch.UseAlphaChannel = useAlphaChannel;
-        Batch.QuadCount = 0;
-        Batch.LinearFilter = linearFilter;
+        Current2DTexture = texture;
+        Current2DAlphaChannel = useAlphaChannel;
+        Current2DQuadCount = 0;
+        Current2DFlag2 = linearFilter;
     }
 }
 
@@ -971,10 +971,10 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
 
     ox::core::CRect<int> poss(targetPos, sourceSize);
 
-    const float xFact = ViewXFactor;
-    const float yFact = ViewYFactor;
-    const int xPlus = ViewXOffset;
-    const int yPlus = ViewYOffset;
+    const float xFact = InvHalfWidth;
+    const float yFact = InvHalfHeight;
+    const int xPlus = ViewOffsetX;
+    const int yPlus = ViewOffsetY;
 
     const ox::core::CDimension2d<int>& ss = texture->getOriginalSize();
     ox::core::CRect<float> tcoords;
@@ -989,7 +989,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = ((float)(poss.LowerRightCorner.X + xPlus) + 0.5f) * xFact;
     npos.LowerRightCorner.Y = ((float)(yPlus - poss.LowerRightCorner.Y) + 0.5f) * yFact;
 
-    ox::video::S3DVertex* v = &Batch.Vertices[Batch.QuadCount * 4];
+    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
     v[0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[0],
         tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
     v[1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[3],
@@ -998,7 +998,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
     v[3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[1],
         tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
-    ++Batch.QuadCount;
+    ++Current2DQuadCount;
 
     if (tempColors)
         delete[] colors;
@@ -1044,10 +1044,10 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
     tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
 
-    const float xFact = ViewXFactor;
-    const float yFact = ViewYFactor;
-    const int xPlus = ViewXOffset;
-    const int yPlus = ViewYOffset;
+    const float xFact = InvHalfWidth;
+    const float yFact = InvHalfHeight;
+    const int xPlus = ViewOffsetX;
+    const int yPlus = ViewOffsetY;
 
     bool linearFilter = corner1.X == corner3.X && corner1.Y == corner2.Y && corner3.Y == corner4.Y &&
         corner2.X == corner4.X;
@@ -1064,7 +1064,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    ox::video::S3DVertex* v = &Batch.Vertices[Batch.QuadCount * 4];
+    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
     v[0] = ox::video::S3DVertex(((float)(corner1.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner1.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
     v[1] = ox::video::S3DVertex(((float)(corner2.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner2.Y) + 0.5f) * yFact,
@@ -1073,7 +1073,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         0, 0, 0, 0, colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
     v[3] = ox::video::S3DVertex(((float)(corner3.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner3.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
-    ++Batch.QuadCount;
+    ++Current2DQuadCount;
 
     if (tempColors)
         delete[] colors;
@@ -1096,10 +1096,10 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
     tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
 
-    const float xPlus = (float)ViewXOffset;
-    const float xFact = ViewXFactor;
-    const float yPlus = (float)ViewYOffset;
-    const float yFact = ViewYFactor;
+    const float xPlus = (float)ViewOffsetX;
+    const float xFact = InvHalfWidth;
+    const float yPlus = (float)ViewOffsetY;
+    const float yFact = InvHalfHeight;
 
     switch2dRendering(texture, useAlphaChannelOfTexture, true, 1);
 
@@ -1111,7 +1111,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    ox::video::S3DVertex* v = &Batch.Vertices[Batch.QuadCount * 4];
+    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
     v[0] = ox::video::S3DVertex((corner1.X + xPlus) * xFact, (yPlus - corner1.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
     v[1] = ox::video::S3DVertex((corner2.X + xPlus) * xFact, (yPlus - corner2.Y) * yFact, 0, 0, 0, 0,
@@ -1120,7 +1120,7 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         colors->Colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
     v[3] = ox::video::S3DVertex((corner3.X + xPlus) * xFact, (yPlus - corner3.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
-    ++Batch.QuadCount;
+    ++Current2DQuadCount;
 
     if (tempColors)
         delete colors;
@@ -1135,10 +1135,10 @@ void CVideoOpenGL::draw2DLine(const ox::core::CPosition2d<int>& start, const ox:
     setRenderStates2DMode(alpha, false, false, false);
     setTexture(0, 0);
 
-    const int xPlus = ViewXOffset;
-    const float xFact = ViewXFactor;
-    const int yPlus = ViewYOffset;
-    const float yFact = ViewYFactor;
+    const int xPlus = ViewOffsetX;
+    const float xFact = InvHalfWidth;
+    const int yPlus = ViewOffsetY;
+    const float yFact = InvHalfHeight;
 
     ox::core::CPosition2d<float> npos_start;
     npos_start.X = (float)(start.X + xPlus) * xFact;
@@ -1287,10 +1287,10 @@ void CVideoOpenGL::draw2DLineFloat(const ox::core::CPosition2d<float>& start, co
     setRenderStates2DMode(alpha, false, false, true);
     setTexture(0, 0);
 
-    const float xPlus = (float)ViewXOffset;
-    const float xFact = ViewXFactor;
-    const float yPlus = (float)ViewYOffset;
-    const float yFact = ViewYFactor;
+    const float xPlus = (float)ViewOffsetX;
+    const float xFact = InvHalfWidth;
+    const float yPlus = (float)ViewOffsetY;
+    const float yFact = InvHalfHeight;
 
     ox::core::CPosition2d<float> npos_start;
     npos_start.X = (start.X + xPlus) * xFact;
@@ -1328,10 +1328,10 @@ void CVideoOpenGL::draw2DRectangle(ox::video::SColor color, const ox::core::CRec
     setRenderStates2DMode(alpha, false, false, false);
     setTexture(0, 0);
 
-    const int xPlus = ViewXOffset;
-    const float xFact = ViewXFactor;
-    const int yPlus = ViewYOffset;
-    const float yFact = ViewYFactor;
+    const int xPlus = ViewOffsetX;
+    const float xFact = InvHalfWidth;
+    const int yPlus = ViewOffsetY;
+    const float yFact = InvHalfHeight;
 
     ox::core::CRect<float> npos;
     npos.UpperLeftCorner.X = (float)(pos.UpperLeftCorner.X + xPlus) * xFact;
@@ -1528,7 +1528,7 @@ void CVideoOpenGL::setBasicRenderStates(const ox::video::SMaterial& material, co
 
 void CVideoOpenGL::flush2dRendering()
 {
-    switch2dRendering(0, false, false, S2DQuadBatch::MAX_QUADS);
+    switch2dRendering(0, false, false, MAX_2D_QUADS);
 }
 
 //! Flushes the 2D batch and restricts drawing to rect (0: no scissor).
