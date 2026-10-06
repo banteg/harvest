@@ -12,7 +12,11 @@
 //   opening camera (and, every other two seconds, the camera after picking Poseidon).
 //
 //     zig build test-video -- <data directory> [--screenshot <directory>] [--frames <n>]
-//         [--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH]
+//         [--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH] [--scale <factor>]
+//
+// --size is the screen size the driver gets (default 1024x768) and --scale the drawable pixels per
+// screen unit (default 1), as the game's device sets them on a high-density display: with --scale 2
+// the scenes are laid out for 1024x768 and drawn into a 2048x1536 drawable.
 //
 // The data directory is the one holding harvestClientData (orig/1.18-linux-amd64). With
 // --screenshot each scene is saved through IVideoDriver::saveJpegScreenshot as
@@ -457,6 +461,7 @@ int main(int argc, char** argv)
     int frames = 3;
     bool gles = false;
     int width = 1024, height = 768;
+    float scale = 1.0f;
     // 0: 2D, 1: 3D, 2: the main menu's scene, -1: all of them
     int sceneArgument = -1;
     int shaderLevel = 2;
@@ -471,6 +476,8 @@ int main(int argc, char** argv)
             gles = true;
         else if (!strcmp(argv[i], "--size") && i + 1 < argc)
             sscanf(argv[++i], "%dx%d", &width, &height);
+        else if (!strcmp(argv[i], "--scale") && i + 1 < argc)
+            scale = (float)atof(argv[++i]);
         else if (!strcmp(argv[i], "--scene") && i + 1 < argc)
         {
             ++i;
@@ -481,10 +488,10 @@ int main(int argc, char** argv)
         else
             dataDirectory = argv[i];
     }
-    if (!dataDirectory || frames < 1)
+    if (!dataDirectory || frames < 1 || scale <= 0.0f)
     {
         fprintf(stderr, "usage: harvest-test-video <data directory> [--screenshot <directory>] [--frames <n>] "
-                        "[--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH]\n");
+                        "[--scene 2d|3d|menu|all] [--level 0-2] [--gles] [--size WxH] [--scale <factor>]\n");
         return 2;
     }
 
@@ -511,7 +518,11 @@ int main(int argc, char** argv)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    SDL_Window* window = SDL_CreateWindow("Harvest renderer test", width, height, SDL_WINDOW_OPENGL);
+    // a window whose drawable is the screen size times the scale, in the display's window coordinates
+    const SDL_DisplayMode* mode = SDL_GetDesktopDisplayMode(SDL_GetPrimaryDisplay());
+    const float density = mode ? mode->pixel_density : 1.0f;
+    SDL_Window* window = SDL_CreateWindow("Harvest renderer test", (int)(width * scale / density + 0.5f),
+        (int)(height * scale / density + 0.5f), SDL_WINDOW_OPENGL | SDL_WINDOW_HIGH_PIXEL_DENSITY);
     if (!window)
     {
         fprintf(stderr, "SDL_CreateWindow: %s\n", SDL_GetError());
@@ -531,13 +542,14 @@ int main(int argc, char** argv)
     io::IFileSystem* fileSystem = daisy::io::createFileSystem();
     fileSystem->addDirectoryAlias("$GAME_RESOURCES$", dataDirectory);
 
-    // the drawable size: the window's pixels, which differ from its size on high-density displays
+    // the screen size: the drawable divided by the scale, as the device computes it
     int pixelWidth = width, pixelHeight = height;
     SDL_GetWindowSizeInPixels(window, &pixelWidth, &pixelHeight);
+    const CDimension2d<int> screenSize((int)(pixelWidth / scale + 0.5f), (int)(pixelHeight / scale + 0.5f));
+    printf("screen %dx%d in a %dx%d drawable\n", screenSize.Width, screenSize.Height, pixelWidth, pixelHeight);
 
     CTestDevice device(window);
-    video::IVideoDriver* driver =
-        port::createVideoDriver(&device, fileSystem, CDimension2d<int>(pixelWidth, pixelHeight));
+    video::IVideoDriver* driver = port::createVideoDriver(&device, fileSystem, screenSize);
     if (!driver)
     {
         fprintf(stderr, "createVideoDriver failed\n");

@@ -46,15 +46,41 @@ ox::core::CString<char> getDataDirectory()
     return path;
 }
 
-ox::core::CDimension2d<int> getDesktopSize()
+//! The primary display's desktop mode; 0 (logged) when SDL cannot read it.
+const SDL_DisplayMode* getDesktopMode()
 {
     const SDL_DisplayMode* mode = SDL_GetDesktopDisplayMode(SDL_GetPrimaryDisplay());
     if (!mode)
-    {
         SDL_Log("cannot read the desktop mode: %s", SDL_GetError());
+    return mode;
+}
+
+//! Drawable pixels per screen unit on the display of a desktop mode: --scale, else the display's
+//! scale (the mode's pixel density times the display's content scale: 2 on Retina displays, 1.5 on
+//! Windows at 150 %), which is what SDL_GetWindowDisplayScale reports for a window on it.
+float getPreferredScaleOn(const SDL_DisplayMode& mode)
+{
+    return g_options.Scale > 0 ? g_options.Scale : mode.pixel_density * SDL_GetDisplayContentScale(mode.displayID);
+}
+
+//! The primary display's desktop size in screen units: its pixels divided by the preferred scale.
+ox::core::CDimension2d<int> getDesktopSize()
+{
+    const SDL_DisplayMode* mode = getDesktopMode();
+    if (!mode)
         return ox::core::CDimension2d<int>(1024, 768);
-    }
-    return ox::core::CDimension2d<int>(mode->w, mode->h);
+    float scale = mode->pixel_density / getPreferredScaleOn(*mode);
+    return ox::core::CDimension2d<int>((int)(mode->w * scale + 0.5f), (int)(mode->h * scale + 0.5f));
+}
+
+//! The window coordinate to warp to for screen position p, with screen units over window
+//! coordinates: where p starts, rounded up to a whole coordinate when coordinates are at most as
+//! large as units (some platforms warp to whole coordinates only), else the middle of p.
+float toWindowCoordinate(int p, int screen, int window)
+{
+    if (window >= screen)
+        return (float)SDL_ceil((double)p * window / screen);
+    return (float)((p + 0.5) * window / screen);
 }
 
 const char* profileName(int profile)
@@ -74,8 +100,9 @@ extern "C" ox::IOxDevice* createDevice(ox::video::E_DRIVER_TYPE driverType, ox::
 CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEventReceiver* receiver,
     const wchar_t* version)
     : CIrrDeviceStub(version, receiver), DriverType(driverType), Window(0), Context(0), SDLOperator(0),
-      SDLJoystickDriver(0), CursorPos(0, 0), RelativeCursorPos(0, 0), ScreenSize(0, 0), WindowedSize(0, 0),
-      CursorVisible(true), SelectedLanguageIndex(0), WindowActive(false), Fullscreen(false), Closed(false)
+      SDLJoystickDriver(0), CursorPos(0, 0), RelativeCursorPos(0, 0), ScreenSize(0, 0), PixelSize(0, 0),
+      MinimumSizeScale(0), WindowedSize(0, 0), WheelX(0), WheelY(0), CursorVisible(true), SelectedLanguageIndex(0),
+      WindowActive(false), Fullscreen(false), Closed(false)
 {
     Instance = this;
 
@@ -108,7 +135,7 @@ CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEv
         SDL_Log("%s is missing: pass --data <dir> or set HARVEST_DATA to the directory that holds "
                 "harvestClientData/", clientData.c_str());
 
-    // The modes strictly smaller than the desktop in both dimensions, all at 32 bits.
+    // The modes strictly smaller than the desktop (in screen units) in both dimensions, all at 32 bits.
     ox::core::CDimension2d<int> desktop = getDesktopSize();
     VideoModeList.setDesktop(32, desktop);
     for (unsigned int m = 0; m < SDL_arraysize(VIDEO_MODES); ++m)
@@ -178,7 +205,7 @@ bool CIrrDeviceSDL::createWindowAndContext(const ox::core::CDimension2d<int>& si
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, stencilBuffer ? 8 : 0);
 
-    SDL_WindowFlags flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+    SDL_WindowFlags flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIGH_PIXEL_DENSITY;
     if (fullscreen)
         flags |= SDL_WINDOW_FULLSCREEN;
     Window = SDL_CreateWindow(Title.c_str(), size.Width, size.Height, flags);
@@ -208,12 +235,19 @@ bool CIrrDeviceSDL::createWindowAndContext(const ox::core::CDimension2d<int>& si
 //! Creates the window (windowed or fullscreen as asked, so there is no mode switch afterwards) with
 //! an OpenGL ES 3.0 context, or OpenGL 3.3 core where ES is unavailable (always on macOS), then the
 //! renderer, the GUI and the scene manager. The null driver type creates no window, as on Linux.
-//! bits and antiAlias are ignored; vsync is on unless --no-vsync (the game always passes false).
-bool CIrrDeviceSDL::createDeviceWindow(const ox::core::CDimension2d<int>& windowSize, unsigned int bits,
+//! screenSize is in screen units; the window gets the size that has them at the primary display's
+//! scale. bits and antiAlias are ignored; vsync is on unless --no-vsync (the game always passes
+//! false).
+bool CIrrDeviceSDL::createDeviceWindow(const ox::core::CDimension2d<int>& screenSize, unsigned int bits,
     bool fullscreen, bool stencilBuffer, bool vsync, unsigned int antiAlias)
 {
     if (DriverType == ox::video::EDT_NULL || Window)
         return false;
+
+    const SDL_DisplayMode* mode = getDesktopMode();
+    float windowScale = mode ? getPreferredScaleOn(*mode) / mode->pixel_density : 1.0f;
+    ox::core::CDimension2d<int> windowSize((int)(screenSize.Width * windowScale + 0.5f),
+        (int)(screenSize.Height * windowScale + 0.5f));
 
 #if defined(SDL_PLATFORM_MACOS)
     bool created = createWindowAndContext(windowSize, fullscreen, stencilBuffer, SDL_GL_CONTEXT_PROFILE_CORE, 3, 3);
@@ -231,13 +265,16 @@ bool CIrrDeviceSDL::createDeviceWindow(const ox::core::CDimension2d<int>& window
 
     // No SDL_SetWindowAspectRatio: on macOS (SDL 3.4.16) AppKit traps when such a window leaves
     // fullscreen. onResized clamps the aspect instead, as the Linux device did.
-    SDL_SetWindowMinimumSize(Window, MIN_WIDTH, MIN_HEIGHT);
+    updateMinimumSize();
     SDL_StartTextInput(Window);
     SDLOperator->setWindow(Window);
     WindowActive = (SDL_GetWindowFlags(Window) & SDL_WINDOW_INPUT_FOCUS) != 0;
     Fullscreen = fullscreen;
-    WindowedSize = windowSize;
-    ScreenSize = getPixelSize();
+    WindowedSize = screenSize;
+    PixelSize = getPixelSize();
+    ScreenSize = getScreenSizeFor(PixelSize);
+    SDL_Log("screen %dx%d in a %dx%d drawable", ScreenSize.Width, ScreenSize.Height, PixelSize.Width,
+        PixelSize.Height);
 
     VideoDriver = g_options.NullVideo ? createNullVideoDriver(this, FileSystem, ScreenSize)
                                       : port::createVideoDriver(this, FileSystem, ScreenSize);
@@ -259,10 +296,48 @@ ox::core::CDimension2d<int> CIrrDeviceSDL::getPixelSize()
     return ox::core::CDimension2d<int>(width, height);
 }
 
-ox::core::CPosition2d<int> CIrrDeviceSDL::toPixels(float x, float y)
+float CIrrDeviceSDL::getPreferredScale()
 {
-    float density = SDL_GetWindowPixelDensity(Window);
-    return ox::core::CPosition2d<int>((int)(x * density), (int)(y * density));
+    return g_options.Scale > 0 ? g_options.Scale : SDL_GetWindowDisplayScale(Window);
+}
+
+float CIrrDeviceSDL::getWindowScale()
+{
+    return getPreferredScale() / SDL_GetWindowPixelDensity(Window);
+}
+
+//! The drawable divided by the preferred scale, rounded. Where that would be smaller than 800x600,
+//! the smallest screen the game was made for (a small display at a high scale), the scale is lowered
+//! to fit 800x600, but not below 1.
+ox::core::CDimension2d<int> CIrrDeviceSDL::getScreenSizeFor(const ox::core::CDimension2d<int>& pixels)
+{
+    float scale = getPreferredScale();
+    scale = SDL_min(scale, pixels.Width / (float)MIN_WIDTH);
+    scale = SDL_min(scale, pixels.Height / (float)MIN_HEIGHT);
+    scale = SDL_max(scale, 1.0f);
+    return ox::core::CDimension2d<int>((int)(pixels.Width / scale + 0.5f), (int)(pixels.Height / scale + 0.5f));
+}
+
+//! 800x600 screen units at the preferred scale, set again when the window coordinates per screen
+//! unit change (a move to a display of another scale).
+void CIrrDeviceSDL::updateMinimumSize()
+{
+    float windowScale = getWindowScale();
+    if (windowScale == MinimumSizeScale)
+        return;
+    MinimumSizeScale = windowScale;
+    SDL_SetWindowMinimumSize(Window, (int)SDL_ceilf(MIN_WIDTH * windowScale),
+        (int)SDL_ceilf(MIN_HEIGHT * windowScale));
+}
+
+//! Rounded down, so positions left of or above the window are negative.
+ox::core::CPosition2d<int> CIrrDeviceSDL::toScreen(float x, float y)
+{
+    int width = 0;
+    int height = 0;
+    SDL_GetWindowSize(Window, &width, &height);
+    return ox::core::CPosition2d<int>((int)SDL_floor((double)x * ScreenSize.Width / width),
+        (int)SDL_floor((double)y * ScreenSize.Height / height));
 }
 
 bool CIrrDeviceSDL::run()
@@ -289,27 +364,44 @@ bool CIrrDeviceSDL::setFullscreenMode(bool fullscreen)
     return true;
 }
 
-//! In fullscreen only the size to restore is recorded; windowed, the window is asked for the size
-//! (the granted size comes back through onResized).
+//! size is in screen units. In fullscreen only the size to restore is recorded; windowed, the window
+//! is asked for the size that has it at the preferred scale (the granted size comes back through
+//! onResized).
 void CIrrDeviceSDL::resizeDeviceWindow(const ox::core::CDimension2d<int>& size)
 {
     WindowedSize = size;
     if (Window && !Fullscreen)
     {
-        float density = SDL_GetWindowPixelDensity(Window);
-        SDL_SetWindowSize(Window, (int)(size.Width / density), (int)(size.Height / density));
+        float windowScale = getWindowScale();
+        SDL_SetWindowSize(Window, (int)(size.Width * windowScale + 0.5f), (int)(size.Height * windowScale + 0.5f));
     }
 }
 
-//! A windowed size outside aspect ratios 4:3 to 16:9 or below 800x600 is clamped as on Linux (a
-//! narrower window gets its height cut to width * 3/4, a wider one its width cut to height * 16/9)
-//! and the window is asked for the clamped size (its minimum size already keeps it from going
-//! below 800x600). The size the window has is applied either way, so the frame always matches the
-//! drawable; when the window grants the clamped size, that arrives as another resize.
-void CIrrDeviceSDL::onResized(const ox::core::CDimension2d<int>& size)
+//! Called for a new drawable size or display scale. When only the drawable changed (a move to a
+//! display of another density at the default scale), only the driver is told, to scale its
+//! viewport. A new screen size is applied; when windowed, a size outside aspect ratios 4:3 to 16:9
+//! or below 800x600 is clamped as on Linux (a narrower window gets its height cut to width * 3/4, a
+//! wider one its width cut to height * 16/9) and the window is asked for the clamped size (its
+//! minimum size already keeps it from going below 800x600). The size the window has is applied
+//! either way, so the frame always matches the drawable; when the window grants the clamped size,
+//! that arrives as another resize.
+void CIrrDeviceSDL::onResized()
 {
-    if (ScreenSize == size)
+    updateMinimumSize();
+
+    ox::core::CDimension2d<int> pixels = getPixelSize();
+    ox::core::CDimension2d<int> size = getScreenSizeFor(pixels);
+    if (pixels == PixelSize && size == ScreenSize)
         return;
+
+    PixelSize = pixels;
+    if (size == ScreenSize)
+    {
+        SDL_Log("screen %dx%d in a %dx%d drawable", ScreenSize.Width, ScreenSize.Height, PixelSize.Width,
+            PixelSize.Height);
+        VideoDriver->OnResize(ScreenSize);
+        return;
+    }
 
     ScreenSize = size;
 
@@ -370,7 +462,8 @@ void CIrrDeviceSDL::handleEvent(const SDL_Event& event)
     switch (event.type)
     {
     case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
-        onResized(ox::core::CDimension2d<int>(event.window.data1, event.window.data2));
+    case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
+        onResized();
         break;
     case SDL_EVENT_WINDOW_FOCUS_GAINED:
         WindowActive = true;
@@ -480,12 +573,16 @@ void CIrrDeviceSDL::postTextEvent(const SDL_TextInputEvent& event)
     }
 }
 
-//! Positions are render pixels from the top left. The left, right and middle buttons send the
-//! pressed events 0-2 with the click count of getClickCount (250 ms, 10 px) and the released events
-//! 3-5 with the current count; other buttons are ignored. The wheel sends EMIE_MOUSE_WHEEL with
-//! ScrollY (and ScrollX) = whole notches * 10 at the pointer. Every event updates the cursor
-//! position; motion, presses and the wheel are posted only inside the window, releases always (SDL
-//! captures the mouse while a button is held, so a drag that ends outside still ends).
+//! Positions are screen units from the top left. The left, right and middle buttons send the
+//! pressed events 0-2 with the click count of getClickCount (250 ms, 10 units) and the released
+//! events 3-5 with the current count; other buttons are ignored. The wheel sends EMIE_MOUSE_WHEEL
+//! at the pointer with ScrollY 10 per notch up and ScrollX 10 per notch left (the game moves the
+//! view by minus these), from SDL's precise amounts: trackpads and high-resolution wheels send
+//! fractions of notches, and the user's scrolling direction (natural scrolling) is applied as in
+//! other applications. The amounts sent are whole, the fractions carried to the next wheel event
+//! (WheelX, WheelY), since the game truncates them. Every event updates the cursor position;
+//! motion, presses and the wheel are posted only inside the window, releases always (SDL captures
+//! the mouse while a button is held, so a drag that ends outside still ends).
 void CIrrDeviceSDL::postMouseEvent(const SDL_Event& event)
 {
     ox::event::SEvent ev;
@@ -499,7 +596,7 @@ void CIrrDeviceSDL::postMouseEvent(const SDL_Event& event)
     switch (event.type)
     {
     case SDL_EVENT_MOUSE_MOTION:
-        pos = toPixels(event.motion.x, event.motion.y);
+        pos = toScreen(event.motion.x, event.motion.y);
         ev.MouseInput.Event = ox::event::EMIE_MOUSE_MOVED;
         break;
 
@@ -514,7 +611,7 @@ void CIrrDeviceSDL::postMouseEvent(const SDL_Event& event)
         case SDL_BUTTON_MIDDLE: button = 2; break;
         default: return;
         }
-        pos = toPixels(event.button.x, event.button.y);
+        pos = toScreen(event.button.x, event.button.y);
         release = !event.button.down;
         MouseButtonStates[button] = event.button.down;
         if (event.button.down)
@@ -532,13 +629,21 @@ void CIrrDeviceSDL::postMouseEvent(const SDL_Event& event)
 
     case SDL_EVENT_MOUSE_WHEEL:
     {
-        if (!event.wheel.integer_x && !event.wheel.integer_y)
+        // SDL's x is positive to the right, y away from the user (up)
+        WheelX -= event.wheel.x * 10.0f;
+        WheelY += event.wheel.y * 10.0f;
+        float scrollX = SDL_truncf(WheelX);
+        float scrollY = SDL_truncf(WheelY);
+        if (scrollX == 0.0f && scrollY == 0.0f)
             return;
-        float direction = event.wheel.direction == SDL_MOUSEWHEEL_FLIPPED ? -10.0f : 10.0f;
-        pos = toPixels(event.wheel.mouse_x, event.wheel.mouse_y);
+        WheelX -= scrollX;
+        WheelY -= scrollY;
+        SDL_LogDebug(SDL_LOG_CATEGORY_INPUT, "wheel %g, %g (%s): ScrollX %g, ScrollY %g", event.wheel.x,
+            event.wheel.y, event.wheel.direction == SDL_MOUSEWHEEL_FLIPPED ? "flipped" : "normal", scrollX, scrollY);
+        pos = toScreen(event.wheel.mouse_x, event.wheel.mouse_y);
         ev.MouseInput.Event = ox::event::EMIE_MOUSE_WHEEL;
-        ev.MouseInput.ScrollY = event.wheel.integer_y * direction;
-        ev.MouseInput.ScrollX = event.wheel.integer_x * direction;
+        ev.MouseInput.ScrollY = scrollY;
+        ev.MouseInput.ScrollX = scrollX;
         break;
     }
 
@@ -582,10 +687,25 @@ void CIrrDeviceSDL::setVisible(bool visible)
         SDL_HideCursor();
 }
 
+//! The pointer is left alone when it is already at that position (the game warps it back to its
+//! position after every wheel event); otherwise it goes to a window coordinate that maps back to
+//! the position exactly.
 void CIrrDeviceSDL::setPosition(int x, int y)
 {
-    float density = SDL_GetWindowPixelDensity(Window);
-    SDL_WarpMouseInWindow(Window, x / density, y / density);
+    float pointerX = 0;
+    float pointerY = 0;
+    SDL_GetMouseState(&pointerX, &pointerY);
+    if (toScreen(pointerX, pointerY) == ox::core::CPosition2d<int>(x, y))
+        return;
+
+    int width = 0;
+    int height = 0;
+    SDL_GetWindowSize(Window, &width, &height);
+    float windowX = toWindowCoordinate(x, ScreenSize.Width, width);
+    float windowY = toWindowCoordinate(y, ScreenSize.Height, height);
+    SDL_LogDebug(SDL_LOG_CATEGORY_INPUT, "pointer at %g, %g warped to %d, %d (%g, %g)", pointerX, pointerY, x, y,
+        windowX, windowY);
+    SDL_WarpMouseInWindow(Window, windowX, windowY);
 }
 
 //! The audio backend (or, with --no-audio or when it cannot start, a driver that plays nothing),

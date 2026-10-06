@@ -158,7 +158,33 @@ way.
 - **Screenshots.** `saveJpegScreenshot` picks the `Screen-yymmdd-NN.jpg` name at once and returns
   false like the original, but reads the frame at the next `endScene`, before presenting: the game
   calls it from an event handler, after the swap, when the back buffer is undefined on most
-  platforms. JPEG quality 100 through stb_image_write, written through the file system.
-- **Sizes.** `OnResize` and the creation size set the viewport, so the device should pass the
-  drawable size in pixels (`SDL_GetWindowSizeInPixels`), which differs from the window size on
-  high-density displays; the 2D mapping uses the render size and scales to the viewport.
+  platforms. JPEG quality 100 through stb_image_write, written through the file system. It reads the
+  viewport in drawable pixels, so the screenshot has the drawable's resolution (2880×1800 for a
+  1440×900 screen on a Retina display): what is on the display, not a reconstruction of the
+  original's image.
+- **Screen size and drawable.** The size the driver is created and resized with is the game's
+  screen size, which on a high-density display is smaller than the drawable it draws into (see
+  [input-and-window.md](input-and-window.md#screen-size-and-scale)). The renderer reads the drawable
+  from the current context's window (`SDL_GetWindowSizeInPixels(SDL_GL_GetCurrentWindow())`) at
+  creation and in `OnResize`, which the device also calls when only the drawable changed. Every
+  coordinate the game passes stays in screen units: the 2D mapping, clipping and `getViewPort` use
+  the screen size, and the default viewport covers the whole drawable, so geometry is rasterised at
+  the drawable's resolution. The pixel-space calls are scaled to the drawable: `glViewport` (at
+  creation, in `OnResize` and `setViewPort`) and `glScissor` (the shuttle race's split screen) scale
+  each edge of the rectangle and round it, so neighbouring rectangles still meet; `glReadPixels`
+  reads the viewport, already in pixels. The 3D projection is unaffected: the camera's aspect is the
+  screen's, which is the drawable's.
+- **Texel inset.** The 2D image draws inset their texture coordinates by half a drawable pixel's
+  worth of texels at 1:1, 0.5 × screen ÷ drawable on each axis: the original's half texel when the
+  two sizes are equal, a quarter texel at a scale of 2. With the original's half texel at a scale
+  of 2, nearest-filtered images would lose half of their edge texels and show two texels three
+  pixels wide in each direction (the image squeezed by one texel); with the scaled inset a 1:1
+  image is an exact 2× enlargement of the original's, and linear-filtered quads still sample their
+  edge texels' centres, so nothing bleeds in from neighbours in a sprite sheet. The half-pixel
+  position shifts of the colour-array and corner variants stay in screen units (a whole drawable
+  pixel at scale 2), which keeps those variants exact 2× enlargements too. `zig build test-video`
+  checks this with `--scale 2`: the built-in font, drawn 1:1 with nearest filtering, matches the
+  1× frame enlarged by pixel repetition.
+- **Lines** are one drawable pixel wide, so at a scale of 2 the game's 2D lines (selection boxes,
+  the minimap's view rectangle, the placement range links, the shuttle race's divider) are half as
+  thick as the original's relative to everything else; core OpenGL has no wider lines.

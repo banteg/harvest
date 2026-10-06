@@ -125,16 +125,47 @@ keeps the behaviour above except where noted, and does not reproduce the Linux d
   arrives as a resize. Leaving fullscreen restores the windowed size, including one set with
   `resizeDeviceWindow` while in fullscreen. A switch made through the window manager (the macOS
   green button) updates the device and driver too.
-- **Resizes**: the window has a minimum size of 800×600; a windowed size outside 4:3 to 16:9 is clamped
-  as on Linux and the window is asked for the clamped size. The size the window actually has is always
-  applied (camera aspect, driver `OnResize`, `EDE_FULLSCREEN_TOGGLED` with the size). SDL's window
-  aspect constraint is not used: on macOS AppKit traps when such a window leaves fullscreen.
-- Sizes are render pixels (`SDL_GetWindowSizeInPixels`); mouse positions are scaled from window
-  coordinates by the pixel density. The window does not ask for high pixel density, so on macOS
-  pixels are points.
+- **Resizes**: the window has a minimum size of 800×600 screen units; a windowed size outside 4:3 to
+  16:9 is clamped as on Linux and the window is asked for the clamped size. The size the window
+  actually has is always applied (camera aspect, driver `OnResize`, `EDE_FULLSCREEN_TOGGLED` with the
+  size). SDL's window aspect constraint is not used: on macOS AppKit traps when such a window leaves
+  fullscreen.
 - `createUserSelectedDeviceWindow` keeps the Linux rule (¾ of the largest 4:3 box in the desktop,
   windowed, English). The video mode list keeps the Linux list and rule, and also records the
-  desktop mode.
+  desktop mode; the desktop is measured in screen units, so a Retina MacBook whose desktop "looks
+  like" 1512×982 offers the modes up to 1440×960.
+
+### Screen size and scale
+
+The original ran at the window's pixel size, showed more of the world at higher resolutions and
+never scaled its sprites or text, so at a high-density display's full pixel size everything is a
+quarter of its intended size. The port separates the two sizes:
+
+- The window asks for high pixel density (`SDL_WINDOW_HIGH_PIXEL_DENSITY`), so its drawable has every
+  pixel of the display (2880×1800 for a 1440×900-point window on a Retina display).
+- The **screen size** the game gets (`getScreenSize`, the camera aspect, `EDE_FULLSCREEN_TOGGLED`,
+  GUI layout, mouse positions, `resizeDeviceWindow` and the settings' resolutions) is the drawable
+  divided by the **scale**, rounded. The renderer draws into the whole drawable (see
+  [renderer.md](renderer.md#in-the-port)), so the game looks as it does at that resolution, drawn
+  with more pixels.
+- The scale is the window's display scale (`SDL_GetWindowDisplayScale`: pixel density times content
+  scale), so the game works in points on macOS and Wayland (2 on Retina), and in the DPI-scaled size
+  on Windows (1.5 at 150 %) and X11 (`Xft.dpi`). `--scale <factor>` (at least 1) fixes it instead:
+  `--scale 1` is the old behaviour, the game at the drawable's full resolution, and `--scale 2` gives
+  crisp nearest-filtered sprites on a 150 % Windows display. Fractional scales work, but
+  nearest-filtered sprites then repeat their texels unevenly (alternately one and two pixels at 1.5).
+- Where the screen would come out smaller than 800×600, the smallest size the game was made for (a
+  small display at a high scale, such as 1366×768 at 150 %), the scale is lowered to fit 800×600, but
+  not below 1.
+- A new drawable size or display scale (`SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED`,
+  `SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED`: resizing, fullscreen, moving to a display of another
+  density) recomputes the screen size. When only the drawable changed (a window moved between a
+  Retina and a standard display keeps its points), the driver's `OnResize` alone runs, to rescale the
+  viewport; the game sees no resize. The minimum window size follows the scale.
+- A window size in screen units (the remembered resolution, `resizeDeviceWindow`) becomes the window
+  size that gives that screen at the scale of the window's display (the primary display before the
+  window exists). The device logs the screen and drawable sizes when it creates the window and when
+  only the drawable changes.
 - The caption is UTF-8 (Linux narrowed each character).
 
 ### Keys
@@ -173,13 +204,34 @@ virtual-key codes for the rest, so every key can be bound and keeps its Windows 
 
 ### Mouse and cursor
 
+- Positions are screen units (window coordinates scaled by screen size ÷ window size, rounded down,
+  so positions left of or above the window are negative).
 - Left, right and middle buttons map to 0, 1 and 2; other buttons are ignored. Click counting is the
-  stub's (250 ms, 10 px). The wheel uses SDL's whole notches (`integer_x`/`integer_y`, so trackpads
-  send a notch at a time) × 10 in `ScrollY` and `ScrollX`, with the platform's flipped direction undone.
+  stub's (250 ms, 10 units).
+- **The wheel** sends SDL's precise amounts (`x`/`y`, in notches; trackpads and high-resolution
+  wheels send fractions), so a trackpad pans the map smoothly while a mouse wheel keeps the
+  original's 10 per notch: `ScrollY` = 10 × `y` (positive up) and `ScrollX` = −10 × `x` (positive
+  left), the directions in which `CPlayState` moves the view by −`ScrollX`, −`ScrollY`. The game
+  truncates each event's amounts (`(int)(ScrollSpeed * ScrollY)`, and the GUI's `(int)ScrollY`), so
+  the device sends whole amounts and carries the fractions to the next wheel event; an event that
+  adds up to less than 1 is not sent. At a scroll speed other than the default 1.0 the game's own
+  truncation still drops up to one pixel per event.
+- The amounts keep SDL's direction, which is the platform's with the user's scrolling preference
+  applied (`direction` only says whether it was flipped): with natural scrolling on macOS the map
+  follows the fingers, as the content of other applications does, and a mouse wheel turned up
+  scrolls the map up when natural scrolling is off. (Earlier the port undid the flip, so vertical
+  scrolling ran against the system setting, and `ScrollX` had the opposite sign.) Linux sent no
+  `ScrollX`; list boxes and scroll bars read only `ScrollY` (10 pixels per unit, 100 per notch).
+- With `SDL_LOGGING=input=debug` the device logs every wheel event's amounts and every pointer warp.
 - Motion, presses and the wheel are posted only inside the window, as on Linux; releases always are
   (SDL captures the mouse while a button is held, so a drag that ends outside the window ends).
 - `ICursorControl::setPosition` warps the pointer (`SDL_WarpMouseInWindow`) without updating the stored
-  position; `setVisible` shows or hides the system cursor.
+  position; `setVisible` shows or hides the system cursor. `CPlayState` warps the pointer back to its
+  position after every wheel event, so the device leaves the pointer alone when it already is at
+  that screen position (no sub-unit jump, and no macOS warp on every trackpad event). Otherwise it
+  warps to a window coordinate that maps back to the position exactly: the first whole coordinate in
+  it when window coordinates are at least as fine as screen units (some platforms warp to whole
+  coordinates), else its middle.
 
 ### Joysticks
 
@@ -219,6 +271,25 @@ zone of 10, since the shuttle race treats any deflection past 0.5 as a turn. But
   also the fallbacks while the renderer or audio backend is not linked
   ([`SeamFallbacks.cpp`](../../port/src/device/SeamFallbacks.cpp)), and the null audio driver is used
   when the backend cannot start.
+
+### Input scripts
+
+`--input-script <file>` feeds the game synthetic SDL events, for testing without a person at the
+keyboard ([`InputScript.h`](../../port/src/device/InputScript.h)). Each line is
+`<frame> <command> [arguments]` (`#` starts a comment); the frame counts frames during which no state
+loads, and the events are handled before the next frame. Positions are window coordinates (points on
+macOS):
+
+| Command | Events |
+|---|---|
+| `move <x> <y>` | pointer motion (the system pointer stays put) |
+| `click <x> <y>` | left button down and up |
+| `wheel <x> <y> [flipped]` | a wheel event with SDL's precise amounts, at the last position |
+| `key <name>` | key down and up; SDL key names, `ctrl+` for Control (`key ctrl+t` takes a screenshot) |
+| `size <w> <h>` | `SDL_SetWindowSize` |
+| `display <n>` | moves the window to the middle of the n-th display (`SDL_GetDisplays`) |
+| `fullscreen on\|off` | `SDL_SetWindowFullscreen` |
+| `quit` | a quit request |
 
 ### Network
 

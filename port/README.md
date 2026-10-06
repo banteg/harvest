@@ -44,6 +44,7 @@ The game needs the original's data, the directory that holds `harvestClientData/
 
     zig-out/bin/harvest --data ../orig/1.18-linux-amd64   # or set HARVEST_DATA; default: next to the executable
     zig-out/bin/harvest --null-video --no-audio --no-vsync
+    zig-out/bin/harvest --scale 1   # the game at the drawable's full resolution (default: the display's scale)
 
 User data goes to `~/.Harvest` on Linux, `~/Library/Application Support/Harvest` on macOS and
 `%APPDATA%\Harvest` on Windows. The device and its options are described in

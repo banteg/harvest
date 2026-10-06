@@ -13,6 +13,7 @@
 
 #include <vector>
 #include "device/CIrrDeviceSDL.h"
+#include "device/InputScript.h"
 #include "device/Options.h"
 #include "harvest/CHarvestFullMain.h"
 
@@ -23,6 +24,8 @@ struct SApp
     harvest::CHarvestFullMain Game;
     //! Input that arrived while a state was loading.
     std::vector<SDL_Event> HeldEvents;
+    //! --input-script's events.
+    port::CInputScript InputScript;
 };
 
 bool isInput(const SDL_Event& event)
@@ -62,6 +65,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv)
 
     SApp* app = new SApp();
     *appstate = app;
+    if (port::g_options.InputScript && !app->InputScript.load(port::g_options.InputScript))
+        return SDL_APP_FAILURE;
     // init creates the device (createDevice), the window and the first state, which then loads
     // over the following iterations.
     if (app->Game.init() != 0)
@@ -84,6 +89,11 @@ SDL_AppResult SDL_AppIterate(void* appstate)
         for (unsigned int i = 0; i < held.size(); ++i)
             handleEvent(held[i]);
     }
+
+    // the script's frames count while no state loads; its events arrive before the next frame
+    port::CIrrDeviceSDL* device = port::CIrrDeviceSDL::getInstance();
+    if (!app->Game.isLoading() && !app->InputScript.isFinished() && device && device->getWindow())
+        app->InputScript.runFrame(device->getWindow());
     return SDL_APP_CONTINUE;
 }
 

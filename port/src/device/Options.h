@@ -7,7 +7,7 @@ namespace port {
 
 struct SOptions
 {
-    SOptions() : DataDirectory(0), NullVideo(false), NoAudio(false), VSync(true) {}
+    SOptions() : DataDirectory(0), NullVideo(false), NoAudio(false), VSync(true), Scale(0), InputScript(0) {}
 
     //! The directory holding harvestClientData/ ($GAME_RESOURCES$): --data, else $HARVEST_DATA,
     //! else 0 for the executable's directory.
@@ -18,6 +18,11 @@ struct SOptions
     bool NoAudio;
     //! --no-vsync turns it off. The original never asked for vsync.
     bool VSync;
+    //! --scale <factor>: drawable pixels per unit of the game's screen size (at least 1; 1 is the
+    //! native resolution). 0, the default, uses the window's display scale.
+    float Scale;
+    //! --input-script <file>: synthetic input for testing (device/InputScript.h), or 0.
+    const char* InputScript;
 };
 
 extern SOptions g_options;

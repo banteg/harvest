@@ -18,6 +18,10 @@ class CSDLOperator;
 //! pumped by run(), which only reports whether the device is still open. The window is created with
 //! an OpenGL ES 3.0 context (OpenGL 3.3 core on macOS, and wherever ES is unavailable) and the
 //! renderer from port::createVideoDriver.
+//!
+//! The game's screen size, mouse positions and window sizes are in screen units: the drawable's
+//! pixels divided by the scale (the display's scale, or --scale), so on a Retina display the game
+//! works in points while the renderer draws every pixel.
 class CIrrDeviceSDL : public daisy::CIrrDeviceStub, public ox::gui::ICursorControl
 {
 public:
@@ -30,6 +34,8 @@ public:
 
     //! Turns one SDL event into ox events.
     void handleEvent(const SDL_Event& event);
+    //! The game's window, 0 until createDeviceWindow.
+    SDL_Window* getWindow() const { return Window; }
 
     virtual bool createDeviceWindow(const ox::core::CDimension2d<int>& windowSize, unsigned int bits,
         bool fullscreen, bool stencilBuffer, bool vsync, unsigned int antiAlias);
@@ -59,7 +65,7 @@ public:
         setPosition((int)(ScreenSize.Width * x), (int)(ScreenSize.Height * y));
     }
     virtual void setPosition(const ox::core::CPosition2d<int>& position) { setPosition(position.X, position.Y); }
-    //! Warps the pointer to render pixels; CursorPos follows with the next motion event only.
+    //! Warps the pointer to a screen position; CursorPos follows with the next motion event only.
     virtual void setPosition(int x, int y);
     virtual ox::core::CPosition2d<int> getPosition() { return CursorPos; }
     virtual ox::core::CPosition2d<float> getRelativePosition() { return RelativeCursorPos; }
@@ -69,13 +75,22 @@ private:
     //! Creates the window and a current OpenGL context of the given profile; false if either fails.
     bool createWindowAndContext(const ox::core::CDimension2d<int>& size, bool fullscreen, bool stencilBuffer,
         int profile, int major, int minor);
-    //! The render size of the window in pixels.
+    //! The size of the window's drawable in pixels.
     ox::core::CDimension2d<int> getPixelSize();
-    //! Window coordinates (SDL's mouse positions) to render pixels.
-    ox::core::CPosition2d<int> toPixels(float x, float y);
-    //! Applies a size the window now has: clamps windowed sizes (asking the window for the clamped
-    //! size when it differs), then updateScreenSize.
-    void onResized(const ox::core::CDimension2d<int>& size);
+    //! Drawable pixels per screen unit wanted for the window: --scale, else its display scale.
+    float getPreferredScale();
+    //! Window coordinates per screen unit at the preferred scale.
+    float getWindowScale();
+    //! The screen size for a drawable of the given size.
+    ox::core::CDimension2d<int> getScreenSizeFor(const ox::core::CDimension2d<int>& pixels);
+    //! Sets the window's minimum size to 800x600 screen units.
+    void updateMinimumSize();
+    //! Window coordinates (SDL's mouse positions) to screen units.
+    ox::core::CPosition2d<int> toScreen(float x, float y);
+    //! Applies the size and scale the window now has: a new drawable alone goes to the driver; a new
+    //! screen size is clamped when windowed (asking the window for the clamped size when it
+    //! differs), then applied with updateScreenSize.
+    void onResized();
     //! Applies ScreenSize: camera aspect, cursor scale, driver viewport and the resize event.
     void updateScreenSize();
 
@@ -95,10 +110,18 @@ private:
 
     ox::core::CPosition2d<int> CursorPos;
     ox::core::CPosition2d<float> RelativeCursorPos;
-    //! The render size in pixels.
+    //! The game's screen size, in screen units.
     ox::core::CDimension2d<int> ScreenSize;
-    //! The window size to restore when leaving fullscreen; 0 until known.
+    //! The drawable's size in pixels.
+    ox::core::CDimension2d<int> PixelSize;
+    //! The window coordinates per screen unit the minimum window size was set for.
+    float MinimumSizeScale;
+    //! The screen size to restore when leaving fullscreen; 0 until known.
     ox::core::CDimension2d<int> WindowedSize;
+    //! The wheel amounts not sent yet: the game truncates each event's amounts to whole pixels, so
+    //! the device sends whole amounts and keeps the fractions for the next event.
+    float WheelX;
+    float WheelY;
     bool MouseButtonStates[3];
     bool CursorVisible;
     int SelectedLanguageIndex;

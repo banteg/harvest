@@ -173,9 +173,19 @@ private:
         ox::video::SColor color);
     //! Writes the frame to PendingScreenshot (saveJpegScreenshot defers to the end of the frame).
     void writeScreenshot();
+    //! Reads DrawableSize from the window of the current OpenGL context.
+    void updateDrawableSize();
+    //! A rectangle in screen units (y down) as glViewport/glScissor's x, y, width and height in
+    //! drawable pixels (y up).
+    void toDrawable(const ox::core::CRect<int>& rect, gl::GLint out[4]) const;
+    //! The 2D texture coordinate inset in texels: half a drawable pixel at 1:1, so 0.5 (the
+    //! original's half texel) when the drawable has the screen size and 0.25 at twice the size.
+    ox::core::CPosition2d<float> getTexelInset() const;
 
     ox::IOxDevice* Device;
     bool Valid;
+    //! The size in pixels of what OpenGL draws into: the screen size times the display's scale.
+    ox::core::CDimension2d<int> DrawableSize;
     CFixedFunction FixedFunction;
 
     ox::core::CMatrix4 Matrizes[ox::video::ETS_COUNT];

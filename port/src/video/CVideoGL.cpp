@@ -7,6 +7,12 @@
 // matrices, so integer positions fall on pixel edges. Images are collected in the 2D quad batch
 // (switch2dRendering) and drawn when the texture, the alpha-channel flag or the filter changes;
 // rectangles and lines are drawn at once, after flushing the batch.
+//
+// Port: the 2D coordinates, the viewport and the scissor are in units of the screen size the device
+// gives (its logical size), and the frame is drawn into the whole drawable of the context's window,
+// which on high-density displays has more pixels (DrawableSize). OpenGL's pixel-space calls
+// (glViewport, glScissor, glReadPixels) are scaled to the drawable; 2D texture coordinates are inset
+// by half a drawable pixel (getTexelInset), which is the original's half texel at 1:1.
 
 #include "video/CVideoGL.h"
 #include "video/CCgMaterialRendererGL.h"
@@ -24,6 +30,7 @@
 #include "ox/video/SColorArray.h"
 #include "ox/video/SLight.h"
 #include "ox/video/SMaterialInline.h"
+#include <SDL3/SDL_video.h>
 #include <ctype.h>
 #include <string.h>
 #include <stb_image_write.h>
@@ -106,7 +113,7 @@ void writeToFile(void* context, void* data, int size)
 } // end anonymous namespace
 
 CVideoGL::CVideoGL(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice* device, ox::io::IFileSystem* io)
-    : CVideoNull(io, screenSize), Device(device), Valid(false), CurrentRenderMode(ERM_NONE),
+    : CVideoNull(io, screenSize), Device(device), Valid(false), DrawableSize(screenSize), CurrentRenderMode(ERM_NONE),
       ResetRenderStates(true), Transformation3DChanged(true), ClampTexture(false), Fullscreen(false),
       LastSetLight(-1), MaxTextureUnits(CFixedFunction::MAX_UNITS), PendingVertexShaderFile(0),
       PendingPixelShaderFile(0)
@@ -148,7 +155,8 @@ CVideoGL::CVideoGL(const ox::core::CDimension2d<int>& screenSize, ox::IOxDevice*
 
     setFog(FogColor, LinearFog, FogStart, FogEnd, FogDensity, PixelFog, RangeFog);
 
-    glViewport(0, 0, PhysicalScreenSize.Width, PhysicalScreenSize.Height);
+    updateDrawableSize();
+    glViewport(0, 0, DrawableSize.Width, DrawableSize.Height);
     Valid = true;
 }
 
@@ -473,11 +481,12 @@ void CVideoGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPositi
     const int yPlus = ViewOffsetY;
 
     const ox::core::CDimension2d<int>& ss = texture->getOriginalSize();
+    const ox::core::CPosition2d<float> inset = getTexelInset();
     ox::core::CRect<float> tcoords;
-    tcoords.UpperLeftCorner.X = ((float)sourcePos.X + 0.5f) / ss.Width;
-    tcoords.UpperLeftCorner.Y = ((float)sourcePos.Y + 0.5f) / ss.Height;
-    tcoords.LowerRightCorner.X = ((float)(sourcePos.X + sourceSize.Width) - 0.5f) / ss.Width;
-    tcoords.LowerRightCorner.Y = ((float)(sourcePos.Y + sourceSize.Height) - 0.5f) / ss.Height;
+    tcoords.UpperLeftCorner.X = ((float)sourcePos.X + inset.X) / ss.Width;
+    tcoords.UpperLeftCorner.Y = ((float)sourcePos.Y + inset.Y) / ss.Height;
+    tcoords.LowerRightCorner.X = ((float)(sourcePos.X + sourceSize.Width) - inset.X) / ss.Width;
+    tcoords.LowerRightCorner.Y = ((float)(sourcePos.Y + sourceSize.Height) - inset.Y) / ss.Height;
 
     ox::core::CRect<float> npos;
     npos.UpperLeftCorner.X = (float)(poss.UpperLeftCorner.X + xPlus) * xFact;
@@ -689,11 +698,12 @@ void CVideoGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPositi
         return;
 
     const ox::core::CDimension2d<int>& ss = texture->getOriginalSize();
+    const ox::core::CPosition2d<float> inset = getTexelInset();
     ox::core::CRect<float> tcoords;
-    tcoords.UpperLeftCorner.X = ((float)sourceRect.UpperLeftCorner.X + 0.5f) / ss.Width;
-    tcoords.LowerRightCorner.X = ((float)sourceRect.LowerRightCorner.X - 0.5f) / ss.Width;
-    tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
-    tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
+    tcoords.UpperLeftCorner.X = ((float)sourceRect.UpperLeftCorner.X + inset.X) / ss.Width;
+    tcoords.LowerRightCorner.X = ((float)sourceRect.LowerRightCorner.X - inset.X) / ss.Width;
+    tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + inset.Y) / ss.Height;
+    tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - inset.Y) / ss.Height;
 
     // the corners are read before the batch is switched
     const ox::core::CPosition2d<int> upperLeft = corner1;
@@ -741,11 +751,12 @@ void CVideoGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPositi
         return;
 
     const ox::core::CDimension2d<int>& ss = texture->getOriginalSize();
+    const ox::core::CPosition2d<float> inset = getTexelInset();
     ox::core::CRect<float> tcoords;
-    tcoords.UpperLeftCorner.X = ((float)sourceRect.UpperLeftCorner.X + 0.5f) / ss.Width;
-    tcoords.LowerRightCorner.X = ((float)sourceRect.LowerRightCorner.X - 0.5f) / ss.Width;
-    tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
-    tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
+    tcoords.UpperLeftCorner.X = ((float)sourceRect.UpperLeftCorner.X + inset.X) / ss.Width;
+    tcoords.LowerRightCorner.X = ((float)sourceRect.LowerRightCorner.X - inset.X) / ss.Width;
+    tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + inset.Y) / ss.Height;
+    tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - inset.Y) / ss.Height;
 
     // the corners are read before the batch is switched
     const ox::core::CPosition2d<float> upperLeft = corner1;
@@ -1122,7 +1133,8 @@ void CVideoGL::flush2dRendering()
 
 //! Flushes the 2D batch and restricts drawing to rect (0: no scissor). Port: OpenGL's window y grows
 //! upwards, so the scissor starts at height - LowerRightCorner.Y; the original's LowerRightCorner.Y
-//! - height is only right for rectangles that end at the bottom (original-bugs.md).
+//! - height is only right for rectangles that end at the bottom (original-bugs.md). The rectangle is
+//! in screen units, scaled to the drawable.
 void CVideoGL::setScissorRect(ox::core::CRect<int>* rect)
 {
     flush2dRendering();
@@ -1130,8 +1142,9 @@ void CVideoGL::setScissorRect(ox::core::CRect<int>* rect)
     if (rect)
     {
         glEnable(GL_SCISSOR_TEST);
-        glScissor(rect->UpperLeftCorner.X, PhysicalScreenSize.Height - rect->LowerRightCorner.Y, rect->getWidth(),
-            rect->getHeight());
+        GLint area[4];
+        toDrawable(*rect, area);
+        glScissor(area[0], area[1], area[2], area[3]);
     }
     else
         glDisable(GL_SCISSOR_TEST);
@@ -1191,7 +1204,8 @@ void CVideoGL::setAmbientLight(const ox::video::SColorf& color)
     FixedFunction.setLightModelAmbient(data);
 }
 
-//! Clips area to the screen; OpenGL's viewport y counts from the bottom.
+//! Clips area to the screen; OpenGL's viewport y counts from the bottom. Port: scaled to the
+//! drawable.
 void CVideoGL::setViewPort(const ox::core::CRect<int>& area)
 {
     ox::core::CRect<int> vp = area;
@@ -1199,10 +1213,40 @@ void CVideoGL::setViewPort(const ox::core::CRect<int>& area)
     clipAgainst(vp, rendert);
 
     if (vp.getHeight() > 0 && vp.getWidth() > 0)
-        glViewport(vp.UpperLeftCorner.X, ScreenSize.Height - vp.UpperLeftCorner.Y - vp.getHeight(), vp.getWidth(),
-            vp.getHeight());
+    {
+        GLint drawable[4];
+        toDrawable(vp, drawable);
+        glViewport(drawable[0], drawable[1], drawable[2], drawable[3]);
+    }
 
     ViewPort = vp;
+}
+
+void CVideoGL::updateDrawableSize()
+{
+    SDL_GetWindowSizeInPixels(SDL_GL_GetCurrentWindow(), &DrawableSize.Width, &DrawableSize.Height);
+}
+
+//! Each edge is scaled and rounded on its own, so rectangles that share an edge in screen units
+//! share it in the drawable.
+void CVideoGL::toDrawable(const ox::core::CRect<int>& rect, GLint out[4]) const
+{
+    const float scaleX = (float)DrawableSize.Width / ScreenSize.Width;
+    const float scaleY = (float)DrawableSize.Height / ScreenSize.Height;
+    const int left = (int)(rect.UpperLeftCorner.X * scaleX + 0.5f);
+    const int right = (int)(rect.LowerRightCorner.X * scaleX + 0.5f);
+    const int top = (int)(rect.UpperLeftCorner.Y * scaleY + 0.5f);
+    const int bottom = (int)(rect.LowerRightCorner.Y * scaleY + 0.5f);
+    out[0] = left;
+    out[1] = DrawableSize.Height - bottom;
+    out[2] = right - left;
+    out[3] = bottom - top;
+}
+
+ox::core::CPosition2d<float> CVideoGL::getTexelInset() const
+{
+    return ox::core::CPosition2d<float>(0.5f * ScreenSize.Width / DrawableSize.Width,
+        0.5f * ScreenSize.Height / DrawableSize.Height);
 }
 
 //! Port: stencil shadows need a stencil buffer, which the port's context does not ask for (the
@@ -1238,10 +1282,13 @@ void CVideoGL::draw3DLine(const ox::core::CVector3d<float>& start, const ox::cor
     FixedFunction.draw(GL_LINES, SVertexArrays(vertices, 2), 0, 0);
 }
 
+//! size is the new screen size; the drawable is read from the context's window, so the device also
+//! calls this when only the drawable changed (a move to a display of another density).
 void CVideoGL::OnResize(const ox::core::CDimension2d<int>& size)
 {
     CVideoNull::OnResize(size);
-    glViewport(0, 0, size.Width, size.Height);
+    updateDrawableSize();
+    glViewport(0, 0, DrawableSize.Width, DrawableSize.Height);
 }
 
 int CVideoGL::getDriverType()
@@ -1413,7 +1460,8 @@ bool CVideoGL::saveJpegScreenshot(const char* directory, const char* name)
 }
 
 //! Reads the viewport as RGB, bottom row last, and writes it as a JPEG at quality 100 (the
-//! original's libjpeg setting).
+//! original's libjpeg setting). Port: the viewport is in drawable pixels, so the screenshot has the
+//! drawable's resolution (2880x1800 for a 1440x900 screen on a Retina display).
 void CVideoGL::writeScreenshot()
 {
     GLint viewport[4];
