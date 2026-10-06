@@ -16,6 +16,7 @@
 #include "device/CIrrDeviceSDL.h"
 #include "device/InputScript.h"
 #include "device/Options.h"
+#include "platform/locale.h"
 #include "platform/Paths.h"
 #include "harvest/CHarvestFullMain.h"
 
@@ -62,6 +63,7 @@ void handleEvent(const SDL_Event& event)
 
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv)
 {
+    port::useUtf8Locale();
     if (!port::parseOptions(argc, argv))
         return SDL_APP_FAILURE;
 

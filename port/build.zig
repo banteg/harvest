@@ -166,6 +166,7 @@ pub fn build(b: *std.Build) void {
         const name = source[0 .. source.len - ".cpp".len];
         const module = b.createModule(.{ .target = target, .optimize = optimize, .link_libcpp = true });
         addIncludePaths(b, module);
+        addTargetMacros(module);
         module.addCSourceFile(.{ .file = b.path(b.pathJoin(&.{ "tests", source })), .flags = &cxx_flags });
         module.linkLibrary(harvest_lib);
         for (libs.all()) |lib| module.linkLibrary(lib);
@@ -184,6 +185,15 @@ fn addIncludePaths(b: *std.Build, module: *std.Build.Module) void {
     module.addIncludePath(b.path("../src/HarvestFull"));
     module.addIncludePath(b.path("src"));
     addMacosSdk(b, module);
+}
+
+/// Target-dependent macros for the game's C++ (the recovered code, the port and the tests).
+fn addTargetMacros(module: *std.Build.Module) void {
+    // mingw-w64's own printf family instead of the CRT's: the recovered code formats wide strings
+    // with glibc's rules (in a wide format, %s is a narrow string and %S or %ls a wide one), and
+    // the CRT's legacy wide specifiers swap %s and %S, so every localized "%s" printed only the
+    // first character of its argument.
+    if (module.resolved_target.?.result.os.tag == .windows) module.addCMacro("__USE_MINGW_ANSI_STDIO", "1");
 }
 
 /// The .cpp files directly in tests/.
@@ -218,6 +228,7 @@ fn gameModule(
         .link_libcpp = true,
     });
     addIncludePaths(b, module);
+    addTargetMacros(module);
     module.addCSourceFiles(.{ .root = b.path("../src"), .files = units, .flags = &cxx_flags });
     module.addCSourceFiles(.{ .root = b.path("src"), .files = port_sources, .flags = &cxx_flags });
     for (libs.all()) |lib| module.linkLibrary(lib);

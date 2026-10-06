@@ -136,19 +136,24 @@ bool lessBytes(const std::string& a, const std::string& b)
 void listWorkingDirectory(const char* pattern, bool mark, std::vector<std::string>& names)
 {
 #ifdef _WIN32
-    WIN32_FIND_DATAA data;
-    HANDLE find = FindFirstFileA("*", &data);
+    // UTF-8 names, as the C library's file functions take them (main.cpp sets its locale); the
+    // ANSI functions would return the ANSI code page's
+    WIN32_FIND_DATAW data;
+    HANDLE find = FindFirstFileW(L"*", &data);
     if (find == INVALID_HANDLE_VALUE)
         return;
     do
     {
-        if (!matchPattern(pattern, data.cFileName))
+        char utf8[MAX_PATH * 4];
+        if (!WideCharToMultiByte(CP_UTF8, 0, data.cFileName, -1, utf8, sizeof(utf8), 0, 0))
             continue;
-        std::string name(data.cFileName);
+        if (!matchPattern(pattern, utf8))
+            continue;
+        std::string name(utf8);
         if (mark && (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
             name += '/';
         names.push_back(name);
-    } while (FindNextFileA(find, &data));
+    } while (FindNextFileW(find, &data));
     FindClose(find);
 #else
     DIR* dir = opendir(".");

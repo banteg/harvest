@@ -60,6 +60,12 @@ directory, builds the list and changes back.
   instead of `strcoll`. The original's order follows the user's locale (`CLinuxOperator`'s
   constructor calls `gtk_init`, which calls `setlocale(LC_ALL, "")`; under `en_US.UTF-8` case is
   mostly ignored); the port's is the "C" locale's, the same everywhere. Patterns containing `/` are not supported (the game passes none).
+  On Windows the names come from `FindFirstFileW` as UTF-8, the encoding the C library's file
+  functions take there once the port has set a UTF-8 locale (`port/src/platform/locale.h`); the
+  pattern is matched by the port, so Windows' short 8.3 names never match.
+- **Folders do not exist on Windows**: `existFile` opens the path with `fopen`, which fails for a
+  folder on Windows, so the game's checks before creating its user data folders always create them
+  again (the second `mkdir` fails harmlessly).
 - **In an archive** (`CZipFileList`): see [zip-archives.md](zip-archives.md). The mode is ignored.
 - If the directory can be entered neither on disk nor as an archive, the current working directory
   is listed instead. On a fresh install `$HARVEST_USERDATA$/mods/` does not exist, so the scan for

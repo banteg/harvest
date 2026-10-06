@@ -18,6 +18,7 @@ network access to fetch the dependencies (github.com, www.lua.org). From this di
     zig build tests                # the test programs in tests/, without running them
     zig build test-audio -- ../orig/1.18-linux-amd64/harvestClientData/sfx/ [--wav out.wav] [--play]
     zig build test-menu_scene -- ../orig/1.18-linux-amd64 [shader level] [width height]
+    zig build test-text -- ../orig/1.18-linux-amd64 [scratch dir]
 
 `harvest` and `census` link every kept unit and port source, so a missing seam shows up as a linker
 error: those errors are the census. For the grouped report with callers, from the repository root:
@@ -35,7 +36,8 @@ From the repository root, `just` wraps the common commands (the game data defaul
     just play             # optimized build without UBSan stops, then run
     just build            # debug build only; just build -Doptimize=ReleaseFast -Dtarget=x86_64-windows-gnu
     just build-all        # macOS, Linux and Windows builds from this machine
-    just port-test audio  # also video, menu_scene
+    just port-test audio  # also video, menu_scene, text
+    just smoke-windows    # the Windows build under Wine, intro to a game; screenshots in build/smoke/windows
     just census           # unresolved symbols, if any
     just package          # release packages in zig-out/packages (just package macos|windows|linux)
 

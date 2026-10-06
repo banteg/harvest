@@ -16,9 +16,12 @@ namespace port {
 //! - click <x> <y>: left button pressed and released there
 //! - wheel <x> <y> [flipped]: SDL's precise wheel amounts at the pointer, as a trackpad sends them
 //! - key <name>: a key pressed and released; SDL key names, "ctrl+" for Control (Command on macOS)
+//! - text <words>: typed text (UTF-8), as SDL_EVENT_TEXT_INPUT; words are joined by one space
 //! - size <w> <h>: SDL_SetWindowSize
 //! - display <n>: the window moves to the middle of the n-th display
 //! - fullscreen on|off: SDL_SetWindowFullscreen
+//! - screenshot <name>: the frame as $HARVEST_USERDATA$/screenshots/<name>-<yymmdd>-NN.jpg (the
+//!   video driver's saveJpegScreenshot, as Ctrl+T calls it)
 //! - quit: a quit request
 class CInputScript
 {

@@ -88,6 +88,7 @@ The `replaced` list in `build.zig`:
 | `io/XMLStubs.cpp` | `CTextReader`, `CXMLReader`, `CXMLWriter` constructors | the game never uses XML; the objects do nothing |
 | `platform/Paths.{h,cpp}` | `port::findGameData`, `getGameDataDirectory`, `getUserDataPath` | the game data search (`--data`, `HARVEST_DATA`, the remembered folder, next to the executable, Steam, the user data folder) and the user data directory ([input-and-window.md](input-and-window.md#game-data)) |
 | `platform/glob.{h,cpp}` | `port::glob`/`globfree`/`glob_t`/`GLOB_MARK` | used by `CFileList` instead of `<glob.h>`; see [file-system.md](file-system.md) |
+| `platform/locale.{h,cpp}` | `port::useUtf8Locale` | a UTF-8 character type locale for the C library, set first by `main.cpp`; see [input-and-window.md](input-and-window.md#paths-and-os-services). `port/tests/text.cpp` checks the formatting, conversions, language files and non-ASCII file names |
 | `video/CImage.cpp` | `daisy::video::CImage` | Irrlicht 0.7's, with the Linux build's formats (0, 1, 2, `0x08101800`) and its `getPixel` (no R5G6B5 case) |
 | `video/ColorFormats.h` | `port::ECF_R5G6B5`, `port::ECF_R8G8B8`, `A1R5G5B5toA8R8G8B8` | the formats the recovered enum leaves out |
 | `video/CSoftwareTexture.cpp` | `daisy::video::CSoftwareTexture` | empty: the renderer overrides `createDeviceDependentTexture` |
@@ -110,6 +111,8 @@ objects byte-identical.
 |---|---|---|
 | [`daisy/io/CReadFile.cpp`](../../src/daisy/io/CReadFile.cpp) | `getModifiedDate` uses `struct stat`/`fstat` | `stat64`/`fstat64` are glibc's large-file API; macOS (and the other targets) have a 64-bit `stat` |
 | [`daisy/io/CFileList.cpp`](../../src/daisy/io/CFileList.cpp) | includes `platform/glob.h` and uses `port::glob` instead of `<glob.h>` | no `glob` on Windows; one implementation everywhere, sorted by byte order |
+| [`daisy/gui/CGUIStaticText.cpp`](../../src/daisy/gui/CGUIStaticText.cpp) | the constructor clears `IconRight` | UBSan traps on the uninitialised bool on Windows ([original-bugs.md](original-bugs.md)) |
+| [`ox/entity/COxEntityManager.cpp`](../../src/ox/entity/COxEntityManager.cpp) | `ListChanged` is value-initialised | UBSan traps on the uninitialised bools on Windows when a game starts ([original-bugs.md](original-bugs.md)) |
 | [`daisy/io/CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp) | `createDirectory` calls `mkdir(path)` on Windows | the Windows C library's `mkdir` takes no mode |
 | [`daisy/video/Null/CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp) | no `cgCreateContext`/`cgDestroyContext`; `CgContext` stays 0 | no Cg runtime in the port |
 | [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | Irrlicht's members instead of the sized placeholder | the port implements `CImage`. Declaring them for GCC changes `CVideoNull`'s code (one function stops matching), so the matching build keeps the placeholder |
@@ -176,7 +179,7 @@ platform:
 |---|---|---|
 | `getcwd`, `chdir`, `mkdir` (unistd, `sys/stat`) | `CFileSystem` | resolve on all three targets (mingw-w64 has them; `mkdir` without a mode on Windows); the web needs a virtual file system. Paths are narrow strings, so Windows uses the ANSI code page unless the executable opts into UTF-8 |
 | `fileno`, `fstat` | `CReadFile` | resolve on all three targets |
-| `opendir`, `readdir`, `stat` / `FindFirstFileA` | `port/src/platform/glob.cpp` | the port's glob |
+| `opendir`, `readdir`, `stat` / `FindFirstFileW` | `port/src/platform/glob.cpp` | the port's glob |
 | `pthread_create`, `pthread_join`, `usleep` | `CThread` | used by `CHTTPConnectionHandler` and by `CGameMain::update` (`CThread::sleep(20)` while the window is inactive); link on Windows through mingw-w64's winpthreads. The web needs another answer (no threads, or Emscripten pthreads) |
 | `pthread_mutex_*` | `CCriticalSection` | same |
 | `gettimeofday` | `os.cpp` | links everywhere (mingw-w64 has it) |
