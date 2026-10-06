@@ -132,8 +132,8 @@ play *args:
 build-all:
     cd port && zig build harvest
     cd port && zig build harvest -Doptimize=ReleaseFast
-    cd port && zig build harvest -Dtarget=x86_64-linux-gnu
-    cd port && zig build harvest -Dtarget=x86_64-windows-gnu
+    cd port && zig build harvest -Dtarget=x86_64-linux-gnu -p zig-out/x86_64-linux
+    cd port && zig build harvest -Dtarget=x86_64-windows-gnu -p zig-out/x86_64-windows
 
 # build release packages of the port into port/zig-out/packages: macos, windows, linux or all
 package target="all":

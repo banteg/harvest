@@ -114,8 +114,8 @@ private:
     ox::core::CDimension2d<int> ScreenSize;
     //! The drawable's size in pixels.
     ox::core::CDimension2d<int> PixelSize;
-    //! The window coordinates per screen unit the minimum window size was set for.
-    float MinimumSizeScale;
+    //! The minimum window size last set, in window coordinates.
+    ox::core::CDimension2d<int> MinimumSize;
     //! The screen size to restore when leaving fullscreen; 0 until known.
     ox::core::CDimension2d<int> WindowedSize;
     //! The wheel amounts not sent yet: the game truncates each event's amounts to whole pixels, so

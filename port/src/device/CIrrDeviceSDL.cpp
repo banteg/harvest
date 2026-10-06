@@ -89,7 +89,7 @@ CIrrDeviceSDL::CIrrDeviceSDL(ox::video::E_DRIVER_TYPE driverType, ox::event::IEv
     const wchar_t* version)
     : CIrrDeviceStub(version, receiver), DriverType(driverType), Window(0), Context(0), SDLOperator(0),
       SDLJoystickDriver(0), CursorPos(0, 0), RelativeCursorPos(0, 0), ScreenSize(0, 0), PixelSize(0, 0),
-      MinimumSizeScale(0), WindowedSize(0, 0), WheelX(0), WheelY(0), CursorVisible(true), SelectedLanguageIndex(0),
+      MinimumSize(0, 0), WindowedSize(0, 0), WheelX(0), WheelY(0), CursorVisible(true), SelectedLanguageIndex(0),
       WindowActive(false), Fullscreen(false), Closed(false)
 {
     Instance = this;
@@ -304,16 +304,24 @@ ox::core::CDimension2d<int> CIrrDeviceSDL::getScreenSizeFor(const ox::core::CDim
     return ox::core::CDimension2d<int>((int)(pixels.Width / scale + 0.5f), (int)(pixels.Height / scale + 0.5f));
 }
 
-//! 800x600 screen units at the preferred scale, set again when the window coordinates per screen
-//! unit change (a move to a display of another scale).
+//! 800x600 screen units at the preferred scale, but no larger than the display; set again when the
+//! window coordinates per screen unit or the display change.
 void CIrrDeviceSDL::updateMinimumSize()
 {
     float windowScale = getWindowScale();
-    if (windowScale == MinimumSizeScale)
+    ox::core::CDimension2d<int> size((int)SDL_ceilf(MIN_WIDTH * windowScale), (int)SDL_ceilf(MIN_HEIGHT * windowScale));
+    // On a display too small for 800x600 at the preferred scale, getScreenSizeFor lowers the scale,
+    // so the window only has to fit the display.
+    SDL_Rect usable;
+    if (SDL_GetDisplayUsableBounds(SDL_GetDisplayForWindow(Window), &usable))
+    {
+        size.Width = SDL_min(size.Width, usable.w);
+        size.Height = SDL_min(size.Height, usable.h);
+    }
+    if (size == MinimumSize)
         return;
-    MinimumSizeScale = windowScale;
-    SDL_SetWindowMinimumSize(Window, (int)SDL_ceilf(MIN_WIDTH * windowScale),
-        (int)SDL_ceilf(MIN_HEIGHT * windowScale));
+    MinimumSize = size;
+    SDL_SetWindowMinimumSize(Window, size.Width, size.Height);
 }
 
 //! Rounded down, so positions left of or above the window are negative.
@@ -450,6 +458,10 @@ void CIrrDeviceSDL::handleEvent(const SDL_Event& event)
     case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
     case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
         onResized();
+        break;
+    case SDL_EVENT_WINDOW_DISPLAY_CHANGED:
+        // another display may be smaller than the minimum window size
+        updateMinimumSize();
         break;
     case SDL_EVENT_WINDOW_FOCUS_GAINED:
         WindowActive = true;
