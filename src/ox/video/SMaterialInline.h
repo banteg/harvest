@@ -10,15 +10,21 @@
 namespace ox {
 namespace video {
 
+//! Colors compare as a whole (a call, so GCC does not merge neighbouring field comparisons).
+inline bool colorsDiffer(SColor a, SColor b)
+{
+    return a.color != b.color;
+}
+
 inline bool SMaterial::operator!=(const SMaterial& other) const
 {
     bool sameTextures = true;
     for (int i = 0; i < MATERIAL_MAX_TEXTURES; ++i)
         sameTextures &= Textures[i] == other.Textures[i];
 
-    return MaterialType != other.MaterialType || AmbientColor.color != other.AmbientColor.color ||
-        DiffuseColor.color != other.DiffuseColor.color || EmissiveColor.color != other.EmissiveColor.color ||
-        SpecularColor.color != other.SpecularColor.color || Shininess != other.Shininess ||
+    return MaterialType != other.MaterialType || colorsDiffer(other.AmbientColor, AmbientColor) ||
+        colorsDiffer(other.DiffuseColor, DiffuseColor) || colorsDiffer(other.EmissiveColor, EmissiveColor) ||
+        colorsDiffer(other.SpecularColor, SpecularColor) || Shininess != other.Shininess ||
         Wireframe != other.Wireframe || GouraudShading != other.GouraudShading || Lighting != other.Lighting ||
         ZBuffer != other.ZBuffer || ZWriteEnable != other.ZWriteEnable || BackfaceCulling != other.BackfaceCulling ||
         FrontFaceCCW != other.FrontFaceCCW || BilinearFilter != other.BilinearFilter ||

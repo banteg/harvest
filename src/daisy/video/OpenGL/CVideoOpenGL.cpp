@@ -474,7 +474,12 @@ void CVideoOpenGL::setRenderStates3DMode()
     }
 
     if (ResetRenderStates)
-        glFrontFace(Material.FrontFaceCCW ? GL_CCW : GL_CW);
+    {
+        if (Material.FrontFaceCCW)
+            glFrontFace(GL_CCW);
+        else
+            glFrontFace(GL_CW);
+    }
 
     if (ResetRenderStates || LastMaterial != Material)
     {
@@ -811,14 +816,13 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = (float)(poss.LowerRightCorner.X + xPlus) * xFact;
     npos.LowerRightCorner.Y = (float)(yPlus - poss.LowerRightCorner.Y) * yFact;
 
-    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
-    v[0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
+    Vertices2D[Current2DQuadCount * 4 + 0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
         tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    v[1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
+    Vertices2D[Current2DQuadCount * 4 + 1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
         tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    v[2] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
+    Vertices2D[Current2DQuadCount * 4 + 2] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
         tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    v[3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
+    Vertices2D[Current2DQuadCount * 4 + 3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
         tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
 }
@@ -989,14 +993,13 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = ((float)(poss.LowerRightCorner.X + xPlus) + 0.5f) * xFact;
     npos.LowerRightCorner.Y = ((float)(yPlus - poss.LowerRightCorner.Y) + 0.5f) * yFact;
 
-    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
-    v[0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[0],
+    Vertices2D[Current2DQuadCount * 4 + 0] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[0],
         tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    v[1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[3],
+    Vertices2D[Current2DQuadCount * 4 + 1] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[3],
         tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    v[2] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[2],
+    Vertices2D[Current2DQuadCount * 4 + 2] = ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[2],
         tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    v[3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[1],
+    Vertices2D[Current2DQuadCount * 4 + 3] = ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[1],
         tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
 
@@ -1044,13 +1047,19 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
     tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
 
+    // the corners are read before the batch is switched
+    const ox::core::CPosition2d<int> upperLeft = corner1;
+    const ox::core::CPosition2d<int> upperRight = corner2;
+    const ox::core::CPosition2d<int> lowerLeft = corner3;
+    const ox::core::CPosition2d<int> lowerRight = corner4;
+
     const float xFact = InvHalfWidth;
     const float yFact = InvHalfHeight;
     const int xPlus = ViewOffsetX;
     const int yPlus = ViewOffsetY;
 
-    bool linearFilter = corner1.X == corner3.X && corner1.Y == corner2.Y && corner3.Y == corner4.Y &&
-        corner2.X == corner4.X;
+    bool linearFilter = upperLeft.X == lowerLeft.X && upperLeft.Y == upperRight.Y && lowerLeft.Y == lowerRight.Y &&
+        upperRight.X == lowerRight.X;
 
     switch2dRendering(texture, useAlphaChannelOfTexture, linearFilter, 1);
 
@@ -1064,14 +1073,13 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
-    v[0] = ox::video::S3DVertex(((float)(corner1.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner1.Y) + 0.5f) * yFact,
+    Vertices2D[Current2DQuadCount * 4 + 0] = ox::video::S3DVertex(((float)(upperLeft.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - upperLeft.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    v[1] = ox::video::S3DVertex(((float)(corner2.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner2.Y) + 0.5f) * yFact,
+    Vertices2D[Current2DQuadCount * 4 + 1] = ox::video::S3DVertex(((float)(upperRight.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - upperRight.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[3], tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    v[2] = ox::video::S3DVertex(((float)(corner4.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner4.Y) + 0.5f) * yFact,
+    Vertices2D[Current2DQuadCount * 4 + 2] = ox::video::S3DVertex(((float)(lowerRight.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - lowerRight.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    v[3] = ox::video::S3DVertex(((float)(corner3.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - corner3.Y) + 0.5f) * yFact,
+    Vertices2D[Current2DQuadCount * 4 + 3] = ox::video::S3DVertex(((float)(lowerLeft.X + xPlus) + 0.5f) * xFact, ((float)(yPlus - lowerLeft.Y) + 0.5f) * yFact,
         0, 0, 0, 0, colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
 
@@ -1096,6 +1104,12 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     tcoords.UpperLeftCorner.Y = ((float)sourceRect.UpperLeftCorner.Y + 0.5f) / ss.Height;
     tcoords.LowerRightCorner.Y = ((float)sourceRect.LowerRightCorner.Y - 0.5f) / ss.Height;
 
+    // the corners are read before the batch is switched
+    const ox::core::CPosition2d<float> upperLeft = corner1;
+    const ox::core::CPosition2d<float> upperRight = corner2;
+    const ox::core::CPosition2d<float> lowerLeft = corner3;
+    const ox::core::CPosition2d<float> lowerRight = corner4;
+
     const float xPlus = (float)ViewOffsetX;
     const float xFact = InvHalfWidth;
     const float yPlus = (float)ViewOffsetY;
@@ -1111,14 +1125,13 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    ox::video::S3DVertex* v = &Vertices2D[Current2DQuadCount * 4];
-    v[0] = ox::video::S3DVertex((corner1.X + xPlus) * xFact, (yPlus - corner1.Y) * yFact, 0, 0, 0, 0,
+    Vertices2D[Current2DQuadCount * 4 + 0] = ox::video::S3DVertex((upperLeft.X + xPlus) * xFact, (yPlus - upperLeft.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    v[1] = ox::video::S3DVertex((corner2.X + xPlus) * xFact, (yPlus - corner2.Y) * yFact, 0, 0, 0, 0,
+    Vertices2D[Current2DQuadCount * 4 + 1] = ox::video::S3DVertex((upperRight.X + xPlus) * xFact, (yPlus - upperRight.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[3], tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    v[2] = ox::video::S3DVertex((corner4.X + xPlus) * xFact, (yPlus - corner4.Y) * yFact, 0, 0, 0, 0,
+    Vertices2D[Current2DQuadCount * 4 + 2] = ox::video::S3DVertex((lowerRight.X + xPlus) * xFact, (yPlus - lowerRight.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    v[3] = ox::video::S3DVertex((corner3.X + xPlus) * xFact, (yPlus - corner3.Y) * yFact, 0, 0, 0, 0,
+    Vertices2D[Current2DQuadCount * 4 + 3] = ox::video::S3DVertex((lowerLeft.X + xPlus) * xFact, (yPlus - lowerLeft.Y) * yFact, 0, 0, 0, 0,
         colors->Colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
 
@@ -1198,9 +1211,16 @@ void CVideoOpenGL::setRenderStates2DMode(bool alpha, bool texture, bool alphaCha
 
     if (texture)
     {
-        GLint filter = linearFilter && !ForcePointSampling ? GL_LINEAR : GL_NEAREST;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+        if (linearFilter && !ForcePointSampling)
+        {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        }
+        else
+        {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        }
 
         if (alphaChannel)
         {
@@ -1252,7 +1272,7 @@ bool CVideoOpenGL::setTexture(int stage, ox::video::ITexture* texture)
     if (stage >= MaxTextureUnits)
         return false;
 
-    if (texture && CurrentTexture[stage] == texture)
+    if (CurrentTexture[stage] == texture && texture)
         return true;
 
     if (MultiTextureExtension)
