@@ -1,6 +1,7 @@
 #include "device/CSDLOperator.h"
 
 #include <wchar.h>
+#include "platform/Message.h"
 #include "platform/Paths.h"
 
 namespace port {
@@ -53,7 +54,7 @@ int CSDLOperator::messageBox(const wchar_t* caption, const wchar_t* text, int fl
 {
     char* title = wideToUtf8(caption);
     char* message = wideToUtf8(text);
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, message, Window);
+    showErrorMessage(title, message, Window);
     SDL_free(title);
     SDL_free(message);
     return 0;

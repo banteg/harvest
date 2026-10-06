@@ -1,0 +1,44 @@
+name: Web build
+
+# Builds the port for the web with Nix (`nix build .#web`) and publishes it to GitHub Pages. The page
+# has no game data; players give it their own copy.
+
+on:
+  push:
+    branches: [master]
+    paths: ['flake.nix', 'flake.lock', 'port/**', 'src/**', 'config/**', '.github/workflows/web.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Build
+        run: nix build -L .#web
+      - name: Collect the site
+        run: mkdir _site && cp -rL --no-preserve=mode result/. _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

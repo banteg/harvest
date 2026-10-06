@@ -17,6 +17,7 @@
 #include "device/InputScript.h"
 #include "device/Options.h"
 #include "platform/locale.h"
+#include "platform/Message.h"
 #include "platform/Paths.h"
 #include "harvest/CHarvestFullMain.h"
 
@@ -72,8 +73,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char** argv)
     std::string problem;
     if (!port::findGameData(problem))
     {
-        SDL_Log("%s", problem.c_str());
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Harvest", problem.c_str(), 0);
+        port::showErrorMessage("Harvest", problem.c_str(), 0);
         return SDL_APP_FAILURE;
     }
 
