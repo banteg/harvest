@@ -100,25 +100,6 @@ ox::core::CString<char> CFileSystem::intern_resolveAliases(const char* filename)
     return result;
 }
 
-ox::io::IReadFile* CFileSystem::readFileIntoMemory(const char* filename)
-{
-    ox::io::IReadFile* file = createAndOpenFile(filename);
-    ox::io::IReadFile* memoryFile = 0;
-
-    if (file)
-    {
-        int size = file->getSize();
-        char* data = new char[size];
-        file->read(data, size);
-        memoryFile = createMemoryReadFile(data, size, filename, true);
-        if (!memoryFile)
-            delete [] data;
-        file->drop();
-    }
-
-    return memoryFile;
-}
-
 //! Opens a file for write access.
 ox::io::IWriteFile* CFileSystem::createAndWriteFile(const char* filename, bool append)
 {
@@ -214,11 +195,11 @@ ox::core::CString<char> CFileSystem::getZipInPath(const char* filename)
     for (std::map<ox::core::CString<char>, bool>::iterator it = ZipExtensions.begin();
         it != ZipExtensions.end(); ++it)
     {
-        if (path.findNext(it->first.c_str(), 0) > 0)
-        {
-            zipPath = path.subString(0, path.findNext(it->first.c_str(), 0) + it->first.size());
-            break;
-        }
+        if (path.findNext(it->first.c_str(), 0) <= 0)
+            continue;
+
+        zipPath = path.subString(0, path.findNext(it->first.c_str(), 0) + it->first.size());
+        break;
     }
 
     return ox::core::CString<char>(zipPath);
@@ -280,12 +261,7 @@ bool CFileSystem::changeWorkingDirectoryTo(const char* directory)
 {
     bool changed = chdir(directory) == 0;
 
-    if (changed)
-    {
-        WorkingDirectoryInZip = false;
-        WorkingZip = 0;
-    }
-    else
+    if (!changed)
     {
         ox::core::CString<char> zipPath = getZipInPath(directory);
         if (zipPath.size() > 0)
@@ -302,6 +278,11 @@ bool CFileSystem::changeWorkingDirectoryTo(const char* directory)
                 }
             }
         }
+    }
+    else
+    {
+        WorkingDirectoryInZip = false;
+        WorkingZip = 0;
     }
 
     if (changed)
@@ -426,6 +407,25 @@ bool CFileSystem::renameFile(const char* filename, const char* newName)
 ox::io::IFileSystem* createFileSystem()
 {
     return new CFileSystem();
+}
+
+ox::io::IReadFile* CFileSystem::readFileIntoMemory(const char* filename)
+{
+    ox::io::IReadFile* file = createAndOpenFile(filename);
+    ox::io::IReadFile* memoryFile = 0;
+
+    if (file)
+    {
+        int size = file->getSize();
+        char* data = new char[size];
+        file->read(data, size);
+        memoryFile = createMemoryReadFile(data, size, filename, true);
+        if (!memoryFile)
+            delete [] data;
+        file->drop();
+    }
+
+    return memoryFile;
 }
 
 } // end namespace io
