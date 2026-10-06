@@ -45,7 +45,7 @@ void Printer::log(const char* message, const char* hint, ox::event::ELOG_LEVEL l
         Logger->log(message, hint, level);
 }
 
-// The variadic forwarders hand their va_list to the logger's variadic log as if it were the first
+// Original bug: the variadic forwarders hand their va_list to the logger's variadic log as if it were the first
 // format argument, so a message such as "Could not load %s" prints garbage instead of the name.
 void Printer::log(const char* format, ox::event::ELOG_LEVEL level, ...)
 {

@@ -129,8 +129,10 @@ private:
     //! Never referenced.
     int Unused[16];
     sf::Window* Window;
+    //! Unset until SFML reports the first focus change.
     bool WindowActive;
     std::string Title;
+    //! Original bug: never initialized, so the first setFullscreenMode compares against heap garbage.
     bool Fullscreen;
 };
 

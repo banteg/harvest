@@ -22,7 +22,7 @@ void gtk_clipboard_set_text(GtkClipboard* clipboard, const char* text, int len);
 
 namespace daisy {
 
-// The services below have empty bodies on Linux, value-returning ones included, so their results
+// Original bug: the services below have empty bodies on Linux, value-returning ones included, so their results
 // are whatever the return register held: callers must not rely on them. messageBox in particular
 // shows nothing (CGameMain's fatal error box is silent on Linux).
 
@@ -88,8 +88,8 @@ ox::core::CString<char> CLinuxOperator::getApplicationSupportPath(const char* ap
     return path + "/." + application;
 }
 
-//! Opens the URL with xdg-open through the shell; the wide URL is narrowed character by character.
-//! Returns nothing defined.
+//! Opens the URL with xdg-open through the shell; the wide URL is narrowed character by character and
+//! not quoted. Original bug: returns nothing defined.
 bool CLinuxOperator::openURL(const wchar_t* url)
 {
     ox::core::CString<char> command("xdg-open ");

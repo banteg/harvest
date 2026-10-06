@@ -68,8 +68,8 @@ CIrrDeviceLinux::CIrrDeviceLinux(ox::video::E_DRIVER_TYPE driverType, ox::event:
     }
     Operator = new CLinuxOperator();
 
-    // $GAME_RESOURCES$ is the directory of the executable. readlink does not terminate the path, so
-    // the scan starts at an unwritten byte.
+    // $GAME_RESOURCES$ is the directory of the executable. Original bug: readlink does not terminate
+    // the path and its result is unchecked, so the scan starts at an unwritten byte (or path[-1]).
     char path[1024];
     int i = readlink("/proc/self/exe", path, 1023);
     while (path[i] != '/' && i >= 0)
@@ -93,7 +93,8 @@ CIrrDeviceLinux::CIrrDeviceLinux(ox::video::E_DRIVER_TYPE driverType, ox::event:
 
     // SFML key codes to ox (Windows virtual-key) codes. Keys not listed (Insert, Pause, the control,
     // alt and system keys, right shift, menu, brackets, semicolon, quote, slash, backslash, tilde,
-    // equal) keep uninitialized table entries. Left shift maps to KEY_CAPITAL.
+    // equal) keep uninitialized table entries (original bug: they report heap garbage, in practice
+    // usually 0). Left shift maps to KEY_CAPITAL.
     KeyMap[sf::Keyboard::Num1] = ox::KEY_KEY_1;
     KeyMap[sf::Keyboard::Num2] = ox::KEY_KEY_2;
     KeyMap[sf::Keyboard::Num3] = ox::KEY_KEY_3;
@@ -443,10 +444,10 @@ void CIrrDeviceLinux::updateScreenSize()
         WindowedSize = ScreenSize;
 }
 
-//! SFML KeyPressed/KeyReleased: KeyInput.Key is KeyMap[code] (no bounds check: SFML's Unknown key,
-//! -1, reads the field before the table, SelectedLanguageIndex), Char is 0. With Control held, a
+//! SFML KeyPressed/KeyReleased: KeyInput.Key is KeyMap[code], Char is 0. Original bug: no bounds
+//! check, so SFML's Unknown key (-1) reads the field before the table, SelectedLanguageIndex. With Control held, a
 //! press of V becomes EKIE_PASTE, F becomes EKIE_TOGGLE_FULLSCREEN and Q closes the device without
-//! an event; a press of any other key with Control leaves KeyInput.Event unset. Releases are
+//! an event; original bug: a press of any other key with Control leaves KeyInput.Event unset. Releases are
 //! always EKIE_KEY_LEFT_UP.
 void CIrrDeviceLinux::postKeyEvent(const sf::Event& event, bool pressed)
 {
@@ -524,8 +525,8 @@ void CIrrDeviceLinux::setWindowCaption(const wchar_t* text)
     Window->setTitle(Title);
 }
 
-//! Closes and deletes the SFML window. Window is not reset: the destructor calls this again, and
-//! run() keeps polling the deleted window after Ctrl+Q.
+//! Closes and deletes the SFML window. Original bug: Window is not reset, so the destructor deletes
+//! it again and run() keeps polling the deleted window after Ctrl+Q.
 void CIrrDeviceLinux::closeDevice()
 {
     Window->close();
