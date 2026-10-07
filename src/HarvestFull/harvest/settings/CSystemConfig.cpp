@@ -154,11 +154,6 @@ ox::core::CString<wchar_t> CSystemConfig::getRecentProfile()
     return ox::core::CString<wchar_t>(profile);
 }
 
-void CSystemConfig::setRecentProfile(const ox::core::CString<wchar_t>& profile)
-{
-    Config->setAttribute(ox::core::CString<wchar_t>(L"user:recentProfile"), profile);
-}
-
 ox::core::CString<wchar_t> CSystemConfig::getLicenseKeySetting()
 {
     ox::core::CString<wchar_t> key;
@@ -211,6 +206,11 @@ int CSystemConfig::getParticleSetting()
 float CSystemConfig::getScrollSpeed()
 {
     return Config->getAttributeAsFloat(L"settings:scrollspeed");
+}
+
+void CSystemConfig::setRecentProfile(const ox::core::CString<wchar_t>& profile)
+{
+    Config->setAttribute(ox::core::CString<wchar_t>(L"user:recentProfile"), profile);
 }
 
 void CSystemConfig::setFullscreen(bool fullscreen)

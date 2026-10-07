@@ -65,6 +65,36 @@ CGUIEditBox::CGUIEditBox(const wchar_t* text, bool border, IGUIEnvironment* envi
         Operator->grab();
 }
 
+int CGUIEditBox::getCursorPos(int x)
+{
+    IGUIFont* font = OverrideFont;
+    IGUISkin* skin = Environment->getSkin();
+    if (!OverrideFont)
+        font = skin->getFont();
+
+    // built like the drawn text, but the position is looked up in the real text
+    core::CString<wchar_t> text;
+    text.reserve(Text.size());
+    if (!Hidden)
+        text = Text;
+    else
+    {
+        int length = Text.size();
+        for (int i = 0; i < length; ++i)
+            text.append(L'*');
+    }
+
+    core::CString<wchar_t> s = Text.subString(0, ScrollPos);
+    int charscrollpos = font->getDimension(s.c_str()).Width;
+
+    int idx = font->getCharacterFromPos(Text.c_str(),
+        x - (AbsoluteRect.UpperLeftCorner.X + AnimationRects[EEBA_LEFT].LowerRightCorner.X) + charscrollpos);
+    if (idx != -1)
+        return idx;
+
+    return Text.size();
+}
+
 //! destructor
 CGUIEditBox::~CGUIEditBox()
 {
@@ -729,36 +759,6 @@ void CGUIEditBox::setMax(int max)
 int CGUIEditBox::getMax()
 {
     return Max;
-}
-
-int CGUIEditBox::getCursorPos(int x)
-{
-    IGUIFont* font = OverrideFont;
-    IGUISkin* skin = Environment->getSkin();
-    if (!OverrideFont)
-        font = skin->getFont();
-
-    // built like the drawn text, but the position is looked up in the real text
-    core::CString<wchar_t> text;
-    text.reserve(Text.size());
-    if (!Hidden)
-        text = Text;
-    else
-    {
-        int length = Text.size();
-        for (int i = 0; i < length; ++i)
-            text.append(L'*');
-    }
-
-    core::CString<wchar_t> s = Text.subString(0, ScrollPos);
-    int charscrollpos = font->getDimension(s.c_str()).Width;
-
-    int idx = font->getCharacterFromPos(Text.c_str(),
-        x - (AbsoluteRect.UpperLeftCorner.X + AnimationRects[EEBA_LEFT].LowerRightCorner.X) + charscrollpos);
-    if (idx != -1)
-        return idx;
-
-    return Text.size();
 }
 
 //! Shows the text as asterisks.

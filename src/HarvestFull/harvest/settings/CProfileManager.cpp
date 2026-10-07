@@ -16,36 +16,6 @@ namespace settings {
 
 CProfileManager* gp_profileManager;
 
-CProfileManager::CProfileManager(ox::IOxDevice* device)
-    : Device(device), CurrentProfile(0)
-{
-    FileSystem = device->getFileSystem();
-    ox::core::CString<wchar_t> recent = gp_systemConfig->getRecentProfile();
-    if (recent.size() != 0)
-        openProfile(ox::core::CString<char>(recent.c_str()));
-}
-
-bool CProfileManager::openProfile(const ox::core::CString<char>& filename)
-{
-    if (CurrentProfile)
-    {
-        CurrentProfile->writeProfile();
-        if (CurrentProfile)
-            delete CurrentProfile;
-    }
-    CurrentProfile = new CHarvestProfile();
-    if (!CurrentProfile->openProfile(FileSystem, filename))
-    {
-        if (CurrentProfile)
-            delete CurrentProfile;
-        CurrentProfile = 0;
-        return false;
-    }
-    if (gp_systemConfig)
-        gp_systemConfig->setRecentProfile(ox::core::CString<wchar_t>(filename.c_str()));
-    return true;
-}
-
 CProfileManager::~CProfileManager()
 {
     writeCurrentProfile();
@@ -57,12 +27,6 @@ CProfileManager::~CProfileManager()
     }
 }
 
-void CProfileManager::writeCurrentProfile()
-{
-    if (CurrentProfile)
-        CurrentProfile->writeProfile();
-}
-
 ox::TArray<SProfileName*>& CProfileManager::getProfileNames(bool refresh)
 {
     if (refresh || Profiles.empty())
@@ -70,32 +34,19 @@ ox::TArray<SProfileName*>& CProfileManager::getProfileNames(bool refresh)
     return Profiles;
 }
 
-void CProfileManager::createProfileList()
+void CProfileManager::writeCurrentProfile()
 {
-    for (unsigned int i = 0; i < Profiles.size(); ++i)
-    {
-        if (Profiles[i])
-            delete Profiles[i];
-    }
-    Profiles.clear();
+    if (CurrentProfile)
+        CurrentProfile->writeProfile();
+}
 
-    ox::core::CString<char> directory = "$HARVEST_USERDATA$/profiles/";
-    ox::io::IFileList* files = FileSystem->createFileList("*.cfg", directory.c_str(), (ox::io::EFileList)1);
-    CHarvestProfile profile;
-    for (int i = 0; i < files->getFileCount(); ++i)
-    {
-        ox::game::CConfiguration* config = new ox::game::CConfiguration(FileSystem);
-        if (profile.openProfile(FileSystem, ox::core::CString<char>(files->getFullFileName(i))) == true)
-        {
-            SProfileName* name = new SProfileName;
-            name->Filename = directory;
-            name->Filename.append(ox::core::CString<char>(files->getFileName(i)));
-            name->Name = profile.getPlayerName();
-            Profiles.push_back(name);
-        }
-        delete config;
-    }
-    files->drop();
+CProfileManager::CProfileManager(ox::IOxDevice* device)
+    : Device(device), CurrentProfile(0)
+{
+    FileSystem = device->getFileSystem();
+    ox::core::CString<wchar_t> recent = gp_systemConfig->getRecentProfile();
+    if (recent.size() != 0)
+        openProfile(ox::core::CString<char>(recent.c_str()));
 }
 
 CHarvestProfile* CProfileManager::getCurrentProfile()
@@ -103,14 +54,15 @@ CHarvestProfile* CProfileManager::getCurrentProfile()
     return CurrentProfile;
 }
 
-bool CProfileManager::openProfileByName(const ox::core::CString<wchar_t>& name)
+bool CProfileManager::deleteCurrentProfile()
 {
-    for (ox::TArray<SProfileName*>::iterator it = Profiles.begin(); it != Profiles.end(); ++it)
-    {
-        if ((*it)->Name == name)
-            return openProfile((*it)->Filename);
-    }
-    return false;
+    if (!CurrentProfile)
+        return false;
+    FileSystem->deleteFile(CurrentProfile->getFilename().c_str());
+    if (CurrentProfile)
+        delete CurrentProfile;
+    CurrentProfile = 0;
+    return true;
 }
 
 bool CProfileManager::createProfile(const ox::core::CString<wchar_t>& name)
@@ -145,15 +97,63 @@ bool CProfileManager::createProfile(const ox::core::CString<wchar_t>& name)
     return true;
 }
 
-bool CProfileManager::deleteCurrentProfile()
+void CProfileManager::createProfileList()
 {
-    if (!CurrentProfile)
-        return false;
-    FileSystem->deleteFile(CurrentProfile->getFilename().c_str());
+    for (unsigned int i = 0; i < Profiles.size(); ++i)
+    {
+        if (Profiles[i])
+            delete Profiles[i];
+    }
+    Profiles.clear();
+
+    ox::core::CString<char> directory = "$HARVEST_USERDATA$/profiles/";
+    ox::io::IFileList* files = FileSystem->createFileList("*.cfg", directory.c_str(), (ox::io::EFileList)1);
+    CHarvestProfile profile;
+    for (int i = 0; i < files->getFileCount(); ++i)
+    {
+        ox::game::CConfiguration* config = new ox::game::CConfiguration(FileSystem);
+        if (profile.openProfile(FileSystem, ox::core::CString<char>(files->getFullFileName(i))) == true)
+        {
+            SProfileName* name = new SProfileName;
+            name->Filename = directory;
+            name->Filename.append(ox::core::CString<char>(files->getFileName(i)));
+            name->Name = profile.getPlayerName();
+            Profiles.push_back(name);
+        }
+        delete config;
+    }
+    files->drop();
+}
+
+bool CProfileManager::openProfile(const ox::core::CString<char>& filename)
+{
     if (CurrentProfile)
-        delete CurrentProfile;
-    CurrentProfile = 0;
+    {
+        CurrentProfile->writeProfile();
+        if (CurrentProfile)
+            delete CurrentProfile;
+    }
+    CurrentProfile = new CHarvestProfile();
+    if (!CurrentProfile->openProfile(FileSystem, filename))
+    {
+        if (CurrentProfile)
+            delete CurrentProfile;
+        CurrentProfile = 0;
+        return false;
+    }
+    if (gp_systemConfig)
+        gp_systemConfig->setRecentProfile(ox::core::CString<wchar_t>(filename.c_str()));
     return true;
+}
+
+bool CProfileManager::openProfileByName(const ox::core::CString<wchar_t>& name)
+{
+    for (ox::TArray<SProfileName*>::iterator it = Profiles.begin(); it != Profiles.end(); ++it)
+    {
+        if ((*it)->Name == name)
+            return openProfile((*it)->Filename);
+    }
+    return false;
 }
 
 } // end namespace settings

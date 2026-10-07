@@ -492,6 +492,24 @@ ITexture* CVideoNull::createDeviceDependentTexture(IImage* surface)
     return new CSoftwareTexture(surface);
 }
 
+void CVideoNull::setInputTexture(int stage, ITexture* texture)
+{
+    if (stage < 2)
+    {
+        if (InputTextures[stage])
+            InputTextures[stage]->drop();
+
+        if (!texture)
+            texture = PPSurfaces[stage];
+
+        InputTextures[stage] = texture;
+        texture->grab();
+        return;
+    }
+
+    os::Printer::log(L"Invalid texture stage to CVideoNull::setInputTexture", ELL_WARNING);
+}
+
 bool CVideoNull::setRenderTarget(ITexture* texture, bool clearBackBuffer, bool clearZBuffer, SColor color)
 {
     return false;
@@ -1487,24 +1505,6 @@ void CVideoNull::runPPShader(int materialType, core::CRect<int>& destRect, core:
     setMaterial(material);
     drawPPImage(destRect, source, PPSurfaces[0]->getSize(), clipRect, &textureSize);
     useMaterialShaderFor2D(useMaterialShader);
-}
-
-void CVideoNull::setInputTexture(int stage, ITexture* texture)
-{
-    if (stage < 2)
-    {
-        if (InputTextures[stage])
-            InputTextures[stage]->drop();
-
-        if (!texture)
-            texture = PPSurfaces[stage];
-
-        InputTextures[stage] = texture;
-        texture->grab();
-        return;
-    }
-
-    os::Printer::log(L"Invalid texture stage to CVideoNull::setInputTexture", ELL_WARNING);
 }
 
 IVideoDriver* createNullDriver(ox::io::IFileSystem* io, const core::CDimension2d<int>& screenSize)
