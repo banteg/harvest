@@ -158,6 +158,7 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
     the target function after the one before it, so a length difference earlier in the section does
     not shift the rest. The section
     is contiguous when every function lands at base + offset: its order and lengths match the target's.
+    `fdes` holds every proven function extent: the FDEs and the thunk extents from extents.tsv.
     """
     functions = sorted(
         (s for s in symbols if s["st_shndx"] == section_index and s["st_info"]["type"] == "STT_FUNC"),
@@ -401,7 +402,8 @@ def check_local_copy(
 
 def compare_object(obj: Elf, target: Elf, known: dict[str, int], explicit: dict[str, int]) -> dict:
     resolver = Resolver(target, known)
-    fdes = target.fde_ranges()
+    extents = target.function_extents()
+    fdes = frozenset((address, size) for address, (size, _) in extents.items())
     placements = place_sections(obj, resolver, explicit, fdes)
     symbols = section_symbols(obj)
     sections = obj.sections
@@ -437,7 +439,7 @@ def compare_object(obj: Elf, target: Elf, known: dict[str, int], explicit: dict[
         compare_section(obj, target, section, index, layout, placements, resolver, sections, result)
         if section["sh_flags"] & SHF_EXECINSTR:
             # FDE extents pin each function's full length, including the section's last one
-            result.functions = function_results(symbols, index, layout, result, fdes)
+            result.functions = function_results(symbols, index, layout, result, extents)
             result.exact = result.exact and all(f["exact"] for f in result.functions)
         result.exact = result.exact and not misplaced and layout.contiguous
         if result.exact and not section["sh_flags"] & SHF_EXECINSTR:
@@ -572,9 +574,11 @@ def resolve(symbol, placements, resolver: Resolver, reach: int) -> int | None:
     return None
 
 
-def function_results(symbols, index, layout: Layout, result: SectionResult, fdes) -> list[dict]:
-    """Per-function verdicts. `exact_but_unknown` means every byte matches except the fields of
-    references to symbols without a known address, whose target destinations are then trustworthy."""
+def function_results(symbols, index, layout: Layout, result: SectionResult, extents) -> list[dict]:
+    """Per-function verdicts. `extent` says what proves the function's extent in the target: an
+    FDE of exactly its size, a thunk extent (extents.tsv), or nothing, in which case it cannot be
+    exact. `exact_but_unknown` means every byte matches except the fields of references to symbols
+    without a known address, whose target destinations are then trustworthy."""
     unknown = [r for r in result.references if r.candidate is not None]
     unknown_bytes = {r.offset + i for r in unknown for i in range(r.width)}
     rows = []
@@ -585,13 +589,14 @@ def function_results(symbols, index, layout: Layout, result: SectionResult, fdes
         start, size = symbol["st_value"], symbol["st_size"]
         address = layout.address_of(start)
         span = range(start, start + size)
-        fde = (address, size) in fdes
+        known_size, source = extents.get(address, (None, None))
+        extent = source if known_size == size else None
         differs = [o for o in result.differences if o in span]
         bad = [r for r in result.references if not r.matches and r.offset in span]
-        row = {"symbol": symbol.name, "address": hex(address), "size": size, "fde": fde}
+        row = {"symbol": symbol.name, "address": hex(address), "size": size, "extent": extent}
         row["global"] = symbol["st_info"]["bind"] != "STB_LOCAL"
-        row["exact"] = fde and not differs and not bad
-        if not row["exact"] and fde and bad and all(r.candidate is not None for r in bad):
+        row["exact"] = extent is not None and not differs and not bad
+        if not row["exact"] and extent is not None and bad and all(r.candidate is not None for r in bad):
             if not [o for o in differs if o not in unknown_bytes]:
                 row["exact_but_unknown"] = True
                 # every reference, so learning can see when two of them disagree

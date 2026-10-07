@@ -31,6 +31,8 @@ class Elf:
         self._symbols = {}
         self._relocations = {}
         self._cache = {}
+        # (address, size) of functions without an FDE, from config/<build>/extents.tsv
+        self.thunks: frozenset[tuple[int, int]] = frozenset()
 
     @classmethod
     def load(cls, path: Path, kind: str):
@@ -129,6 +131,15 @@ class Elf:
                 (entry["initial_location"], entry["address_range"]) for entry in self.fdes()
             )
         return self._cache["fde_ranges"]
+
+    def function_extents(self) -> dict[int, tuple[int, str]]:
+        """Each function's start -> (size, source): its FDE, or its thunk extent."""
+        extents = {address: (size, "fde") for address, size in self.fde_ranges()}
+        for address, size in self.thunks:
+            if address in extents:
+                raise ValueError(f"thunk extent at {address:#x} duplicates an FDE")
+            extents[address] = (size, "thunk")
+        return extents
 
     def fde_lsdas(self) -> dict[int, int]:
         """The exception table (LSDA) of each function that has one, by function address."""

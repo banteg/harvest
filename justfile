@@ -59,6 +59,10 @@ diff unit symbol:
 port-symbols:
     uv run hv port-symbols
 
+# find thunk extents from the vtables (config/<build>/extents.tsv) and name the thunks
+extents:
+    uv run hv extents
+
 # compile recovered units and compare them with the target (default: all)
 match *units:
     uv run hv match {{units}}

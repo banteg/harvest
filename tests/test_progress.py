@@ -17,10 +17,10 @@ def sample():
         ],
     }
     functions = [
-        {"address": 0x1000, "size": 20, "section": ".text"},
-        {"address": 0x1020, "size": 40, "section": ".text"},
+        {"address": 0x1000, "size": 20, "section": ".text", "extent": "fde"},
+        {"address": 0x1020, "size": 40, "section": ".text", "extent": "fde"},
     ]
-    function = {"symbol": "_Z3foov", "address": "0x1000", "size": 20, "fde": True, "exact": True}
+    function = {"symbol": "_Z3foov", "address": "0x1000", "size": 20, "extent": "fde", "exact": True}
     unit = {
         "unit": "a.cpp",
         "exact": True,
@@ -166,7 +166,7 @@ def test_inexact_unit_credits_only_its_exact_functions():
     unit = evidence["units"][0]
     unit["exact"] = False
     unit["sections"][0]["exact"] = False
-    other = {"symbol": "_Z3barv", "address": "0x1020", "size": 40, "fde": True, "exact": False}
+    other = {"symbol": "_Z3barv", "address": "0x1020", "size": 40, "extent": "fde", "exact": False}
     unit["sections"][0]["functions"].append(other)
     report = progress.make_report(inv, functions, evidence, {}, {})
     assert report["measures"]["matched_code"] == "20"
@@ -191,7 +191,7 @@ def test_inconsistent_exact_evidence_fails(change):
     if change == "extent":
         function["size"] += 1
     if change == "fde":
-        function["fde"] = False
+        function["extent"] = None
     if change == "function":
         function["exact"] = False
     if change == "section":
@@ -219,7 +219,7 @@ def captured(tmp_path, monkeypatch):
         p.write_text("input")
     (tmp_path / "config/test/flags.json").write_text('{"version":"gcc"}')
     inv, functions, evidence = sample()
-    table = "address\tsize\tsection\n0x1000\t20\t.text\n0x1020\t40\t.text\n"
+    table = "address\tsize\tsection\textent\n0x1000\t20\t.text\tfde\n0x1020\t40\t.text\tfde\n"
     inv.update(
         schema=progress.SCHEMA,
         build="test",
@@ -340,11 +340,11 @@ def layer_config():
 
 def test_layers_follow_rules_then_the_previous_named_function_then_the_range():
     functions = [
-        {"address": 0x1000, "size": 8, "section": ".text"},
-        {"address": 0x1020, "size": 8, "section": ".text"},
-        {"address": 0x1030, "size": 8, "section": ".text"},
-        {"address": 0x1040, "size": 8, "section": ".text"},
-        {"address": 0x1050, "size": 8, "section": ".text"},
+        {"address": 0x1000, "size": 8, "section": ".text", "extent": "fde"},
+        {"address": 0x1020, "size": 8, "section": ".text", "extent": "fde"},
+        {"address": 0x1030, "size": 8, "section": ".text", "extent": "fde"},
+        {"address": 0x1040, "size": 8, "section": ".text", "extent": "fde"},
+        {"address": 0x1050, "size": 8, "section": ".text", "extent": "fde"},
     ]
     names = {0x1030: "_ZN5daisy5video14CSpritePackage4loadEv", 0x1050: "_ZN5daisy5video10CVideoNull5clearEv"}
     layers = progress.assign_layers(functions, names, layer_config())
@@ -371,12 +371,16 @@ def test_functions_outside_every_layer_range_are_rejected():
     config = layer_config()
     config["range"] = config["range"][:1]
     with pytest.raises(ValueError, match="outside every layer range"):
-        progress.assign_layers([{"address": 0x1020, "size": 8, "section": ".text"}], {}, config)
+        progress.assign_layers(
+            [{"address": 0x1020, "size": 8, "section": ".text", "extent": "fde"}], {}, config
+        )
 
 
 def test_copies_take_the_surrounding_layer_and_are_never_inherited():
     addresses = range(0x1000, 0x1060, 0x10)
-    functions = [{"address": address, "size": 8, "section": ".text"} for address in addresses]
+    functions = [
+        {"address": address, "size": 8, "section": ".text", "extent": "fde"} for address in addresses
+    ]
     names = {
         0x1000: "_ZN7harvest4game6CWorld6updateEv",
         0x1010: "_ZN2ox4core7CStringIcEaSERKS2_",

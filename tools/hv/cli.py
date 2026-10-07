@@ -10,7 +10,7 @@ from hv import builds
 def cmd_match(args: argparse.Namespace) -> int:
     from elftools.common.exceptions import ELFError
 
-    from hv import match, objdiff, symbols, toolchain, units
+    from hv import extents, match, objdiff, symbols, toolchain, units
     from hv.elf import Elf
 
     try:
@@ -26,7 +26,7 @@ def cmd_match(args: argparse.Namespace) -> int:
             selected = [u for u in selected if u.source in args.units]
         if args.object and len(selected) != 1:
             raise ValueError("--object needs exactly one unit")
-        target = Elf.load(image.path, "ET_EXEC")
+        target = extents.load_target(build.key)
         known = symbols.by_name(symbols.load(build.key))
         out = builds.ROOT / "build" / "match" / build.key
         compiler = None if args.object else toolchain.Compiler(toolchain.load_flags(build.key), out)
@@ -58,7 +58,9 @@ def cmd_match(args: argparse.Namespace) -> int:
             functions = [f for s in result["sections"] for f in s.get("functions", [])]
             exact_functions = sum(f["exact"] for f in functions)
             status = "exact" if result["exact"] else "different"
-            print(f"{status:10} {unit.source}  functions {exact_functions}/{len(functions)}")
+            thunks = sum(f["extent"] == "thunk" for f in functions)
+            proven = f", {thunks} by thunk extent" if thunks else ""
+            print(f"{status:10} {unit.source}  functions {exact_functions}/{len(functions)}{proven}")
             if args.verbose or not result["exact"]:
                 print_details(result)
             failed |= not result["exact"]
@@ -74,7 +76,7 @@ def cmd_match(args: argparse.Namespace) -> int:
 def add_learned(build: str, learned: dict, target) -> None:
     from hv import symbols
 
-    sizes = dict(target.fde_ranges())
+    sizes = {address: size for address, (size, _) in target.function_extents().items()}
     rows = symbols.load(build)
     rows += [
         symbols.Symbol(address, sizes.get(address, 0), name, evidence)
@@ -96,7 +98,8 @@ def print_details(result: dict) -> None:
                 unknown = ", ".join(sorted({name for name, _ in function["candidates"]}))
                 print(f"         function {function['symbol']} matches except unknown symbols: {unknown}")
             elif not function["exact"]:
-                print(f"         function {function['symbol']} @ {function['address']} differs")
+                extent = function["extent"] or "no FDE or thunk extent of its size"
+                print(f"         function {function['symbol']} @ {function['address']} differs ({extent})")
     for name in result["unplaced_sections"]:
         print(f"  ??   {name}: not placed (add it to units.toml or name a symbol in it)")
 
@@ -184,6 +187,30 @@ def cmd_port_symbols(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_extents(args: argparse.Namespace) -> int:
+    from hv import extents, symbols
+
+    build = builds.load_builds()[args.build]
+    rows = extents.generate(build.key)
+    path = extents.path_for(build.key)
+    path.write_text(extents.render(rows))
+    known = {s.name for s in symbols.load(build.key)}
+    named = [
+        symbols.Symbol(e.address, e.size, e.symbol, f"thunk:{e.evidence.split(';')[0].removeprefix('slot ')}")
+        for e in rows
+        if e.symbol
+    ]
+    merged = symbols.replace_generated(build.key, {"thunk"}, named)
+    new = sum(e.symbol not in known for e in rows if e.symbol)
+    unnamed = sum(not e.symbol for e in rows)
+    print(f"{path.relative_to(builds.ROOT)}: {len(rows)} thunks, {sum(e.size for e in rows)} bytes")
+    table = symbols.path_for(build.key).relative_to(builds.ROOT)
+    print(f"{table}: {len(merged)} symbols, {new} new thunk names")
+    if unnamed:
+        print(f"{unnamed} thunks jump to unnamed functions and stay unnamed in extents.tsv", file=sys.stderr)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="hv", description="Harvest decompilation tooling")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -195,6 +222,10 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("import-mac", help="write reference tables from the Mac debug map")
     p.add_argument("build", nargs="?", default="1.18-mac-i386")
     p.set_defaults(func=cmd_import_mac)
+
+    p = sub.add_parser("extents", help="find thunk extents from the vtables and name the thunks")
+    p.add_argument("build", nargs="?", default=builds.canonical_build())
+    p.set_defaults(func=cmd_extents)
 
     p = sub.add_parser("port-symbols", help="name target RTTI, vtables and virtual functions")
     p.add_argument("build", nargs="?", default=builds.canonical_build())
