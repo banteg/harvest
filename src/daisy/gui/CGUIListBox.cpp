@@ -369,7 +369,9 @@ void CGUIListBox::draw()
 
     ListParent->moveTo(ox::core::CPosition2d<int>(0, ListParentY - ScrollBar->getPos()));
 
-    if (!DrawBack)
+    if (DrawBack)
+        IGUIElement::draw();
+    else
     {
         if (ListParent && ScrollBar)
         {
@@ -377,8 +379,6 @@ void CGUIListBox::draw()
             ScrollBar->draw();
         }
     }
-    else
-        IGUIElement::draw();
 
     if (Selected < 0 || Selected >= (int)ListParent->getChildren().size())
         return;
