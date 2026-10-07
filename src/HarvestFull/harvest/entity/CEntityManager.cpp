@@ -73,6 +73,8 @@ public:
     int EntityType;
 };
 
+const ox::core::CRect<float>& CEntityManager::getBuildingsBoundingBox() const { return BuildingsBoundingBox; }
+
 CEntityManager::CEntityManager()
     : COxEntityManager(5), ClickableSearch(0), RandomSearch(0), ShootableSearch(0), BuildingSearch(0),
       RangeLineSearch(0), BuildingsChanged(true), NumBuildings(0), NumEntities(0)
@@ -142,11 +144,9 @@ bool CEntityManager::writeEntities(ox::io::IWriteFile* file)
     }
     return true;
 }
-
 bool CEntityManager::hasBuildingListChanged() const { return BuildingsChanged || ListChanged[0]; }
 int CEntityManager::getNumBuildings() const { return NumBuildings; }
 int CEntityManager::getNumAliens() const { return EntityLists[1].size(); }
-const ox::core::CRect<float>& CEntityManager::getBuildingsBoundingBox() const { return BuildingsBoundingBox; }
 
 void CEntityManager::renderEntities(const ox::core::CPosition2d<float>& camera, const ox::core::CRect<int>& viewPort)
 {
