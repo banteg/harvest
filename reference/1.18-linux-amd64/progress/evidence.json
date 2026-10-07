@@ -182,7 +182,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -727,7 +727,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -1140,7 +1140,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -1586,7 +1586,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2110,7 +2110,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2633,7 +2633,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -3843,7 +3843,7 @@
         ".text._ZN2ox4core7CStringIcE6appendERKS2_"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4483,7 +4483,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4931,7 +4931,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5191,7 +5191,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5401,7 +5401,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5583,7 +5583,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5865,7 +5865,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6202,7 +6202,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6390,7 +6390,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6603,7 +6603,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6934,7 +6934,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -7255,7 +7255,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9116,7 +9116,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9954,7 +9954,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -11621,7 +11621,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -12815,7 +12815,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -13601,7 +13601,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -14393,7 +14393,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15217,7 +15217,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15961,7 +15961,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -17081,7 +17081,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -18275,7 +18275,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19163,7 +19163,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19617,7 +19617,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -36408,7 +36408,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -39876,7 +39876,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -50231,7 +50231,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -56664,7 +56664,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -59012,7 +59012,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -60342,7 +60342,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -60749,7 +60749,7 @@
     },
     {
       "unit": "HarvestFull/harvest/entity/CEntityManager.cpp",
-      "object_sha256": "7fc9b112bf1fcf947cae97d3fc921f17f2d2842b1b7d1a55a6c374501880ae11",
+      "object_sha256": "9cb7cc147b0bcf8b51cbb38bf66ca86f4f5f22cdb68af1ca1905df8664caf658",
       "exact": false,
       "sections": [
         {
@@ -60759,8 +60759,28 @@
           "exact": false,
           "address": "0x430390",
           "first_difference": 4348,
-          "differing_bytes": 536,
+          "differing_bytes": 535,
           "misplaced_symbols": [
+            {
+              "symbol": "_ZNK7harvest6entity14CEntityManager23getBuildingsBoundingBoxEv",
+              "known": "0x4303f0",
+              "placed": "0x430390"
+            },
+            {
+              "symbol": "_ZNK7harvest6entity14CEntityManager22hasBuildingListChangedEv",
+              "known": "0x430390",
+              "placed": "0x4303a0"
+            },
+            {
+              "symbol": "_ZNK7harvest6entity14CEntityManager15getNumBuildingsEv",
+              "known": "0x4303b0",
+              "placed": "0x4303c0"
+            },
+            {
+              "symbol": "_ZNK7harvest6entity14CEntityManager12getNumAliensEv",
+              "known": "0x4303c0",
+              "placed": "0x4303d0"
+            },
             {
               "symbol": "_ZN7harvest6entity14CEntityManager28calculateGridCoordinateClampEf",
               "known": "0x4304b0",
@@ -60885,6 +60905,14 @@
           "references": 161,
           "functions": [
             {
+              "symbol": "_ZNK7harvest6entity14CEntityManager23getBuildingsBoundingBoxEv",
+              "address": "0x4303f0",
+              "size": 8,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
               "symbol": "_ZNK7harvest6entity14CEntityManager22hasBuildingListChangedEv",
               "address": "0x430390",
               "size": 23,
@@ -60904,14 +60932,6 @@
               "symbol": "_ZNK7harvest6entity14CEntityManager12getNumAliensEv",
               "address": "0x4303c0",
               "size": 40,
-              "fde": true,
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZNK7harvest6entity14CEntityManager23getBuildingsBoundingBoxEv",
-              "address": "0x4303f0",
-              "size": 8,
               "fde": true,
               "global": true,
               "exact": true
@@ -61154,7 +61174,7 @@
               "size": 202,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest6entity14CEntityManagerC2Ev",
@@ -61715,7 +61735,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -61733,7 +61753,7 @@
           "/out/HarvestFull__harvest__entity__CEntityManager.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/entity/CEntityManager.cpp": "16774a8b3a3d5e9464444a28506ffd641ed45b676e92064f487e32593f1c6b73",
+          "src/HarvestFull/harvest/entity/CEntityManager.cpp": "8a5781e77226dd70d718653b9f97cbadb6da82405cccaa81ee0ece37e2800967",
           "src/ox/io/CHelpIO.h": "83785946785456bff5b9b8343e511a39834e3df69fb441901205394962693a70",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -61787,10 +61807,16 @@
           "src/ox/core/CMath.h": "638a6f202ae1063de58b70c3fd43d602eb53daea15e9ef292bd4834472a8ecba"
         },
         "system_headers": 132,
-        "object_sha256": "7fc9b112bf1fcf947cae97d3fc921f17f2d2842b1b7d1a55a6c374501880ae11"
+        "object_sha256": "9cb7cc147b0bcf8b51cbb38bf66ca86f4f5f22cdb68af1ca1905df8664caf658"
       },
-      "fuzzy_target_sha256": "56daa697ef181efdcc0ca92edc093211b240a0c00fa40c78ee891c1383ba8bb9",
+      "fuzzy_target_sha256": "0a662d130b1fbd54d6ba9b35a42eb313ca090cec579bc0a557c35763f3257c6b",
       "fuzzy_functions": [
+        {
+          "address": "0x4303f0",
+          "size": 8,
+          "symbol": "_ZNK7harvest6entity14CEntityManager23getBuildingsBoundingBoxEv",
+          "percent": 100.0
+        },
         {
           "address": "0x430390",
           "size": 23,
@@ -61807,12 +61833,6 @@
           "address": "0x4303c0",
           "size": 40,
           "symbol": "_ZNK7harvest6entity14CEntityManager12getNumAliensEv",
-          "percent": 100.0
-        },
-        {
-          "address": "0x4303f0",
-          "size": 8,
-          "symbol": "_ZNK7harvest6entity14CEntityManager23getBuildingsBoundingBoxEv",
           "percent": 100.0
         },
         {
@@ -61993,7 +62013,7 @@
           "address": "0x431980",
           "size": 202,
           "symbol": "_ZN7harvest6entity14CEntityManagerC1Ev",
-          "percent": 99.70588
+          "percent": 100.0
         },
         {
           "address": "0x431a50",
@@ -62415,7 +62435,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -64182,7 +64202,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -65014,7 +65034,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -65399,7 +65419,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -70330,7 +70350,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -78384,7 +78404,7 @@
         ".text._ZN7harvest4game22SLuaEntityActionButtonC1ERKS1_"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -79716,7 +79736,7 @@
     },
     {
       "unit": "HarvestFull/harvest/settings/CSystemConfig.cpp",
-      "object_sha256": "5d10df6a0cf3ef75424f8943af8c7d7956692b250efea022397f3cf2da974ec2",
+      "object_sha256": "ea9c4158d9400a14a9fe230a97c70ba19cc065f86324c04308e09258c294629f",
       "exact": false,
       "sections": [
         {
@@ -79725,8 +79745,8 @@
           "placement": "explicit",
           "exact": false,
           "address": "0x491d00",
-          "first_difference": 2287,
-          "differing_bytes": 49,
+          "first_difference": 4134,
+          "differing_bytes": 16,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig11setFirstRunEb",
@@ -79774,13 +79794,13 @@
               "placed": "0x492500"
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
-              "known": "0x4928a0",
+              "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
+              "known": "0x4927e0",
               "placed": "0x4925d0"
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
-              "known": "0x4927e0",
+              "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
+              "known": "0x4928a0",
               "placed": "0x492690"
             },
             {
@@ -79797,24 +79817,6 @@
               "symbol": "_ZN7harvest8settings13CSystemConfig29getCurrentLanguageDisplayNameEv",
               "known": "0x492680",
               "placed": "0x4928b0"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 2290,
-              "type": 2,
-              "symbol": ".LC12",
-              "addend": -4,
-              "reason": "unmapped or truncated range: -0x7ab6bffb+0x40",
-              "matches": false
-            },
-            {
-              "offset": 2481,
-              "type": 2,
-              "symbol": ".LC11",
-              "addend": -4,
-              "reason": "unmapped or truncated range: 0x178af21a+0x4c",
-              "matches": false
             }
           ],
           "references": 413,
@@ -80052,20 +80054,20 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
-              "address": "0x4928a0",
-              "size": 192,
-              "fde": true,
-              "global": true,
-              "exact": false
-            },
-            {
               "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
               "address": "0x4927e0",
               "size": 192,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
+              "address": "0x4928a0",
+              "size": 192,
+              "fde": true,
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
@@ -80264,6 +80266,21 @@
               "kind": "merged string"
             },
             {
+              "address": "0x6069d0",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6069d0",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x6069d0",
+              "size": 76,
+              "kind": "merged string"
+            },
+            {
               "address": "0x6068c0",
               "size": 64,
               "kind": "merged string"
@@ -80274,13 +80291,8 @@
               "kind": "merged string"
             },
             {
-              "address": "0x6069d0",
-              "size": 76,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x6069d0",
-              "size": 76,
+              "address": "0x6068c0",
+              "size": 64,
               "kind": "merged string"
             },
             {
@@ -81084,7 +81096,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -81102,7 +81114,7 @@
           "/out/HarvestFull__harvest__settings__CSystemConfig.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/settings/CSystemConfig.cpp": "bef7e5febe489a4f3120f131e2e9718aebecc31f776089183d5fec8919e0559f",
+          "src/HarvestFull/harvest/settings/CSystemConfig.cpp": "955cbda345a0c64233e214212ee453ff4525f2edede9df491be032cdd0a58c84",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -81157,9 +81169,9 @@
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef"
         },
         "system_headers": 150,
-        "object_sha256": "5d10df6a0cf3ef75424f8943af8c7d7956692b250efea022397f3cf2da974ec2"
+        "object_sha256": "ea9c4158d9400a14a9fe230a97c70ba19cc065f86324c04308e09258c294629f"
       },
-      "fuzzy_target_sha256": "89ab1aa80b453fc5c5d52cfdfa383ba7e1c3736afea4f5d3ca68a9989b163869",
+      "fuzzy_target_sha256": "35abdbdf6653555750a8bfb76f18ea523fe792efbe29b852cf20e32bee28e399",
       "fuzzy_functions": [
         {
           "address": "0x491d00",
@@ -81336,16 +81348,16 @@
           "percent": 99.745766
         },
         {
-          "address": "0x4928a0",
-          "size": 192,
-          "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
-          "percent": 98.125
-        },
-        {
           "address": "0x4927e0",
           "size": 192,
           "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
-          "percent": 98.125
+          "percent": 99.73214
+        },
+        {
+          "address": "0x4928a0",
+          "size": 192,
+          "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
+          "percent": 99.73214
         },
         {
           "address": "0x492730",
@@ -82027,7 +82039,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82442,7 +82454,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82838,7 +82850,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -83569,7 +83581,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -83784,7 +83796,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -84371,7 +84383,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -96837,7 +96849,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -101501,7 +101513,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -103377,7 +103389,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -103726,530 +103738,35 @@
     },
     {
       "unit": "HarvestFull/harvest/settings/CProfileManager.cpp",
-      "object_sha256": "60b26771a97b87622c99257bc6c89bf17609b446e738d4a7cdcf9c6927d6b709",
+      "object_sha256": "588ce3820973ce10bd6d5d9e1daf1208e838ac15553e06b8f21e5fe42c1925da",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 7871,
+          "size": 7887,
           "placement": "symbol: _ZN7harvest8settings15CProfileManager17getCurrentProfileEv",
           "exact": false,
           "address": "0x48fae0",
-          "first_difference": 1465,
-          "differing_bytes": 2764,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest8settings15CProfileManagerD2Ev",
               "known": "0x4918f0",
-              "placed": "0x48fe10"
-            },
-            {
-              "symbol": "_ZN7harvest8settings15CProfileManager13createProfileERKN2ox4core7CStringIwEE",
-              "known": "0x490610",
-              "placed": "0x48fed0"
-            },
-            {
-              "symbol": "_ZN7harvest8settings15CProfileManager17createProfileListEv",
-              "known": "0x48fed0",
-              "placed": "0x490de0"
-            },
-            {
-              "symbol": "_ZN7harvest8settings15CProfileManager15getProfileNamesEb",
-              "known": "0x4905d0",
-              "placed": "0x4914e0"
+              "placed": "0x491530"
             },
             {
               "symbol": "_ZN7harvest8settings15CProfileManagerC1EPN2ox9IOxDeviceE",
               "known": "0x491530",
-              "placed": "0x491520"
-            },
-            {
-              "symbol": "_ZN7harvest8settings15CProfileManagerD0Ev",
-              "known": "0x48fe10",
-              "placed": "0x4916a0"
+              "placed": "0x4915f0"
             },
             {
               "symbol": "_ZN7harvest8settings15CProfileManagerD1Ev",
               "known": "0x4916b0",
-              "placed": "0x491760"
+              "placed": "0x491770"
             },
             {
               "symbol": "_ZN7harvest8settings15CProfileManagerC2EPN2ox9IOxDeviceE",
               "known": "0x491770",
-              "placed": "0x491820"
-            }
-          ],
-          "bad_references": [
-            {
-              "offset": 2058,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x516b800+0x5",
-              "matches": false
-            },
-            {
-              "offset": 2094,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2104,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x8948fff7+0x5",
-              "matches": false
-            },
-            {
-              "offset": 2129,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x3024448b+0x5",
-              "matches": false
-            },
-            {
-              "offset": 2282,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2347,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15CHarvestProfile16createNewProfileERKN2ox4core7CStringIwEEPNS2_2io11IFileSystemERKNS4_IcEE",
-              "addend": -4,
-              "destination": "0x48f020",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2357,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2394,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2435,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2470,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2498,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2574,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2597,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2707,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -5,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2815,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2862,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings15gp_systemConfigE",
-              "addend": -4,
-              "destination": "0x86bc80",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2870,
-              "type": 2,
-              "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x4927e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2885,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2903,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2970,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 8,
-              "reason": "unmapped or truncated range: 0x801f+0x2",
-              "matches": false
-            },
-            {
-              "offset": 3006,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3016,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 8,
-              "reason": "unmapped or truncated range: 0x63484824+0x2",
-              "matches": false
-            },
-            {
-              "offset": 3041,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 8,
-              "reason": "unmapped or truncated range: 0x4024448b+0x2",
-              "matches": false
-            },
-            {
-              "offset": 3183,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3400,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3534,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3568,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3702,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3744,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3878,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3926,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4068,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4106,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4235,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4271,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4401,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4439,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4570,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4592,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4641,
-              "type": 2,
-              "symbol": "_ZNSt6vectorIPN7harvest8settings12SProfileNameESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
-              "addend": -4,
-              "destination": "0x4919b0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4657,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4665,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4673,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4681,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4692,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4700,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4721,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4744,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4767,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4790,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4813,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4823,
-              "type": 2,
-              "symbol": "__stack_chk_fail",
-              "addend": -4,
-              "destination": "0x407d58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4834,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
+              "placed": "0x491830"
             }
           ],
           "references": 194,
@@ -104303,20 +103820,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings15CProfileManagerD2Ev",
-              "address": "0x4918f0",
+              "symbol": "_ZN7harvest8settings15CProfileManagerD0Ev",
+              "address": "0x48fe10",
               "size": 190,
               "fde": true,
               "global": true,
               "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest8settings15CProfileManager13createProfileERKN2ox4core7CStringIwEE",
-              "address": "0x490610",
-              "size": 3853,
-              "fde": false,
-              "global": true,
-              "exact": false
             },
             {
               "symbol": "_ZN7harvest8settings15CProfileManager17createProfileListEv",
@@ -104324,7 +103833,7 @@
               "size": 1792,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest8settings15CProfileManager15getProfileNamesEb",
@@ -104335,17 +103844,25 @@
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings15CProfileManagerC1EPN2ox9IOxDeviceE",
-              "address": "0x491530",
-              "size": 383,
+              "symbol": "_ZN7harvest8settings15CProfileManager13createProfileERKN2ox4core7CStringIwEE",
+              "address": "0x490610",
+              "size": 3869,
               "fde": true,
               "global": true,
               "exact": true
             },
             {
-              "symbol": "_ZN7harvest8settings15CProfileManagerD0Ev",
-              "address": "0x48fe10",
+              "symbol": "_ZN7harvest8settings15CProfileManagerD2Ev",
+              "address": "0x4918f0",
               "size": 190,
+              "fde": true,
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest8settings15CProfileManagerC1EPN2ox9IOxDeviceE",
+              "address": "0x491530",
+              "size": 383,
               "fde": true,
               "global": true,
               "exact": true
@@ -104368,6 +103885,26 @@
             }
           ],
           "data_ranges": [
+            {
+              "address": "0x5eee89",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee89",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5eee89",
+              "size": 29,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f0515",
+              "size": 6,
+              "kind": "merged string"
+            },
             {
               "address": "0x5eee89",
               "size": 29,
@@ -104424,23 +103961,33 @@
               "kind": "merged string"
             },
             {
-              "address": "0x5eee89",
-              "size": 29,
+              "address": "0x5f0516",
+              "size": 5,
               "kind": "merged string"
             },
             {
-              "address": "0x5eee89",
-              "size": 29,
+              "address": "0x5f0516",
+              "size": 5,
               "kind": "merged string"
             },
             {
-              "address": "0x5eee89",
-              "size": 29,
+              "address": "0x5f0516",
+              "size": 5,
               "kind": "merged string"
             },
             {
-              "address": "0x5f0515",
-              "size": 6,
+              "address": "0x606573",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606573",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x606573",
+              "size": 2,
               "kind": "merged string"
             }
           ]
@@ -104461,24 +104008,6 @@
           ]
         },
         {
-          "name": ".text._ZN2ox4core7CStringIcED1Ev",
-          "size": 18,
-          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
-          "exact": true,
-          "address": "0x409c20",
-          "references": 1,
-          "functions": [
-            {
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "address": "0x409c20",
-              "size": 18,
-              "fde": true,
-              "global": true,
-              "exact": true
-            }
-          ]
-        },
-        {
           "name": ".text._ZN2ox4core7CStringIwED1Ev",
           "size": 18,
           "placement": "symbol: _ZN2ox4core7CStringIwED1Ev",
@@ -104489,6 +104018,24 @@
             {
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "address": "0x409c40",
+              "size": 18,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIcED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIcED1Ev",
+          "exact": true,
+          "address": "0x409c20",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "address": "0x409c20",
               "size": 18,
               "fde": true,
               "global": true,
@@ -104564,7 +104111,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -104582,7 +104129,7 @@
           "/out/HarvestFull__harvest__settings__CProfileManager.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/settings/CProfileManager.cpp": "b674e56f68264c2cf253b2cfbaf017458226ef52b334b0dccecebe3314f492b8",
+          "src/HarvestFull/harvest/settings/CProfileManager.cpp": "888c9bf380e183cd9f58da4051a53e9a19037b92722f23a8fdcda16f1a5d5245",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -104618,9 +104165,9 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d"
         },
         "system_headers": 121,
-        "object_sha256": "60b26771a97b87622c99257bc6c89bf17609b446e738d4a7cdcf9c6927d6b709"
+        "object_sha256": "588ce3820973ce10bd6d5d9e1daf1208e838ac15553e06b8f21e5fe42c1925da"
       },
-      "fuzzy_target_sha256": "ff61a39addbc38772a807a06129eed3e0ed9b3ea186ac7b48be146a7d0b63ee0",
+      "fuzzy_target_sha256": "2add37a8b93a78edf86cf85945cf9babfb9acfa5aab80f0415b16ee907d04f17",
       "fuzzy_functions": [
         {
           "address": "0x48fae0",
@@ -104659,22 +104206,16 @@
           "percent": 100.0
         },
         {
-          "address": "0x4918f0",
+          "address": "0x48fe10",
           "size": 190,
-          "symbol": "_ZN7harvest8settings15CProfileManagerD2Ev",
+          "symbol": "_ZN7harvest8settings15CProfileManagerD0Ev",
           "percent": 100.0
-        },
-        {
-          "address": "0x490610",
-          "size": 3869,
-          "symbol": "_ZN7harvest8settings15CProfileManager13createProfileERKN2ox4core7CStringIwEE",
-          "percent": 99.38771
         },
         {
           "address": "0x48fed0",
           "size": 1792,
           "symbol": "_ZN7harvest8settings15CProfileManager17createProfileListEv",
-          "percent": 99.8022
+          "percent": 100.0
         },
         {
           "address": "0x4905d0",
@@ -104683,15 +104224,21 @@
           "percent": 100.0
         },
         {
-          "address": "0x491530",
-          "size": 383,
-          "symbol": "_ZN7harvest8settings15CProfileManagerC1EPN2ox9IOxDeviceE",
+          "address": "0x490610",
+          "size": 3869,
+          "symbol": "_ZN7harvest8settings15CProfileManager13createProfileERKN2ox4core7CStringIwEE",
           "percent": 100.0
         },
         {
-          "address": "0x48fe10",
+          "address": "0x4918f0",
           "size": 190,
-          "symbol": "_ZN7harvest8settings15CProfileManagerD0Ev",
+          "symbol": "_ZN7harvest8settings15CProfileManagerD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x491530",
+          "size": 383,
+          "symbol": "_ZN7harvest8settings15CProfileManagerC1EPN2ox9IOxDeviceE",
           "percent": 100.0
         },
         {
@@ -104707,15 +104254,15 @@
           "percent": 100.0
         },
         {
-          "address": "0x409c20",
-          "size": 18,
-          "symbol": "_ZN2ox4core7CStringIcED1Ev",
-          "percent": 100.0
-        },
-        {
           "address": "0x409c40",
           "size": 18,
           "symbol": "_ZN2ox4core7CStringIwED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c20",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIcED1Ev",
           "percent": 100.0
         },
         {
@@ -107100,7 +106647,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -107387,7 +106934,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -107713,7 +107260,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -109343,7 +108890,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -110256,7 +109803,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -112500,7 +112047,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -114380,7 +113927,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -115241,7 +114788,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -116994,7 +116541,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -117665,7 +117212,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -121197,7 +120744,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -123093,7 +122640,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -124277,7 +123824,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -125175,7 +124722,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -125886,7 +125433,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -127062,7 +126609,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -127603,7 +127150,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128042,7 +127589,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129131,7 +128678,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129899,7 +129446,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -130352,7 +129899,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -130492,7 +130039,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -130924,7 +130471,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -131145,7 +130692,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -131699,7 +131246,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133191,7 +132738,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -134140,7 +133687,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -134753,7 +134300,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -135460,7 +135007,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -136182,7 +135729,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -136947,7 +136494,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -139131,7 +138678,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -139670,7 +139217,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -140272,7 +139819,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -142276,7 +141823,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -142741,17 +142288,17 @@
     },
     {
       "unit": "daisy/gui/CGUIEditBox.cpp",
-      "object_sha256": "9599ccc63439bfb0bc714532f2ffa7e67ee1202de9ac0aa86e699d55308efd77",
+      "object_sha256": "f2f50f60de4ebc9943c97a624e35bd4409644cafa606a22d706b28ab84713d10",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 22201,
+          "size": 22185,
           "placement": "symbol: _ZN5daisy3gui11CGUIEditBox20updateAnimationRectsEv",
           "exact": false,
           "address": "0x5c0b00",
-          "first_difference": 3367,
-          "differing_bytes": 3775,
+          "first_difference": 8924,
+          "differing_bytes": 2518,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox16setOverrideColorEN2ox5video6SColorE",
@@ -142821,147 +142368,67 @@
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBoxD2Ev",
               "known": "0x5c1d30",
-              "placed": "0x5c1e80"
+              "placed": "0x5c1d80"
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIEditBoxD0Ev",
               "known": "0x5c2010",
-              "placed": "0x5c2070"
+              "placed": "0x5c2060"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBoxD0Ev",
               "known": "0x5c2020",
-              "placed": "0x5c2080"
+              "placed": "0x5c2070"
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIEditBoxD1Ev",
               "known": "0x5c2210",
-              "placed": "0x5c2270"
+              "placed": "0x5c2260"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBoxD1Ev",
               "known": "0x5c2220",
-              "placed": "0x5c2280"
+              "placed": "0x5c2270"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox12getCursorPosEi",
               "known": "0x5c2410",
-              "placed": "0x5c2470"
+              "placed": "0x5c2460"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox12processMouseERKN2ox5event6SEventE",
               "known": "0x5c28a0",
-              "placed": "0x5c2900"
+              "placed": "0x5c28f0"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox6setMaxEi",
               "known": "0x5c2a60",
-              "placed": "0x5c2ac0"
+              "placed": "0x5c2ab0"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox10processKeyERKN2ox5event6SEventE",
               "known": "0x5c2d20",
-              "placed": "0x5c2d80"
+              "placed": "0x5c2d70"
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIEditBox7OnEventERKN2ox5event6SEventE",
               "known": "0x5c4a80",
-              "placed": "0x5c4ad0"
+              "placed": "0x5c4ac0"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox7OnEventERKN2ox5event6SEventE",
               "known": "0x5c4a90",
-              "placed": "0x5c4ae0"
+              "placed": "0x5c4ad0"
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox4drawEv",
               "known": "0x5c4b70",
-              "placed": "0x5c4bc0"
+              "placed": "0x5c4bb0"
             }
           ],
           "bad_references": [
             {
-              "offset": 3601,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4204,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4485,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 22,
-              "reason": "unmapped or truncated range: 0x480061f2+0x8",
-              "matches": false
-            },
-            {
-              "offset": 4496,
-              "type": 2,
-              "symbol": "_ZN5daisy3gui11CGUIEditBox13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-              "addend": -4,
-              "destination": "0x5c0dc0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4640,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 16,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4648,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 328,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4711,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4731,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4748,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4807,
+              "offset": 11888,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -142970,241 +142437,7 @@
               "matches": false
             },
             {
-              "offset": 4824,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4844,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4861,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4875,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4882,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4890,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4904,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4911,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4919,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4961,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4968,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4976,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5010,
-              "type": 11,
-              "symbol": "_ZTVN5daisy3gui11CGUIEditBoxE",
-              "addend": 16,
-              "destination": "0x61fbe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5018,
-              "type": 11,
-              "symbol": "_ZTVN5daisy3gui11CGUIEditBoxE",
-              "addend": 400,
-              "destination": "0x61fbe0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5129,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 16,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5138,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 328,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5334,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5377,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5385,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5401,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5419,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5438,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIEditBoxE",
-              "addend": 16,
-              "destination": "0x61fe20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5447,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIEditBoxE",
-              "addend": 400,
-              "destination": "0x61fe20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5452,
-              "type": 2,
-              "symbol": "_ZN2ox3gui11IGUIElementD2Ev",
-              "addend": -4,
-              "destination": "0x504450",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5460,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5470,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11904,
+              "offset": 11920,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -143213,16 +142446,7 @@
               "matches": false
             },
             {
-              "offset": 11936,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 11969,
+              "offset": 11953,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143231,7 +142455,7 @@
               "matches": false
             },
             {
-              "offset": 12110,
+              "offset": 12094,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143240,7 +142464,7 @@
               "matches": false
             },
             {
-              "offset": 12185,
+              "offset": 12169,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143249,7 +142473,7 @@
               "matches": false
             },
             {
-              "offset": 12209,
+              "offset": 12193,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143258,7 +142482,7 @@
               "matches": false
             },
             {
-              "offset": 12228,
+              "offset": 12212,
               "type": 2,
               "symbol": "mbstowcs",
               "addend": -4,
@@ -143267,7 +142491,7 @@
               "matches": false
             },
             {
-              "offset": 14386,
+              "offset": 14370,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143276,7 +142500,7 @@
               "matches": false
             },
             {
-              "offset": 14480,
+              "offset": 14464,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
@@ -143285,7 +142509,7 @@
               "matches": false
             },
             {
-              "offset": 14499,
+              "offset": 14483,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
               "addend": -4,
@@ -143294,7 +142518,7 @@
               "matches": false
             },
             {
-              "offset": 14515,
+              "offset": 14499,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143303,7 +142527,7 @@
               "matches": false
             },
             {
-              "offset": 14542,
+              "offset": 14526,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
@@ -143312,7 +142536,7 @@
               "matches": false
             },
             {
-              "offset": 14553,
+              "offset": 14537,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
               "addend": -4,
@@ -143321,7 +142545,7 @@
               "matches": false
             },
             {
-              "offset": 14561,
+              "offset": 14545,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143330,7 +142554,7 @@
               "matches": false
             },
             {
-              "offset": 14574,
+              "offset": 14558,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
               "addend": -4,
@@ -143339,7 +142563,7 @@
               "matches": false
             },
             {
-              "offset": 14595,
+              "offset": 14579,
               "type": 2,
               "symbol": "_ZN5daisy2os5Timer7getTimeEv",
               "addend": -4,
@@ -143348,7 +142572,7 @@
               "matches": false
             },
             {
-              "offset": 14644,
+              "offset": 14628,
               "type": 2,
               "symbol": "_ZN5daisy2os5Timer7getTimeEv",
               "addend": -4,
@@ -143357,7 +142581,7 @@
               "matches": false
             },
             {
-              "offset": 14913,
+              "offset": 14897,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143366,7 +142590,7 @@
               "matches": false
             },
             {
-              "offset": 14995,
+              "offset": 14979,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -143375,7 +142599,7 @@
               "matches": false
             },
             {
-              "offset": 15039,
+              "offset": 15023,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143384,7 +142608,7 @@
               "matches": false
             },
             {
-              "offset": 15138,
+              "offset": 15122,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143393,7 +142617,7 @@
               "matches": false
             },
             {
-              "offset": 15220,
+              "offset": 15204,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -143402,7 +142626,7 @@
               "matches": false
             },
             {
-              "offset": 15277,
+              "offset": 15261,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -143411,7 +142635,25 @@
               "matches": false
             },
             {
-              "offset": 15334,
+              "offset": 15318,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15339,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15347,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143422,33 +142664,15 @@
             {
               "offset": 15355,
               "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "symbol": "_Unwind_Resume",
               "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15363,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
+              "destination": "0x4084f8",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 15371,
               "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15387,
-              "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
@@ -143456,7 +142680,7 @@
               "matches": false
             },
             {
-              "offset": 15400,
+              "offset": 15384,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -143465,7 +142689,7 @@
               "matches": false
             },
             {
-              "offset": 15426,
+              "offset": 15410,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143474,25 +142698,34 @@
               "matches": false
             },
             {
-              "offset": 15454,
+              "offset": 15438,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15446,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 15462,
               "type": 2,
-              "symbol": "_Unwind_Resume",
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
-              "destination": "0x4084f8",
+              "destination": "0x409c40",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 15478,
+              "offset": 15475,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143501,7 +142734,7 @@
               "matches": false
             },
             {
-              "offset": 15491,
+              "offset": 15510,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143510,7 +142743,7 @@
               "matches": false
             },
             {
-              "offset": 15526,
+              "offset": 15529,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143519,20 +142752,20 @@
               "matches": false
             },
             {
-              "offset": 15545,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15553,
+              "offset": 15537,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
               "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15566,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
               "reason": "different destination",
               "matches": false
             },
@@ -143546,16 +142779,7 @@
               "matches": false
             },
             {
-              "offset": 15598,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15606,
+              "offset": 15590,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -143564,7 +142788,7 @@
               "matches": false
             },
             {
-              "offset": 15641,
+              "offset": 15625,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143573,7 +142797,7 @@
               "matches": false
             },
             {
-              "offset": 15649,
+              "offset": 15633,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -143582,26 +142806,26 @@
               "matches": false
             },
             {
-              "offset": 15714,
+              "offset": 15698,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
               "destination": "0x5c6710",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 15717,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
+              "addend": -4,
+              "destination": "0x472bd0",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 15733,
               "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
-              "addend": -4,
-              "destination": "0x472bd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 15749,
-              "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
@@ -143609,7 +142833,7 @@
               "matches": false
             },
             {
-              "offset": 15782,
+              "offset": 15766,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
@@ -143618,7 +142842,7 @@
               "matches": false
             },
             {
-              "offset": 15793,
+              "offset": 15777,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
               "addend": -4,
@@ -143627,7 +142851,7 @@
               "matches": false
             },
             {
-              "offset": 15801,
+              "offset": 15785,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143636,7 +142860,7 @@
               "matches": false
             },
             {
-              "offset": 15814,
+              "offset": 15798,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
               "addend": -4,
@@ -143645,7 +142869,7 @@
               "matches": false
             },
             {
-              "offset": 15837,
+              "offset": 15821,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143654,7 +142878,7 @@
               "matches": false
             },
             {
-              "offset": 16107,
+              "offset": 16091,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143663,26 +142887,26 @@
               "matches": false
             },
             {
-              "offset": 16197,
+              "offset": 16181,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
               "destination": "0x5c6710",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 16200,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
+              "addend": -4,
+              "destination": "0x472bd0",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 16216,
               "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
-              "addend": -4,
-              "destination": "0x472bd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16232,
-              "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
@@ -143690,7 +142914,7 @@
               "matches": false
             },
             {
-              "offset": 16261,
+              "offset": 16245,
               "type": 2,
               "symbol": "_ZNK2ox4core7CStringIwE9subStringEii",
               "addend": -4,
@@ -143699,7 +142923,7 @@
               "matches": false
             },
             {
-              "offset": 16272,
+              "offset": 16256,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwE6appendERKS2_",
               "addend": -4,
@@ -143708,7 +142932,7 @@
               "matches": false
             },
             {
-              "offset": 16280,
+              "offset": 16264,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143717,11 +142941,29 @@
               "matches": false
             },
             {
-              "offset": 16293,
+              "offset": 16277,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwEaSERKS2_",
               "addend": -4,
               "destination": "0x472bd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21976,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 21984,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
               "reason": "different destination",
               "matches": false
             },
@@ -143737,24 +142979,6 @@
             {
               "offset": 22000,
               "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22008,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 22016,
-              "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
               "destination": "0x4084f8",
@@ -143762,7 +142986,7 @@
               "matches": false
             },
             {
-              "offset": 22052,
+              "offset": 22036,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143771,7 +142995,7 @@
               "matches": false
             },
             {
-              "offset": 22088,
+              "offset": 22072,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143780,7 +143004,7 @@
               "matches": false
             },
             {
-              "offset": 22122,
+              "offset": 22106,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143789,7 +143013,7 @@
               "matches": false
             },
             {
-              "offset": 22156,
+              "offset": 22140,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143798,7 +143022,7 @@
               "matches": false
             },
             {
-              "offset": 22174,
+              "offset": 22158,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143807,7 +143031,7 @@
               "matches": false
             },
             {
-              "offset": 22192,
+              "offset": 22176,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -143816,7 +143040,7 @@
               "matches": false
             }
           ],
-          "references": 383,
+          "references": 380,
           "functions": [
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBox20updateAnimationRectsEv",
@@ -143925,18 +143149,18 @@
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBoxC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEEPNS4_11IOSOperatorE",
               "address": "0x5c17d0",
-              "size": 1625,
-              "fde": false,
+              "size": 1370,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIEditBoxD2Ev",
               "address": "0x5c1d30",
-              "size": 484,
-              "fde": false,
+              "size": 722,
+              "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIEditBoxD0Ev",
@@ -144046,6 +143270,11 @@
             {
               "address": "0x608963",
               "size": 6,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x61f259",
+              "size": 8,
               "kind": "merged string"
             },
             {
@@ -145010,21 +144239,8 @@
           "name": ".text._ZN2ox4core16CStringFunctions10ansiToWideERKNS0_7CStringIcEE",
           "size": 466,
           "placement": "symbol: _ZN2ox4core16CStringFunctions10ansiToWideERKNS0_7CStringIcEE",
-          "exact": false,
+          "exact": true,
           "address": "0x5c6530",
-          "first_difference": 163,
-          "differing_bytes": 62,
-          "bad_references": [
-            {
-              "offset": 229,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
           "references": 11,
           "functions": [
             {
@@ -145033,7 +144249,7 @@
               "size": 466,
               "fde": true,
               "global": true,
-              "exact": false
+              "exact": true
             }
           ]
         },
@@ -145120,8 +144336,8 @@
               "offset": 0,
               "type": 1,
               "symbol": ".text",
-              "addend": 14333,
-              "destination": "0x5c0aa0",
+              "addend": 14317,
+              "destination": "0x5c0ab0",
               "reason": "different destination",
               "matches": false
             },
@@ -145129,8 +144345,8 @@
               "offset": 40,
               "type": 1,
               "symbol": ".text",
-              "addend": 14713,
-              "destination": "0x5c0aa0",
+              "addend": 14697,
+              "destination": "0x5c0ab0",
               "reason": "different destination",
               "matches": false
             },
@@ -145138,8 +144354,8 @@
               "offset": 216,
               "type": 1,
               "symbol": ".text",
-              "addend": 14676,
-              "destination": "0x5c0aa0",
+              "addend": 14660,
+              "destination": "0x5c0ab0",
               "reason": "different destination",
               "matches": false
             },
@@ -145147,8 +144363,8 @@
               "offset": 224,
               "type": 1,
               "symbol": ".text",
-              "addend": 14832,
-              "destination": "0x5c0aa0",
+              "addend": 14816,
+              "destination": "0x5c0ab0",
               "reason": "different destination",
               "matches": false
             },
@@ -145156,8 +144372,8 @@
               "offset": 232,
               "type": 1,
               "symbol": ".text",
-              "addend": 14604,
-              "destination": "0x5c0aa0",
+              "addend": 14588,
+              "destination": "0x5c0ab0",
               "reason": "different destination",
               "matches": false
             }
@@ -145304,7 +144520,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -145322,7 +144538,7 @@
           "/out/daisy__gui__CGUIEditBox.o"
         ],
         "inputs": {
-          "src/daisy/gui/CGUIEditBox.cpp": "9f08b4600cf330c975880977aeeb011c668b70e6de87624dd9e0f241ecf67236",
+          "src/daisy/gui/CGUIEditBox.cpp": "f8d1591ebb6d8313d2f8b4aac6c72b0c0e2c576fc0cbb56c7f2514aef8b3006c",
           "src/daisy/gui/CGUIEditBox.h": "9e3f8a1578b6f1fcc26ecf0259e055a86905c9d5493c2af073503a0b16a8a328",
           "src/ox/gui/IGUIEditBox.h": "7cd565d6427adec206b19e54f535fd2c6559a84caaf92e2954e6f500c88dd402",
           "src/ox/gui/IGUIElement.h": "3b1a6381f8baf0d0e937f4f10a0a26efd3b529b6b1ac74ed58309321ffa93335",
@@ -145365,9 +144581,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 134,
-        "object_sha256": "9599ccc63439bfb0bc714532f2ffa7e67ee1202de9ac0aa86e699d55308efd77"
+        "object_sha256": "f2f50f60de4ebc9943c97a624e35bd4409644cafa606a22d706b28ab84713d10"
       },
-      "fuzzy_target_sha256": "7301760f2149d7ed5873a5bb85fcd002f240f15d8419dc2fbd638fccaad219f1",
+      "fuzzy_target_sha256": "8965d2db61dfe9276b9741a0cdf127dd95cd95f34bcdea5ab166366e51ef97d7",
       "fuzzy_functions": [
         {
           "address": "0x5c0b00",
@@ -145451,13 +144667,13 @@
           "address": "0x5c17d0",
           "size": 1370,
           "symbol": "_ZN5daisy3gui11CGUIEditBoxC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEEPNS4_11IOSOperatorE",
-          "percent": 74.3
+          "percent": 99.98333
         },
         {
           "address": "0x5c1d30",
           "size": 722,
           "symbol": "_ZN5daisy3gui11CGUIEditBoxD2Ev",
-          "percent": 60.5533
+          "percent": 100.0
         },
         {
           "address": "0x5c2020",
@@ -145769,7 +144985,7 @@
           "address": "0x5c6530",
           "size": 466,
           "symbol": "_ZN2ox4core16CStringFunctions10ansiToWideERKNS0_7CStringIcEE",
-          "percent": 98.8
+          "percent": 100.0
         },
         {
           "address": "0x5c63d0",
@@ -146963,7 +146179,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -149641,7 +148857,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -154121,7 +153337,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -155437,7 +154653,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -160070,7 +159286,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -163487,7 +162703,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -165467,7 +164683,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -167047,7 +166263,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -168902,7 +168118,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -170354,7 +169570,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -171792,7 +171008,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -173293,7 +172509,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -174746,7 +173962,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -176688,7 +175904,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -178021,7 +177237,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -179740,7 +178956,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -182456,7 +181672,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -184149,7 +183365,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -186920,7 +186136,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -188845,7 +188061,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -193131,7 +192347,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -199156,7 +198372,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -200480,7 +199696,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -201298,7 +200514,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -201982,7 +201198,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -202549,7 +201765,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -203794,7 +203010,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205279,7 +204495,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205879,7 +205095,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -206353,7 +205569,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -206879,7 +206095,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -207441,7 +206657,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -207979,7 +207195,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -208550,7 +207766,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -209931,7 +209147,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -210158,7 +209374,7 @@
     },
     {
       "unit": "daisy/video/Null/CVideoNull.cpp",
-      "object_sha256": "5e9d3d15beaa2c6ad90c0e91c9dd1aec48627eeaee101ffb74cf876fa204a4d8",
+      "object_sha256": "05514bc1b0bbb7c3b29345d1e7742786656d7407e63afc1319a8c5241fa00989",
       "exact": false,
       "sections": [
         {
@@ -212850,13 +212066,51 @@
           ]
         },
         {
+          "name": ".text._ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+          "size": 770,
+          "placement": "symbol: _ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+          "exact": false,
+          "address": "0x4e8f90",
+          "first_difference": 445,
+          "differing_bytes": 4,
+          "references": 12,
+          "functions": [
+            {
+              "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+              "address": "0x4e8f90",
+              "size": 770,
+              "fde": true,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+          "size": 255,
+          "placement": "symbol: _ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+          "exact": true,
+          "address": "0x4e92a0",
+          "references": 7,
+          "functions": [
+            {
+              "symbol": "_ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
+              "address": "0x4e92a0",
+              "size": 255,
+              "fde": true,
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
           "name": ".text._ZNSt6vectorIN5daisy5video10CVideoNull8SSpritesESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
           "size": 1155,
           "placement": "symbol: _ZNSt6vectorIN5daisy5video10CVideoNull8SSpritesESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
           "exact": false,
           "address": "0x4e98e0",
           "first_difference": 2,
-          "differing_bytes": 959,
+          "differing_bytes": 972,
           "bad_references": [
             {
               "offset": 75,
@@ -213081,93 +212335,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5video10CVideoNull8SSpritesESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "address": "0x4e98e0",
               "size": 1155,
-              "fde": false,
-              "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "size": 770,
-          "placement": "symbol: _ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "exact": false,
-          "address": "0x4e8f90",
-          "first_difference": 103,
-          "differing_bytes": 77,
-          "references": 12,
-          "functions": [
-            {
-              "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-              "address": "0x4e8f90",
-              "size": 770,
-              "fde": true,
-              "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "size": 263,
-          "placement": "symbol: _ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "exact": false,
-          "address": "0x4e92a0",
-          "first_difference": 25,
-          "differing_bytes": 151,
-          "bad_references": [
-            {
-              "offset": 190,
-              "type": 2,
-              "symbol": "_ZSt25__unguarded_linear_insertIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEES5_EvT_T0_",
-              "addend": -4,
-              "destination": "0x4e5f60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 204,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 231,
-              "type": 2,
-              "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-              "addend": -4,
-              "destination": "0x4e8f90",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 251,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 259,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
-          "references": 7,
-          "functions": [
-            {
-              "symbol": "_ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-              "address": "0x4e92a0",
-              "size": 263,
               "fde": false,
               "global": true,
               "exact": false
@@ -214376,7 +213543,7 @@
         ".text._ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull8SSpritesES4_SaIS3_EET0_T_S7_S6_RT1_"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -214394,7 +213561,7 @@
           "/out/daisy__video__Null__CVideoNull.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CVideoNull.cpp": "9a6860ec2b6e5b9d40a41ed5b0f20a58d64a3569f360b4fb1c57f6a2a2e1dacb",
+          "src/daisy/video/Null/CVideoNull.cpp": "093456729aea99e69b62770850ebf2ffc3314ce458cc1cee582bdffab61f5eb0",
           "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -214449,9 +213616,9 @@
           "src/ox/video/IMaterialRenderer.h": "a7a6e23983cb7de57e3ae6b9c0f25cac31f066a85cee4176bdd3f048f445958d"
         },
         "system_headers": 141,
-        "object_sha256": "5e9d3d15beaa2c6ad90c0e91c9dd1aec48627eeaee101ffb74cf876fa204a4d8"
+        "object_sha256": "05514bc1b0bbb7c3b29345d1e7742786656d7407e63afc1319a8c5241fa00989"
       },
-      "fuzzy_target_sha256": "9a29affb64ea29f924ff9be76ae72d44d9e63b9a4d55741800c929036eb4a73c",
+      "fuzzy_target_sha256": "72a3b1b34e1b643bdd8a345f80644c1ebdf4d6406cdee108431b089ba3377d24",
       "fuzzy_functions": [
         {
           "address": "0x4def60",
@@ -215366,22 +214533,22 @@
           "percent": 100.0
         },
         {
-          "address": "0x4e98e0",
-          "size": 1354,
-          "symbol": "_ZNSt6vectorIN5daisy5video10CVideoNull8SSpritesESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
-          "percent": 75.12712
-        },
-        {
           "address": "0x4e8f90",
           "size": 770,
           "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "percent": 98.38095
+          "percent": 99.85714
         },
         {
           "address": "0x4e92a0",
           "size": 255,
           "symbol": "_ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEEEvT_SB_",
-          "percent": 98.943665
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e98e0",
+          "size": 1354,
+          "symbol": "_ZNSt6vectorIN5daisy5video10CVideoNull8SSpritesESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+          "percent": 75.38701
         },
         {
           "address": "0x4e5780",
@@ -215580,7 +214747,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -216816,7 +215983,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -217511,7 +216678,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -217948,7 +217115,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -218526,7 +217693,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -219997,7 +219164,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -220882,7 +220049,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -222250,7 +221417,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223049,7 +222216,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223216,11 +222383,11 @@
   ],
   "fuzzy": {
     "version": "3.8.1",
-    "sha256": "98f8275c27900c4fe2248fce3af37617658be49648fa7dbb5b376371f046dfdb",
+    "sha256": "c8290281e82114bcc1a06ff73061110d3902a177822e750337de2537188e358f",
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "8bb2cffd17c3904c1d92655e29b5cd5827b048a88b7fff9a0b48112474c39518"
+    "report_sha256": "07935ca4870ca027e8d860e244b0beaf8ac4622a6dc2d326cd9b0d104de69403"
   },
   "link": {
     "status": "unavailable",
