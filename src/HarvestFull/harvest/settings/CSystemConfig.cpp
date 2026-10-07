@@ -41,16 +41,16 @@ CSystemConfig::CSystemConfig(ox::io::IFileSystem* fileSystem, const char* filena
         openLanguageFile(ox::core::CString<char>(L"$GAME_RESOURCES$/harvestClientData/lang/english.cfg"));
 
     ox::core::CDimension2d<int> resolution(800, 600);
-    if (Config->attributeExists(L"settings:resolutionh") == true &&
-        Config->attributeExists(L"settings:resolutionv"))
+    if (Config->attributeExists(L"settings:resolutionh") != true ||
+        !Config->attributeExists(L"settings:resolutionv"))
+        setScreenRes(resolution);
+    else
     {
         resolution = getScreenRes();
         if (resolution.Width <= 0 || resolution.Width % 2 != 0 || resolution.Height <= 0 ||
             resolution.Height % 2 != 0)
             setScreenRes(resolution);
     }
-    else
-        setScreenRes(resolution);
 
     if (!Config->attributeExists(L"settings:shaderlevel"))
         setShaderLevel(ESL_HIGH);
