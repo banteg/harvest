@@ -122,7 +122,7 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `daisy/video/Software/CZBuffer.cpp` | 16/16 | exact; signed 16-bit software depth buffer, resizing and reference-counted factory |
 | `ox/io/CMemReadFile.cpp` | 19/19 | Irrlicht 0.7 `IUnknown` → `IReadFile` → `CMemReadFile` |
 | `ox/io/CMemWriteFile.cpp` | 18/18 | `IWriteFile` from Irrlicht 0.7; the class itself is Oxeye's |
-| `ox/net/CHTTPConnectionHandler.cpp` | 19/22 | `OnEvent` differs only in one register choice; function order differs |
+| `ox/net/CHTTPConnectionHandler.cpp` | 20/23 | `OnEvent` matches once the unit's `CString<char>::append` copy is placed; that copy differs by one compare operand order in its copy loop; function order differs |
 | `ox/net/CVariablePacket.cpp` | 32/32 | packet parser and builder; function order differs |
 | `ox/io/CHelpIO.cpp` | 19/19 | Complete unit: numeric and string I/O, free-filename selection, static initializer; all compared sections match |
 | `ox/algo/CRand.cpp`, `CSimplePress.cpp`, `CTimeCounter.cpp` | 35/35 | exact |
