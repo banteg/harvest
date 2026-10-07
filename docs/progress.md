@@ -15,19 +15,20 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
 
 - **Denominator:** all 1,998,094 bytes in the original's allocated executable sections: `.init`,
   `.plt`, `.text`, and `.fini`. This deliberately includes linker/runtime code and padding.
-- **Function inventory:** 4,976 nonoverlapping `.eh_frame` FDE ranges, totaling 1,946,920 bytes.
-  The remaining 51,174 bytes are retained as unclaimed code, not invented functions or matches.
-  This is an unwind-derived inventory, not a claim that every function has an FDE.
+- **Function inventory:** 5,240 nonoverlapping function extents totaling 1,948,609 bytes: 4,976
+  `.eh_frame` FDE ranges (1,946,920 bytes) and 264 thunks (1,689 bytes) from `config/<build>/extents.tsv`,
+  which GCC 4.4 emits without an FDE. The remaining 49,485 bytes are retained as unclaimed code, not
+  invented functions or matches.
 - **Matching credit:** full inventoried function bodies that the matcher found exact at their own
   target address: every byte and every resolved reference equal, and the extent equal to the
-  function's FDE. A function earns credit even when its unit as a whole does not match yet (for
+  function's inventoried extent (its FDE or thunk extent). A function earns credit even when its unit as a whole does not match yet (for
   example because GCC ordered the unit's functions differently); an exact unit must be exact in
   every section and function. No fuzzy/normalized similarity earns exact matching credit.
 - **Deduplication:** each original address/range earns credit once. Shared inline/COMDAT bodies
   emitted by multiple recovered units do not inflate the numerator.
 - **Fuzzy code:** pinned objdiff v3.8.1 compares fresh compiled objects with independently delinked
-  target objects, using `functionRelocDiffs=data_value`. Each score is weighted by the original FDE
-  size, even when the candidate function has a different size. Duplicate target addresses use the
+  target objects, using `functionRelocDiffs=data_value`. Each score is weighted by the original function
+  extent, even when the candidate function has a different size. Duplicate target addresses use the
   best measured score once; unrecovered functions and unclaimed executable bytes contribute zero.
   Exact matcher proofs contribute 100; an objdiff score of 100 alone does not grant exact credit.
 - **Data denominator:** all allocated non-executable ELF sections, including `.rodata`, `.data`,
@@ -45,10 +46,10 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
 - **Linked code/data:** `complete_code`, `complete_data` and `complete_units` remain zero. Capture
   records an explicit unavailable link status because there is no executable link step. Compiling
   an object or matching a function does not establish that it is included in a rebuilt executable.
-- **Display:** one treemap unit per FDE, with readable Mac-derived names when available, plus four
+- **Display:** one treemap unit per function extent, with readable Mac-derived names when available, plus four
   unclaimed-code units and matched/unclaimed data intervals. The **Allocated data** category isolates
   data progress. Leave the site's default category as **All** to retain the full denominator.
-- **Port-relevance layers:** `config/<build>/layers.toml` puts every FDE into one more category, so
+- **Port-relevance layers:** `config/<build>/layers.toml` puts every function into one more category, so
   the code a modern port keeps can be followed apart from code it would replace. **Game logic**
   is the `harvest` objects; **Engine core** is the `ox` library plus the daisy pieces that define
   data formats or game behaviour (sprite and particle packages, fonts, the sound logic in
@@ -69,18 +70,24 @@ committed or uploaded by the workflow.
 ## Freshness and proof limits
 
 `inventory.json` pins the target image, section sizes/hashes and function-table hash.
-`functions.tsv` contains the complete FDE ranges. `evidence.json` contains the whole-object matcher
+`functions.tsv` contains every function extent and its source (`fde` or `thunk`); the **Thunks**
+category reports the thunks apart. `evidence.json` contains the whole-object matcher
 results, object hashes, compiler/image identity, dependency hashes from GCC's depfile, toolchain
 manifest hash, and hashes of all measurement code/configuration inputs. Schema 2 also records native
 per-function scores, the scorer binary/configuration, delinked object hashes, exact data ranges and
 link status. Capture uses its own local objdiff project; it does not change the root `objdiff.json`
 or reuse stale interactive objects. Capture checks for source and measurement changes during compilation.
+Schema 3 adds each function's extent source to `functions.tsv` and to the matcher's function rows.
 
 CI verifies these identities, score extents, data bounds and the evidence's internal consistency.
 **It does not recompile or recheck the proprietary original.** It publishes the recorded local measurement
 only when its
 source/header, compiler configuration, matcher, inventory, and unit list still agree with the
 checkout. This is not a signed attestation and should be reviewed like other generated evidence.
+
+Local matching, searching and capture also regenerate `extents.tsv` from the exact pinned image
+before trusting thunk boundaries. RTTI slot discovery is part of the hashed measurement inputs.
+Without originals, report validation checks that every inventoried thunk agrees with that table.
 
 The workflow's report self-comparison only exercises the official objdiff parser;
 it is not a before/after measurement or a recompilation proof. The bot compares

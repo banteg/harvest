@@ -1,9 +1,9 @@
 {
-  "schema": 2,
+  "schema": 3,
   "build": "1.18-linux-amd64",
   "image": "Harvest",
   "image_sha256": "ac381fa044f6009e09a29e1e221a51e72e65f0772edd164083857dda863a426a",
-  "scope": "all allocated executable ELF sections; FDE bodies plus all remaining bytes",
+  "scope": "all allocated executable ELF sections; FDE and thunk bodies plus all remaining bytes",
   "sections": [
     {
       "name": ".init",
@@ -195,7 +195,7 @@
   ],
   "data_scope": "all allocated non-executable ELF sections, including BSS and linker metadata",
   "total_data": 573002,
-  "functions_sha256": "0fa7a96dce4c584ea796245d7c0d7f3d2e59aba033f04e01268a39b9069a8171",
+  "functions_sha256": "a64854f3ffdd89165a6e19a503b07778263586943445b84a17816a07cdbfca7a",
   "total_code": 1998094,
-  "total_functions": 4976
+  "total_functions": 5240
 }
