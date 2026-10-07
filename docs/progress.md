@@ -85,6 +85,10 @@ only when its
 source/header, compiler configuration, matcher, inventory, and unit list still agree with the
 checkout. This is not a signed attestation and should be reviewed like other generated evidence.
 
+Local matching, searching and capture also regenerate `extents.tsv` from the exact pinned image
+before trusting thunk boundaries. RTTI slot discovery is part of the hashed measurement inputs.
+Without originals, report validation checks that every inventoried thunk agrees with that table.
+
 The workflow's report self-comparison only exercises the official objdiff parser;
 it is not a before/after measurement or a recompilation proof. The bot compares
 the reports associated with its displayed base and head commits. Its "new

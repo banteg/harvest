@@ -36,6 +36,7 @@ def measurement_paths(build: str) -> list[str]:
                 "builds",
                 "elf",
                 "extents",
+                "rtti",
                 "match",
                 "symbols",
                 "toolchain",
@@ -244,6 +245,12 @@ def validate(build: str) -> tuple[dict, list[dict], dict]:
         end = address + size
     if len(functions) != inv["total_functions"] or sum(s["size"] for s in ordered) != inv["total_code"]:
         raise ValueError("inventory totals disagree")
+    from hv import extents
+
+    if {(e.address, e.size) for e in extents.load(build)} != {
+        (f["address"], f["size"]) for f in functions if f["extent"] == "thunk"
+    }:
+        raise ValueError("inventoried thunks differ from extents.tsv")
     data = inv["data_sections"]
     end = 0
     for section in sorted([*ordered, *data], key=lambda s: s["address"]):
@@ -277,7 +284,10 @@ def measured_functions(functions: list[dict], evidence: dict) -> dict[int, dict]
                         raise ValueError("inconsistent exact-unit evidence")
                     continue
                 address = int(function["address"], 0)
-                if extents.get(address) != (function["size"], function["extent"]):
+                if function["extent"] not in ("fde", "thunk") or extents.get(address) != (
+                    function["size"],
+                    function["extent"],
+                ):
                     raise ValueError("matched function lacks its complete inventoried extent")
                 row = matched.setdefault(address, {"symbol": function["symbol"], "sources": []})
                 if unit["unit"] not in row["sources"]:
@@ -344,6 +354,8 @@ def assign_layers(functions: list[dict], names: dict[int, str], config: dict) ->
         if index != current_range:
             current_range, inherited = index, ranges[index][2]
         name = names.get(address)
+        if name is not None:
+            name = re.sub(r"^_ZT(?:hn\d+|v\d+_n\d+)_", "_Z", name)
         if name is None:
             result[address] = inherited
             continue

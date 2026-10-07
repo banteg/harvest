@@ -21,15 +21,24 @@ toolchain container and compares the object with the target image, section by se
 
 Rows with other evidence (for example `manual:`) are kept when the generator reruns.
 
-GCC 4.4 gives every function an FDE except the this-adjusting thunks it emits directly as assembly.
-`just extents` (`hv extents`) proves their extents another way and writes
-`config/<build>/extents.tsv`: every data word that points into code outside the FDEs at an `add rdi,
-imm; jmp` sequence (`rsi` when a hidden return pointer occupies `rdi`), optionally with `mov r10,
-[rdi]; add rdi, [r10 + disp]` for a virtual thunk, is a thunk ending at its jump. Each row records the
-vtable slot that points at it and its jump target, and the thunk is named from the Itanium mangling of
-its adjustment and that target (`_ZThn24_...`, `_ZTv0_n24_...`), which reproduces every thunk name
-written by hand before. New names go into `symbols.tsv` with `thunk:` evidence. A test checks that
-regenerating the table reproduces the committed one.
+The checked GCC 4.4 this-adjusting thunks have no FDE. `just extents` (`hv extents`) proves their
+extents another way and writes `config/<build>/extents.tsv`. RTTI identifies primary and secondary
+vtable headers; contiguous function slots after each header supply candidates. The walk stops at
+the next header, RTTI object or non-code word, and permits null abstract-destructor slots.
+
+Only the observed operand shapes qualify: `add rdi, negative immediate; jmp` (`rsi` when a hidden
+return pointer occupies `rdi`), or `mov r10, [rdi]; add rdi, [r10 + negative aligned offset]; jmp`.
+The jump must be direct and land at an FDE start. Thunk extents overlap neither FDEs nor each other;
+named thunks missing this proof fail generation. Each row records the vtable slot and jump target.
+Names use the Itanium mangling of the adjustment and target (`_ZThn24_...`, `_ZTv0_n24_...`), which
+reproduces every thunk name written by hand before. New names go into `symbols.tsv` with `thunk:`
+evidence; candidates with unnamed jump targets are flagged. No unwind entries are synthesized.
+
+Matching, searching and progress capture verify the exact loaded image bytes against the pin,
+regenerate the table in memory, and require it to reproduce the committed file before accepting
+its boundaries. Editing a boundary, name or slot therefore requires `just extents` again. The
+regeneration test checks this against the original; synthetic tests reject forged tables, wrong
+operand roles, invalid jumps and overlapping extents.
 
 Mac virtual-slot names need instruction-level validation when the layouts differ. Linux's
 `CFileSystem` inserts a virtual at slot 12, shifting subsequent Mac names by one. Manual rows

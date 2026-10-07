@@ -217,6 +217,7 @@ def captured(tmp_path, monkeypatch):
         p = tmp_path / name
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("input")
+    (tmp_path / "config/test/extents.tsv").write_text("address\tsize\tsymbol\tevidence\n")
     (tmp_path / "config/test/flags.json").write_text('{"version":"gcc"}')
     inv, functions, evidence = sample()
     table = "address\tsize\tsection\textent\n0x1000\t20\t.text\tfde\n0x1020\t40\t.text\tfde\n"
@@ -271,6 +272,9 @@ def test_snapshot_validates_without_originals_or_objects(captured):
         "src/a.cpp",
         "src/a.h",
         "tools/hv/match.py",
+        "tools/hv/extents.py",
+        "tools/hv/rtti.py",
+        "config/test/extents.tsv",
         "config/test/units.toml",
         "config/test/flags.json",
         "uv.lock",
@@ -336,6 +340,15 @@ def layer_config():
         ],
         "copies": [r"^_ZN?K?(St|9__gnu_cxx)", r"^_ZNK?2ox"],
     }
+
+
+def test_thunks_use_the_underlying_method_for_layer_rules():
+    functions = [{"address": a, "size": 8, "section": ".text"} for a in (0x1020, 0x1030)]
+    names = {
+        0x1020: "_ZThn24_N2ox3gui11IGUIElementD0Ev",
+        0x1030: "_ZTv0_n24_N2ox5video26IShaderConstantSetCallBackD1Ev",
+    }
+    assert progress.assign_layers(functions, names, layer_config()) == {0x1020: "engine", 0x1030: "engine"}
 
 
 def test_layers_follow_rules_then_the_previous_named_function_then_the_range():
