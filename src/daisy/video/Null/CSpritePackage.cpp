@@ -138,6 +138,14 @@ CSpritePackage::~CSpritePackage()
     }
 }
 
+void CSpritePackage::removeImage(ox::video::ISpriteAnimationImage* image)
+{
+    int index = ox::algo::binarySearchIf(Images, SAnimationImageIdSearcher<ox::video::ISpriteAnimationImage*>(),
+        image->getImageId());
+    if (index >= 0 && image->drop())
+        Images.erase(Images.begin() + index);
+}
+
 void CSpritePackage::updateAllAnimations(float frameDelta)
 {
     for (unsigned int i = 0; i < States.size(); ++i)
@@ -231,14 +239,6 @@ ox::video::ISpriteAnimationImage* CSpritePackage::addNewImage(int id)
     Images.push_back(sprite);
     std::sort(Images.begin(), Images.end(), ox::algo::SPointerSortFunctor<ox::video::ISpriteAnimationImage*>());
     return sprite;
-}
-
-void CSpritePackage::removeImage(ox::video::ISpriteAnimationImage* image)
-{
-    int index = ox::algo::binarySearchIf(Images, SAnimationImageIdSearcher<ox::video::ISpriteAnimationImage*>(),
-        image->getImageId());
-    if (index >= 0 && image->drop())
-        Images.erase(Images.begin() + index);
 }
 
 ox::video::ITexture* CSpritePackage::getTexture(int index)

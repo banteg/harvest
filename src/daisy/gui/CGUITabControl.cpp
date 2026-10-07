@@ -103,18 +103,6 @@ CGUITabControl::CGUITabControl(ox::gui::IGUIEnvironment* environment, ox::gui::I
     TextColor = Environment->getSkin()->getColor(ox::gui::EGDC_BUTTON_TEXT);
 }
 
-//! destructor
-CGUITabControl::~CGUITabControl()
-{
-    for (int i = 0; i < (int)Tabs.size(); ++i)
-        if (Tabs[i])
-            Tabs[i]->drop();
-
-    for (int i = 0; i < ETCA_COUNT; ++i)
-        if (Animations[i])
-            Animations[i]->remove();
-}
-
 //! Adds a tab
 ox::gui::IGUITab* CGUITabControl::addTab(wchar_t* caption, int id)
 {
@@ -619,10 +607,6 @@ void CGUITabControl::setTextColor(ox::video::SColor color)
     TextColor = color;
 }
 
-// ------------------------------------------------------------------
-// Tab button row
-// ------------------------------------------------------------------
-
 CGUITabButtonRow::CGUITabButtonRow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent,
     const ox::core::CRect<int>& rectangle, int id)
     : IGUITabButtonRow(environment, parent, id, rectangle), ActiveTab(-1), HoverTab(-1)
@@ -640,6 +624,10 @@ CGUITabButtonRow::CGUITabButtonRow(ox::gui::IGUIEnvironment* environment, ox::gu
     if (Environment->getSkin()->getSpritePackage())
         setAnimations(Environment->getSkin()->getSpritePackage(), "TabControl");
 }
+
+// ------------------------------------------------------------------
+// Tab button row
+// ------------------------------------------------------------------
 
 CGUITabButtonRow::~CGUITabButtonRow()
 {
@@ -1021,6 +1009,18 @@ void CGUITabButtonRow::setRelativePosition(const ox::core::CRect<int>& position)
 {
     IGUIElement::setRelativePosition(position);
     repositionTabs();
+}
+
+//! destructor
+CGUITabControl::~CGUITabControl()
+{
+    for (int i = 0; i < (int)Tabs.size(); ++i)
+        if (Tabs[i])
+            Tabs[i]->drop();
+
+    for (int i = 0; i < ETCA_COUNT; ++i)
+        if (Animations[i])
+            Animations[i]->remove();
 }
 
 } // end namespace gui
