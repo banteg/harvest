@@ -70809,17 +70809,17 @@
     },
     {
       "unit": "HarvestFull/harvest/game/CLuaManager.cpp",
-      "object_sha256": "f0bfc832a5dab19f2a3cb5070c82ee69b720e40622dc4f49ecf6ac44f3d09efe",
+      "object_sha256": "b1989b5e82351a70dbb4bda3ed9162e225bd1f6b6ffd68cc9bbc1275d84a26b0",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 53729,
+          "size": 53967,
           "placement": "explicit",
           "exact": false,
           "address": "0x4431c0",
           "first_difference": 4732,
-          "differing_bytes": 11742,
+          "differing_bytes": 11670,
           "misplaced_symbols": [
             {
               "symbol": "_ZN7harvest4game11CLuaManager22setCreativeListVisibleEb",
@@ -71517,79 +71517,79 @@
               "placed": "0x44a8c0"
             },
             {
-              "symbol": "_ZN7harvest4game23harvest_showInfoMessageEP9lua_State",
-              "known": "0x44cac0",
-              "placed": "0x44af60"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager18pushCreativeHookerEPKci",
-              "known": "0x44b8e0",
-              "placed": "0x44b3a0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager18hookCreativeUpdateERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityEf",
-              "known": "0x44bcb0",
-              "placed": "0x44b7b0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager16hookCreativeInitERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityE",
-              "known": "0x44bef0",
-              "placed": "0x44b9f0"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-              "known": "0x44afb0",
-              "placed": "0x44bc10"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager10includeModERKNS0_7SLuaModE",
-              "known": "0x44c110",
-              "placed": "0x44c570"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager19initLuaByScriptListEv",
-              "known": "0x44ca30",
-              "placed": "0x44ce90"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
-              "known": "0x44ddd0",
-              "placed": "0x44cf20"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager23refreshAvailableLuaModsEPN2ox9IOxDeviceE",
-              "known": "0x44f6d0",
-              "placed": "0x44e3f0"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager17initLuaBySaveFileEPN2ox2io9IReadFileEi",
-              "known": "0x44fe70",
-              "placed": "0x44eb90"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-              "known": "0x44cf00",
-              "placed": "0x44f040"
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
-              "known": "0x44db50",
-              "placed": "0x44fd10"
-            },
-            {
               "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
               "known": "0x44f2b0",
-              "placed": "0x44ff90"
+              "placed": "0x44af60"
             },
             {
               "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
               "known": "0x44f5f0",
-              "placed": "0x4502d0"
+              "placed": "0x44b2a0"
             },
             {
               "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
               "known": "0x44f660",
-              "placed": "0x450340"
+              "placed": "0x44b310"
+            },
+            {
+              "symbol": "_ZN7harvest4game23harvest_showInfoMessageEP9lua_State",
+              "known": "0x44cac0",
+              "placed": "0x44b380"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager18pushCreativeHookerEPKci",
+              "known": "0x44b8e0",
+              "placed": "0x44b7c0"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager18hookCreativeUpdateERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityEf",
+              "known": "0x44bcb0",
+              "placed": "0x44bbd0"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager16hookCreativeInitERKN2ox4core7CStringIcEEPNS_6entity15CCreativeEntityE",
+              "known": "0x44bef0",
+              "placed": "0x44be10"
+            },
+            {
+              "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
+              "known": "0x44afb0",
+              "placed": "0x44c030"
+            },
+            {
+              "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
+              "known": "0x44cf00",
+              "placed": "0x44c9a0"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
+              "known": "0x44db50",
+              "placed": "0x44d6c0"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager10includeModERKNS0_7SLuaModE",
+              "known": "0x44c110",
+              "placed": "0x44d940"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager19initLuaByScriptListEv",
+              "known": "0x44ca30",
+              "placed": "0x44e260"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
+              "known": "0x44ddd0",
+              "placed": "0x44e2f0"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager23refreshAvailableLuaModsEPN2ox9IOxDeviceE",
+              "known": "0x44f6d0",
+              "placed": "0x44f840"
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager17initLuaBySaveFileEPN2ox2io9IReadFileEi",
+              "known": "0x44fe70",
+              "placed": "0x44ffe0"
             }
           ],
           "bad_references": [
@@ -71963,7 +71963,7 @@
               "matches": false
             },
             {
-              "offset": 33430,
+              "offset": 34486,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -71972,7 +71972,7 @@
               "matches": false
             },
             {
-              "offset": 33581,
+              "offset": 34637,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -71981,7 +71981,7 @@
               "matches": false
             },
             {
-              "offset": 33667,
+              "offset": 34723,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -71990,7 +71990,7 @@
               "matches": false
             },
             {
-              "offset": 33760,
+              "offset": 34816,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -71999,7 +71999,7 @@
               "matches": false
             },
             {
-              "offset": 33815,
+              "offset": 34871,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72008,7 +72008,7 @@
               "matches": false
             },
             {
-              "offset": 33911,
+              "offset": 34967,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -72017,7 +72017,7 @@
               "matches": false
             },
             {
-              "offset": 33981,
+              "offset": 35037,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72026,7 +72026,7 @@
               "matches": false
             },
             {
-              "offset": 34003,
+              "offset": 35059,
               "type": 2,
               "symbol": "lua_rawgeti",
               "addend": -4,
@@ -72035,7 +72035,7 @@
               "matches": false
             },
             {
-              "offset": 34020,
+              "offset": 35076,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -72044,7 +72044,7 @@
               "matches": false
             },
             {
-              "offset": 34059,
+              "offset": 35115,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72053,7 +72053,7 @@
               "matches": false
             },
             {
-              "offset": 34197,
+              "offset": 35253,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72062,7 +72062,7 @@
               "matches": false
             },
             {
-              "offset": 34249,
+              "offset": 35305,
               "type": 2,
               "symbol": "_ZNSt6vectorIN7harvest4game13SCreativeHookESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
               "addend": -4,
@@ -72071,7 +72071,7 @@
               "matches": false
             },
             {
-              "offset": 34265,
+              "offset": 35321,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72080,7 +72080,7 @@
               "matches": false
             },
             {
-              "offset": 34273,
+              "offset": 35329,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72089,7 +72089,7 @@
               "matches": false
             },
             {
-              "offset": 35815,
+              "offset": 37321,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72098,7 +72098,16 @@
               "matches": false
             },
             {
-              "offset": 35890,
+              "offset": 37418,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 37498,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72107,34 +72116,25 @@
               "matches": false
             },
             {
-              "offset": 35905,
+              "offset": 37545,
               "type": 2,
-              "symbol": "lua_pushstring",
+              "symbol": "_Znam",
               "addend": -4,
-              "destination": "0x407ad8",
+              "destination": "0x407128",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 35932,
+              "offset": 37654,
               "type": 2,
-              "symbol": "lua_pushstring",
+              "symbol": "_Znam",
               "addend": -4,
-              "destination": "0x407ad8",
+              "destination": "0x407128",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 35946,
-              "type": 2,
-              "symbol": "lua_settable",
-              "addend": -4,
-              "destination": "0x408158",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36029,
+              "offset": 37730,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72143,88 +72143,7 @@
               "matches": false
             },
             {
-              "offset": 36044,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36136,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36151,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36297,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36394,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36474,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36521,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36647,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
-              "addend": -4,
-              "destination": "0x450320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36662,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 36679,
+              "offset": 37747,
               "type": 2,
               "symbol": "strtol",
               "addend": -4,
@@ -72233,7 +72152,7 @@
               "matches": false
             },
             {
-              "offset": 36703,
+              "offset": 37771,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -72242,7 +72161,7 @@
               "matches": false
             },
             {
-              "offset": 36717,
+              "offset": 37785,
               "type": 2,
               "symbol": "lua_createtable",
               "addend": -4,
@@ -72251,7 +72170,7 @@
               "matches": false
             },
             {
-              "offset": 36727,
+              "offset": 37795,
               "type": 2,
               "symbol": "lua_gettop",
               "addend": -4,
@@ -72260,7 +72179,7 @@
               "matches": false
             },
             {
-              "offset": 36749,
+              "offset": 37817,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "addend": -4,
@@ -72269,7 +72188,7 @@
               "matches": false
             },
             {
-              "offset": 36763,
+              "offset": 37831,
               "type": 2,
               "symbol": "lua_settable",
               "addend": -4,
@@ -72278,7 +72197,7 @@
               "matches": false
             },
             {
-              "offset": 36786,
+              "offset": 37854,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72287,7 +72206,7 @@
               "matches": false
             },
             {
-              "offset": 36805,
+              "offset": 37873,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72296,7 +72215,7 @@
               "matches": false
             },
             {
-              "offset": 36854,
+              "offset": 37922,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72305,7 +72224,7 @@
               "matches": false
             },
             {
-              "offset": 36967,
+              "offset": 38031,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72314,7 +72233,7 @@
               "matches": false
             },
             {
-              "offset": 37017,
+              "offset": 38085,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72323,7 +72242,7 @@
               "matches": false
             },
             {
-              "offset": 37030,
+              "offset": 38098,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72332,7 +72251,7 @@
               "matches": false
             },
             {
-              "offset": 37045,
+              "offset": 38113,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72341,15 +72260,15 @@
               "matches": false
             },
             {
-              "offset": 37078,
+              "offset": 38146,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 501,
-              "reason": "unmapped or truncated range: 0x303c8840+0x2",
+              "reason": "unmapped or truncated range: 0xd28411b6+0x2",
               "matches": false
             },
             {
-              "offset": 37124,
+              "offset": 38196,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72358,23 +72277,23 @@
               "matches": false
             },
             {
-              "offset": 37134,
+              "offset": 38206,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 501,
-              "reason": "unmapped or truncated range: 0x83481074+0x2",
+              "reason": "unmapped or truncated range: 0x548b0beb+0x2",
               "matches": false
             },
             {
-              "offset": 37156,
+              "offset": 38228,
               "type": 11,
               "symbol": ".rodata.str1.1",
               "addend": 501,
-              "reason": "unmapped or truncated range: 0x6c24543b+0x2",
+              "reason": "unmapped or truncated range: -0x43740+0x2",
               "matches": false
             },
             {
-              "offset": 37252,
+              "offset": 38324,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72383,7 +72302,7 @@
               "matches": false
             },
             {
-              "offset": 37275,
+              "offset": 38347,
               "type": 2,
               "symbol": "lua_pushstring",
               "addend": -4,
@@ -72392,7 +72311,7 @@
               "matches": false
             },
             {
-              "offset": 37293,
+              "offset": 38365,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72401,7 +72320,7 @@
               "matches": false
             },
             {
-              "offset": 37407,
+              "offset": 38479,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72410,15 +72329,15 @@
               "matches": false
             },
             {
-              "offset": 37422,
+              "offset": 38494,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 503,
-              "reason": "unmapped or truncated range: 0x7c2444c7+0x1",
+              "reason": "unmapped or truncated range: 0x8b48ffff+0x1",
               "matches": false
             },
             {
-              "offset": 37452,
+              "offset": 38524,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72427,15 +72346,15 @@
               "matches": false
             },
             {
-              "offset": 37467,
+              "offset": 38539,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 503,
-              "reason": "unmapped or truncated range: 0x6c8b48fd+0x1",
+              "reason": "unmapped or truncated range: 0x50244489+0x1",
               "matches": false
             },
             {
-              "offset": 37497,
+              "offset": 38569,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72444,7 +72363,7 @@
               "matches": false
             },
             {
-              "offset": 37522,
+              "offset": 38594,
               "type": 2,
               "symbol": "lua_pushnumber",
               "addend": -4,
@@ -72453,7 +72372,7 @@
               "matches": false
             },
             {
-              "offset": 37540,
+              "offset": 38612,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72462,7 +72381,7 @@
               "matches": false
             },
             {
-              "offset": 37647,
+              "offset": 38719,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -72471,15 +72390,15 @@
               "matches": false
             },
             {
-              "offset": 37662,
+              "offset": 38734,
               "type": 10,
               "symbol": ".rodata.str1.1",
               "addend": 503,
-              "reason": "unmapped or truncated range: 0xc3894870+0x1",
+              "reason": "unmapped or truncated range: 0x7c8d48ff+0x1",
               "matches": false
             },
             {
-              "offset": 37692,
+              "offset": 38764,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -72488,7 +72407,7 @@
               "matches": false
             },
             {
-              "offset": 37710,
+              "offset": 38782,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72497,7 +72416,7 @@
               "matches": false
             },
             {
-              "offset": 37718,
+              "offset": 38790,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72506,7 +72425,7 @@
               "matches": false
             },
             {
-              "offset": 37731,
+              "offset": 38803,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72515,7 +72434,7 @@
               "matches": false
             },
             {
-              "offset": 37739,
+              "offset": 38811,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72524,7 +72443,7 @@
               "matches": false
             },
             {
-              "offset": 37754,
+              "offset": 38826,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72533,7 +72452,7 @@
               "matches": false
             },
             {
-              "offset": 37762,
+              "offset": 38834,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -72542,7 +72461,7 @@
               "matches": false
             },
             {
-              "offset": 37775,
+              "offset": 38847,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72551,7 +72470,7 @@
               "matches": false
             },
             {
-              "offset": 37790,
+              "offset": 38862,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -72560,25 +72479,7 @@
               "matches": false
             },
             {
-              "offset": 40810,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 40824,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfigurationC1EPNS_2io11IFileSystemE",
-              "addend": -4,
-              "destination": "0x5e6560",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 40863,
+              "offset": 39693,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -72587,409 +72488,7 @@
               "matches": false
             },
             {
-              "offset": 41065,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41265,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41293,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration4readEPNS_2io9IReadFileE",
-              "addend": -4,
-              "destination": "0x5e98b0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41330,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41345,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x199b6ae8+0x24",
-              "matches": false
-            },
-            {
-              "offset": 41353,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
-              "addend": -4,
-              "destination": "0x5e7d60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41362,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 40,
-              "reason": "unmapped or truncated range: 0x4024+0x2c",
-              "matches": false
-            },
-            {
-              "offset": 41370,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
-              "addend": -4,
-              "destination": "0x5e7d60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41409,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41455,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41501,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41544,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41596,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41620,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x4c005f5f+0x24",
-              "matches": false
-            },
-            {
-              "offset": 41636,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x5e8320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41646,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 88,
-              "reason": "unmapped or truncated range: 0x9ffce8ef+0x2c",
-              "matches": false
-            },
-            {
-              "offset": 41654,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x5e8320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41667,
-              "type": 10,
-              "symbol": ".rodata.str4.8",
-              "addend": 40,
-              "reason": "unmapped or truncated range: 0x24bc6348+0x2c",
-              "matches": false
-            },
-            {
-              "offset": 41675,
-              "type": 2,
-              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
-              "addend": -4,
-              "destination": "0x5e8320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41690,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41711,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 41900,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42068,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42085,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 513,
-              "reason": "unmapped or truncated range: 0xec+0x2",
-              "matches": false
-            },
-            {
-              "offset": 42129,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42142,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 513,
-              "reason": "unmapped or truncated range: 0x4801c183+0x2",
-              "matches": false
-            },
-            {
-              "offset": 42180,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 513,
-              "reason": "unmapped or truncated range: 0x13048d01+0x2",
-              "matches": false
-            },
-            {
-              "offset": 42316,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42434,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42493,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42514,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42597,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42649,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42738,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 504,
-              "reason": "unmapped or truncated range: 0x48fffb89+0x9",
-              "matches": false
-            },
-            {
-              "offset": 42785,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 42798,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 504,
-              "reason": "unmapped or truncated range: 0x303c8840+0x9",
-              "matches": false
-            },
-            {
-              "offset": 42836,
-              "type": 11,
-              "symbol": ".rodata.str1.1",
-              "addend": 504,
-              "reason": "unmapped or truncated range: 0xcc24+0x9",
-              "matches": false
-            },
-            {
-              "offset": 42992,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43058,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43150,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 515,
-              "reason": "unmapped or truncated range: 0x9c8b0000+0xc",
-              "matches": false
-            },
-            {
-              "offset": 43189,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
-              "addend": -4,
-              "destination": "0x450390",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43326,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43367,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
-              "addend": 4,
-              "destination": "0x86b8e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43374,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
-              "addend": 12,
-              "destination": "0x86b8e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43440,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43546,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43633,
+              "offset": 39803,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -72998,438 +72497,7 @@
               "matches": false
             },
             {
-              "offset": 43669,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
-              "addend": -4,
-              "destination": "0x450320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43698,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
-              "addend": 4,
-              "destination": "0x86b8e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43709,
-              "type": 2,
-              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
-              "addend": 4,
-              "destination": "0x86b8e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43727,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43745,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43763,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43773,
-              "type": 2,
-              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
-              "addend": -4,
-              "destination": "0x450ef0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43808,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43942,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 43974,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44032,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44166,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44196,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44303,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44330,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44447,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44467,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44515,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44573,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44711,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44748,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44779,
-              "type": 10,
-              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
-              "addend": 0,
-              "destination": "0x86b8e0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44784,
-              "type": 2,
-              "symbol": "_ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-              "addend": -4,
-              "destination": "0x452c90",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44809,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 513,
-              "reason": "unmapped or truncated range: 0x84c70000+0x2",
-              "matches": false
-            },
-            {
-              "offset": 44851,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
-              "addend": -4,
-              "destination": "0x450390",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 44984,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45023,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45149,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45195,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45203,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45219,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45232,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45242,
-              "type": 2,
-              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
-              "addend": -4,
-              "destination": "0x450ef0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45255,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45273,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45291,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45322,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45356,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45393,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45441,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45455,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45465,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45511,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45519,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45527,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 45585,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 49581,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 49696,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 49803,
+              "offset": 39853,
               "type": 2,
               "symbol": "lua_settop",
               "addend": -4,
@@ -73438,7 +72506,7 @@
               "matches": false
             },
             {
-              "offset": 49821,
+              "offset": 39871,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73447,7 +72515,7 @@
               "matches": false
             },
             {
-              "offset": 49836,
+              "offset": 39886,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73456,7 +72524,7 @@
               "matches": false
             },
             {
-              "offset": 49855,
+              "offset": 39905,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73465,7 +72533,7 @@
               "matches": false
             },
             {
-              "offset": 49881,
+              "offset": 39929,
               "type": 2,
               "symbol": "lua_isstring",
               "addend": -4,
@@ -73474,7 +72542,7 @@
               "matches": false
             },
             {
-              "offset": 49905,
+              "offset": 39953,
               "type": 2,
               "symbol": "lua_tolstring",
               "addend": -4,
@@ -73483,7 +72551,7 @@
               "matches": false
             },
             {
-              "offset": 49979,
+              "offset": 40027,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73492,7 +72560,7 @@
               "matches": false
             },
             {
-              "offset": 50039,
+              "offset": 40087,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73501,25 +72569,7 @@
               "matches": false
             },
             {
-              "offset": 50104,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
-              "addend": -4,
-              "destination": "0x450320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 50155,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
-              "addend": -4,
-              "destination": "0x450320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 50181,
+              "offset": 40162,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73528,7 +72578,25 @@
               "matches": false
             },
             {
-              "offset": 50295,
+              "offset": 40284,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 40373,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 40487,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73537,7 +72605,7 @@
               "matches": false
             },
             {
-              "offset": 50324,
+              "offset": 40516,
               "type": 2,
               "symbol": "lua_tonumber",
               "addend": -4,
@@ -73546,7 +72614,7 @@
               "matches": false
             },
             {
-              "offset": 50548,
+              "offset": 40740,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73555,7 +72623,7 @@
               "matches": false
             },
             {
-              "offset": 50615,
+              "offset": 40807,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73564,7 +72632,7 @@
               "matches": false
             },
             {
-              "offset": 50642,
+              "offset": 40834,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73573,7 +72641,7 @@
               "matches": false
             },
             {
-              "offset": 50761,
+              "offset": 40953,
               "type": 2,
               "symbol": "lua_type",
               "addend": -4,
@@ -73582,7 +72650,7 @@
               "matches": false
             },
             {
-              "offset": 50828,
+              "offset": 41020,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73591,15 +72659,15 @@
               "matches": false
             },
             {
-              "offset": 50998,
+              "offset": 41190,
               "type": 10,
               "symbol": ".rodata.str1.1",
-              "addend": 573,
-              "reason": "unmapped or truncated range: 0x11a548d+0x2",
+              "addend": 504,
+              "reason": "unmapped or truncated range: 0x8b48001f+0x2",
               "matches": false
             },
             {
-              "offset": 51032,
+              "offset": 41224,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
               "addend": -4,
@@ -73608,7 +72676,7 @@
               "matches": false
             },
             {
-              "offset": 51140,
+              "offset": 41332,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73617,7 +72685,7 @@
               "matches": false
             },
             {
-              "offset": 51158,
+              "offset": 41350,
               "type": 2,
               "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "addend": -4,
@@ -73626,7 +72694,7 @@
               "matches": false
             },
             {
-              "offset": 51177,
+              "offset": 41369,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73635,7 +72703,7 @@
               "matches": false
             },
             {
-              "offset": 51332,
+              "offset": 41524,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73644,7 +72712,7 @@
               "matches": false
             },
             {
-              "offset": 51435,
+              "offset": 41627,
               "type": 2,
               "symbol": "_ZNSt6vectorIN7harvest4game12SLuaFilePairESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
               "addend": -4,
@@ -73653,7 +72721,7 @@
               "matches": false
             },
             {
-              "offset": 51530,
+              "offset": 41722,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73662,7 +72730,7 @@
               "matches": false
             },
             {
-              "offset": 51582,
+              "offset": 41774,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73671,7 +72739,7 @@
               "matches": false
             },
             {
-              "offset": 51696,
+              "offset": 41888,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73680,7 +72748,7 @@
               "matches": false
             },
             {
-              "offset": 51722,
+              "offset": 41914,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73689,7 +72757,7 @@
               "matches": false
             },
             {
-              "offset": 51840,
+              "offset": 42032,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -73698,7 +72766,7 @@
               "matches": false
             },
             {
-              "offset": 51859,
+              "offset": 42051,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -73707,7 +72775,7 @@
               "matches": false
             },
             {
-              "offset": 51914,
+              "offset": 42106,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73716,7 +72784,7 @@
               "matches": false
             },
             {
-              "offset": 51927,
+              "offset": 42119,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73725,7 +72793,7 @@
               "matches": false
             },
             {
-              "offset": 51935,
+              "offset": 42127,
               "type": 2,
               "symbol": "_ZN7harvest4game12SLuaFilePairD1Ev",
               "addend": -4,
@@ -73734,7 +72802,7 @@
               "matches": false
             },
             {
-              "offset": 51943,
+              "offset": 42135,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -73743,7 +72811,7 @@
               "matches": false
             },
             {
-              "offset": 51959,
+              "offset": 42151,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73752,7 +72820,7 @@
               "matches": false
             },
             {
-              "offset": 51991,
+              "offset": 42183,
               "type": 2,
               "symbol": "__stack_chk_fail",
               "addend": -4,
@@ -73761,7 +72829,7 @@
               "matches": false
             },
             {
-              "offset": 52004,
+              "offset": 42196,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73770,7 +72838,7 @@
               "matches": false
             },
             {
-              "offset": 52014,
+              "offset": 42206,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73779,7 +72847,7 @@
               "matches": false
             },
             {
-              "offset": 52034,
+              "offset": 42226,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -73788,11 +72856,898 @@
               "matches": false
             },
             {
-              "offset": 52042,
+              "offset": 42234,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
               "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 45475,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 45881,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 45897,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfigurationC1EPNS_2io11IFileSystemE",
+              "addend": -4,
+              "destination": "0x5e6560",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 45936,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46137,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46337,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46370,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration4readEPNS_2io9IReadFileE",
+              "addend": -4,
+              "destination": "0x5e98b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46406,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46425,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x4bfb0+0x24",
+              "matches": false
+            },
+            {
+              "offset": 46433,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
+              "addend": -4,
+              "destination": "0x5e7d60",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46442,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 40,
+              "reason": "unmapped or truncated range: 0x14824+0x2c",
+              "matches": false
+            },
+            {
+              "offset": 46450,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration15attributeExistsEPKw",
+              "addend": -4,
+              "destination": "0x5e7d60",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46489,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46535,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46581,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46624,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46676,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46700,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x480019a0+0x24",
+              "matches": false
+            },
+            {
+              "offset": 46716,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x5e8320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46726,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 88,
+              "reason": "unmapped or truncated range: 0x4870247c+0x2c",
+              "matches": false
+            },
+            {
+              "offset": 46734,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x5e8320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46747,
+              "type": 10,
+              "symbol": ".rodata.str4.8",
+              "addend": 40,
+              "reason": "unmapped or truncated range: 0x7c247c89+0x2c",
+              "matches": false
+            },
+            {
+              "offset": 46755,
+              "type": 2,
+              "symbol": "_ZN2ox4game14CConfiguration12getAttributeEPKwRNS_4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x5e8320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46770,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46791,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 46980,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47148,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47165,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 524,
+              "reason": "unmapped or truncated range: 0xe8000000+0x2",
+              "matches": false
+            },
+            {
+              "offset": 47209,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47222,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 524,
+              "reason": "unmapped or truncated range: 0x8348005f+0x2",
+              "matches": false
+            },
+            {
+              "offset": 47252,
+              "type": 11,
+              "symbol": ".rodata.str1.1",
+              "addend": 524,
+              "reason": "unmapped or truncated range: 0x13048d01+0x2",
+              "matches": false
+            },
+            {
+              "offset": 47388,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47508,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47565,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47586,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47669,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47721,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47810,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 515,
+              "reason": "unmapped or truncated range: 0x48fffb89+0x9",
+              "matches": false
+            },
+            {
+              "offset": 47857,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 47870,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 515,
+              "reason": "unmapped or truncated range: 0x303c8840+0x9",
+              "matches": false
+            },
+            {
+              "offset": 47908,
+              "type": 11,
+              "symbol": ".rodata.str1.1",
+              "addend": 515,
+              "reason": "unmapped or truncated range: 0xcc24+0x9",
+              "matches": false
+            },
+            {
+              "offset": 48064,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48137,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48222,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 526,
+              "reason": "unmapped or truncated range: 0x9c8b0000+0xc",
+              "matches": false
+            },
+            {
+              "offset": 48261,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+              "addend": -4,
+              "destination": "0x450390",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48398,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48446,
+              "type": 2,
+              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
+              "addend": 4,
+              "destination": "0x86b8e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48453,
+              "type": 2,
+              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
+              "addend": 12,
+              "destination": "0x86b8e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48519,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48618,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48717,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48826,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48911,
+              "type": 2,
+              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
+              "addend": 4,
+              "destination": "0x86b8e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48922,
+              "type": 2,
+              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
+              "addend": 4,
+              "destination": "0x86b8e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48940,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48958,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48976,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 48986,
+              "type": 2,
+              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
+              "addend": -4,
+              "destination": "0x450ef0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49016,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49150,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49174,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49232,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49366,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49396,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49503,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49530,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49647,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49667,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49715,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49773,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49911,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49948,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49979,
+              "type": 10,
+              "symbol": "_ZN7harvest4game11CLuaManager25s_availableLuaScriptFilesE",
+              "addend": 0,
+              "destination": "0x86b8e0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 49984,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
+              "addend": -4,
+              "destination": "0x452c90",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50009,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 524,
+              "reason": "unmapped or truncated range: 0x24948bd2+0x2",
+              "matches": false
+            },
+            {
+              "offset": 50051,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEaSIcEERS2_PKT_",
+              "addend": -4,
+              "destination": "0x450390",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50184,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50223,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50349,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50395,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50403,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50419,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50432,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50442,
+              "type": 2,
+              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
+              "addend": -4,
+              "destination": "0x450ef0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50455,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50473,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50491,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50504,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50522,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50535,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50556,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50569,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50593,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50641,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50655,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50665,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50711,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50719,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50727,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 50785,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
               "reason": "different destination",
               "matches": false
             },
@@ -74945,6 +74900,30 @@
               "exact": true
             },
             {
+              "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
+              "address": "0x44f2b0",
+              "size": 818,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
+              "address": "0x44f5f0",
+              "size": 100,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
+              "address": "0x44f660",
+              "size": 97,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
               "symbol": "_ZN7harvest4game23harvest_showInfoMessageEP9lua_State",
               "address": "0x44cac0",
               "size": 1075,
@@ -74979,10 +74958,26 @@
             {
               "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
               "address": "0x44afb0",
-              "size": 2390,
+              "size": 2406,
               "extent": null,
               "global": true,
               "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
+              "address": "0x44cf00",
+              "size": 3358,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
+              "address": "0x44db50",
+              "size": 638,
+              "extent": "fde",
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN7harvest4game11CLuaManager10includeModERKNS0_7SLuaModE",
@@ -75003,7 +74998,7 @@
             {
               "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
               "address": "0x44ddd0",
-              "size": 5314,
+              "size": 5442,
               "extent": null,
               "global": true,
               "exact": false
@@ -75020,46 +75015,6 @@
               "symbol": "_ZN7harvest4game11CLuaManager17initLuaBySaveFileEPN2ox2io9IReadFileEi",
               "address": "0x44fe70",
               "size": 1199,
-              "extent": "fde",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-              "address": "0x44cf00",
-              "size": 3278,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
-              "address": "0x44db50",
-              "size": 638,
-              "extent": "fde",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
-              "address": "0x44f2b0",
-              "size": 818,
-              "extent": "fde",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
-              "address": "0x44f5f0",
-              "size": 100,
-              "extent": "fde",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
-              "address": "0x44f660",
-              "size": 97,
               "extent": "fde",
               "global": true,
               "exact": true
@@ -75467,6 +75422,16 @@
               "kind": "merged string"
             },
             {
+              "address": "0x5f56c6",
+              "size": 9,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x622e31",
+              "size": 1,
+              "kind": "merged string"
+            },
+            {
               "address": "0x5f56bd",
               "size": 9,
               "kind": "merged string"
@@ -75534,16 +75499,6 @@
             {
               "address": "0x5f5700",
               "size": 9,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x5f56c6",
-              "size": 9,
-              "kind": "merged string"
-            },
-            {
-              "address": "0x622e31",
-              "size": 1,
               "kind": "merged string"
             }
           ]
@@ -76315,6 +76270,24 @@
               "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
               "address": "0x450dd0",
               "size": 42,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
+          "size": 237,
+          "placement": "symbol: _ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
+          "exact": true,
+          "address": "0x450e00",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
+              "address": "0x450e00",
+              "size": 237,
               "extent": "fde",
               "global": true,
               "exact": true
@@ -77293,6 +77266,298 @@
           ]
         },
         {
+          "name": ".text._ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
+          "size": 1271,
+          "placement": "symbol: _ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
+          "exact": false,
+          "address": "0x4536c0",
+          "first_difference": 13,
+          "differing_bytes": 1060,
+          "bad_references": [
+            {
+              "offset": 234,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
+              "addend": -4,
+              "destination": "0x450320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 333,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 348,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 435,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 450,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 558,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 576,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 659,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 677,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 752,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 767,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 903,
+              "type": 2,
+              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonC1ERKS1_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x454a92",
+              "matches": false
+            },
+            {
+              "offset": 924,
+              "type": 2,
+              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
+              "addend": -4,
+              "destination": "0x450e00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 946,
+              "type": 2,
+              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
+              "addend": -4,
+              "destination": "0x450e00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 980,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 995,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1018,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1102,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1131,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1143,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1156,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1169,
+              "type": 2,
+              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
+              "addend": -4,
+              "destination": "0x450dd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1177,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1188,
+              "type": 2,
+              "symbol": "__cxa_begin_catch",
+              "addend": -4,
+              "destination": "0x4074f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1210,
+              "type": 2,
+              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
+              "addend": -4,
+              "destination": "0x450dd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1233,
+              "type": 2,
+              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
+              "addend": -4,
+              "destination": "0x450dd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1246,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1251,
+              "type": 2,
+              "symbol": "__cxa_rethrow",
+              "addend": -4,
+              "destination": "0x408228",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1259,
+              "type": 2,
+              "symbol": "__cxa_end_catch",
+              "addend": -4,
+              "destination": "0x4083a8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1267,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 33,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
+              "address": "0x4536c0",
+              "size": 1271,
+              "extent": null,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
           "name": ".text._ZNSt6vectorIN7harvest4game13SCreativeHookESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
           "size": 1047,
           "placement": "symbol: _ZNSt6vectorIN7harvest4game13SCreativeHookESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
@@ -77519,7 +77784,7 @@
           "exact": false,
           "address": "0x451520",
           "first_difference": 2,
-          "differing_bytes": 523,
+          "differing_bytes": 527,
           "bad_references": [
             {
               "offset": 102,
@@ -77644,15 +77909,15 @@
         },
         {
           "name": ".text._ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "size": 2335,
+          "size": 2255,
           "placement": "symbol: _ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
           "exact": false,
           "address": "0x452c90",
           "first_difference": 35,
-          "differing_bytes": 1572,
+          "differing_bytes": 1397,
           "bad_references": [
             {
-              "offset": 918,
+              "offset": 910,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -77697,25 +77962,7 @@
               "matches": false
             },
             {
-              "offset": 1214,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1229,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1295,
+              "offset": 1200,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
               "addend": -4,
@@ -77724,7 +77971,16 @@
               "matches": false
             },
             {
-              "offset": 1342,
+              "offset": 1214,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
+              "addend": -4,
+              "destination": "0x450320",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1261,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -77733,7 +77989,7 @@
               "matches": false
             },
             {
-              "offset": 1368,
+              "offset": 1287,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -77742,7 +77998,7 @@
               "matches": false
             },
             {
-              "offset": 1447,
+              "offset": 1367,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -77751,7 +78007,7 @@
               "matches": false
             },
             {
-              "offset": 1473,
+              "offset": 1393,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -77760,7 +78016,7 @@
               "matches": false
             },
             {
-              "offset": 1550,
+              "offset": 1470,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -77769,7 +78025,7 @@
               "matches": false
             },
             {
-              "offset": 1568,
+              "offset": 1488,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -77778,7 +78034,7 @@
               "matches": false
             },
             {
-              "offset": 1656,
+              "offset": 1576,
               "type": 2,
               "symbol": "_ZdaPv",
               "addend": -4,
@@ -77787,7 +78043,7 @@
               "matches": false
             },
             {
-              "offset": 1674,
+              "offset": 1594,
               "type": 2,
               "symbol": "_Znam",
               "addend": -4,
@@ -77796,7 +78052,7 @@
               "matches": false
             },
             {
-              "offset": 1756,
+              "offset": 1676,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
@@ -77805,7 +78061,7 @@
               "matches": false
             },
             {
-              "offset": 1875,
+              "offset": 1795,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModC1ERKS1_",
               "addend": -4,
@@ -77814,7 +78070,7 @@
               "matches": false
             },
             {
-              "offset": 1897,
+              "offset": 1817,
               "type": 2,
               "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game7SLuaModES3_SaIS2_EET0_T_S6_S5_RT1_",
               "addend": -4,
@@ -77823,7 +78079,7 @@
               "matches": false
             },
             {
-              "offset": 1924,
+              "offset": 1844,
               "type": 2,
               "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game7SLuaModES3_SaIS2_EET0_T_S6_S5_RT1_",
               "addend": -4,
@@ -77832,7 +78088,7 @@
               "matches": false
             },
             {
-              "offset": 1959,
+              "offset": 1879,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
@@ -77841,7 +78097,7 @@
               "matches": false
             },
             {
-              "offset": 1982,
+              "offset": 1902,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -77850,7 +78106,7 @@
               "matches": false
             },
             {
-              "offset": 2079,
+              "offset": 1999,
               "type": 2,
               "symbol": "_Znwm",
               "addend": -4,
@@ -77859,7 +78115,7 @@
               "matches": false
             },
             {
-              "offset": 2104,
+              "offset": 2024,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -77868,7 +78124,7 @@
               "matches": false
             },
             {
-              "offset": 2112,
+              "offset": 2032,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -77877,7 +78133,7 @@
               "matches": false
             },
             {
-              "offset": 2129,
+              "offset": 2049,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIcED1Ev",
               "addend": -4,
@@ -77886,7 +78142,7 @@
               "matches": false
             },
             {
-              "offset": 2143,
+              "offset": 2063,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -77895,7 +78151,7 @@
               "matches": false
             },
             {
-              "offset": 2153,
+              "offset": 2073,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
@@ -77904,25 +78160,61 @@
               "matches": false
             },
             {
-              "offset": 2185,
+              "offset": 2105,
               "type": 2,
               "symbol": "_ZN2ox4core7CStringIwED1Ev",
               "addend": -4,
               "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2118,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "addend": -4,
+              "destination": "0x409c20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2133,
+              "type": 2,
+              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
+              "addend": -4,
+              "destination": "0x450ef0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2141,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2176,
+              "type": 2,
+              "symbol": "__cxa_begin_catch",
+              "addend": -4,
+              "destination": "0x4074f8",
               "reason": "different destination",
               "matches": false
             },
             {
               "offset": 2198,
               "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
+              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
-              "destination": "0x409c20",
+              "destination": "0x450ef0",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 2213,
+              "offset": 2217,
               "type": 2,
               "symbol": "_ZN7harvest4game7SLuaModD1Ev",
               "addend": -4,
@@ -77931,43 +78223,7 @@
               "matches": false
             },
             {
-              "offset": 2221,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2256,
-              "type": 2,
-              "symbol": "__cxa_begin_catch",
-              "addend": -4,
-              "destination": "0x4074f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2278,
-              "type": 2,
-              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
-              "addend": -4,
-              "destination": "0x450ef0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2297,
-              "type": 2,
-              "symbol": "_ZN7harvest4game7SLuaModD1Ev",
-              "addend": -4,
-              "destination": "0x450ef0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2310,
+              "offset": 2230,
               "type": 2,
               "symbol": "_ZdlPv",
               "addend": -4,
@@ -77976,7 +78232,7 @@
               "matches": false
             },
             {
-              "offset": 2315,
+              "offset": 2235,
               "type": 2,
               "symbol": "__cxa_rethrow",
               "addend": -4,
@@ -77985,7 +78241,7 @@
               "matches": false
             },
             {
-              "offset": 2323,
+              "offset": 2243,
               "type": 2,
               "symbol": "__cxa_end_catch",
               "addend": -4,
@@ -77994,7 +78250,7 @@
               "matches": false
             },
             {
-              "offset": 2331,
+              "offset": 2251,
               "type": 2,
               "symbol": "_Unwind_Resume",
               "addend": -4,
@@ -78003,398 +78259,12 @@
               "matches": false
             }
           ],
-          "references": 46,
+          "references": 45,
           "functions": [
             {
               "symbol": "_ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
               "address": "0x452c90",
-              "size": 2335,
-              "extent": null,
-              "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "size": 429,
-          "placement": "symbol: _ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "exact": false,
-          "address": "0x450e00",
-          "first_difference": 4,
-          "differing_bytes": 410,
-          "bad_references": [
-            {
-              "offset": 121,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 236,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 363,
-              "type": 2,
-              "symbol": "__cxa_begin_catch",
-              "addend": -4,
-              "destination": "0x4074f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 380,
-              "type": 2,
-              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
-              "addend": -4,
-              "destination": "0x450dd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 399,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 406,
-              "type": 2,
-              "symbol": "__cxa_rethrow",
-              "addend": -4,
-              "destination": "0x408228",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 417,
-              "type": 2,
-              "symbol": "__cxa_end_catch",
-              "addend": -4,
-              "destination": "0x4083a8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 425,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
-          "references": 8,
-          "functions": [
-            {
-              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-              "address": "0x450e00",
-              "size": 429,
-              "extent": null,
-              "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "size": 1271,
-          "placement": "symbol: _ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "exact": false,
-          "address": "0x4536c0",
-          "first_difference": 13,
-          "differing_bytes": 1063,
-          "bad_references": [
-            {
-              "offset": 234,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcEaSERKS2_",
-              "addend": -4,
-              "destination": "0x450320",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 333,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 348,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 427,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 442,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 550,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 568,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 651,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 669,
-              "type": 2,
-              "symbol": "_Znam",
-              "addend": -4,
-              "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 752,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 767,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 903,
-              "type": 2,
-              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonC1ERKS1_",
-              "addend": -4,
-              "reason": "no target address for symbol",
-              "candidate": "0x454a92",
-              "matches": false
-            },
-            {
-              "offset": 924,
-              "type": 2,
-              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-              "addend": -4,
-              "destination": "0x450e00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 946,
-              "type": 2,
-              "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-              "addend": -4,
-              "destination": "0x450e00",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 980,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 995,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1018,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1102,
-              "type": 2,
-              "symbol": "_Znwm",
-              "addend": -4,
-              "destination": "0x407bc8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1131,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1143,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1156,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIcED1Ev",
-              "addend": -4,
-              "destination": "0x409c20",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1169,
-              "type": 2,
-              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
-              "addend": -4,
-              "destination": "0x450dd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1177,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1188,
-              "type": 2,
-              "symbol": "__cxa_begin_catch",
-              "addend": -4,
-              "destination": "0x4074f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1210,
-              "type": 2,
-              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
-              "addend": -4,
-              "destination": "0x450dd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1233,
-              "type": 2,
-              "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
-              "addend": -4,
-              "destination": "0x450dd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1246,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1251,
-              "type": 2,
-              "symbol": "__cxa_rethrow",
-              "addend": -4,
-              "destination": "0x408228",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1259,
-              "type": 2,
-              "symbol": "__cxa_end_catch",
-              "addend": -4,
-              "destination": "0x4083a8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 1267,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
-          "references": 33,
-          "functions": [
-            {
-              "symbol": "_ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-              "address": "0x4536c0",
-              "size": 1271,
+              "size": 2255,
               "extent": null,
               "global": true,
               "exact": false
@@ -78425,7 +78295,7 @@
           "/out/HarvestFull__harvest__game__CLuaManager.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CLuaManager.cpp": "be8fdb6b3096a3abd55ea303c1071cbd6a54c1f6afe6e3354e171dfee48f0512",
+          "src/HarvestFull/harvest/game/CLuaManager.cpp": "8bcd273ddcae4c524520b82c36d517561c86a21c53712a2a81b677233e85bfb1",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -78507,9 +78377,9 @@
           "src/ox/video/IParticleEngineCallback.h": "6c2b0ef8969e63695c187ea1bf2e966b1ee4df3ac6cd74d42a771ed6d04cba57"
         },
         "system_headers": 141,
-        "object_sha256": "f0bfc832a5dab19f2a3cb5070c82ee69b720e40622dc4f49ecf6ac44f3d09efe"
+        "object_sha256": "b1989b5e82351a70dbb4bda3ed9162e225bd1f6b6ffd68cc9bbc1275d84a26b0"
       },
-      "fuzzy_target_sha256": "4d24b60fd2fffa01252747d0f5a3fda64f95c0dfdf42767c0b5212e143b27799",
+      "fuzzy_target_sha256": "6af3647ee66eefc8e0351ba4d1381a5ca79c7f3bf3d7a2239ead8b2c7743d02e",
       "fuzzy_functions": [
         {
           "address": "0x4468f0",
@@ -79364,6 +79234,24 @@
           "percent": 100.0
         },
         {
+          "address": "0x44f2b0",
+          "size": 818,
+          "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
+          "percent": 100.0
+        },
+        {
+          "address": "0x44f5f0",
+          "size": 100,
+          "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
+          "percent": 100.0
+        },
+        {
+          "address": "0x44f660",
+          "size": 97,
+          "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
+          "percent": 100.0
+        },
+        {
           "address": "0x44cac0",
           "size": 1075,
           "symbol": "_ZN7harvest4game23harvest_showInfoMessageEP9lua_State",
@@ -79373,7 +79261,7 @@
           "address": "0x44b8e0",
           "size": 966,
           "symbol": "_ZN7harvest4game11CLuaManager18pushCreativeHookerEPKci",
-          "percent": 82.7621
+          "percent": 83.145164
         },
         {
           "address": "0x44bcb0",
@@ -79391,13 +79279,25 @@
           "address": "0x44afb0",
           "size": 2345,
           "symbol": "_ZN7harvest4game14CLuaFileValues15getLuaTableVarsEP9lua_StateiRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-          "percent": 48.78087
+          "percent": 49.970436
+        },
+        {
+          "address": "0x44cf00",
+          "size": 3150,
+          "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
+          "percent": 90.33512
+        },
+        {
+          "address": "0x44db50",
+          "size": 638,
+          "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
+          "percent": 100.0
         },
         {
           "address": "0x44c110",
           "size": 2330,
           "symbol": "_ZN7harvest4game11CLuaManager10includeModERKNS0_7SLuaModE",
-          "percent": 99.086006
+          "percent": 99.25464
         },
         {
           "address": "0x44ca30",
@@ -79409,7 +79309,7 @@
           "address": "0x44ddd0",
           "size": 5330,
           "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
-          "percent": 84.55715
+          "percent": 79.441154
         },
         {
           "address": "0x44f6d0",
@@ -79421,36 +79321,6 @@
           "address": "0x44fe70",
           "size": 1199,
           "symbol": "_ZN7harvest4game11CLuaManager17initLuaBySaveFileEPN2ox2io9IReadFileEi",
-          "percent": 100.0
-        },
-        {
-          "address": "0x44cf00",
-          "size": 3150,
-          "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-          "percent": 93.49732
-        },
-        {
-          "address": "0x44db50",
-          "size": 638,
-          "symbol": "_ZN7harvest4game11CLuaManager14writeLuaStatesEPN2ox2io10IWriteFileE",
-          "percent": 100.0
-        },
-        {
-          "address": "0x44f2b0",
-          "size": 818,
-          "symbol": "_ZN7harvest4game11CLuaManager21addEntityActionButtonEPKcS3_b",
-          "percent": 100.0
-        },
-        {
-          "address": "0x44f5f0",
-          "size": 100,
-          "symbol": "_ZN7harvest4game27harvest_defineUpgradeButtonEP9lua_State",
-          "percent": 100.0
-        },
-        {
-          "address": "0x44f660",
-          "size": 97,
-          "symbol": "_ZN7harvest4game26harvest_defineActionButtonEP9lua_State",
           "percent": 100.0
         },
         {
@@ -79571,6 +79441,12 @@
           "address": "0x450dd0",
           "size": 42,
           "symbol": "_ZN7harvest4game22SLuaEntityActionButtonD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x450e00",
+          "size": 237,
+          "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
           "percent": 100.0
         },
         {
@@ -79706,34 +79582,28 @@
           "percent": 99.152176
         },
         {
+          "address": "0x4536c0",
+          "size": 1564,
+          "symbol": "_ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
+          "percent": 38.629074
+        },
+        {
           "address": "0x451800",
           "size": 983,
           "symbol": "_ZNSt6vectorIN7harvest4game13SCreativeHookESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "percent": 88.43023
+          "percent": 88.19768
         },
         {
           "address": "0x451520",
           "size": 498,
           "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game7SLuaModES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "percent": 57.734375
+          "percent": 57.5
         },
         {
           "address": "0x452c90",
           "size": 2319,
           "symbol": "_ZNSt6vectorIN7harvest4game7SLuaModESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "percent": 90.544266
-        },
-        {
-          "address": "0x450e00",
-          "size": 237,
-          "symbol": "_ZSt22__uninitialized_move_aIPN7harvest4game22SLuaEntityActionButtonES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "percent": 11.441176
-        },
-        {
-          "address": "0x4536c0",
-          "size": 1564,
-          "symbol": "_ZNSt6vectorIN7harvest4game22SLuaEntityActionButtonESaIS2_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS2_S4_EERKS2_",
-          "percent": 38.26065
+          "percent": 95.36885
         }
       ]
     },
@@ -136816,7 +136686,7 @@
     },
     {
       "unit": "daisy/video/Null/CSpritePackage.cpp",
-      "object_sha256": "bdc30223986f785731478a891ba6b538719e57bcdca629c7d291b3346f6e4480",
+      "object_sha256": "6602f747c5882eb6011df2c530f69a3c043b868467f0f0d175c69d33a8170bb5",
       "exact": false,
       "sections": [
         {
@@ -136825,8 +136695,8 @@
           "placement": "symbol: _ZN5daisy5video14CSpritePackage19updateAllAnimationsEf",
           "exact": false,
           "address": "0x5a1390",
-          "first_difference": 1622,
-          "differing_bytes": 2777,
+          "first_difference": 7573,
+          "differing_bytes": 2775,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy5video14CSpritePackage11removeImageEPN2ox5video21ISpriteAnimationImageE",
@@ -137401,7 +137271,7 @@
               "size": 495,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy5video14CSpritePackage20animationStateExistsERKN2ox4core7CStringIcEE",
@@ -138476,6 +138346,24 @@
           ]
         },
         {
+          "name": ".text._ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
+          "size": 343,
+          "placement": "symbol: _ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
+          "exact": true,
+          "address": "0x5a6fd0",
+          "references": 8,
+          "functions": [
+            {
+              "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
+              "address": "0x5a6fd0",
+              "size": 343,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
           "name": ".text._ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEENS3_19SImageIdSortFunctorIS4_EEEvT_SC_T0_",
           "size": 393,
           "placement": "symbol: _ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEENS3_19SImageIdSortFunctorIS4_EEEvT_SC_T0_",
@@ -138505,24 +138393,6 @@
               "symbol": "_ZSt21__unguarded_partitionIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEES4_NS3_19SImageIdSortFunctorIS4_EEET_SC_SC_T0_T1_",
               "address": "0x5a7130",
               "size": 475,
-              "extent": "fde",
-              "global": true,
-              "exact": true
-            }
-          ]
-        },
-        {
-          "name": ".text._ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "size": 343,
-          "placement": "symbol: _ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
-          "exact": true,
-          "address": "0x5a6fd0",
-          "references": 8,
-          "functions": [
-            {
-              "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
-              "address": "0x5a6fd0",
-              "size": 343,
               "extent": "fde",
               "global": true,
               "exact": true
@@ -138777,7 +138647,7 @@
           "/out/daisy__video__Null__CSpritePackage.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CSpritePackage.cpp": "355824f8568f2fdf1f6f6709f4dc0baa0be63aeea798b6eb72ab059a773bfb4f",
+          "src/daisy/video/Null/CSpritePackage.cpp": "a321bd35bc19529a2ef0d085471743cd89171bec8e3ffb092d715b0837bc575e",
           "src/daisy/video/Null/CSpritePackage.h": "f3e14016a17b31ee4109e889a2d4c9e25ec5fd7aaaee4fcd807844f76aeabaf9",
           "src/daisy/video/Null/CSpriteAnimationImageBundle.h": "93b611c925f5fb293125ff74e8739c8719c50ec08da530b98f225376e2fabbe5",
           "src/daisy/video/Null/CSpriteAnimationImage.h": "3edc19504ee68ba462709a5d361dfc25355782cc0b1a719e231d139ff15c1b2a",
@@ -138809,9 +138679,9 @@
           "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead"
         },
         "system_headers": 141,
-        "object_sha256": "bdc30223986f785731478a891ba6b538719e57bcdca629c7d291b3346f6e4480"
+        "object_sha256": "6602f747c5882eb6011df2c530f69a3c043b868467f0f0d175c69d33a8170bb5"
       },
-      "fuzzy_target_sha256": "cfe69d30310460c12576511af1176689b28d2d8c117d09ada63a954a9a944a98",
+      "fuzzy_target_sha256": "a9ead780e64edba32300bc9663fca47156878f56b1d3fb50d94a654614c80077",
       "fuzzy_functions": [
         {
           "address": "0x5a1390",
@@ -138883,7 +138753,7 @@
           "address": "0x5a1910",
           "size": 495,
           "symbol": "_ZN5daisy5video14CSpritePackage20removeAnimationStateEPN2ox5video21ISpriteAnimationStateE",
-          "percent": 99.48529
+          "percent": 100.0
         },
         {
           "address": "0x5a1b00",
@@ -139192,6 +139062,12 @@
           "percent": 100.0
         },
         {
+          "address": "0x5a6fd0",
+          "size": 343,
+          "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
+          "percent": 100.0
+        },
+        {
           "address": "0x5a7310",
           "size": 393,
           "symbol": "_ZSt22__final_insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEENS3_19SImageIdSortFunctorIS4_EEEvT_SC_T0_",
@@ -139201,12 +139077,6 @@
           "address": "0x5a7130",
           "size": 475,
           "symbol": "_ZSt21__unguarded_partitionIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEES4_NS3_19SImageIdSortFunctorIS4_EEET_SC_SC_T0_T1_",
-          "percent": 100.0
-        },
-        {
-          "address": "0x5a6fd0",
-          "size": 343,
-          "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video13SSpriteBundleES3_SaIS2_EET0_T_S6_S5_RT1_",
           "percent": 100.0
         },
         {
@@ -146733,7 +146603,7 @@
     },
     {
       "unit": "daisy/gui/CGUIStaticText.cpp",
-      "object_sha256": "391b76c7324b7741bb3fc2a1f4dd12c9da7b5c3dccfc4f38f423eac070142338",
+      "object_sha256": "514bd582a528372a3bf4d51fc630b917814470c6d57be97db57f1174accbe5dd",
       "exact": false,
       "sections": [
         {
@@ -146743,7 +146613,7 @@
           "exact": false,
           "address": "0x51a080",
           "first_difference": 83,
-          "differing_bytes": 2965,
+          "differing_bytes": 2345,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticText13getTextHeightEv",
@@ -146776,39 +146646,39 @@
               "placed": "0x51a4a0"
             },
             {
-              "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-              "known": "0x51aa30",
+              "symbol": "_ZN5daisy3gui14CGUIStaticTextC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
+              "known": "0x51a4f0",
               "placed": "0x51a4e0"
             },
             {
-              "symbol": "_ZN5daisy3gui14CGUIStaticTextC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-              "known": "0x51a4f0",
+              "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
+              "known": "0x51aa30",
               "placed": "0x51aa20"
             },
             {
               "symbol": "_ZThn24_N5daisy3gui14CGUIStaticTextD0Ev",
               "known": "0x51af70",
-              "placed": "0x51b040"
+              "placed": "0x51af60"
             },
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticTextD0Ev",
               "known": "0x51af80",
-              "placed": "0x51b050"
+              "placed": "0x51af70"
             },
             {
               "symbol": "_ZThn24_N5daisy3gui14CGUIStaticTextD1Ev",
               "known": "0x51b1c0",
-              "placed": "0x51b290"
+              "placed": "0x51b1b0"
             },
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticTextD1Ev",
               "known": "0x51b1d0",
-              "placed": "0x51b2a0"
+              "placed": "0x51b1c0"
             },
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticTextD2Ev",
               "known": "0x51b400",
-              "placed": "0x51b4d0"
+              "placed": "0x51b3f0"
             },
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticText9breakTextEv",
@@ -146889,294 +146759,6 @@
               "symbol": "_Znam",
               "addend": -4,
               "destination": "0x407128",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3681,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 16,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3689,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 328,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3756,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3776,
-              "type": 2,
-              "symbol": "_ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
-              "addend": -4,
-              "destination": "0x409c60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3784,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3801,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3818,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3838,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3855,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3869,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3876,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3884,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3893,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3900,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3908,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3963,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 3980,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4017,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5216,
-              "type": 11,
-              "symbol": "_ZTVN5daisy3gui14CGUIStaticTextE",
-              "addend": 16,
-              "destination": "0x615140",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5224,
-              "type": 11,
-              "symbol": "_ZTVN5daisy3gui14CGUIStaticTextE",
-              "addend": 424,
-              "destination": "0x615140",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5584,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5632,
-              "type": 2,
-              "symbol": "_ZN2ox6TArrayINS_4core7CStringIwEEED1Ev",
-              "addend": -4,
-              "destination": "0x409c60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5645,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5656,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui14IGUIStaticTextE",
-              "addend": 16,
-              "destination": "0x615380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5665,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui14IGUIStaticTextE",
-              "addend": 424,
-              "destination": "0x615380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5670,
-              "type": 2,
-              "symbol": "_ZN2ox3gui11IGUIElementD2Ev",
-              "addend": -4,
-              "destination": "0x504450",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5678,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5689,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5697,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5713,
-              "type": 2,
-              "symbol": "_ZN2ox4core7CStringIwED1Ev",
-              "addend": -4,
-              "destination": "0x409c40",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5731,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5746,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
               "reason": "different destination",
               "matches": false
             },
@@ -147477,7 +147059,7 @@
               "matches": false
             }
           ],
-          "references": 207,
+          "references": 204,
           "functions": [
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticText16setTextAlignmentEN2ox3gui20EFontHorizontalAlignENS3_18EFontVerticalAlignE",
@@ -147568,18 +147150,18 @@
               "exact": true
             },
             {
-              "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-              "address": "0x51aa30",
+              "symbol": "_ZN5daisy3gui14CGUIStaticTextC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
+              "address": "0x51a4f0",
               "size": 1332,
               "extent": "fde",
               "global": true,
               "exact": false
             },
             {
-              "symbol": "_ZN5daisy3gui14CGUIStaticTextC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-              "address": "0x51a4f0",
-              "size": 1567,
-              "extent": null,
+              "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
+              "address": "0x51aa30",
+              "size": 1332,
+              "extent": "fde",
               "global": true,
               "exact": false
             },
@@ -147618,10 +147200,10 @@
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticTextD2Ev",
               "address": "0x51b400",
-              "size": 552,
-              "extent": null,
+              "size": 770,
+              "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy3gui14CGUIStaticText9breakTextEv",
@@ -149082,7 +148664,7 @@
           "/out/daisy__gui__CGUIStaticText.o"
         ],
         "inputs": {
-          "src/daisy/gui/CGUIStaticText.cpp": "93d87b82cd22997376566d605b72e34dd469d5ddc0bdbbe08fe05632b742d589",
+          "src/daisy/gui/CGUIStaticText.cpp": "502faef7d819eebe79b9a5fdff3ae93eec65aa6bccd7fd02f2f80014d4aa2da3",
           "src/daisy/gui/CGUIStaticText.h": "a7914bec6e8bc86fbd7055b505102f5feb2f67111fabff942384080802c0869e",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/IGUIElement.h": "3b1a6381f8baf0d0e937f4f10a0a26efd3b529b6b1ac74ed58309321ffa93335",
@@ -149121,9 +148703,9 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
         },
         "system_headers": 117,
-        "object_sha256": "391b76c7324b7741bb3fc2a1f4dd12c9da7b5c3dccfc4f38f423eac070142338"
+        "object_sha256": "514bd582a528372a3bf4d51fc630b917814470c6d57be97db57f1174accbe5dd"
       },
-      "fuzzy_target_sha256": "08a8443201b25f99cd7b6b88f0da088177108fc8a3cd6f5236bf3d7023781140",
+      "fuzzy_target_sha256": "f9e6a6472ea0a1a364602eeca4e47ca6e792f736087903b861c20751ae11e79c",
       "fuzzy_functions": [
         {
           "address": "0x51a080",
@@ -149192,16 +148774,16 @@
           "percent": 100.0
         },
         {
-          "address": "0x51aa30",
-          "size": 1332,
-          "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-          "percent": 99.59866
-        },
-        {
           "address": "0x51a4f0",
           "size": 1332,
           "symbol": "_ZN5daisy3gui14CGUIStaticTextC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
-          "percent": 74.99666
+          "percent": 99.59866
+        },
+        {
+          "address": "0x51aa30",
+          "size": 1332,
+          "symbol": "_ZN5daisy3gui14CGUIStaticTextC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEES3_",
+          "percent": 99.397995
         },
         {
           "address": "0x51af70",
@@ -149231,7 +148813,7 @@
           "address": "0x51b400",
           "size": 770,
           "symbol": "_ZN5daisy3gui14CGUIStaticTextD2Ev",
-          "percent": 63.902912
+          "percent": 100.0
         },
         {
           "address": "0x51b710",
@@ -149543,7 +149125,7 @@
     },
     {
       "unit": "daisy/gui/CGUITabControl.cpp",
-      "object_sha256": "c2ffdf6d4f5bb477ef4f4bf5de829f7b76204f622de9ad4c8d20bb97e904df16",
+      "object_sha256": "5ea3201c27e31f738b0f8bb19285eee6cb61413e814c02e50e1238f69ac2e08e",
       "exact": false,
       "sections": [
         {
@@ -151538,6 +151120,58 @@
           ]
         },
         {
+          "name": ".text._ZN2ox3gui14IGUITabControlD0Ev",
+          "size": 49,
+          "placement": "symbol: _ZThn24_N2ox3gui14IGUITabControlD0Ev",
+          "exact": true,
+          "address": "0x522690",
+          "references": 4,
+          "functions": [
+            {
+              "symbol": "_ZThn24_N2ox3gui14IGUITabControlD0Ev",
+              "address": "0x522690",
+              "size": 6,
+              "extent": "thunk",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN2ox3gui14IGUITabControlD0Ev",
+              "address": "0x5226a0",
+              "size": 33,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox3gui14IGUITabControlD1Ev",
+          "size": 36,
+          "placement": "symbol: _ZThn24_N2ox3gui14IGUITabControlD1Ev",
+          "exact": true,
+          "address": "0x5226d0",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZThn24_N2ox3gui14IGUITabControlD1Ev",
+              "address": "0x5226d0",
+              "size": 6,
+              "extent": "thunk",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN2ox3gui14IGUITabControlD1Ev",
+              "address": "0x5226e0",
+              "size": 20,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui16IGUITabButtonRowD0Ev",
           "size": 49,
           "placement": "symbol: _ZThn24_N2ox3gui16IGUITabButtonRowD0Ev",
@@ -151600,89 +151234,6 @@
               "extent": null,
               "global": true,
               "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZN2ox3gui16IGUITabButtonRowD1Ev",
-          "size": 36,
-          "placement": "symbol: _ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
-          "exact": false,
-          "address": "0x522c20",
-          "first_difference": 16,
-          "differing_bytes": 20,
-          "bad_references": [
-            {
-              "offset": 19,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui16IGUITabButtonRowE",
-              "addend": 16,
-              "destination": "0x615c60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 27,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui16IGUITabButtonRowE",
-              "addend": 408,
-              "destination": "0x615c60",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 32,
-              "type": 2,
-              "symbol": "_ZN2ox3gui11IGUIElementD2Ev",
-              "addend": -4,
-              "destination": "0x504450",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
-          "references": 3,
-          "functions": [
-            {
-              "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
-              "address": "0x522c20",
-              "size": 6,
-              "extent": "thunk",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN2ox3gui16IGUITabButtonRowD1Ev",
-              "address": "0x522c30",
-              "size": 20,
-              "extent": null,
-              "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".text._ZN2ox3gui14IGUITabControlD0Ev",
-          "size": 49,
-          "placement": "symbol: _ZThn24_N2ox3gui14IGUITabControlD0Ev",
-          "exact": true,
-          "address": "0x522690",
-          "references": 4,
-          "functions": [
-            {
-              "symbol": "_ZThn24_N2ox3gui14IGUITabControlD0Ev",
-              "address": "0x522690",
-              "size": 6,
-              "extent": "thunk",
-              "global": true,
-              "exact": true
-            },
-            {
-              "symbol": "_ZN2ox3gui14IGUITabControlD0Ev",
-              "address": "0x5226a0",
-              "size": 33,
-              "extent": "fde",
-              "global": true,
-              "exact": true
             }
           ]
         },
@@ -153030,155 +152581,28 @@
           ]
         },
         {
-          "name": ".text._ZN2ox3gui14IGUITabControlD1Ev",
+          "name": ".text._ZN2ox3gui16IGUITabButtonRowD1Ev",
           "size": 357,
-          "placement": "symbol: _ZThn24_N2ox3gui14IGUITabControlD1Ev",
-          "exact": false,
-          "address": "0x5226d0",
-          "first_difference": 16,
-          "differing_bytes": 320,
-          "bad_references": [
-            {
-              "offset": 40,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 16,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 48,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIElementE",
-              "addend": 328,
-              "destination": "0x622ae0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 135,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 196,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 223,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 238,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 246,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 289,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 297,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 318,
-              "type": 2,
-              "symbol": "_ZdaPv",
-              "addend": -4,
-              "destination": "0x407f58",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 336,
-              "type": 2,
-              "symbol": "_ZdlPv",
-              "addend": -4,
-              "destination": "0x407b48",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 351,
-              "type": 2,
-              "symbol": "_ZN2ox5event14IEventReceiverD2Ev",
-              "addend": -4,
-              "destination": "0x5e37a0",
-              "reason": "different destination",
-              "matches": false
-            }
-          ],
+          "placement": "symbol: _ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
+          "exact": true,
+          "address": "0x522c20",
           "references": 12,
           "functions": [
             {
-              "symbol": "_ZThn24_N2ox3gui14IGUITabControlD1Ev",
-              "address": "0x5226d0",
+              "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
+              "address": "0x522c20",
               "size": 6,
               "extent": "thunk",
               "global": true,
               "exact": true
             },
             {
-              "symbol": "_ZN2ox3gui14IGUITabControlD1Ev",
-              "address": "0x5226e0",
+              "symbol": "_ZN2ox3gui16IGUITabButtonRowD1Ev",
+              "address": "0x522c30",
               "size": 341,
-              "extent": null,
+              "extent": "fde",
               "global": true,
-              "exact": false
-            }
-          ]
-        },
-        {
-          "name": ".rodata._ZTVN5daisy3gui16CGUITabButtonRowE",
-          "size": 432,
-          "placement": "symbol: _ZTVN5daisy3gui16CGUITabButtonRowE",
-          "exact": true,
-          "address": "0x6155c0",
-          "references": 52,
-          "data_ranges": [
-            {
-              "address": "0x6155c0",
-              "size": 432,
-              "kind": "section"
+              "exact": true
             }
           ]
         },
@@ -153193,6 +152617,21 @@
             {
               "address": "0x615780",
               "size": 408,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy3gui16CGUITabButtonRowE",
+          "size": 432,
+          "placement": "symbol: _ZTVN5daisy3gui16CGUITabButtonRowE",
+          "exact": true,
+          "address": "0x6155c0",
+          "references": 52,
+          "data_ranges": [
+            {
+              "address": "0x6155c0",
+              "size": 432,
               "kind": "section"
             }
           ]
@@ -153423,16 +152862,16 @@
           ]
         },
         {
-          "name": ".rodata._ZTVN2ox3gui16IGUITabButtonRowE",
-          "size": 432,
-          "placement": "symbol: _ZTVN2ox3gui16IGUITabButtonRowE",
+          "name": ".rodata._ZTVN2ox3gui14IGUITabControlE",
+          "size": 408,
+          "placement": "symbol: _ZTVN2ox3gui14IGUITabControlE",
           "exact": true,
-          "address": "0x615c60",
-          "references": 52,
+          "address": "0x615e20",
+          "references": 49,
           "data_ranges": [
             {
-              "address": "0x615c60",
-              "size": 432,
+              "address": "0x615e20",
+              "size": 408,
               "kind": "section"
             }
           ]
@@ -153483,16 +152922,16 @@
           ]
         },
         {
-          "name": ".rodata._ZTVN2ox3gui14IGUITabControlE",
-          "size": 408,
-          "placement": "symbol: _ZTVN2ox3gui14IGUITabControlE",
+          "name": ".rodata._ZTVN2ox3gui16IGUITabButtonRowE",
+          "size": 432,
+          "placement": "symbol: _ZTVN2ox3gui16IGUITabButtonRowE",
           "exact": true,
-          "address": "0x615e20",
-          "references": 49,
+          "address": "0x615c60",
+          "references": 52,
           "data_ranges": [
             {
-              "address": "0x615e20",
-              "size": 408,
+              "address": "0x615c60",
+              "size": 432,
               "kind": "section"
             }
           ]
@@ -153592,7 +153031,7 @@
           "/out/daisy__gui__CGUITabControl.o"
         ],
         "inputs": {
-          "src/daisy/gui/CGUITabControl.cpp": "83d44bcdcb2420e83bc0cdd1b8c304445cbf83e3ae3724f840338a0b9bfeebb5",
+          "src/daisy/gui/CGUITabControl.cpp": "cf4c8c24756a81a5ba5f7ca028ee2b9384e9c571d4d47ae95688370488d7f3f1",
           "src/daisy/gui/CGUITabControl.h": "c77ade3ccae9774ec5f87cf7db8388d083f7d5ae6d6c58d62f81ae8d952cd41e",
           "src/ox/gui/IGUITabControl.h": "01cc766e8da9a5bbe408064f33529e3c92b930d662d1e244344c767e45ede80e",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
@@ -153632,9 +153071,9 @@
           "src/ox/video/ISpriteAnimationState.h": "60650fa7302da13d29a0deffc37dd27a2077bccd18a14f1ff0a6d654c4fbafb8"
         },
         "system_headers": 117,
-        "object_sha256": "c2ffdf6d4f5bb477ef4f4bf5de829f7b76204f622de9ad4c8d20bb97e904df16"
+        "object_sha256": "5ea3201c27e31f738b0f8bb19285eee6cb61413e814c02e50e1238f69ac2e08e"
       },
-      "fuzzy_target_sha256": "5533bef54dbf88990404cbe26d6b25be205aa4bd08af34367e9a6ccb7ae56f86",
+      "fuzzy_target_sha256": "885c7057e6008d45c9f8d8188577800250e7f7fd68033b5395182fd4013124d9",
       "fuzzy_functions": [
         {
           "address": "0x51d360",
@@ -154213,30 +153652,6 @@
           "percent": 86.98864
         },
         {
-          "address": "0x522ab0",
-          "size": 6,
-          "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD0Ev",
-          "percent": 100.0
-        },
-        {
-          "address": "0x522ac0",
-          "size": 348,
-          "symbol": "_ZN2ox3gui16IGUITabButtonRowD0Ev",
-          "percent": 5.0
-        },
-        {
-          "address": "0x522c20",
-          "size": 6,
-          "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
-          "percent": 100.0
-        },
-        {
-          "address": "0x522c30",
-          "size": 341,
-          "symbol": "_ZN2ox3gui16IGUITabButtonRowD1Ev",
-          "percent": 1.25
-        },
-        {
           "address": "0x522690",
           "size": 6,
           "symbol": "_ZThn24_N2ox3gui14IGUITabControlD0Ev",
@@ -154247,6 +153662,30 @@
           "size": 33,
           "symbol": "_ZN2ox3gui14IGUITabControlD0Ev",
           "percent": 100.0
+        },
+        {
+          "address": "0x5226d0",
+          "size": 6,
+          "symbol": "_ZThn24_N2ox3gui14IGUITabControlD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5226e0",
+          "size": 20,
+          "symbol": "_ZN2ox3gui14IGUITabControlD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x522ab0",
+          "size": 6,
+          "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x522ac0",
+          "size": 348,
+          "symbol": "_ZN2ox3gui16IGUITabButtonRowD0Ev",
+          "percent": 5.0
         },
         {
           "address": "0x522700",
@@ -154357,16 +153796,16 @@
           "percent": 0
         },
         {
-          "address": "0x5226d0",
+          "address": "0x522c20",
           "size": 6,
-          "symbol": "_ZThn24_N2ox3gui14IGUITabControlD1Ev",
+          "symbol": "_ZThn24_N2ox3gui16IGUITabButtonRowD1Ev",
           "percent": 100.0
         },
         {
-          "address": "0x5226e0",
-          "size": 20,
-          "symbol": "_ZN2ox3gui14IGUITabControlD1Ev",
-          "percent": 0
+          "address": "0x522c30",
+          "size": 341,
+          "symbol": "_ZN2ox3gui16IGUITabButtonRowD1Ev",
+          "percent": 100.0
         }
       ]
     },
@@ -218543,7 +217982,7 @@
     },
     {
       "unit": "daisy/other/CLinuxOperator.cpp",
-      "object_sha256": "b93a47368d184dcf9ba26336762de679a28cc67c145fe5933f6df339aea41c9e",
+      "object_sha256": "387c5c3eecb429806adba457239dc138875da2108bacbb59b9a0b4e5e678249c",
       "exact": false,
       "sections": [
         {
@@ -218552,8 +217991,6 @@
           "placement": "symbol: _ZN5daisy14CLinuxOperator25getOperationSystemVersionEv",
           "exact": false,
           "address": "0x4c0620",
-          "first_difference": 983,
-          "differing_bytes": 4,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy14CLinuxOperator15copyToClipboardEPKc",
@@ -218571,11 +218008,6 @@
               "placed": "0x4c07e0"
             },
             {
-              "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
-              "known": "0x4c0d90",
-              "placed": "0x4c0860"
-            },
-            {
               "symbol": "_ZN5daisy14CLinuxOperatorC2Ev",
               "known": "0x4c07e0",
               "placed": "0x4c0ba0"
@@ -218586,8 +218018,8 @@
               "placed": "0x4c0c20"
             },
             {
-              "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
-              "known": "0x4c0860",
+              "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
+              "known": "0x4c0d90",
               "placed": "0x4c0e10"
             }
           ],
@@ -218714,12 +218146,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
-              "address": "0x4c0d90",
+              "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
+              "address": "0x4c0860",
               "size": 831,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy14CLinuxOperatorC2Ev",
@@ -218738,12 +218170,12 @@
               "exact": true
             },
             {
-              "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
-              "address": "0x4c0860",
+              "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
+              "address": "0x4c0d90",
               "size": 831,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             }
           ],
           "data_ranges": [
@@ -218753,13 +218185,13 @@
               "kind": "merged string"
             },
             {
-              "address": "0x5f56fe",
-              "size": 2,
+              "address": "0x60c5c0",
+              "size": 3,
               "kind": "merged string"
             },
             {
-              "address": "0x5f56fe",
-              "size": 2,
+              "address": "0x60c5c0",
+              "size": 3,
               "kind": "merged string"
             },
             {
@@ -218778,13 +218210,13 @@
               "kind": "merged string"
             },
             {
-              "address": "0x60c5c0",
-              "size": 3,
+              "address": "0x5f56fe",
+              "size": 2,
               "kind": "merged string"
             },
             {
-              "address": "0x60c5c0",
-              "size": 3,
+              "address": "0x5f56fe",
+              "size": 2,
               "kind": "merged string"
             }
           ]
@@ -219034,16 +218466,16 @@
           "/out/daisy__other__CLinuxOperator.o"
         ],
         "inputs": {
-          "src/daisy/other/CLinuxOperator.cpp": "8e3a4807950d288cc5788705e064af1dd3c9616743efbade74053c4dfed3cce2",
+          "src/daisy/other/CLinuxOperator.cpp": "e3e7cc2c018a589ea04e61337876c177bc97aa1aec98aee10b99e32cbf666d9b",
           "src/daisy/other/CLinuxOperator.h": "4d1f869b14b7f888a5957638f7953e04962d084c2857c7d866d29db99e6c340c",
           "src/ox/IOSOperator.h": "7d129fa95cc0d732940c50e5870085cb91f16064c6526a383591aafd9f1bbfde",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee"
         },
         "system_headers": 110,
-        "object_sha256": "b93a47368d184dcf9ba26336762de679a28cc67c145fe5933f6df339aea41c9e"
+        "object_sha256": "387c5c3eecb429806adba457239dc138875da2108bacbb59b9a0b4e5e678249c"
       },
-      "fuzzy_target_sha256": "85b40d30bacbc83a04bfb452c00a26f66854912cdc809ae7b1f49b8a3af0a7e5",
+      "fuzzy_target_sha256": "65ffeefa7e288e079c87f707f125caf871cd2f90b78108d2aca6fff83505e9aa",
       "fuzzy_functions": [
         {
           "address": "0x4c0620",
@@ -219136,10 +218568,10 @@
           "percent": 100.0
         },
         {
-          "address": "0x4c0d90",
+          "address": "0x4c0860",
           "size": 831,
-          "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
-          "percent": 99.91304
+          "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
+          "percent": 99.934784
         },
         {
           "address": "0x4c07e0",
@@ -219154,10 +218586,10 @@
           "percent": 99.92958
         },
         {
-          "address": "0x4c0860",
+          "address": "0x4c0d90",
           "size": 831,
-          "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
-          "percent": 99.86957
+          "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
+          "percent": 99.978264
         },
         {
           "address": "0x466870",
@@ -223806,7 +223238,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "07935ca4870ca027e8d860e244b0beaf8ac4622a6dc2d326cd9b0d104de69403"
+    "report_sha256": "ead93191b9a8366855fc1558fc3bbcc55e4dfeb0bc77bdd4dedea5d1157a9387"
   },
   "link": {
     "status": "unavailable",

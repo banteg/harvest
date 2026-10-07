@@ -1827,19 +1827,6 @@ bool CLuaManager::pushHooker(const char* name, int hook)
     return true;
 }
 
-void CLuaManager::checkHooker(int hook)
-{
-    if (HookStates[hook] == 0)
-    {
-        int result = lua_tointeger(L, -1);
-        if (result)
-            HookStates[hook] = 2;
-        else
-            HookStates[hook] = 1;
-    }
-    lua_pop(L, 1);
-}
-
 ox::TArray<ox::core::CString<char> >& CLuaManager::getCompilerErrors()
 {
     return CompilerErrors;
@@ -2056,6 +2043,19 @@ void CLuaManager::hookMissileLaunched(int missileType, entity::CBuildingEntity* 
         if (lua_pcall(L, 6, 1, 0) == 0)
             checkHooker(15);
     }
+}
+
+void CLuaManager::checkHooker(int hook)
+{
+    if (HookStates[hook] == 0)
+    {
+        int result = lua_tointeger(L, -1);
+        if (result)
+            HookStates[hook] = 2;
+        else
+            HookStates[hook] = 1;
+    }
+    lua_pop(L, 1);
 }
 
 void CLuaManager::hookEnergyLinkOverheated(entity::CBuildingEntity* link)

@@ -80,14 +80,6 @@ void CLinuxOperator::copyToClipboard(const char* text)
     gtk_clipboard_set_text(clipboard, text, strlen(text));
 }
 
-//! "$HOME/." followed by the application name, e.g. "/home/user/.Harvest" (no trailing slash); with
-//! HOME unset, "/.Harvest". The game mounts it as $HARVEST_USERDATA$.
-ox::core::CString<char> CLinuxOperator::getApplicationSupportPath(const char* application)
-{
-    ox::core::CString<char> path(getenv("HOME"));
-    return path + "/." + application;
-}
-
 //! Opens the URL with xdg-open through the shell; the wide URL is narrowed character by character and
 //! not quoted. Original bug: returns nothing defined.
 bool CLinuxOperator::openURL(const wchar_t* url)
@@ -102,6 +94,14 @@ ox::core::CString<char> CLinuxOperator::getDocumentsPath(const char* application
 {
     ox::core::CString<char> path(getenv("HOME"));
     return path + "/" + application;
+}
+
+//! "$HOME/." followed by the application name, e.g. "/home/user/.Harvest" (no trailing slash); with
+//! HOME unset, "/.Harvest". The game mounts it as $HARVEST_USERDATA$.
+ox::core::CString<char> CLinuxOperator::getApplicationSupportPath(const char* application)
+{
+    ox::core::CString<char> path(getenv("HOME"));
+    return path + "/." + application;
 }
 
 } // end namespace daisy

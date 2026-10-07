@@ -58,16 +58,6 @@ CGUIStaticText::CGUIStaticText(const wchar_t* text, bool border, ox::gui::IGUIEn
     Text = text;
 }
 
-//! destructor
-CGUIStaticText::~CGUIStaticText()
-{
-    if (OverrideFont)
-        OverrideFont->drop();
-
-    if (ParagraphIcon)
-        ParagraphIcon->remove();
-}
-
 //! draws the element and its children
 void CGUIStaticText::draw()
 {
@@ -476,6 +466,16 @@ void CGUIStaticText::activateProgressiveReveal(unsigned int time)
 {
     ProgressiveReveal = true;
     RevealStart = daisy::os::Timer::getTime() + time;
+}
+
+//! destructor
+CGUIStaticText::~CGUIStaticText()
+{
+    if (OverrideFont)
+        OverrideFont->drop();
+
+    if (ParagraphIcon)
+        ParagraphIcon->remove();
 }
 
 void CGUIStaticText::activateOffsetScrollingToEnsureVisibleText()
