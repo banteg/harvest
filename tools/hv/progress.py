@@ -14,7 +14,7 @@ from pathlib import Path
 
 from hv import builds, metrics, units
 
-SCHEMA = 2
+SCHEMA = 3
 
 
 def sha(data: bytes) -> str:
@@ -35,6 +35,8 @@ def measurement_paths(build: str) -> list[str]:
             for name in (
                 "builds",
                 "elf",
+                "extents",
+                "rtti",
                 "match",
                 "symbols",
                 "toolchain",
@@ -45,7 +47,7 @@ def measurement_paths(build: str) -> list[str]:
                 "delink",
             )
         ],
-        *[f"config/{build}/{name}" for name in ("flags.json", "symbols.tsv", "units.toml")],
+        *[f"config/{build}/{name}" for name in ("flags.json", "symbols.tsv", "extents.tsv", "units.toml")],
     ]
 
 
@@ -83,24 +85,24 @@ def inventory(target, image) -> tuple[dict, str]:
     ]
     rows = []
     end = 0
-    for address, size in sorted(target.fde_ranges()):
+    for address, (size, source) in sorted(target.function_extents().items()):
         owner = next(
             (s for s in sections if s["address"] <= address and address + size <= s["address"] + s["size"]),
             None,
         )
         if owner is None or size <= 0 or address < end:
-            raise ValueError(f"invalid/overlapping executable FDE: {address:#x}+{size}")
-        rows.append((address, size, owner["name"]))
+            raise ValueError(f"invalid/overlapping executable function extent: {address:#x}+{size}")
+        rows.append((address, size, owner["name"], source))
         end = address + size
     if not rows:
         raise ValueError("no executable FDEs")
-    table = "address\tsize\tsection\n" + "".join(f"{a:#x}\t{n}\t{s}\n" for a, n, s in rows)
+    table = "address\tsize\tsection\textent\n" + "".join(f"{a:#x}\t{n}\t{s}\t{e}\n" for a, n, s, e in rows)
     return {
         "schema": SCHEMA,
         "build": image.build,
         "image": image.name,
         "image_sha256": image.sha256,
-        "scope": "all allocated executable ELF sections; FDE bodies plus all remaining bytes",
+        "scope": "all allocated executable ELF sections; FDE and thunk bodies plus all remaining bytes",
         "sections": sections,
         "data_sections": data_sections,
         "data_scope": "all allocated non-executable ELF sections, including BSS and linker metadata",
@@ -112,7 +114,7 @@ def inventory(target, image) -> tuple[dict, str]:
 
 
 def capture(build: str) -> dict:
-    from hv import match, symbols, toolchain
+    from hv import extents, match, symbols, toolchain
     from hv.elf import Elf
 
     (image,) = builds.load_builds()[build].images.values()
@@ -126,7 +128,7 @@ def capture(build: str) -> dict:
         if p.is_file()
     ]
     source_before = input_hashes(source_names)
-    target = Elf.load(image.path, "ET_EXEC")
+    target = extents.load_target(build)
     inv, table = inventory(target, image)
     selected = units.load(build)
     out = builds.ROOT / "build" / "progress" / build
@@ -235,10 +237,20 @@ def validate(build: str) -> tuple[dict, list[dict], dict]:
             or address + size > section["address"] + section["size"]
         ):
             raise ValueError("invalid/overlapping function inventory")
-        functions.append({"address": address, "size": size, "section": row["section"]})
+        if row["extent"] not in ("fde", "thunk"):
+            raise ValueError("invalid function extent source")
+        functions.append(
+            {"address": address, "size": size, "section": row["section"], "extent": row["extent"]}
+        )
         end = address + size
     if len(functions) != inv["total_functions"] or sum(s["size"] for s in ordered) != inv["total_code"]:
         raise ValueError("inventory totals disagree")
+    from hv import extents
+
+    if {(e.address, e.size) for e in extents.load(build)} != {
+        (f["address"], f["size"]) for f in functions if f["extent"] == "thunk"
+    }:
+        raise ValueError("inventoried thunks differ from extents.tsv")
     data = inv["data_sections"]
     end = 0
     for section in sorted([*ordered, *data], key=lambda s: s["address"]):
@@ -256,10 +268,11 @@ def measured_functions(functions: list[dict], evidence: dict) -> dict[int, dict]
     """Credit each function whose body matched at its own target address.
 
     A function earns credit when the matcher found its bytes and every reference in it exact and its
-    extent equal to the inventoried FDE, whether or not its unit matched as a whole (the unit can
-    still differ in function order or in other functions). An exact unit must be exact throughout.
+    extent equal to the inventoried one (an FDE, or a thunk extent from extents.tsv), whether or not
+    its unit matched as a whole (the unit can still differ in function order or in other functions).
+    An exact unit must be exact throughout.
     """
-    extents = {f["address"]: f["size"] for f in functions}
+    extents = {f["address"]: (f["size"], f["extent"]) for f in functions}
     matched = {}
     for unit in evidence["units"]:
         if unit["exact"] and (unit["unplaced_sections"] or any(not s["exact"] for s in unit["sections"])):
@@ -271,8 +284,11 @@ def measured_functions(functions: list[dict], evidence: dict) -> dict[int, dict]
                         raise ValueError("inconsistent exact-unit evidence")
                     continue
                 address = int(function["address"], 0)
-                if not function["fde"] or extents.get(address) != function["size"]:
-                    raise ValueError("matched function lacks its complete inventoried FDE extent")
+                if function["extent"] not in ("fde", "thunk") or extents.get(address) != (
+                    function["size"],
+                    function["extent"],
+                ):
+                    raise ValueError("matched function lacks its complete inventoried extent")
                 row = matched.setdefault(address, {"symbol": function["symbol"], "sources": []})
                 if unit["unit"] not in row["sources"]:
                     row["sources"].append(unit["unit"])
@@ -338,6 +354,8 @@ def assign_layers(functions: list[dict], names: dict[int, str], config: dict) ->
         if index != current_range:
             current_range, inherited = index, ranges[index][2]
         name = names.get(address)
+        if name is not None:
+            name = re.sub(r"^_ZT(?:hn\d+|v\d+_n\d+)_", "_Z", name)
         if name is None:
             result[address] = inherited
             continue
@@ -364,6 +382,7 @@ def make_report(
     data = metrics.data_ranges(inv, evidence)
     layer_of = assign_layers(functions, names, layers) if layers else {}
     layer_totals = {layer: [0, 0, 0, 0, 0.0] for layer in layers["layers"]} if layers else {}
+    thunk_totals = [0, 0, 0, 0, 0.0]
     fuzzy_code = 0.0
     report_units = []
     covered = dict.fromkeys((s["name"] for s in inv["sections"]), 0)
@@ -378,6 +397,13 @@ def make_report(
         )
         display = demangled.get(symbol, symbol)
         metadata = {"complete": False, "progress_categories": ["functions"]}
+        if function["extent"] == "thunk":
+            metadata["progress_categories"].append("thunks")
+            thunk_totals[0] += size
+            thunk_totals[1] += size if proof else 0
+            thunk_totals[2] += 1
+            thunk_totals[3] += int(bool(proof))
+            thunk_totals[4] += size * percent / 100
         if layer := layer_of.get(address):
             metadata["progress_categories"].append(layer)
             totals = layer_totals[layer]
@@ -471,7 +497,7 @@ def make_report(
         "categories": [
             {
                 "id": "functions",
-                "name": "FDE function bodies",
+                "name": "Function bodies (FDE and thunk extents)",
                 "measures": measures(
                     function_code,
                     matched_code,
@@ -479,6 +505,18 @@ def make_report(
                     len(matched),
                     len(report_units),
                     fuzzy_code=fuzzy_code,
+                ),
+            },
+            {
+                "id": "thunks",
+                "name": "Thunks (extents from config/<build>/extents.tsv)",
+                "measures": measures(
+                    thunk_totals[0],
+                    thunk_totals[1],
+                    thunk_totals[2],
+                    thunk_totals[3],
+                    thunk_totals[2],
+                    fuzzy_code=thunk_totals[4],
                 ),
             },
             {
@@ -536,7 +574,9 @@ def main(argv: list[str] | None = None) -> int:
             f"{m['matched_code']}/{m['total_code']} bytes ({m['matched_code_percent']:.5f}%), "
             f"{m['matched_functions']}/{m['total_functions']} functions -> {args.output}"
         )
-        for category in report["categories"][3:]:
+        for category in report["categories"]:
+            if category["id"] in ("functions", "data", "unclaimed"):
+                continue
             c = category["measures"]
             print(
                 f"  {category['id']:8} {c['matched_code']:>7}/{c['total_code']:>7} bytes "

@@ -13,7 +13,7 @@ from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
-from hv import builds, match, progress, symbols, toolchain, units
+from hv import builds, extents, match, progress, symbols, toolchain, units
 from hv.elf import Elf
 
 SCHEMA = 1
@@ -543,7 +543,7 @@ def search(
     (image,) = builds.load_builds()[build].images.values()
     if problem := builds.check_image(image):
         raise ValueError(f"{image.path}: {problem}")
-    target = Elf.load(image.path, "ET_EXEC")
+    target = extents.load_target(build)
     inputs = sorted(
         set(
             progress.measurement_paths(build)

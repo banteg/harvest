@@ -22,7 +22,8 @@ def write_unit(build: str, unit, target: Elf, compiled: Elf, obj: Path, result: 
     """Write the unit's delinked target object and a copy of our object next to it."""
     target_path, base_path = unit_paths(build, unit.slug)
     known = [(s.address, s.size, s.name) for s in symbols.load(build)]
-    sections, syms = delink.delink_unit(target, compiled, result, known, dict(target.fde_ranges()))
+    sizes = {address: size for address, (size, _) in target.function_extents().items()}
+    sections, syms = delink.delink_unit(target, compiled, result, known, sizes)
     delink.write_object(target_path, sections, syms)
     base_path.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(obj, base_path)

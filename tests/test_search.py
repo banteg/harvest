@@ -207,6 +207,7 @@ def evaluator(tmp_path, monkeypatch):
     run.mkdir()
     context = {"inputs": {"src/unit.cpp": search.sha(b.source)}}
     monkeypatch.setattr(search.Elf, "load", lambda *args: None)
+    monkeypatch.setattr(search.extents, "load_target", lambda build: None)
     calls = []
 
     def compare(*args):
@@ -361,6 +362,7 @@ def search_project(tmp_path, monkeypatch):
 
     monkeypatch.setattr(search.toolchain, "Compiler", compiler)
     monkeypatch.setattr(search.Elf, "load", lambda p, kind: p.read_bytes() if kind == "ET_REL" else None)
+    monkeypatch.setattr(search.extents, "load_target", lambda build: None)
 
     def compare(obj, *args):
         winning = obj == b"head\nB\nfixed\nA\ntail\n"
@@ -444,6 +446,7 @@ def test_parallel_comparisons_reuse_objects_and_defer_candidate_errors(evaluator
     duplicate.write_bytes(b"good")
     bad.write_bytes(b"bad")
     monkeypatch.setattr(search.Elf, "load", lambda path, kind: path.read_bytes())
+    monkeypatch.setattr(search.extents, "load_target", lambda build: None)
 
     def compare(obj, *args):
         if obj == b"bad":

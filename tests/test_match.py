@@ -169,7 +169,19 @@ def test_function_extent_must_match_target_fde():
     # identical bytes, but the target's function is longer than ours
     result = compare(target=target_image(extent=7))
     assert not result["exact"]
-    assert not text(result)["functions"][0]["fde"]
+    assert text(result)["functions"][0]["extent"] is None
+
+
+def test_thunk_extent_proves_a_function_without_an_fde():
+    # GCC emits no FDE for thunks; a thunk extent from extents.tsv proves the extent instead
+    target = target_image()
+    ((_, size),) = target.fde_ranges()
+    target.fde_ranges = lambda: set()
+    assert not compare(target=target)["exact"]
+    target.thunks = frozenset({(ADDRESS, size)})
+    result = compare(target=target)
+    assert result["exact"]
+    assert text(result)["functions"][0]["extent"] == "thunk"
 
 
 def test_section_without_known_symbol_is_unplaced():

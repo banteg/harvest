@@ -24,7 +24,7 @@ def fuzzy_capture(target: Elf, known: list, selected: list, results: list, out: 
     project = out / "fuzzy"
     project.mkdir(parents=True, exist_ok=True)
     entries = []
-    extents = dict(target.fde_ranges())
+    extents = {address: size for address, (size, _) in target.function_extents().items()}
     for unit, result in zip(selected, results, strict=True):
         obj = out / f"{unit.slug}.o"
         if builds.sha256_file(obj) != result["object_sha256"]:
