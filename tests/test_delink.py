@@ -186,7 +186,8 @@ def test_float_access_keeps_its_binary_value_and_merge_type(tmp_path, value):
     assert result["exact"] == (value == bytes(4))
     sections, syms = delink.delink_unit(target, obj, result, [], {ADDRESS: len(code)})
     expected = ".rodata.cst4" if value == bytes(4) else ".rodata.lit"
-    assert {s.name for s in sections} == {".text", expected}
+    # the copies of our merged sections, and no section for .comment
+    assert {s.name for s in sections} == {".text", ".rodata.cst4", ".rodata.str1.1", expected}
     data = next(s for s in sections if s.name == expected)
     assert data.data == value
     assert not data.flags & delink.SHF_STRINGS
@@ -333,3 +334,29 @@ def test_label_address_loaded_into_a_register_resolves_into_the_function_it_poin
     sections, _ = delink.delink_unit(target, obj, result, [], {ADDRESS: len(code)})
     (text,) = sections
     assert text.relocations == [(1, delink.R_X86_64_32, ".text", 5)]
+
+
+def test_target_keeps_every_merged_section_of_ours_even_when_nothing_references_it(tmp_path):
+    from test_match import ADDRESS, DESTINATION
+
+    # objdiff combines .rodata.str1.1 and .rodata.str1.8 into one section only when an object has both
+    code = b"\xbf" + bytes(4) + b"\xc3"  # mov edi, offset "ab"; ret
+    flags = delink.SHF_ALLOC | 0x30
+    sections = [
+        delink.Section(".text", code, 0x6, relocations=[(1, delink.R_X86_64_32, ".rodata.str1.1", 0)]),
+        delink.Section(".rodata.str1.1", b"ab\0", flags, align=1),
+        delink.Section(".rodata.str1.8", b"cd\0" + bytes(5), flags, align=8),
+    ]
+    delink.write_object(
+        tmp_path / "unit.o", sections, [delink.Symbol("f", ".text", 0, len(code), function=True)]
+    )
+    obj = Elf.load(tmp_path / "unit.o", "ET_REL")
+    linked = code[:1] + DESTINATION.to_bytes(4, "little") + code[5:]
+    target = target_with_rodata(tmp_path, linked, b"ab\0")
+    result = {"sections": [{"name": ".text", "address": hex(ADDRESS), "functions": [
+        {"symbol": "f", "address": hex(ADDRESS), "size": len(code)}]}]}  # fmt: skip
+    copies, _ = delink.delink_unit(target, obj, result, [], {ADDRESS: len(code)})
+    strings = {s.name: s for s in copies if s.name.startswith(".rodata.str")}
+    assert strings[".rodata.str1.1"].data == b"ab\0"
+    assert strings[".rodata.str1.8"].data == bytes(8)
+    assert (strings[".rodata.str1.8"].flags, strings[".rodata.str1.8"].align) == (flags, 8)

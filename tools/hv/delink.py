@@ -15,9 +15,10 @@ section, as in our object, and an address inside one of our functions (a jump ta
 a variadic prologue jumps to) a reference to that function's section at its offset in the target
 object. A referenced string that our object also has in a merged string section, narrow or wide,
 goes into a target copy of that section at the same offset, holding the target's bytes, so both
-sides reference `.rodata.str1.1+offset` or `.rodata.str4.4+offset`. Binary merge elements are
-matched by access width and content, and keep their merge type. Other literals go into
-`.rodata.lit`; unnamed code becomes sub_<addr> and unnamed data lbl_<addr>.
+sides reference `.rodata.str1.1+offset` or `.rodata.str4.4+offset`; the target has a copy of every
+merged section of ours, zero-filled where nothing references it. Binary merge elements are matched
+by access width and content, and keep their merge type. Other literals go into `.rodata.lit`;
+unnamed code becomes sub_<addr> and unnamed data lbl_<addr>.
 """
 
 import bisect
@@ -366,10 +367,13 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
                 symbols.append(Symbol(sym.name, osec.name, sym["st_value"], sym["st_size"]))
 
     # Target merge elements at the offsets our merged sections hold them, with their original type.
+    # Every merged section of ours has a copy, zero-filled where nothing references it: objdiff
+    # combines the sections of a class (such as .rodata.str1.1 and .rodata.str1.8) only when an
+    # object has at least two, and the two objects must combine alike.
     for osec in obj_sections:
-        if osec.name in namer.merged:
+        if osec["sh_flags"] & (SHF_ALLOC | SHF_MERGE) == SHF_ALLOC | SHF_MERGE:
             data = bytearray(osec["sh_size"])
-            for offset, text in namer.merged[osec.name].items():
+            for offset, text in namer.merged.get(osec.name, {}).items():
                 data[offset : offset + len(text)] = text
             sections.append(
                 Section(
