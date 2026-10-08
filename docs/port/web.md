@@ -3,7 +3,7 @@
 `just web` builds the port for the browser into `port/zig-out/web/`: the page
 ([`port/web/index.html`](../../port/web/index.html) and its assets), `harvest.js` and `harvest.wasm`.
 `just serve-web` serves it on `http://127.0.0.1:8000`. Every push to master that touches the port
-publishes it to [Cloudflare Pages](https://harvest-2ks.pages.dev/) through its Git integration.
+publishes it to [Cloudflare Pages](https://harvest.banteg.xyz/) through its Git integration.
 GitHub Actions builds pull requests ([`.github/workflows/web.yml`](../../.github/workflows/web.yml)).
 With nothing stored, the page downloads the data zip and starts the game.
 

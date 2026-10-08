@@ -14,7 +14,7 @@ Neither includes the game's data: you need your own copy (the Steam release work
 
 ## Playing the port
 
-In the browser: open [harvest-2ks.pages.dev](https://harvest-2ks.pages.dev/). The game data downloads
+In the browser: open [harvest.banteg.xyz](https://harvest.banteg.xyz/). The game data downloads
 automatically from the Reflexive bucket and stays in the browser for the next visit. You can also
 drop your install folder (or a zip of it) onto the disc.
 
