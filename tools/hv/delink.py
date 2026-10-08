@@ -11,10 +11,12 @@ Nothing is copied from our object's relocations for code, so a wrong call target
 
 Symbols are named from this unit's placed symbols, then symbols.tsv, the PLT and copy relocations.
 An address inside one of our placed data sections (such as `.bss`) becomes a reference to that
-section, as in our object. A referenced string that our object also has in a merged string section,
-narrow or wide, goes into a target copy of that section at the same offset, holding the target's
-bytes, so both sides reference `.rodata.str1.1+offset` or `.rodata.str4.4+offset`. Binary merge
-elements are matched by access width and content, and keep their merge type. Other literals go into
+section, as in our object, and an address inside one of our functions (a jump table case, the label
+a variadic prologue jumps to) a reference to that function's section at its offset in the target
+object. A referenced string that our object also has in a merged string section, narrow or wide,
+goes into a target copy of that section at the same offset, holding the target's bytes, so both
+sides reference `.rodata.str1.1+offset` or `.rodata.str4.4+offset`. Binary merge elements are
+matched by access width and content, and keep their merge type. Other literals go into
 `.rodata.lit`; unnamed code becomes sub_<addr> and unnamed data lbl_<addr>.
 """
 
@@ -72,9 +74,11 @@ class Namer:
         strings: dict[bytes, tuple[str, int]],
         constants: dict[bytes, tuple[str, int]] | None = None,
         copies: dict[str, bytes] | None = None,
+        bodies: list[tuple[int, int, str, int]] | None = None,
     ):
         """known: (address, size, name), size 0 running to the next known symbol; placed: our data
-        sections as (start, end, name); strings: our merged strings by content -> (section, offset)."""
+        sections as (start, end, name); strings: our merged strings by content -> (section, offset);
+        bodies: our functions as (start, end, section, offset of the start in the target object)."""
         self.target = target
         self.by_address: dict[int, str] = {}
         for address, _, name in known:
@@ -84,6 +88,8 @@ class Namer:
             self.by_address.setdefault(address, name)
         text = target.elf.get_section_by_name(".text")
         self.text = range(text["sh_addr"], text["sh_addr"] + text["sh_size"])
+        self.bodies = sorted(bodies or [])
+        self.body_starts = [start for start, _, _, _ in self.bodies]
         self.placed = placed
         self.strings = strings
         self.constants = constants or {}
@@ -104,6 +110,12 @@ class Namer:
         """(symbol or section, addend) for a target address."""
         if address in self.by_address:
             return self.by_address[address], 0
+        # A label inside one of our functions (a case of a jump table, the target of a computed
+        # jump) is where the assembler put it: in that function's section, at its offset there.
+        i = bisect.bisect_right(self.body_starts, address) - 1
+        if i >= 0 and address < self.bodies[i][1]:
+            start, _, section, offset = self.bodies[i]
+            return section, offset + address - start
         if address in self.text:
             return f"sub_{address:x}", 0
         for start, end, section in self.placed:
@@ -285,21 +297,29 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
             if any(start <= r["r_offset"] < start + size for r, _ in obj.relocations(index)):
                 continue
             copies[symbol.name] = target.read(placed_at[section.name] + start, size)
-    namer = Namer(target, known, local, placed, merged_strings(obj), merged_constants(obj), copies)
-    offset_of = {name: (index, offset) for name, _, _, index, offset in functions}
-
-    sections, symbols = [], []
+    # our offsets, unless a longer target function before would overlap: then shift down
+    layout = {}  # our section index -> [(symbol, target address, target size, our section index, offset)]
     for index in sorted({f[3] for f in functions}):
-        osec = obj_sections[index]
-        # our offsets, unless a longer target function before would overlap: then shift down
-        members, end = [], 0
+        layout[index], end = [], 0
         for name, address, size, _, offset in sorted(
             (f for f in functions if f[3] == index), key=lambda f: f[4]
         ):
             offset = max(offset, end)
-            members.append((name, address, size, index, offset))
+            layout[index].append((name, address, size, index, offset))
             end = offset + size
-        offset_of.update({name: (index, offset) for name, _, _, _, offset in members})
+    offset_of = {
+        name: (index, offset) for members in layout.values() for name, _, _, index, offset in members
+    }
+    bodies = [
+        (address, address + size, obj_sections[index].name, offset)
+        for members in layout.values()
+        for _, address, size, index, offset in members
+    ]
+    namer = Namer(target, known, local, placed, merged_strings(obj), merged_constants(obj), copies, bodies)
+
+    sections, symbols = [], []
+    for index, members in layout.items():
+        osec = obj_sections[index]
         data = bytearray(max([osec["sh_size"]] + [offset + size for _, _, size, _, offset in members]))
         section = Section(osec.name, b"", SHF_ALLOC | SHF_EXECINSTR, align=osec["sh_addralign"])
         for _, address, size, _, offset in members:

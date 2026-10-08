@@ -277,3 +277,59 @@ def test_wide_string_reference_goes_to_a_target_copy_of_our_wide_string_section(
     (copy,) = [s for s in sections if s.name == ".rodata.str4.4"]
     assert copy.data == bytes(4) + wide("ab")
     assert (copy.flags, copy.align, copy.entsize) == (delink.SHF_ALLOC | 0x30, 4, 4)
+
+
+def test_address_inside_our_function_resolves_to_its_section_at_the_target_offset(tmp_path):
+    from test_match import ADDRESS
+
+    target = target_with_rodata(tmp_path, bytes(32), bytes(8))
+    bodies = [(ADDRESS, ADDRESS + 16, ".text._Z1fv", 0x20)]
+    namer = delink.Namer(target, [], {ADDRESS: "_Z1fv"}, [], {}, bodies=bodies)
+    assert namer.name(ADDRESS) == ("_Z1fv", 0), "the start keeps the function's symbol"
+    assert namer.name(ADDRESS + 5) == (".text._Z1fv", 0x25)
+    assert namer.name(ADDRESS + 16) == (f"sub_{ADDRESS + 16:x}", 0), "the end is past the function"
+
+
+@pytest.mark.parametrize("longer", [0, 4])
+def test_jump_table_entry_resolves_into_the_function_it_points_into(tmp_path, longer):
+    from test_match import ADDRESS, DESTINATION
+
+    # Our .text holds f and g, 4 bytes each, and a table entry for the byte 2 into g. The target's f is
+    # `longer` bytes longer, which moves g (and the entry's offset) in the delinked object.
+    delink.write_object(
+        tmp_path / "unit.o",
+        [
+            delink.Section(".text", bytes(8), 0x6),
+            delink.Section(".rodata", bytes(8), 0x2, relocations=[(0, delink.R_X86_64_64, ".text", 6)]),
+        ],
+        [
+            delink.Symbol("f", ".text", 0, 4, function=True),
+            delink.Symbol("g", ".text", 4, 4, function=True),
+        ],
+    )
+    obj = Elf.load(tmp_path / "unit.o", "ET_REL")
+    g = ADDRESS + 4 + longer
+    target = target_with_rodata(tmp_path, bytes(8 + longer), struct.pack("<Q", g + 2))
+    result = {"sections": [
+        {"name": ".text", "address": hex(ADDRESS), "functions": [
+            {"symbol": "f", "address": hex(ADDRESS), "size": 4},
+            {"symbol": "g", "address": hex(g), "size": 4}]},
+        {"name": ".rodata", "address": hex(DESTINATION)},
+    ]}  # fmt: skip
+    sections, _ = delink.delink_unit(target, obj, result, [], {ADDRESS: 4 + longer, g: 4})
+    (table,) = [s for s in sections if s.name == ".rodata"]
+    assert table.relocations == [(0, delink.R_X86_64_64, ".text", 4 + longer + 2)]
+
+
+def test_label_address_loaded_into_a_register_resolves_into_the_function_it_points_into():
+    from test_match import ADDRESS, NAME, elf_image
+
+    # GCC's variadic prologue loads the address of a label inside the function: mov eax, label; ... jmp rax
+    code = b"\xb8" + (ADDRESS + 5).to_bytes(4, "little") + b"\xc3"
+    target = Elf(elf_image(code, kind=2), "ET_EXEC")
+    obj = Elf(elf_image(bytes(6)), "ET_REL")
+    result = {"sections": [{"name": ".text", "address": hex(ADDRESS), "functions": [
+        {"symbol": NAME, "address": hex(ADDRESS), "size": len(code)}]}]}  # fmt: skip
+    sections, _ = delink.delink_unit(target, obj, result, [], {ADDRESS: len(code)})
+    (text,) = sections
+    assert text.relocations == [(1, delink.R_X86_64_32, ".text", 5)]
