@@ -198,7 +198,9 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
         PulseTimer -= step;
         if (PulseTimer <= 0.0f && PulseTimeLeft <= 0.0f)
         {
-            if (!Info->PulseParticles.empty())
+            if (Info->PulseParticles.empty())
+                PulseTimer += 1000000.0f;
+            else
             {
                 if (Info->MaxPulses > 0 && PulseCount >= Info->MaxPulses)
                 {
@@ -246,8 +248,6 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
                     delay = ox::algo::CRand::rand() % (Info->MaxPulseDelay - Info->MinPulseDelay);
                 PulseTimer += (Info->MinPulseDelay + delay) * 0.001f;
             }
-            else
-                PulseTimer += 1000000.0f;
             ++PulseCount;
         }
         else if (PulseTimeLeft > 0.0f)

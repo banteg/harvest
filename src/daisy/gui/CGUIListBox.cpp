@@ -309,15 +309,15 @@ bool CGUIListBox::selectNew(int x, int y, bool onlyHover, int clicks)
     ox::event::SEvent event;
     event.EventType = ox::event::EET_GUI_EVENT;
     event.GUIEvent.Caller = this;
-    if (LastSelected == index)
-    {
-        SelectedAgain = clicks > 1;
-        event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_SELECTED_AGAIN;
-    }
-    else
+    if (LastSelected != index)
     {
         SelectedAgain = false;
         event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_CHANGED;
+    }
+    else
+    {
+        SelectedAgain = clicks > 1;
+        event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_SELECTED_AGAIN;
     }
     LastSelected = index;
     OverrideActionParent->OnEvent(event);

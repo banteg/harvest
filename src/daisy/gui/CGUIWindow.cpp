@@ -270,61 +270,7 @@ void CGUIWindow::draw()
     ox::core::CRect<int> rect = AbsoluteRect;
     ox::core::CRect<int>* cl = &AbsoluteClippingRect;
 
-    if (!Animations[EWP_BACKGROUND])
-    {
-        // draw body fast
-
-        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + 1;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_HIGH_LIGHT), rect, cl);
-
-        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
-        rect.LowerRightCorner.X = rect.UpperLeftCorner.X + 1;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_HIGH_LIGHT), rect, cl);
-
-        rect.UpperLeftCorner.X = AbsoluteRect.LowerRightCorner.X - 1;
-        rect.LowerRightCorner.X = AbsoluteRect.LowerRightCorner.X;
-        rect.UpperLeftCorner.Y = AbsoluteRect.UpperLeftCorner.Y;
-        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_DARK_SHADOW), rect, cl);
-
-        rect.UpperLeftCorner.X -= 1;
-        rect.LowerRightCorner.X -= 1;
-        rect.UpperLeftCorner.Y += 1;
-        rect.LowerRightCorner.Y -= 1;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_SHADOW), rect, cl);
-
-        rect.UpperLeftCorner.X = AbsoluteRect.UpperLeftCorner.X;
-        rect.UpperLeftCorner.Y = AbsoluteRect.LowerRightCorner.Y - 1;
-        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
-        rect.LowerRightCorner.X = AbsoluteRect.LowerRightCorner.X;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_DARK_SHADOW), rect, cl);
-
-        rect.UpperLeftCorner.X += 1;
-        rect.LowerRightCorner.X -= 1;
-        rect.UpperLeftCorner.Y -= 1;
-        rect.LowerRightCorner.Y -= 1;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_SHADOW), rect, cl);
-
-        rect = AbsoluteRect;
-        rect.UpperLeftCorner.X += 1;
-        rect.UpperLeftCorner.Y += 1;
-        rect.LowerRightCorner.X -= 2;
-        rect.LowerRightCorner.Y -= 2;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_FACE), rect, cl);
-
-        // draw title bar
-
-        rect = AbsoluteRect;
-        rect.UpperLeftCorner.X += 2;
-        rect.UpperLeftCorner.Y += 2;
-        rect.LowerRightCorner.X -= 2;
-        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + skin->getSize(ox::gui::EGDS_WINDOW_BUTTON_WIDTH) + 2;
-        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_ACTIVE_BORDER), rect, cl);
-
-        rect.UpperLeftCorner.X += 2;
-        rect.LowerRightCorner.X -= skin->getSize(ox::gui::EGDS_WINDOW_BUTTON_WIDTH) + 5;
-    }
-    else
+    if (Animations[EWP_BACKGROUND])
     {
         const ox::video::SColor white(0xffffffff);
         // corners
@@ -425,6 +371,60 @@ void CGUIWindow::draw()
         rect.UpperLeftCorner.Y += 2;
         rect.LowerRightCorner.X -= AnimationRects[EWP_TOP_RIGHT].getWidth() + 2;
         rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + AnimationRects[EWP_TOP].getHeight() - 2;
+    }
+    else
+    {
+        // draw body fast
+
+        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + 1;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_HIGH_LIGHT), rect, cl);
+
+        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+        rect.LowerRightCorner.X = rect.UpperLeftCorner.X + 1;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_HIGH_LIGHT), rect, cl);
+
+        rect.UpperLeftCorner.X = AbsoluteRect.LowerRightCorner.X - 1;
+        rect.LowerRightCorner.X = AbsoluteRect.LowerRightCorner.X;
+        rect.UpperLeftCorner.Y = AbsoluteRect.UpperLeftCorner.Y;
+        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_DARK_SHADOW), rect, cl);
+
+        rect.UpperLeftCorner.X -= 1;
+        rect.LowerRightCorner.X -= 1;
+        rect.UpperLeftCorner.Y += 1;
+        rect.LowerRightCorner.Y -= 1;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_SHADOW), rect, cl);
+
+        rect.UpperLeftCorner.X = AbsoluteRect.UpperLeftCorner.X;
+        rect.UpperLeftCorner.Y = AbsoluteRect.LowerRightCorner.Y - 1;
+        rect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+        rect.LowerRightCorner.X = AbsoluteRect.LowerRightCorner.X;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_DARK_SHADOW), rect, cl);
+
+        rect.UpperLeftCorner.X += 1;
+        rect.LowerRightCorner.X -= 1;
+        rect.UpperLeftCorner.Y -= 1;
+        rect.LowerRightCorner.Y -= 1;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_SHADOW), rect, cl);
+
+        rect = AbsoluteRect;
+        rect.UpperLeftCorner.X += 1;
+        rect.UpperLeftCorner.Y += 1;
+        rect.LowerRightCorner.X -= 2;
+        rect.LowerRightCorner.Y -= 2;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_3D_FACE), rect, cl);
+
+        // draw title bar
+
+        rect = AbsoluteRect;
+        rect.UpperLeftCorner.X += 2;
+        rect.UpperLeftCorner.Y += 2;
+        rect.LowerRightCorner.X -= 2;
+        rect.LowerRightCorner.Y = rect.UpperLeftCorner.Y + skin->getSize(ox::gui::EGDS_WINDOW_BUTTON_WIDTH) + 2;
+        driver->draw2DRectangle(skin->getColor(ox::gui::EGDC_ACTIVE_BORDER), rect, cl);
+
+        rect.UpperLeftCorner.X += 2;
+        rect.LowerRightCorner.X -= skin->getSize(ox::gui::EGDS_WINDOW_BUTTON_WIDTH) + 5;
     }
 
     if (Text.size() && !IsFrame)
@@ -759,18 +759,18 @@ bool CGUIDetachableFrame::OnEvent(const ox::event::SEvent& event)
             DragStartPosition = AbsoluteRect.UpperLeftCorner;
             if (!Environment->hasFocus(this))
             {
-                if (SizeDragHandle && Resizable &&
-                    SizeDragHandleRect.isPointInside(ox::core::CPosition2d<int>(
+                if (!SizeDragHandle || !Resizable ||
+                    !SizeDragHandleRect.isPointInside(ox::core::CPosition2d<int>(
                         DragStart.X - AbsoluteRect.UpperLeftCorner.X, DragStart.Y - AbsoluteRect.UpperLeftCorner.Y)))
                 {
                     FadedOut = false;
-                    Resizing = true;
-                    Dragging = false;
+                    Dragging = true;
                 }
                 else
                 {
                     FadedOut = false;
-                    Dragging = true;
+                    Resizing = true;
+                    Dragging = false;
                 }
 
                 Environment->setFocus(this);

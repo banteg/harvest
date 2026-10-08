@@ -775,7 +775,7 @@ bool CGUITabButtonRow::OnEvent(const ox::event::SEvent& event)
             {
                 if (x >= Tabs[i]->X && x < Tabs[i]->X + tabWidth)
                 {
-                    if ((int)i < ActiveTab && x >= Tabs[i + 1]->X)
+                    if (ActiveTab > (int)i && x >= Tabs[i + 1]->X)
                         continue;
 
                     int index = i;

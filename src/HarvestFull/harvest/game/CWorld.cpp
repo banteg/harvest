@@ -649,10 +649,13 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
         VisibleGameField.LowerRightCorner.X = ActualGameField.LowerRightCorner.X;
     else if (VisibleGameField.LowerRightCorner.X > ActualGameField.LowerRightCorner.X)
         VisibleGameField.LowerRightCorner.X = ox::core::max_(VisibleGameField.LowerRightCorner.X - movement, ActualGameField.LowerRightCorner.X);
-    if (VisibleGameField.LowerRightCorner.Y < ActualGameField.LowerRightCorner.Y)
+    if (!(VisibleGameField.LowerRightCorner.Y < ActualGameField.LowerRightCorner.Y))
+    {
+        if (VisibleGameField.LowerRightCorner.Y > ActualGameField.LowerRightCorner.Y)
+            VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
+    }
+    else
         VisibleGameField.LowerRightCorner.Y = ActualGameField.LowerRightCorner.Y;
-    else if (VisibleGameField.LowerRightCorner.Y > ActualGameField.LowerRightCorner.Y)
-        VisibleGameField.LowerRightCorner.Y = ox::core::max_(VisibleGameField.LowerRightCorner.Y - movement, ActualGameField.LowerRightCorner.Y);
 }
 
 void CWorld::renderBackground(const ox::core::CPosition2d<float>& position, ox::gui::IGUIFont* font,
