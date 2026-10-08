@@ -14,8 +14,9 @@ Neither includes the game's data: you need your own copy (the Steam release work
 
 ## Playing the port
 
-In the browser: open [banteg.github.io/harvest](https://banteg.github.io/harvest/) and drop your
-install folder (or a zip of it) onto the disc. The data stays in the browser for the next visit.
+In the browser: open [harvest-2ks.pages.dev](https://harvest-2ks.pages.dev/). The game data downloads
+automatically from the Reflexive bucket and stays in the browser for the next visit. You can also
+drop your install folder (or a zip of it) onto the disc.
 
 On the desktop, build it with [zig](https://ziglang.org) 0.17 and [just](https://just.systems):
 

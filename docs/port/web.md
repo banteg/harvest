@@ -3,8 +3,15 @@
 `just web` builds the port for the browser into `port/zig-out/web/`: the page
 ([`port/web/index.html`](../../port/web/index.html) and its assets), `harvest.js` and `harvest.wasm`.
 `just serve-web` serves it on `http://127.0.0.1:8000`. Every push to master that touches the port
-publishes it to GitHub Pages ([`.github/workflows/web.yml`](../../.github/workflows/web.yml)), and
-pull requests build it. The page holds no game data: players give it their own copy.
+publishes it to [Cloudflare Pages](https://harvest-2ks.pages.dev/) through its Git integration.
+GitHub Actions builds pull requests ([`.github/workflows/web.yml`](../../.github/workflows/web.yml)).
+With nothing stored, the page downloads the data zip and starts the game.
+
+Cloudflare runs `bash port/tools/build-web.sh` from the repository root and serves `port/zig-out/web`.
+The script installs the same Zig 0.17.0 and Emscripten 6.0.10 as CI. Preview deployments are disabled.
+[`wrangler.jsonc`](../../wrangler.jsonc) binds the existing `reflexive` R2 bucket as `REFLEXIVE`.
+The page's Worker reads `harvest/harvestClientData.zip` at `/harvestClientData.zip`; all other routes
+serve static assets without invoking the Worker. No bucket CORS configuration is needed.
 
 ## Building
 
@@ -40,9 +47,14 @@ on `PATH`, 6.0.10 in CI) only provides the sysroot and links.
 - The data and the user data folder (`/libsdl/Harvest`: settings, profiles, saves) live in IndexedDB
   through IDBFS. The data is kept for the next visit (the page asks the browser not to evict it), and
   the user data is written back every 3 seconds and when the page is hidden. Eject forgets the data.
-- `?data=<url>` loads a data folder from `<url>/manifest.json` (or a zip, for a `<url>` ending in
-  `.zip`) for development, only when the page is served from localhost, so a link to the published
-  page cannot hand players someone else's copy.
+- With nothing stored, the page fetches `/harvestClientData.zip` from the same origin. The Worker
+  streams the same object published at `https://reflexive.banteg.xyz/harvest/harvestClientData.zip`.
+  Download progress is shown before the archive is extracted and cached. `?data=<url>` still
+  loads a data folder from `<url>/manifest.json` (or a zip, for a `<url>` ending in `.zip`) for
+  development, only when the page is served from localhost, so a link to the published page cannot
+  hand players someone else's copy.
+- `just serve-web` serves static files only. Use `?data=<url>` with a local zip or data manifest for
+  local play, or use `wrangler pages dev port/zig-out/web` with a local R2 object to exercise the Worker.
 - The game's fatal messages go to the page through `port::showErrorMessage`
   ([`Message.h`](../../port/src/platform/Message.h)) instead of a native dialog. On the web the
   window fills the page and Ctrl+Q does nothing.
@@ -55,8 +67,8 @@ backend (`MA_ENABLE_AUDIO_WORKLETS`) would move the mixing off that thread, at a
 
 - links with `-sAUDIO_WORKLET -sWASM_WORKERS -sASYNCIFY` (a bigger, slower module);
 - shared memory, so everything is compiled with atomics, and the page must be cross-origin isolated
-  (`Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers), which GitHub Pages
-  cannot send. A host with custom headers (Cloudflare Pages) or a service-worker shim would be needed.
+  (`Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers). Cloudflare Pages can send
+  these through an `_headers` file if this backend is enabled.
 
 The mixer already locks around the audio callback (it runs on its own thread on the desktop), so the
 game side is ready for it.

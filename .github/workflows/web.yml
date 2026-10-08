@@ -1,7 +1,7 @@
 name: Web build
 
-# Builds the port for the web (zig compiles, Emscripten links; see docs/port/web.md) and publishes it
-# to GitHub Pages from master. The page has no game data; players give it their own copy.
+# Builds the port for the web (zig compiles, Emscripten links; see docs/port/web.md).
+# Cloudflare Pages publishes master through its Git integration.
 
 on:
   push:
@@ -30,23 +30,7 @@ jobs:
       - name: Build
         working-directory: port
         run: zig build harvest -Dtarget=wasm32-emscripten -Doptimize=ReleaseFast -p zig-out/web
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
+          name: harvest-web
           path: port/zig-out/web
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-24.04
-    permissions:
-      pages: write
-      id-token: write
-    concurrency:
-      group: pages
-      cancel-in-progress: true
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

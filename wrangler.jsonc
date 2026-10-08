@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "harvest",
+  "pages_build_output_dir": "./port/zig-out/web",
+  "compatibility_date": "2026-10-08",
+  "r2_buckets": [
+    { "binding": "REFLEXIVE", "bucket_name": "reflexive" }
+  ]
+}

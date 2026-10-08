@@ -20,4 +20,4 @@ __pycache__/
 /port/.zig-cache/
 /port/zig-out/
 /port/zig-pkg/
-
+/port/.web-toolchain/
