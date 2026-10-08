@@ -3414,7 +3414,7 @@ void CPlayState::renderMinimap()
         ox::core::CPosition2d<int> position((int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X,
             (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y);
         ox::core::CRect<int> box;
-        if (!(it->Time > 4.0f))
+        if (it->Time <= 4.0f)
             box = ox::core::CRect<int>(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
         else
         {
