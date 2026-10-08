@@ -25,7 +25,6 @@ public:
     virtual int getNumber() = 0;
     virtual void setDrawBackground(bool draw) = 0;
     virtual void setBackgroundColor(video::SColor color) = 0;
-    virtual void setNumber(int number) = 0;
 };
 
 //! A control with a row of tabs over their pages.

@@ -39,7 +39,6 @@ public:
     virtual void removeItem(int index) = 0;
     virtual bool selectionWasDoubleClicked() = 0;
     virtual IGUIElement* getScrollBar() = 0;
-    virtual void setIconFont(IGUIFont* font) = 0;
 };
 
 } // end namespace gui

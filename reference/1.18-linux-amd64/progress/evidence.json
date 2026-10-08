@@ -101474,7 +101474,7 @@
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/gui/IGUIImage.h": "2e4f71f9783d1b3950768858867ef90148fbcf1072d0c9853f17153357984bc2",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUIModalScreen.h": "9e28a3a78358a3980de84eb46b23fad1dd0a6b88863abc294864732035f75c3b",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -106602,13 +106602,13 @@
           "src/ox/gui/IGUICheckBox.h": "218eb169f37fce9353f14f12ed6bf0c09ceecaae1f2fe80f7db4c2d28cfd66bc",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUIScrollBar.h": "83992afa7b5835dfe7237473aecff162b9e1e8a3550768f0e0d329882fc4612e",
           "src/ox/gui/IGUISkin.h": "f7d4a7096818a44ca922cc640054e90825bc01d6ade41f3e1536ab60b0924ed4",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/ox/gui/IGUITabControl.h": "01cc766e8da9a5bbe408064f33529e3c92b930d662d1e244344c767e45ede80e",
+          "src/ox/gui/IGUITabControl.h": "a146312643c4ee86b9da7027a4a90b2abd493b02022abf2906156607bfefe14d",
           "src/ox/input/KeyNames.h": "6edada3e9cdbd11a0bf05d3d3081be869015ce31b91f92c305b4365af582e4e1",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -114782,7 +114782,7 @@
           "src/ox/gui/IGUIEditBox.h": "7cd565d6427adec206b19e54f535fd2c6559a84caaf92e2954e6f500c88dd402",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be"
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840"
         },
         "system_headers": 117,
         "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805"
@@ -120781,7 +120781,7 @@
           "src/ox/gui/IGUIImage.h": "2e4f71f9783d1b3950768858867ef90148fbcf1072d0c9853f17153357984bc2",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
           "src/ox/gui/IGUIWindow.h": "ef620b696de4833d9e278618f9dea881e75bd909b36006e70619108ddb63890c",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUISkin.h": "f7d4a7096818a44ca922cc640054e90825bc01d6ade41f3e1536ab60b0924ed4",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
@@ -122639,7 +122639,7 @@
           "src/ox/gui/IGUIEditBox.h": "7cd565d6427adec206b19e54f535fd2c6559a84caaf92e2954e6f500c88dd402",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -149125,7 +149125,7 @@
     },
     {
       "unit": "daisy/gui/CGUITabControl.cpp",
-      "object_sha256": "5ea3201c27e31f738b0f8bb19285eee6cb61413e814c02e50e1238f69ac2e08e",
+      "object_sha256": "d39141082fad61f7af357a61312e1dda31745c28ff5b7dfaec9d52aa5a027cb6",
       "exact": false,
       "sections": [
         {
@@ -152938,60 +152938,18 @@
         },
         {
           "name": ".rodata._ZTVN2ox3gui7IGUITabE",
-          "size": 432,
+          "size": 424,
           "placement": "symbol: _ZTVN2ox3gui7IGUITabE",
-          "exact": false,
+          "exact": true,
           "address": "0x615fc0",
-          "first_difference": 384,
-          "differing_bytes": 25,
-          "bad_references": [
+          "references": 51,
+          "data_ranges": [
             {
-              "offset": 384,
-              "type": 1,
-              "symbol": "__cxa_pure_virtual",
-              "addend": 0,
-              "destination": "0x408648",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 400,
-              "type": 1,
-              "symbol": "_ZTIN2ox3gui7IGUITabE",
-              "addend": 0,
-              "destination": "0x615bd0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 408,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui11IGUIElement7OnEventERKNS_5event6SEventE",
-              "addend": 0,
-              "destination": "0x4febf0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 416,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui7IGUITabD1Ev",
-              "addend": 0,
-              "destination": "0x522740",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 424,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui7IGUITabD0Ev",
-              "addend": 0,
-              "destination": "0x522700",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x615fc0",
+              "size": 424,
+              "kind": "section"
             }
-          ],
-          "references": 52
+          ]
         },
         {
           "name": ".rodata._ZTVN2ox3gui10IGUILayoutE",
@@ -153033,7 +152991,7 @@
         "inputs": {
           "src/daisy/gui/CGUITabControl.cpp": "cf4c8c24756a81a5ba5f7ca028ee2b9384e9c571d4d47ae95688370488d7f3f1",
           "src/daisy/gui/CGUITabControl.h": "c77ade3ccae9774ec5f87cf7db8388d083f7d5ae6d6c58d62f81ae8d952cd41e",
-          "src/ox/gui/IGUITabControl.h": "01cc766e8da9a5bbe408064f33529e3c92b930d662d1e244344c767e45ede80e",
+          "src/ox/gui/IGUITabControl.h": "a146312643c4ee86b9da7027a4a90b2abd493b02022abf2906156607bfefe14d",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
           "src/ox/gui/IGUIElement.h": "3b1a6381f8baf0d0e937f4f10a0a26efd3b529b6b1ac74ed58309321ffa93335",
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -153071,9 +153029,9 @@
           "src/ox/video/ISpriteAnimationState.h": "60650fa7302da13d29a0deffc37dd27a2077bccd18a14f1ff0a6d654c4fbafb8"
         },
         "system_headers": 117,
-        "object_sha256": "5ea3201c27e31f738b0f8bb19285eee6cb61413e814c02e50e1238f69ac2e08e"
+        "object_sha256": "d39141082fad61f7af357a61312e1dda31745c28ff5b7dfaec9d52aa5a027cb6"
       },
-      "fuzzy_target_sha256": "885c7057e6008d45c9f8d8188577800250e7f7fd68033b5395182fd4013124d9",
+      "fuzzy_target_sha256": "5374c0b80bd20ac926a5a1b27158b52520fbaac7b2e2ab0a9531603aaecf6080",
       "fuzzy_functions": [
         {
           "address": "0x51d360",
@@ -159156,7 +159114,7 @@
           "src/daisy/gui/CGUIInOutFader.h": "741025b1e8d35cac9039253dc0bcbba0b9ce3fa017f08bfa4b141a5ce9383e0a",
           "src/ox/gui/IGUIInOutFader.h": "a8fba6c2b92b7748a33f59be0d586027198e76406e3e1ed80e40f007648cbf4e",
           "src/daisy/gui/CGUIListBox.h": "1ba33de1c31394724ad99b6b863076a8afafa880486890337aeba96fcb4264f0",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/daisy/gui/CGUIMenu.h": "56171e3f12be6ddf6fe7d7416956c7f07b1e81fc84a096c3b8fd5a45780a7299",
           "src/daisy/gui/CGUIMeshViewer.h": "2dfc8367412168440cce7f4e40108bb5d593af9ccc1fdf784ec246e3f6b0c030",
           "src/ox/gui/IGUIMeshViewer.h": "956958686ba8d39a65106e2a477d2a824b0adc641da7606330ad48553c8eb26d",
@@ -159177,7 +159135,7 @@
           "src/daisy/gui/CGUITabButtonRow.h": "8dfd1804d1a920fd4bf7cd90cf2b1f12193f143da64653288dc2b73c448644f2",
           "src/ox/gui/IGUITabButtonRow.h": "c08b3ef19130a9b438fd826fbfd02a98d99f852ff78b864eebe27309287100fa",
           "src/daisy/gui/CGUITabControl.h": "c77ade3ccae9774ec5f87cf7db8388d083f7d5ae6d6c58d62f81ae8d952cd41e",
-          "src/ox/gui/IGUITabControl.h": "01cc766e8da9a5bbe408064f33529e3c92b930d662d1e244344c767e45ede80e",
+          "src/ox/gui/IGUITabControl.h": "a146312643c4ee86b9da7027a4a90b2abd493b02022abf2906156607bfefe14d",
           "src/daisy/gui/CGUIToolBar.h": "817917504acc3a5d289a7c2b91ef735c5eab755277b9204597fd2c2443116ec4",
           "src/ox/gui/IGUIToolBar.h": "0398e8b935cb486ce3a3cbbbcfab388c6b93e132dee391ca5e7bd68404427f3c",
           "src/daisy/gui/CUnicodeFont.h": "60b5e75f61ab040949ae504955d0fff91b7e79a81be48b0d79970d4eb5152813",
@@ -174436,7 +174394,7 @@
     },
     {
       "unit": "daisy/gui/CGUIListBox.cpp",
-      "object_sha256": "bcec8f8582c7df93a5f03c5c717a5b3db6335f89f57dd99bc7a283e533272938",
+      "object_sha256": "d2cc1248866e8b3b28d15e013f17095880d38d80a861090c7c86f145b486f0a5",
       "exact": false,
       "sections": [
         {
@@ -174446,7 +174404,7 @@
           "exact": false,
           "address": "0x50b4d0",
           "first_difference": 1689,
-          "differing_bytes": 1732,
+          "differing_bytes": 1728,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy3gui11CGUIListBox11addTextItemEPKwPN2ox3gui8IGUIFontENS4_5video6SColorEbb",
@@ -174610,42 +174568,6 @@
               "symbol": ".rodata.str4.4",
               "addend": 8,
               "reason": "unmapped or truncated range: 0x5f8640b8+0x10",
-              "matches": false
-            },
-            {
-              "offset": 7341,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIListBoxE",
-              "addend": 456,
-              "destination": "0x613600",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 9578,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIListBoxE",
-              "addend": 456,
-              "destination": "0x613600",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10097,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIListBoxE",
-              "addend": 456,
-              "destination": "0x613600",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 10602,
-              "type": 11,
-              "symbol": "_ZTVN2ox3gui11IGUIListBoxE",
-              "addend": 456,
-              "destination": "0x613600",
-              "reason": "different destination",
               "matches": false
             }
           ],
@@ -174849,7 +174771,7 @@
               "size": 482,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIListBoxD0Ev",
@@ -174865,7 +174787,7 @@
               "size": 488,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZThn24_N5daisy3gui11CGUIListBoxD1Ev",
@@ -174881,7 +174803,7 @@
               "size": 482,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy3gui11CGUIListBox4drawEv",
@@ -175925,60 +175847,18 @@
         },
         {
           "name": ".rodata._ZTVN2ox3gui11IGUIListBoxE",
-          "size": 480,
+          "size": 472,
           "placement": "symbol: _ZTVN2ox3gui11IGUIListBoxE",
-          "exact": false,
+          "exact": true,
           "address": "0x613600",
-          "first_difference": 432,
-          "differing_bytes": 27,
-          "bad_references": [
+          "references": 57,
+          "data_ranges": [
             {
-              "offset": 432,
-              "type": 1,
-              "symbol": "__cxa_pure_virtual",
-              "addend": 0,
-              "destination": "0x408648",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 448,
-              "type": 1,
-              "symbol": "_ZTIN2ox3gui11IGUIListBoxE",
-              "addend": 0,
-              "destination": "0x6135c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 456,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui11IGUIElement7OnEventERKNS_5event6SEventE",
-              "addend": 0,
-              "destination": "0x4febf0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 464,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui11IGUIListBoxD1Ev",
-              "addend": 0,
-              "destination": "0x50e500",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 472,
-              "type": 1,
-              "symbol": "_ZThn24_N2ox3gui11IGUIListBoxD0Ev",
-              "addend": 0,
-              "destination": "0x50e390",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x613600",
+              "size": 472,
+              "kind": "section"
             }
-          ],
-          "references": 58
+          ]
         },
         {
           "name": ".rodata._ZTVN2ox8IUnknownE",
@@ -176050,7 +175930,7 @@
         "inputs": {
           "src/daisy/gui/CGUIListBox.cpp": "9018f07d65315298c95cbee4a9c8b58da1330d7cc3546150226427258c972026",
           "src/daisy/gui/CGUIListBox.h": "1ba33de1c31394724ad99b6b863076a8afafa880486890337aeba96fcb4264f0",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUIElement.h": "3b1a6381f8baf0d0e937f4f10a0a26efd3b529b6b1ac74ed58309321ffa93335",
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -176086,9 +175966,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 135,
-        "object_sha256": "bcec8f8582c7df93a5f03c5c717a5b3db6335f89f57dd99bc7a283e533272938"
+        "object_sha256": "d2cc1248866e8b3b28d15e013f17095880d38d80a861090c7c86f145b486f0a5"
       },
-      "fuzzy_target_sha256": "4e793f9a088298bdb3ce0290f8ea7a288573cec2ba92f1b0513aad6e2754cc89",
+      "fuzzy_target_sha256": "d411e49f8743cad0726eb1be954f4014af8fd4062f5a29c90c659cc88ecf107e",
       "fuzzy_functions": [
         {
           "address": "0x50b4d0",
@@ -179175,7 +179055,7 @@
           "src/ox/gui/IGUIElementInline.h": "7f2e564d125434f3365a17cdcbc91822baa7f2464af5e587fff49185933b7f9c",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/IGUIStaticText.h": "0f802d4bd81933887c580a8b0b8dbd39d714512f6c491b708f5bacaf87bbb9a2",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -188460,7 +188340,7 @@
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/gui/IGUIElementInline.h": "7f2e564d125434f3365a17cdcbc91822baa7f2464af5e587fff49185933b7f9c",
           "src/daisy/gui/CGUIListBox.h": "1ba33de1c31394724ad99b6b863076a8afafa880486890337aeba96fcb4264f0",
-          "src/ox/gui/IGUIListBox.h": "872685fcbdb574f061e77feba2560b6fa9c108b6b5037baa4ad40822ce5b54be",
+          "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840",
           "src/ox/gui/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/gui/IGUIButton.h": "c4bf143a453416f1607b8074ae3816c1452973a4e5d12ef5e098b07854043b78",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
@@ -223238,7 +223118,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "ead93191b9a8366855fc1558fc3bbcc55e4dfeb0bc77bdd4dedea5d1157a9387"
+    "report_sha256": "78ef90f916a985df7ea191817721a48f3cdf5894e726cf7b3c954f3072b71371"
   },
   "link": {
     "status": "unavailable",
