@@ -11,11 +11,11 @@ Nothing is copied from our object's relocations for code, so a wrong call target
 
 Symbols are named from this unit's placed symbols, then symbols.tsv, the PLT and copy relocations.
 An address inside one of our placed data sections (such as `.bss`) becomes a reference to that
-section, as in our object. A referenced string that our object also has in a merged string section
-goes into a target copy of that section at the same offset, holding the target's bytes, so both
-sides reference `.rodata.str1.1+offset`. Binary merge elements are matched by access width and
-content, and keep their merge type. Other literals go into `.rodata.lit`; unnamed code becomes
-sub_<addr> and unnamed data lbl_<addr>.
+section, as in our object. A referenced string that our object also has in a merged string section,
+narrow or wide, goes into a target copy of that section at the same offset, holding the target's
+bytes, so both sides reference `.rodata.str1.1+offset` or `.rodata.str4.4+offset`. Binary merge
+elements are matched by access width and content, and keep their merge type. Other literals go into
+`.rodata.lit`; unnamed code becomes sub_<addr> and unnamed data lbl_<addr>.
 """
 
 import bisect
@@ -35,6 +35,8 @@ R_X86_64_32S = 11
 
 SHT_PROGBITS, SHT_SYMTAB, SHT_STRTAB, SHT_RELA, SHT_NOBITS = 1, 2, 3, 4, 8
 SHF_ALLOC, SHF_EXECINSTR, SHF_MERGE, SHF_STRINGS = 0x2, 0x4, 0x10, 0x20
+
+WCHAR_SIZE = 4  # the character size of wide strings (and of their merged sections, such as .rodata.str4.4)
 
 
 @dataclass
@@ -125,33 +127,42 @@ class Namer:
             if len(copies) == 1:
                 return copies[0], 0
         literal = self.literal(address, size)
-        if literal is not None:
+        wide = self.literal(address, width=WCHAR_SIZE)
+        if size is None:
+            # A pointer may address a wide string. Read narrow, it stops after the first character
+            # (an empty wide string reads as the empty narrow one), so the wide reading goes first.
+            readings = [(wide, self.strings), (literal, self.strings)]
+        else:
             # A memory operand supplies its access width. Read its binary value rather than
-            # interpreting, for example, the first zero byte of a float as an empty C string.
-            candidates = self.constants if size is not None else self.strings
-            if literal in candidates:
-                section, offset = candidates[literal]
-                self.merged.setdefault(section, {})[offset] = literal
+            # interpreting, for example, the first zero byte of a float as an empty C string. A load
+            # of the first character of a wide string reaches the string by the same address.
+            readings = [(literal, self.constants), (wide, self.strings)]
+        for content, candidates in readings:
+            if content in candidates:
+                section, offset = candidates[content]
+                self.merged.setdefault(section, {})[offset] = content
                 return section, offset
-            # Different instructions may read different widths at the same address.
-            if len(literal) > len(self.literals.get(address, b"")):
-                self.literals[address] = literal
+        # Different instructions may read different widths at the same address.
+        if literal is not None and len(literal) > len(self.literals.get(address, b"")):
+            self.literals[address] = literal
         return f"lbl_{address:x}", 0
 
-    def literal(self, address: int, size: int | None = None) -> bytes | None:
+    def literal(self, address: int, size: int | None = None, width: int = 1) -> bytes | None:
+        """The bytes of `size` at an address, or the string of `width`-byte characters there."""
         section = self.target.section_at(address)
-        if section is None or section.name != ".rodata":
+        if section is None or section.name != ".rodata" or address % width:
             return None
         try:
             if size is not None:
                 return self.target.read(address, size)
-            return self.target.cstring(address) + b"\0"
+            return self.target.cstring(address, width) + bytes(width)
         except ValueError:
             return None
 
 
 def merged_strings(obj: Elf) -> dict[bytes, tuple[str, int]]:
-    """Every zero-terminated string of our merged string sections, by content."""
+    """Every zero-terminated string of our merged string sections, by content. Each string starts at
+    the section's alignment: the zeros between aligned strings are padding, not empty strings."""
     strings: dict[bytes, tuple[str, int]] = {}
     for section in obj.elf.iter_sections():
         flags = SHF_ALLOC | SHF_MERGE | SHF_STRINGS
@@ -159,6 +170,7 @@ def merged_strings(obj: Elf) -> dict[bytes, tuple[str, int]]:
             continue
         data = section.data()
         size = section["sh_entsize"] or 1
+        align = section["sh_addralign"] or 1
         start = 0
         while start < len(data):
             end = start
@@ -167,7 +179,7 @@ def merged_strings(obj: Elf) -> dict[bytes, tuple[str, int]]:
             if end + size > len(data):
                 raise ValueError(f"unterminated merged string in {section.name}")
             strings.setdefault(data[start : end + size], (section.name, start))
-            start = end + size
+            start = (end + size + align - 1) // align * align
     return strings
 
 

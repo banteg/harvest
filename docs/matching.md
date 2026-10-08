@@ -94,8 +94,8 @@ sections, each function at our offset. Its relocations come from the target code
 every instruction, and each call or jump leaving the function, rip-relative operand and absolute
 address immediate becomes a relocation against the symbol the target references (known symbols, the
 PLT, copied library data, our placed sections by offset; `sub_`/`lbl_` otherwise). Calls to a local
-function in the same section are resolved in place, as the assembler did for ours. Referenced strings
-that our object also has go into a target copy of our merged string section at the same offsets,
+function in the same section are resolved in place, as the assembler did for ours. Referenced strings,
+narrow or wide, that our object also has go into a target copy of our merged string section at the same offsets,
 holding the target's bytes. Nothing is copied from our relocations, so a wrong target stays visible.
 Indexed absolute operands also get relocations. Binary merge elements are checked by the memory
 operand's access width and content, separately from strings; non-allocated metadata such as
@@ -106,7 +106,7 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 
 - `uv run pytest`: synthetic ELF fixtures (call destinations and addends, unknown symbols,
   unsupported types, overflow, overlaps, changed constants, FDE extents, BSS bounds and placement
-  conflicts, mutable static substitution, indexed addresses and binary literals); with
+  conflicts, mutable static substitution, indexed addresses, binary literals and wide strings); with
   the originals present, RTTI and vtable porting.
 - `HARVEST_TEST_TOOLCHAIN=1 uv run pytest`: compiles `ox/io/CMemReadFile.cpp`, requires an exact
   match, and requires three mutations to fail: a changed constant, `memcpy` changed to `memmove`, and
@@ -459,6 +459,8 @@ A data section with no known symbol is placed where the references to it from pl
 when all of them agree, and is then compared byte for byte. References into merged string or
 constant sections (for example `.rodata.str1.1`, or `.rodata.str4.4` for wide strings) are checked
 by content: the string or constant at the referenced offset must equal the target's.
+
+The delinked target object finds these elements from the other side, because the executable does not say which section a string came from. For an address in `.rodata` it reads the target's string both ways, as bytes up to a zero byte and, from a 4-aligned address, as four-byte characters up to a zero character, and names the element of our object with the same content. An address that is passed on takes the wide reading first, since an empty wide string (four zero bytes) is also the empty narrow string. An address that is loaded from takes a binary constant of the access width first, so a zero float stays in its `.rodata.cst4` element, and a wide string second, because the first character of a wide string is loaded through the string's own address. The element goes into the target's copy of our merged section at the same offset, so both sides reference the same section and objdiff compares the references. A literal that matches nothing keeps its widest read in `.rodata.lit`.
 
 An inline copy (a COMDAT section) kept from another object reads that object's copy of a file-level
 static, such as a header's `static const int` table, so its reference cannot land in our copy. A

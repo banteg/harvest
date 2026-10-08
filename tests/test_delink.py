@@ -13,6 +13,11 @@ def read(path):
     return ELFFile(io.BytesIO(path.read_bytes()))
 
 
+def wide(text):
+    """A wide string as the target holds it: four-byte characters and a four-byte terminator."""
+    return text.encode("utf-32-le") + bytes(4)
+
+
 def test_write_object_round_trips(tmp_path):
     code = delink.Section(".text", b"\xe8\x11\x11\x11\x11\xc3", delink.SHF_ALLOC | delink.SHF_EXECINSTR)
     code.relocations.append((1, delink.R_X86_64_PC32, "memcpy", -4))
@@ -63,6 +68,20 @@ def test_merged_strings_index_by_content(tmp_path):
     strings = delink.merged_strings(Elf.load(path, "ET_REL"))
     assert strings[b"MemFile\0"] == (".rodata.str1.1", 5)
     assert strings[b"GET \0"] == (".rodata.str1.1", 0)
+
+
+@pytest.mark.parametrize("entsize", [1, 4])
+def test_merged_strings_skip_the_padding_between_aligned_strings(tmp_path, entsize):
+    # GCC aligns each string of .rodata.str1.8 and .rodata.str4.8 to 8 bytes; the zeros before the next
+    # one are padding, so the empty string stays the one of the section that really has it
+    first, second = (b"ab\0", b"c\0") if entsize == 1 else (wide("ab"), wide("c"))
+    padding = bytes(-len(first) % 8)
+    section = delink.Section(
+        f".rodata.str{entsize}.8", first + padding + second, delink.SHF_ALLOC | 0x30, align=8, entsize=entsize
+    )
+    delink.write_object(tmp_path / "s.o", [section], [])
+    strings = delink.merged_strings(Elf.load(tmp_path / "s.o", "ET_REL"))
+    assert strings == {first: (section.name, 0), second: (section.name, len(first) + len(padding))}
 
 
 def test_target_symbol_takes_the_target_extent():
@@ -179,3 +198,82 @@ def test_float_access_keeps_its_binary_value_and_merge_type(tmp_path, value):
     assert relocation["r_addend"] == -4
     name = symbol.name or exported.elf.get_section(symbol["st_shndx"]).name
     assert name == (expected if value == bytes(4) else f"lbl_{DESTINATION:x}")
+
+
+def test_wide_string_ends_at_its_first_zero_character(tmp_path):
+    from test_match import DESTINATION
+
+    # "a" and its terminator, with zero bytes that straddle two characters
+    target = target_with_rodata(tmp_path, b"\xc3", wide("a") + wide("bc"))
+    assert target.cstring(DESTINATION, 4) == b"a\0\0\0"
+    assert target.cstring(DESTINATION) == b"a"
+    with pytest.raises(ValueError, match="unterminated"):
+        target_with_rodata(tmp_path, b"\xc3", b"a\0\0\0b\0\0\0").cstring(DESTINATION, 4)
+
+
+@pytest.mark.parametrize("size", [None, 4])
+def test_wide_string_is_resolved_whole_by_a_pointer_or_a_load_of_its_first_character(tmp_path, size):
+    from test_match import DESTINATION
+
+    # Read narrow, the string would be "a", which our object also has
+    target = target_with_rodata(tmp_path, b"\xc3", wide("ab"))
+    strings = {b"a\0": (".rodata.str1.1", 0), wide("ab"): (".rodata.str4.4", 8)}
+    namer = delink.Namer(target, [], {}, [], strings)
+    assert namer.name(DESTINATION, size) == (".rodata.str4.4", 8)
+    assert namer.merged == {".rodata.str4.4": {8: wide("ab")}}
+    assert not namer.literals
+
+
+def test_empty_wide_string_is_not_resolved_to_the_empty_narrow_string(tmp_path):
+    from test_match import DESTINATION
+
+    target = target_with_rodata(tmp_path, b"\xc3", wide("") + wide("="))
+    strings = {b"\0": (".rodata.str1.1", 0), wide(""): (".rodata.str4.4", 0x14)}
+    namer = delink.Namer(target, [], {}, [], strings)
+    assert namer.name(DESTINATION) == (".rodata.str4.4", 0x14)
+
+
+def test_narrow_string_is_not_resolved_to_a_wide_string(tmp_path):
+    from test_match import DESTINATION
+
+    # the empty string before "abc"; the characters read as a wide string end at the zero after them
+    target = target_with_rodata(tmp_path, b"\xc3", b"\0abc\0\0\0\0")
+    strings = {b"\0": (".rodata.str1.1", 0), wide(""): (".rodata.str4.4", 0x14)}
+    assert delink.Namer(target, [], {}, [], strings).name(DESTINATION) == (".rodata.str1.1", 0)
+
+
+def test_loaded_binary_constant_wins_over_a_wide_string(tmp_path):
+    from test_match import DESTINATION
+
+    # A zero float and an empty wide string are the same four bytes; the access tells them apart
+    target = target_with_rodata(tmp_path, b"\xc3", bytes(8))
+    namer = delink.Namer(
+        target, [], {}, [], {wide(""): (".rodata.str4.4", 0)}, {bytes(4): (".rodata.cst4", 4)}
+    )
+    assert namer.name(DESTINATION, 4) == (".rodata.cst4", 4)
+    assert namer.name(DESTINATION) == (".rodata.str4.4", 0)
+
+
+def test_wide_string_reference_goes_to_a_target_copy_of_our_wide_string_section(tmp_path):
+    from test_match import ADDRESS, DESTINATION
+
+    code = b"\xbf" + bytes(4) + b"\xc3"  # mov edi, offset L"ab"; ret
+    text = delink.Section(".text", code, 0x6, relocations=[(1, delink.R_X86_64_32, ".rodata.str4.4", 4)])
+    strings = delink.Section(
+        ".rodata.str4.4", wide("") + wide("ab"), delink.SHF_ALLOC | 0x30, align=4, entsize=4
+    )
+    delink.write_object(
+        tmp_path / "unit.o", [text, strings], [delink.Symbol("f", ".text", 0, len(code), function=True)]
+    )
+    obj = Elf.load(tmp_path / "unit.o", "ET_REL")
+    linked = code[:1] + DESTINATION.to_bytes(4, "little") + code[5:]
+    target = target_with_rodata(tmp_path, linked, wide("ab"))
+    result = {"sections": [{"name": ".text", "address": hex(ADDRESS), "functions": [
+        {"symbol": "f", "address": hex(ADDRESS), "size": len(code)}]}]}  # fmt: skip
+    sections, symbols = delink.delink_unit(target, obj, result, [], {ADDRESS: len(code)})
+    assert {s.name for s in sections} == {".text", ".rodata.str4.4"}
+    (text,) = [s for s in sections if s.name == ".text"]
+    assert text.relocations == [(1, delink.R_X86_64_32, ".rodata.str4.4", 4)]
+    (copy,) = [s for s in sections if s.name == ".rodata.str4.4"]
+    assert copy.data == bytes(4) + wide("ab")
+    assert (copy.flags, copy.align, copy.entsize) == (delink.SHF_ALLOC | 0x30, 4, 4)

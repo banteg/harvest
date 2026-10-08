@@ -90,13 +90,17 @@ class Elf:
         section = self.section_at(address)
         return section is not None and bool(section["sh_flags"] & 4)
 
-    def cstring(self, address: int) -> bytes:
+    def cstring(self, address: int, width: int = 1) -> bytes:
+        """The string at an address, without its terminator: the characters of `width` bytes before
+        the first zero character (a wide string has width 4)."""
         section = self.section_at(address)
         if section is None or section["sh_type"] == "SHT_NOBITS":
             raise ValueError(f"no string data at {address:#x}")
         data = next(data for mapped, data in self.mapped if mapped is section)
         start = address - section["sh_addr"]
-        end = data.find(b"\0", start)
+        end = data.find(bytes(width), start)
+        while end >= 0 and (end - start) % width:  # a zero run that straddles two characters
+            end = data.find(bytes(width), end + 1)
         if end < 0:
             raise ValueError(f"unterminated string at {address:#x}")
         return data[start:end]
