@@ -242,7 +242,9 @@ int CDropshipEntity::updateLogic(float frameDelta)
             SalvoCount = 1;
         }
         gp_entityManager->updateReference(BulletTarget, 1, false);
-        if (BulletCooldown <= 0)
+        if (!(BulletCooldown <= 0))
+            BulletCooldown -= frameDelta;
+        else
         {
             BulletCooldown += .1f;
             if (!BulletTarget.Entity)
@@ -269,8 +271,6 @@ int CDropshipEntity::updateLogic(float frameDelta)
                 }
             }
         }
-        else
-            BulletCooldown -= frameDelta;
         if (aligned)
             Speed = ox::core::min_(Speed + 30.0f * frameDelta, 300.0f);
         else
@@ -331,45 +331,48 @@ int CDropshipEntity::updateLogic(float frameDelta)
         }
         Speed = distance * 200.0f;
     }
-    else if (State == 4)
+    else if (State != 4)
+    {
+        if (State == 5)
+        {
+            SoundPitch = ox::core::min_(SoundPitch + .1f * frameDelta, 1.25f);
+            SpriteIndex = Position.Z < 75.0f ? 74 : 75;
+            if (StateTime > .5f)
+            {
+                Position.Z = ox::core::min_(Position.Z + 7.0f * frameDelta, 100.0f);
+                Speed = ox::core::min_(Speed + (frameDelta + frameDelta), 10.0f);
+                if (Position.Z >= 90.0f)
+                {
+                    State = 6;
+                    ox::event::SEvent event;
+                    event.EventType = ox::event::EET_USER_EVENT;
+                    event.UserEvent.UserData1 = 37;
+                    event.UserEvent.UserData2 = 0;
+                    event.UserEvent.UserData3 = 0;
+                    event.UserEvent.UserPointer = 0;
+                    ox::event::gp_subscriberList->OnEvent(event);
+                    if (gp_audioDriver)
+                        gp_audioDriver->playSound("DropShipTakeOff.ogg", .8f, 0.0f, 1.0f);
+                }
+            }
+        }
+        else if (State == 6)
+        {
+            SpriteIndex = 76;
+            Speed += 200.0f * frameDelta;
+            Position.Z += 10.0f * frameDelta;
+            if (Position.Y < -1024.0f)
+                return 1;
+            SoundPitch = ox::core::min_(SoundPitch + .2f * frameDelta, 2.0f);
+        }
+    }
+    else
     {
         SpriteIndex = 73;
         Position.Z = 7.0f;
         SoundPitch = ox::core::max_(SoundPitch + -.05f * frameDelta, .75f);
         StateTime = 0;
         Speed = 0;
-    }
-    else if (State == 5)
-    {
-        SoundPitch = ox::core::min_(SoundPitch + .1f * frameDelta, 1.25f);
-        SpriteIndex = Position.Z < 75.0f ? 74 : 75;
-        if (StateTime > .5f)
-        {
-            Position.Z = ox::core::min_(Position.Z + 7.0f * frameDelta, 100.0f);
-            Speed = ox::core::min_(Speed + (frameDelta + frameDelta), 10.0f);
-            if (Position.Z >= 90.0f)
-            {
-                State = 6;
-                ox::event::SEvent event;
-                event.EventType = ox::event::EET_USER_EVENT;
-                event.UserEvent.UserData1 = 37;
-                event.UserEvent.UserData2 = 0;
-                event.UserEvent.UserData3 = 0;
-                event.UserEvent.UserPointer = 0;
-                ox::event::gp_subscriberList->OnEvent(event);
-                if (gp_audioDriver)
-                    gp_audioDriver->playSound("DropShipTakeOff.ogg", .8f, 0.0f, 1.0f);
-            }
-        }
-    }
-    else if (State == 6)
-    {
-        SpriteIndex = 76;
-        Speed += 200.0f * frameDelta;
-        Position.Z += 10.0f * frameDelta;
-        if (Position.Y < -1024.0f)
-            return 1;
-        SoundPitch = ox::core::min_(SoundPitch + .2f * frameDelta, 2.0f);
     }
     double speed = Speed;
     Position += ox::core::CVector3d<float>(cos((double)Angle) * speed, sin((double)Angle) * speed, 0) * frameDelta;

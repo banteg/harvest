@@ -175,10 +175,10 @@ int CConfiguration::parseString(const wchar_t* text, core::CString<wchar_t>& res
             end = result.size();
             escaped = false;
         }
-        else if (c == L' ')
-            escaped = false;
-        else
+        else if (c != L' ')
             return -1;
+        else
+            escaped = false;
         ++i;
     }
 

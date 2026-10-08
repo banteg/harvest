@@ -362,9 +362,10 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
                 if (CursorPos > Text.size())
                     CursorPos = Text.size();
 
-                BlinkStartTime = os::Timer::getTime();
-                MarkBegin = 0;
+                unsigned int time = os::Timer::getTime();
+                BlinkStartTime = time;
                 MarkEnd = 0;
+                MarkBegin = 0;
                 textChanged = true;
             }
             break;
@@ -372,7 +373,7 @@ bool CGUIEditBox::processKey(const event::SEvent& event)
             {
                 // focus the next edit box of the tab
                 IGUIElement* tab = Parent;
-                while (tab->getType() == EGUIET_TAB && tab->getParent())
+                while (EGUIET_TAB == tab->getType() && tab->getParent())
                     tab = tab->getParent();
 
                 for (int id = ID + 1;; ++id)

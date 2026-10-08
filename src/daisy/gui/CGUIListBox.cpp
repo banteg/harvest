@@ -309,15 +309,15 @@ bool CGUIListBox::selectNew(int x, int y, bool onlyHover, int clicks)
     ox::event::SEvent event;
     event.EventType = ox::event::EET_GUI_EVENT;
     event.GUIEvent.Caller = this;
-    if (LastSelected == index)
-    {
-        SelectedAgain = clicks > 1;
-        event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_SELECTED_AGAIN;
-    }
-    else
+    if (LastSelected != index)
     {
         SelectedAgain = false;
         event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_CHANGED;
+    }
+    else
+    {
+        SelectedAgain = clicks > 1;
+        event.GUIEvent.EventType = ox::gui::EGET_LISTBOX_SELECTED_AGAIN;
     }
     LastSelected = index;
     OverrideActionParent->OnEvent(event);
@@ -369,7 +369,9 @@ void CGUIListBox::draw()
 
     ListParent->moveTo(ox::core::CPosition2d<int>(0, ListParentY - ScrollBar->getPos()));
 
-    if (!DrawBack)
+    if (DrawBack)
+        IGUIElement::draw();
+    else
     {
         if (ListParent && ScrollBar)
         {
@@ -377,8 +379,6 @@ void CGUIListBox::draw()
             ScrollBar->draw();
         }
     }
-    else
-        IGUIElement::draw();
 
     if (Selected < 0 || Selected >= (int)ListParent->getChildren().size())
         return;

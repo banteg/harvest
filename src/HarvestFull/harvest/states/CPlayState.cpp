@@ -1185,10 +1185,13 @@ int CPlayState::updateState(float time)
             ViewPosition.X += -400.0f * time * ScrollSpeed;
         else if (MousePosition.X >= ScreenSize.Width - 1)
             ViewPosition.X += 400.0f * time * ScrollSpeed;
-        if (MousePosition.Y == 0)
+        if (MousePosition.Y != 0)
+        {
+            if (MousePosition.Y >= ScreenSize.Height - 1)
+                ViewPosition.Y += 400.0f * time * ScrollSpeed;
+        }
+        else
             ViewPosition.Y += -400.0f * time * ScrollSpeed;
-        else if (MousePosition.Y >= ScreenSize.Height - 1)
-            ViewPosition.Y += 400.0f * time * ScrollSpeed;
     }
     if (game::gp_world)
         game::gp_world->constrainViewPos(ViewPosition);
@@ -2100,7 +2103,31 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                 bool aliens[WAVE_COUNT];
                 int count;
                 int first;
-                if (GameMode == game::EGM_WAVE)
+                if (GameMode != game::EGM_WAVE)
+                {
+                    if (LuaManager)
+                    {
+                        label = ox::core::CString<wchar_t>(LuaManager->getWaveButtonNumber(wave));
+                        first = -1;
+                        count = 0;
+                        for (int i = 0; i < WAVE_COUNT; ++i)
+                        {
+                            aliens[i] = LuaManager->isAlienOnButton(wave, i);
+                            if (aliens[i])
+                            {
+                                ++count;
+                                if (first < 0)
+                                    first = i;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        first = -1;
+                        count = 0;
+                    }
+                }
+                else
                 {
                     first = -1;
                     count = 0;
@@ -2114,27 +2141,6 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
                                 first = i;
                         }
                     }
-                }
-                else if (LuaManager)
-                {
-                    label = ox::core::CString<wchar_t>(LuaManager->getWaveButtonNumber(wave));
-                    first = -1;
-                    count = 0;
-                    for (int i = 0; i < WAVE_COUNT; ++i)
-                    {
-                        aliens[i] = LuaManager->isAlienOnButton(wave, i);
-                        if (aliens[i])
-                        {
-                            ++count;
-                            if (first < 0)
-                                first = i;
-                        }
-                    }
-                }
-                else
-                {
-                    first = -1;
-                    count = 0;
                 }
                 renderWaveButton(event.GUIEvent.Caller, count, first, aliens, label);
                 return true;
@@ -3408,14 +3414,14 @@ void CPlayState::renderMinimap()
         ox::core::CPosition2d<int> position((int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X,
             (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y);
         ox::core::CRect<int> box;
-        if (it->Time > 4.0f)
+        if (!(it->Time > 4.0f))
+            box = ox::core::CRect<int>(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
+        else
         {
             int size = (int)((it->Time - 4.0f) * 100.0f) + 6;
             box.UpperLeftCorner = position - ox::core::CPosition2d<int>(size / 2, size / 2);
             box.LowerRightCorner = box.UpperLeftCorner + ox::core::CPosition2d<int>(size, size);
         }
-        else
-            box = ox::core::CRect<int>(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
 
         // Clip the square to the minimap and skip the edges that were cut.
         bool left = true;
@@ -3917,7 +3923,12 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
 
     bool result;
     ox::io::IWriteFile* saveFile = Device->getFileSystem()->createAndWriteFile(filename, false);
-    if (saveFile)
+    if (!saveFile)
+    {
+        result = false;
+        delete[] encrypted;
+    }
+    else
     {
         settings::SSavestateHeader header;
         header.PlayerName = PlayerName;
@@ -3935,11 +3946,6 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         delete[] encrypted;
         saveFile->drop();
         result = true;
-    }
-    else
-    {
-        result = false;
-        delete[] encrypted;
     }
     return result;
 }
@@ -4314,10 +4320,10 @@ void CPlayState::addParticleEntity(ox::video::IParticleState* state, const ox::c
         return;
     }
 
-    if (entity::gp_entityManager->getEntityList(4).size() < 10000)
-        entity::gp_entityManager->appendEntity(new entity::CParticleEntity(state, position), 4);
-    else
+    if (entity::gp_entityManager->getEntityList(4).size() >= 10000)
         state->remove();
+    else
+        entity::gp_entityManager->appendEntity(new entity::CParticleEntity(state, position), 4);
 }
 
 void CPlayState::playParticleSound(const char* sound, const ox::core::CVector3d<float>& position)

@@ -294,7 +294,8 @@ bool CIrrDeviceStub::getAcceptsDragAndDrop(ox::event::E_DRAG_TYPE type)
 //! The extension is compared case-sensitively, exactly as given.
 void CIrrDeviceStub::setAcceptsDragAndDropFileType(const char* extension, bool accept)
 {
-    AcceptedDragAndDropFileTypes[ox::core::CString<char>(extension)] = accept;
+    ox::core::CString<char> extensionString = ox::core::CString<char>(extension);
+    AcceptedDragAndDropFileTypes[extensionString] = accept;
 }
 
 //! Looks the extension up with operator[], so asking about an unknown extension adds it as

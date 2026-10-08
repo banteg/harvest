@@ -4447,6 +4447,7 @@ address	size	symbol	evidence
 0x5ed120	954	_ZN2ox3net22CHTTPConnectionHandler5doGetERKNS_4core7CStringIcEERKNS3_IwEEj	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
 0x5ed4e0	695	_ZN2ox3net22CHTTPConnectionHandler16getContentLengthERNS_4core7CStringIcEE	manual:FDE layout of the CHTTPConnectionHandler object (sizes, C2 before C1 as in GCC output)
 0x5ed7a0	1682	_ZN2ox3net22CHTTPConnectionHandler7OnEventERKNS_5event6SEventE	mac-vtable:_ZTVN2ox3net22CHTTPConnectionHandlerE:2
+0x5ede40	230	_ZN2ox4core7CStringIcE6appendERKS2_	reloc:ox/net/CHTTPConnectionHandler.cpp:_ZN2ox3net22CHTTPConnectionHandler7OnEventERKNS_5event6SEventE
 0x5edf30	585	_ZNK2ox4core7CStringIcE14subStringToEndEi	reloc:ox/net/CHTTPConnectionHandler.cpp:_ZN2ox3net22CHTTPConnectionHandler16getContentLengthERNS_4core7CStringIcEE
 0x5ee180	32	_ZN2ox3net21CVariablePacketParserC2EPKv	manual:FDE layout of the CVariablePacket object, identified from Linux decompilation
 0x5ee1a0	32	_ZN2ox3net21CVariablePacketParserC1EPKv	manual:FDE layout of the CVariablePacket object, identified from Linux decompilation

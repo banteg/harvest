@@ -2267,10 +2267,10 @@ bool CVideoOpenGL::saveJpegScreenshot(const char* directory, const char* name)
 
         fileName.append(ox::core::CBasic::getTimeString((char*)"%y%m%d"));
 
-        if (i > 9)
-            fileName.append(ox::core::CString<char>("-"));
-        else
+        if (i <= 9)
             fileName.append(ox::core::CString<char>("-0"));
+        else
+            fileName.append(ox::core::CString<char>("-"));
 
         fileName.append(i);
         fileName.append(ox::core::CString<char>(".jpg"));

@@ -188,13 +188,11 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
                 ox::game::CConfigBlock* block = blocks[j];
                 ox::core::CString<wchar_t> blockName = block->getBlockName();
                 // A block missing an attribute is skipped; the file name was meant for an error message.
-                if (!block->attributeExists(L"name") || !block->attributeExists(L"description") ||
-                    !block->attributeExists(L"package") || !block->attributeExists(L"buildingSprite") ||
-                    !block->attributeExists(L"buttonSprite") || !block->attributeExists(L"constructionSprite") ||
-                    !block->attributeExists(L"radius") || !block->attributeExists(L"minerals") ||
-                    !block->attributeExists(L"energy") || !block->attributeExists(L"radius"))
-                    buildingFiles->getFileName(i);
-                else
+                if (block->attributeExists(L"name") && block->attributeExists(L"description") &&
+                    block->attributeExists(L"package") && block->attributeExists(L"buildingSprite") &&
+                    block->attributeExists(L"buttonSprite") && block->attributeExists(L"constructionSprite") &&
+                    block->attributeExists(L"radius") && block->attributeExists(L"minerals") &&
+                    block->attributeExists(L"energy") && block->attributeExists(L"radius"))
                 {
                     ox::core::CString<wchar_t> value;
                     block->getAttribute(L"package", value);
@@ -231,6 +229,8 @@ void CBuildableItems::loadCreativeBuildingList(ox::io::IFileSystem* fileSystem, 
                         16, buildingSprite.c_str(), constructionSprite.c_str(), name.c_str(), description.c_str(),
                         minerals, energy, radius, buttonSprite.c_str(), buildingSprite.c_str());
                 }
+                else
+                    buildingFiles->getFileName(i);
             }
         }
         if (config)
