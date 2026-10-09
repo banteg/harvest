@@ -93,9 +93,9 @@ The target object (`tools/hv/delink.py`) holds the target's bytes laid out like 
 sections, each function at our offset. Its relocations come from the target code: capstone decodes
 every instruction, and each call or jump leaving the function, rip-relative operand and absolute
 address immediate becomes a relocation against the symbol the target references (known symbols, the
-PLT, copied library data, our placed sections by offset; `sub_`/`lbl_` otherwise). Calls to a local
-function in the same section are resolved in place, as the assembler did for ours. Referenced strings
-that our object also has go into a target copy of our merged string section at the same offsets,
+PLT, copied library data, our placed sections and functions by offset; `sub_`/`lbl_` otherwise). Calls to a local
+function in the same section are resolved in place, as the assembler did for ours. Referenced strings,
+narrow or wide, that our object also has go into a target copy of our merged string section at the same offsets,
 holding the target's bytes. Nothing is copied from our relocations, so a wrong target stays visible.
 Indexed absolute operands also get relocations. Binary merge elements are checked by the memory
 operand's access width and content, separately from strings; non-allocated metadata such as
@@ -106,8 +106,8 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 
 - `uv run pytest`: synthetic ELF fixtures (call destinations and addends, unknown symbols,
   unsupported types, overflow, overlaps, changed constants, FDE extents, BSS bounds and placement
-  conflicts, mutable static substitution, indexed addresses and binary literals); with
-  the originals present, RTTI and vtable porting.
+  conflicts, mutable static substitution, indexed addresses, binary literals, wide strings and
+  jump table entries); with the originals present, RTTI and vtable porting.
 - `HARVEST_TEST_TOOLCHAIN=1 uv run pytest`: compiles `ox/io/CMemReadFile.cpp`, requires an exact
   match, and requires three mutations to fail: a changed constant, `memcpy` changed to `memmove`, and
   two virtual declarations swapped (same function bodies, different vtable).
@@ -459,6 +459,10 @@ A data section with no known symbol is placed where the references to it from pl
 when all of them agree, and is then compared byte for byte. References into merged string or
 constant sections (for example `.rodata.str1.1`, or `.rodata.str4.4` for wide strings) are checked
 by content: the string or constant at the referenced offset must equal the target's.
+
+The delinked target object finds these elements from the other side, because the executable does not say which section a string came from. For an address in `.rodata` it reads the target's string both ways, as bytes up to a zero byte and, from a 4-aligned address, as four-byte characters up to a zero character, and names the element of our object with the same content. An address that is passed on takes the wide reading first, since an empty wide string (four zero bytes) is also the empty narrow string. The same four bytes could instead be a narrow empty string followed by three zero bytes at an aligned address, and the content cannot tell the two apart. The recovered units reference no such address (their only narrow empty string is the terminator of a string at an odd address), and one that did would show in `hv diff` as `.rodata.str4.4` against our `.rodata.str1.1`. An address that is loaded from takes a binary constant of the access width first, so a zero float stays in its `.rodata.cst4` element, and a wide string second, because the first character of a wide string is loaded through the string's own address. The element goes into the target's copy of our merged section at the same offset, so both sides reference the same section and objdiff compares the references. The target has a copy of every merged section of ours, zero-filled where no reference found a string, because objdiff's report combines the sections of a class (`.rodata.str1.1` and `.rodata.str1.8`, say) only when an object has at least two, and the two objects must combine alike. A literal that matches nothing keeps its widest read in `.rodata.lit`.
+
+A label inside one of our functions, such as a jump table case or the label a variadic prologue loads before its computed jump, is named by that function's section and the offset the function has in the target object, shifted when a longer target function before it moves it. This is the reference the assembler wrote for ours, a section symbol and an addend, and a table entry that points into an unrecovered function keeps its `sub_` name.
 
 An inline copy (a COMDAT section) kept from another object reads that object's copy of a file-level
 static, such as a header's `static const int` table, so its reference cannot land in our copy. A

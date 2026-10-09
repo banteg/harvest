@@ -7,7 +7,7 @@
     "uv.lock": "8b7a77a281f5a04a1bc023af1ba705e4ba3b439f10e749c5d134d481e9e4c3c0",
     "toolchain/manifest.tsv": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
     "tools/hv/builds.py": "05428a1bfbab5b76bf9405ce62639af7c2c89482a3eb6705d53eb1a9f1f68d01",
-    "tools/hv/elf.py": "127eac9fb83edefcdc13cd4e01c09a80f77eee713c17c97bfe97fc5390554e0b",
+    "tools/hv/elf.py": "ecb249e166cdcb73b73e93706576a434895c43ef5054e3bf27ad36fe8b0e6d5a",
     "tools/hv/extents.py": "3c790ccc6c342a73d3278cd03269b899cca0bf57ff9a03c786378f6952f949f3",
     "tools/hv/rtti.py": "83cb630e01e62973f1f232d6d95ed483d4f7773d3b9b4817a22cc2135e3d1306",
     "tools/hv/match.py": "92fbd1a12709324e7e0fdff8aa8fc3c3e75426c02b08b527584398ad0dbb0c23",
@@ -17,7 +17,7 @@
     "tools/hv/progress.py": "bac344ee36c63061ac3d710c81364db9836e39f395d597eae4e606690504bd93",
     "tools/hv/metrics.py": "b540d8fcf5d196fefc52076876b5aa3bbd9d2f39db68e6ed69a891a4726172c9",
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
-    "tools/hv/delink.py": "536857fac0b1e250a693cf0f2ab9739f53dbe0b966b4ea047fea9b32028b22e5",
+    "tools/hv/delink.py": "357e8e8f9665ec56ed5b44c5c7ea42eb5c37312e17ee0c3d521b9b98e7b82983",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
     "config/1.18-linux-amd64/symbols.tsv": "0ec8ba6eb42cc573d79fec60127c4109272719fd8e552a3a8e180537f1f77640",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
@@ -185,7 +185,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -730,7 +730,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -755,7 +755,7 @@
         "system_headers": 108,
         "object_sha256": "246415c0a3bd5e00c2c4ef0e2124e0daf437db396b4e566bbe0f74c283d1cd6b"
       },
-      "fuzzy_target_sha256": "c16bfc06194dda442c92b91b87b963b384072eef46add288cb7f7c53c67450fe",
+      "fuzzy_target_sha256": "88498cf0eb04d57152e1e9bfd9ff19c2ab371031d3798cbee3ff8bae398f92d3",
       "fuzzy_functions": [
         {
           "address": "0x5dd200",
@@ -1143,7 +1143,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -1589,7 +1589,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2113,7 +2113,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2636,7 +2636,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -3741,7 +3741,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4387,7 +4387,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4414,7 +4414,7 @@
         "system_headers": 102,
         "object_sha256": "42729ab436f49920d6625ce00d0ad2c14e35733fe706cae38e6db8f46042056c"
       },
-      "fuzzy_target_sha256": "b8a1d558f7876ea36b9a74bc8e734d8a760889c4b3a778c7ca01b8bc915d3eb9",
+      "fuzzy_target_sha256": "6fa382e46f5529ad6e75b48bb4d8043e635253bb7de0e8dae58c02bd9bffb067",
       "fuzzy_functions": [
         {
           "address": "0x5ee180",
@@ -4606,7 +4606,7 @@
           "address": "0x5eea10",
           "size": 420,
           "symbol": "_ZN2ox3net21CVariablePacketParser15fetchWideStringERNS_4core7CStringIwEE",
-          "percent": 99.83471
+          "percent": 100.0
         }
       ]
     },
@@ -4835,7 +4835,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5095,7 +5095,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5305,7 +5305,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5487,7 +5487,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5769,7 +5769,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6106,7 +6106,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6294,7 +6294,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6507,7 +6507,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6838,7 +6838,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6867,7 +6867,7 @@
         "system_headers": 106,
         "object_sha256": "49b49033e96b209d69a58d659912f3335c164314dd5164ef7209c44c9f2e57b7"
       },
-      "fuzzy_target_sha256": "66ba22c34cdc9aac61fa5a3651371352190db6b2c682a24085f8524d66335ae2",
+      "fuzzy_target_sha256": "fde5bcea3c91f334cbdb3fac9c4fcd4983ad11d8c6cc76fd0b57c648d6395eab",
       "fuzzy_functions": [
         {
           "address": "0x5eaf90",
@@ -6969,7 +6969,7 @@
           "address": "0x5eb370",
           "size": 927,
           "symbol": "_ZN2ox2io7CHelpIO14readWideStringEPNS0_9IReadFileERNS_4core7CStringIwEE",
-          "percent": 99.92278
+          "percent": 100.0
         },
         {
           "address": "0x5eb710",
@@ -7159,7 +7159,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9020,7 +9020,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9090,7 +9090,7 @@
         "system_headers": 150,
         "object_sha256": "56ca4b21f492b0c55e65c25807d84be7930c4d3ca35dd771a2c16f301e36c2bf"
       },
-      "fuzzy_target_sha256": "d27617a51b1c5e912b5d2ed62be3bab3e220a0b2485e30eff604cfb6bd3275cc",
+      "fuzzy_target_sha256": "7f4b4c3e8109c28105a5787bad054cfde6feb798dc165e4615724ce2a6037564",
       "fuzzy_functions": [
         {
           "address": "0x45bf40",
@@ -9132,7 +9132,7 @@
           "address": "0x45c0b0",
           "size": 41,
           "symbol": "_ZN7harvest4game12CThreatLevel18getWaveDescriptionEi",
-          "percent": 99.583336
+          "percent": 100.0
         },
         {
           "address": "0x45c0e0",
@@ -9504,7 +9504,7 @@
           "address": "0x45dd50",
           "size": 3319,
           "symbol": "_ZN7harvest4game16CThreatLevelWave15updateWaveNamesEv",
-          "percent": 99.80867
+          "percent": 99.91709
         },
         {
           "address": "0x45ea50",
@@ -9552,13 +9552,13 @@
           "address": "0x45f000",
           "size": 3298,
           "symbol": "_ZN7harvest4game16CThreatLevelWave19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-          "percent": 99.854485
+          "percent": 99.93015
         },
         {
           "address": "0x45fcf0",
           "size": 185,
           "symbol": "_ZN7harvest4game12CThreatLevel19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-          "percent": 99.64286
+          "percent": 100.0
         },
         {
           "address": "0x45fdb0",
@@ -9858,7 +9858,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -11525,7 +11525,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -11606,7 +11606,7 @@
         "system_headers": 132,
         "object_sha256": "15b4ae1b33bfdc9f0f248107f081641622b88b56d09c15ce687b4ccda042fde8"
       },
-      "fuzzy_target_sha256": "61230b511637b9a8fafb3a1857fcd4ff44659b923deff79577b638368d1534f0",
+      "fuzzy_target_sha256": "0eef3b763f5daedda962e4f227990266db978a5e21215d4169353608c168f523",
       "fuzzy_functions": [
         {
           "address": "0x432270",
@@ -11846,7 +11846,7 @@
           "address": "0x4339d0",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity17getOperatorStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x433a50",
@@ -11858,13 +11858,13 @@
           "address": "0x433be0",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity13getInfoStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x433c60",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity17getMiniStatStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x433ce0",
@@ -12719,7 +12719,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -13505,7 +13505,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -14297,7 +14297,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -14366,7 +14366,7 @@
         "system_headers": 132,
         "object_sha256": "4d3027a88837547686c471335243ecd2ce1c57b3a8392ff4e0d3f7e980c636d8"
       },
-      "fuzzy_target_sha256": "aba6c79c294cd8911cae1ef632eafac195731e22e1a4567673b949ede766f71c",
+      "fuzzy_target_sha256": "328a8fc4e122e5bad9afb33cb5b5bfcba28e3443780248721aaa3ef8ef04f979",
       "fuzzy_functions": [
         {
           "address": "0x4429d0",
@@ -14408,13 +14408,13 @@
           "address": "0x442b50",
           "size": 64,
           "symbol": "_ZN7harvest6entity20CSparkProducerEntity13getInfoStringEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x442b90",
           "size": 165,
           "symbol": "_ZN7harvest6entity20CSparkProducerEntity17getMiniStatStringEv",
-          "percent": 99.62264
+          "percent": 100.0
         },
         {
           "address": "0x442c40",
@@ -15121,7 +15121,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15181,7 +15181,7 @@
         "system_headers": 124,
         "object_sha256": "f8bb886f796bae7bcec605f1fcb5376331e110c9eaba3f5c97daaeca073917ca"
       },
-      "fuzzy_target_sha256": "3577f6e4e52f4e763c5c647388589d6d4a74b22ce5a9bc097126fcc274c09df0",
+      "fuzzy_target_sha256": "606ec55d58534c82559f66088030989bca145a8e1662e4d80ad816dbfa70604b",
       "fuzzy_functions": [
         {
           "address": "0x435410",
@@ -15241,7 +15241,7 @@
           "address": "0x4354f0",
           "size": 42,
           "symbol": "_ZN7harvest6entity15CMineralsEntity13getInfoStringEv",
-          "percent": 99.61539
+          "percent": 100.0
         },
         {
           "address": "0x435520",
@@ -15865,7 +15865,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15950,7 +15950,7 @@
         "system_headers": 132,
         "object_sha256": "f35201535ad0524aaa01fdf7a0a6e34bf91c897785d1456bbe6793462ced2d43"
       },
-      "fuzzy_target_sha256": "2631b4c319784ac349dfdb5de3df752acc9ca3fd27f4beed9b37fddc17002452",
+      "fuzzy_target_sha256": "67c8c2e48dab01eaaaab338cefd850a939b062d29b221785f3217eb598f7ac37",
       "fuzzy_functions": [
         {
           "address": "0x41b050",
@@ -16010,7 +16010,7 @@
           "address": "0x41b320",
           "size": 59,
           "symbol": "_ZN7harvest6entity19CConstructionEntity13getInfoStringEv",
-          "percent": 99.666664
+          "percent": 100.0
         },
         {
           "address": "0x41b360",
@@ -16985,7 +16985,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -17062,7 +17062,7 @@
         "system_headers": 132,
         "object_sha256": "72a6c41a188239c2016b6197cfb05bc2cf88d8b66e0f0bdabc0950a14e763599"
       },
-      "fuzzy_target_sha256": "86d4e431ee134e933f369c70b027f45cd0a5bf675193ebb56d69c9b2c2f1ffee",
+      "fuzzy_target_sha256": "19f2ec8eaacfb1e29a347dc79c080e44556ff32b1b1115eb918ed80613f5e6f5",
       "fuzzy_functions": [
         {
           "address": "0x4340c0",
@@ -17122,13 +17122,13 @@
           "address": "0x4342d0",
           "size": 31,
           "symbol": "_ZN7harvest6entity20CMineralGatherEntity17getMiniStatStringEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x4342f0",
           "size": 136,
           "symbol": "_ZN7harvest6entity20CMineralGatherEntity13getInfoStringEv",
-          "percent": 99.48718
+          "percent": 100.0
         },
         {
           "address": "0x434380",
@@ -18179,7 +18179,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -18257,7 +18257,7 @@
         "system_headers": 132,
         "object_sha256": "0218ed01a25899997b2fac6e26331f986e22d75719250b295ecb6d23d99e7a76"
       },
-      "fuzzy_target_sha256": "f76097831e0b0eccdfd466d7330d5ecf3c6c7ad0be93457791c6f5460638d917",
+      "fuzzy_target_sha256": "5d4f08abce227cf8f9fc1b80e80f31fd9c354acfa6a40debfd9dfdfab93aa96a",
       "fuzzy_functions": [
         {
           "address": "0x440ec0",
@@ -18371,13 +18371,13 @@
           "address": "0x441600",
           "size": 62,
           "symbol": "_ZN7harvest6entity17CSparkMoverEntity17getMiniStatStringEv",
-          "percent": 99.6875
+          "percent": 100.0
         },
         {
           "address": "0x441640",
           "size": 92,
           "symbol": "_ZN7harvest6entity17CSparkMoverEntity13getInfoStringEv",
-          "percent": 99.565216
+          "percent": 100.0
         },
         {
           "address": "0x4416a0",
@@ -19067,7 +19067,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19521,7 +19521,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19573,7 +19573,7 @@
         "system_headers": 121,
         "object_sha256": "552016e9b8d0e83ff2023b3773b7d8e2827cbad9f8a8109bf184adeea38a8b55"
       },
-      "fuzzy_target_sha256": "304cf912e10db96d7ba6f52b98aa34c3252265bdff92147d01507fa79ab6a0c3",
+      "fuzzy_target_sha256": "55bfa382b21e04d53a59ed3d82551826a5c57ab5e795df6cf5c0ae0f4093a81a",
       "fuzzy_functions": [
         {
           "address": "0x48a4a0",
@@ -19621,7 +19621,7 @@
           "address": "0x48a690",
           "size": 1146,
           "symbol": "_ZNK7harvest8settings16CAlienPriorities18prioritiesToStringEv",
-          "percent": 99.95066
+          "percent": 100.0
         },
         {
           "address": "0x48ab10",
@@ -36312,7 +36312,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -36389,7 +36389,7 @@
         "system_headers": 134,
         "object_sha256": "46b89ab0e201d95bd72fcd7fc480d87e866ad3e6d4fd0de6502e7f84d4fb2f7d"
       },
-      "fuzzy_target_sha256": "cef200ae0de87368cb920257d95ad525bbff25e4d1bb03c7d4c2844917960cff",
+      "fuzzy_target_sha256": "195d67ba47520959fa27cc20aff406885b6f27c8df5da7b4dbdc5db57fb3f5c5",
       "fuzzy_functions": [
         {
           "address": "0x41e7a0",
@@ -36509,13 +36509,13 @@
           "address": "0x41ec10",
           "size": 125,
           "symbol": "_ZN7harvest6entity19CDefenseTowerEntity17getOperatorStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x41ec90",
           "size": 64,
           "symbol": "_ZN7harvest6entity19CDefenseTowerEntity17getMiniStatStringEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x41ee40",
@@ -36527,7 +36527,7 @@
           "address": "0x41fb60",
           "size": 789,
           "symbol": "_ZN7harvest6entity19CDefenseTowerEntity13getInfoStringEv",
-          "percent": 99.943504
+          "percent": 100.0
         },
         {
           "address": "0x41fe80",
@@ -39780,7 +39780,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -39854,7 +39854,7 @@
         "system_headers": 147,
         "object_sha256": "ec94b4d3605b0d953d824e1d64e63e59dd97304c815d77cd0d3d348a151e887c"
       },
-      "fuzzy_target_sha256": "e82e4ae644a45b303bc731e03413e8b0d73d7b024cabd9eafaede135512adf83",
+      "fuzzy_target_sha256": "3afb58dd08e648f819fb86da3a869da72f88bbea6d9a91a52ac6a07cdc019eb9",
       "fuzzy_functions": [
         {
           "address": "0x435ec0",
@@ -40004,13 +40004,13 @@
           "address": "0x4368f0",
           "size": 125,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity17getOperatorStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x436970",
           "size": 64,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity17getMiniStatStringEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x4369b0",
@@ -40076,7 +40076,7 @@
           "address": "0x4377d0",
           "size": 1033,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity13getInfoStringEv",
-          "percent": 99.91736
+          "percent": 100.0
         },
         {
           "address": "0x437be0",
@@ -50135,7 +50135,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -50216,7 +50216,7 @@
         "system_headers": 132,
         "object_sha256": "46dc5838ba80646333841b6ad5a509e10c5814b79616db7085bdd6b40a7c33ee"
       },
-      "fuzzy_target_sha256": "bb8439682d16d2eeafc4c16e94398c195f94a517efddf99369be1a12b740452c",
+      "fuzzy_target_sha256": "e269029332a8c519c51cc1f74cd16ffd499e24228c7759ed4f480493a6f5bdb3",
       "fuzzy_functions": [
         {
           "address": "0x40a2d0",
@@ -50420,7 +50420,7 @@
           "address": "0x40cd90",
           "size": 1907,
           "symbol": "_ZN7harvest6entity12CAlienEntity6renderERKN2ox4core11CPosition2dIfEERKNS3_5CRectIiEE",
-          "percent": 95.81022
+          "percent": 95.84672
         },
         {
           "address": "0x40d510",
@@ -56397,7 +56397,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -56469,7 +56469,7 @@
         "system_headers": 131,
         "object_sha256": "23a5b03a3b655e5f6db6fc581645b1708851b6eb7ea951dade080b1492545379"
       },
-      "fuzzy_target_sha256": "bc0261fbe92d8dbbed0c86cee8342e0cb5da2bf0ee944726f682b04454a034c6",
+      "fuzzy_target_sha256": "b1e552ddcf1c50ec7f71e0c63159d6aea9e6facec37635c42bd06fdded6757df",
       "fuzzy_functions": [
         {
           "address": "0x42a540",
@@ -56589,13 +56589,13 @@
           "address": "0x42afd0",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CDropshipEntity17getMiniStatStringEv",
-          "percent": 99.625
+          "percent": 100.0
         },
         {
           "address": "0x42b050",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CDropshipEntity13getInfoStringEv",
-          "percent": 99.625
+          "percent": 100.0
         },
         {
           "address": "0x42b0d0",
@@ -58745,7 +58745,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -60075,7 +60075,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -60146,7 +60146,7 @@
         "system_headers": 132,
         "object_sha256": "24c4377baa62b3fe5678cc7d4236c930e6c637de7f4962658ab4a9d854943f9d"
       },
-      "fuzzy_target_sha256": "42d4b70b4c30a7b3c648240b5a95f50d81b3297aacdbac50ee7c2c899af1747e",
+      "fuzzy_target_sha256": "841fbec6fc0641c36e0a1e373fbaa620541d27a17ec29a874cd6f6cc21ea1a43",
       "fuzzy_functions": [
         {
           "address": "0x41be00",
@@ -60314,7 +60314,7 @@
           "address": "0x41c460",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CCreativeEntity13getInfoStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x41c840",
@@ -60326,7 +60326,7 @@
           "address": "0x41c5c0",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CCreativeEntity17getMiniStatStringEv",
-          "percent": 99.625
+          "percent": 99.875
         },
         {
           "address": "0x41c640",
@@ -61468,7 +61468,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -61542,7 +61542,7 @@
         "system_headers": 132,
         "object_sha256": "9cb7cc147b0bcf8b51cbb38bf66ca86f4f5f22cdb68af1ca1905df8664caf658"
       },
-      "fuzzy_target_sha256": "0a662d130b1fbd54d6ba9b35a42eb313ca090cec579bc0a557c35763f3257c6b",
+      "fuzzy_target_sha256": "6da6a6459f4eb2b136565b38161e81538508acfbf8543a65bd6158cdfeef4454",
       "fuzzy_functions": [
         {
           "address": "0x4303f0",
@@ -62168,7 +62168,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -63923,7 +63923,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -63996,7 +63996,7 @@
         "system_headers": 129,
         "object_sha256": "ac8685e0dc676f7e7574a512082f0b6daf8ce4430133d153acc11b3996bbaf30"
       },
-      "fuzzy_target_sha256": "a17f8091391f05e60d01875d1035f960eafbe77591243dd54e186f52b9aa4754",
+      "fuzzy_target_sha256": "4651bd7123c6c2644034a2b50ce0365c425dddbcca2ab6fad63ca4454ca03c6f",
       "fuzzy_functions": [
         {
           "address": "0x45fdd0",
@@ -64755,7 +64755,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -65140,7 +65140,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -70071,7 +70071,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -70137,7 +70137,7 @@
         "system_headers": 131,
         "object_sha256": "b247a2543d0f1d278a85278727c454d11bf3a8b5f4b132280b227620cfc5fd44"
       },
-      "fuzzy_target_sha256": "5e698fafc472c5fdadfc8592470c1dee228441db69873c501188eb23df5f8ca8",
+      "fuzzy_target_sha256": "d79d500e088dfbca5eb4ec3acd37e25e23445e51e8ff66a24ba8a84abb4faa8e",
       "fuzzy_functions": [
         {
           "address": "0x453d90",
@@ -70245,13 +70245,13 @@
           "address": "0x455fc0",
           "size": 1863,
           "symbol": "_ZN7harvest4game9CScenarioC1Ev",
-          "percent": 99.90239
+          "percent": 100.0
         },
         {
           "address": "0x456710",
           "size": 1879,
           "symbol": "_ZN7harvest4game9CScenarioC2Ev",
-          "percent": 99.902596
+          "percent": 100.0
         },
         {
           "address": "0x456e70",
@@ -70269,7 +70269,7 @@
           "address": "0x457360",
           "size": 2301,
           "symbol": "_ZN7harvest4game9CScenario26notifyDropshipGoingToSpaceEPN2ox5event14IEventReceiverE",
-          "percent": 99.97006
+          "percent": 100.0
         },
         {
           "address": "0x457c60",
@@ -70281,19 +70281,19 @@
           "address": "0x458020",
           "size": 1587,
           "symbol": "_ZN7harvest4game9CScenario20notifyDropshipLandedEPN2ox5event14IEventReceiverE",
-          "percent": 99.868805
+          "percent": 100.0
         },
         {
           "address": "0x458660",
           "size": 558,
           "symbol": "_ZN7harvest4game9CScenario29notifyDropshipKilledAllAliensEPN2ox5event14IEventReceiverE",
-          "percent": 99.80315
+          "percent": 100.0
         },
         {
           "address": "0x458890",
           "size": 2981,
           "symbol": "_ZN7harvest4game9CScenario20createScenarioEventsEPN2ox5event14IEventReceiverE",
-          "percent": 90.180374
+          "percent": 90.367966
         },
         {
           "address": "0x459460",
@@ -77995,7 +77995,7 @@
         ".text._ZN7harvest4game22SLuaEntityActionButtonC1ERKS1_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -78097,7 +78097,7 @@
         "system_headers": 141,
         "object_sha256": "b1989b5e82351a70dbb4bda3ed9162e225bd1f6b6ffd68cc9bbc1275d84a26b0"
       },
-      "fuzzy_target_sha256": "6af3647ee66eefc8e0351ba4d1381a5ca79c7f3bf3d7a2239ead8b2c7743d02e",
+      "fuzzy_target_sha256": "2c56b1c30cdb3e4cadccd40f44748a909e4ece9670c3f13f5ef1feca21abc10b",
       "fuzzy_functions": [
         {
           "address": "0x4468f0",
@@ -79027,7 +79027,7 @@
           "address": "0x44ddd0",
           "size": 5330,
           "symbol": "_ZN7harvest4game11CLuaManager16addModsFromFilesEPN2ox2io9IFileListEPNS2_9IOxDeviceERKNS2_4core7CStringIcEE",
-          "percent": 79.441154
+          "percent": 79.458084
         },
         {
           "address": "0x44f6d0",
@@ -80687,7 +80687,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -80762,7 +80762,7 @@
         "system_headers": 150,
         "object_sha256": "7811febe78ffac390d962d14aa3fd2a39a24a1843e385750570d04fa6508289d"
       },
-      "fuzzy_target_sha256": "35abdbdf6653555750a8bfb76f18ea523fe792efbe29b852cf20e32bee28e399",
+      "fuzzy_target_sha256": "260e59532721a0a3e182c01643d7df11ad5dfaa5af3364f4c8c961f20beb392b",
       "fuzzy_functions": [
         {
           "address": "0x491d00",
@@ -80786,103 +80786,103 @@
           "address": "0x491df0",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig14setScrollSpeedEf",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491e00",
           "size": 16,
           "symbol": "_ZN7harvest8settings13CSystemConfig18setParticleSettingEi",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491e10",
           "size": 16,
           "symbol": "_ZN7harvest8settings13CSystemConfig14setMusicVolumeEi",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491e20",
           "size": 16,
           "symbol": "_ZN7harvest8settings13CSystemConfig12setSfxVolumeEi",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491e30",
           "size": 18,
           "symbol": "_ZN7harvest8settings13CSystemConfig13setFullscreenEb",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491eb0",
           "size": 18,
           "symbol": "_ZN7harvest8settings13CSystemConfig11setFirstRunEb",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491ea0",
           "size": 16,
           "symbol": "_ZN7harvest8settings13CSystemConfig14setShaderLevelENS0_12EShaderLevelE",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491e50",
           "size": 67,
           "symbol": "_ZN7harvest8settings13CSystemConfig12setScreenResERKN2ox4core12CDimension2dIiEE",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x491ed0",
           "size": 17,
           "symbol": "_ZN7harvest8settings13CSystemConfig14setVideoDriverEPKw",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x491ef0",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig14getScrollSpeedEv",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491f00",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig18getParticleSettingEv",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491f10",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig14getShaderLevelEv",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491f20",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig14getMusicVolumeEv",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491f30",
           "size": 14,
           "symbol": "_ZN7harvest8settings13CSystemConfig12getSfxVolumeEv",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x491f40",
           "size": 28,
           "symbol": "_ZN7harvest8settings13CSystemConfig13getFullscreenEv",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4920b0",
           "size": 53,
           "symbol": "_ZN7harvest8settings13CSystemConfig10isFirstRunEv",
-          "percent": 99.47369
+          "percent": 100.0
         },
         {
           "address": "0x491f60",
           "size": 84,
           "symbol": "_ZN7harvest8settings13CSystemConfig12getScreenResEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x491fc0",
@@ -80918,85 +80918,85 @@
           "address": "0x4922a0",
           "size": 114,
           "symbol": "_ZN7harvest8settings13CSystemConfig14getVideoDriverEv",
-          "percent": 99.80769
+          "percent": 100.0
         },
         {
           "address": "0x4924e0",
           "size": 225,
           "symbol": "_ZN7harvest8settings13CSystemConfig16getRecentProfileEv",
-          "percent": 99.913795
+          "percent": 100.0
         },
         {
           "address": "0x492320",
           "size": 225,
           "symbol": "_ZN7harvest8settings13CSystemConfig20getLicenseKeySettingEv",
-          "percent": 99.913795
+          "percent": 100.0
         },
         {
           "address": "0x492410",
           "size": 202,
           "symbol": "_ZN7harvest8settings13CSystemConfig19openDefaultLanguageEv",
-          "percent": 99.745766
+          "percent": 100.0
         },
         {
           "address": "0x4927e0",
           "size": 192,
           "symbol": "_ZN7harvest8settings13CSystemConfig16setRecentProfileERKN2ox4core7CStringIwEE",
-          "percent": 99.73214
+          "percent": 100.0
         },
         {
           "address": "0x4928a0",
           "size": 192,
           "symbol": "_ZN7harvest8settings13CSystemConfig20addLicenseKeySettingERKN2ox4core7CStringIwEE",
-          "percent": 99.73214
+          "percent": 100.0
         },
         {
           "address": "0x492730",
           "size": 165,
           "symbol": "_ZN7harvest8settings13CSystemConfig22getCurrentLanguageNameEv",
-          "percent": 99.61539
+          "percent": 100.0
         },
         {
           "address": "0x4925d0",
           "size": 165,
           "symbol": "_ZN7harvest8settings13CSystemConfig21getCurrentLanguageTagEv",
-          "percent": 99.61539
+          "percent": 100.0
         },
         {
           "address": "0x492680",
           "size": 165,
           "symbol": "_ZN7harvest8settings13CSystemConfig29getCurrentLanguageDisplayNameEv",
-          "percent": 99.61539
+          "percent": 100.0
         },
         {
           "address": "0x492960",
           "size": 1812,
           "symbol": "_ZN7harvest8settings13CSystemConfig15getAllLanguagesERN2ox6TArrayINS0_13SLanguageFileEEE",
-          "percent": 99.82143
+          "percent": 99.84375
         },
         {
           "address": "0x493080",
           "size": 2998,
           "symbol": "_ZN7harvest8settings13CSystemConfig16getLocalizedTextEPKwz",
-          "percent": 99.886536
+          "percent": 100.0
         },
         {
           "address": "0x493c40",
           "size": 582,
           "symbol": "_ZN7harvest8settings13CSystemConfig16openLanguageFileERKN2ox4core7CStringIcEE",
-          "percent": 99.90625
+          "percent": 100.0
         },
         {
           "address": "0x493e90",
           "size": 1363,
           "symbol": "_ZN7harvest8settings13CSystemConfigC1EPN2ox2io11IFileSystemEPKc",
-          "percent": 99.64497
+          "percent": 100.0
         },
         {
           "address": "0x4943f0",
           "size": 1363,
           "symbol": "_ZN7harvest8settings13CSystemConfigC2EPN2ox2io11IFileSystemEPKc",
-          "percent": 99.64497
+          "percent": 100.0
         },
         {
           "address": "0x409c40",
@@ -81630,7 +81630,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -81714,7 +81714,7 @@
         "system_headers": 131,
         "object_sha256": "e126531547cc4a21351801c01c8bc01122d25d4b8761e7e56c5f05f23f3ec876"
       },
-      "fuzzy_target_sha256": "f4cd299f0816abe392571a33543265cd2a0c8d6840e6b02701d0c8eb5cf32a8d",
+      "fuzzy_target_sha256": "d52fc2e2f49095bcaae9ed1989e07e59ed67db5ba2c8c6c9c11fcb98b8164d6b",
       "fuzzy_functions": [
         {
           "address": "0x495db0",
@@ -81738,7 +81738,7 @@
           "address": "0x496080",
           "size": 858,
           "symbol": "_ZN7harvest6states11CIntroState7OnEventERKN2ox5event6SEventE",
-          "percent": 67.590164
+          "percent": 67.644806
         },
         {
           "address": "0x4963e0",
@@ -81756,7 +81756,7 @@
           "address": "0x496900",
           "size": 150,
           "symbol": "_ZN7harvest6states11CIntroState9firstInitEPN2ox9IOxDeviceE",
-          "percent": 99.871796
+          "percent": 100.0
         },
         {
           "address": "0x4969a0",
@@ -82045,7 +82045,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82099,7 +82099,7 @@
         "system_headers": 114,
         "object_sha256": "e93ffc7a7646bb72ac4509806644a2e07a86349688c7737684d1544cbd30229e"
       },
-      "fuzzy_target_sha256": "b1108ea63398c99a79cd519c721963872859445923eacdaedf3d1ba201979f2e",
+      "fuzzy_target_sha256": "c0ceb4ae87a89bd3f33ef80f8664519eea5a2a1ac81ff78634c5ccb5aefb838e",
       "fuzzy_functions": [
         {
           "address": "0x496e80",
@@ -82135,7 +82135,7 @@
           "address": "0x496f70",
           "size": 247,
           "symbol": "_ZN7harvest6states14CLoadingScreen4initEPN2ox5video12IVideoDriverE",
-          "percent": 99.71831
+          "percent": 99.92958
         },
         {
           "address": "0x497070",
@@ -82147,7 +82147,7 @@
           "address": "0x4970a0",
           "size": 1554,
           "symbol": "_ZN7harvest6states14CLoadingScreen6renderEPN2ox9IOxDeviceEPNS2_5video12IVideoDriverE",
-          "percent": 99.86779
+          "percent": 100.0
         }
       ]
     },
@@ -82441,7 +82441,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82500,7 +82500,7 @@
         "system_headers": 117,
         "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f"
       },
-      "fuzzy_target_sha256": "23a538eb85fdf1a79eaae2cd8f6a030df5c66a53c7a64b543d02ade5b06647cb",
+      "fuzzy_target_sha256": "938dc16d910eb25708001b5bc023e57778fa8ade27472ad326af33d852a0796b",
       "fuzzy_functions": [
         {
           "address": "0x473430",
@@ -82518,13 +82518,13 @@
           "address": "0x473490",
           "size": 698,
           "symbol": "_ZN7harvest3gui17CIngameMenuScreen10setVisibleEbbi",
-          "percent": 99.61539
+          "percent": 99.93007
         },
         {
           "address": "0x473750",
           "size": 667,
           "symbol": "_ZN7harvest3gui17CIngameMenuScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.88024
+          "percent": 100.0
         },
         {
           "address": "0x4739f0",
@@ -83172,7 +83172,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -83241,7 +83241,7 @@
         "system_headers": 117,
         "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714"
       },
-      "fuzzy_target_sha256": "7da190573a3bd9762f059fd827b6bd80c8a4efd9fea3453389fd7a155fa94f8e",
+      "fuzzy_target_sha256": "ccdf7b168becabe9bd141de99cac875ee60dcb830f39770b5738b5bd8558651d",
       "fuzzy_functions": [
         {
           "address": "0x473c00",
@@ -83295,7 +83295,7 @@
           "address": "0x4740d0",
           "size": 6771,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialog14refillMainViewEi",
-          "percent": 99.81041
+          "percent": 99.93308
         },
         {
           "address": "0x475b50",
@@ -83307,7 +83307,7 @@
           "address": "0x475cb0",
           "size": 749,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-          "percent": 99.91071
+          "percent": 99.97024
         },
         {
           "address": "0x472bd0",
@@ -83387,7 +83387,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -83974,7 +83974,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -84065,7 +84065,7 @@
         "system_headers": 124,
         "object_sha256": "b7fcb078790f90aa89846deee4b314286eb8af2c96c0139e8aa020a7bcef0f48"
       },
-      "fuzzy_target_sha256": "ad24bfa1c0334c375ff854f130372ac51922907b45319f227c9a38b4fe168f59",
+      "fuzzy_target_sha256": "d8e98b6e0adbb5e94d52d476f4a239e2672ddbde996f96dc33a5133c949f92e3",
       "fuzzy_functions": [
         {
           "address": "0x4088e0",
@@ -84137,7 +84137,7 @@
           "address": "0x408f70",
           "size": 3194,
           "symbol": "_ZN7harvest16CHarvestFullMain4initEv",
-          "percent": 99.916985
+          "percent": 100.0
         },
         {
           "address": "0x409bf0",
@@ -96875,7 +96875,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -97022,7 +97022,7 @@
         "system_headers": 144,
         "object_sha256": "bfb6ae91e22ebf6e44b1f2f4b1ca1014733d47302611b60f14afb639909dfdc9"
       },
-      "fuzzy_target_sha256": "f270d3b74b190bb8de7406f07bc3ca593a6dca8c98aed8121776dc640db85376",
+      "fuzzy_target_sha256": "f23696b4530d1db624ddbc7c1b010d69c037e48bd0255e2ff44ef7100aef69e0",
       "fuzzy_functions": [
         {
           "address": "0x49f6b0",
@@ -97208,7 +97208,7 @@
           "address": "0x49fcc0",
           "size": 178,
           "symbol": "_ZN7harvest6states10CPlayState19clearSelectedEntityEv",
-          "percent": 99.545456
+          "percent": 100.0
         },
         {
           "address": "0x49fdd0",
@@ -97304,7 +97304,7 @@
           "address": "0x4a2e40",
           "size": 2830,
           "symbol": "_ZN7harvest6states10CPlayState22getPopupForBuildButtonEPKwS3_ii",
-          "percent": 99.88314
+          "percent": 99.95827
         },
         {
           "address": "0x4a47e0",
@@ -97370,7 +97370,7 @@
           "address": "0x4a7a70",
           "size": 1603,
           "symbol": "_ZN7harvest6states10CPlayState21setCreativeListToggleEb",
-          "percent": 99.91279
+          "percent": 99.941864
         },
         {
           "address": "0x4a80c0",
@@ -97382,7 +97382,7 @@
           "address": "0x4a80e0",
           "size": 1499,
           "symbol": "_ZN7harvest6states10CPlayState17setWaveListToggleEb",
-          "percent": 99.27469
+          "percent": 99.29012
         },
         {
           "address": "0x4a86c0",
@@ -97400,13 +97400,13 @@
           "address": "0x4a9630",
           "size": 14253,
           "symbol": "_ZN7harvest6states10CPlayState6renderEv",
-          "percent": 95.54766
+          "percent": 95.60498
         },
         {
           "address": "0x4ad940",
           "size": 2253,
           "symbol": "_ZN7harvest6states10CPlayState21displayWelcomeMessageEv",
-          "percent": 97.76138
+          "percent": 97.81603
         },
         {
           "address": "0x4ae210",
@@ -97418,49 +97418,49 @@
           "address": "0x4aebc0",
           "size": 11813,
           "symbol": "_ZN7harvest6states10CPlayState10secondInitEv",
-          "percent": 99.14732
+          "percent": 99.2567
         },
         {
           "address": "0x4acde0",
           "size": 741,
           "symbol": "_ZN7harvest6states10CPlayState26displayInsaneRewardMessageEv",
-          "percent": 99.945656
+          "percent": 100.0
         },
         {
           "address": "0x4ad0d0",
           "size": 896,
           "symbol": "_ZN7harvest6states10CPlayState20displayRecordMessageEib",
-          "percent": 99.93304
+          "percent": 100.0
         },
         {
           "address": "0x4ad450",
           "size": 1252,
           "symbol": "_ZN7harvest6states10CPlayState25displayTimeVictoryMessageEv",
-          "percent": 99.95049
+          "percent": 100.0
         },
         {
           "address": "0x4b19f0",
           "size": 1003,
           "symbol": "_ZN7harvest6states10CPlayState15launchWaveLevelEi",
-          "percent": 99.95935
+          "percent": 100.0
         },
         {
           "address": "0x4b1de0",
           "size": 13487,
           "symbol": "_ZN7harvest6states10CPlayState7OnEventERKN2ox5event6SEventE",
-          "percent": 70.11127
+          "percent": 70.13088
         },
         {
           "address": "0x4b5290",
           "size": 1098,
           "symbol": "_ZN7harvest6states10CPlayState15checkWaveRewardEv",
-          "percent": 99.96047
+          "percent": 100.0
         },
         {
           "address": "0x4b56e0",
           "size": 7474,
           "symbol": "_ZN7harvest6states10CPlayState11updateStateEf",
-          "percent": 95.19372
+          "percent": 95.20354
         },
         {
           "address": "0x4643e0",
@@ -101557,7 +101557,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -101649,7 +101649,7 @@
         "system_headers": 135,
         "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67"
       },
-      "fuzzy_target_sha256": "509a18bd6f51411b95b90ba067d07e96e3efce28918ee0f123f6ab042eadd0ab",
+      "fuzzy_target_sha256": "f3d9ae6f64a44e86bba93c74210652532abdb1f288cf8ec689199cc06d266040",
       "fuzzy_functions": [
         {
           "address": "0x469ef0",
@@ -101673,7 +101673,7 @@
           "address": "0x46a0a0",
           "size": 221,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen18createStatusStringEPKw",
-          "percent": 93.87931
+          "percent": 93.965515
         },
         {
           "address": "0x46a180",
@@ -101685,13 +101685,13 @@
           "address": "0x46a1e0",
           "size": 556,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen23parseRelativeTimeFormatERKN2ox4core7CStringIcEE",
-          "percent": 99.66216
+          "percent": 100.0
         },
         {
           "address": "0x46a410",
           "size": 271,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen15createLoadBlockEv",
-          "percent": 99.83871
+          "percent": 99.91936
         },
         {
           "address": "0x46a6e0",
@@ -101727,7 +101727,7 @@
           "address": "0x46b6c0",
           "size": 2323,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen17createSummaryPageEv",
-          "percent": 99.92032
+          "percent": 99.96016
         },
         {
           "address": "0x46bfe0",
@@ -101739,7 +101739,7 @@
           "address": "0x46c1d0",
           "size": 1079,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen24createUCS2FromBase64UTF2ERKN2ox4core7CStringIcEE",
-          "percent": 99.94718
+          "percent": 100.0
         },
         {
           "address": "0x46c610",
@@ -101751,13 +101751,13 @@
           "address": "0x46c800",
           "size": 7488,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen14loadHighscoresEi",
-          "percent": 99.99093
+          "percent": 100.0
         },
         {
           "address": "0x46e540",
           "size": 3895,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen20parseHighscoreStringERKN2ox4core7CStringIcEE",
-          "percent": 63.10519
+          "percent": 63.14025
         },
         {
           "address": "0x46f480",
@@ -101775,19 +101775,19 @@
           "address": "0x4702f0",
           "size": 2243,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen15loadSummaryPageEi",
-          "percent": 99.9744
+          "percent": 100.0
         },
         {
           "address": "0x470bc0",
           "size": 1482,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen10setVisibleEb",
-          "percent": 89.55592
+          "percent": 89.572365
         },
         {
           "address": "0x471190",
           "size": 6501,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.33151
+          "percent": 99.429245
         },
         {
           "address": "0x472b00",
@@ -103433,7 +103433,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -103494,13 +103494,13 @@
         "system_headers": 131,
         "object_sha256": "2353d0015972f1147a229892e35642ce6865f086419f83c971675f291e779ad0"
       },
-      "fuzzy_target_sha256": "cc4281f01bc54e3f370261e3a69950b150466780dcf405de90074d940eba7b06",
+      "fuzzy_target_sha256": "f97e41d255ad64179bbafd4df213b1097e28c5eb185315669806abf8537ce4f8",
       "fuzzy_functions": [
         {
           "address": "0x48ae60",
           "size": 26,
           "symbol": "_ZN7harvest8settings15CHarvestProfile24getPriorityAttributeNameEi",
-          "percent": 99.28571
+          "percent": 100.0
         },
         {
           "address": "0x48ae80",
@@ -103614,13 +103614,13 @@
           "address": "0x48b450",
           "size": 562,
           "symbol": "_ZN7harvest8settings15CHarvestProfile28parseLocalAchievementsStringEv",
-          "percent": 99.73856
+          "percent": 99.803925
         },
         {
           "address": "0x48b710",
           "size": 948,
           "symbol": "_ZN7harvest8settings15CHarvestProfile21parseKeyMappingStringEv",
-          "percent": 99.948715
+          "percent": 100.0
         },
         {
           "address": "0x48bad0",
@@ -103632,49 +103632,49 @@
           "address": "0x48bbc0",
           "size": 40,
           "symbol": "_ZN7harvest8settings15CHarvestProfile17getAttackPriorityEi",
-          "percent": 99.61539
+          "percent": 100.0
         },
         {
           "address": "0x48bbf0",
           "size": 19,
           "symbol": "_ZN7harvest8settings15CHarvestProfile14getPlayerGroupEv",
-          "percent": 99.28571
+          "percent": 100.0
         },
         {
           "address": "0x48bc10",
           "size": 19,
           "symbol": "_ZN7harvest8settings15CHarvestProfile13getPlayerNameEv",
-          "percent": 99.28571
+          "percent": 100.0
         },
         {
           "address": "0x48bc30",
           "size": 305,
           "symbol": "_ZN7harvest8settings15CHarvestProfile17setAttackPriorityEiRKN2ox4core7CStringIwEE",
-          "percent": 99.9359
+          "percent": 100.0
         },
         {
           "address": "0x48bd70",
           "size": 700,
           "symbol": "_ZN7harvest8settings15CHarvestProfile21setAttackRangeMattersEib",
-          "percent": 99.8895
+          "percent": 100.0
         },
         {
           "address": "0x48c030",
           "size": 684,
           "symbol": "_ZN7harvest8settings15CHarvestProfile21getAttackRangeMattersEi",
-          "percent": 99.88827
+          "percent": 100.0
         },
         {
           "address": "0x48c2e0",
           "size": 698,
           "symbol": "_ZN7harvest8settings15CHarvestProfile22createKeyMappingStringEv",
-          "percent": 99.916664
+          "percent": 100.0
         },
         {
           "address": "0x48c5a0",
           "size": 699,
           "symbol": "_ZN7harvest8settings15CHarvestProfile29createLocalAchievementsStringEv",
-          "percent": 99.91713
+          "percent": 100.0
         },
         {
           "address": "0x48c860",
@@ -103692,25 +103692,25 @@
           "address": "0x48c9b0",
           "size": 13,
           "symbol": "_ZN7harvest8settings15CHarvestProfile14setPlayerGroupERKN2ox4core7CStringIwEE",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x48c9c0",
           "size": 13,
           "symbol": "_ZN7harvest8settings15CHarvestProfile13setPlayerNameERKN2ox4core7CStringIwEE",
-          "percent": 98.333336
+          "percent": 100.0
         },
         {
           "address": "0x48c9d0",
           "size": 1453,
           "symbol": "_ZN7harvest8settings15CHarvestProfile13getLocalScoreEiii",
-          "percent": 99.95536
+          "percent": 100.0
         },
         {
           "address": "0x48cf80",
           "size": 2533,
           "symbol": "_ZN7harvest8settings15CHarvestProfile16updateLocalScoreEiiii",
-          "percent": 99.97537
+          "percent": 100.0
         },
         {
           "address": "0x48d970",
@@ -103722,13 +103722,13 @@
           "address": "0x48e5a0",
           "size": 2685,
           "symbol": "_ZN7harvest8settings15CHarvestProfile16verifyAttributesEv",
-          "percent": 99.88226
+          "percent": 100.0
         },
         {
           "address": "0x48f020",
           "size": 364,
           "symbol": "_ZN7harvest8settings15CHarvestProfile16createNewProfileERKN2ox4core7CStringIwEEPNS2_2io11IFileSystemERKNS4_IcEE",
-          "percent": 99.85981
+          "percent": 100.0
         },
         {
           "address": "0x48f190",
@@ -104155,7 +104155,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -106691,7 +106691,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -106770,7 +106770,7 @@
         "system_headers": 117,
         "object_sha256": "aa425a6dc8e8ecc51e06e85cc79330d3e14b53ef10b8e2936048460a7702f1ae"
       },
-      "fuzzy_target_sha256": "b7762edad6c41086de7b4097b437947df695fd9f6516b72b82b2fbfb88ad624f",
+      "fuzzy_target_sha256": "21d11956fe0b0438b66c4268cb46f5597c596623cb26f4d404b10cb07b7ff780",
       "fuzzy_functions": [
         {
           "address": "0x480a60",
@@ -106836,7 +106836,7 @@
           "address": "0x480e70",
           "size": 162,
           "symbol": "_ZN7harvest3gui15CSettingsScreen17updateKeyMappingsEv",
-          "percent": 99.895836
+          "percent": 100.0
         },
         {
           "address": "0x480f20",
@@ -106872,7 +106872,7 @@
           "address": "0x4811d0",
           "size": 268,
           "symbol": "_ZN7harvest3gui15CSettingsScreen15createLoadBlockEv",
-          "percent": 99.85915
+          "percent": 99.92958
         },
         {
           "address": "0x4812e0",
@@ -106884,13 +106884,13 @@
           "address": "0x481a90",
           "size": 6554,
           "symbol": "_ZN7harvest3gui15CSettingsScreenC1EPN2ox9IOxDeviceEb",
-          "percent": 99.88897
+          "percent": 99.95189
         },
         {
           "address": "0x483430",
           "size": 6554,
           "symbol": "_ZN7harvest3gui15CSettingsScreenC2EPN2ox9IOxDeviceEb",
-          "percent": 99.88897
+          "percent": 99.95189
         },
         {
           "address": "0x409c40",
@@ -106978,7 +106978,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -107304,7 +107304,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -107364,7 +107364,7 @@
         "system_headers": 117,
         "object_sha256": "b5bd7bee86f16fa6b365c50972f7597bb40f7508832ef018db84382e7ae054fa"
       },
-      "fuzzy_target_sha256": "d443ae7412f66acb90546a476b9e83f3375edb5b8619fb9ae7d7acb78d0a32e8",
+      "fuzzy_target_sha256": "e87d81499b9fcad1e6a0fd7cd3a53003e86109f57e046f07c0f7ecfdf778c1a4",
       "fuzzy_functions": [
         {
           "address": "0x4695b0",
@@ -107376,7 +107376,7 @@
           "address": "0x4695f0",
           "size": 595,
           "symbol": "_ZN7harvest3gui13CGuiInfoLines11addInfoLineEPKwS3_PN2ox5video14ISpritePackageEPKc",
-          "percent": 99.80769
+          "percent": 99.92308
         },
         {
           "address": "0x469850",
@@ -107412,13 +107412,13 @@
           "address": "0x469c90",
           "size": 281,
           "symbol": "_ZN7harvest3gui13CGuiInfoLinesC1EPN2ox9IOxDeviceE",
-          "percent": 99.86487
+          "percent": 100.0
         },
         {
           "address": "0x469db0",
           "size": 281,
           "symbol": "_ZN7harvest3gui13CGuiInfoLinesC2EPN2ox9IOxDeviceE",
-          "percent": 99.86487
+          "percent": 100.0
         }
       ]
     },
@@ -108934,7 +108934,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -109013,7 +109013,7 @@
         "system_headers": 117,
         "object_sha256": "a65e5be9cfbfb8fc024bea1ec4d2d06d7fc8615082916cc83789825128c0e997"
       },
-      "fuzzy_target_sha256": "3d2f7db57f9407d2b01a14d06bb01f942f02a75605e6bc846300c8e8b9d332c9",
+      "fuzzy_target_sha256": "2b0b3103907649f3655a7de9b0e1010d4536a20d86e598b98d6a699b625c5ba7",
       "fuzzy_functions": [
         {
           "address": "0x4668e0",
@@ -109067,19 +109067,19 @@
           "address": "0x466de0",
           "size": 2500,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen13getAwardPopupEii",
-          "percent": 99.85586
+          "percent": 99.87387
         },
         {
           "address": "0x4677b0",
           "size": 2195,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen10setVisibleEb",
-          "percent": 99.64803
+          "percent": 99.65839
         },
         {
           "address": "0x468050",
           "size": 3778,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.79721
+          "percent": 99.828896
         },
         {
           "address": "0x4643e0",
@@ -109847,7 +109847,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -109936,7 +109936,7 @@
         "system_headers": 131,
         "object_sha256": "2a5f6a71b14bcb68053c630b09f42883f35d9f2e11cbb84fb658fe6650949e44"
       },
-      "fuzzy_target_sha256": "a57c63aabcadbee2f1ec41c26b2540df2b45e3b80fc698b5e92a802002a26174",
+      "fuzzy_target_sha256": "0947b90ce9f8c40bf42b523b8deed985e74aaf95b0cacf8b9ebe9bc43d5385cd",
       "fuzzy_functions": [
         {
           "address": "0x475fc0",
@@ -109996,13 +109996,13 @@
           "address": "0x476d40",
           "size": 2010,
           "symbol": "_ZN7harvest3gui15CPriorityScreen10setVisibleEbPNS_4game12CThreatLevelE",
-          "percent": 99.75177
+          "percent": 99.83452
         },
         {
           "address": "0x477520",
           "size": 2335,
           "symbol": "_ZN7harvest3gui15CPriorityScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 90.95324
+          "percent": 90.96223
         },
         {
           "address": "0x478150",
@@ -112091,7 +112091,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -112178,7 +112178,7 @@
         "system_headers": 129,
         "object_sha256": "ab82923bfbdc5bc420c928d7366d0005a9cbba265c92e51d53d0429a6ca4763e"
       },
-      "fuzzy_target_sha256": "daf7e80e7465d339aa85e764cf17e9d87660f230cfc37ec9440d95f5a0808c8d",
+      "fuzzy_target_sha256": "f385b5beb25f4158343b785888ccce22d0d2b2c9b2b94ee019b38df0bb25b055",
       "fuzzy_functions": [
         {
           "address": "0x4b75b0",
@@ -113452,7 +113452,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -113538,7 +113538,7 @@
         "system_headers": 134,
         "object_sha256": "4dc1c18ab3084db170dd48665d259764cc1656ab67aad322d8406832b72e2695"
       },
-      "fuzzy_target_sha256": "a8f8cc75113f1d1174a56289f537f4b80fab94b41bc995de8e27f8fdcfeda7d8",
+      "fuzzy_target_sha256": "606782cbfb31ec56d8292221a07d7c8c26f5645938480b85248cf0d5e3426dca",
       "fuzzy_functions": [
         {
           "address": "0x416a20",
@@ -113688,7 +113688,7 @@
           "address": "0x418a00",
           "size": 5781,
           "symbol": "_ZN7harvest6entity15CBuildableItems24loadCreativeBuildingListEPN2ox2io11IFileSystemEPNS2_5video12IVideoDriverEPKcPNS3_9IFileListESC_",
-          "percent": 99.613144
+          "percent": 99.70882
         },
         {
           "address": "0x41a0a0",
@@ -113700,7 +113700,7 @@
           "address": "0x41a220",
           "size": 1682,
           "symbol": "_ZN7harvest6entity15CBuildableItems21loadStandardBuildingsEPN2ox5video12IVideoDriverE",
-          "percent": 99.68278
+          "percent": 99.96979
         },
         {
           "address": "0x409c20",
@@ -114313,7 +114313,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -114379,7 +114379,7 @@
         "system_headers": 117,
         "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805"
       },
-      "fuzzy_target_sha256": "7957c0ad8b976db90074dec0658723a9676c1720b6c2672251e15b811cee18a2",
+      "fuzzy_target_sha256": "c93e51fc67f2442f6538034e2ab68fb1358c7c9de87725303600c2283828f695",
       "fuzzy_functions": [
         {
           "address": "0x478630",
@@ -114397,7 +114397,7 @@
           "address": "0x478650",
           "size": 63,
           "symbol": "_ZN7harvest3gui14CProfileScreen7getTextEi",
-          "percent": 99.7619
+          "percent": 100.0
         },
         {
           "address": "0x478690",
@@ -114439,13 +114439,13 @@
           "address": "0x4788c0",
           "size": 264,
           "symbol": "_ZN7harvest3gui14CProfileScreen14checkValidNameERN2ox4core7CStringIwEE",
-          "percent": 99.83871
+          "percent": 100.0
         },
         {
           "address": "0x4789d0",
           "size": 796,
           "symbol": "_ZN7harvest3gui14CProfileScreen20deleteCurrentProfileEv",
-          "percent": 99.95169
+          "percent": 100.0
         },
         {
           "address": "0x478cf0",
@@ -114457,25 +114457,25 @@
           "address": "0x478fd0",
           "size": 2058,
           "symbol": "_ZN7harvest3gui14CProfileScreen23createEditProfileWindowEb",
-          "percent": 99.7669
+          "percent": 99.94173
         },
         {
           "address": "0x4797e0",
           "size": 2087,
           "symbol": "_ZN7harvest3gui14CProfileScreen23createProfileListWindowEv",
-          "percent": 99.87327
+          "percent": 99.9424
         },
         {
           "address": "0x47a010",
           "size": 1172,
           "symbol": "_ZN7harvest3gui14CProfileScreen11saveProfileEb",
-          "percent": 99.06207
+          "percent": 99.09655
         },
         {
           "address": "0x47a4b0",
           "size": 1066,
           "symbol": "_ZN7harvest3gui14CProfileScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.916664
+          "percent": 100.0
         },
         {
           "address": "0x409c40",
@@ -116066,7 +116066,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -116157,7 +116157,7 @@
         "system_headers": 127,
         "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1"
       },
-      "fuzzy_target_sha256": "b36380aa8243cb767f98020f32aeffd9a30cb95c9818d3538400f6994cec0456",
+      "fuzzy_target_sha256": "cd5a5e8a4599c051e62f9e483343eede33f4f1a369ef65ed6a71804027ca570e",
       "fuzzy_functions": [
         {
           "address": "0x484f80",
@@ -116199,7 +116199,7 @@
           "address": "0x4850b0",
           "size": 3068,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen12createGraphsEi",
-          "percent": 99.37911
+          "percent": 99.40772
         },
         {
           "address": "0x485cb0",
@@ -116247,19 +116247,19 @@
           "address": "0x486810",
           "size": 4410,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen10setVisibleEb",
-          "percent": 99.77378
+          "percent": 99.808586
         },
         {
           "address": "0x487950",
           "size": 2810,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen16submitHighscoresEv",
-          "percent": 99.97956
+          "percent": 100.0
         },
         {
           "address": "0x488450",
           "size": 2623,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 62.72241
+          "percent": 62.739132
         },
         {
           "address": "0x416760",
@@ -116737,7 +116737,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -116804,7 +116804,7 @@
         "system_headers": 117,
         "object_sha256": "5c31e8f3d2c5e2d408e51dac83b44c2f799d49b3f6cefc9899aeab0e068c04e4"
       },
-      "fuzzy_target_sha256": "706e098cdfb2fcad86db51b02170d2b7a3bf036b097a65222a1e569f59263eff",
+      "fuzzy_target_sha256": "88438028f9bc2ae4171f3115b31b5ac820320df49f8c908d6750923e0ed8db85",
       "fuzzy_functions": [
         {
           "address": "0x4893b0",
@@ -116822,7 +116822,7 @@
           "address": "0x489560",
           "size": 371,
           "symbol": "_ZN7harvest3gui12CStoryScreen16createBorderTextEiPN2ox3gui11IGUIElementE",
-          "percent": 99.57317
+          "percent": 99.939026
         },
         {
           "address": "0x4896e0",
@@ -120269,7 +120269,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -120408,7 +120408,7 @@
         "system_headers": 132,
         "object_sha256": "b706fa2e83140c307e8c423374af140f675f53a67deb5a94081059b7afab39e9"
       },
-      "fuzzy_target_sha256": "69f3d83a62905c46cc905f4ed945735faf6df581397acb367d226c22c6505836",
+      "fuzzy_target_sha256": "3cbeef7dc11f646b7077d182ae9d2d2e2ca6fe1ea7404c667365e765d77f88d4",
       "fuzzy_functions": [
         {
           "address": "0x4976c0",
@@ -120432,7 +120432,7 @@
           "address": "0x497a30",
           "size": 82,
           "symbol": "_ZN7harvest6states14CMainMenuState16enterNeutralModeEv",
-          "percent": 99.77273
+          "percent": 100.0
         },
         {
           "address": "0x497a90",
@@ -120510,13 +120510,13 @@
           "address": "0x4988c0",
           "size": 678,
           "symbol": "_ZN7harvest6states14CMainMenuState20createDemoMessageBoxEv",
-          "percent": 99.71831
+          "percent": 99.89436
         },
         {
           "address": "0x498b70",
           "size": 775,
           "symbol": "_ZN7harvest6states14CMainMenuState24fillLayoutWithPlanetInfoEPN2ox3gui10IGUILayoutEib",
-          "percent": 99.77778
+          "percent": 99.888885
         },
         {
           "address": "0x498e80",
@@ -120534,37 +120534,37 @@
           "address": "0x499c10",
           "size": 6565,
           "symbol": "_ZN7harvest6states14CMainMenuState10secondInitEv",
-          "percent": 59.189922
+          "percent": 59.197674
         },
         {
           "address": "0x49b5c0",
           "size": 6810,
           "symbol": "_ZN7harvest6states14CMainMenuState28createLockedPlanetMessageBoxEi",
-          "percent": 99.91982
+          "percent": 99.97434
         },
         {
           "address": "0x49d060",
           "size": 1938,
           "symbol": "_ZN7harvest6states14CMainMenuState23enterGameModeSelectModeEi",
-          "percent": 96.836845
+          "percent": 97.02105
         },
         {
           "address": "0x49d800",
           "size": 324,
           "symbol": "_ZN7harvest6states14CMainMenuState21enterPlanetSelectModeEv",
-          "percent": 99.80769
+          "percent": 100.0
         },
         {
           "address": "0x49d950",
           "size": 2049,
           "symbol": "_ZN7harvest6states14CMainMenuState24createLuaSelectionWindowEv",
-          "percent": 99.846695
+          "percent": 99.90566
         },
         {
           "address": "0x49e160",
           "size": 5013,
           "symbol": "_ZN7harvest6states14CMainMenuState7OnEventERKN2ox5event6SEventE",
-          "percent": 52.78163
+          "percent": 52.786316
         },
         {
           "address": "0x49f500",
@@ -122165,7 +122165,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -122249,7 +122249,7 @@
         "system_headers": 139,
         "object_sha256": "f1d289f47ad54b5feb2bc13e6594eeb377095063c58e50631e369d1778a24889"
       },
-      "fuzzy_target_sha256": "f421bc4a19faf4eb87c90b3a33de0607b3be971a319de74c64a727f769d3af42",
+      "fuzzy_target_sha256": "bef3a0490f3f404445704fc16ebcb9b6aed51fa92569a7447a746316f61b78cd",
       "fuzzy_functions": [
         {
           "address": "0x47a8e0",
@@ -122279,13 +122279,13 @@
           "address": "0x47ac40",
           "size": 303,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen12addEmptySlotEv",
-          "percent": 99.921875
+          "percent": 100.0
         },
         {
           "address": "0x47a960",
           "size": 736,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen17createSaveGameBoxEv",
-          "percent": 99.81707
+          "percent": 99.90854
         },
         {
           "address": "0x47ad70",
@@ -122321,13 +122321,13 @@
           "address": "0x47b440",
           "size": 3368,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen16addSavestateSlotERKNS_8settings16SSavestateHeaderERKN2ox4core7CStringIwEE",
-          "percent": 99.91561
+          "percent": 99.992966
         },
         {
           "address": "0x47c170",
           "size": 2141,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen17performListActionEv",
-          "percent": 99.939026
+          "percent": 100.0
         },
         {
           "address": "0x47c9d0",
@@ -122339,13 +122339,13 @@
           "address": "0x47d440",
           "size": 1930,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen10setVisibleEbb",
-          "percent": 99.8995
+          "percent": 99.96231
         },
         {
           "address": "0x47dbd0",
           "size": 1213,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.96575
+          "percent": 100.0
         },
         {
           "address": "0x473bc0",
@@ -123349,7 +123349,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -124233,7 +124233,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -124277,7 +124277,7 @@
         "system_headers": 114,
         "object_sha256": "5abb4e6c2eef0fbb3bb021201dce0580a82e498cc8defe5157616a746b18ed2f"
       },
-      "fuzzy_target_sha256": "3ab29614be3eda3eaeaaa4d42a94d60926aef183083a86439835f2898d4304a5",
+      "fuzzy_target_sha256": "df53250a68b3153b49044f5612c1310d21e8faf92909a50a6c32db73a0022b1a",
       "fuzzy_functions": [
         {
           "address": "0x59f550",
@@ -124944,7 +124944,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -124979,7 +124979,7 @@
         "system_headers": 124,
         "object_sha256": "2821ee0686736edef1f0dd9d5564dcb4c864dedfcc6fd5e7fcc434b1633a641f"
       },
-      "fuzzy_target_sha256": "d9ea2cda66285da79a4e562281bdcae8e89989ac6d3f1e5a479ef36a57a3f8d5",
+      "fuzzy_target_sha256": "a835a9521abea871590508ced59f6d1a8e052dcb82d2c65cbc3b5473f0b207da",
       "fuzzy_functions": [
         {
           "address": "0x5e4110",
@@ -125081,7 +125081,7 @@
           "address": "0x5e4e10",
           "size": 3817,
           "symbol": "_ZN2ox4game12CConfigBlock10printBlockEPNS_2io10IWriteFileE",
-          "percent": 99.91218
+          "percent": 100.0
         },
         {
           "address": "0x5e5d00",
@@ -126120,7 +126120,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -126163,7 +126163,7 @@
         "system_headers": 124,
         "object_sha256": "93ec4b2712ea5c54d9172cfb78997330319f5fe8601f4118be69f865186c382c"
       },
-      "fuzzy_target_sha256": "afdd933d2e834c3ae27663b9769fbfbe39d3deca829ff458104a4ca6667a330b",
+      "fuzzy_target_sha256": "a50abed83ba99a62185475ca7032059987370cfe78dc6dc2e51cdbcbc9fdecd8",
       "fuzzy_functions": [
         {
           "address": "0x5e6530",
@@ -126241,13 +126241,13 @@
           "address": "0x5e6960",
           "size": 324,
           "symbol": "_ZN2ox4game14CConfiguration10isNextCharEPKww",
-          "percent": 99.85577
+          "percent": 100.0
         },
         {
           "address": "0x5e6ab0",
           "size": 1247,
           "symbol": "_ZN2ox4game14CConfiguration10getBlockExERKNS_4core7CStringIwEERS4_S7_",
-          "percent": 99.75
+          "percent": 99.78125
         },
         {
           "address": "0x5e6f90",
@@ -126283,7 +126283,7 @@
           "address": "0x5e7640",
           "size": 553,
           "symbol": "_ZN2ox4game14CConfiguration22getAttributeFromBase64ERKNS_4core7CStringIwEERS4_",
-          "percent": 99.871796
+          "percent": 100.0
         },
         {
           "address": "0x5e7870",
@@ -126343,13 +126343,13 @@
           "address": "0x5e8940",
           "size": 1991,
           "symbol": "_ZN2ox4game14CConfiguration11parseStringEPKwRNS_4core7CStringIwEERKS6_b",
-          "percent": 60.199623
+          "percent": 60.28437
         },
         {
           "address": "0x5e9110",
           "size": 666,
           "symbol": "_ZN2ox4game14CConfiguration14parseAttributeEPKwPNS0_12CConfigBlockE",
-          "percent": 98.3237
+          "percent": 98.41041
         },
         {
           "address": "0x5e8860",
@@ -126373,7 +126373,7 @@
           "address": "0x5e93b0",
           "size": 1273,
           "symbol": "_ZN2ox4game14CConfiguration15parseConfigFileEPKw",
-          "percent": 99.31953
+          "percent": 99.40829
         },
         {
           "address": "0x5e98b0",
@@ -126661,7 +126661,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -126712,7 +126712,7 @@
         "system_headers": 121,
         "object_sha256": "45960046bb34c5b9170ae47ad7be1b030c7400e7e5aa9650916b5e9196bc69f1"
       },
-      "fuzzy_target_sha256": "83976da59d2f9f2aec9f6cd555cd095bbe455fd3c61b87caa8c23fa66c4198b3",
+      "fuzzy_target_sha256": "e349de7221b39c25131a08976671155b2abe21ce246dbcf51a4aa024b4bdbf9e",
       "fuzzy_functions": [
         {
           "address": "0x5e9e60",
@@ -126802,7 +126802,7 @@
           "address": "0x5ea310",
           "size": 981,
           "symbol": "_ZN2ox4game9CGameMain10checkFilesEPPc",
-          "percent": 99.87365
+          "percent": 100.0
         }
       ]
     },
@@ -127100,7 +127100,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128189,7 +128189,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128975,7 +128975,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129001,7 +129001,7 @@
         "system_headers": 102,
         "object_sha256": "d359f075191af12a54bdd32cf426f6c69283beac27cfcf47ab9426233c6aa543"
       },
-      "fuzzy_target_sha256": "b78dd9c919d41eb2fc376fa00f931ba291a6c70472fd263b86218e3dfb848807",
+      "fuzzy_target_sha256": "c5370de27b10122909cb9576b6d28a3b1590f06a50065770ceb947f117000960",
       "fuzzy_functions": [
         {
           "address": "0x5de250",
@@ -129031,13 +129031,13 @@
           "address": "0x5de340",
           "size": 6,
           "symbol": "_ZNK2ox4core4CAes12getShortNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x5de350",
           "size": 6,
           "symbol": "_ZNK2ox4core4CAes11getLongNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x5de360",
@@ -129097,13 +129097,13 @@
           "address": "0x5df0a0",
           "size": 6,
           "symbol": "_ZNK2ox4core7ICipher12getShortNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x5df0b0",
           "size": 6,
           "symbol": "_ZNK2ox4core7ICipher11getLongNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x5de680",
@@ -129428,7 +129428,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129454,7 +129454,7 @@
         "system_headers": 127,
         "object_sha256": "328a852630190162ee922ebcdbb914eee5dafe83ad682655ebf18fbc9aa1b6b5"
       },
-      "fuzzy_target_sha256": "0f2ca1c47a7305fe21205186ce5f8d492fa40880fa6465e0b82e7f7c696c4bea",
+      "fuzzy_target_sha256": "7696b399ff644861d14248b174bba2c3e93d0e142d702d9d3e18ab679cadbc8d",
       "fuzzy_functions": [
         {
           "address": "0x5e0110",
@@ -129568,7 +129568,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129591,7 +129591,7 @@
         "system_headers": 107,
         "object_sha256": "6dd16922f8e823f64cda70cff9b5b0137d5ca098f7b97d9271318d5c03ac9a48"
       },
-      "fuzzy_target_sha256": "c32d02ec682b1eb749dacd28d0dbd369c521e93bd2d2932c4e4a2b8e5756bf35",
+      "fuzzy_target_sha256": "be14653d84d69f4ec16a8449b7b13c8549e9a3a4dcc6b50798e19de635cf1063",
       "fuzzy_functions": [
         {
           "address": "0x5eebc0",
@@ -129603,7 +129603,7 @@
           "address": "0x5eebf0",
           "size": 268,
           "symbol": "_Z18AlwaysAppendToFilePKcS0_z",
-          "percent": 99.91228
+          "percent": 100.0
         }
       ]
     },
@@ -130000,7 +130000,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -130030,7 +130030,7 @@
         "system_headers": 115,
         "object_sha256": "bd4476c8d25e0b11e3b5d1ceea6f44172dcc352537aee53c1212e0a1fd3f7460"
       },
-      "fuzzy_target_sha256": "b8fe467bfc09e26f19f75ea3d5a6ca611bc2e840cb7328fa0fbefa57b30f255e",
+      "fuzzy_target_sha256": "b56c65a6ae8621b2ebd6994a6c73240fb6db8194209eca7f9693f8401b80bdea",
       "fuzzy_functions": [
         {
           "address": "0x5ea8c0",
@@ -130042,7 +130042,7 @@
           "address": "0x5ea8f0",
           "size": 658,
           "symbol": "_ZN2ox4game17CTextLocalization7getTextEPKw",
-          "percent": 99.832405
+          "percent": 100.0
         },
         {
           "address": "0x409c40",
@@ -130221,7 +130221,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -130247,7 +130247,7 @@
         "system_headers": 115,
         "object_sha256": "1355966244fed8f8fbed033a6c3664e0a4fd9a1cbe7f6d7fea70ce5e1d0b83bd"
       },
-      "fuzzy_target_sha256": "07e19b08a6766f7b6b66b7eebff2018937a7633e6b1686e9aaf0159a682172e7",
+      "fuzzy_target_sha256": "706ba59bdcdd9b06d14f8c75706098d9abe261fed7eefca0478adff0411ab845",
       "fuzzy_functions": [
         {
           "address": "0x5e08a0",
@@ -130259,7 +130259,7 @@
           "address": "0x5e08d0",
           "size": 4325,
           "symbol": "_ZN2ox4core16CStringFunctions18millisecondsToWideEfb",
-          "percent": 99.85677
+          "percent": 99.926216
         }
       ]
     },
@@ -130775,7 +130775,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -132267,7 +132267,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -132310,7 +132310,7 @@
         "system_headers": 118,
         "object_sha256": "32405000563d03cc86acabf5397d3306283665a326363832457b78c27869b3c8"
       },
-      "fuzzy_target_sha256": "49d45c09ebce2632d10459cb4ec55d5fd0c58a55107f7e691858a9044e0edd95",
+      "fuzzy_target_sha256": "373b429ac3aebef51d3d9a4507f04e18a6078b69d9576afded4f31a2e8cdb2c0",
       "fuzzy_functions": [
         {
           "address": "0x5b14a0",
@@ -133216,7 +133216,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133257,7 +133257,7 @@
         "system_headers": 114,
         "object_sha256": "d99020fad515f690e429ed2b65864a7e60913acd86480e6606ebffeca87c418f"
       },
-      "fuzzy_target_sha256": "26556fc27d72a88fdb4b23878a4e8e78ab0f3ef92ddd7ee4da0c777ac3466391",
+      "fuzzy_target_sha256": "5f7f313a1f09951bb57fa401680aeac758adaeff6b50fe1f4d2ecc19aa9d01da",
       "fuzzy_functions": [
         {
           "address": "0x5081c0",
@@ -133829,7 +133829,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133870,7 +133870,7 @@
         "system_headers": 123,
         "object_sha256": "6b626c493392d8ec9a4256806b6cac4d3082fc0446a738fbba2d66cec9efd5a1"
       },
-      "fuzzy_target_sha256": "bbfe76ea73a9e9b99a187c378fd60530938c82adfb9e450e28a5acf78804b17e",
+      "fuzzy_target_sha256": "d12a41242ba7dccee9428ce4fbfe9c96fbf487d7cf61a80c63d6ca01d4cca63a",
       "fuzzy_functions": [
         {
           "address": "0x52b540",
@@ -134536,7 +134536,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -134580,7 +134580,7 @@
         "system_headers": 114,
         "object_sha256": "3b32a03a1b9fd06b7666a52ad75592dd5f1739b51086d9897c24c713e910e27b"
       },
-      "fuzzy_target_sha256": "b68dc5b003e1367311582f9cc9458b0e867c92a08f723b8d6ece60eca9c78b88",
+      "fuzzy_target_sha256": "000f0cff06873a3b999d79d11b1dd8a77d5ecd93e84592395b3c435e96efd37f",
       "fuzzy_functions": [
         {
           "address": "0x5d8dc0",
@@ -135258,7 +135258,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -136023,7 +136023,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -138207,7 +138207,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -138259,7 +138259,7 @@
         "system_headers": 141,
         "object_sha256": "6602f747c5882eb6011df2c530f69a3c043b868467f0f0d175c69d33a8170bb5"
       },
-      "fuzzy_target_sha256": "a9ead780e64edba32300bc9663fca47156878f56b1d3fb50d94a654614c80077",
+      "fuzzy_target_sha256": "34ec294904ba08ad70d48bfa65c74fb71c8c0ee120f90c94e93ebcef4bf01ce9",
       "fuzzy_functions": [
         {
           "address": "0x5a1390",
@@ -138746,7 +138746,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -139348,7 +139348,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -139398,7 +139398,7 @@
         "system_headers": 114,
         "object_sha256": "11027e3d2744fe59a3d0437abcb50ea474282e88b0d62cbe4793be1371d1dc68"
       },
-      "fuzzy_target_sha256": "13b6d05853f3fc8985cc6d1401cd3ec8fbff02a67909f5c101e9d9e2c26008c8",
+      "fuzzy_target_sha256": "07fce42e1b87d342a0d4405c14ceaecd283dca8347833fb0fcbe7d536cfafbf1",
       "fuzzy_functions": [
         {
           "address": "0x464740",
@@ -141376,7 +141376,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -144217,7 +144217,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -144280,7 +144280,7 @@
         "system_headers": 134,
         "object_sha256": "6e062175fb70c6d98e7a3c62ed6fdb485fb59336afcfc347b1eefcdf203447fd"
       },
-      "fuzzy_target_sha256": "ff72c69b587a4517065cbe7601d73faf19dbbfb1f3856108cab964d56c31cf25",
+      "fuzzy_target_sha256": "d12a64aa52921309a3c7ee058c1fbca07a4ad776452afd11692e117490c35a81",
       "fuzzy_functions": [
         {
           "address": "0x5c0b00",
@@ -145912,7 +145912,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -148332,7 +148332,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -148391,7 +148391,7 @@
         "system_headers": 117,
         "object_sha256": "514bd582a528372a3bf4d51fc630b917814470c6d57be97db57f1174accbe5dd"
       },
-      "fuzzy_target_sha256": "f9e6a6472ea0a1a364602eeca4e47ca6e792f736087903b861c20751ae11e79c",
+      "fuzzy_target_sha256": "0cd65d9efab8486a7de8f045a2c2550266e0fe5ccfcc178751f1080c443b6605",
       "fuzzy_functions": [
         {
           "address": "0x51a080",
@@ -148427,13 +148427,13 @@
           "address": "0x51a160",
           "size": 121,
           "symbol": "_ZN5daisy3gui14CGUIStaticText13getTextHeightEv",
-          "percent": 99.861115
+          "percent": 100.0
         },
         {
           "address": "0x51a1e0",
           "size": 366,
           "symbol": "_ZN5daisy3gui14CGUIStaticText8packSizeEv",
-          "percent": 99.95238
+          "percent": 100.0
         },
         {
           "address": "0x51a350",
@@ -148505,13 +148505,13 @@
           "address": "0x51b710",
           "size": 2145,
           "symbol": "_ZN5daisy3gui14CGUIStaticText9breakTextEv",
-          "percent": 97.36699
+          "percent": 97.42524
         },
         {
           "address": "0x51bf80",
           "size": 1154,
           "symbol": "_ZN5daisy3gui14CGUIStaticText16setParagraphIconEPKcPN2ox5video14ISpritePackageEb",
-          "percent": 95.9798
+          "percent": 95.996635
         },
         {
           "address": "0x51c410",
@@ -148535,7 +148535,7 @@
           "address": "0x51c560",
           "size": 2845,
           "symbol": "_ZN5daisy3gui14CGUIStaticText4drawEv",
-          "percent": 93.22023
+          "percent": 93.228386
         },
         {
           "address": "0x466870",
@@ -152657,7 +152657,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -152717,7 +152717,7 @@
         "system_headers": 117,
         "object_sha256": "ebe8200ad74092a674b571acc1705ed528dfb3bdab0fd51a42a53f22c1d119e4"
       },
-      "fuzzy_target_sha256": "5374c0b80bd20ac926a5a1b27158b52520fbaac7b2e2ab0a9531603aaecf6080",
+      "fuzzy_target_sha256": "3a35e8d257e42569e276583b002a67755f2c16011e2cb6ee8a912733c0ff4e06",
       "fuzzy_functions": [
         {
           "address": "0x51d360",
@@ -152819,7 +152819,7 @@
           "address": "0x51d810",
           "size": 54,
           "symbol": "_ZN5daisy3gui16CGUITabButtonRow13getTabCaptionEi",
-          "percent": 99.666664
+          "percent": 100.0
         },
         {
           "address": "0x51e180",
@@ -154075,7 +154075,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -154118,7 +154118,7 @@
         "system_headers": 114,
         "object_sha256": "4f5c37ec54184f895124b8cd38b14e7e792b1ee05268a976ce6d0140f9115371"
       },
-      "fuzzy_target_sha256": "88ca3930fea5940137d670a3474ea865ef810e1a03bb23225265cb69861ab991",
+      "fuzzy_target_sha256": "5d6af69d710196bb34754b7c3897795a0c78d38416e2194d66ccc81635b71c94",
       "fuzzy_functions": [
         {
           "address": "0x519110",
@@ -154208,7 +154208,7 @@
           "address": "0x519c00",
           "size": 1029,
           "symbol": "_ZN5daisy3gui8CGUISkinC1EN2ox3gui14EGUI_SKIN_TYPEE",
-          "percent": 99.666664
+          "percent": 99.75
         },
         {
           "address": "0x51a010",
@@ -154220,7 +154220,7 @@
           "address": "0x5197f0",
           "size": 1029,
           "symbol": "_ZN5daisy3gui8CGUISkinC2EN2ox3gui14EGUI_SKIN_TYPEE",
-          "percent": 99.666664
+          "percent": 99.75
         },
         {
           "address": "0x466870",
@@ -158708,7 +158708,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -158833,7 +158833,7 @@
         "system_headers": 142,
         "object_sha256": "dfa038b2a538b731fb31d9a366a10f911e00c93943b27447020c7e673d970130"
       },
-      "fuzzy_target_sha256": "85ea5392ae4eebeec3f0bb3a954c95df1aabebb967b4c67890b30d7f3dcb2d2e",
+      "fuzzy_target_sha256": "b2eea7ba51df922f34492a1599834b858e7506772df701c1a6cbefc4f54b427a",
       "fuzzy_functions": [
         {
           "address": "0x4fa980",
@@ -158935,13 +158935,13 @@
           "address": "0x4fb000",
           "size": 503,
           "symbol": "_ZN5daisy3gui15CGUIEnvironment13addStaticTextEPKwiPN2ox3gui11IGUIElementEPNS5_8IGUIFontEiS3_",
-          "percent": 98.21849
+          "percent": 98.30252
         },
         {
           "address": "0x4fb5f0",
           "size": 1110,
           "symbol": "_ZN5daisy3gui15CGUIEnvironment7getFontEPKc",
-          "percent": 99.70297
+          "percent": 99.719475
         },
         {
           "address": "0x4fba50",
@@ -159625,7 +159625,7 @@
           "address": "0x500ca0",
           "size": 4473,
           "symbol": "_ZN2ox3gui14IGUIStaticText9breakTextERKNS_4core7CStringIwEEPNS0_8IGUIFontERNS_6TArrayIS4_EEiPKw",
-          "percent": 34.01317
+          "percent": 34.03512
         },
         {
           "address": "0x451040",
@@ -162203,7 +162203,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -164231,7 +164231,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -164286,7 +164286,7 @@
         "system_headers": 117,
         "object_sha256": "82990d624f0ed5117726dbba654eb8dd608c3991459548b6e6919f5f9b53e34f"
       },
-      "fuzzy_target_sha256": "6df58882a8f6936728381ac93ada1cd1a3e102a9a4f63537352b696578dee5c2",
+      "fuzzy_target_sha256": "1056e12548e2bb45d47fb5f624e3567b8802f23feb6e097bce2afd2a1b4435bd",
       "fuzzy_functions": [
         {
           "address": "0x515cb0",
@@ -164412,7 +164412,7 @@
           "address": "0x516fd0",
           "size": 3776,
           "symbol": "_ZN5daisy3gui13CGUIScrollBar13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 99.9473
+          "percent": 99.959015
         },
         {
           "address": "0x517e90",
@@ -165847,7 +165847,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -165901,13 +165901,13 @@
         "system_headers": 135,
         "object_sha256": "6603663b3b05d97ce9e2c4b8f3ac13d480062394dad2c54702713e4ea52d503b"
       },
-      "fuzzy_target_sha256": "2a118fffdb54e59bd33ab6b00244218f9bd89760fccb14b4d5531ef45cfff9a6",
+      "fuzzy_target_sha256": "1ba403bb2a4e3be5f3713fe001b71cb8b762c1ad7903585dd20a377c7f293931",
       "fuzzy_functions": [
         {
           "address": "0x512b00",
           "size": 233,
           "symbol": "_ZN5daisy3gui13CGUIPopupMenu13addMenuOptionEPKwi",
-          "percent": 99.895836
+          "percent": 100.0
         },
         {
           "address": "0x512bf0",
@@ -165937,13 +165937,13 @@
           "address": "0x512f00",
           "size": 1071,
           "symbol": "_ZN5daisy3gui13CGUIPopupMenuC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core11CPosition2dIiEEiPKwPNS3_8IGUIFontESE_",
-          "percent": 99.97908
+          "percent": 100.0
         },
         {
           "address": "0x513330",
           "size": 1071,
           "symbol": "_ZN5daisy3gui13CGUIPopupMenuC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core11CPosition2dIiEEiPKwPNS3_8IGUIFontESE_",
-          "percent": 99.97908
+          "percent": 100.0
         },
         {
           "address": "0x513760",
@@ -167738,7 +167738,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -167778,7 +167778,7 @@
         "system_headers": 108,
         "object_sha256": "c4fc261d59f59dee1c6ecfffa6528e6ebde2056c26b8be78c7bf5029402924dc"
       },
-      "fuzzy_target_sha256": "6f8cebeeeccf5bd4b9ff0dae8603f307192344d7f048499ab5aee62aa5dd356a",
+      "fuzzy_target_sha256": "a48d0b7ed5a7ed77576f335ce5037380fd1998fc9b636b153b74461a38f12d28",
       "fuzzy_functions": [
         {
           "address": "0x514200",
@@ -169226,7 +169226,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -170682,7 +170682,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -172219,7 +172219,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -173702,7 +173702,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -175591,7 +175591,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -175649,7 +175649,7 @@
         "system_headers": 135,
         "object_sha256": "333bb892d1a7dc5212302fe5e02bab8eb7728512602be5bff4a32ffc0e776efa"
       },
-      "fuzzy_target_sha256": "e5ca2203a1728221c1054ff9070e13a096c06fcf82c9f538e897a5b197acbc37",
+      "fuzzy_target_sha256": "a821dd9dc16b4a1dcd4b62d817f3883d8eb8d99d3a41c6ca906d81a48ae9e7cd",
       "fuzzy_functions": [
         {
           "address": "0x50b4d0",
@@ -175757,7 +175757,7 @@
           "address": "0x50db60",
           "size": 808,
           "symbol": "_ZN5daisy3gui11CGUIListBox11addTextItemEPKwPN2ox3gui8IGUIFontENS4_5video6SColorEbb",
-          "percent": 83.515465
+          "percent": 83.56701
         },
         {
           "address": "0x50bb40",
@@ -175787,13 +175787,13 @@
           "address": "0x50c740",
           "size": 1571,
           "symbol": "_ZN5daisy3gui11CGUIListBoxC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbbb",
-          "percent": 99.695656
+          "percent": 99.73913
         },
         {
           "address": "0x50ce60",
           "size": 1804,
           "symbol": "_ZN5daisy3gui11CGUIListBoxC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbbb",
-          "percent": 99.963684
+          "percent": 100.0
         },
         {
           "address": "0x50d570",
@@ -176960,7 +176960,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -177011,7 +177011,7 @@
         "system_headers": 117,
         "object_sha256": "57e9203bac1b06c03019c2a05899db1259d94fcac4e30cfa4d14aba782bfc89d"
       },
-      "fuzzy_target_sha256": "b0d846adae0fbb00a53a4a0624bc9eac9a1c4a9abc82eb481dbef695556e2849",
+      "fuzzy_target_sha256": "a8e86b2f946c934cde14a0e9853e594fc76046e65ebaaa9db9eeda00a00fdaaa",
       "fuzzy_functions": [
         {
           "address": "0x50e670",
@@ -177023,7 +177023,7 @@
           "address": "0x50eb90",
           "size": 503,
           "symbol": "_ZN5daisy3gui8CGUIMenu15recalculateSizeEv",
-          "percent": 99.96296
+          "percent": 100.0
         },
         {
           "address": "0x50ed90",
@@ -178697,7 +178697,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -178754,7 +178754,7 @@
         "system_headers": 125,
         "object_sha256": "dd269accfe2ad98e8803b45d6e9b10bc6f91dce219f8ce2304cecf3b146f8619"
       },
-      "fuzzy_target_sha256": "3eb9ed805518bddfb571c41868e2b1e0a12567b27c1ecb6f6799a452b67c825b",
+      "fuzzy_target_sha256": "3ab720fe6b20c3ef14014b7dfa8c3a75aa98f89bce54b3458da325e2b6f6a4b6",
       "fuzzy_functions": [
         {
           "address": "0x504c70",
@@ -178826,19 +178826,19 @@
           "address": "0x5054d0",
           "size": 4477,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialog11fillListBoxEPKc",
-          "percent": 99.90732
+          "percent": 99.98537
         },
         {
           "address": "0x506650",
           "size": 1894,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialogC1EPN2ox2io11IFileSystemEPKwPNS2_3gui15IGUIEnvironmentEPNS8_11IGUIElementEiPKcSE_",
-          "percent": 99.90979
+          "percent": 99.96134
         },
         {
           "address": "0x506dc0",
           "size": 2136,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialogC2EPN2ox2io11IFileSystemEPKwPNS2_3gui15IGUIEnvironmentEPNS8_11IGUIElementEiPKcSE_",
-          "percent": 99.92308
+          "percent": 99.96703
         },
         {
           "address": "0x507620",
@@ -178850,7 +178850,7 @@
           "address": "0x507630",
           "size": 2219,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialog7OnEventERKN2ox5event6SEventE",
-          "percent": 99.84615
+          "percent": 99.86539
         },
         {
           "address": "0x466870",
@@ -181449,7 +181449,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -181504,7 +181504,7 @@
         "system_headers": 117,
         "object_sha256": "c3155f511b6e0ac1504eb7d917443f58ade2a2fb8191ed5626ffae8fe590620d"
       },
-      "fuzzy_target_sha256": "8a1bf3137b7fba76bc5daf610f73fcb6d23d845aee5433525758876538210d8c",
+      "fuzzy_target_sha256": "6ebbd29fbc7a44f8aaa12e1e03ab0db0ecd7ee799684b3ee8309fbf0de53d40e",
       "fuzzy_functions": [
         {
           "address": "0x5b4d40",
@@ -181600,7 +181600,7 @@
           "address": "0x5b5750",
           "size": 1238,
           "symbol": "_ZN5daisy3gui10CGUIButtonC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbPKw",
-          "percent": 99.89933
+          "percent": 99.966446
         },
         {
           "address": "0x5b5c30",
@@ -181630,7 +181630,7 @@
           "address": "0x5b6b70",
           "size": 1238,
           "symbol": "_ZN5daisy3gui10CGUIButtonC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbPKw",
-          "percent": 99.46309
+          "percent": 99.530205
         },
         {
           "address": "0x5b7850",
@@ -183208,7 +183208,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -186015,7 +186015,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -186054,7 +186054,7 @@
         "system_headers": 108,
         "object_sha256": "af76fc8f2f012dad9bdd81545866f2a8a77cd020b0434b0538d4b732d3695098"
       },
-      "fuzzy_target_sha256": "130d2f183f9503d09d2c50546df5aa8b41a8e47f515f2c18748f516d78880fca",
+      "fuzzy_target_sha256": "c53ce9c2447601c5646abd9a638584df3c1f1502b96bc37f192eff46760c84d2",
       "fuzzy_functions": [
         {
           "address": "0x5ba6c0",
@@ -187988,7 +187988,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -188046,7 +188046,7 @@
         "system_headers": 117,
         "object_sha256": "49d1228d3589f65dec49083a10aabef492aa01cda5c7b9f97b9c8d92f1f1f999"
       },
-      "fuzzy_target_sha256": "6117c869bd868732be91e4a3ecc9ab5d36cc64dbdbaf3ba65dedf03a1d51159a",
+      "fuzzy_target_sha256": "abc58f295c208f825f409340978f8ce21160939a92c576ed6bf761bd7d100f23",
       "fuzzy_functions": [
         {
           "address": "0x5bb540",
@@ -188094,7 +188094,7 @@
           "address": "0x5bb710",
           "size": 546,
           "symbol": "_ZN5daisy3gui12CGUIComboBox13openCloseMenuEv",
-          "percent": 99.96575
+          "percent": 100.0
         },
         {
           "address": "0x5bb940",
@@ -192310,7 +192310,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -192375,7 +192375,7 @@
         "system_headers": 117,
         "object_sha256": "f8358e5f603a69a23a47f95629aa6cf43b28a7c7754f686a4882d66dd8329b3f"
       },
-      "fuzzy_target_sha256": "1fe5bbaa561c58c7d01ce8a8c44463960fa834fc0ee1580dda0c91c1191428e3",
+      "fuzzy_target_sha256": "cacb30b4c8cbc45235da298b0234f5cf8a13f5ea2d0da9ee4d8ed707cf017be8",
       "fuzzy_functions": [
         {
           "address": "0x524240",
@@ -192639,13 +192639,13 @@
           "address": "0x529e00",
           "size": 1675,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrameC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEjbb",
-          "percent": 99.92712
+          "percent": 99.95627
         },
         {
           "address": "0x52a490",
           "size": 1675,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrameC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEjbb",
-          "percent": 99.92712
+          "percent": 99.95627
         },
         {
           "address": "0x466870",
@@ -198413,7 +198413,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -198504,7 +198504,7 @@
         "system_headers": 151,
         "object_sha256": "16b7cdea9e2adea4c0676aa0bcf66c795295f3dc98e536ba337734d4b8433ac7"
       },
-      "fuzzy_target_sha256": "b183a6decd5f2c42a497ddfea1b613dd0b63f05fcbb1334792eeefcbed4242c5",
+      "fuzzy_target_sha256": "028e9d88465c060782a629bf512ac0084f0a525e978c5cbcb7e7958cfce864f8",
       "fuzzy_functions": [
         {
           "address": "0x4eaaa0",
@@ -199134,7 +199134,7 @@
           "address": "0x4eea50",
           "size": 3428,
           "symbol": "_ZN5daisy5video12CVideoOpenGL18saveJpegScreenshotEPKcS3_",
-          "percent": 93.94042
+          "percent": 93.98131
         },
         {
           "address": "0x4edbf0",
@@ -199170,7 +199170,7 @@
           "address": "0x4ef910",
           "size": 2747,
           "symbol": "_ZN5daisy5video12CVideoOpenGL14loadExtensionsEv",
-          "percent": 95.04702
+          "percent": 95.07053
         },
         {
           "address": "0x4f03d0",
@@ -199809,7 +199809,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -199844,7 +199844,7 @@
         "system_headers": 108,
         "object_sha256": "33d729fd771368c348ebed96a20fa8f2a567b4356166d49c630d5ad873c7f5b7"
       },
-      "fuzzy_target_sha256": "15a9f0aaf1dcf50a2509222b168f544a4a86cf160341af94f32f3b6a4eff6e44",
+      "fuzzy_target_sha256": "f421841f04a797a1dc9c833d43efbce55906c7ce484d3b087dcadd3be61cbfac",
       "fuzzy_functions": [
         {
           "address": "0x5a8440",
@@ -200639,7 +200639,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -201371,7 +201371,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -201938,7 +201938,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -203183,7 +203183,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -204716,7 +204716,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205316,7 +205316,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205790,7 +205790,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205817,7 +205817,7 @@
         "system_headers": 107,
         "object_sha256": "f582e664eaeddaee6f9d7708f99ab530f6f3d6cebe8f322b6a0e3ccddef23963"
       },
-      "fuzzy_target_sha256": "ec6731a4f145396455a87b6da50826e2f67eef90a00398062ba9c28d5480de75",
+      "fuzzy_target_sha256": "b173552edddcb23ee31c05639aa34b7c758baf34446a7856832d663f456d86e5",
       "fuzzy_functions": [
         {
           "address": "0x5323d0",
@@ -206316,7 +206316,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -206878,7 +206878,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -207416,7 +207416,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -207987,7 +207987,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -209368,7 +209368,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -209409,7 +209409,7 @@
         "system_headers": 135,
         "object_sha256": "71fcb5a9d3417ca09e22425a590a48a2ba55e096470a04641a99803e07e9d8a9"
       },
-      "fuzzy_target_sha256": "9542fa838786dfcb76c2c9056bd45e3e4c9b2643925eb09d6d9054e1332332c5",
+      "fuzzy_target_sha256": "9a663eef95830cf0bbe1984b4e0918da7ebea05ac534faa841a4a63a5862cfa3",
       "fuzzy_functions": [
         {
           "address": "0x539840",
@@ -213764,7 +213764,7 @@
         ".text._ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull8SSpritesES4_SaIS3_EET0_T_S7_S6_RT1_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -213839,7 +213839,7 @@
         "system_headers": 141,
         "object_sha256": "05514bc1b0bbb7c3b29345d1e7742786656d7407e63afc1319a8c5241fa00989"
       },
-      "fuzzy_target_sha256": "72a3b1b34e1b643bdd8a345f80644c1ebdf4d6406cdee108431b089ba3377d24",
+      "fuzzy_target_sha256": "b9c4a67ea41b5f6686e14c17edc396fbbd05e028ba692c104955497e8c56c027",
       "fuzzy_functions": [
         {
           "address": "0x4def60",
@@ -214517,19 +214517,19 @@
           "address": "0x4e2f60",
           "size": 617,
           "symbol": "_ZN5daisy5video10CVideoNull11findTextureEPKc",
-          "percent": 99.97326
+          "percent": 100.0
         },
         {
           "address": "0x4e31d0",
           "size": 617,
           "symbol": "_ZN5daisy5video10CVideoNull19findParticlePackageEPKc",
-          "percent": 99.97326
+          "percent": 100.0
         },
         {
           "address": "0x4e3440",
           "size": 617,
           "symbol": "_ZN5daisy5video10CVideoNull17findSpritePackageEPKc",
-          "percent": 99.97326
+          "percent": 100.0
         },
         {
           "address": "0x4e36b0",
@@ -214571,7 +214571,7 @@
           "address": "0x4e45c0",
           "size": 535,
           "symbol": "_ZN5daisy5video10CVideoNull10addTextureEPN2ox5video8ITextureEPKc",
-          "percent": 99.42857
+          "percent": 99.46429
         },
         {
           "address": "0x4e47e0",
@@ -215070,7 +215070,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -215096,7 +215096,7 @@
         "system_headers": 108,
         "object_sha256": "155efedcde0a418035d15b4bcf2d5a7bb55079db93c757bba7ecd74a68769b7f"
       },
-      "fuzzy_target_sha256": "0e6bf02fb67eda5f8f61df519b7b6bf5c28759f459aaf15875b4949ff5ba82b3",
+      "fuzzy_target_sha256": "4b63ca7873c1c76d5322befca026dcc73954862bec25ad0c7456b74d7b09285f",
       "fuzzy_functions": [
         {
           "address": "0x4c1e90",
@@ -215120,19 +215120,19 @@
           "address": "0x4c1f00",
           "size": 164,
           "symbol": "_ZN5daisy2os7Printer11logWithInfoEPKwS3_iN2ox5event10ELOG_LEVELEz",
-          "percent": 99.871796
+          "percent": 100.0
         },
         {
           "address": "0x4c1fb0",
           "size": 166,
           "symbol": "_ZN5daisy2os7Printer3logEPKwN2ox5event10ELOG_LEVELEz",
-          "percent": 99.86487
+          "percent": 100.0
         },
         {
           "address": "0x4c2060",
           "size": 166,
           "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
-          "percent": 99.86487
+          "percent": 100.0
         },
         {
           "address": "0x4c2110",
@@ -216306,7 +216306,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -217001,7 +217001,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -217438,7 +217438,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -218009,7 +218009,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -219475,7 +219475,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -219561,7 +219561,7 @@
         "system_headers": 125,
         "object_sha256": "84fc36512a855b2cc75d2d1e704e752df5281761cae0de446ffb4261f6fba466"
       },
-      "fuzzy_target_sha256": "3c1c6dfe3da48d29f10fc8c6c9e3c3446d4d9678d9cb389761a445bc58704c14",
+      "fuzzy_target_sha256": "8192b7cb5e6102564c013015d5bacbf809aa22dd14f703764da26c29a901f543",
       "fuzzy_functions": [
         {
           "address": "0x4bd0b0",
@@ -219597,7 +219597,7 @@
           "address": "0x4bd100",
           "size": 6,
           "symbol": "_ZN5daisy14CIrrDeviceStub10getVersionEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x4bd110",
@@ -219753,13 +219753,13 @@
           "address": "0x4bec50",
           "size": 1138,
           "symbol": "_ZN5daisy14CIrrDeviceStubC1EPKwPN2ox5event14IEventReceiverE",
-          "percent": 99.88095
+          "percent": 99.940475
         },
         {
           "address": "0x4bf0d0",
           "size": 1138,
           "symbol": "_ZN5daisy14CIrrDeviceStubC2EPKwPN2ox5event14IEventReceiverE",
-          "percent": 99.88095
+          "percent": 99.940475
         },
         {
           "address": "0x4bf550",
@@ -220384,7 +220384,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -220417,7 +220417,7 @@
         "system_headers": 121,
         "object_sha256": "a4557833960087b445ea65886aabb96152b0377d3b7c490a66b0c9a62d841a07"
       },
-      "fuzzy_target_sha256": "070f21b30faa402a075c7e260ab4c5bb94b4bbf00eb769c5cfcd81dd3bba9629",
+      "fuzzy_target_sha256": "a936014a3144606a46de93ef236a3d2e42746a3fe0e14dcf97ffbed470778a1d",
       "fuzzy_functions": [
         {
           "address": "0x4c1170",
@@ -220447,19 +220447,19 @@
           "address": "0x4c11d0",
           "size": 477,
           "symbol": "_ZN5daisy7CLogger11logWithInfoEPKwS2_iN2ox5event10ELOG_LEVELEz",
-          "percent": 99.84375
+          "percent": 99.895836
         },
         {
           "address": "0x4c13b0",
           "size": 164,
           "symbol": "_ZN5daisy7CLogger3logEPKwN2ox5event10ELOG_LEVELEz",
-          "percent": 99.85714
+          "percent": 100.0
         },
         {
           "address": "0x4c1460",
           "size": 174,
           "symbol": "_ZN5daisy7CLogger3logEPKcN2ox5event10ELOG_LEVELEz",
-          "percent": 99.86487
+          "percent": 100.0
         },
         {
           "address": "0x4c1510",
@@ -221752,7 +221752,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -221841,7 +221841,7 @@
         "system_headers": 137,
         "object_sha256": "7c2bfbe649af4fe9b882f9d53af0fad1636814ad13ac2aa5ecddb46c40bf3b15"
       },
-      "fuzzy_target_sha256": "600bbbceea11ffd6fd7561e5e6b32984ea90fe44f358996022627d1c11964490",
+      "fuzzy_target_sha256": "7daf34c35c1c306eca54d9cf6451eff8efea56199a62ccc5f734aaa9dda0c86b",
       "fuzzy_functions": [
         {
           "address": "0x4bacc0",
@@ -222015,7 +222015,7 @@
           "address": "0x4bba50",
           "size": 482,
           "symbol": "_ZN5daisy15CIrrDeviceLinux30createUserSelectedDeviceWindowEPKN2ox6TArrayINS1_4core7CStringIwEEEEj",
-          "percent": 87.2
+          "percent": 87.307144
         },
         {
           "address": "0x4bbc40",
@@ -222623,7 +222623,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -222790,11 +222790,11 @@
   ],
   "fuzzy": {
     "version": "3.8.1",
-    "sha256": "c8290281e82114bcc1a06ff73061110d3902a177822e750337de2537188e358f",
+    "sha256": "98f8275c27900c4fe2248fce3af37617658be49648fa7dbb5b376371f046dfdb",
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "86a0da79fdbcbb149a6a4d62f6da670a0cc741afe106a7af556ec045149f64f2"
+    "report_sha256": "f6170f8092831c1d2281ae10ebe990af38662f0df683271c95c370b0d102db8e"
   },
   "link": {
     "status": "unavailable",
