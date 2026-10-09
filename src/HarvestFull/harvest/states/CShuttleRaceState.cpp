@@ -388,14 +388,15 @@ void CShuttleRaceState::render()
                 ox::core::CPosition2d<float> position(
                     entity::LAP_CHECKPOINTS[j].X - ViewPositions[i].X + viewPort.UpperLeftCorner.X,
                     entity::LAP_CHECKPOINTS[j].Y - ViewPositions[i].Y + viewPort.UpperLeftCorner.Y);
-                ox::video::SColor color = j != Shuttles[i]->getNextCheckPoint() ? ox::video::SColor(0xff40cc40)
+                ox::video::SColor color = Shuttles[i]->getNextCheckPoint() != j ? ox::video::SColor(0xff40cc40)
                                                                                : ox::video::SColor(0xffffffff);
                 Sprites[SPRITE_CHECKPOINT]->drawScaled(position, 250.0f / 255.0f, color);
             }
 
         if (Sprites[SPRITE_LOGO])
         {
-            ox::core::CPosition2d<int> logoPosition(viewPort.UpperLeftCorner.X - (int)ViewPositions[i].X + 1673,
+            ox::core::CPosition2d<float> viewPositions = ViewPositions[i];
+            ox::core::CPosition2d<int> logoPosition(viewPort.UpperLeftCorner.X - (int)viewPositions.X + 1673,
                 viewPort.UpperLeftCorner.Y - (int)ViewPositions[i].Y - 856);
             Sprites[SPRITE_LOGO]->draw(logoPosition, 0, ox::video::SColor(0xa0ffffff));
         }
@@ -439,15 +440,18 @@ void CShuttleRaceState::render()
         if (LargeFont && Font)
         {
             ox::core::CString<wchar_t> text;
-            if (RaceState != RACE_COUNTDOWN)
+            if (RaceState == RACE_COUNTDOWN)
+            {
+                if (i == 0)
+                    text = L"W, A, D or Gamepad 1";
+                else
+                    text = L"Up, Left, Right or Gamepad 2";
+            }
+            else
             {
                 text = L"Position: ";
                 text.append(Shuttles[i]->getCurrentPlacing());
             }
-            else if (i == 0)
-                text = L"W, A, D or Gamepad 1";
-            else
-                text = L"Up, Left, Right or Gamepad 2";
             LargeFont->draw(text.c_str(),
                 ox::core::CRect<int>(viewPort.UpperLeftCorner.X + 10, ScreenSize.Height - 74, ScreenSize.Width / 2,
                     ScreenSize.Height),
