@@ -109,7 +109,14 @@ is flipped back to how the original shows it). Grayscale JPEGs decode correctly,
 load opaque. The BMP loader ([`ImageLoaderBmp.cpp`](../../port/src/video/ImageLoaderBmp.cpp)) is
 Irrlicht 0.7's: `.bmp` name test, `BM` content test, uncompressed 1/4/8-bit (to A1R5G5B5 through the
 palette) and 24-bit files; its only user is the GUI's built-in font, a 128 × 128 4-bit BMP loaded from
-memory as `#DefaultFont`, which only the content test finds. The PSD and PCX loaders accept nothing.
+memory as `#DefaultFont`, which only the content test finds. The PCX loader accepts nothing.
+
+The recovered PSD unit is kept for matching, but the port uses stb_image for PSD. The original
+loader leaves alpha uninitialized for raw RGB images, mistakes TGA type 2 for a PSD format probe,
+and has unchecked legacy PackBits reads. The port keeps the case-sensitive `.psd` name test,
+recognizes the `8BPS` signature, and returns defined A8R8G8B8 pixels (opaque when alpha is absent).
+`zig build test-image_loaders` checks raw and PackBits images, including 128-pixel runs, alpha,
+truncated input, unsupported headers and repeat loads, plus existing JPEG/TGA/PNG decoding.
 
 ## Colour formats
 
