@@ -521,8 +521,9 @@ int CAlienEntity::updateLogic(float frameDelta)
             event.UserEvent.UserPointer = 0;
             ox::event::gp_subscriberList->OnEvent(event);
         }
+        ox::core::CVector3d<float>* speedPointer = &speed;
         gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y,
-            Position.Z + 3.0f, &speed, particle), 4);
+            Position.Z + 3.0f, speedPointer, particle), 4);
         if (game::gp_luaManager)
             game::gp_luaManager->hookAlienDeath(AlienType, Position);
         return 1;
@@ -544,7 +545,15 @@ int CAlienEntity::updateLogic(float frameDelta)
         gp_entityManager->updateReference(Target, 0, true);
     if (!Target.Entity)
     {
-        if (AlienType == 5)
+        if (AlienType != 5)
+        {
+            if (AlienType == 7)
+            {
+                SummonerCharging = false;
+                PendingSummon = false;
+            }
+        }
+        else
         {
             if (SpriteIndex != 0 && SpriteIndex != 3)
             {
@@ -552,17 +561,10 @@ int CAlienEntity::updateLogic(float frameDelta)
                 Sprites[3]->reset();
             }
         }
-        else if (AlienType == 7)
-        {
-            SummonerCharging = false;
-            PendingSummon = false;
-        }
         locateTargetBuilding();
     }
     ox::core::CVector3d<float> target;
-    if (Target.Entity)
-        target = Target.Entity->getPosition();
-    else
+    if (!Target.Entity)
     {
         if (ox::algo::CRand::rand() % 100 == 0)
             return 1;
@@ -572,10 +574,13 @@ int CAlienEntity::updateLogic(float frameDelta)
             ox::core::CPosition2d<float> center((field.UpperLeftCorner.X + field.LowerRightCorner.X) * .5f,
                 (field.UpperLeftCorner.Y + field.LowerRightCorner.Y) * .5f);
             float angle = Id * 10.0f * .0174532905f;
-            target.X = cos((double)angle) * 450.0 + center.X;
+            double targetXOffset = cos((double)angle) * 450.0;
+            target.X = targetXOffset + center.X;
             target.Y = sin((double)angle) * 450.0 + center.Y;
         }
     }
+    else
+        target = Target.Entity->getPosition();
     if (SpawnCooldown > 0)
     {
         SpawnCooldown -= frameDelta;
@@ -595,7 +600,8 @@ int CAlienEntity::updateLogic(float frameDelta)
         if (m_nextChantTime < -5.0f)
         {
             m_nextChantTime = (ox::algo::CRand::rand() % 5000) * .001f + 5.0f;
-            m_currentChantLine = ox::algo::CRand::rand() % 10;
+            int currentChantLine = ox::algo::CRand::rand() % 10;
+            m_currentChantLine = currentChantLine;
         }
     }
     ox::core::CVector2d<float> movement(target.X - Position.X, target.Y - Position.Y);
@@ -620,7 +626,8 @@ int CAlienEntity::updateLogic(float frameDelta)
     movement += Speed * frameDelta;
     if (AlienType != 8)
     {
-        ox::core::CPosition2d<float> position(Position.X + movement.X, Position.Y + movement.Y);
+        float y = Position.Y;
+        ox::core::CPosition2d<float> position(Position.X + movement.X, y + movement.Y);
         if (game::gp_world->mayMoveHere(position))
         {
             Position.X = position.X;
@@ -637,9 +644,10 @@ int CAlienEntity::updateLogic(float frameDelta)
             else
                 angle += 1.2566371f;
             JumpSpeed.X = position.X + cos((double)angle) * 10.0;
-            JumpSpeed.Y = position.Y + sin((double)angle) * 10.0;
-            Invisible = true;
+            double jumpSpeedYOffset = sin((double)angle) * 10.0;
+            JumpSpeed.Y = position.Y + jumpSpeedYOffset;
             JumpSpeed.Z = 0;
+            Invisible = true;
         }
     }
     else
@@ -648,10 +656,10 @@ int CAlienEntity::updateLogic(float frameDelta)
         Position.Y += movement.Y;
     }
     gp_entityManager->updateGridEntity(this, oldPosition, 1);
-    if (AlienType == 2)
-        Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * .5f);
-    else
+    if (AlienType != 2)
         Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * 5.0f);
+    else
+        Speed *= ox::core::max_(0.0f, 1.0f - frameDelta * .5f);
     if (AlienType != 8 && AlienType != 5 && !Invisible && Target.Entity)
     {
         float dx = target.X - Position.X;
