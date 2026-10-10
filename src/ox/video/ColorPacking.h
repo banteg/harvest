@@ -18,6 +18,21 @@ inline short X8R8G8B8toA1R5G5B5(int color)
     return RGB16(color >> 16, color >> 8, color);
 }
 
+inline int getBlue(short color)
+{
+    return ((color)&0x1F);
+}
+
+inline int getGreen(short color)
+{
+    return ((color >> 5)&0x1F);
+}
+
+inline int getRed(short color)
+{
+    return ((color >> 10)&0x1F);
+}
+
 } // end namespace video
 } // end namespace ox
 

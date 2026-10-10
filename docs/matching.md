@@ -120,6 +120,22 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `ox/algo/CRegulator.cpp` | 34/34 | exact; scalar and three-axis PID-style regulators, anti-windup and speed regulation |
 | `ox/game/CGameState.cpp` | 10/10 | exact; state initialization, cached device subsystems and borrowed error messages |
 | `daisy/video/Software/CZBuffer.cpp` | 16/16 | exact; signed 16-bit software depth buffer, resizing and reference-counted factory |
+| `daisy/video/Software/CTRFlat.cpp` | 5/5 | exact; Irrlicht 0.7's flat-shaded software rasterizer, translated to daisy and ox names |
+| `daisy/video/Software/CTRFlatWire.cpp` | 5/5 | exact; Irrlicht 0.7's flat wireframe rasterizer, translated to daisy and ox names |
+| `daisy/video/Software/CTRGouraud.cpp` | 5/5 | exact; Irrlicht 0.7's Gouraud rasterizer, with its packed 16-bit colour helpers in `ox/video/ColorPacking.h` |
+| `daisy/video/Software/CTRGouraudWire.cpp` | 5/5 | exact; Irrlicht 0.7's Gouraud wireframe rasterizer |
+| `daisy/video/Software/CTRTextureFlat.cpp` | 5/5 | exact; Irrlicht 0.7's flat textured rasterizer |
+| `daisy/video/Software/CTRTextureFlatWire.cpp` | 5/5 | exact; Irrlicht 0.7's flat textured wireframe rasterizer |
+| `daisy/video/Software/CTRTextureGouraudWire.cpp` | 4/5 | Irrlicht 0.7's textured Gouraud wireframe rasterizer; `drawIndexedTriangleList` differs by one compare operand order |
+| `daisy/video/Software/CTRTextureGouraud.cpp` | 14/15 | Irrlicht 0.7's textured Gouraud rasterizer, the base of the others; only `drawIndexedTriangleList` differs (99.91%) |
+| `daisy/scene/CParticleFadeOutAffector.cpp` | 8/8 | exact; Irrlicht 0.7's fade-out particle affector |
+| `daisy/scene/CSceneNodeAnimatorDelete.cpp` | 11/11 | exact; Irrlicht 0.7's animator that removes its node after a time |
+| `daisy/scene/CSceneNodeAnimatorFlyCircle.cpp` | 11/11 | exact; Irrlicht 0.7's circling animator |
+| `daisy/scene/CSceneNodeAnimatorFlyStraight.cpp` | 11/11 | exact; Irrlicht 0.7's straight-line animator |
+| `daisy/scene/CSceneNodeAnimatorFollowSpline.cpp` | 11/11 | exact; Irrlicht 0.7's spline animator |
+| `daisy/scene/CSceneNodeAnimatorRotation.cpp` | 11/11 | exact; Irrlicht 0.7's rotation animator |
+| `daisy/scene/CSceneNodeAnimatorTexture.cpp` | 12/12 | exact; Irrlicht 0.7's texture-cycling animator |
+| `daisy/video/Null/CImageLoaderPSD.cpp` | 17/17 | exact; Irrlicht 0.7's Photoshop image loader |
 | `ox/io/CMemReadFile.cpp` | 19/19 | Irrlicht 0.7 `IUnknown` → `IReadFile` → `CMemReadFile` |
 | `ox/io/CMemWriteFile.cpp` | 18/18 | `IWriteFile` from Irrlicht 0.7; the class itself is Oxeye's |
 | `ox/net/CHTTPConnectionHandler.cpp` | 20/23 | `OnEvent` matches once the unit's `CString<char>::append` copy is placed; that copy differs by one compare operand order in its copy loop; function order differs |
