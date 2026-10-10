@@ -31,6 +31,9 @@ const replaced = [_][]const u8{
     "daisy/video/Null/CCGMaterialRenderer.cpp",
     // The software renderer's z-buffer, never reached by the game.
     "daisy/video/Software/",
+    // The recovered PSD loader preserves uninitialized alpha and unchecked legacy reads.
+    // The port decodes PSD through stb_image, alongside JPEG and TGA.
+    "daisy/video/Null/CImageLoaderPSD.cpp",
     // The blocking main loop: the port runs the frame step from SDL3's main callbacks.
     "HarvestFull/main.cpp",
 };

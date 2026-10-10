@@ -1,4 +1,4 @@
-// The JPEG and TGA loaders CVideoNull creates, over stb_image, with the original's rules
+// The JPEG, TGA and PSD loaders CVideoNull creates, over stb_image, with the original's rules
 // (docs/port/textures.md):
 //
 // - By name, a case-sensitive strstr for ".jpg" or ".tga" anywhere in the name.
@@ -11,6 +11,8 @@
 //
 // Differences: grayscale JPEGs decode correctly (the original garbled them), and a 16-bit TGA
 // always loads opaque (stb_image drops the attribute bit).
+// PSD uses its 8BPS signature and defined RGBA pixels; the recovered legacy loader's format
+// probe tests for TGA, leaves raw-image alpha uninitialized and does not bound its PackBits reads.
 
 #include "daisy/os.h"
 #include "daisy/video/Null/CImage.h"
@@ -75,6 +77,50 @@ public:
 
         CImage* image = new CImage(port::ECF_R8G8B8, ox::core::CDimension2d<int>(width, height));
         memcpy(image->lock(), pixels, width * height * 3);
+        image->unlock();
+        stbi_image_free(pixels);
+        return image;
+    }
+};
+
+class CImageLoaderPSD : public ox::video::IImageLoader
+{
+public:
+    virtual bool isALoadableFileExtension(const char* fileName)
+    {
+        return strstr(fileName, ".psd") != 0;
+    }
+
+    virtual bool isALoadableFileFormat(ox::io::IReadFile* file)
+    {
+        if (!file)
+            return false;
+        unsigned char signature[4] = {0, 0, 0, 0};
+        file->seek(0);
+        return file->read(signature, 4) == 4 && memcmp(signature, "8BPS", 4) == 0;
+    }
+
+    virtual IImage* loadImage(ox::io::IReadFile* file)
+    {
+        std::vector<unsigned char> data;
+        if (!readWholeFile(file, data) || data.size() < 4 || memcmp(&data[0], "8BPS", 4) != 0)
+            return 0;
+
+        int width, height, channels;
+        unsigned char* pixels = stbi_load_from_memory(&data[0], (int)data.size(), &width, &height, &channels, 4);
+        if (!pixels)
+        {
+            os::Printer::log("Could not decode PSD file", file->getFileName(), ox::event::ELL_ERROR);
+            return 0;
+        }
+
+        CImage* image = new CImage(ox::video::ECF_A8R8G8B8, ox::core::CDimension2d<int>(width, height));
+        unsigned int* out = (unsigned int*)image->lock();
+        for (int i = 0; i < width * height; ++i)
+        {
+            const unsigned char* in = pixels + i * 4;
+            out[i] = (unsigned int)in[3] << 24 | in[0] << 16 | in[1] << 8 | in[2];
+        }
         image->unlock();
         stbi_image_free(pixels);
         return image;
@@ -172,6 +218,11 @@ ox::video::IImageLoader* createImageLoaderJPG()
 ox::video::IImageLoader* createImageLoaderTGA()
 {
     return new CImageLoaderTGA();
+}
+
+ox::video::IImageLoader* createImageLoaderPSD()
+{
+    return new CImageLoaderPSD();
 }
 
 } // end namespace video
