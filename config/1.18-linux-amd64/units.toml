@@ -618,3 +618,36 @@
 ["daisy/video/CVideoModeList.cpp"]
 # std::ios_base::Init object of the iostream static initializer
 ".bss" = 0x86c060
+
+["daisy/video/Software/CTRTextureGouraud.cpp"]
+
+["daisy/video/Software/CTRFlat.cpp"]
+".text" = 0x5aaef0
+".bss" = 0x86c194
+
+["daisy/video/Software/CTRFlatWire.cpp"]
+".text" = 0x5ab640
+".bss" = 0x86c198
+
+["daisy/video/Software/CTRGouraud.cpp"]
+".text" = 0x5abda0
+".bss" = 0x86c19c
+
+["daisy/video/Software/CTRGouraudWire.cpp"]
+".text" = 0x5acb10
+".bss" = 0x86c1a0
+
+["daisy/video/Software/CTRTextureFlat.cpp"]
+".text" = 0x5ad7f0
+".bss" = 0x86c1a4
+
+["daisy/video/Software/CTRTextureFlatWire.cpp"]
+".text" = 0x5ae2e0
+".bss" = 0x86c1a8
+
+["daisy/video/Software/CTRTextureGouraudWire.cpp"]
+".text" = 0x5b0320
+".bss" = 0x86c1b0
+
+["daisy/scene/CParticleFadeOutAffector.cpp"]
+".text" = 0x5d5630
