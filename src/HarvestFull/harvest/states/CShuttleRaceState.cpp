@@ -307,7 +307,8 @@ int CShuttleRaceState::updateState(float time)
         ShowMessage = Countdown > -1.0f;
         ox::core::CRect<float> visibleArea = game::gp_world->getVisibleGameFieldSize();
         // Update in steps of at most 10 ms so fast shuttles do not miss checkpoints.
-        while (!(frameDelta <= 0))
+        // The original ucomiss/jbe exits on unordered (NaN) deltas too.
+        while (frameDelta > 0)
         {
             float step = frameDelta < 0.01f ? frameDelta : 0.01f;
             if (entity::gp_entityManager)
