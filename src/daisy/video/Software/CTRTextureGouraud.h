@@ -22,7 +22,7 @@ using namespace ox::video;
 
 		//! constructor
 		CTRTextureGouraud(IZBuffer* zbuffer);
-	
+
 		//! destructor
 		virtual ~CTRTextureGouraud();
 
@@ -68,4 +68,3 @@ using namespace ox::video;
 } // end namespace daisy
 
 #endif
-

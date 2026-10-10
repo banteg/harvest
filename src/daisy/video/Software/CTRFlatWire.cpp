@@ -37,7 +37,7 @@ public:
 		int spanEnd; // saves end of spans
 		float leftdeltaxf; // amount of pixels to increase on left side of triangle
 		float rightdeltaxf; // amount of pixels to increase on right side of triangle
-		int leftx, rightx; // position where we are 
+		int leftx, rightx; // position where we are
 		float leftxf, rightxf; // same as above, but as float values
 		int span; // current span
 		ox::core::CRect<int> TriangleRect;
@@ -48,7 +48,7 @@ public:
 
 		lockedSurface = (short*)RenderTarget->lock();
 		lockedZBuffer = ZBuffer->lock();
-		
+
 		for (int i=0; i<triangleCount; ++i)
 		{
 			v1 = &vertices[*indexList];
@@ -151,7 +151,7 @@ public:
 				if (spanEnd > ViewPortRect.LowerRightCorner.Y)
 					spanEnd = ViewPortRect.LowerRightCorner.Y;
 
-				// if the span <0, than we can skip these spans, 
+				// if the span <0, than we can skip these spans,
 				// and proceed to the next spans which are really on the screen.
 				if (span < ViewPortRect.UpperLeftCorner.Y)
 				{
@@ -163,7 +163,7 @@ public:
 					}
 					else
 					{
-						leftx = ViewPortRect.UpperLeftCorner.Y - span; 
+						leftx = ViewPortRect.UpperLeftCorner.Y - span;
 						span = ViewPortRect.UpperLeftCorner.Y;
 					}
 

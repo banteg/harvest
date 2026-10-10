@@ -35,7 +35,7 @@ using namespace ox::video;
 	class IK3DTriangleRenderer : public ox::IUnknown
 	{
 	public:
-	
+
 		//! destructor
 		virtual ~IK3DTriangleRenderer() {};
 
@@ -67,4 +67,3 @@ using namespace ox::video;
 } // end namespace daisy
 
 #endif
-

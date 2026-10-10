@@ -44,4 +44,3 @@ void CSceneNodeAnimatorFlyCircle::animateNode(ISceneNode* node, unsigned int tim
 
 } // end namespace scene
 } // end namespace daisy
-

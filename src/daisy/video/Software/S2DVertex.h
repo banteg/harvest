@@ -29,4 +29,3 @@ using namespace ox::video;
 } // end namespace daisy
 
 #endif
-

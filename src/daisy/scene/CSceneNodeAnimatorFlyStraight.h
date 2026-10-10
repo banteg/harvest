@@ -21,7 +21,7 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		CSceneNodeAnimatorFlyStraight(const ox::core::CVector3d<float>& startPoint, 
+		CSceneNodeAnimatorFlyStraight(const ox::core::CVector3d<float>& startPoint,
 									  const ox::core::CVector3d<float>& endPoint, unsigned int timeForWay,
 									  bool loop, unsigned int now);
 
@@ -49,4 +49,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

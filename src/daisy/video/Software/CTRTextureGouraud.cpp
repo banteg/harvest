@@ -88,7 +88,7 @@ void CTRTextureGouraud::setRenderTarget(ox::video::IImage* surface, const ox::co
 		SurfaceHeight = RenderTarget->getDimension().Height;
 		RenderTarget->grab();
 		ViewPortRect = viewPort;
-	}		
+	}
 }
 
 
@@ -106,7 +106,7 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 	int spanEnd; // saves end of spans
 	float leftdeltaxf; // amount of pixels to increase on left side of triangle
 	float rightdeltaxf; // amount of pixels to increase on right side of triangle
-	int leftx, rightx; // position where we are 
+	int leftx, rightx; // position where we are
 	float leftxf, rightxf; // same as above, but as float values
 	int span; // current span
 	short *hSpanBegin, *hSpanEnd; // pointer used when plotting pixels
@@ -127,7 +127,7 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 	lockedSurface = (short*)RenderTarget->lock();
 	lockedZBuffer = ZBuffer->lock();
 	lockedTexture = (short*)Texture->lock();
-	
+
 	for (int i=0; i<triangleCount; ++i)
 	{
 		v1 = &vertices[*indexList];
@@ -254,7 +254,7 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 			if (spanEnd > ViewPortRect.LowerRightCorner.Y)
 				spanEnd = ViewPortRect.LowerRightCorner.Y;
 
-			// if the span <0, than we can skip these spans, 
+			// if the span <0, than we can skip these spans,
 			// and proceed to the next spans which are really on the screen.
 			if (span < ViewPortRect.UpperLeftCorner.Y)
 			{
@@ -266,7 +266,7 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 				}
 				else
 				{
-					leftx = ViewPortRect.UpperLeftCorner.Y - span; 
+					leftx = ViewPortRect.UpperLeftCorner.Y - span;
 					span = ViewPortRect.UpperLeftCorner.Y;
 				}
 
@@ -326,14 +326,14 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 					spanZTarget = zTarget + leftx;
 					hSpanEnd = targetSurface + rightx;
 
-					spanR = leftR;	
-					spanG = leftG;	
+					spanR = leftR;
+					spanG = leftG;
 					spanB = leftB;
 					spanStepR = (int)((rightR - leftR) * tmpDiv);
 					spanStepG = (int)((rightG - leftG) * tmpDiv);
 					spanStepB = (int)((rightB - leftB) * tmpDiv);
 
-					spanTx = leftTx;	
+					spanTx = leftTx;
 					spanTy = leftTy;
 					spanTxStep = (int)((rightTx - leftTx) * tmpDiv);
 					spanTyStep = (int)((rightTy - leftTy) * tmpDiv);
@@ -353,7 +353,7 @@ void CTRTextureGouraud::drawIndexedTriangleList(S2DVertex* vertices, int vertexC
 
 						spanTx += spanTxStep;
 						spanTy += spanTyStep;
-						
+
 						spanZValue += spanZStep;
 						++hSpanBegin;
 						++spanZTarget;
@@ -458,6 +458,3 @@ IK3DTriangleRenderer* createTriangleRendererTextureGouraud(IZBuffer* zbuffer)
 
 } // end namespace video
 } // end namespace daisy
-
-
-

@@ -17,7 +17,7 @@ using namespace ox::scene;
 
 
 //! constructor
-CSceneNodeAnimatorTexture::CSceneNodeAnimatorTexture(const ox::TArray<ox::video::ITexture*>& textures, 
+CSceneNodeAnimatorTexture::CSceneNodeAnimatorTexture(const ox::TArray<ox::video::ITexture*>& textures,
 													 int timePerFrame, bool loop, unsigned int now)
 : Loop(loop), StartTime(now), TimePerFrame(timePerFrame)
 {

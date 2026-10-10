@@ -17,14 +17,14 @@ namespace daisy
 namespace scene
 {
 using namespace ox::scene;
-	//! Scene node animator based free code Matthias Gall wrote and sent in. (Most of 
+	//! Scene node animator based free code Matthias Gall wrote and sent in. (Most of
 	//! this code is written by him, I only modified bits.)
 	class CSceneNodeAnimatorFollowSpline : public ISceneNodeAnimator
 	{
 	public:
-	
+
 		//! constructor
-		CSceneNodeAnimatorFollowSpline(unsigned int startTime, 
+		CSceneNodeAnimatorFollowSpline(unsigned int startTime,
 			const ox::TArray< ox::core::CVector3d<float> >& points,
 			float speed = 1.0f, float tightness = 0.5f);
 
@@ -51,4 +51,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

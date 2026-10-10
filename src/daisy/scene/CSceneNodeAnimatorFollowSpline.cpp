@@ -48,7 +48,7 @@ void CSceneNodeAnimatorFollowSpline::animateNode(ISceneNode* node, unsigned int 
 	float dt = ( (timeMs-StartTime) * Speed );
 	int idx = static_cast< int >( 0.001f * dt ) % NumPoints;
 	float u = 0.001f * fmodf( dt, 1000.0f );
-    
+
 	p0 = Points[ clamp( idx - 1, NumPoints ) ];
 	p1 = Points[ clamp( idx, NumPoints ) ];
 	p2 = Points[ clamp( idx + 1, NumPoints ) ];
@@ -66,11 +66,10 @@ void CSceneNodeAnimatorFollowSpline::animateNode(ISceneNode* node, unsigned int 
 
     // interpolated point
 	p = p1 * h1 + p2 * h2 + t1 * h3 + t2 * h4;
-		
+
 	node->setPosition(p);
 }
 
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -16,7 +16,7 @@ using namespace ox::scene;
 
 
 //! constructor
-CSceneNodeAnimatorFlyStraight::CSceneNodeAnimatorFlyStraight(const ox::core::CVector3d<float>& startPoint, 
+CSceneNodeAnimatorFlyStraight::CSceneNodeAnimatorFlyStraight(const ox::core::CVector3d<float>& startPoint,
 							const ox::core::CVector3d<float>& endPoint, unsigned int timeForWay,
 							bool loop, unsigned int now)
 : Start(startPoint), End(endPoint), StartTime(now), TimeForWay(timeForWay), Loop(loop)

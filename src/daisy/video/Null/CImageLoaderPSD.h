@@ -76,7 +76,7 @@ private:
 
 	bool readRawImageData(ox::io::IReadFile* file);
 	bool readRLEImageData(ox::io::IReadFile* file);
-	char getShiftFromChannel(char channelNr); 
+	char getShiftFromChannel(char channelNr);
 
 	inline unsigned int convert2le (unsigned int value)
 	{
@@ -105,4 +105,3 @@ private:
 
 
 #endif
-

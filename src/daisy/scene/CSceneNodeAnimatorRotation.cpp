@@ -32,15 +32,14 @@ CSceneNodeAnimatorRotation::~CSceneNodeAnimatorRotation()
 void CSceneNodeAnimatorRotation::animateNode(ISceneNode* node, unsigned int timeMs)
 {
 	if (node) // thanks to warui for this fix
-	{ 
-		ox::core::CVector3d<float> NewRotation = node->getRotation(); 
-		NewRotation += Rotation* ((timeMs-StartTime)/10.0f); 
-		node->setRotation(NewRotation); 
-		StartTime=timeMs; 
+	{
+		ox::core::CVector3d<float> NewRotation = node->getRotation();
+		NewRotation += Rotation* ((timeMs-StartTime)/10.0f);
+		node->setRotation(NewRotation);
+		StartTime=timeMs;
 	}
 }
 
 
 } // end namespace scene
 } // end namespace daisy
-

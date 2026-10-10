@@ -1,3 +1,7 @@
+// Copyright (C) 2002-2004 Nikolaus Gebhardt
+// Adapted from Irrlicht 0.7 source/Irrlicht/CImageLoaderPSD.cpp (license: third_party/irrlicht-0.7/include/irrlicht.h).
+// Recovered for Harvest's daisy namespace; not the original source.
+
 #include <iostream>
 #include "CImageLoaderPSD.h"
 #include "ox/core/CDimension2d.h"
@@ -188,7 +192,7 @@ bool CImageLoaderPSD::readRawImageData(ox::io::IReadFile* file)
 		}
 
 	}
-		
+
 	delete [] tmpData;
 	return true;
 }
@@ -235,8 +239,8 @@ bool CImageLoaderPSD::readRLEImageData(ox::io::IReadFile* file)
 	unsigned char* tmpData = new unsigned char[header.width * header.height];
 	unsigned short *rleCount= new unsigned short [header.height * header.channels];
 
-	int size=0;      
-      
+	int size=0;
+
 	for (unsigned int y=0; y<header.height * header.channels; ++y)
 	{
 		if (!file->read(&rleCount[y], sizeof(unsigned short)))
@@ -251,7 +255,7 @@ bool CImageLoaderPSD::readRLEImageData(ox::io::IReadFile* file)
 		size += rleCount[y];
 	}
 
-	char *buf = new char[size];       
+	char *buf = new char[size];
 	if (!file->read(buf, size))
 	{
 		delete [] rleCount;
@@ -261,39 +265,39 @@ bool CImageLoaderPSD::readRLEImageData(ox::io::IReadFile* file)
 		return false;
 	}
 
-	unsigned short *rcount=rleCount; 
-	
+	unsigned short *rcount=rleCount;
+
 	char rh;
 	unsigned short bytesRead;
 	unsigned char *dest;
 	char *pBuf = buf;
 
-	// decompress packbit rle 
+	// decompress packbit rle
 
 	for (int channel=0; channel<header.channels; channel++)
 	{
-		for (unsigned int y=0; y<header.height; ++y, ++rcount) 
+		for (unsigned int y=0; y<header.height; ++y, ++rcount)
 		{
 			bytesRead=0;
 			dest = &tmpData[y*header.width];
-			
+
 			while (bytesRead < *rcount)
 			{
 				rh = *pBuf++;
 				++bytesRead;
-				
+
 				if (rh >= 0)
 				{
 					++rh;
 
 					while (rh--)
-					{ 
+					{
 						*dest = *pBuf++;
 						++bytesRead;
 						++dest;
-					} 
+					}
 				}
-				else 
+				else
 				if (rh > -128)
 				{
 					rh = -rh +1;
@@ -309,7 +313,7 @@ bool CImageLoaderPSD::readRLEImageData(ox::io::IReadFile* file)
 				}
 			}
 		}
-		
+
 		char shift = getShiftFromChannel(channel);
 
 		if (shift != -1)
@@ -325,7 +329,7 @@ bool CImageLoaderPSD::readRLEImageData(ox::io::IReadFile* file)
 				}
 		}
 	}
-       
+
 	delete [] rleCount;
 	delete [] buf;
 	delete [] tmpData;
@@ -364,4 +368,3 @@ IImageLoader* createImageLoaderPSD()
 
 } // end namespace video
 } // end namespace daisy
-
