@@ -24,7 +24,7 @@ CParticleFadeOutAffector::CParticleFadeOutAffector(
 
 
 //! Affects an array of particles.
-void CParticleFadeOutAffector::affect(unsigned int now, SParticle* particlearray, unsigned int count)
+void CParticleFadeOutAffector::affect(unsigned int now, ox::scene::SParticle* particlearray, unsigned int count)
 {
 	float d;
 
@@ -40,4 +40,3 @@ void CParticleFadeOutAffector::affect(unsigned int now, SParticle* particlearray
 
 } // end namespace scene
 } // end namespace daisy
-

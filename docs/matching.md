@@ -128,7 +128,7 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `daisy/video/Software/CTRTextureFlatWire.cpp` | 5/5 | exact; Irrlicht 0.7's flat textured wireframe rasterizer |
 | `daisy/video/Software/CTRTextureGouraudWire.cpp` | 4/5 | Irrlicht 0.7's textured Gouraud wireframe rasterizer; `drawIndexedTriangleList` differs by one compare operand order |
 | `daisy/video/Software/CTRTextureGouraud.cpp` | 14/15 | Irrlicht 0.7's textured Gouraud rasterizer, the base of the others; only `drawIndexedTriangleList` differs (99.91%) |
-| `daisy/scene/CParticleFadeOutAffector.cpp` | 8/8 | exact; Irrlicht 0.7's fade-out particle affector |
+| `daisy/scene/CParticleFadeOutAffector.cpp` | 10/10 | exact; Irrlicht 0.7's fade-out particle affector, with Harvest's `ox::scene::IParticleAffector` base and `ox::scene::SParticle` type |
 | `daisy/scene/CSceneNodeAnimatorDelete.cpp` | 11/11 | exact; Irrlicht 0.7's animator that removes its node after a time |
 | `daisy/scene/CSceneNodeAnimatorFlyCircle.cpp` | 11/11 | exact; Irrlicht 0.7's circling animator |
 | `daisy/scene/CSceneNodeAnimatorFlyStraight.cpp` | 11/11 | exact; Irrlicht 0.7's straight-line animator |

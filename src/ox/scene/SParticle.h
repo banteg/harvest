@@ -1,6 +1,6 @@
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/SParticle.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
-// Recovered for Harvest's daisy namespace; not the original source.
+// Recovered for Harvest's ox::scene namespace; not the original source.
 
 #ifndef __S_PARTICLE_H_INCLUDED__
 #define __S_PARTICLE_H_INCLUDED__
@@ -9,12 +9,10 @@
 #include "ox/video/SColor.h"
 #include "ox/video/ColorPacking.h"
 
-namespace ox { namespace scene {} }
-namespace daisy
+namespace ox
 {
 namespace scene
 {
-using namespace ox::scene;
 	//! Struct for holding particle data
 	struct SParticle
 	{
@@ -37,7 +35,7 @@ using namespace ox::scene;
 		//! of the particle it had when it was emitted.
 		ox::video::SColor startColor;
 
-		//! Original direction and speed of the particle, 
+		//! Original direction and speed of the particle,
 		//! the direction and speed the particle had when
 		//! it was emitted.
 		ox::core::CVector3d<float> startVector;
@@ -45,7 +43,6 @@ using namespace ox::scene;
 
 
 } // end namespace scene
-} // end namespace daisy
+} // end namespace ox
 
 #endif
-

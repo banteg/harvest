@@ -5,7 +5,7 @@
 #ifndef __C_PARTICLE_FADE_OUT_AFFECTOR_H_INCLUDED__
 #define __C_PARTICLE_FADE_OUT_AFFECTOR_H_INCLUDED__
 
-#include "IParticleAffector.h"
+#include "ox/scene/IParticleAffector.h"
 #include "ox/video/SColor.h"
 #include "ox/video/ColorPacking.h"
 
@@ -17,14 +17,14 @@ namespace scene
 using namespace ox::scene;
 
 //! Particle Affector for fading out a color
-class CParticleFadeOutAffector : public IParticleAffector
+class CParticleFadeOutAffector : public ox::scene::IParticleAffector
 {
 public:
 
 	CParticleFadeOutAffector(ox::video::SColor targetColor, unsigned int fadeOutTime);
 
 	//! Affects a particle.
-	virtual void affect(unsigned int now, SParticle* particlearray, unsigned int count);
+	virtual void affect(unsigned int now, ox::scene::SParticle* particlearray, unsigned int count);
 
 private:
 
@@ -37,4 +37,3 @@ private:
 
 
 #endif
-
