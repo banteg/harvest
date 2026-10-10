@@ -620,6 +620,7 @@
 ".bss" = 0x86c060
 
 ["daisy/video/Software/CTRTextureGouraud.cpp"]
+".bss" = 0x86c1ac
 
 ["daisy/video/Software/CTRFlat.cpp"]
 ".text" = 0x5aaef0
@@ -646,8 +647,28 @@
 ".bss" = 0x86c1a8
 
 ["daisy/video/Software/CTRTextureGouraudWire.cpp"]
-".text" = 0x5b0320
 ".bss" = 0x86c1b0
 
 ["daisy/scene/CParticleFadeOutAffector.cpp"]
-".text" = 0x5d5630
+".bss" = 0x86c1e8
+
+["daisy/scene/CSceneNodeAnimatorDelete.cpp"]
+".bss" = 0x86c028
+
+["daisy/scene/CSceneNodeAnimatorRotation.cpp"]
+".bss" = 0x86c038
+
+["daisy/scene/CSceneNodeAnimatorFlyCircle.cpp"]
+".bss" = 0x86c02c
+
+["daisy/scene/CSceneNodeAnimatorFlyStraight.cpp"]
+".bss" = 0x86c030
+
+["daisy/scene/CSceneNodeAnimatorTexture.cpp"]
+".bss" = 0x86c03c
+
+["daisy/scene/CSceneNodeAnimatorFollowSpline.cpp"]
+".bss" = 0x86c034
+
+["daisy/video/Null/CImageLoaderPSD.cpp"]
+".bss" = 0x86c170
