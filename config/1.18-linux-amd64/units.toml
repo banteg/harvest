@@ -672,3 +672,25 @@
 
 ["daisy/video/Null/CImageLoaderPSD.cpp"]
 ".bss" = 0x86c170
+
+["daisy/scene/CBillboardSceneNode.cpp"]
+".bss" = 0x86c108
+
+["daisy/scene/CDummyTransformationSceneNode.cpp"]
+".bss" = 0x86c120
+
+["daisy/scene/CEmptySceneNode.cpp"]
+
+["daisy/scene/CLightSceneNode.cpp"]
+".bss" = 0x86c12c
+
+["daisy/scene/CMeshManipulator.cpp"]
+
+["daisy/scene/CSceneNodeAnimatorCollisionResponse.cpp"]
+".bss" = 0x86c024
+
+["daisy/scene/CTriangleBBSelector.cpp"]
+".bss" = 0x86c050
+
+["daisy/scene/CTriangleSelector.cpp"]
+".bss" = 0x86c054

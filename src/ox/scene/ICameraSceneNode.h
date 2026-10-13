@@ -18,7 +18,6 @@ struct SViewFrustrum;
 class ICameraSceneNode : public ISceneNode
 {
 public:
-#ifdef HARVEST_PORT
     ICameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
         const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0),
         const core::CVector3d<float>& rotation = core::CVector3d<float>(0, 0, 0),
@@ -27,7 +26,6 @@ public:
     {
     }
 
-#endif
     virtual void setProjectionMatrix(const core::CMatrix4& projection) = 0;
     virtual const core::CMatrix4& getProjectionMatrix() = 0;
     virtual const core::CMatrix4& getViewMatrix() = 0;

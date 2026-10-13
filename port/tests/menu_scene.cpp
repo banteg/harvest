@@ -10,6 +10,7 @@
 // The planets' rotation animators run on the wall clock, so before each frame the test sets the
 // planet rotations to fixed values; the animator itself is checked with a fixed clock.
 
+#include "ox/core/CAabbox3d.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

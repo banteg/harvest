@@ -135,6 +135,14 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `daisy/scene/CSceneNodeAnimatorFollowSpline.cpp` | 11/11 | exact; Irrlicht 0.7's spline animator |
 | `daisy/scene/CSceneNodeAnimatorRotation.cpp` | 11/11 | exact; Irrlicht 0.7's rotation animator |
 | `daisy/scene/CSceneNodeAnimatorTexture.cpp` | 12/12 | exact; Irrlicht 0.7's texture-cycling animator |
+| `daisy/scene/CSceneNodeAnimatorCollisionResponse.cpp` | 24/24 | exact; Irrlicht 0.7's collision response animator (gravity, sliding, falling state) |
+| `daisy/scene/CBillboardSceneNode.cpp` | 48/48 | Irrlicht 0.7's billboard node and the inline `ox::scene::ISceneNode` members it emits; the port keeps its own billboard node |
+| `daisy/scene/CDummyTransformationSceneNode.cpp` | 45/45 | Irrlicht 0.7's node that only holds a transformation |
+| `daisy/scene/CEmptySceneNode.cpp` | 40/41 | Irrlicht 0.7's empty node; the static initializer differs |
+| `daisy/scene/CLightSceneNode.cpp` | 43/45 | Irrlicht 0.7's light node; both constructors differ; the port keeps its own light node |
+| `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
+| `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
+| `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
 | `daisy/video/Null/CImageLoaderPSD.cpp` | 17/17 | exact; Irrlicht 0.7's Photoshop image loader |
 | `ox/io/CMemReadFile.cpp` | 19/19 | Irrlicht 0.7 `IUnknown` → `IReadFile` → `CMemReadFile` |
 | `ox/io/CMemWriteFile.cpp` | 18/18 | `IWriteFile` from Irrlicht 0.7; the class itself is Oxeye's |

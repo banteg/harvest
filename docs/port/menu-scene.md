@@ -514,8 +514,8 @@ id, which is returned, or −1 on failure.
 ## The port's scene manager
 
 `port/src/scene/` implements `daisy::scene::createSceneManager` with the subset above, adapted from
-the Irrlicht 0.7 sources with daisy's changes: the scene manager and root node, `ISceneNode`'s
-bodies (declared under `HARVEST_PORT` in [`ISceneNode.h`](../../src/ox/scene/ISceneNode.h)), the
+the Irrlicht 0.7 sources with daisy's changes: the scene manager and root node, the recovered
+inline `ISceneNode` bodies in [`ISceneNode.h`](../../src/ox/scene/ISceneNode.h), the
 animated mesh, camera, light, billboard and skybox nodes, the rotation animator, bounding-box
 picking and projection, and the OBJ loader. Every other `ISceneManager` function returns null or
 does nothing. Rendering goes through `IVideoDriver` only.
@@ -529,3 +529,10 @@ prints the meshes, every driver call of three `drawAll` frames (with the constan
 The planets' rotation animators run on the wall clock, so the test sets the planet rotations
 before each frame. The opaque draw order follows texture addresses and can differ between runs
 on other platforms.
+
+The shared node header retains a defined fallback material in the port, since the animated-mesh
+node uses it for missing materials. The port also accepts a null child and supports clearing or
+reassigning a triangle selector, retaining the new reference before dropping the old one. The
+matching build preserves the original bodies. `zig build test-scene_nodes` checks these paths,
+selector/animator ownership, hierarchy transforms, animation, the recovered dummy node and
+bounding-box triangles without a window or game data.
