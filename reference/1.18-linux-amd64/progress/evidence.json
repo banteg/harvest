@@ -185,7 +185,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -730,7 +730,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -1143,7 +1143,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -1589,7 +1589,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2113,7 +2113,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -2636,7 +2636,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -3741,7 +3741,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4387,7 +4387,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -4835,7 +4835,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5095,7 +5095,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5305,7 +5305,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5487,7 +5487,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -5769,7 +5769,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6106,7 +6106,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6294,7 +6294,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6507,7 +6507,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -6838,7 +6838,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -7159,7 +7159,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9020,7 +9020,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -9858,7 +9858,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -11525,7 +11525,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -12719,7 +12719,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -13505,7 +13505,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -14297,7 +14297,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15121,7 +15121,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -15865,7 +15865,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -16985,7 +16985,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -18184,7 +18184,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19072,7 +19072,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -19526,7 +19526,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -36317,7 +36317,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -39785,7 +39785,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -49601,7 +49601,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -55863,7 +55863,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -58211,7 +58211,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -59541,7 +59541,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -60934,7 +60934,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -61634,7 +61634,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -63389,7 +63389,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -64221,7 +64221,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -64606,7 +64606,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -69537,7 +69537,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -77461,7 +77461,7 @@
         ".text._ZN7harvest4game22SLuaEntityActionButtonC1ERKS1_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -80153,7 +80153,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -81096,7 +81096,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -81511,7 +81511,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -81907,7 +81907,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82638,7 +82638,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -82853,7 +82853,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -83440,7 +83440,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -96122,7 +96122,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -100804,7 +100804,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -102680,7 +102680,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -103402,7 +103402,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -105938,7 +105938,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -106225,7 +106225,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -106551,7 +106551,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -108181,7 +108181,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -109094,7 +109094,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -111293,7 +111293,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -112654,7 +112654,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -113515,7 +113515,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -115268,7 +115268,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -115939,7 +115939,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -119471,7 +119471,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -119581,20 +119581,20 @@
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/gui/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/IAnimatedMeshSceneNode.h": "d94c2d0db0505991b9cea4ee59479de9bb070404138d59703cabf7140fa9a208",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/IBillboardSceneNode.h": "061a0356b828173218383768f15c51e917f72dcb6fac53aaeb43c0528ecbfe6a",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -121374,7 +121374,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -122558,7 +122558,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -123442,7 +123442,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -124153,7 +124153,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -125329,7 +125329,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -125870,7 +125870,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -126309,7 +126309,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -127398,7 +127398,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128184,7 +128184,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128637,7 +128637,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -128777,7 +128777,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129209,7 +129209,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129430,7 +129430,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -129984,7 +129984,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -131476,7 +131476,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -131505,23 +131505,23 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CBasic.h": "c86e1d11c2b70b75264ad0af1c7117a4f1e61c43a7e8a49617b06ca6affeb348",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/scene/../event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
@@ -132436,7 +132436,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133049,7 +133049,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133756,7 +133756,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -133790,9 +133790,9 @@
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
@@ -134482,7 +134482,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -135247,7 +135247,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -137431,7 +137431,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -137970,7 +137970,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -138572,7 +138572,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -138596,12 +138596,12 @@
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/IAnimatedMeshSceneNode.h": "d94c2d0db0505991b9cea4ee59479de9bb070404138d59703cabf7140fa9a208",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -138610,9 +138610,9 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
           "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/scene/../event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
@@ -140609,7 +140609,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -143450,7 +143450,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -145145,7 +145145,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -147565,7 +147565,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -151890,7 +151890,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -153308,7 +153308,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -157941,7 +157941,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -161436,7 +161436,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -163464,7 +163464,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -165080,7 +165080,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -166971,7 +166971,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -168459,7 +168459,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -169915,7 +169915,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -169953,9 +169953,9 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
@@ -171456,7 +171456,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -172939,7 +172939,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -174828,7 +174828,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -176197,7 +176197,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -177934,7 +177934,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -180686,7 +180686,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -182445,7 +182445,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -185252,7 +185252,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -187225,7 +187225,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -191547,7 +191547,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -197650,7 +197650,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -197688,9 +197688,9 @@
           "src/ox/video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/IMaterialRendererServices.h": "41fbfec0821ef7330138487909adf12c6a89278b990a6a52f71668676149d4f8",
           "src/daisy/video/OpenGL/COpenGLCGMaterialRenderer.h": "56711cf47197828a22c41d5bf25a03acc3bdf43dcb21cf23399c74b31b9ba467",
@@ -199050,7 +199050,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -199880,7 +199880,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -199919,9 +199919,9 @@
           "src/ox/video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/IMaterialRendererServices.h": "41fbfec0821ef7330138487909adf12c6a89278b990a6a52f71668676149d4f8",
           "src/ox/video/IMaterialRenderer.h": "a7a6e23983cb7de57e3ae6b9c0f25cac31f066a85cee4176bdd3f048f445958d",
@@ -200616,7 +200616,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -200655,9 +200655,9 @@
           "src/ox/video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/IMaterialRendererServices.h": "41fbfec0821ef7330138487909adf12c6a89278b990a6a52f71668676149d4f8",
           "src/ox/video/IMaterialRenderer.h": "a7a6e23983cb7de57e3ae6b9c0f25cac31f066a85cee4176bdd3f048f445958d",
@@ -201187,7 +201187,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -202432,7 +202432,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -203965,7 +203965,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -204565,7 +204565,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205039,7 +205039,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -205565,7 +205565,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -206127,7 +206127,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -206665,7 +206665,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -207236,7 +207236,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -208617,7 +208617,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -213013,7 +213013,7 @@
         ".text._ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull8SSpritesES4_SaIS3_EET0_T_S7_S6_RT1_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -213069,14 +213069,14 @@
           "src/daisy/video/Software/CSoftwareTexture.h": "c5fe3e8c02330668a6a8947894f12a08b3fe01fd54805ae4c6880b2e7df6f964",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/core/CStringFunctions.h": "ba3c14a79a391026582c2fea88e76fc369132797d628e9f051be5a2501eba4b8",
           "src/ox/core/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -214322,7 +214322,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -215558,7 +215558,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -216253,7 +216253,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -216690,7 +216690,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -217261,7 +217261,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -218727,7 +218727,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -219636,7 +219636,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -221004,7 +221004,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -221079,19 +221079,19 @@
           "src/ox/scene/../video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -221885,7 +221885,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -222406,7 +222406,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -222715,7 +222715,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -222961,7 +222961,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223207,7 +223207,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223453,7 +223453,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223699,7 +223699,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -223945,7 +223945,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -224193,7 +224193,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -224589,7 +224589,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -224982,7 +224982,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -225002,23 +225002,23 @@
         "inputs": {
           "src/daisy/scene/CSceneNodeAnimatorDelete.cpp": "c22e5cd851b0bd127e46c0d36c2f9195c5a70891397873ed722160aeec4bfed9",
           "src/daisy/scene/CSceneNodeAnimatorDelete.h": "ae845d17084f2bd7f55f1093ee77fff552ba148c9f75d8ab0836c3c60e522b0b",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -225405,7 +225405,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -225425,23 +225425,23 @@
         "inputs": {
           "src/daisy/scene/CSceneNodeAnimatorRotation.cpp": "8c0ed5d201ca95ea633b5c7cdb8c398d1db6d33653960ccdc2db30fc2b78851f",
           "src/daisy/scene/CSceneNodeAnimatorRotation.h": "4cab4528be0442acad147380d086e555af8f99ea0ec663050e2fa65f617710c2",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff"
         },
         "system_headers": 111,
@@ -225813,7 +225813,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -225833,23 +225833,23 @@
         "inputs": {
           "src/daisy/scene/CSceneNodeAnimatorFlyCircle.cpp": "dddaf56fa313316bad4a786caa48857d903f43f1474ba2d7a272cccf5316d085",
           "src/daisy/scene/CSceneNodeAnimatorFlyCircle.h": "b9268cc7582859c2fd3eb87dac956dee64855566037d49f8d01de1ee11432b1b",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff"
         },
         "system_headers": 111,
@@ -226243,7 +226243,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -226263,23 +226263,23 @@
         "inputs": {
           "src/daisy/scene/CSceneNodeAnimatorFlyStraight.cpp": "68681252d7182796e378dbba67a0f91305e30e94b993af951e99ed31a2bc03ef",
           "src/daisy/scene/CSceneNodeAnimatorFlyStraight.h": "a6d21eb7ba82ccda3a0732416ab4e78ee6335c82c3894ea0be4aa32a74a4f500",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff"
         },
         "system_headers": 111,
@@ -226684,7 +226684,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -226708,23 +226708,23 @@
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff"
         },
         "system_headers": 117,
@@ -227154,7 +227154,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -227174,23 +227174,23 @@
         "inputs": {
           "src/daisy/scene/CSceneNodeAnimatorFollowSpline.cpp": "7ddd30f7dc51828cfd3738404eb69ebf3384fbe0a6b1ab4ee06ea6cf5a1a9239",
           "src/daisy/scene/CSceneNodeAnimatorFollowSpline.h": "85ff479799421708bcd7adc10e7a97c6cf13e1104e4076e89c0051c63f43cd13",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa"
         },
@@ -227688,7 +227688,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -228861,7 +228861,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -228879,18 +228879,18 @@
           "/out/daisy__scene__CBillboardSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CBillboardSceneNode.cpp": "1bb0d16807e37197a8dc0e1d06331d5926fad2ed81f9461355b7aff8e058a077",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CBillboardSceneNode.cpp": "2443c613f0756c78de79ae2516c69eee7219beb19148b10685058137b3b8c65b",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/IBillboardSceneNode.h": "061a0356b828173218383768f15c51e917f72dcb6fac53aaeb43c0528ecbfe6a",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -228898,11 +228898,11 @@
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/daisy/scene/CBillboardSceneNode.h": "0200e4f6fe77b6834231563f981ddf9909d02c110d30bc9a0ac33599ac392be2",
+          "src/daisy/scene/CBillboardSceneNode.h": "d5ff7dc938d45b825581c15ffdca4d0e384661ae730211559db71117259f93db",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
@@ -230213,7 +230213,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -230231,15 +230231,15 @@
           "/out/daisy__scene__CDummyTransformationSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CDummyTransformationSceneNode.cpp": "41e30fbd61fa643f2a1e8741cd8541129885e2bf9bcb9859fe89cb50434f873f",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CDummyTransformationSceneNode.cpp": "a426c46c8a4c800acea607e5203ec4e07553dcdd8ef0f1c33059bfaf3e77c6cf",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
-          "src/ox/scene/IDummyTransformationSceneNode.h": "8dc0dc2a492ed395790814d041c5123bdd2e86bf517bfd68ced9273cd0384311",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/IDummyTransformationSceneNode.h": "40029015bff51d6ba030f3425bd69db014ccfb7f7132c7e0c9d53f15ff75807f",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -230248,9 +230248,9 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/scene/IAnimatedMeshSceneNode.h": "d94c2d0db0505991b9cea4ee59479de9bb070404138d59703cabf7140fa9a208",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -230260,7 +230260,7 @@
           "src/ox/scene/../event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/scene/../video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/daisy/scene/CDummyTransformationSceneNode.h": "5e0c9aed36a18d90c8ee21c836af4f6ee65240719864eb394e573c0a005f7046"
+          "src/daisy/scene/CDummyTransformationSceneNode.h": "19ee792d295fb870a1f3549a2b2a00a904159db6a7c073fef30ff37617e7a3b6"
         },
         "system_headers": 117,
         "object_sha256": "eafb91c5fe386eb477a8da31a685275e46b5f69d7d12e9ee65730e5db3d44235"
@@ -231440,7 +231440,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -231459,12 +231459,12 @@
         ],
         "inputs": {
           "src/daisy/scene/CEmptySceneNode.cpp": "6a14762a8d181629d1053d62f6a41d1ad700cb6f0b7304f76a63c188ebbf8935",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -231473,11 +231473,11 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
-          "src/daisy/scene/CEmptySceneNode.h": "f056e45b3c810285fccc23ca5ead0bd884333611016e6f17ad7951e952a8b142",
+          "src/daisy/scene/CEmptySceneNode.h": "05ef1ebec2fad1b89d74061a18ea0ee91c1dacdd70af03bdb03699ffa83261be",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -232880,7 +232880,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -232898,17 +232898,17 @@
           "/out/daisy__scene__CLightSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CLightSceneNode.cpp": "0113113e12b677eb54e9bc8af973f122032b41e58ad84801ab15c0439813eaa3",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CLightSceneNode.cpp": "690f4ca86c0e2a18f861110d23c89d1e3317040fbf6ff3108ea2f78981f7d77b",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/ILightSceneNode.h": "7475007951b94276712d1fc45fff94fc9ce06cce752789c2d358195ce951ea49",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -232917,12 +232917,12 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../video/SLight.h": "4622a7c7b61791cf920c9307f3637ad6f60805589cadcf071059464291c46dea",
-          "src/daisy/scene/CLightSceneNode.h": "68f63f5ca6400f3918ef605593bbdfe1b8a7cdd66259b7a4434af7ce42c0a5c6",
+          "src/daisy/scene/CLightSceneNode.h": "c3225502a2951972467c50b8bd36921212b69a81ee8b5bd6ce6ad24ba694cab5",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -234718,7 +234718,7 @@
         ".text._ZNSt6vectorIPN2ox5scene11IMeshBufferESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -234736,11 +234736,11 @@
           "/out/daisy__scene__CMeshManipulator.o"
         ],
         "inputs": {
-          "src/daisy/scene/CMeshManipulator.cpp": "d0db0ad38c96516c6f64fbda530933097d6c5cbd0be6529ddce78c6022bc460a",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CMeshManipulator.cpp": "ee72dbcf9cc064bbd29a3eec60e11c40e5f4873b7e6363c5c64cd952b23d0881",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -234750,18 +234750,18 @@
           "src/ox/scene/IMeshBuffer.h": "9b4581b95169eaad07229b693947ae050a6a37713b305d202846cb4f7f5b1cd1",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
-          "src/daisy/scene/CMeshManipulator.h": "7ec12aef5c2bd0787d0df2afd9e8ca6eeeb9e5612d2d8f21a21abad941cb1ea3",
-          "src/ox/scene/IMeshManipulator.h": "e060ae0eb125c0b802756514f62efb358430440263cce409dae579121c3c977b",
+          "src/daisy/scene/CMeshManipulator.h": "fb5a48d843f5a871f72115df5bea20d59cf01f82dce256af65afd7b339607ed5",
+          "src/ox/scene/IMeshManipulator.h": "c700a361fec66b088b1512154406e47d968e67a01bfd276cc68a7ecd3fe96001",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/IAnimatedMesh.h": "dd1b18d3e5006c5d6a25f2e50f1b3f76e1b9534abf5ce98d56a523940266891d",
           "src/ox/scene/IMesh.h": "0b868b15ac75e5d5ddd8bc282587929c1ecb7037c48d5eeb7060d5d5380c26fb",
           "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
-          "src/ox/scene/SMesh.h": "cebc091a968cf0633d541751034eaf2e138f985a98e32eac90aeff1d7d0bddda",
+          "src/ox/scene/SMesh.h": "ce449ea8b64c01b3403d573a9fc822c15f888fa304eb7fe849144e51140270d8",
           "src/ox/video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/ox/scene/SMeshBuffer.h": "607e8af2633deaeb2d16272d195d1a3e0a9ba7adb755b69523104dee4b7641d4",
-          "src/ox/scene/SMeshBufferLightMap.h": "81a7f4edd1aaec6cbe82c15fa25326031dcc8073ad03fb64a1afc17aa791b0b6"
+          "src/ox/scene/SMeshBuffer.h": "03dad507f310c1df3b31fd04dd82856d9e1adb6fd2fe190d261992130ff58f3e",
+          "src/ox/scene/SMeshBufferLightMap.h": "ee5c644aee6facc5b515e3c720ba44be87e6b90c5bfb8f2e5d9dec0ac008078f"
         },
         "system_headers": 114,
         "object_sha256": "0f9619cb333dd2d3872c436bebc5ddfc78d996016a1dcec88e16cff35f70fd02"
@@ -235623,7 +235623,7 @@
       ],
       "unplaced_sections": [],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -235641,14 +235641,14 @@
           "/out/daisy__scene__CSceneNodeAnimatorCollisionResponse.o"
         ],
         "inputs": {
-          "src/daisy/scene/CSceneNodeAnimatorCollisionResponse.cpp": "710a17afe96efd332bfd179d5c406dc02d9803bcadaed37f570cf2d6494bc245",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/daisy/scene/CSceneNodeAnimatorCollisionResponse.cpp": "fc4add1ec7c059202964eb98311ed81c297c8b38dca6ba96786eaf2265f08d35",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -235657,13 +235657,13 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/scene/CSceneNodeAnimatorCollisionResponse.h": "e6f5a5e53720246d7d6c49c1b81f107c5816988e24b674361d0692fe5caea26b",
-          "src/ox/scene/ISceneNodeAnimatorCollisionResponse.h": "210db1ef7182c43aa7e726d23df3149617241f14844d8af06aeefc74c9a9b7a6",
+          "src/daisy/scene/CSceneNodeAnimatorCollisionResponse.h": "9136079ae45c09bb0bc0ba4b3628b00db71130a4463c9278abb478dff99ad656",
+          "src/ox/scene/ISceneNodeAnimatorCollisionResponse.h": "fa9d5f905f78be22d9c221b98d1223eb6363f7b43664d6f173022b84db9e0deb",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -236068,7 +236068,7 @@
         ".gcc_except_table"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -236086,19 +236086,19 @@
           "/out/daisy__scene__CTriangleBBSelector.o"
         ],
         "inputs": {
-          "src/daisy/scene/CTriangleBBSelector.cpp": "8d9b493aadcc8055247a67076bbd0e0394ff6cc74e9bdd0f578747c346fe2587",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CTriangleBBSelector.cpp": "e1610c3308ea1fd5708df472816ed8309550d9ace644cd2123030f48abc5513c",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
-          "src/daisy/scene/CTriangleBBSelector.h": "30b3c72cbb16422518e9d8ef1df69e578490cb31323036ef268159b1b0b3705e",
-          "src/daisy/scene/CTriangleSelector.h": "88341b5e86bab2cc06e3ef8500aede7dafa5770f08d9bb301b81e025054a4481",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
+          "src/daisy/scene/CTriangleBBSelector.h": "2bceebbaaaa8b79e3ad752d9c7ec107812a54f14f984104c6ee6bca0993e5eb8",
+          "src/daisy/scene/CTriangleSelector.h": "e44dcaeb3e0e4c648b5e0d6c0ed71500840f9d261058ae4a00d7811b07976c00",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -236611,7 +236611,7 @@
         ".text._ZNSt6vectorIN2ox4core11CTriangle3dIfEESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_"
       ],
       "compilation": {
-        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
         "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
         "command": [
@@ -236629,14 +236629,14 @@
           "/out/daisy__scene__CTriangleSelector.o"
         ],
         "inputs": {
-          "src/daisy/scene/CTriangleSelector.cpp": "907346716fe8de082fb9540bfd76d949741a356a89ad1db2cac516f204da77a6",
-          "src/ox/core/CAabbox3d.h": "22fe9fcaf29868a84d285780578fb9aeaacb6f97c36a5876a6b192fea780b374",
+          "src/daisy/scene/CTriangleSelector.cpp": "ec5db2cb67aa6fffbb3780f2d27c506e1c5448eaa7d563ee971991b27ea5bf4f",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/ox/core/CPlane3d.h": "51ad133f6c3a77459c8b149233fda659be9622d98b6a0004d2de9e6f14d0eb40",
-          "src/ox/core/irrMath.h": "1e39222d3a146b29a992de061750dc55d3337b6e1d8d3fbd5487a2d4a579ef6c",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
-          "src/ox/core/CTriangle3d.h": "7608ddafb763bbdfbf63d67bc52741202101db3f5b4b488e3a835d1527d4f6c9",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -236648,10 +236648,10 @@
           "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/IMeshBuffer.h": "9b4581b95169eaad07229b693947ae050a6a37713b305d202846cb4f7f5b1cd1",
           "src/ox/scene/../video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
-          "src/daisy/scene/CTriangleSelector.h": "88341b5e86bab2cc06e3ef8500aede7dafa5770f08d9bb301b81e025054a4481",
-          "src/ox/scene/ITriangleSelector.h": "c36b615a1bfb3a4ee4405820bccf4229ea4c05da7fff369435757cfd9749976f",
+          "src/daisy/scene/CTriangleSelector.h": "e44dcaeb3e0e4c648b5e0d6c0ed71500840f9d261058ae4a00d7811b07976c00",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/scene/ISceneNode.h": "1c255df09d1d8ddb03d4dd1f97593723aa46a2a2634ab2ba58af2996b7c27ccb",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../core/CMatrix4.h": "51b71b9706f5386a9b2e150b6ccc15e477eef6c2c73c74574d6fa4042a1e9bff",
           "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -236777,7 +236777,7 @@
   ],
   "fuzzy": {
     "version": "3.8.1",
-    "sha256": "c8290281e82114bcc1a06ff73061110d3902a177822e750337de2537188e358f",
+    "sha256": "98f8275c27900c4fe2248fce3af37617658be49648fa7dbb5b376371f046dfdb",
     "config": {
       "functionRelocDiffs": "data_value"
     },
