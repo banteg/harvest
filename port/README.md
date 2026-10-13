@@ -16,6 +16,7 @@ network access to fetch the dependencies (github.com, www.lua.org). From this di
     zig build run                  # build and run it (arguments after --)
     zig build census               # links every kept unit with the original's plain loop
     zig build tests                # the test programs in tests/, without running them
+    zig build test-scene_nodes      # scene graph, ownership and material fallback; no game data
     zig build test-audio -- ../orig/1.18-linux-amd64/harvestClientData/sfx/ [--wav out.wav] [--play]
     zig build test-menu_scene -- ../orig/1.18-linux-amd64 [shader level] [width height]
     zig build test-text -- ../orig/1.18-linux-amd64 [scratch dir]

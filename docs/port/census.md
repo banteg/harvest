@@ -68,6 +68,7 @@ The `replaced` list in `build.zig`:
 | `daisy/video/Null/CCGMaterialRenderer` | Cg material renderer base (Cg runtime calls) | GLES3 renderer |
 | `daisy/video/Software/CZBuffer` | software renderer z-buffer, never reached | dropped |
 | `HarvestFull/main.cpp` | the blocking `init`/`update` loop | SDL3 main callbacks (`port/src/main.cpp`) |
+| `daisy/scene/CBillboardSceneNode.cpp`, `CLightSceneNode.cpp` | recovered billboard and light nodes | the existing nodes in `port/src/scene/` |
 
 ## Port sources (`port/src/`)
 
@@ -96,8 +97,11 @@ The `replaced` list in `build.zig`:
 | `video/ImageLoaderBmp.cpp` | `createImageLoaderBmp` | Irrlicht 0.7's BMP loader (uncompressed 1/4/8/24-bit), for the GUI's built-in font |
 | `video/ImageLoaderStubs.cpp` | `createImageLoaderPCX` | a loader that accepts nothing (they must not be null: `CVideoNull` calls and drops every loader) |
 | `video/CVideoGL.{h,cpp}`, `CFixedFunction.*`, `CTextureGL.*`, `MaterialRenderers.h`, `CCgMaterialRendererGL.*`, `GL.*`, `Shaders.*`, `shaders/` | `port::createVideoDriver` | the OpenGL ES 3.0 / OpenGL 3.3 core renderer, per [renderer.md](renderer.md#in-the-port); `port/tests/video.cpp` draws the 2D primitives, the scattering materials and the menu scene and saves screenshots |
-| `scene/` | `daisy::scene::createSceneManager`, the bodies of `ox::scene::ISceneNode` | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, light, billboard and skybox nodes, rotation animator, bounding-box picking, OBJ loader; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
+| `scene/` | `daisy::scene::createSceneManager`, using the recovered inline `ox::scene::ISceneNode` bodies | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, light, billboard and skybox nodes, rotation animator, bounding-box picking, OBJ loader; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
 | `thirdparty/stb_image.c`, `thirdparty/stb_image_write.c`, `thirdparty/miniaudio.c` | the libraries' implementations | stb_image: JPEG, TGA, PSD, PNG, from memory only; stb_image_write: JPEG to a callback (screenshots); miniaudio with stb_vorbis |
+
+The camera, animated-mesh, light and billboard interfaces now share their recovered constructors
+forwarding to `ISceneNode` in both builds; the port nodes continue to derive from these interfaces.
 
 ## Source changes for the port
 
@@ -116,8 +120,7 @@ objects byte-identical.
 | [`daisy/io/CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp) | `createDirectory` calls `mkdir(path)` on Windows | the Windows C library's `mkdir` takes no mode |
 | [`daisy/video/Null/CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp) | no `cgCreateContext`/`cgDestroyContext`; `CgContext` stays 0 | no Cg runtime in the port |
 | [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | Irrlicht's members instead of the sized placeholder | the port implements `CImage`. Declaring them for GCC changes `CVideoNull`'s code (one function stops matching), so the matching build keeps the placeholder |
-| [`ox/scene/ISceneNode.h`](../../src/ox/scene/ISceneNode.h) | Irrlicht 0.7's members (in the Mac constructor's order) instead of the sized placeholder, the constructor and destructor, `getTransformedBoundingBox`, `getChildren`, `setAutomaticCulling` (port only) | the port implements the scene graph (`port/src/scene/`) |
-| [`ox/scene/ICameraSceneNode.h`](../../src/ox/scene/ICameraSceneNode.h), [`IAnimatedMeshSceneNode.h`](../../src/ox/scene/IAnimatedMeshSceneNode.h), [`ILightSceneNode.h`](../../src/ox/scene/ILightSceneNode.h), [`IBillboardSceneNode.h`](../../src/ox/scene/IBillboardSceneNode.h) | Irrlicht 0.7's constructors forwarding to `ISceneNode` (port only) | the port's nodes derive from these interfaces |
+| [`ox/scene/ISceneNode.h`](../../src/ox/scene/ISceneNode.h) | a defined fallback material, null-child guard and selector retain-before-release/null clear under `HARVEST_PORT` | both builds share the recovered fields and inline bodies; the port retains its safe animated-mesh fallback and handles selector ownership |
 | [`ox/scene/ISceneManager.h`](../../src/ox/scene/ISceneManager.h) | the `E_SCENE_NODE_RENDER_TIME` enumerators (both builds) | recovered from the Mac `registerNodeForRendering`; the matching build is unchanged by them |
 | [`daisy/other/CIrrDeviceStub.cpp`](../../src/daisy/other/CIrrDeviceStub.cpp) | includes `net/CWinsockNetworkDevice.h` instead of declaring the sized placeholder | the port implements the network device against one declaration |
 | [`ox/game/CGameMain.h`](../../src/ox/game/CGameMain.h), [`CGameMain.cpp`](../../src/ox/game/CGameMain.cpp) | `setState` starts a load and `update` runs one `renderFirst`/`secondInit` step per call (`isLoading`, `loadStep`); a failed load logs the state's message; no 20 ms inactive sleep under Emscripten | a frame must not block for a whole load (the web build cannot block) |

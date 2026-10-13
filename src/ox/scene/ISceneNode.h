@@ -154,6 +154,10 @@ public:
     }
     virtual void addChild(ISceneNode* child)
     {
+#ifdef HARVEST_PORT
+        if (!child)
+            return;
+#endif
         child->grab();
         child->remove(); // remove from old parent
         Children.push_back(child);
@@ -210,11 +214,17 @@ public:
         for (; it != Animators.end(); ++it)
             (*it)->drop();
 
-        Animators.clear();    
+        Animators.clear();
     }
     virtual video::SMaterial& getMaterial(int i)
     {
+#ifdef HARVEST_PORT
+        // The port's animated-mesh node uses this fallback for an absent material.
+        static video::SMaterial none;
+        return none;
+#else
         return *((video::SMaterial*)0);
+#endif
     }
     virtual int getMaterialCount()
     {
@@ -269,16 +279,24 @@ public:
     virtual void setTriangleSelector(ITriangleSelector* selector)
 
     {
+#ifdef HARVEST_PORT
+        // Retain before releasing so reassigning the node's sole reference is safe.
+        // A null selector clears the attachment.
+        if (selector)
+            selector->grab();
+#endif
         if (TriangleSelector)
             TriangleSelector->drop();
 
         TriangleSelector = selector;
+#ifndef HARVEST_PORT
         TriangleSelector->grab();
+#endif
     }
     virtual void updateAbsolutePosition()
     {
         if (Parent)
-            AbsoluteTransformation = 
+            AbsoluteTransformation =
                 Parent->getAbsoluteTransformation() * getRelativeTransformation();
         else
             AbsoluteTransformation = getRelativeTransformation();
