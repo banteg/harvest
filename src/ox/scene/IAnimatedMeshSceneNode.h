@@ -22,7 +22,6 @@ enum EMD2_ANIMATION_TYPE
 class IAnimatedMeshSceneNode : public ISceneNode
 {
 public:
-#ifdef HARVEST_PORT
     IAnimatedMeshSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
         const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0),
         const core::CVector3d<float>& rotation = core::CVector3d<float>(0, 0, 0),
@@ -31,7 +30,6 @@ public:
     {
     }
 
-#endif
     virtual void setCurrentFrame(int frame) = 0;
     virtual bool setFrameLoop(int begin, int end) = 0;
     virtual void setAnimationSpeed(int framesPerSecond) = 0;

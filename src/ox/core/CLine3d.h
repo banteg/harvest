@@ -16,6 +16,20 @@ template <class T>
 class CLine3d
 {
 public:
+    CVector3d<T> getVector() const
+    {
+        return end - start;
+    }
+
+    CVector3d<T> getMiddle() const
+    {
+        return (start + end) * (T)0.5;
+    }
+
+    double getLengthSQ() const { return start.getDistanceFromSQ(end); }
+
+    double getLength() const { return start.getDistanceFrom(end); }
+
     CLine3d()
         : start(0, 0, 0), end(1, 1, 1) {}
 
