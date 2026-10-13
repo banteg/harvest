@@ -39,16 +39,16 @@ public:
 	~CTriangleSelector();
 
 	//! Gets all triangles.
-	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount, 
+	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount,
 		const ox::core::CMatrix4* transform=0);
 
 	//! Gets all triangles which lie within a specific bounding box.
-	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount, 
+	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount,
 		const ox::core::CAabbox3d<float>& box, const ox::core::CMatrix4* transform=0);
 
 	//! Gets all triangles which have or may have contact with a 3d line.
 	virtual void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-		int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+		int& outTriangleCount, const ox::core::CLine3d<float>& line,
 		const ox::core::CMatrix4* transform=0);
 
 	//! Returns amount of all available triangles in this selector
@@ -65,4 +65,3 @@ protected:
 
 
 #endif
-

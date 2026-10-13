@@ -28,7 +28,7 @@ public:
 	virtual ~CTriangleBBSelector() {};
 
 	//! Gets all triangles.
-	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount, 
+	void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize, int& outTriangleCount,
 		const ox::core::CMatrix4* transform=0);
 };
 
@@ -37,4 +37,3 @@ public:
 
 
 #endif
-

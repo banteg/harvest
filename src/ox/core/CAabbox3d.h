@@ -37,8 +37,8 @@ public:
         if (d.Y < 0) d.Y = -d.Y;
         if (d.Z < 0) d.Z = -d.Z;
 
-        return (d.X < ROUNDING_ERROR && 
-                d.Y < ROUNDING_ERROR && 
+        return (d.X < ROUNDING_ERROR &&
+                d.Y < ROUNDING_ERROR &&
                 d.Z < ROUNDING_ERROR);
     }
 
@@ -49,7 +49,7 @@ public:
 
     bool intersectsWithLine(const CLine3d<T>& line) const
     {
-        return intersectsWithLine(line.getMiddle(), line.getVector().normalize(), 
+        return intersectsWithLine(line.getMiddle(), line.getVector().normalize(),
                 (T)(line.getLength() * 0.5));
     }
 
@@ -61,7 +61,7 @@ public:
         const CVector3d<T> t = (MinEdge + e) - linemiddle;
         float r;
 
-        if ((fabs(t.X) > e.X + halflength * fabs(linevect.X)) || 
+        if ((fabs(t.X) > e.X + halflength * fabs(linevect.X)) ||
             (fabs(t.Y) > e.Y + halflength * fabs(linevect.Y)) ||
             (fabs(t.Z) > e.Z + halflength * fabs(linevect.Z)) )
             return false;

@@ -20,7 +20,7 @@ namespace scene
 using namespace ox::scene;
 
 //! An interface for easily manipulate meshes.
-/** Scale, set alpha value, flip surfaces, and so on. This exists for fixing problems 
+/** Scale, set alpha value, flip surfaces, and so on. This exists for fixing problems
  with wrong imported or exported meshes quickly after loading. It is not intended for doing mesh
  modifications and/or animations during runtime.
 */
@@ -57,7 +57,7 @@ public:
 	//! Creates a planar texture mapping on the mesh
 	//! \param mesh: Mesh on which the operation is performed.
 	//! \param resolution: resolution of the planar mapping. This is the value
-	//! specifying which is the releation between world space and 
+	//! specifying which is the releation between world space and
 	//! texture coordinate space.
 	virtual void makePlanarTextureMapping(ox::scene::IMesh* mesh, float resolution) const;
 
@@ -76,4 +76,3 @@ public:
 
 
 #endif
-

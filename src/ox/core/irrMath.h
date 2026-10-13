@@ -26,4 +26,3 @@ namespace core
 }// end namespace ox
 
 #endif
-

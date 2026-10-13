@@ -17,7 +17,7 @@ namespace scene
 
 //! Dummy scene node for adding additional transformations to the scene graph.
 /** This scene node does not render itself, and does not respond to set/getPosition,
-set/getRotation and set/getScale. Its just a simple scene node that takes a 
+set/getRotation and set/getScale. Its just a simple scene node that takes a
 matrix as relative transformation, making it possible to insert any transformation
 anywhere into the scene graph.
 This scene node is for example used by the IAnimatedMeshSceneNode for emulating
@@ -42,4 +42,3 @@ public:
 
 
 #endif
-

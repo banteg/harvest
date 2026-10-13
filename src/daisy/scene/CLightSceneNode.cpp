@@ -20,7 +20,7 @@ namespace scene
 using namespace ox::scene;
 
 //! constructor
-CLightSceneNode::CLightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,	
+CLightSceneNode::CLightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 	const ox::core::CVector3d<float>& position, ox::video::SColorf color,float radius)
 : ILightSceneNode(parent, mgr, id, position)
 {

@@ -25,7 +25,7 @@ namespace scene
 		}
 
 		//! destructor
-		~SMeshBufferLightMap() {}; 
+		~SMeshBufferLightMap() {};
 
         //! returns the material of this meshbuffer
         virtual const ox::video::SMaterial& getMaterial() const
@@ -44,13 +44,13 @@ namespace scene
 		virtual const void* getVertices() const
 		{
 			return &Vertices[0];
-		} 
+		}
 
 		//! returns pointer to vertices
 		virtual void* getVertices()
 		{
 			return &Vertices[0];
-		} 
+		}
 
 		//! returns amount of vertices
 		virtual int getVertexCount() const
@@ -117,4 +117,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

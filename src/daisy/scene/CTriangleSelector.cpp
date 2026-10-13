@@ -93,7 +93,7 @@ CTriangleSelector::~CTriangleSelector()
 
 //! Gets all triangles.
 void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
-									 int arraySize, int& outTriangleCount, 
+									 int arraySize, int& outTriangleCount,
 									const ox::core::CMatrix4* transform)
 {
 	int cnt = Triangles.size();
@@ -122,8 +122,8 @@ void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
 
 
 //! Gets all triangles which lie within a specific bounding box.
-void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, 
-									 int arraySize, int& outTriangleCount, 
+void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
+									 int arraySize, int& outTriangleCount,
 									const ox::core::CAabbox3d<float>& box,
 									const ox::core::CMatrix4* transform)
 {
@@ -134,7 +134,7 @@ void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
 
 //! Gets all triangles which have or may have contact with a 3d line.
 void CTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-	int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+	int& outTriangleCount, const ox::core::CLine3d<float>& line,
 	const ox::core::CMatrix4* transform)
 {
 	// return all triangles
@@ -152,4 +152,3 @@ int CTriangleSelector::getTriangleCount() const
 
 } // end namespace scene
 } // end namespace daisy
-

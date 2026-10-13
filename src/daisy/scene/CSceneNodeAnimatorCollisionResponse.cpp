@@ -23,7 +23,7 @@ using namespace ox::scene;
 //! constructor
 CSceneNodeAnimatorCollisionResponse::CSceneNodeAnimatorCollisionResponse(
 		ISceneManager* scenemanager,
-		ITriangleSelector* world, ISceneNode* object, 
+		ITriangleSelector* world, ISceneNode* object,
 		const ox::core::CVector3d<float>& ellipsoidRadius,
 		const ox::core::CVector3d<float>& gravityPerSecond,
 		float accelerationPerSecond,
@@ -71,7 +71,7 @@ bool CSceneNodeAnimatorCollisionResponse::isFalling()
 
 
 //! Sets the radius of the ellipsoid with which collision detection and
-//! response is done. 
+//! response is done.
 void CSceneNodeAnimatorCollisionResponse::setEllipsoidRadius(
 	const ox::core::CVector3d<float>& radius)
 {
@@ -210,4 +210,3 @@ void CSceneNodeAnimatorCollisionResponse::animateNode(ISceneNode* node, unsigned
 
 } // end namespace scene
 } // end namespace daisy
-

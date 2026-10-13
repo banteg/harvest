@@ -19,7 +19,7 @@
 namespace ox { namespace scene {} }
 namespace daisy
 {
-namespace scene 
+namespace scene
 {
 using namespace ox::scene;
 
@@ -112,7 +112,7 @@ void CMeshManipulator::recalculateNormals(ox::scene::IMesh* mesh) const
 		{
 		case ox::video::EVT_STANDARD:
 			{
-				ox::video::S3DVertex* v = 
+				ox::video::S3DVertex* v =
 					(ox::video::S3DVertex*)buffer->getVertices();
 
 				for (int i=0; i<idxcnt; i+=3)
@@ -127,7 +127,7 @@ void CMeshManipulator::recalculateNormals(ox::scene::IMesh* mesh) const
 			break;
 		case ox::video::EVT_2TCOORDS:
 			{
-				ox::video::S3DVertex2TCoords* v = 
+				ox::video::S3DVertex2TCoords* v =
 					(ox::video::S3DVertex2TCoords*)buffer->getVertices();
 
 				for (int i=0; i<idxcnt; i+=3)
@@ -204,7 +204,7 @@ void CMeshManipulator::recalculateBoundingBox(ox::scene::IMeshBuffer* buffer) co
 	void* v = buffer->getVertices();
 	int vtxcnt = buffer->getVertexCount();
 	ox::core::CAabbox3d<float> box;
-	
+
 	int i = 1;
 
 	switch(buffer->getVertexType())
@@ -237,7 +237,7 @@ SMesh* CMeshManipulator::createMeshCopy(ox::scene::IMesh* mesh) const
 	SMesh* clone = new SMesh();
 
 	int meshBufferCount = mesh->getMeshBufferCount();
-	
+
     for (int b=0; b<meshBufferCount; ++b)
 	{
 		int vtxCnt = mesh->getMeshBuffer(b)->getVertexCount();
@@ -251,7 +251,7 @@ SMesh* CMeshManipulator::createMeshCopy(ox::scene::IMesh* mesh) const
 				SMeshBuffer* buffer = new SMeshBuffer();
 				buffer->Material = mesh->getMeshBuffer(b)->getMaterial();
 
-				ox::video::S3DVertex* v = 
+				ox::video::S3DVertex* v =
 					(ox::video::S3DVertex*)mesh->getMeshBuffer(b)->getVertices();
 
 				int i;
@@ -271,7 +271,7 @@ SMesh* CMeshManipulator::createMeshCopy(ox::scene::IMesh* mesh) const
 				SMeshBufferLightMap* buffer = new SMeshBufferLightMap();
 				buffer->Material = mesh->getMeshBuffer(b)->getMaterial();
 
-				ox::video::S3DVertex2TCoords* v = 
+				ox::video::S3DVertex2TCoords* v =
 					(ox::video::S3DVertex2TCoords*)mesh->getMeshBuffer(b)->getVertices();
 
 				int i;
@@ -299,7 +299,7 @@ SMesh* CMeshManipulator::createMeshCopy(ox::scene::IMesh* mesh) const
 //! Creates a planar texture mapping on the mesh
 //! \param mesh: Mesh on which the operation is performed.
 //! \param resolution: resolution of the planar mapping. This is the value
-//! specifying which is the releation between world space and 
+//! specifying which is the releation between world space and
 //! texture coordinate space.
 void CMeshManipulator::makePlanarTextureMapping(ox::scene::IMesh* mesh, float resolution=0.01f) const
 {
@@ -318,7 +318,7 @@ void CMeshManipulator::makePlanarTextureMapping(ox::scene::IMesh* mesh, float re
 		{
 		case ox::video::EVT_STANDARD:
 			{
-				ox::video::S3DVertex* v = 
+				ox::video::S3DVertex* v =
 					(ox::video::S3DVertex*)buffer->getVertices();
 
 				for (int i=0; i<idxcnt; i+=3)
@@ -362,7 +362,7 @@ void CMeshManipulator::makePlanarTextureMapping(ox::scene::IMesh* mesh, float re
 			break;
 		case ox::video::EVT_2TCOORDS:
 			{
-				ox::video::S3DVertex2TCoords* v = 
+				ox::video::S3DVertex2TCoords* v =
 					(ox::video::S3DVertex2TCoords*)buffer->getVertices();
 
 				for (int i=0; i<idxcnt; i+=3)
@@ -436,4 +436,3 @@ int CMeshManipulator::getPolyCount(ox::scene::IAnimatedMesh* mesh) const
 
 } // end namespace scene
 } // end namespace daisy
-

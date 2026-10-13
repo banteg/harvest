@@ -24,7 +24,7 @@ namespace scene
 using namespace ox::scene;
 
 //! constructor
-CBillboardSceneNode::CBillboardSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,	
+CBillboardSceneNode::CBillboardSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 const ox::core::CVector3d<float>& position, const ox::core::CDimension2d<float>& size)
 : IBillboardSceneNode(parent, mgr, id, position)
 {
@@ -97,7 +97,7 @@ void CBillboardSceneNode::render()
 	vertical.normalize();
 
 	horizontal *= 0.5f * Size.Width;
-	vertical *= 0.5f * Size.Height;	
+	vertical *= 0.5f * Size.Height;
 
 	vertices[0].Pos = pos + horizontal + vertical;
 	vertices[1].Pos = pos + horizontal - vertical;
@@ -154,4 +154,3 @@ const ox::core::CDimension2d<float>& CBillboardSceneNode::getSize()
 
 } // end namespace scene
 } // end namespace daisy
-

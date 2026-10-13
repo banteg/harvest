@@ -17,9 +17,9 @@ namespace scene
 {
 
 //! Interface to return triangles with specific properties.
-/** Every ISceneNode may have a triangle selector, available with 
+/** Every ISceneNode may have a triangle selector, available with
  ISceneNode::getTriangleScelector() or ISceneManager::createTriangleSelector.
- This is used for doing collision detection: For example if you know, that a collision may happened in the 
+ This is used for doing collision detection: For example if you know, that a collision may happened in the
  area between (1,1,1) and (10,10,10), you can get all triangles of the
  scene node in this area with the ITriangleSelector easily and check every triangle
  if it collided. */
@@ -57,7 +57,7 @@ public:
 	//! they are returned. Useful for example to scale all triangles down into an
 	//! ellipsoid space. If this pointer is null, no transformation will be done.
 	virtual void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-		int& outTriangleCount, const ox::core::CAabbox3d<float>& box, 
+		int& outTriangleCount, const ox::core::CAabbox3d<float>& box,
 		const ox::core::CMatrix4* transform=0) = 0;
 
 	//! Gets all triangles which have or may have contact with a 3d line.
@@ -73,7 +73,7 @@ public:
 	//! they are returned. Useful for example to scale all triangles down into an
 	//! ellipsoid space. If this pointer is null, no transformation will be done.
 	virtual void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-		int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+		int& outTriangleCount, const ox::core::CLine3d<float>& line,
 		const ox::core::CMatrix4* transform=0) = 0;
 };
 
@@ -82,4 +82,3 @@ public:
 
 
 #endif
-

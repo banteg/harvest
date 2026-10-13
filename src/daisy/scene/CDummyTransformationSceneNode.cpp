@@ -60,4 +60,3 @@ ox::core::CMatrix4 CDummyTransformationSceneNode::getRelativeTransformation() co
 
 } // end namespace scene
 } // end namespace daisy
-

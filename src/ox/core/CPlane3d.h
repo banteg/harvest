@@ -14,7 +14,7 @@ namespace core
 {
 
 //! Enumeration for intersection relations of 3d objects
-enum EIntersectionRelation3D 
+enum EIntersectionRelation3D
 {
 	ISREL3D_FRONT = 0,
 	ISREL3D_BACK,
@@ -80,7 +80,7 @@ class CPlane3d
 			if (t2 == 0)
 				return false;
 
-			T t =- (Normal.dotProduct(linePoint) + D) / t2;			
+			T t =- (Normal.dotProduct(linePoint) + D) / t2;
 			outIntersection = linePoint + (lineVect * t);
 			return true;
 		}
@@ -90,7 +90,7 @@ class CPlane3d
 		//! \param linePoint2: Point 2 of the line.
 		//! \param outIntersection: Place to store the intersection point, if there is one.
 		//! \return Returns true if there was an intersection, false if there was not.
-		bool getIntersectionWithLimitedLine(const CVector3d<T>& linePoint1, 
+		bool getIntersectionWithLimitedLine(const CVector3d<T>& linePoint1,
 					const CVector3d<T>& linePoint2, CVector3d<T>& outIntersection) const
 		{
 			return (	getIntersectionWithLine(linePoint1, linePoint2 - linePoint1, outIntersection) &&
@@ -159,7 +159,7 @@ class CPlane3d
 		}
 
 		//! Returns the intersection point with two other planes if there is one.
-		bool getIntersectionWithPlanes(const CPlane3d<T>& o1, 
+		bool getIntersectionWithPlanes(const CPlane3d<T>& o1,
 				const CPlane3d<T>& o2, CVector3d<T>& outPoint) const
 		{
 			CVector3d<T> linePoint, lineVect;
@@ -185,9 +185,9 @@ class CPlane3d
 		{
 			return point.dotProduct(Normal) + D;
 		}
-	
+
 		// member variables
-		
+
 		T D;					// distance from origin
 		CVector3d<T> Normal;		// normal vector
 };
@@ -201,4 +201,3 @@ typedef CPlane3d<int> plane3di;
 } // end namespace ox
 
 #endif
-

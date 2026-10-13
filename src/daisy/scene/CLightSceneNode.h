@@ -19,14 +19,14 @@ namespace scene
 {
 using namespace ox::scene;
 
-//! Scene node which is a dynamic light. You can switch the light on and off by 
+//! Scene node which is a dynamic light. You can switch the light on and off by
 //! making it visible or not, and let it be animated by ordinary scene node animators.
 class CLightSceneNode : public ILightSceneNode
 {
 public:
 
 	//! constructor
-	CLightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,	
+	CLightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position, ox::video::SColorf color,float range);
 
 	virtual ~CLightSceneNode();
@@ -55,4 +55,3 @@ private:
 
 
 #endif
-

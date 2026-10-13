@@ -56,7 +56,7 @@ public:
 
     bool isTotalInsideBox(const CAabbox3d<float>& box) const
     {
-        return (box.isPointInside(pointA) && 
+        return (box.isPointInside(pointA) &&
                 box.isPointInside(pointB) &&
                 box.isPointInside(pointC));
     }

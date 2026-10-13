@@ -21,14 +21,14 @@ namespace scene
 {
 using namespace ox::scene;
 
-//! Scene node which is a billboard. ox::core::A billboard is like a 3d sprite: ox::core::A 2d element,
-//! which always looks to the camera. 
+//! Scene node which is a billboard. A billboard is like a 3d sprite: A 2d element,
+//! which always looks to the camera.
 class CBillboardSceneNode : public IBillboardSceneNode
 {
 public:
 
 	//! constructor
-	CBillboardSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,	
+	CBillboardSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position, const ox::core::CDimension2d<float>& size);
 
 	virtual ~CBillboardSceneNode();
@@ -49,10 +49,10 @@ public:
 	virtual const ox::core::CDimension2d<float>& getSize();
 
 	virtual ox::video::SMaterial& getMaterial(int i);
-	
+
 	//! returns amount of materials used by this scene node.
 	virtual int getMaterialCount();
-	
+
 private:
 
 	ox::core::CDimension2d<float> Size;
@@ -69,4 +69,3 @@ private:
 
 
 #endif
-

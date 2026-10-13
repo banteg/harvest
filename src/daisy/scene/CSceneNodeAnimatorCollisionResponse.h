@@ -22,7 +22,7 @@ using namespace ox::scene;
 	//! Special scene node animator for doing automatic collision detection and response.
 	/** This scene node animator can be attached to any scene node modifying it in that
 	way, that it cannot move through walls of the world, is influenced by gravity and
-	acceleration. This animator is useful for example for first person shooter 
+	acceleration. This animator is useful for example for first person shooter
 	games. Attach it for example to a first person shooter camera, and the camera will
 	behave as the player control in a first person shooter game: The camera stops and
 	slides at walls, walks up stairs, falls down if there is no floor under it, and so on.
@@ -33,7 +33,7 @@ using namespace ox::scene;
 
 		//! constructor
 		CSceneNodeAnimatorCollisionResponse(ISceneManager* scenemanager,
-			ITriangleSelector* world, ISceneNode* object, 
+			ITriangleSelector* world, ISceneNode* object,
 			const ox::core::CVector3d<float>& ellipsoidRadius = ox::core::CVector3d<float>(30,60,30),
 			const ox::core::CVector3d<float>& gravityPerSecond = ox::core::CVector3d<float>(0,-100.0f,0),
 			float accelerationPerSecond=100.0f,
@@ -49,7 +49,7 @@ using namespace ox::scene;
 		virtual bool isFalling();
 
 		//! Sets the radius of the ellipsoid with which collision detection and
-		//! response is done. 
+		//! response is done.
 		virtual void setEllipsoidRadius(const ox::core::CVector3d<float>& radius);
 
 		//! Returns the radius of the ellipsoid with wich the collision detection and
@@ -91,7 +91,7 @@ using namespace ox::scene;
 		ox::core::CVector3d<float> Radius;
 		ox::core::CVector3d<float> Gravity;
 		ox::core::CVector3d<float> Translation;
-		
+
 		ITriangleSelector* World;
 		ISceneNode* Object;
 		ISceneManager* SceneManager;
@@ -108,4 +108,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

@@ -50,7 +50,7 @@ namespace scene
 		}
 
 		//! Returns an axis aligned bounding box of the mesh.
-		//! \return ox::core::A bounding box of this mesh is returned.
+		//! \return A bounding box of this mesh is returned.
 		virtual ox::core::CAabbox3d<float>& getBoundingBox()
 		{
 			return BoundingBox;
@@ -95,4 +95,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

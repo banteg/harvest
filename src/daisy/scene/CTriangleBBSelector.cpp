@@ -29,7 +29,7 @@ CTriangleBBSelector::CTriangleBBSelector(ISceneNode* node)
 
 //! Gets all triangles.
 void CTriangleBBSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
-									 int arraySize, int& outTriangleCount, 
+									 int arraySize, int& outTriangleCount,
 									const ox::core::CMatrix4* transform)
 {
 	if (!SceneNode)
@@ -65,4 +65,3 @@ void CTriangleBBSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
 
 } // end namespace scene
 } // end namespace daisy
-
