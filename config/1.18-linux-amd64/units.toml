@@ -697,3 +697,17 @@
 
 ["daisy/scene/CSkyBoxSceneNode.cpp"]
 ".bss" = 0x86c040
+
+["daisy/scene/CParticleBoxEmitter.cpp"]
+".bss" = 0x86c1e4
+
+["daisy/scene/CParticlePointEmitter.cpp"]
+".bss" = 0x86c1f0
+
+["daisy/scene/CWaterSurfaceSceneNode.cpp"]
+
+["daisy/video/Null/CImageLoaderPCX.cpp"]
+".bss" = 0x86c16c
+
+["daisy/scene/CTestSceneNode.cpp"]
+".bss" = 0x86c048

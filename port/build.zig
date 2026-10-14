@@ -49,6 +49,8 @@ const replaced = [_][]const u8{
     "daisy/net/",
     // The blocking main loop: the port runs the frame step from SDL3's main callbacks.
     "HarvestFull/main.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStubs.cpp.
+    "daisy/video/Null/CImageLoaderPCX.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no
