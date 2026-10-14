@@ -93,14 +93,17 @@ The target object (`tools/hv/delink.py`) holds the target's bytes laid out like 
 sections, each function at our offset. Its relocations come from the target code: capstone decodes
 every instruction, and each call or jump leaving the function, rip-relative operand and absolute
 address immediate becomes a relocation against the symbol the target references (known symbols, the
-PLT, copied library data, our placed sections and functions by offset; `sub_`/`lbl_` otherwise). Calls to a local
-function in the same section are resolved in place, as the assembler did for ours. Referenced strings,
-narrow or wide, that our object also has go into a target copy of our merged string section at the same offsets,
-holding the target's bytes. Nothing is copied from our relocations, so a wrong target stays visible.
-Indexed absolute operands also get relocations. Binary merge elements are checked by the memory
-operand's access width and content, separately from strings; non-allocated metadata such as
-`.comment` cannot supply literals.
-With these objects objdiff scores every function of the exact units at 100%, matching `hv match`.
+PLT, copied library data, our placed sections and functions by offset; `sub_`/`lbl_` otherwise).
+Recursive calls to a global function keep their relocation; calls to a local function in the same
+section are resolved in place, as the assembler did for ours. Size-zero vtable symbols stop after
+their code and header slots so following `.rodata` strings and constants are not attributed to them.
+Referenced strings, narrow or wide (including loops that peel the first character), that our object
+also has go into a target copy of our merged string section at the same offsets, holding the target's
+bytes. Nothing is copied from our relocations, so a wrong target stays visible.
+Indexed and base-register absolute operands also get relocations. Binary merge elements are checked by
+the memory operand's access width and content (including scalar float loads of 16-byte SSE constants),
+separately from strings; non-allocated metadata such as `.comment` cannot supply literals.
+With these objects objdiff scores every exact function across all 160 units at 100%, matching `hv match`.
 
 ## Tests
 

@@ -570,3 +570,28 @@ void X::f(int)
     blocks = search.Blocks.load(source, spec)
     swapped = blocks.render((1, 0, 2)).decode()
     assert swapped.index("void X::f()") < swapped.index("//! First.") < swapped.index("void X::f(int)")
+
+
+def test_auto_blocks_handles_operators_and_preprocessor_after_comments():
+    source = b"""// file comment
+#include "x.h"
+void f()
+{
+}
+
+bool X::operator<(const X& o) const
+{
+    return a < o.a;
+}
+
+X& X::operator=(const X& o)
+{
+    return *this;
+}
+"""
+    spec = search.auto_blocks(source)
+    assert [(b["name"], b["start"], b["end"]) for b in spec["blocks"]] == [
+        ("f", 3, 5),
+        ("X::operator<", 7, 10),
+        ("X::operator=", 12, 15),
+    ]

@@ -113,6 +113,8 @@ def cmd_diff(args: argparse.Namespace) -> int:
         print("\n".join(objdiff.render(result, args.symbol, args.context)))
     except (ValueError, OSError, subprocess.CalledProcessError) as error:
         print(f"diff: {error}", file=sys.stderr)
+        if isinstance(error, subprocess.CalledProcessError) and error.stderr:
+            print(error.stderr.rstrip(), file=sys.stderr)
         return 2
     return 0
 

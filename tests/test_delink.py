@@ -128,6 +128,26 @@ def test_indexed_absolute_address_recovers_the_table_relocation(tmp_path, opcode
     ]
 
 
+def test_base_register_table_access_recovers_the_table_relocation(tmp_path):
+    from test_match import ADDRESS, DESTINATION
+
+    # movzx eax, byte ptr [rax + TABLE]; ret (scale 1 uses base register rax, not index)
+    code = b"\x0f\xb6\x80" + DESTINATION.to_bytes(4, "little") + b"\xc3"
+    target = target_with_rodata(tmp_path, code, bytes(8))
+    namer = delink.Namer(target, [(DESTINATION, 8, "TABLE")], {}, [], {})
+    assert delink.code_relocations(target, ADDRESS, code, namer) == [(3, delink.R_X86_64_32S, "TABLE", 0)]
+
+
+def test_recursive_call_to_global_function_emits_relocation(tmp_path):
+    from test_match import ADDRESS, NAME, elf_image
+
+    # call +0 (recursive call to the start of the function at ADDRESS); ret
+    code = b"\xe8\xfb\xff\xff\xff\xc3"
+    target = Elf(elf_image(code, kind=2), "ET_EXEC")
+    namer = delink.Namer(target, [(ADDRESS, len(code), NAME)], {ADDRESS: NAME}, [], {})
+    assert delink.code_relocations(target, ADDRESS, code, namer) == [(1, delink.R_X86_64_PC32, NAME, -4)]
+
+
 def test_metadata_strings_are_not_literal_candidates(tmp_path):
     delink.write_object(tmp_path / "comment.o", [delink.Section(".comment", b"\0GCC\0", 0x30)], [])
     assert delink.merged_strings(Elf.load(tmp_path / "comment.o", "ET_REL")) == {}
@@ -360,3 +380,41 @@ def test_target_keeps_every_merged_section_of_ours_even_when_nothing_references_
     assert strings[".rodata.str1.1"].data == b"ab\0"
     assert strings[".rodata.str1.8"].data == bytes(8)
     assert (strings[".rodata.str1.8"].flags, strings[".rodata.str1.8"].align) == (flags, 8)
+
+
+def test_size_zero_vtable_stops_before_following_rodata_literals(tmp_path):
+    from test_match import ADDRESS, DESTINATION
+
+    # A vtable at DESTINATION (offset-to-top 0, typeinfo pointer, one code slot), followed by a float
+    vtable = struct.pack("<QQQ", 0, DESTINATION + 0x40, ADDRESS)
+    constant = struct.pack("<f", 1000.0)
+    target = target_with_rodata(tmp_path, b"\xc3", vtable + constant + bytes(64))
+    namer = delink.Namer(
+        target,
+        [(DESTINATION, 0, "_ZTV1C"), (DESTINATION + 0x40, 16, "_ZTI1C")],
+        {},
+        [],
+        {},
+        {constant: (".rodata.cst4", 0)},
+    )
+    assert namer.name(DESTINATION + 16) == ("_ZTV1C", 16)
+    assert namer.name(DESTINATION + len(vtable), 4) == (".rodata.cst4", 0)
+
+
+def test_scalar_float_load_matches_16_byte_sse_constant(tmp_path):
+    from test_match import DESTINATION
+
+    mask = b"\x00\x00\x00\x80" + bytes(12)
+    target = target_with_rodata(tmp_path, b"\xc3", mask)
+    namer = delink.Namer(target, [], {}, [], {}, {mask: (".rodata.cst16", 0)})
+    assert namer.name(DESTINATION, 4) == (".rodata.cst16", 0)
+    assert namer.merged == {".rodata.cst16": {0: mask}}
+
+
+def test_peeled_string_loop_resolves_to_merged_string_plus_one_char(tmp_path):
+    from test_match import DESTINATION
+
+    target = target_with_rodata(tmp_path, b"\xc3", b"\r\n\r\n\0")
+    namer = delink.Namer(target, [], {}, [], {b"\r\n\r\n\0": (".rodata.str1.1", 8)})
+    assert namer.name(DESTINATION + 1) == (".rodata.str1.1", 9)
+    assert namer.merged == {".rodata.str1.1": {8: b"\r\n\r\n\0"}}

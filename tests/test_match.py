@@ -390,7 +390,14 @@ def test_unnamed_function_follows_its_predecessor():
 
 
 def inline_copy_reading_a_static(
-    tmp_path, group, other_table, *, writable=False, target_writable=False, store=False
+    tmp_path,
+    group,
+    other_table,
+    *,
+    writable=False,
+    target_writable=False,
+    target_executable=False,
+    store=False,
 ):
     """Our object: an inline function reading a file-level static table through the `.rodata`
     section symbol. The target keeps the linked copy of the function from another object, which
@@ -424,7 +431,8 @@ def inline_copy_reading_a_static(
         + bytes(8)
         + other_table
     )
-    target = Elf(elf_image(image, kind=2, flags=0x7 if target_writable else 0x6), "ET_EXEC")
+    target_flags = 0x2 | (0x1 if target_writable else 0) | (0x4 if target_executable else 0)
+    target = Elf(elf_image(image, kind=2, flags=target_flags), "ET_EXEC")
     target.fde_ranges = lambda: {(ADDRESS, len(code))}
     return compare_object(obj, target, {"_Z3getv": ADDRESS}, {data_section: ADDRESS + 0x10})
 
@@ -458,6 +466,12 @@ def test_inline_copy_cannot_substitute_a_mutable_static(tmp_path, store):
 
 def test_inline_copy_cannot_substitute_a_writable_target_copy(tmp_path):
     result = inline_copy_reading_a_static(tmp_path, True, bytes(range(1, 9)), target_writable=True)
+    assert not result["exact"]
+    assert function_section(result)["bad_references"][0]["reason"] == "mutable or unmapped target copy"
+
+
+def test_inline_copy_cannot_substitute_an_executable_target_copy(tmp_path):
+    result = inline_copy_reading_a_static(tmp_path, True, bytes(range(1, 9)), target_executable=True)
     assert not result["exact"]
     assert function_section(result)["bad_references"][0]["reason"] == "mutable or unmapped target copy"
 
@@ -532,3 +546,70 @@ def test_exception_table_is_placed_from_the_target_fde(tmp_path):
 
 def test_placed_exception_table_is_compared(tmp_path):
     assert not function_with_exception_table(tmp_path, b"\xff\x03\x05\x02\x00\x00\x00\x00")["exact"]
+
+
+def test_pc_relative_merged_constant_with_trailing_immediate(tmp_path):
+    """cmpltss xmm0, dword ptr [rip + .LC0] has a 1-byte immediate after its 4-byte displacement,
+    so its RELA addend is -5 rather than -4."""
+    from hv.delink import R_X86_64_PC32, Section, Symbol, write_object
+
+    code = b"\xf3\x0f\xc2\x05" + bytes(4) + b"\x01\xc3"
+    constant = struct.pack("<f", 2.5)
+    sections = [
+        Section(".text", code, 0x6, relocations=[(4, R_X86_64_PC32, ".LC0", -5)]),
+        Section(".rodata.cst4", bytes(4) + constant, 0x12, align=4, entsize=4),
+    ]
+    symbols = [
+        Symbol(NAME, ".text", 0, len(code), function=True),
+        Symbol(".LC0", ".rodata.cst4", 4, local=True),
+    ]
+    write_object(tmp_path / "cmpltss.o", sections, symbols)
+    obj = Elf.load(tmp_path / "cmpltss.o", "ET_REL")
+    linked = code[:4] + (DESTINATION - (ADDRESS + 9)).to_bytes(4, "little", signed=True) + code[8:]
+    from test_delink import target_with_rodata
+
+    target = target_with_rodata(tmp_path, linked, constant)
+    result = compare_object(obj, target, {NAME: ADDRESS}, {})
+    assert result["exact"]
+    assert text(result)["data_ranges"] == [
+        {"address": hex(DESTINATION), "size": 4, "kind": "merged constant"}
+    ]
+
+
+def test_pc_relative_negative_symbol_offset_uses_instruction_bias(tmp_path):
+    """movss xmm0, [rip + .LC0 - 4] has addend -8 (a -4 symbol offset plus the -4 PC bias),
+    while its instruction bias is still 4."""
+    from test_delink import target_with_rodata
+
+    from hv.delink import R_X86_64_PC32, Section, Symbol, write_object
+
+    code = b"\xf3\x0f\x10\x05" + bytes(4) + b"\xc3"
+    sections = [
+        Section(".text", code, 0x6, relocations=[(4, R_X86_64_PC32, ".LC0", -8)]),
+        Section(".rodata.cst4", struct.pack("<fff", 0.0, 2.5, 7.5), 0x12, align=4, entsize=4),
+    ]
+    symbols = [
+        Symbol(NAME, ".text", 0, len(code), function=True),
+        Symbol(".LC0", ".rodata.cst4", 8, local=True),
+    ]
+    write_object(tmp_path / "load.o", sections, symbols)
+    obj = Elf.load(tmp_path / "load.o", "ET_REL")
+    linked = code[:4] + (DESTINATION - (ADDRESS + 8)).to_bytes(4, "little", signed=True) + code[8:]
+    wrong = target_with_rodata(tmp_path, linked, struct.pack("<ff", 1.0, 7.5))
+    assert not compare_object(obj, wrong, {NAME: ADDRESS}, {})["exact"]
+    right = target_with_rodata(tmp_path, linked, struct.pack("<ff", 2.5, 7.5))
+    assert compare_object(obj, right, {NAME: ADDRESS}, {})["exact"]
+
+
+def test_local_symbol_is_never_a_learning_candidate(tmp_path):
+    from hv.delink import R_X86_64_PC32, Section, Symbol, write_object
+
+    sections = [Section(".text", CALL, 0x6, relocations=[(1, R_X86_64_PC32, "T.1", -4)])]
+    symbols = [
+        Symbol(NAME, ".text", 0, len(CALL), function=True),
+        Symbol("T.1", None, local=True),
+    ]
+    write_object(tmp_path / "local.o", sections, symbols)
+    result = compare_object(Elf.load(tmp_path / "local.o", "ET_REL"), target_image(), {NAME: ADDRESS}, {})
+    assert not result["exact"]
+    assert "exact_but_unknown" not in text(result)["functions"][0]

@@ -63,6 +63,34 @@ class Symbol:
     local: bool = False
 
 
+def vtable_end(target: Elf, start: int, limit: int) -> int:
+    """End of a size-0 vtable starting at `start`, up to `limit`, so strings and constants emitted
+    after the vtable in `.rodata` are not attributed to it."""
+    section = target.section_at(start)
+    if section is None or section["sh_type"] == "SHT_NOBITS":
+        return limit
+    limit = min(limit, section["sh_addr"] + section["sh_size"])
+    address, end = start, start + 1
+    while address + 8 <= limit:
+        word = target.word(address)
+        signed = struct.unpack("<q", struct.pack("<Q", word))[0]
+        if target.is_code(word):
+            address += 8
+            end = address
+        elif abs(signed) < 1 << 20 and signed % 8 == 0:
+            if address + 16 <= limit:
+                typeinfo = target.word(address + 8)
+                owner = target.section_at(typeinfo)
+                if owner is not None and not target.is_code(typeinfo) and typeinfo >= 0x400000:
+                    address += 16
+                    end = address + 1
+                    continue
+            address += 8
+        else:
+            break
+    return min(end, limit)
+
+
 class Namer:
     """Names for target addresses."""
 
@@ -104,11 +132,17 @@ class Namer:
         self.data = []
         for i, (address, size, name) in enumerate(data):
             end = address + size if size else (data[i + 1][0] if i + 1 < len(data) else address + 1)
+            if not size and name.startswith(("_ZTV", "_ZTC")):
+                end = vtable_end(target, address, end)
             self.data.append((address, end, name))
         self.starts = [a for a, _, _ in self.data]
 
-    def name(self, address: int, size: int | None = None) -> tuple[str, int]:
+    def name(self, address: int, size: int | None = None, *, prefer_wide: bool = False) -> tuple[str, int]:
         """(symbol or section, addend) for a target address."""
+        if size is None:
+            for start, end, section in self.placed:
+                if section == ".bss" and address == end:
+                    return section, end - start
         if address in self.by_address:
             return self.by_address[address], 0
         # A label inside one of our functions (a case of a jump table, the target of a computed
@@ -126,7 +160,7 @@ class Namer:
         if i >= 0 and address < self.data[i][1]:
             return self.data[i][2], address - self.data[i][0]
         owner = self.target.section_at(address)
-        if size is not None and owner is not None and not owner["sh_flags"] & 1:
+        if size is not None and owner is not None and not owner["sh_flags"] & (1 | 4):
             # A kept inline function can reference another object's copy of a local constant
             # table. Name it only when the entire target table equals the target definition
             # exported in this unit, not just the single indexed element's access width.
@@ -145,16 +179,31 @@ class Namer:
             # A pointer may address a wide string. Read narrow, it stops after the first character
             # (an empty wide string reads as the empty narrow one), so the wide reading goes first.
             readings = [(wide, self.strings), (literal, self.strings)]
+        elif prefer_wide:
+            readings = [(wide, self.strings), (literal, self.constants)]
         else:
             # A memory operand supplies its access width. Read its binary value rather than
             # interpreting, for example, the first zero byte of a float as an empty C string. A load
-            # of the first character of a wide string reaches the string by the same address.
-            readings = [(literal, self.constants), (wide, self.strings)]
+            # of the first character of a wide string reaches the string by the same address, and a
+            # scalar float instruction may load the low word of a 16-byte SSE constant.
+            readings = [
+                (literal, self.constants),
+                (self.literal(address, 16, width=16), self.constants),
+                (wide, self.strings),
+            ]
         for content, candidates in readings:
             if content in candidates:
                 section, offset = candidates[content]
                 self.merged.setdefault(section, {})[offset] = content
                 return section, offset
+        if size is None:
+            # An inlined string loop may peel the first character and load the address of the second.
+            for width in (WCHAR_SIZE, 1):
+                peeled = self.literal(address - width, width=width)
+                if peeled is not None and len(peeled) > width and peeled in self.strings:
+                    section, offset = self.strings[peeled]
+                    self.merged.setdefault(section, {})[offset] = peeled
+                    return section, offset + width
         # Different instructions may read different widths at the same address.
         if literal is not None and len(literal) > len(self.literals.get(address, b"")):
             self.literals[address] = literal
@@ -237,7 +286,11 @@ def code_relocations(target: Elf, address: int, code: bytes, namer: Namer):
                 branch = insn.group(capstone.CS_GRP_CALL) or insn.group(capstone.CS_GRP_JUMP)
             if op.type == x86.X86_OP_IMM and branch:
                 destination = op.imm
-                if address <= destination < end or insn.imm_size != 4:
+                if (
+                    address < destination < end
+                    or (destination == address and not insn.group(capstone.CS_GRP_CALL))
+                    or insn.imm_size != 4
+                ):
                     continue
                 field = offset + insn.imm_offset
                 name, addend = namer.name(destination)
@@ -246,9 +299,10 @@ def code_relocations(target: Elf, address: int, code: bytes, namer: Namer):
                 destination = tail_end + op.mem.disp
                 field = offset + insn.disp_offset
                 size = None if insn.id == x86.X86_INS_LEA else op.size
-                name, addend = namer.name(destination, size)
+                prefer_wide = insn.id == x86.X86_INS_MOV and size == WCHAR_SIZE
+                name, addend = namer.name(destination, size, prefer_wide=prefer_wide)
                 relocations.append((field, R_X86_64_PC32, name, addend - (tail_end - (address + field))))
-            elif op.type == x86.X86_OP_MEM and op.mem.base == 0 and insn.disp_size == 4:
+            elif op.type == x86.X86_OP_MEM and insn.disp_size == 4:
                 if mapped(target, op.mem.disp):
                     size = None if insn.id == x86.X86_INS_LEA else op.size
                     name, addend = namer.name(op.mem.disp, size)
@@ -302,7 +356,7 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
                 continue
             start, size = symbol["st_value"], symbol["st_size"]
             owner = target.section_at(placed_at[section.name] + start)
-            if owner is None or owner["sh_flags"] & 1:
+            if owner is None or owner["sh_flags"] & (1 | 4):
                 continue
             if any(start <= r["r_offset"] < start + size for r, _ in obj.relocations(index)):
                 continue

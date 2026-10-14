@@ -109,6 +109,11 @@ def code_lines(text: str):
     return out
 
 
+FUNCTION_NAME = re.compile(
+    r"((?:[\w:~]+::)?operator\s*(?:new(?:\s*\[\])?|delete(?:\s*\[\])?|\(\)|\[\]|[^\s(]+)|[\w:~]+)\s*\("
+)
+
+
 def auto_blocks(source: bytes) -> dict:
     """A block specification with one block per top-level function definition, with the comment
     lines directly above it. Namespaces are transparent; data, declarations and classes stay put."""
@@ -120,11 +125,11 @@ def auto_blocks(source: bytes) -> dict:
         top = all(kind == "namespace" for kind in stack)
         stripped = line.strip()
         if top and start is None:
-            if not stripped:
+            if not stripped or stripped.startswith("#"):
                 lead = None
             elif stripped.startswith("//") or stripped.startswith("/*") or stripped.startswith("*"):
                 lead = lead or number
-            elif not stripped.startswith("#") and code.strip() and code.strip() != "}":
+            elif code.strip() and code.strip() != "}":
                 start, header = number, ""
         for c in code:
             if c == "{":
@@ -139,12 +144,14 @@ def auto_blocks(source: bytes) -> dict:
                 if kind == "code" and all(k == "namespace" for k in stack) and start is not None:
                     declaration = header.strip()
                     words = declaration.split()
+                    prefix = declaration.split("(")[0]
+                    found = FUNCTION_NAME.search(declaration) if "(" in declaration else None
                     if (
-                        "(" in declaration
-                        and "=" not in declaration.split("(")[0]
+                        found is not None
+                        and ("=" not in prefix or re.search(r"\boperator\s*[^\s(]*=", prefix))
                         and not (words and words[0] in ("class", "struct", "union", "enum"))
                     ):
-                        name = re.search(r"([\w:~]+)\s*\(", declaration).group(1)
+                        name = re.sub(r"\s+", " ", found.group(1).strip())
                         taken = sum(b["name"] == name or b["name"].startswith(name + "#") for b in blocks)
                         blocks.append(
                             {
@@ -333,14 +340,17 @@ class Evaluator:
         """Compile the uncached candidates among orders in one container, within the budget left.
         Their results are evaluated, logged and counted only when evaluate reaches them."""
         todo = {}
+        planned = 0
         for order in orders:
             source = self.blocks.render(order)
             digest = sha(source)
-            if digest in self.sources or digest in self.pending or digest in todo or self.cached(digest):
+            if digest in self.sources or digest in todo:
                 continue
-            if self.evaluated + len(self.pending) + len(todo) >= self.budget:
+            if self.evaluated + planned >= self.budget:
                 break
-            todo[digest] = source
+            planned += 1
+            if digest not in self.pending and not self.cached(digest):
+                todo[digest] = source
         if len(todo) < 2:
             return
         self.fresh()
@@ -428,6 +438,7 @@ def climb(
     try:
         for restart in range(restarts + 1):
             attempts = 0
+            reason = "plateau"
             if restart:
                 order = list(initial.order)
                 for _ in range(8):
