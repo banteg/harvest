@@ -128,7 +128,6 @@ pub fn build(b: *std.Build) void {
         .miniaudio = buildMiniaudio(b, target, optimize),
         .sdl = buildSdl(b, target, optimize),
     };
-    for (libs.all()) |lib| b.installArtifact(lib);
 
     const units = keptUnits(b);
     const port_sources = portSources(b);
@@ -139,12 +138,15 @@ pub fn build(b: *std.Build) void {
         .name = "harvest",
         .root_module = gameModule(b, target, optimize, libs, units, port_sources),
     });
-    b.installArtifact(harvest_lib);
-
     if (target.result.os.tag == .emscripten) {
-        b.step("harvest", "Build the game for the web").dependOn(webSite(b, target, optimize, harvest_lib, libs));
+        const web = webSite(b, target, optimize, harvest_lib, libs);
+        b.getInstallStep().dependOn(web);
+        b.step("harvest", "Build the game for the web").dependOn(web);
         return;
     }
+
+    for (libs.all()) |lib| b.installArtifact(lib);
+    b.installArtifact(harvest_lib);
 
     // The game. It links every kept object and port source, so it only links once every seam
     // exists; until then `zig build harvest` lists what is missing, like the census.
