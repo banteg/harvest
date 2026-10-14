@@ -107,13 +107,13 @@ test:
 
 # check lint and formatting without changing files
 lint:
-    uv run ruff check tools tests
-    uv run ruff format --check tools tests
+    uv run ruff check tools tests port/tools
+    uv run ruff format --check tools tests port/tools
 
 # apply lint fixes and formatting
 fix:
-    uv run ruff check tools tests --fix --unsafe-fixes
-    uv run ruff format tools tests
+    uv run ruff check tools tests port/tools --fix --unsafe-fixes
+    uv run ruff format tools tests port/tools
 
 # the port: game data defaults to the original Linux install in orig/
 data := justfile_directory() / "orig/1.18-linux-amd64"
