@@ -613,3 +613,62 @@ def test_local_symbol_is_never_a_learning_candidate(tmp_path):
     result = compare_object(Elf.load(tmp_path / "local.o", "ET_REL"), target_image(), {NAME: ADDRESS}, {})
     assert not result["exact"]
     assert "exact_but_unknown" not in text(result)["functions"][0]
+
+
+def test_unnamed_function_does_not_take_a_known_functions_address():
+    # C2 (unnamed, at 0x0) and C1 (known at 0x1000, placed at 0x40 in object) have the same size;
+    # C2 must take the unclaimed FDE at 0x1040 rather than colliding with C1 at 0x1000.
+    symbols = [FakeSymbol("C2", 0x0, 0x40), FakeSymbol("C1", 0x40, 0x40)]
+    fdes = {(0x1000, 0x40), (0x1040, 0x40)}
+    layout = match.layout_functions(1, 0x1000, symbols, FakeResolver({"C1": 0x1000}), fdes)
+    assert layout.address_of(0x0) == 0x1040
+    assert layout.address_of(0x40) == 0x1000
+
+
+def test_exception_table_ignores_discarded_comdat_lsda_when_own_functions_agree(tmp_path):
+    from hv.delink import Section, Symbol, write_object
+
+    code, lsda = b"\x90\x90\x90\xc3", bytes(16)
+    cie = struct.pack("<II", 12, 0) + bytes(8)
+    fde1 = struct.pack("<II", 20, len(cie) + 4) + bytes(16)
+    fde2 = struct.pack("<II", 20, len(cie) + len(fde1) + 4) + bytes(16)
+    sections = [
+        Section(".text", code, 0x6),
+        Section(".text.comdat", code, 0x206),
+        Section(".gcc_except_table", lsda, 0x2, align=4),
+        Section(
+            ".eh_frame",
+            cie + fde1 + fde2,
+            0x2,
+            align=8,
+            relocations=[
+                (len(cie) + 8, 2, ".text", 0),
+                (len(cie) + 16, 10, ".gcc_except_table", 0),
+                (len(cie) + len(fde1) + 8, 2, ".text.comdat", 0),
+                (len(cie) + len(fde1) + 16, 10, ".gcc_except_table", 8),
+            ],
+        ),
+    ]
+    symbols = [
+        Symbol("f", ".text", 0, len(code), function=True),
+        Symbol("g", ".text.comdat", 0, len(code), function=True),
+    ]
+    write_object(tmp_path / "unit.o", sections, symbols)
+    obj = Elf.load(tmp_path / "unit.o", "ET_REL")
+    target = Elf(elf_image(code + bytes(0x1C) + lsda, kind=2), "ET_EXEC")
+    target.fde_ranges = lambda: {(ADDRESS, len(code)), (ADDRESS + 0x100, len(code))}
+    # f's FDE points to our table at ADDRESS + 0x20; g's kept copy points to another unit's table
+    target.fde_lsdas = lambda: {ADDRESS: ADDRESS + 0x20, ADDRESS + 0x100: ADDRESS + 0x900}
+    result = compare_object(obj, target, {"f": ADDRESS, "g": ADDRESS + 0x100}, {})
+    table = next(s for s in result["sections"] if s["name"] == ".gcc_except_table")
+    assert (table["address"], table["exact"]) == (hex(ADDRESS + 0x20), True)
+
+
+def test_learning_rejects_two_symbols_claiming_the_same_address():
+    functions = [
+        {"symbol": "C1", "address": "0x401000", "exact": True, "global": True},
+        {"symbol": "C2", "address": "0x401000", "exact": True, "global": True},
+    ]
+    learned, conflicts = match.learnable({"sections": [{"functions": functions}]}, "u.cpp", {})
+    assert learned == {}
+    assert conflicts == ["C1", "C2"]
