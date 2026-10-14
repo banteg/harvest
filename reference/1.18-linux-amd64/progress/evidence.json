@@ -10,7 +10,7 @@
     "tools/hv/elf.py": "aa50c2ed5bbdfee9539e9357c12befc2bd2f98567c04b11f4d6610374d3db063",
     "tools/hv/extents.py": "3c790ccc6c342a73d3278cd03269b899cca0bf57ff9a03c786378f6952f949f3",
     "tools/hv/rtti.py": "83cb630e01e62973f1f232d6d95ed483d4f7773d3b9b4817a22cc2135e3d1306",
-    "tools/hv/match.py": "38f1845761b17d2ac910d80b9bb02d7314793b090f0362f6461723eb73dfaf15",
+    "tools/hv/match.py": "63090c531310268e9e734831420f054397d6d16eb1037f4d21d8dd47b9e38457",
     "tools/hv/symbols.py": "0d9150908ba72df692193dbeabb92d9dc3c43830bab42f029a098da5f5f9e76c",
     "tools/hv/toolchain.py": "6f8be7d498157b9b4c9dcf2b4f914f3876118074a0fed89682ef46c2603d2ab8",
     "tools/hv/units.py": "2f71fb16f1daffbc46e613e3cb0dd1995ae88f4d61eedc8560a15eb625e197d6",
@@ -19,7 +19,7 @@
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
     "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "3804e96fb50a00d694610cfe4658138e7b2292165a415493ffe7000eebce1eb3",
+    "config/1.18-linux-amd64/symbols.tsv": "1e274917611f568fffb9f97e9948dc00571759ec88fef5704fabcbc63bdf3ff5",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
     "config/1.18-linux-amd64/units.toml": "74eaafd2897ce4193e1e49aacc89efc7f5f4e79b433ff2b610fc5526dcd87009"
   },
@@ -3106,6 +3106,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 663,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x666ef4",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x666ef4",
+              "size": 663,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox4core7CStringIcE6appendERKS2_",
           "size": 230,
           "placement": "symbol: _ZN2ox4core7CStringIcE6appendERKS2_",
@@ -3737,9 +3752,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -3777,7 +3790,7 @@
         "system_headers": 115,
         "object_sha256": "f4ba0dee385c561bdc30e3c13d2ab153eab3d03d9a98083fe09126403f0dd929"
       },
-      "fuzzy_target_sha256": "1c386ea04cb5afdf9c229038f7d60d8e55da5455ceb561d78c038fd12097ca59",
+      "fuzzy_target_sha256": "776d1157fd61795eab7bfb595413f78c3f1d4501c7be8d4f31555beeb381fb7e",
       "fuzzy_functions": [
         {
           "address": "0x5ec670",
@@ -63441,7 +63454,7 @@
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
@@ -63697,26 +63710,14 @@
     {
       "unit": "HarvestFull/harvest/game/CStatistics.cpp",
       "object_sha256": "1cce1b420d730363e164c9b26d518a3d4a117a2caefcf652425db1f3b6447569",
-      "exact": false,
+      "exact": true,
       "sections": [
         {
           "name": ".text",
           "size": 7030,
           "placement": "explicit",
-          "exact": false,
+          "exact": true,
           "address": "0x45a040",
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoC2Ev",
-              "known": "0x45a710",
-              "placed": "0x45a600"
-            },
-            {
-              "symbol": "_ZN7harvest4game14CHighscoreInfoC1Ev",
-              "known": "0x45a600",
-              "placed": "0x45a710"
-            }
-          ],
           "references": 207,
           "functions": [
             {
@@ -63905,7 +63906,7 @@
             },
             {
               "symbol": "_ZN7harvest4game14CHighscoreInfoC2Ev",
-              "address": "0x45a710",
+              "address": "0x45a600",
               "size": 266,
               "extent": "fde",
               "global": true,
@@ -63913,7 +63914,7 @@
             },
             {
               "symbol": "_ZN7harvest4game14CHighscoreInfoC1Ev",
-              "address": "0x45a600",
+              "address": "0x45a710",
               "size": 266,
               "extent": "fde",
               "global": true,
@@ -64091,6 +64092,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 344,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x65b69a",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x65b69a",
+              "size": 344,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZNSt6vectorIPN7harvest4game11SLevelStatsESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
           "size": 401,
           "placement": "symbol: _ZNSt6vectorIPN7harvest4game11SLevelStatsESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
@@ -64217,9 +64233,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -64276,7 +64290,7 @@
         "system_headers": 121,
         "object_sha256": "1cce1b420d730363e164c9b26d518a3d4a117a2caefcf652425db1f3b6447569"
       },
-      "fuzzy_target_sha256": "9765ebd48cd0df51c9ee5c5f653f5658fdd22d30753d3599912ba445847a8491",
+      "fuzzy_target_sha256": "ecc0107cda0efea00d6a241d5eddfc0daa6bcb058ba92d79056faadd4d1c26fb",
       "fuzzy_functions": [
         {
           "address": "0x45a040",
@@ -64417,13 +64431,13 @@
           "percent": 100.0
         },
         {
-          "address": "0x45a710",
+          "address": "0x45a600",
           "size": 266,
           "symbol": "_ZN7harvest4game14CHighscoreInfoC2Ev",
           "percent": 100.0
         },
         {
-          "address": "0x45a600",
+          "address": "0x45a710",
           "size": 266,
           "symbol": "_ZN7harvest4game14CHighscoreInfoC1Ev",
           "percent": 100.0
@@ -68279,6 +68293,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 682,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x65b3f0",
+          "first_difference": 539,
+          "differing_bytes": 109,
+          "references": 0
+        },
+        {
           "name": ".text._ZN7harvest4game17CSpawnEntityEvent8runEventEv",
           "size": 39,
           "placement": "symbol: _ZN7harvest4game17CSpawnEntityEvent8runEventEv",
@@ -69533,9 +69557,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -69573,7 +69595,7 @@
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/HarvestFull/harvest/game/CScenario.h": "801d404664019cfeec2585cf4c1c54f6c6af47ddef17b16242d92b7063bac7c5",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
@@ -69603,7 +69625,7 @@
         "system_headers": 131,
         "object_sha256": "b247a2543d0f1d278a85278727c454d11bf3a8b5f4b132280b227620cfc5fd44"
       },
-      "fuzzy_target_sha256": "3bb8ce23d19529612d83afb4ba44ff30e86a9654c87d233b00e7df93703777af",
+      "fuzzy_target_sha256": "6c16af7ae7e196918e4c7cd721b79aeae1cff3f90dcc9fed350daf9f973bcc5e",
       "fuzzy_functions": [
         {
           "address": "0x453d90",
@@ -81619,8 +81641,8 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CIngameMenuScreen.cpp",
-      "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f",
-      "exact": false,
+      "object_sha256": "3ffc72dfa26622323930e590e6bba3503e14f0424d62b18b4018327af7b733ee",
+      "exact": true,
       "sections": [
         {
           "name": ".text",
@@ -81876,33 +81898,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui17CIngameMenuScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui17CIngameMenuScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x5ffdc0",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x5ffdc0",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         }
       ],
       "unplaced_sections": [],
@@ -81942,7 +81949,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CIngameMenuScreen.h": "9a7a72f24db39e6091efdfe8c5d5e4c2cfcdc368b9fa4d52f1db2202fd288d82",
+          "src/HarvestFull/harvest/gui/CIngameMenuScreen.h": "d84d1099c63154668a0da7df97843f377aab946e45ca95e1f438d18c32cc4a56",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -81964,9 +81971,9 @@
           "src/ox/gui/IGUILayout.h": "d6611840e98425c0ae573680bac0fd3d5c75e031286816c7dccf036b7115fc98"
         },
         "system_headers": 117,
-        "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f"
+        "object_sha256": "3ffc72dfa26622323930e590e6bba3503e14f0424d62b18b4018327af7b733ee"
       },
-      "fuzzy_target_sha256": "51805f901f755923e1896ba624d176f87bb5421f231cc6cb2a6c4ad461f32d97",
+      "fuzzy_target_sha256": "7cf70788d17cb9eb91ccb3aec0aecbd2d2f2eaec0d91ca5834f3eabaa7930b27",
       "fuzzy_functions": [
         {
           "address": "0x473430",
@@ -82032,7 +82039,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CMenuInfoDialog.cpp",
-      "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714",
+      "object_sha256": "cdc8f10dabaeb95eed578169ad04ef6f5a58d73184974fb735dc5c29c8c22e16",
       "exact": false,
       "sections": [
         {
@@ -82605,33 +82612,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui15CMenuInfoDialogE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui15CMenuInfoDialogE",
-          "exact": false,
+          "exact": true,
           "address": "0x600d00",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x600d00",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         }
       ],
       "unplaced_sections": [
@@ -82673,7 +82665,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "8af3fb7fc4a34de7b6bdce1e083bbd27c91b3c1f05bc62a34a0f66a5acc4ad70",
+          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "5f351ca38a831179984140a42f89b106bd6e707f6c4ccb3833a49146c8915af0",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
@@ -82705,9 +82697,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 117,
-        "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714"
+        "object_sha256": "cdc8f10dabaeb95eed578169ad04ef6f5a58d73184974fb735dc5c29c8c22e16"
       },
-      "fuzzy_target_sha256": "de8783099cb980984eb7b708f0c5cb2e2620250a53f82e3f4609eb8023397f32",
+      "fuzzy_target_sha256": "3548371f3e80157cf6257d12776e1edc2526e5aa287d814b4be7373fac6edc38",
       "fuzzy_functions": [
         {
           "address": "0x473c00",
@@ -83503,8 +83495,8 @@
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "c0f2fe323f43d0cfb22c6728667788448c687fc83039d1465d42dd8ce2e36b29",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "d92e68732d3214d787af775620188db996bc208d8d7f5621e8977dd0997542da",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/HarvestFull/harvest/game/CThreatLevel.h": "91ca60fdda8a94c199c422c879133979c296a2f81a1ac70c76c3e531df132528",
           "src/ox/IOSOperator.h": "7d129fa95cc0d732940c50e5870085cb91f16064c6526a383591aafd9f1bbfde",
           "src/ox/ITimer.h": "416497c58de2b4e3de6cfba1936f0376522832769eb2ed53a55e075dbefb96fb",
@@ -96199,22 +96191,22 @@
           "src/HarvestFull/harvest/entity/CSparkProducerEntity.h": "a8226039c7a94c556d4756329968a89ef68e9183b14028751959cbb05fd9de44",
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/game/CScenario.h": "801d404664019cfeec2585cf4c1c54f6c6af47ddef17b16242d92b7063bac7c5",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/HarvestFull/harvest/game/SInfoLineMessage.h": "33aa55d3cd365ce34fb04a2e1097bbf8e687967d6449e38bc2d1da150394e5dd",
           "src/HarvestFull/harvest/game/CStatistics.h": "4f8d081bebc7f0c08a5bf1703919f2ab632fffeb497f6d95ad083eb7e0c0a72c",
           "src/HarvestFull/harvest/game/CThreatLevel.h": "91ca60fdda8a94c199c422c879133979c296a2f81a1ac70c76c3e531df132528",
           "src/HarvestFull/harvest/gui/CGuiEffects.h": "33490d7589d3be3a2fbd03b0de58901d2f2e7799ca1328471f769641e0ad9d2c",
           "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
-          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "a736e238f9ccd9849b9e247bb4631307327ec8ae4e2560607551e7a7573aa809",
+          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "4d4d6b82e1081915162d6a4825e00970aa90a932edf35c844a75a23b4e139702",
           "src/HarvestFull/harvest/settings/CHarvestProfile.h": "daf3f0448033b7e80b0056644a09c2f1b78d4999469f4453b0c3b6b4599c236b",
           "src/ox/Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/HarvestFull/harvest/gui/CGuiInfoLines.h": "e96b2f8c86024d28ad081b89127da6ce6928502c7950ca72eba1e0fc2142d7a2",
-          "src/HarvestFull/harvest/gui/CIngameMenuScreen.h": "9a7a72f24db39e6091efdfe8c5d5e4c2cfcdc368b9fa4d52f1db2202fd288d82",
-          "src/HarvestFull/harvest/gui/CPriorityScreen.h": "5978da963c630090dee17e25d2b41a424c7753aa4bb41d5fc2cd4335935afeac",
-          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "1e50faf3655e232a4b8d6141cdd1fad2ea2ff1d62da89f6d72e29810ff2be303",
+          "src/HarvestFull/harvest/gui/CIngameMenuScreen.h": "d84d1099c63154668a0da7df97843f377aab946e45ca95e1f438d18c32cc4a56",
+          "src/HarvestFull/harvest/gui/CPriorityScreen.h": "69b70050c705f5064e8be6d2ae3b3014500ddbf528ae6018184924237df719eb",
+          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "9e23f1683627b67bd4a53e34ac304e5d4f444be6b71531113692ebf0faef76a0",
           "src/HarvestFull/harvest/settings/CSavestateInfo.h": "eea61d981ebe27179dc4d7be38826788cfc50d6795ba360560bdd184b3250234",
-          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "544f7b0d124dffb4c284ced93db76d66d34372d27f7669cb47d768c09eb6788e",
+          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "014e474f92210bb3915464274044a46547dc9f285fb4900e2e36db0d5799d26e",
           "src/HarvestFull/harvest/settings/CSystemConfig.h": "b6c82e24b6f2820f2d3cc0e4756e954cb1999fef0fb68f41173d3cee3df52604",
           "src/HarvestFull/harvest/settings/CProfileManager.h": "cbfa9a04121890c0a404094f39beb0e2624874c9b2055537e77f69f91be593a4",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
@@ -96863,7 +96855,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CHighscoreScreen.cpp",
-      "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67",
+      "object_sha256": "6b903b8f6b6ecb87672ecd33f3532f9eaec7d6ae187580ca2e7d2fad3624d2a3",
       "exact": false,
       "sections": [
         {
@@ -100771,33 +100763,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui16CHighscoreScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui16CHighscoreScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x5ffb40",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x5ffb40",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         }
       ],
       "unplaced_sections": [
@@ -100839,7 +100816,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CHighscoreScreen.h": "6e73fe9675ccfe8b0b63d42765e5947341faa95828373d94ee517bb8adde31c0",
+          "src/HarvestFull/harvest/gui/CHighscoreScreen.h": "b735ce3f8a198a841e0f3feed630880e25da418d970f870eab072f8b4cfce9bd",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -100894,9 +100871,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 135,
-        "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67"
+        "object_sha256": "6b903b8f6b6ecb87672ecd33f3532f9eaec7d6ae187580ca2e7d2fad3624d2a3"
       },
-      "fuzzy_target_sha256": "0a1d13ed574dae2151f3443a61e2efba730debe6d03ef3fe64fd9440e03611fc",
+      "fuzzy_target_sha256": "0b3776b3d58b5fbdd9548468ffe1022d14f9ee781e1a3a529acb3ea5b2cd931e",
       "fuzzy_functions": [
         {
           "address": "0x469ef0",
@@ -103566,7 +103543,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CSettingsScreen.cpp",
-      "object_sha256": "aa425a6dc8e8ecc51e06e85cc79330d3e14b53ef10b8e2936048460a7702f1ae",
+      "object_sha256": "3fbb5e22db6a23ef29a3301f3a5cf76f3bbbcc18d1c2a4d84fc184c86e625619",
       "exact": false,
       "sections": [
         {
@@ -104502,33 +104479,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui15CSettingsScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui15CSettingsScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x604420",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x604420",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         },
         {
           "name": ".rodata",
@@ -105973,7 +105935,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "544f7b0d124dffb4c284ced93db76d66d34372d27f7669cb47d768c09eb6788e",
+          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "014e474f92210bb3915464274044a46547dc9f285fb4900e2e36db0d5799d26e",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -106015,9 +105977,9 @@
           "src/ox/video/IVideoModeList.h": "c37ff8012ea2f8c5178f47b9b31b920fa53f78a46de0c21c7d62e060a4e9fc5d"
         },
         "system_headers": 117,
-        "object_sha256": "aa425a6dc8e8ecc51e06e85cc79330d3e14b53ef10b8e2936048460a7702f1ae"
+        "object_sha256": "3fbb5e22db6a23ef29a3301f3a5cf76f3bbbcc18d1c2a4d84fc184c86e625619"
       },
-      "fuzzy_target_sha256": "538e0de1f1b745c12a3edfb9b1a0e63cea783368a12137dcb5cacd7a5bff3043",
+      "fuzzy_target_sha256": "15218c6ce72765664b8b440d36ece7dd23b2df144e73a185141d01206db1d40a",
       "fuzzy_functions": [
         {
           "address": "0x480a60",
@@ -106671,7 +106633,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CAchievementsScreen.cpp",
-      "object_sha256": "a65e5be9cfbfb8fc024bea1ec4d2d06d7fc8615082916cc83789825128c0e997",
+      "object_sha256": "022916166eac8558674bc69f566e6daa11510950dc7688c16200f2607f4f8eb0",
       "exact": false,
       "sections": [
         {
@@ -107415,33 +107377,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui19CAchievementsScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui19CAchievementsScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x5fdec0",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x5fdec0",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         },
         {
           "name": ".rodata",
@@ -108216,7 +108163,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "a736e238f9ccd9849b9e247bb4631307327ec8ae4e2560607551e7a7573aa809",
+          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "4d4d6b82e1081915162d6a4825e00970aa90a932edf35c844a75a23b4e139702",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -108258,9 +108205,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 117,
-        "object_sha256": "a65e5be9cfbfb8fc024bea1ec4d2d06d7fc8615082916cc83789825128c0e997"
+        "object_sha256": "022916166eac8558674bc69f566e6daa11510950dc7688c16200f2607f4f8eb0"
       },
-      "fuzzy_target_sha256": "c64fe81a9ced649480d8eba3de195b678d22a5c141259884a1dd34586e2fd78f",
+      "fuzzy_target_sha256": "c74f58dbf5be791dbf2d886eea664fe1ceaf22551add9e193d1b973a1f2fd716",
       "fuzzy_functions": [
         {
           "address": "0x4668e0",
@@ -108386,7 +108333,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CPriorityScreen.cpp",
-      "object_sha256": "2a5f6a71b14bcb68053c630b09f42883f35d9f2e11cbb84fb658fe6650949e44",
+      "object_sha256": "ec6abfa941512677604db014fbc113668f8f62b920db7194fb4e43d44690a6b5",
       "exact": false,
       "sections": [
         {
@@ -109021,33 +108968,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui15CPriorityScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui15CPriorityScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x6011e0",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x6011e0",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         },
         {
           "name": ".rodata",
@@ -109145,7 +109077,7 @@
           "third_party/luajit-2.0.0-beta8/include/lauxlib.h": "a1be3c2d133777c618c2d88fa7cdcb013d5372b0959b77b235cd7de67323cc23",
           "third_party/luajit-2.0.0-beta8/include/lualib.h": "a6f4f0c553306242b878fd286a276174078b79c88ac2a18fcb2d9987017f4799",
           "third_party/luajit-2.0.0-beta8/include/luajit.h": "18bdc87917bc74002145a0e1d03d4ad113d8526fe546bf1b8845e79e5b47d4ef",
-          "src/HarvestFull/harvest/gui/CPriorityScreen.h": "5978da963c630090dee17e25d2b41a424c7753aa4bb41d5fc2cd4335935afeac",
+          "src/HarvestFull/harvest/gui/CPriorityScreen.h": "69b70050c705f5064e8be6d2ae3b3014500ddbf528ae6018184924237df719eb",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -109181,9 +109113,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 131,
-        "object_sha256": "2a5f6a71b14bcb68053c630b09f42883f35d9f2e11cbb84fb658fe6650949e44"
+        "object_sha256": "ec6abfa941512677604db014fbc113668f8f62b920db7194fb4e43d44690a6b5"
       },
-      "fuzzy_target_sha256": "0e456e7e6030c1f9ed5cd3fe5700d6718ec5e33b3510c8625322a6dbdfd1abcf",
+      "fuzzy_target_sha256": "5690c302c8241d5eb7700bb95ac6c3844e648b9940c934050a9209d82548b7fb",
       "fuzzy_functions": [
         {
           "address": "0x475fc0",
@@ -109309,7 +109241,7 @@
     },
     {
       "unit": "HarvestFull/harvest/states/CShuttleRaceState.cpp",
-      "object_sha256": "89416e0c1bb8e455d3e8d02cc54ca63d0538ead0da5f3f18ace56b3b13036c64",
+      "object_sha256": "96b07e65a52fee1b874da116093843a519ca6fdebf3e57c4761ea58e3b14d367",
       "exact": false,
       "sections": [
         {
@@ -111149,11 +111081,16 @@
           "name": ".rodata._ZTIN7harvest6states17CShuttleRaceStateE",
           "size": 72,
           "placement": "symbol: _ZTIN7harvest6states17CShuttleRaceStateE",
-          "exact": false,
+          "exact": true,
           "address": "0x60b820",
-          "first_difference": 64,
-          "differing_bytes": 1,
-          "references": 5
+          "references": 5,
+          "data_ranges": [
+            {
+              "address": "0x60b820",
+              "size": 72,
+              "kind": "section"
+            }
+          ]
         },
         {
           "name": ".rodata._ZTIN7harvest4game9IScenarioE",
@@ -111335,11 +111272,11 @@
           "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/entity/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "c0f2fe323f43d0cfb22c6728667788448c687fc83039d1465d42dd8ce2e36b29",
+          "src/HarvestFull/harvest/states/CShuttleRaceState.h": "d92e68732d3214d787af775620188db996bc208d8d7f5621e8977dd0997542da",
           "src/HarvestFull/harvest/entity/CEntityManager.h": "508cf4e6e1ce63b88243246536b953b2f6920e93a0b6a8cf43a2c5399ba05dd0",
           "src/ox/entity/COxEntityManager.h": "a9f061c257146a727b08ad801be7e4c434d8043b30124eb83012f44f0c22e1de",
           "src/ox/entity/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
@@ -111378,7 +111315,7 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 129,
-        "object_sha256": "89416e0c1bb8e455d3e8d02cc54ca63d0538ead0da5f3f18ace56b3b13036c64"
+        "object_sha256": "96b07e65a52fee1b874da116093843a519ca6fdebf3e57c4761ea58e3b14d367"
       },
       "fuzzy_target_sha256": "4247a5e65dc19546252ef3ac70e001e8e849cbf104f3b2d957c1b5b1a7fb6f03",
       "fuzzy_functions": [
@@ -112944,7 +112881,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CProfileScreen.cpp",
-      "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805",
+      "object_sha256": "53c13feaf4c322d77f1e2eba23efb8fe27e635a291b07b626e2e27d6a0888526",
       "exact": false,
       "sections": [
         {
@@ -113484,33 +113421,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui14CProfileScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui14CProfileScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x601b20",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x601b20",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         }
       ],
       "unplaced_sections": [],
@@ -113550,7 +113472,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CProfileScreen.h": "9b06ec2ad36395925676364bc1e030776d03eddef2b1b29ae34b1c675c5061ee",
+          "src/HarvestFull/harvest/gui/CProfileScreen.h": "65b7f6d59bad7dffc0ad9844f9ae86196c093f2ada3ab7087e1e88c999400c8b",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
@@ -113579,9 +113501,9 @@
           "src/ox/gui/IGUIListBox.h": "b94d5f70d957e53421471c3551c6385769aa26faf1af9ec96c237755cb089840"
         },
         "system_headers": 117,
-        "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805"
+        "object_sha256": "53c13feaf4c322d77f1e2eba23efb8fe27e635a291b07b626e2e27d6a0888526"
       },
-      "fuzzy_target_sha256": "146e3b295809a6f40e1afdafdc9c87e171d4ee5b194497fe0d8ad2e449961eac",
+      "fuzzy_target_sha256": "41510e4761e60d00c02541be780bd02612a812fed9fb9ac8bda9e149ba5ab17b",
       "fuzzy_functions": [
         {
           "address": "0x478630",
@@ -113695,7 +113617,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CStatisticsScreen.cpp",
-      "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1",
+      "object_sha256": "a47c37eee870eb1402be50efd9ecf87dd4245f712b71cb3c515f7c0d76db9d5d",
       "exact": false,
       "sections": [
         {
@@ -114832,33 +114754,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui17CStatisticsScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui17CStatisticsScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x605ce0",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x605ce0",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         },
         {
           "name": ".rodata",
@@ -115309,7 +115216,7 @@
           "src/ox/entity/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/entity/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/entity/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CStatisticsScreen.h": "6c474b45c0a73b6d34540b7f02f8e38b3ab42523fb9ff8619649b4dfbec4a942",
+          "src/HarvestFull/harvest/gui/CStatisticsScreen.h": "59b154f8eae9c37148525cbae067104215a1dcd172fcbc496712c4087087b9c3",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
@@ -115357,9 +115264,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 127,
-        "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1"
+        "object_sha256": "a47c37eee870eb1402be50efd9ecf87dd4245f712b71cb3c515f7c0d76db9d5d"
       },
-      "fuzzy_target_sha256": "51feebd402a681381dfb21ad7ed92b9144ecb41699e82bef1ab0fd71a11995be",
+      "fuzzy_target_sha256": "d9bce5031adc57bfb3394a72ea99fff883b1d7d72d6ed89f15c7f0d0e8a6da0c",
       "fuzzy_functions": [
         {
           "address": "0x484f80",
@@ -115509,7 +115416,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CStoryScreen.cpp",
-      "object_sha256": "5c31e8f3d2c5e2d408e51dac83b44c2f799d49b3f6cefc9899aeab0e068c04e4",
+      "object_sha256": "a3da02bd29109e2c8a87408d594347b60ae84148b2ef63ad1932306c098c7c9e",
       "exact": false,
       "sections": [
         {
@@ -115863,33 +115770,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui12CStoryScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui12CStoryScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x606020",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x606020",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         },
         {
           "name": ".rodata._ZTVN7harvest3gui17CDialogueItemInfoE",
@@ -115974,7 +115866,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7b20a1ac0a343727956c856b1494534f4fbd852b5abb3a2648cf133ab54c1f87",
+          "src/HarvestFull/harvest/gui/CStoryScreen.h": "7690e2c8da9b58e486f968cc1dc50e1ae230c29c8b1358595b2e05865e76ec43",
           "src/ox/algo/CTimeCounter.h": "d1a446ddb0fb426ddc04ba17a3ca69913510c9d907819a9e243f80fde160a959",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
@@ -116004,9 +115896,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 117,
-        "object_sha256": "5c31e8f3d2c5e2d408e51dac83b44c2f799d49b3f6cefc9899aeab0e068c04e4"
+        "object_sha256": "a3da02bd29109e2c8a87408d594347b60ae84148b2ef63ad1932306c098c7c9e"
       },
-      "fuzzy_target_sha256": "c89b9f88dd667fe742f7fd698c7b216499bdabd8c798c4467953b7298a47b433",
+      "fuzzy_target_sha256": "dcca236316d8d7c8ca1c96ee38ff596ea4dd8c6e832a4fa8e9848bd3b9f03a03",
       "fuzzy_functions": [
         {
           "address": "0x4893b0",
@@ -119536,17 +119428,17 @@
           "src/HarvestFull/harvest/game/CLuaManager.h": "72ec7cafd271efa7f9794fe704899c0d6c90331882bb917ce1840f5cff31bb78",
           "src/HarvestFull/harvest/gfx/CScatterShader.h": "7173c74f6abe09aad646804cc73cce737e0c502dd60a5c62de5c73ffdff61a92",
           "src/ox/video/IShaderConstantSetCallBack.h": "da22de5ed9622b505975df67b27a34a3f29ac2cfdec64f6152c7f1843b85facb",
-          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "a736e238f9ccd9849b9e247bb4631307327ec8ae4e2560607551e7a7573aa809",
+          "src/HarvestFull/harvest/gui/CAchievementsScreen.h": "4d4d6b82e1081915162d6a4825e00970aa90a932edf35c844a75a23b4e139702",
           "src/HarvestFull/harvest/settings/CHarvestProfile.h": "daf3f0448033b7e80b0056644a09c2f1b78d4999469f4453b0c3b6b4599c236b",
           "src/ox/Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
-          "src/HarvestFull/harvest/gui/CHighscoreScreen.h": "6e73fe9675ccfe8b0b63d42765e5947341faa95828373d94ee517bb8adde31c0",
+          "src/HarvestFull/harvest/gui/CHighscoreScreen.h": "b735ce3f8a198a841e0f3feed630880e25da418d970f870eab072f8b4cfce9bd",
           "src/ox/core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
-          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "8af3fb7fc4a34de7b6bdce1e083bbd27c91b3c1f05bc62a34a0f66a5acc4ad70",
-          "src/HarvestFull/harvest/gui/CProfileScreen.h": "9b06ec2ad36395925676364bc1e030776d03eddef2b1b29ae34b1c675c5061ee",
-          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "1e50faf3655e232a4b8d6141cdd1fad2ea2ff1d62da89f6d72e29810ff2be303",
+          "src/HarvestFull/harvest/gui/CMenuInfoDialog.h": "5f351ca38a831179984140a42f89b106bd6e707f6c4ccb3833a49146c8915af0",
+          "src/HarvestFull/harvest/gui/CProfileScreen.h": "65b7f6d59bad7dffc0ad9844f9ae86196c093f2ada3ab7087e1e88c999400c8b",
+          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "9e23f1683627b67bd4a53e34ac304e5d4f444be6b71531113692ebf0faef76a0",
           "src/HarvestFull/harvest/settings/CSavestateInfo.h": "eea61d981ebe27179dc4d7be38826788cfc50d6795ba360560bdd184b3250234",
-          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "544f7b0d124dffb4c284ced93db76d66d34372d27f7669cb47d768c09eb6788e",
-          "src/HarvestFull/harvest/gui/CStatisticsScreen.h": "6c474b45c0a73b6d34540b7f02f8e38b3ab42523fb9ff8619649b4dfbec4a942",
+          "src/HarvestFull/harvest/gui/CSettingsScreen.h": "014e474f92210bb3915464274044a46547dc9f285fb4900e2e36db0d5799d26e",
+          "src/HarvestFull/harvest/gui/CStatisticsScreen.h": "59b154f8eae9c37148525cbae067104215a1dcd172fcbc496712c4087087b9c3",
           "src/HarvestFull/harvest/settings/CProfileManager.h": "cbfa9a04121890c0a404094f39beb0e2624874c9b2055537e77f69f91be593a4",
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -119815,7 +119707,7 @@
     },
     {
       "unit": "HarvestFull/harvest/gui/CSaveGameScreen.cpp",
-      "object_sha256": "f1d289f47ad54b5feb2bc13e6594eeb377095063c58e50631e369d1778a24889",
+      "object_sha256": "f79079438ba397cd947bba4bb86b88f139ce575ab3b0011203782ea8f55e6b59",
       "exact": false,
       "sections": [
         {
@@ -121341,33 +121233,18 @@
         },
         {
           "name": ".rodata._ZTIN7harvest3gui15CSaveGameScreenE",
-          "size": 24,
+          "size": 40,
           "placement": "symbol: _ZTIN7harvest3gui15CSaveGameScreenE",
-          "exact": false,
+          "exact": true,
           "address": "0x601e20",
-          "first_difference": 0,
-          "differing_bytes": 6,
-          "bad_references": [
+          "references": 3,
+          "data_ranges": [
             {
-              "offset": 0,
-              "type": 1,
-              "symbol": "_ZTVN10__cxxabiv120__si_class_type_infoE",
-              "addend": 16,
-              "destination": "0x86b380",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 16,
-              "type": 1,
-              "symbol": "_ZTIN2ox5event14IEventReceiverE",
-              "addend": 0,
-              "destination": "0x622770",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x601e20",
+              "size": 40,
+              "kind": "section"
             }
-          ],
-          "references": 3
+          ]
         }
       ],
       "unplaced_sections": [
@@ -121409,7 +121286,7 @@
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
-          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "1e50faf3655e232a4b8d6141cdd1fad2ea2ff1d62da89f6d72e29810ff2be303",
+          "src/HarvestFull/harvest/gui/CSaveGameScreen.h": "9e23f1683627b67bd4a53e34ac304e5d4f444be6b71531113692ebf0faef76a0",
           "src/HarvestFull/harvest/settings/CSavestateInfo.h": "eea61d981ebe27179dc4d7be38826788cfc50d6795ba360560bdd184b3250234",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
@@ -121456,9 +121333,9 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3"
         },
         "system_headers": 139,
-        "object_sha256": "f1d289f47ad54b5feb2bc13e6594eeb377095063c58e50631e369d1778a24889"
+        "object_sha256": "f79079438ba397cd947bba4bb86b88f139ce575ab3b0011203782ea8f55e6b59"
       },
-      "fuzzy_target_sha256": "246cacf7fba9586a80e9cd0576cf614650576a4322a2f5b3f05fa9d42a03bbba",
+      "fuzzy_target_sha256": "4ea1ba15b83c11727f93b8c8e3f7147a7ac6b2ebf40895bb2b04c493d94150d0",
       "fuzzy_functions": [
         {
           "address": "0x47a8e0",
@@ -129203,11 +129080,24 @@
               "exact": false
             }
           ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 141,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x666dca",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x666dca",
+              "size": 141,
+              "kind": "section"
+            }
+          ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -129239,7 +129129,7 @@
         "system_headers": 115,
         "object_sha256": "bd4476c8d25e0b11e3b5d1ceea6f44172dcc352537aee53c1212e0a1fd3f7460"
       },
-      "fuzzy_target_sha256": "b56c65a6ae8621b2ebd6994a6c73240fb6db8194209eca7f9693f8401b80bdea",
+      "fuzzy_target_sha256": "44e6ec054d6737b8b2e4fc0c1648b7b51d807a05e9f1933f746add66814462bf",
       "fuzzy_functions": [
         {
           "address": "0x5ea8c0",
@@ -136521,6 +136411,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 957,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x664e34",
+          "first_difference": 535,
+          "differing_bytes": 91,
+          "references": 0
+        },
+        {
           "name": ".text._ZN5daisy5video14SAnimationDataD1Ev",
           "size": 66,
           "placement": "symbol: _ZN5daisy5video14SAnimationDataD1Ev",
@@ -137427,9 +137327,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -137483,7 +137381,7 @@
         "system_headers": 141,
         "object_sha256": "6602f747c5882eb6011df2c530f69a3c043b868467f0f0d175c69d33a8170bb5"
       },
-      "fuzzy_target_sha256": "db35d5a889dd3243f9a5441f5a980f3d083a585a3e54d21a78cb7375c9b6a83c",
+      "fuzzy_target_sha256": "aa038b1032fff123dae6510f3455e93d7054e6f2e60a4832c7ee2783f64ce264",
       "fuzzy_functions": [
         {
           "address": "0x5a1390",
@@ -143063,6 +142961,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 1065,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x665e27",
+          "first_difference": 151,
+          "differing_bytes": 192,
+          "references": 0
+        },
+        {
           "name": ".text._ZN2ox4core7CStringIwE6appendEw",
           "size": 214,
           "placement": "symbol: _ZN2ox4core7CStringIwE6appendEw",
@@ -143446,9 +143354,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -143513,7 +143419,7 @@
         "system_headers": 134,
         "object_sha256": "6e062175fb70c6d98e7a3c62ed6fdb485fb59336afcfc347b1eefcdf203447fd"
       },
-      "fuzzy_target_sha256": "0b0e4dac27b9f622c352139d006a4d204c66aa12a1777be504609682a09688f1",
+      "fuzzy_target_sha256": "ecc24fa88cd3958bb1048333c4e613bb6234e219462eff4a1e46c6a4fe0b7c83",
       "fuzzy_functions": [
         {
           "address": "0x5c0b00",
@@ -153483,7 +153389,7 @@
     },
     {
       "unit": "daisy/gui/CGUIEnvironment.cpp",
-      "object_sha256": "dfa038b2a538b731fb31d9a366a10f911e00c93943b27447020c7e673d970130",
+      "object_sha256": "4dd746c2bebc569efc4275b6f55bc065673ead248e4903f9f384a87197da5aee",
       "exact": false,
       "sections": [
         {
@@ -157750,11 +157656,16 @@
           "name": ".rodata._ZTIN5daisy3gui15CGUIEnvironmentE",
           "size": 56,
           "placement": "symbol: _ZTIN5daisy3gui15CGUIEnvironmentE",
-          "exact": false,
+          "exact": true,
           "address": "0x611f80",
-          "first_difference": 48,
-          "differing_bytes": 1,
-          "references": 4
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x611f80",
+              "size": 56,
+              "kind": "section"
+            }
+          ]
         },
         {
           "name": ".rodata._ZTIN2ox3gui15IGUIEnvironmentE",
@@ -157960,7 +157871,7 @@
         ],
         "inputs": {
           "src/daisy/gui/CGUIEnvironment.cpp": "1093a92b65d35fad9cd5e8232522c673d7d4a53b1fc76c043ad61e8aefd9c5c3",
-          "src/daisy/gui/CGUIEnvironment.h": "99963847fd9ca3830101d65fa76bc808121db6fe3436898edd3cbd426e9e23b0",
+          "src/daisy/gui/CGUIEnvironment.h": "cb7b44bd00f4d1544bfcd0940351b50235eafaf4dea4696758d36308ca6e4083",
           "src/ox/gui/IGUIEnvironment.h": "a67c6c4a36433888ad5d66dd8cfd52ff1da59353bf637027e3bfdcc8616bcb9a",
           "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -158064,7 +157975,7 @@
           "src/ox/gui/IGUIStaticTextInline.h": "0f383c2c79f8c4f871119c486caeade0d23bb76f08a43ea5cde9022ce7b0b562"
         },
         "system_headers": 142,
-        "object_sha256": "dfa038b2a538b731fb31d9a366a10f911e00c93943b27447020c7e673d970130"
+        "object_sha256": "4dd746c2bebc569efc4275b6f55bc065673ead248e4903f9f384a87197da5aee"
       },
       "fuzzy_target_sha256": "7cd49861208a360f8a960cb7752aaebb182a30523b123280d23e251974fd9440",
       "fuzzy_functions": [
@@ -163218,6 +163129,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 486,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x66147d",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x66147d",
+              "size": 486,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement11removeChildEPS1_",
           "size": 82,
           "placement": "symbol: _ZN2ox3gui11IGUIElement11removeChildEPS1_",
@@ -163460,9 +163386,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -163519,7 +163443,7 @@
         "system_headers": 117,
         "object_sha256": "82990d624f0ed5117726dbba654eb8dd608c3991459548b6e6919f5f9b53e34f"
       },
-      "fuzzy_target_sha256": "7d7a00eaffd302f45270b332a6f7468de29c8e3759ff7c993dc84c6af4e5ca4a",
+      "fuzzy_target_sha256": "2fe10089f6ef965117c61e14170f8c3733188b8c178466cfdf65fabbcf9f9218",
       "fuzzy_functions": [
         {
           "address": "0x515cb0",
@@ -164813,6 +164737,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 224,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x66126c",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x66126c",
+              "size": 224,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement17removeAllChildrenEv",
           "size": 139,
           "placement": "symbol: _ZN2ox3gui11IGUIElement17removeAllChildrenEv",
@@ -165076,9 +165015,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -165134,7 +165071,7 @@
         "system_headers": 135,
         "object_sha256": "6603663b3b05d97ce9e2c4b8f3ac13d480062394dad2c54702713e4ea52d503b"
       },
-      "fuzzy_target_sha256": "1ba403bb2a4e3be5f3713fe001b71cb8b762c1ad7903585dd20a377c7f293931",
+      "fuzzy_target_sha256": "f2077e4e1db00ccf2608027108279ca154f69de5e5817ab3c9e111e4c8b5d205",
       "fuzzy_functions": [
         {
           "address": "0x512b00",
@@ -169666,6 +169603,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 251,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x660ea9",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x660ea9",
+              "size": 251,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement8addChildEPS1_",
           "size": 76,
           "placement": "symbol: _ZN2ox3gui11IGUIElement8addChildEPS1_",
@@ -169911,9 +169863,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -169980,7 +169930,7 @@
         "system_headers": 117,
         "object_sha256": "e0fb79819a93cf77035007c382644ddcc149d622c2bb0297a1a342a6f7eb14a1"
       },
-      "fuzzy_target_sha256": "68fc7b035d88b7cdb30486561418c42326fe5d6b6001f9e88f1916fbb47250fa",
+      "fuzzy_target_sha256": "31098156b02131d5ae5a132526a1537556566d31061b98dcc720c21afe10b191",
       "fuzzy_functions": [
         {
           "address": "0x50f300",
@@ -171207,6 +171157,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 261,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x660b0c",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x660b0c",
+              "size": 261,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement8addChildEPS1_",
           "size": 76,
           "placement": "symbol: _ZN2ox3gui11IGUIElement8addChildEPS1_",
@@ -171452,9 +171417,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -171507,7 +171470,7 @@
         "system_headers": 117,
         "object_sha256": "720d57f30957718e199263bf52490f6b4932135bf040314e225a87216bd8c124"
       },
-      "fuzzy_target_sha256": "c4dc0f03d75ab628a9073328808cd580058358c1734503a89ef1385ca4dad154",
+      "fuzzy_target_sha256": "211caa4905ca1306dfb3e831b8d3ca800950e89bb2c0d69aa25745f2ab01d947",
       "fuzzy_functions": [
         {
           "address": "0x5090a0",
@@ -172646,6 +172609,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 148,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x660c11",
+          "first_difference": 128,
+          "differing_bytes": 5,
+          "references": 0
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement17removeAllChildrenEv",
           "size": 139,
           "placement": "symbol: _ZN2ox3gui11IGUIElement17removeAllChildrenEv",
@@ -172935,9 +172908,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -172987,7 +172958,7 @@
         "system_headers": 117,
         "object_sha256": "6e60467f6f62796101182b1544d263d96f3391599ceaa8743f1d611b9b9cccab"
       },
-      "fuzzy_target_sha256": "37ea5bd779ebbefdfc55475632451348abaf628d3576e22df36d959bcba05944",
+      "fuzzy_target_sha256": "c2a6f019528b9b7724772673d83d319ab53c1ad100cde1b48cbc39cd4e8a8cf5",
       "fuzzy_functions": [
         {
           "address": "0x50a410",
@@ -177654,6 +177625,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 536,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x6608b3",
+          "first_difference": 32,
+          "differing_bytes": 10,
+          "references": 0
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement11removeChildEPS1_",
           "size": 82,
           "placement": "symbol: _ZN2ox3gui11IGUIElement11removeChildEPS1_",
@@ -177930,9 +177911,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -177991,7 +177970,7 @@
         "system_headers": 125,
         "object_sha256": "dd269accfe2ad98e8803b45d6e9b10bc6f91dce219f8ce2304cecf3b146f8619"
       },
-      "fuzzy_target_sha256": "508488bb526028a1199854a9d9e06485854c4e4a68c1e24c5a58efe3035c2301",
+      "fuzzy_target_sha256": "fe5015df22cdc3837f8c92db64128c71868a8294ffe4a314b14eab47ba4b0206",
       "fuzzy_functions": [
         {
           "address": "0x504c70",
@@ -182181,6 +182160,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 329,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x6657f2",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6657f2",
+              "size": 329,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement11removeChildEPS1_",
           "size": 82,
           "placement": "symbol: _ZN2ox3gui11IGUIElement11removeChildEPS1_",
@@ -182441,9 +182435,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -182499,7 +182491,7 @@
         "system_headers": 117,
         "object_sha256": "3184fa1dc5373aed7bb5d28a12029a0f0e6c6a10589e60136c34714bb02760da"
       },
-      "fuzzy_target_sha256": "7c34f697254af867b49521fc3051d9c37db1a2a2c5a66160d42b9ba3ec6d82ed",
+      "fuzzy_target_sha256": "fa856cd8d98e16118967f67373ca8793e114fff02c188d1970cc0b7a8fe73edc",
       "fuzzy_functions": [
         {
           "address": "0x5b8a20",
@@ -186644,6 +186636,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 442,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x665ae0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x665ae0",
+              "size": 442,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox3gui11IGUIElement7setTextEPKw",
           "size": 236,
           "placement": "symbol: _ZN2ox3gui11IGUIElement7setTextEPKw",
@@ -187221,9 +187228,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -187283,7 +187288,7 @@
         "system_headers": 117,
         "object_sha256": "49d1228d3589f65dec49083a10aabef492aa01cda5c7b9f97b9c8d92f1f1f999"
       },
-      "fuzzy_target_sha256": "a870703e5b71b73866c0b5053268166c9d88ac1fe5d54f80bfae5a699c384dd5",
+      "fuzzy_target_sha256": "fc846968956497ec8a1957cdd5ef78bfe501fba40cd7593c81f113c97c84b7fc",
       "fuzzy_functions": [
         {
           "address": "0x5bb540",
@@ -189702,6 +189707,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 953,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x661cc4",
+          "first_difference": 295,
+          "differing_bytes": 80,
+          "references": 0
+        },
+        {
           "name": ".text._ZN2ox3gui10IGUIWindowD2Ev",
           "size": 20,
           "placement": "symbol: _ZN2ox3gui10IGUIWindowD2Ev",
@@ -191543,9 +191558,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -191612,7 +191625,7 @@
         "system_headers": 117,
         "object_sha256": "f8358e5f603a69a23a47f95629aa6cf43b28a7c7754f686a4882d66dd8329b3f"
       },
-      "fuzzy_target_sha256": "16fe51a5dcf2c7f76fe9d7f56d697f7d6b2b381a3329550605c26282c1813a68",
+      "fuzzy_target_sha256": "217cc813a5dbffab9d42710d6b41f86bda69d9d7e64831e967ddb849d7ab9f23",
       "fuzzy_functions": [
         {
           "address": "0x524240",
@@ -192284,7 +192297,7 @@
     },
     {
       "unit": "daisy/video/OpenGL/CVideoOpenGL.cpp",
-      "object_sha256": "16b7cdea9e2adea4c0676aa0bcf66c795295f3dc98e536ba337734d4b8433ac7",
+      "object_sha256": "e1af18ab7990592c72923222317a77e439e97dfeb17ba0e2a560d667afb7a7a3",
       "exact": false,
       "sections": [
         {
@@ -197054,11 +197067,16 @@
           "name": ".rodata._ZTIN5daisy5video12CVideoOpenGLE",
           "size": 56,
           "placement": "symbol: _ZTIN5daisy5video12CVideoOpenGLE",
-          "exact": false,
+          "exact": true,
           "address": "0x610660",
-          "first_difference": 48,
-          "differing_bytes": 1,
-          "references": 4
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x610660",
+              "size": 56,
+              "kind": "section"
+            }
+          ]
         },
         {
           "name": ".rodata._ZTIN2ox5video25IMaterialRendererServicesE",
@@ -197669,7 +197687,7 @@
         ],
         "inputs": {
           "src/daisy/video/OpenGL/CVideoOpenGL.cpp": "8c803dcd591f488c3583d5a9fae67c360e605ba807a95f5ae7d46a5f7edf1215",
-          "src/daisy/video/OpenGL/CVideoOpenGL.h": "068c15fe88b2abc5680d10ed931a4945ef923da639861856c527b5257daa5aae",
+          "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
           "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -197743,7 +197761,7 @@
           "src/ox/video/SMaterialInline.h": "2d89de0cf22a8c26573f804d222bf67e602d7471b00394373b02b5ca81d1d1db"
         },
         "system_headers": 151,
-        "object_sha256": "16b7cdea9e2adea4c0676aa0bcf66c795295f3dc98e536ba337734d4b8433ac7"
+        "object_sha256": "e1af18ab7990592c72923222317a77e439e97dfeb17ba0e2a560d667afb7a7a3"
       },
       "fuzzy_target_sha256": "9b8f3d769746f5c1d756c170be5be068ab79a16b47176f88a9e2c4c27591e93e",
       "fuzzy_functions": [
@@ -199900,7 +199918,7 @@
         "inputs": {
           "src/daisy/video/OpenGL/COpenGLSLMaterialRenderer.cpp": "5a5da1036d3b1b0a8b995b3dce424d3ce8f2debc7938f3152c2c41e28f0a89d8",
           "src/daisy/video/OpenGL/COpenGLSLMaterialRenderer.h": "c1f5d61d859199a957ddc0d87b3ea19fbec00aa2e8c243fcad9947dff8a96c22",
-          "src/daisy/video/OpenGL/CVideoOpenGL.h": "068c15fe88b2abc5680d10ed931a4945ef923da639861856c527b5257daa5aae",
+          "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
           "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -200636,7 +200654,7 @@
         "inputs": {
           "src/daisy/video/OpenGL/COpenGLShaderMaterialRenderer.cpp": "48908f8de0c71730ad648257af05e56b687e3f9674ee575d030ca37fadbabdb5",
           "src/daisy/video/OpenGL/COpenGLShaderMaterialRenderer.h": "11149e529254d50ca47a3044bd4edfd7e1dde927257518993e65a1ddb40f5d37",
-          "src/daisy/video/OpenGL/CVideoOpenGL.h": "068c15fe88b2abc5680d10ed931a4945ef923da639861856c527b5257daa5aae",
+          "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
           "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -227839,21 +227857,14 @@
     {
       "unit": "daisy/scene/CBillboardSceneNode.cpp",
       "object_sha256": "7d0e87cbd1134b8547f9e194b27dfa802c207b6421a5d3b72ef2f7e6a82529ab",
-      "exact": false,
+      "exact": true,
       "sections": [
         {
           "name": ".text",
           "size": 7602,
           "placement": "symbol: _ZNK5daisy5scene19CBillboardSceneNode14getBoundingBoxEv",
-          "exact": false,
+          "exact": true,
           "address": "0x54a650",
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN5daisy5scene19CBillboardSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEERKNS8_12CDimension2dIfEE",
-              "known": "0x54abf0",
-              "placed": "0x54ba30"
-            }
-          ],
           "references": 57,
           "functions": [
             {
@@ -227954,7 +227965,7 @@
             },
             {
               "symbol": "_ZN5daisy5scene19CBillboardSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEERKNS8_12CDimension2dIfEE",
-              "address": "0x54abf0",
+              "address": "0x54ba30",
               "size": 2514,
               "extent": "fde",
               "global": true,
@@ -228605,6 +228616,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 140,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x6631c8",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6631c8",
+              "size": 140,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox5scene10ISceneNodeD1Ev",
           "size": 361,
           "placement": "symbol: _ZN2ox5scene10ISceneNodeD1Ev",
@@ -228857,9 +228883,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -228927,7 +228951,7 @@
         "system_headers": 117,
         "object_sha256": "7d0e87cbd1134b8547f9e194b27dfa802c207b6421a5d3b72ef2f7e6a82529ab"
       },
-      "fuzzy_target_sha256": "8fd37613b57c6253ca94c9fea50cc8397055ea23e836eab2796aa4c66e86f086",
+      "fuzzy_target_sha256": "8f40b34a8297e3ece75c8260e7e401a16ef35efd2fed18de5a2bee673e93ed16",
       "fuzzy_functions": [
         {
           "address": "0x54a650",
@@ -229002,7 +229026,7 @@
           "percent": 100.0
         },
         {
-          "address": "0x54abf0",
+          "address": "0x54ba30",
           "size": 2514,
           "symbol": "_ZN5daisy5scene19CBillboardSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEERKNS8_12CDimension2dIfEE",
           "percent": 100.0
@@ -229222,26 +229246,14 @@
     {
       "unit": "daisy/scene/CDummyTransformationSceneNode.cpp",
       "object_sha256": "eafb91c5fe386eb477a8da31a685275e46b5f69d7d12e9ee65730e5db3d44235",
-      "exact": false,
+      "exact": true,
       "sections": [
         {
           "name": ".text",
           "size": 5506,
           "placement": "symbol: _ZNK5daisy5scene29CDummyTransformationSceneNode14getBoundingBoxEv",
-          "exact": false,
+          "exact": true,
           "address": "0x556bf0",
-          "misplaced_symbols": [
-            {
-              "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
-              "known": "0x557940",
-              "placed": "0x556ca0"
-            },
-            {
-              "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
-              "known": "0x556ca0",
-              "placed": "0x557940"
-            }
-          ],
           "references": 53,
           "functions": [
             {
@@ -229278,7 +229290,7 @@
             },
             {
               "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
-              "address": "0x557940",
+              "address": "0x556ca0",
               "size": 2098,
               "extent": "fde",
               "global": true,
@@ -229310,7 +229322,7 @@
             },
             {
               "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
-              "address": "0x556ca0",
+              "address": "0x557940",
               "size": 2098,
               "extent": "fde",
               "global": true,
@@ -229957,6 +229969,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 140,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x6634ed",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6634ed",
+              "size": 140,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox5scene10ISceneNodeD1Ev",
           "size": 361,
           "placement": "symbol: _ZN2ox5scene10ISceneNodeD1Ev",
@@ -230209,9 +230236,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -230265,7 +230290,7 @@
         "system_headers": 117,
         "object_sha256": "eafb91c5fe386eb477a8da31a685275e46b5f69d7d12e9ee65730e5db3d44235"
       },
-      "fuzzy_target_sha256": "375969526e6a3fd7bd81a5999f1315d142e341cd132a431bface0c93cf268681",
+      "fuzzy_target_sha256": "445617705e7da18b60b91681c80768a8c5650ca3ee538c93e5e8dc4809aa32c0",
       "fuzzy_functions": [
         {
           "address": "0x556bf0",
@@ -230292,7 +230317,7 @@
           "percent": 100.0
         },
         {
-          "address": "0x557940",
+          "address": "0x556ca0",
           "size": 2098,
           "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
           "percent": 100.0
@@ -230316,7 +230341,7 @@
           "percent": 100.0
         },
         {
-          "address": "0x556ca0",
+          "address": "0x557940",
           "size": 2098,
           "symbol": "_ZN5daisy5scene29CDummyTransformationSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEi",
           "percent": 100.0
@@ -231228,6 +231253,21 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 98,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x663579",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x663579",
+              "size": 98,
+              "kind": "section"
+            }
+          ]
+        },
+        {
           "name": ".text._ZN2ox5scene10ISceneNodeD0Ev",
           "size": 373,
           "placement": "symbol: _ZN2ox5scene10ISceneNodeD0Ev",
@@ -231436,8 +231476,7 @@
         }
       ],
       "unplaced_sections": [
-        ".bss",
-        ".gcc_except_table"
+        ".bss"
       ],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
@@ -231498,7 +231537,7 @@
         "system_headers": 117,
         "object_sha256": "9425bff882fc05908d7be60562fca2f380166a188f97e9a9640f5627761f5f5c"
       },
-      "fuzzy_target_sha256": "919910881911ee75238bff528b6e95844b45fd4763eec33e2792e72945fbd7a4",
+      "fuzzy_target_sha256": "036bebf4822f6d53ecc77deb174ae15a74eeea663a71fac8b73a22131065d733",
       "fuzzy_functions": [
         {
           "address": "0x558480",
@@ -232624,6 +232663,16 @@
           ]
         },
         {
+          "name": ".gcc_except_table",
+          "size": 142,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x663628",
+          "first_difference": 46,
+          "differing_bytes": 14,
+          "references": 0
+        },
+        {
           "name": ".text._ZN2ox5scene10ISceneNodeD0Ev",
           "size": 373,
           "placement": "symbol: _ZN2ox5scene10ISceneNodeD0Ev",
@@ -232876,9 +232925,7 @@
           ]
         }
       ],
-      "unplaced_sections": [
-        ".gcc_except_table"
-      ],
+      "unplaced_sections": [],
       "compilation": {
         "container_image_id": "sha256:647e6aa11cda66853b69b73c6a4fcc5a5a802809d38c89b84ebf1a6b45871a18",
         "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
@@ -232939,7 +232986,7 @@
         "system_headers": 117,
         "object_sha256": "e8a9181c09d2e507d7fe577d3dd8bd9efcdaade4eadb0dd8691f669a25121cad"
       },
-      "fuzzy_target_sha256": "4251621cad46b9456e8717366cb44fee9d2f3cd0029f4572e305bde69759d204",
+      "fuzzy_target_sha256": "badbcc2ca8d7ea083c7745cad44e0eb3b5de84dc51104033ef83a72b22afb34e",
       "fuzzy_functions": [
         {
           "address": "0x55ba30",
@@ -239716,7 +239763,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "f99b9c18ec862c5be22a74fe5308f6ae94c2df01144d8bed606adfeb1f44bdcc"
+    "report_sha256": "aa069d074b622e93ddfa80671b0f897dd4e0f8abd1d6d075f8c2342a3d893689"
   },
   "link": {
     "status": "unavailable",
