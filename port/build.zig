@@ -51,6 +51,10 @@ const replaced = [_][]const u8{
     "HarvestFull/main.cpp",
     // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStubs.cpp.
     "daisy/video/Null/CImageLoaderPCX.cpp",
+    // Recovered from Irrlicht 0.7; it needs daisy::scene::CMeshSceneNode::render(), which nothing defines yet.
+    "daisy/scene/CWaterSurfaceSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; it needs ox::video::S3DVertex::S3DVertex(float, float, float, float, float, float, ox::video::SColor, float, float), which nothing defines yet.
+    "daisy/scene/CTestSceneNode.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no
