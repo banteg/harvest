@@ -33,21 +33,21 @@ CSkyBoxSceneNode::CSkyBoxSceneNode(ox::video::ITexture* top, ox::video::ITexture
 	// create indices
 
 	Indices[0] = 0;
-	Indices[1] = 1; 
-	Indices[2] = 2; 
-	Indices[3] = 0; 
-	Indices[4] = 2; 
-	Indices[5] = 3; 
+	Indices[1] = 1;
+	Indices[2] = 2;
+	Indices[3] = 0;
+	Indices[4] = 2;
+	Indices[5] = 3;
 
 	// create material
-	
+
 	ox::video::SMaterial mat;
 	mat.Lighting = false;
 	mat.ZBuffer = false;
 	mat.ZWriteEnable = false;
 	mat.BilinearFilter = true;
 
-	/* Hey, I am no artist, but look at that 
+	/* Hey, I am no artist, but look at that
 	   cool ASCII art I made! ;)
 
        -111         111
@@ -61,7 +61,7 @@ CSkyBoxSceneNode::CSkyBoxSceneNode(ox::video::ITexture* top, ox::video::ITexture
         0---------1/          |  //  |
      -1-1-1     1-1-1         |//    |
 	                         0--------1
-	*/ 
+	*/
 
 	float onepixel = 0.0f;
 
@@ -157,7 +157,7 @@ void CSkyBoxSceneNode::render()
 	mat.setTranslation(camera->getAbsolutePosition());
 
 	driver->setTransform(ox::video::ETS_WORLD, mat);
-	
+
 	for (int i=0; i<6; ++i)
 	{
 		driver->setMaterial(Material[i]);
@@ -205,4 +205,3 @@ int CSkyBoxSceneNode::getMaterialCount()
 
 } // end namespace scene
 } // end namespace daisy
-

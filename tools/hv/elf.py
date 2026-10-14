@@ -78,11 +78,16 @@ class Elf:
         return self._relocations[section_index]
 
     def section_at(self, address: int):
-        for section in self.sections:
-            if (
-                section["sh_flags"] & 2
-                and section["sh_addr"] <= address < section["sh_addr"] + section["sh_size"]
-            ):
+        # the allocated sections' ranges, read once: this is asked for every operand the
+        # delinker inspects, and a pyelftools header field costs a dictionary lookup each time
+        if "ranges" not in self._cache:
+            self._cache["ranges"] = [
+                (section["sh_addr"], section["sh_addr"] + section["sh_size"], section)
+                for section in self.sections
+                if section["sh_flags"] & 2
+            ]
+        for start, end, section in self._cache["ranges"]:
+            if start <= address < end:
                 return section
         return None
 
