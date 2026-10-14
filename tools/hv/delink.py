@@ -211,6 +211,10 @@ def merged_constants(obj: Elf) -> dict[bytes, tuple[str, int]]:
     return constants
 
 
+DISASSEMBLER = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
+DISASSEMBLER.detail = True
+
+
 def mapped(target: Elf, value: int) -> bool:
     section = target.section_at(value)
     return section is not None and value >= 0x400000
@@ -218,15 +222,19 @@ def mapped(target: Elf, value: int) -> bool:
 
 def code_relocations(target: Elf, address: int, code: bytes, namer: Namer):
     """Relocations for one target function, recovered from its instructions."""
-    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
-    md.detail = True
     end = address + len(code)
     relocations = []
-    for insn in md.disasm(code, address):
+    for insn in DISASSEMBLER.disasm(code, address):
+        if insn.size < 5:
+            # every reference below is a 4-byte field after at least one opcode byte; skipping
+            # shorter instructions spares capstone's Python copy of their operand details
+            continue
         offset = insn.address - address
         tail_end = insn.address + insn.size
+        branch = None  # asked of capstone once per instruction, and only for one with an immediate
         for op in insn.operands:
-            branch = insn.group(capstone.CS_GRP_CALL) or insn.group(capstone.CS_GRP_JUMP)
+            if op.type == x86.X86_OP_IMM and branch is None:
+                branch = insn.group(capstone.CS_GRP_CALL) or insn.group(capstone.CS_GRP_JUMP)
             if op.type == x86.X86_OP_IMM and branch:
                 destination = op.imm
                 if address <= destination < end or insn.imm_size != 4:
@@ -260,7 +268,7 @@ def is_local(sym) -> bool:
 
 def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int, str]], fdes: dict[int, int]):
     """Sections and symbols of the target object for one unit, from its match result."""
-    obj_sections = list(obj.elf.iter_sections())
+    obj_sections = obj.sections
     placed_at = {s["name"]: int(s["address"], 16) for s in result["sections"] if "address" in s}
     data_sections = [
         (index, osec)
@@ -268,8 +276,9 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
         if osec.name in placed_at and not osec["sh_flags"] & SHF_EXECINSTR
     ]
     placed = [(placed_at[o.name], placed_at[o.name] + o["sh_size"], o.name) for _, o in data_sections]
-    symtab = obj.elf.get_section_by_name(".symtab")
-    ours = {sym.name: sym for sym in symtab.iter_symbols() if sym["st_info"]["type"] == "STT_FUNC"}
+    # the object's symbols, parsed once: pyelftools re-parses the table on every iter_symbols()
+    symtab = obj.symtab()
+    ours = {sym.name: sym for sym in symtab if sym["st_info"]["type"] == "STT_FUNC"}
     local = {}
     functions = []  # (symbol, target address, target size, our section index, our offset)
     for section in result["sections"]:
@@ -283,7 +292,7 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
     for index, section in data_sections:
         if section["sh_flags"] & 1 or section["sh_type"] != "SHT_PROGBITS":
             continue
-        for symbol in symtab.iter_symbols():
+        for symbol in symtab:
             if (
                 symbol["st_shndx"] != index
                 or not is_local(symbol)
@@ -362,7 +371,7 @@ def delink_unit(target: Elf, obj: Elf, result: dict, known: list[tuple[int, int,
                     name, addend = namer.name(value)
                     section.relocations.append((offset, R_X86_64_64, name, addend))
             sections.append(section)
-        for sym in symtab.iter_symbols():
+        for sym in symtab:
             if sym["st_shndx"] == index and sym.name and sym["st_info"]["type"] != "STT_SECTION":
                 symbols.append(Symbol(sym.name, osec.name, sym["st_value"], sym["st_size"]))
 
