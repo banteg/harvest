@@ -9,7 +9,7 @@
 # `copies` match the template and inline code a unit emits beside its own: STL instantiations and
 # ox interface inlines. A copy takes a rule's layer when one matches, else the layer of the code around
 # it, and never becomes the layer that later unnamed functions inherit.
-copies = ['^_ZN?K?(St|9__gnu_cxx)', '^_ZNK?2ox']
+copies = ['^_ZN?K?(St|9__gnu_cxx)', '^_ZNK?2ox', '^T\.\d+$']
 
 [layers.game]
 name = "Game logic (harvest)"

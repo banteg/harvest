@@ -389,8 +389,8 @@ def test_functions_outside_every_layer_range_are_rejected():
         )
 
 
-def test_copies_take_the_surrounding_layer_and_are_never_inherited():
-    addresses = range(0x1000, 0x1060, 0x10)
+def test_copies_and_clones_take_the_surrounding_layer_and_are_never_inherited():
+    addresses = range(0x1000, 0x1070, 0x10)
     functions = [
         {"address": address, "size": 8, "section": ".text", "extent": "fde"} for address in addresses
     ]
@@ -399,6 +399,7 @@ def test_copies_take_the_surrounding_layer_and_are_never_inherited():
         0x1010: "_ZN2ox4core7CStringIcEaSERKS2_",
         0x1030: "_ZN5daisy5video14CSpritePackage4loadEv",
         0x1040: "_ZNSt6vectorIiSaIiEE13_M_insert_auxEv",
+        0x1050: "T.189",
     }
     layers = progress.assign_layers(functions, names, layer_config())
     assert layers == {
@@ -408,4 +409,5 @@ def test_copies_take_the_surrounding_layer_and_are_never_inherited():
         0x1030: "engine",
         0x1040: "engine",
         0x1050: "engine",
+        0x1060: "engine",
     }
