@@ -59,7 +59,7 @@ struct SSaveGameSorter
 };
 
 //! The screen that lists the save games of the current profile to load one or save over one.
-class CSaveGameScreen : public ox::event::IEventReceiver
+class CSaveGameScreen : ox::event::IEventReceiver
 {
 public:
     CSaveGameScreen(ox::IOxDevice* device);

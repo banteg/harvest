@@ -44,7 +44,7 @@ struct SGraphColumn
 };
 
 //! The statistics shown after a game: wave graphs, the score, the event log and the highscore upload.
-class CStatisticsScreen : public ox::event::IEventReceiver
+class CStatisticsScreen : ox::event::IEventReceiver
 {
 public:
     CStatisticsScreen(ox::IOxDevice* device);
