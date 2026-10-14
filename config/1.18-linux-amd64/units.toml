@@ -694,3 +694,6 @@
 
 ["daisy/scene/CTriangleSelector.cpp"]
 ".bss" = 0x86c054
+
+["daisy/scene/CSkyBoxSceneNode.cpp"]
+".bss" = 0x86c040
