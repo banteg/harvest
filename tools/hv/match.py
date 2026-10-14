@@ -16,6 +16,8 @@ import functools
 import hashlib
 from dataclasses import dataclass, field
 
+import capstone
+
 from hv.elf import Elf
 
 R_X86_64_64 = 1
@@ -286,7 +288,9 @@ def infer_placements(obj: Elf, target: Elf, placements: dict, sections: list) ->
             implied.setdefault(shndx, set()).add(absolute - relocation["r_addend"] - symbol["st_value"])
     for shndx, bases in implied.items():
         if len(bases) == 1:
-            placements[shndx] = (Layout(bases.pop()), "references", [])
+            base = bases.pop()
+            if not target.is_code(base):
+                placements[shndx] = (Layout(base), "references", [])
 
 
 def infer_exception_tables(obj: Elf, target: Elf, placements: dict, sections: list) -> None:
@@ -387,7 +391,7 @@ def check_local_copy(
         return False, "different destination"
     start, size = holders[0]["st_value"], holders[0]["st_size"]
     owner = target.section_at(address - (offset - start))
-    if owner is None or owner["sh_flags"] & SHF_WRITE:
+    if owner is None or owner["sh_flags"] & (SHF_WRITE | SHF_EXECINSTR):
         return False, "mutable or unmapped target copy"
     if any(start <= r["r_offset"] < start + size for r, _ in obj.relocations(shndx)):
         return False, "different destination"
@@ -471,6 +475,25 @@ def expected_bytes(target: Elf, layout: Layout, size: int) -> tuple[bytes, set[i
     return bytes(expected), ignored
 
 
+DISASSEMBLER = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
+
+
+def pc_bias(
+    raw: bytes, offset: int, symbol, addend: int, biases: dict[int, int] | None
+) -> tuple[int, dict[int, int]]:
+    """Bytes from a PC-relative relocation field to the end of its instruction (more than 4 when
+    an immediate operand follows the displacement)."""
+    if symbol["st_info"]["type"] != "STT_SECTION" and -8 <= addend < -4:
+        return -addend, biases
+    if biases is None:
+        biases = {
+            at: addr + size - at
+            for addr, size, _, _ in DISASSEMBLER.disasm_lite(raw, 0)
+            for at in range(addr, addr + size)
+        }
+    return biases.get(offset, 4), biases
+
+
 def compare_section(obj, target, section, index, layout, placements, resolver, sections, result):
     raw = section.data()
     try:
@@ -481,6 +504,7 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
         return
     relocated = bytearray(raw)
     covered: set[int] = set()
+    biases = None
     for relocation, symbol in obj.relocations(index):
         rtype = relocation["r_info_type"]
         offset = relocation["r_offset"]
@@ -507,9 +531,11 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
 
         target_section = sections[symbol["st_shndx"]] if isinstance(symbol["st_shndx"], int) else None
         if target_section is not None and is_merged(target_section) and symbol["st_shndx"] not in placements:
-            # S + A as the target encodes it; a rip-relative operand without a trailing immediate
-            # points 4 bytes past its addend
-            bias = 4 if rtype in PC_RELATIVE else 0
+            # S + A as the target encodes it; a rip-relative operand points to the end of its
+            # instruction, which is past both the 4-byte displacement and any trailing immediate
+            bias, biases = (
+                pc_bias(raw, offset, symbol, ref.addend, biases) if rtype in PC_RELATIVE else (0, biases)
+            )
             absolute = field_value + place if rtype in PC_RELATIVE else field_value
             ours = symbol["st_value"] + ref.addend + bias
             ref.resolved = True
@@ -525,11 +551,25 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
             relocated[offset : offset + width] = field_bytes if ref.matches else bytes(width)
             continue
 
-        bias = 4 if rtype in PC_RELATIVE else 0
+        shndx = symbol["st_shndx"]
+        if (
+            rtype in PC_RELATIVE
+            and isinstance(shndx, int)
+            and shndx in placements
+            and symbol["st_info"]["type"] == "STT_SECTION"
+            and not placements[shndx][0].contiguous
+        ):
+            bias, biases = pc_bias(raw, offset, symbol, ref.addend, biases)
+        else:
+            bias = 4 if rtype in PC_RELATIVE else 0
         destination = resolve(symbol, placements, resolver, ref.addend + bias)
         if destination is None:
             ref.reason = "no target address for symbol"
-            if symbol.name and symbol["st_info"]["type"] != "STT_SECTION":
+            if (
+                symbol.name
+                and symbol["st_info"]["type"] != "STT_SECTION"
+                and symbol["st_info"]["bind"] != "STB_LOCAL"
+            ):
                 ref.candidate = (
                     field_value + place - ref.addend if rtype in PC_RELATIVE else field_value - ref.addend
                 )
@@ -550,6 +590,9 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
             ref.reason = "different destination"
             if section["sh_flags"] & SHF_GROUP and symbol["st_info"]["bind"] == "STB_LOCAL":
                 # an inline copy kept from another object reads that object's copy of a static
+                bias, biases = (
+                    pc_bias(raw, offset, symbol, ref.addend, biases) if rtype in PC_RELATIVE else (0, biases)
+                )
                 pointed = field_value + place + bias if rtype in PC_RELATIVE else field_value
                 ours = symbol["st_value"] + ref.addend + bias
                 ref.matches, ref.reason = check_local_copy(
