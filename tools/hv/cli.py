@@ -31,11 +31,12 @@ def cmd_match(args: argparse.Namespace) -> int:
         out = builds.ROOT / "build" / "match" / build.key
         compiler = None if args.object else toolchain.Compiler(toolchain.load_flags(build.key), out)
         failed = False
+        compiled_units = compiler and compiler.compile_each([(unit.path, unit.slug) for unit in selected])
         for unit in selected:
             if compiler is None:
                 obj, metadata = args.object, {"note": "supplied object; compiler and source not verified"}
             else:
-                obj, metadata = compiler.compile(unit.path, unit.slug)
+                obj, metadata = next(compiled_units)
             compiled = Elf.load(obj, "ET_REL")
             result = match.compare_object(compiled, target, known, unit.placements)
             # functions that match once their references are learned can prove more addresses

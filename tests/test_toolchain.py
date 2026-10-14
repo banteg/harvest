@@ -56,3 +56,54 @@ def test_toolchain_build_selects_runtime_security_flags(tmp_path, monkeypatch, s
         "harvest-toolchain",
         "toolchain",
     ]
+
+
+def test_compile_each_runs_concurrently_but_yields_in_source_order(monkeypatch):
+    from pathlib import Path
+    from threading import Barrier, Event
+
+    from hv import toolchain
+
+    compiler = toolchain.Compiler.__new__(toolchain.Compiler)
+    together = Barrier(3, timeout=5)
+    completed = [Event() for _ in range(3)]
+
+    def compile(source, name):
+        index = int(name)
+        together.wait()
+        if index < 2:
+            assert completed[index + 1].wait(5)
+        completed[index].set()
+        return Path(f"{name}.o"), {"source": str(source)}
+
+    monkeypatch.setattr(compiler, "compile", compile)
+    items = [(Path(f"{i}.cpp"), str(i)) for i in range(3)]
+    assert list(compiler.compile_each(items, jobs=3)) == [
+        (Path(f"{i}.o"), {"source": f"{i}.cpp"}) for i in range(3)
+    ]
+
+
+def test_compile_each_preserves_prior_result_and_compiler_error(monkeypatch):
+    from pathlib import Path
+    from threading import Event
+
+    from hv import toolchain
+
+    compiler = toolchain.Compiler.__new__(toolchain.Compiler)
+    failed = Event()
+    error = subprocess.CalledProcessError(7, ["g++", "bad.cpp"], stderr="compile failed")
+
+    def compile(source, name):
+        if name == "bad":
+            failed.set()
+            raise error
+        assert failed.wait(5)
+        return Path("good.o"), {"source": str(source)}
+
+    monkeypatch.setattr(compiler, "compile", compile)
+    results = compiler.compile_each([(Path("good.cpp"), "good"), (Path("bad.cpp"), "bad")], jobs=2)
+    assert next(results) == (Path("good.o"), {"source": "good.cpp"})
+    with pytest.raises(subprocess.CalledProcessError) as caught:
+        next(results)
+    assert caught.value is error
+    assert caught.value.stderr == "compile failed"

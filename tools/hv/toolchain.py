@@ -5,6 +5,7 @@ import os
 import shlex
 import subprocess
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from hv import builds
@@ -84,6 +85,17 @@ class Compiler:
         override = (source, source_override) if source_override is not None else None
         self.command(*command, source_override=override)
         return self.out / f"{name}.o", self.metadata(source, name, command, source_override)
+
+    def compile_each(self, items: list[tuple[Path, str]], jobs: int | None = None):
+        """Compile several sources, each as compile() does and in its own container, up to `jobs`
+        at a time (8, or the processor count if smaller), and yield (object, metadata) in the
+        order given. A failed compilation is raised when its item is reached, as a loop over
+        compile() would raise it, and the compilations not yet started are dropped."""
+        pool = ThreadPoolExecutor(jobs or min(8, os.cpu_count() or 1))
+        try:
+            yield from pool.map(lambda item: self.compile(*item), items)
+        finally:
+            pool.shutdown(cancel_futures=True)
 
     def compile_many(self, source: Path, items: list[tuple[str, Path]], lanes: int | None = None) -> list:
         """Compile replacements of one repository source in a single container. Items run in parallel
