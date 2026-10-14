@@ -65,6 +65,7 @@ bool CImageLoaderPCX::isALoadableFileFormat(ox::io::IReadFile* file)
 //! creates a image from the file
 IImage* CImageLoaderPCX::loadImage(ox::io::IReadFile* file)
 {
+    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
     __builtin_trap();
 }
 

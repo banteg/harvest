@@ -711,3 +711,42 @@
 
 ["daisy/scene/CTestSceneNode.cpp"]
 ".bss" = 0x86c048
+
+["daisy/scene/CXMeshFileLoader.cpp"]
+".bss" = 0x86c05c
+
+["daisy/scene/CDefaultMeshFormatLoader.cpp"]
+".bss" = 0x86c11c
+
+["daisy/scene/CBspTreeSceneNode.cpp"]
+".bss" = 0x86c10c
+
+["daisy/scene/CTextSceneNode.cpp"]
+".bss" = 0x86c04c
+
+["daisy/scene/CMeshSceneNode.cpp"]
+".bss" = 0x86c134
+
+["daisy/scene/COctTreeTriangleSelector.cpp"]
+
+["daisy/scene/CMetaTriangleSelector.cpp"]
+".bss" = 0x86c138
+
+["daisy/scene/CStaticMeshOBJ.cpp"]
+".bss" = 0x86c154
+
+["daisy/scene/CShadowVolumeSceneNode.cpp"]
+".bss" = 0x86c150
+
+["daisy/scene/CParticleSystemSceneNode.cpp"]
+".bss" = 0x86c144
+
+["daisy/scene/CCameraSceneNode.cpp"]
+
+["daisy/scene/CAnimatedMeshMD2.cpp"]
+
+["daisy/scene/COctTreeSceneNode.cpp"]
+".bss" = 0x86c13c
+
+["daisy/scene/CXFileReader.cpp"]
+".bss" = 0x86c15c

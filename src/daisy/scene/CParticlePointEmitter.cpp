@@ -37,6 +37,7 @@ CParticlePointEmitter::CParticlePointEmitter(
 //! and returns how much new particles there are.
 int CParticlePointEmitter::emitt(unsigned int now, unsigned int timeSinceLastCall, SParticle*& outArray)
 {
+    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
     __builtin_trap();
 }
 

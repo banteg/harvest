@@ -55,6 +55,32 @@ const replaced = [_][]const u8{
     "daisy/scene/CWaterSurfaceSceneNode.cpp",
     // Recovered from Irrlicht 0.7; it needs ox::video::S3DVertex::S3DVertex(float, float, float, float, float, float, ox::video::SColor, float, float), which nothing defines yet.
     "daisy/scene/CTestSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CAnimatedMeshMD2.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CBspTreeSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CMeshSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CMetaTriangleSelector.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/COctTreeSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/COctTreeTriangleSelector.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CParticleBoxEmitter.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CParticlePointEmitter.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CParticleSystemSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CTextSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CXFileReader.cpp",
+    // Recovered from Irrlicht 0.7; it needs daisy::scene::CAnimatedMeshMD2::CAnimatedMeshMD2(), which nothing defines yet.
+    "daisy/scene/CDefaultMeshFormatLoader.cpp",
+    // Recovered from Irrlicht 0.7; it needs daisy::scene::CXFileReader::CXFileReader(ox::io::IReadFile*), which nothing defines yet.
+    "daisy/scene/CXMeshFileLoader.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no

@@ -60,6 +60,7 @@ CWaterSurfaceSceneNode::~CWaterSurfaceSceneNode()
 //! frame
 void CWaterSurfaceSceneNode::OnPreRender()
 {
+    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
     __builtin_trap();
 }
 

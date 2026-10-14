@@ -106,6 +106,7 @@ const ox::core::CAabbox3d<float>& CTestSceneNode::getBoundingBox() const
 
 void CTestSceneNode::OnPreRender()
 {
+    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
     __builtin_trap();
 }
 
