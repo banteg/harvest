@@ -13,6 +13,7 @@ libraries. Symbols are grouped by owner with the rules below; anything unmatched
 import argparse
 import re
 import subprocess
+import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
@@ -88,16 +89,15 @@ def references(obj: Path) -> dict[str, set[str]]:
             section = line.split("[")[1].rstrip("]:")
             continue
         parts = line.split()
-        if section not in functions or len(parts) != 3 or not re.fullmatch(r"[0-9a-f]{16}", parts[0]):
+        if section is None or len(parts) != 3 or not re.fullmatch(r"[0-9a-f]{16}", parts[0]):
             continue
         offset, target = int(parts[0], 16), re.sub(r"[-+]0x[0-9a-f]+$", "", parts[2])
-        owner = None
-        for start, name in functions[section]:
+        owner = ""
+        for start, name in functions.get(section, ()):
             if start > offset:
                 break
             owner = name
-        if owner:
-            refs[target].add(owner)
+        refs[target].add(owner)
     return refs
 
 
@@ -122,7 +122,7 @@ def port_census(work: Path) -> tuple[list[Path], set[str], bool]:
     objs = sorted(work.glob("*.o"))
     for obj in objs:
         obj.chmod(0o644)  # zig writes archive members with mode 000
-    return objs, missing, True
+    return objs, missing, sys.platform == "darwin"
 
 
 def original_census() -> tuple[list[Path], set[str], bool]:
@@ -154,7 +154,8 @@ def main() -> None:
         objs, missing, macho = original_census() if args.original else port_census(Path(tmp))
         if args.libc and not args.original:
             defined, undefined = defined_and_undefined(objs)
-            missing |= {s for s in undefined - defined if re.fullmatch(r"_[a-z][a-z0-9_]*", s)}
+            pattern = r"_[a-z][a-z0-9_]*" if macho else r"[a-z][a-z0-9_]*"
+            missing |= {s for s in undefined - defined if re.fullmatch(pattern, s)}
         callers = defaultdict(set)
         units = unit_names()
         for obj in objs:
@@ -165,7 +166,7 @@ def main() -> None:
     names = sorted(missing)
     plain = {n: strip_prefix(n, macho) for n in names}
     pretty = demangle([plain[n] for n in names])
-    owners = sorted({f for fs in callers.values() for _, f in fs})
+    owners = sorted({f for fs in callers.values() for _, f in fs if f})
     pretty_owner = demangle([strip_prefix(f, macho) for f in owners]) if owners else {}
 
     grouped = defaultdict(list)
@@ -180,7 +181,9 @@ def main() -> None:
         print(f"## {GROUP_TITLES[group]} ({len(grouped[group])})\n")
         for text, name in sorted(grouped[group]):
             units = sorted({u for u, _ in callers[name]})
-            funcs = sorted({pretty_owner[strip_prefix(f, macho)].split("(")[0] for _, f in callers[name]})
+            funcs = sorted(
+                {pretty_owner[strip_prefix(f, macho)].split("(")[0] for _, f in callers[name] if f}
+            )
             if group in LIBRARY_GROUPS:
                 print(f"- `{text}`: {', '.join(Path(u).name for u in units) or '-'}")
                 continue

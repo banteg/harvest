@@ -81,6 +81,7 @@ class Compiler:
         ]
 
     def compile(self, source: Path, name: str, *, source_override: Path | None = None) -> tuple[Path, dict]:
+        (self.out / f"{name}.o").parent.mkdir(parents=True, exist_ok=True)
         command = self.compile_command(source, name)
         override = (source, source_override) if source_override is not None else None
         self.command(*command, source_override=override)
@@ -117,12 +118,13 @@ class Compiler:
             replacement = replacement.resolve()
             if not replacement.is_relative_to(self.out):
                 raise ValueError("batch replacements must be compiler output files")
+            (self.out / f"{name}.o").parent.mkdir(parents=True, exist_ok=True)
             command = self.compile_command(source, name)
             commands.append(command)
             work[index % lanes].append(
                 f"if cp {shlex.quote(self.container_path(replacement))} {shlex.quote(str(relative))}; "
                 f"then {shlex.join(command)} 2> /out/{name}.err; echo $? > /out/{name}.status; "
-                f"else echo 125 > /out/{name}.status; fi"
+                f"else echo 'cp failed' > /out/{name}.err; echo 125 > /out/{name}.status; fi"
             )
         lines = ["set -u"]
         for lane, steps in enumerate(work):
@@ -144,9 +146,11 @@ class Compiler:
             script.unlink()
         outcomes = []
         for (name, replacement), command in zip(items, commands, strict=True):
-            status = int((self.out / f"{name}.status").read_text())
+            status_path = self.out / f"{name}.status"
+            err_path = self.out / f"{name}.err"
+            status = int(status_path.read_text()) if status_path.exists() else 125
             if status:
-                error = (self.out / f"{name}.err").read_text()
+                error = err_path.read_text() if err_path.exists() else "batch compilation lane failed"
                 outcomes.append(subprocess.CalledProcessError(status, command, stderr=error))
             else:
                 outcomes.append((self.out / f"{name}.o", self.metadata(source, name, command, replacement)))
@@ -159,7 +163,11 @@ class Compiler:
             if host is None:
                 system.append(dependency)
             else:
-                key = str(host.relative_to(builds.ROOT)) if host.is_relative_to(builds.ROOT) else str(host)
+                key = (
+                    str(host.relative_to(builds.ROOT))
+                    if host.resolve().is_relative_to(builds.ROOT)
+                    else str(host.resolve())
+                )
                 actual = (
                     source_override
                     if source_override is not None and host.resolve() == source.resolve()
