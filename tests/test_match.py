@@ -355,6 +355,13 @@ def test_merged_constant_must_be_complete():
     assert not ok and "incomplete" in message
 
 
+def test_merged_data_is_not_proven_by_bytes_inside_code():
+    target = target_image()
+    constant = target.read(ADDRESS, 4)  # the function's first four bytes, as a float constant
+    ok, message = match.check_merged(target, FakeSection(constant, 4, flags=0x10), 0, ADDRESS)
+    assert not ok and "in code" in message
+
+
 class FakeSymbol(dict):
     def __init__(self, name, value, size):
         super().__init__(st_shndx=1, st_info={"type": "STT_FUNC"}, st_value=value, st_size=size)

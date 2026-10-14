@@ -355,6 +355,10 @@ def check_merged(target: Elf, section, offset: int, address: int) -> tuple[bool,
     try:
         ours = merged_content(section, offset)
         kind = "merged string" if section["sh_flags"] & SHF_STRINGS else "merged constant"
+        if target.is_code(address):
+            # a reference in code that does not match yet can resolve into the middle of a
+            # function, where a short constant's bytes may happen to occur
+            return False, f"{kind} would lie in code"
         return target.read(address, len(ours)) == ours, kind
     except ValueError as error:
         return False, str(error)
