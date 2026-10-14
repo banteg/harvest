@@ -10,14 +10,14 @@
     "tools/hv/elf.py": "aa50c2ed5bbdfee9539e9357c12befc2bd2f98567c04b11f4d6610374d3db063",
     "tools/hv/extents.py": "3c790ccc6c342a73d3278cd03269b899cca0bf57ff9a03c786378f6952f949f3",
     "tools/hv/rtti.py": "83cb630e01e62973f1f232d6d95ed483d4f7773d3b9b4817a22cc2135e3d1306",
-    "tools/hv/match.py": "fe39b48087af975d5654d7d71296ec2523836addfc16b344292b9ff4d9184c55",
+    "tools/hv/match.py": "dd8d5cdd3423452161db42d3cc8c2910024be4e6885656f7bd60819406303738",
     "tools/hv/symbols.py": "0d9150908ba72df692193dbeabb92d9dc3c43830bab42f029a098da5f5f9e76c",
-    "tools/hv/toolchain.py": "da1204b77c6d43aadfd61fb21009a411d163c2121fd1ca4070f85dd5ff9acf6a",
+    "tools/hv/toolchain.py": "6f8be7d498157b9b4c9dcf2b4f914f3876118074a0fed89682ef46c2603d2ab8",
     "tools/hv/units.py": "2f71fb16f1daffbc46e613e3cb0dd1995ae88f4d61eedc8560a15eb625e197d6",
-    "tools/hv/progress.py": "7ceb63944699fbcc27ab0c1e6901c1a860878cc20b232cf4962315ce91b16c48",
+    "tools/hv/progress.py": "b5332870c69d3f0cdd13287ac61910ca722a7299699271abb9926bb37a3a0c28",
     "tools/hv/metrics.py": "b540d8fcf5d196fefc52076876b5aa3bbd9d2f39db68e6ed69a891a4726172c9",
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
-    "tools/hv/delink.py": "0d39948ae1127283a1b4b3ce83b9577df5356f41308082194a93d05c45141ced",
+    "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
     "config/1.18-linux-amd64/symbols.tsv": "3804e96fb50a00d694610cfe4658138e7b2292165a415493ffe7000eebce1eb3",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
@@ -755,7 +755,7 @@
         "system_headers": 108,
         "object_sha256": "246415c0a3bd5e00c2c4ef0e2124e0daf437db396b4e566bbe0f74c283d1cd6b"
       },
-      "fuzzy_target_sha256": "88498cf0eb04d57152e1e9bfd9ff19c2ab371031d3798cbee3ff8bae398f92d3",
+      "fuzzy_target_sha256": "ea4ea2fc1ed1ffec1f5223f362d3eef9add5ac5b62b7949387ef4d0136320e7c",
       "fuzzy_functions": [
         {
           "address": "0x5dd200",
@@ -3777,7 +3777,7 @@
         "system_headers": 115,
         "object_sha256": "f4ba0dee385c561bdc30e3c13d2ab153eab3d03d9a98083fe09126403f0dd929"
       },
-      "fuzzy_target_sha256": "7026a65b6367f6b1bfed062ece164bb16c410007774356901c68a25fef3728ed",
+      "fuzzy_target_sha256": "1c386ea04cb5afdf9c229038f7d60d8e55da5455ceb561d78c038fd12097ca59",
       "fuzzy_functions": [
         {
           "address": "0x5ec670",
@@ -3861,7 +3861,7 @@
           "address": "0x5ed7a0",
           "size": 1682,
           "symbol": "_ZN2ox3net22CHTTPConnectionHandler7OnEventERKNS_5event6SEventE",
-          "percent": 99.98677
+          "percent": 100.0
         },
         {
           "address": "0x48f350",
@@ -9090,7 +9090,7 @@
         "system_headers": 150,
         "object_sha256": "56ca4b21f492b0c55e65c25807d84be7930c4d3ca35dd771a2c16f301e36c2bf"
       },
-      "fuzzy_target_sha256": "7f4b4c3e8109c28105a5787bad054cfde6feb798dc165e4615724ce2a6037564",
+      "fuzzy_target_sha256": "1c07f581513cb2adecb2e4dd5bfc434e9fd1d5228d8abffeabfe1854ff4c6dd3",
       "fuzzy_functions": [
         {
           "address": "0x45bf40",
@@ -9390,7 +9390,7 @@
           "address": "0x45cf00",
           "size": 579,
           "symbol": "_ZN7harvest4game17CThreatLevelLogic21initAttackSectionAreaEiiiRN2ox4core5CRectIfEE",
-          "percent": 99.79508
+          "percent": 100.0
         },
         {
           "address": "0x45d150",
@@ -9504,7 +9504,7 @@
           "address": "0x45dd50",
           "size": 3319,
           "symbol": "_ZN7harvest4game16CThreatLevelWave15updateWaveNamesEv",
-          "percent": 99.91709
+          "percent": 100.0
         },
         {
           "address": "0x45ea50",
@@ -9552,7 +9552,7 @@
           "address": "0x45f000",
           "size": 3298,
           "symbol": "_ZN7harvest4game16CThreatLevelWave19spawnNextWaveAttackEiRN2ox4core7CStringIwEE",
-          "percent": 99.93015
+          "percent": 100.0
         },
         {
           "address": "0x45fcf0",
@@ -11606,7 +11606,7 @@
         "system_headers": 132,
         "object_sha256": "15b4ae1b33bfdc9f0f248107f081641622b88b56d09c15ce687b4ccda042fde8"
       },
-      "fuzzy_target_sha256": "0eef3b763f5daedda962e4f227990266db978a5e21215d4169353608c168f523",
+      "fuzzy_target_sha256": "313c9d417179860931ac3640d19fc404c7b3398ce17a80ee321530bd9d8c4c7a",
       "fuzzy_functions": [
         {
           "address": "0x432270",
@@ -11648,7 +11648,7 @@
           "address": "0x4323e0",
           "size": 236,
           "symbol": "_ZN7harvest6entity7CEntity16renderEnergyLineERKN2ox4core11CPosition2dIfEERKNS3_5CRectIiEES7_b",
-          "percent": 99.91525
+          "percent": 100.0
         },
         {
           "address": "0x4324d0",
@@ -11846,7 +11846,7 @@
           "address": "0x4339d0",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity17getOperatorStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x433a50",
@@ -11858,13 +11858,13 @@
           "address": "0x433be0",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity13getInfoStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x433c60",
           "size": 125,
           "symbol": "_ZN7harvest6entity7CEntity17getMiniStatStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x433ce0",
@@ -17062,7 +17062,7 @@
         "system_headers": 132,
         "object_sha256": "72a6c41a188239c2016b6197cfb05bc2cf88d8b66e0f0bdabc0950a14e763599"
       },
-      "fuzzy_target_sha256": "19f2ec8eaacfb1e29a347dc79c080e44556ff32b1b1115eb918ed80613f5e6f5",
+      "fuzzy_target_sha256": "172677b35d5cf6a427e19093077ab05301584b665a0893dc51cd8086e92893b6",
       "fuzzy_functions": [
         {
           "address": "0x4340c0",
@@ -17140,7 +17140,7 @@
           "address": "0x434450",
           "size": 137,
           "symbol": "_ZN7harvest6entity20CMineralGatherEntity18locateFreeMineralsEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x4344e0",
@@ -19142,7 +19142,7 @@
         "system_headers": 132,
         "object_sha256": "57a755d4b785785dcc0def484293e9dce16b6933a9e79529442610c7536f3b2f"
       },
-      "fuzzy_target_sha256": "16c0f9744021e430bb4330fae8a6637d02ea809248e75018339fca93cd4e6e39",
+      "fuzzy_target_sha256": "47044e36f1a5abea5a2b3b311168e2769a5e88afbb64c94b4ff7280414c76968",
       "fuzzy_functions": [
         {
           "address": "0x43ab60",
@@ -19178,7 +19178,7 @@
           "address": "0x43ac70",
           "size": 1184,
           "symbol": "_ZN7harvest6entity23CPerimeterBombExplosion11updateLogicEf",
-          "percent": 99.86641
+          "percent": 99.8855
         },
         {
           "address": "0x43b110",
@@ -36394,7 +36394,7 @@
         "system_headers": 134,
         "object_sha256": "46b89ab0e201d95bd72fcd7fc480d87e866ad3e6d4fd0de6502e7f84d4fb2f7d"
       },
-      "fuzzy_target_sha256": "195d67ba47520959fa27cc20aff406885b6f27c8df5da7b4dbdc5db57fb3f5c5",
+      "fuzzy_target_sha256": "8cad611b92d9f6255350a6be17026f956db7c1632c10fbb15462b364e82ef984",
       "fuzzy_functions": [
         {
           "address": "0x41e7a0",
@@ -36514,7 +36514,7 @@
           "address": "0x41ec10",
           "size": 125,
           "symbol": "_ZN7harvest6entity19CDefenseTowerEntity17getOperatorStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x41ec90",
@@ -39859,7 +39859,7 @@
         "system_headers": 147,
         "object_sha256": "ec94b4d3605b0d953d824e1d64e63e59dd97304c815d77cd0d3d348a151e887c"
       },
-      "fuzzy_target_sha256": "3afb58dd08e648f819fb86da3a869da72f88bbea6d9a91a52ac6a07cdc019eb9",
+      "fuzzy_target_sha256": "b1e0dd772b4814e711f875e19543a6eed78aa1504841e270e00a797c8f2d1caa",
       "fuzzy_functions": [
         {
           "address": "0x435ec0",
@@ -40009,7 +40009,7 @@
           "address": "0x4368f0",
           "size": 125,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity17getOperatorStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x436970",
@@ -40045,7 +40045,7 @@
           "address": "0x436ab0",
           "size": 1484,
           "symbol": "_ZN7harvest6entity20CMissileTurretEntity17findPriorityAlienERKN2ox4core9CVector3dIfEEiffPS5_",
-          "percent": 92.85152
+          "percent": 93.21515
         },
         {
           "address": "0x437080",
@@ -40057,7 +40057,7 @@
           "address": "0x4370f0",
           "size": 915,
           "symbol": "_ZN7harvest6entity19CTempestBlastEntity11createBeamsERKN2ox4core9CVector3dIfEES7_i",
-          "percent": 99.976074
+          "percent": 100.0
         },
         {
           "address": "0x437490",
@@ -40093,7 +40093,7 @@
           "address": "0x437d50",
           "size": 2930,
           "symbol": "_ZN7harvest6entity14CMissileEntity11updateLogicEf",
-          "percent": 81.367935
+          "percent": 81.38321
         },
         {
           "address": "0x4388d0",
@@ -40297,7 +40297,7 @@
           "address": "0x43a620",
           "size": 489,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN7harvest6entity18SAlienDistancePairESt6vectorIS4_SaIS4_EEEElNS3_20SAlienDistanceSorterEEvT_SB_T0_T1_",
-          "percent": 99.962685
+          "percent": 100.0
         },
         {
           "address": "0x416880",
@@ -49682,13 +49682,13 @@
         "system_headers": 132,
         "object_sha256": "bfcb3a87e1c724b61a3aadb87b965915905b9d773cd5ef1f238cb9529e72dba9"
       },
-      "fuzzy_target_sha256": "254221cda9e12e3aba53b184e4c27140b29381ff6a3e78afd631cf17c9a33356",
+      "fuzzy_target_sha256": "6f790c62313645b59d106937fc71aafbe0e22ab2a3c2955d258a6a86b72ed9dc",
       "fuzzy_functions": [
         {
           "address": "0x40a2d0",
           "size": 15,
           "symbol": "_ZN7harvest6entity12getAlienNameEi",
-          "percent": 85.0
+          "percent": 100.0
         },
         {
           "address": "0x40a2e0",
@@ -49832,7 +49832,7 @@
           "address": "0x40b1d0",
           "size": 44,
           "symbol": "__tcf_0",
-          "percent": 99.583336
+          "percent": 100.0
         },
         {
           "address": "0x40b200",
@@ -49856,7 +49856,7 @@
           "address": "0x40b960",
           "size": 1307,
           "symbol": "_ZN7harvest6entity12CAlienEntity10dealDamageERfRKN2ox4core11CPosition2dIfEEfi",
-          "percent": 99.78022
+          "percent": 100.0
         },
         {
           "address": "0x40be80",
@@ -49868,7 +49868,7 @@
           "address": "0x40bf70",
           "size": 1482,
           "symbol": "_ZN7harvest6entity12CAlienEntity20locateTargetBuildingEv",
-          "percent": 99.69388
+          "percent": 99.868805
         },
         {
           "address": "0x40cab0",
@@ -49880,7 +49880,7 @@
           "address": "0x40c540",
           "size": 1389,
           "symbol": "_ZN7harvest6entity12CAlienEntity19updateMinerMovementEfRN2ox4core9CVector3dIfEERNS3_9CVector2dIfEE",
-          "percent": 61.173203
+          "percent": 61.36928
         },
         {
           "address": "0x40cd90",
@@ -49898,7 +49898,7 @@
           "address": "0x40d5f0",
           "size": 378,
           "symbol": "_ZN7harvest6entity12setAlienNameEiPKw",
-          "percent": 97.0
+          "percent": 100.0
         },
         {
           "address": "0x40d770",
@@ -55935,7 +55935,7 @@
         "system_headers": 131,
         "object_sha256": "23a5b03a3b655e5f6db6fc581645b1708851b6eb7ea951dade080b1492545379"
       },
-      "fuzzy_target_sha256": "b1e552ddcf1c50ec7f71e0c63159d6aea9e6facec37635c42bd06fdded6757df",
+      "fuzzy_target_sha256": "4c0cc0c81a86571f249e7be13afbd6a0a0dda857a07aa021de42e935996a4f96",
       "fuzzy_functions": [
         {
           "address": "0x42a540",
@@ -58270,7 +58270,7 @@
         "system_headers": 132,
         "object_sha256": "cf159b6f8b29103730367f3d16e537ac691c12127063d34e4af90c602e3c9267"
       },
-      "fuzzy_target_sha256": "f35e53dcaee3208d31e15e5c301a6b730542e7f3cb18b39898641c4e4cb4705d",
+      "fuzzy_target_sha256": "6c60be5721a7acff9af35ed47a4f03f00667e43234b698aa24fd34d8f165e65e",
       "fuzzy_functions": [
         {
           "address": "0x43b430",
@@ -58366,7 +58366,7 @@
           "address": "0x43b5a0",
           "size": 1527,
           "symbol": "_ZN7harvest6entity14CShuttleEntity14resetAllAiByMeEb",
-          "percent": 97.2149
+          "percent": 98.590256
         },
         {
           "address": "0x43bba0",
@@ -58414,13 +58414,13 @@
           "address": "0x43cd30",
           "size": 6453,
           "symbol": "_ZN7harvest6entity14CShuttleEntityC2Ei",
-          "percent": 99.82942
+          "percent": 100.0
         },
         {
           "address": "0x43e670",
           "size": 6453,
           "symbol": "_ZN7harvest6entity14CShuttleEntityC1Ei",
-          "percent": 99.82942
+          "percent": 100.0
         },
         {
           "address": "0x416670",
@@ -58516,7 +58516,7 @@
           "address": "0x440110",
           "size": 695,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN7harvest6entity14CShuttleEntityESt6vectorIS5_SaIS5_EEEElNS3_18SBestShuttleSorterEEvT_SC_T0_T1_",
-          "percent": 99.97207
+          "percent": 100.0
         },
         {
           "address": "0x409c20",
@@ -59612,7 +59612,7 @@
         "system_headers": 132,
         "object_sha256": "24c4377baa62b3fe5678cc7d4236c930e6c637de7f4962658ab4a9d854943f9d"
       },
-      "fuzzy_target_sha256": "841fbec6fc0641c36e0a1e373fbaa620541d27a17ec29a874cd6f6cc21ea1a43",
+      "fuzzy_target_sha256": "5899037aa87d4dba52b4c0a33575c6cda37444571e47ebb540409067b89389f4",
       "fuzzy_functions": [
         {
           "address": "0x41be00",
@@ -59780,7 +59780,7 @@
           "address": "0x41c460",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CCreativeEntity13getInfoStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x41c840",
@@ -59792,7 +59792,7 @@
           "address": "0x41c5c0",
           "size": 125,
           "symbol": "_ZN7harvest6entity15CCreativeEntity17getMiniStatStringEv",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x41c640",
@@ -61008,7 +61008,7 @@
         "system_headers": 132,
         "object_sha256": "9cb7cc147b0bcf8b51cbb38bf66ca86f4f5f22cdb68af1ca1905df8664caf658"
       },
-      "fuzzy_target_sha256": "6da6a6459f4eb2b136565b38161e81538508acfbf8543a65bd6158cdfeef4454",
+      "fuzzy_target_sha256": "6e5bfdd17ebfb7ee3ab0742882960b4cee9a64e9acfdb6456e733fc2c2f533b4",
       "fuzzy_functions": [
         {
           "address": "0x4303f0",
@@ -61068,7 +61068,7 @@
           "address": "0x430520",
           "size": 414,
           "symbol": "_ZN7harvest6entity14CEntityManager6updateEfRKN2ox4core5CRectIfEE",
-          "percent": 99.36842
+          "percent": 100.0
         },
         {
           "address": "0x4306c0",
@@ -61182,7 +61182,7 @@
           "address": "0x431470",
           "size": 545,
           "symbol": "_ZN7harvest6entity14CEntityManager21isBuildingPlacementOkERN2ox4core11CPosition2dIfEEf",
-          "percent": 83.44827
+          "percent": 83.86207
         },
         {
           "address": "0x4316a0",
@@ -61667,7 +61667,7 @@
         "system_headers": 132,
         "object_sha256": "25224ca513e505f7d2c3ae80cdeee0a8becc731160ea6f646ec46a65f2ce77a7"
       },
-      "fuzzy_target_sha256": "7c9900afca0a0caabcce0a0862ed5f900d71a8d773d17c5fa806a50bb1f7556b",
+      "fuzzy_target_sha256": "560bb8607274157eb17eba196b91ed8971e3b3a02d790113ba165d10a3addd6d",
       "fuzzy_functions": [
         {
           "address": "0x5e1d20",
@@ -61793,7 +61793,7 @@
           "address": "0x5e30c0",
           "size": 1258,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN2ox6entity9COxEntityESt6vectorIS5_SaIS5_EEEElNS2_4algo19SPointerSortFunctorIS5_EEEvT_SE_T0_T1_",
-          "percent": 99.98542
+          "percent": 100.0
         }
       ]
     },
@@ -63462,7 +63462,7 @@
         "system_headers": 129,
         "object_sha256": "ac8685e0dc676f7e7574a512082f0b6daf8ce4430133d153acc11b3996bbaf30"
       },
-      "fuzzy_target_sha256": "4651bd7123c6c2644034a2b50ce0365c425dddbcca2ab6fad63ca4454ca03c6f",
+      "fuzzy_target_sha256": "8a108684aafc9c180a6ce182689327ea809e2841df225aad8213f2be3e3934e2",
       "fuzzy_functions": [
         {
           "address": "0x45fdd0",
@@ -63534,13 +63534,13 @@
           "address": "0x460220",
           "size": 630,
           "symbol": "_ZN7harvest4game6CWorld16renderBackgroundERKN2ox4core11CPosition2dIfEEPNS2_3gui8IGUIFontEPNS3_5CRectIiEE",
-          "percent": 98.62893
+          "percent": 98.66038
         },
         {
           "address": "0x4604a0",
           "size": 778,
           "symbol": "_ZN7harvest4game6CWorld16renderEdgeShadesERKN2ox4core11CPosition2dIfEE",
-          "percent": 99.77988
+          "percent": 100.0
         },
         {
           "address": "0x4607b0",
@@ -63582,7 +63582,7 @@
           "address": "0x461120",
           "size": 749,
           "symbol": "_ZN7harvest4game6CWorld18recreateDoodadGridEv",
-          "percent": 99.97041
+          "percent": 100.0
         },
         {
           "address": "0x461410",
@@ -63594,19 +63594,19 @@
           "address": "0x4616a0",
           "size": 1777,
           "symbol": "_ZN7harvest4game6CWorld11expandWorldEifb",
-          "percent": 79.414925
+          "percent": 79.44478
         },
         {
           "address": "0x461da0",
           "size": 242,
           "symbol": "_ZN7harvest4game6CWorld22expandWorldFromCurrentEib",
-          "percent": 99.68254
+          "percent": 100.0
         },
         {
           "address": "0x461ea0",
           "size": 479,
           "symbol": "_ZN7harvest4game6CWorld17initializeNewGameEPNS0_9IScenarioE",
-          "percent": 99.91151
+          "percent": 100.0
         },
         {
           "address": "0x462080",
@@ -63642,7 +63642,7 @@
           "address": "0x462a00",
           "size": 3007,
           "symbol": "_ZN7harvest4game6CWorld6updateEfRKN2ox4core5CRectIfEE",
-          "percent": 85.88486
+          "percent": 85.892746
         },
         {
           "address": "0x4635c0",
@@ -69603,7 +69603,7 @@
         "system_headers": 131,
         "object_sha256": "b247a2543d0f1d278a85278727c454d11bf3a8b5f4b132280b227620cfc5fd44"
       },
-      "fuzzy_target_sha256": "d79d500e088dfbca5eb4ec3acd37e25e23445e51e8ff66a24ba8a84abb4faa8e",
+      "fuzzy_target_sha256": "3bb8ce23d19529612d83afb4ba44ff30e86a9654c87d233b00e7df93703777af",
       "fuzzy_functions": [
         {
           "address": "0x453d90",
@@ -77563,7 +77563,7 @@
         "system_headers": 141,
         "object_sha256": "b1989b5e82351a70dbb4bda3ed9162e225bd1f6b6ffd68cc9bbc1275d84a26b0"
       },
-      "fuzzy_target_sha256": "2c56b1c30cdb3e4cadccd40f44748a909e4ece9670c3f13f5ef1feca21abc10b",
+      "fuzzy_target_sha256": "9a4e25d3639b9326dbafe866c83da76cab1b350fc9b2d622304024298c86d129",
       "fuzzy_functions": [
         {
           "address": "0x4468f0",
@@ -77887,7 +77887,7 @@
           "address": "0x4444e0",
           "size": 74,
           "symbol": "_ZN7harvest4game20harvest_isKeyPressedEP9lua_State",
-          "percent": 97.27273
+          "percent": 100.0
         },
         {
           "address": "0x4441a0",
@@ -78469,7 +78469,7 @@
           "address": "0x44cf00",
           "size": 3150,
           "symbol": "_ZN7harvest4game14CLuaFileValues15addLuaTableVarsEP9lua_StateRKN2ox4core7CStringIcEERNS4_6TArrayINS0_12SLuaFilePairEEE",
-          "percent": 90.33512
+          "percent": 90.348526
         },
         {
           "address": "0x44db50",
@@ -78709,7 +78709,7 @@
           "address": "0x452300",
           "size": 629,
           "symbol": "_ZN5LunarIN7harvest6entity17CCreativeLuaStateEE4pushEP9lua_StatePS2_b",
-          "percent": 99.96795
+          "percent": 100.0
         },
         {
           "address": "0x452580",
@@ -78721,7 +78721,7 @@
           "address": "0x452010",
           "size": 629,
           "symbol": "_ZN5LunarIN7harvest6entity16CBuildingLuaInfoEE4pushEP9lua_StatePS2_b",
-          "percent": 99.96795
+          "percent": 100.0
         },
         {
           "address": "0x452290",
@@ -78733,7 +78733,7 @@
           "address": "0x4525f0",
           "size": 629,
           "symbol": "_ZN5LunarIN7harvest6entity13CAlienLuaInfoEE4pushEP9lua_StatePS2_b",
-          "percent": 99.96795
+          "percent": 100.0
         },
         {
           "address": "0x452870",
@@ -81180,7 +81180,7 @@
         "system_headers": 131,
         "object_sha256": "e126531547cc4a21351801c01c8bc01122d25d4b8761e7e56c5f05f23f3ec876"
       },
-      "fuzzy_target_sha256": "d52fc2e2f49095bcaae9ed1989e07e59ed67db5ba2c8c6c9c11fcb98b8164d6b",
+      "fuzzy_target_sha256": "f35cb191e53dc6199b2aac63bd2a9639e1894c0336fba2aee617e53682c700c5",
       "fuzzy_functions": [
         {
           "address": "0x495db0",
@@ -81210,13 +81210,13 @@
           "address": "0x4963e0",
           "size": 395,
           "symbol": "_ZN7harvest6states11CIntroState11updateStateEf",
-          "percent": 97.47369
+          "percent": 100.0
         },
         {
           "address": "0x496570",
           "size": 898,
           "symbol": "_ZN7harvest6states11CIntroState10secondInitEv",
-          "percent": 99.97549
+          "percent": 100.0
         },
         {
           "address": "0x496900",
@@ -81565,7 +81565,7 @@
         "system_headers": 114,
         "object_sha256": "e93ffc7a7646bb72ac4509806644a2e07a86349688c7737684d1544cbd30229e"
       },
-      "fuzzy_target_sha256": "c0ceb4ae87a89bd3f33ef80f8664519eea5a2a1ac81ff78634c5ccb5aefb838e",
+      "fuzzy_target_sha256": "0784d086935a21871eeac65f60de3932c3a60ed6c8cdbc9e5892681f9c77a0aa",
       "fuzzy_functions": [
         {
           "address": "0x496e80",
@@ -81601,7 +81601,7 @@
           "address": "0x496f70",
           "size": 247,
           "symbol": "_ZN7harvest6states14CLoadingScreen4initEPN2ox5video12IVideoDriverE",
-          "percent": 99.92958
+          "percent": 100.0
         },
         {
           "address": "0x497070",
@@ -81966,7 +81966,7 @@
         "system_headers": 117,
         "object_sha256": "f74d29d28b9ce22add49d0f06bfe2e35cbc4135ca5afe4d77ca053fc29b26e6f"
       },
-      "fuzzy_target_sha256": "938dc16d910eb25708001b5bc023e57778fa8ade27472ad326af33d852a0796b",
+      "fuzzy_target_sha256": "51805f901f755923e1896ba624d176f87bb5421f231cc6cb2a6c4ad461f32d97",
       "fuzzy_functions": [
         {
           "address": "0x473430",
@@ -81984,7 +81984,7 @@
           "address": "0x473490",
           "size": 698,
           "symbol": "_ZN7harvest3gui17CIngameMenuScreen10setVisibleEbbi",
-          "percent": 99.93007
+          "percent": 100.0
         },
         {
           "address": "0x473750",
@@ -82707,7 +82707,7 @@
         "system_headers": 117,
         "object_sha256": "584a78ec7062d39c8d3ce21b2aff13ce2a0dc78087b2dfc714f005c6beccd714"
       },
-      "fuzzy_target_sha256": "ccdf7b168becabe9bd141de99cac875ee60dcb830f39770b5738b5bd8558651d",
+      "fuzzy_target_sha256": "de8783099cb980984eb7b708f0c5cb2e2620250a53f82e3f4609eb8023397f32",
       "fuzzy_functions": [
         {
           "address": "0x473c00",
@@ -82761,7 +82761,7 @@
           "address": "0x4740d0",
           "size": 6771,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialog14refillMainViewEi",
-          "percent": 99.93308
+          "percent": 100.0
         },
         {
           "address": "0x475b50",
@@ -82773,7 +82773,7 @@
           "address": "0x475cb0",
           "size": 749,
           "symbol": "_ZN7harvest3gui15CMenuInfoDialog7OnEventERKN2ox5event6SEventE",
-          "percent": 99.97024
+          "percent": 100.0
         },
         {
           "address": "0x472bd0",
@@ -90290,7 +90290,7 @@
               "type": 2,
               "symbol": ".LC21",
               "addend": -5,
-              "reason": "reference not aligned to a merged element",
+              "reason": "unmapped or truncated range: -0x3e5e8e92+0x4",
               "matches": false
             },
             {
@@ -96269,7 +96269,7 @@
         "system_headers": 144,
         "object_sha256": "85ee52a6d201dfc214e3379687a6a10f536f7b7de63698fae5f80413e2441cee"
       },
-      "fuzzy_target_sha256": "f23696b4530d1db624ddbc7c1b010d69c037e48bd0255e2ff44ef7100aef69e0",
+      "fuzzy_target_sha256": "9f5ee7a34a633a676c7212e40c964b8d5426e5a907d6db09da4029d5ff8d1c88",
       "fuzzy_functions": [
         {
           "address": "0x49f6b0",
@@ -96281,7 +96281,7 @@
           "address": "0x49f6e0",
           "size": 286,
           "symbol": "_ZN7harvest6states10CPlayState20getPopupForGuiButtonEPKw",
-          "percent": 99.92308
+          "percent": 100.0
         },
         {
           "address": "0x49f810",
@@ -96443,7 +96443,7 @@
           "address": "0x4a0f50",
           "size": 410,
           "symbol": "_ZN7harvest6states10CPlayState25buyBuildingAtPlacementPosEv",
-          "percent": 99.1573
+          "percent": 99.213486
         },
         {
           "address": "0x4a0310",
@@ -96533,7 +96533,7 @@
           "address": "0x4a2350",
           "size": 243,
           "symbol": "_ZN7harvest6states10CPlayState14addToSelectionEPNS_6entity7CEntityE",
-          "percent": 99.90566
+          "percent": 100.0
         },
         {
           "address": "0x4a2450",
@@ -96551,7 +96551,7 @@
           "address": "0x4a2e40",
           "size": 2830,
           "symbol": "_ZN7harvest6states10CPlayState22getPopupForBuildButtonEPKwS3_ii",
-          "percent": 99.95827
+          "percent": 100.0
         },
         {
           "address": "0x4a47e0",
@@ -96617,7 +96617,7 @@
           "address": "0x4a7a70",
           "size": 1603,
           "symbol": "_ZN7harvest6states10CPlayState21setCreativeListToggleEb",
-          "percent": 99.941864
+          "percent": 100.0
         },
         {
           "address": "0x4a80c0",
@@ -96629,7 +96629,7 @@
           "address": "0x4a80e0",
           "size": 1499,
           "symbol": "_ZN7harvest6states10CPlayState17setWaveListToggleEb",
-          "percent": 99.29012
+          "percent": 99.35185
         },
         {
           "address": "0x4a86c0",
@@ -96647,7 +96647,7 @@
           "address": "0x4a9630",
           "size": 14253,
           "symbol": "_ZN7harvest6states10CPlayState6renderEv",
-          "percent": 95.60498
+          "percent": 95.60661
         },
         {
           "address": "0x4ad940",
@@ -96659,13 +96659,13 @@
           "address": "0x4ae210",
           "size": 2466,
           "symbol": "_ZN7harvest6states10CPlayState17initializeNewGameEv",
-          "percent": 99.68577
+          "percent": 99.77819
         },
         {
           "address": "0x4aebc0",
           "size": 11813,
           "symbol": "_ZN7harvest6states10CPlayState10secondInitEv",
-          "percent": 99.2567
+          "percent": 99.28795
         },
         {
           "address": "0x4acde0",
@@ -96695,7 +96695,7 @@
           "address": "0x4b1de0",
           "size": 13487,
           "symbol": "_ZN7harvest6states10CPlayState7OnEventERKN2ox5event6SEventE",
-          "percent": 70.13088
+          "percent": 70.17368
         },
         {
           "address": "0x4b5290",
@@ -96707,7 +96707,7 @@
           "address": "0x4b56e0",
           "size": 7474,
           "symbol": "_ZN7harvest6states10CPlayState11updateStateEf",
-          "percent": 95.20354
+          "percent": 95.20681
         },
         {
           "address": "0x4643e0",
@@ -100896,7 +100896,7 @@
         "system_headers": 135,
         "object_sha256": "76f107c46f7508fd826697e762e442ee854d26b354cae6bddd68edc87efa9c67"
       },
-      "fuzzy_target_sha256": "f3d9ae6f64a44e86bba93c74210652532abdb1f288cf8ec689199cc06d266040",
+      "fuzzy_target_sha256": "0a1d13ed574dae2151f3443a61e2efba730debe6d03ef3fe64fd9440e03611fc",
       "fuzzy_functions": [
         {
           "address": "0x469ef0",
@@ -100938,7 +100938,7 @@
           "address": "0x46a410",
           "size": 271,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen15createLoadBlockEv",
-          "percent": 99.91936
+          "percent": 100.0
         },
         {
           "address": "0x46a6e0",
@@ -100950,7 +100950,7 @@
           "address": "0x46a520",
           "size": 442,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen11loadSpritesEv",
-          "percent": 99.44444
+          "percent": 100.0
         },
         {
           "address": "0x46a840",
@@ -100974,7 +100974,7 @@
           "address": "0x46b6c0",
           "size": 2323,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen17createSummaryPageEv",
-          "percent": 99.96016
+          "percent": 100.0
         },
         {
           "address": "0x46bfe0",
@@ -101004,7 +101004,7 @@
           "address": "0x46e540",
           "size": 3895,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen20parseHighscoreStringERKN2ox4core7CStringIcEE",
-          "percent": 63.14025
+          "percent": 63.147266
         },
         {
           "address": "0x46f480",
@@ -101028,13 +101028,13 @@
           "address": "0x470bc0",
           "size": 1482,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen10setVisibleEb",
-          "percent": 89.572365
+          "percent": 89.835526
         },
         {
           "address": "0x471190",
           "size": 6501,
           "symbol": "_ZN7harvest3gui16CHighscoreScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.429245
+          "percent": 99.51134
         },
         {
           "address": "0x472b00",
@@ -102741,7 +102741,7 @@
         "system_headers": 131,
         "object_sha256": "2353d0015972f1147a229892e35642ce6865f086419f83c971675f291e779ad0"
       },
-      "fuzzy_target_sha256": "f97e41d255ad64179bbafd4df213b1097e28c5eb185315669806abf8537ce4f8",
+      "fuzzy_target_sha256": "36dd62ce33d0a8a6ddcb32528b69fbb0cd40bc5bf9906271e4177b5cd9a110b8",
       "fuzzy_functions": [
         {
           "address": "0x48ae60",
@@ -102759,7 +102759,7 @@
           "address": "0x48af10",
           "size": 93,
           "symbol": "_ZN7harvest8settings15CHarvestProfile21notifyMiniAchievementEii",
-          "percent": 97.77778
+          "percent": 100.0
         },
         {
           "address": "0x48af70",
@@ -102783,13 +102783,13 @@
           "address": "0x48b030",
           "size": 32,
           "symbol": "_ZN7harvest8settings15CHarvestProfile26hasMainAchievementAtPlanetEii",
-          "percent": 93.333336
+          "percent": 100.0
         },
         {
           "address": "0x48b050",
           "size": 32,
           "symbol": "_ZN7harvest8settings15CHarvestProfile18hasMiniAchievementEii",
-          "percent": 93.333336
+          "percent": 100.0
         },
         {
           "address": "0x48b070",
@@ -102963,7 +102963,7 @@
           "address": "0x48d970",
           "size": 3106,
           "symbol": "_ZN7harvest8settings15CHarvestProfile24getAchievementSpriteNameEii",
-          "percent": 90.82921
+          "percent": 90.84777
         },
         {
           "address": "0x48e5a0",
@@ -106017,7 +106017,7 @@
         "system_headers": 117,
         "object_sha256": "aa425a6dc8e8ecc51e06e85cc79330d3e14b53ef10b8e2936048460a7702f1ae"
       },
-      "fuzzy_target_sha256": "21d11956fe0b0438b66c4268cb46f5597c596623cb26f4d404b10cb07b7ff780",
+      "fuzzy_target_sha256": "538e0de1f1b745c12a3edfb9b1a0e63cea783368a12137dcb5cacd7a5bff3043",
       "fuzzy_functions": [
         {
           "address": "0x480a60",
@@ -106119,7 +106119,7 @@
           "address": "0x4811d0",
           "size": 268,
           "symbol": "_ZN7harvest3gui15CSettingsScreen15createLoadBlockEv",
-          "percent": 99.92958
+          "percent": 100.0
         },
         {
           "address": "0x4812e0",
@@ -106131,13 +106131,13 @@
           "address": "0x481a90",
           "size": 6554,
           "symbol": "_ZN7harvest3gui15CSettingsScreenC1EPN2ox9IOxDeviceEb",
-          "percent": 99.95189
+          "percent": 100.0
         },
         {
           "address": "0x483430",
           "size": 6554,
           "symbol": "_ZN7harvest3gui15CSettingsScreenC2EPN2ox9IOxDeviceEb",
-          "percent": 99.95189
+          "percent": 100.0
         },
         {
           "address": "0x409c40",
@@ -106611,7 +106611,7 @@
         "system_headers": 117,
         "object_sha256": "b5bd7bee86f16fa6b365c50972f7597bb40f7508832ef018db84382e7ae054fa"
       },
-      "fuzzy_target_sha256": "e87d81499b9fcad1e6a0fd7cd3a53003e86109f57e046f07c0f7ecfdf778c1a4",
+      "fuzzy_target_sha256": "fd562662bb5ce949b72135f2ad51b8a2855da4da0fdb8f2efe32fad44d3b8cda",
       "fuzzy_functions": [
         {
           "address": "0x4695b0",
@@ -106623,7 +106623,7 @@
           "address": "0x4695f0",
           "size": 595,
           "symbol": "_ZN7harvest3gui13CGuiInfoLines11addInfoLineEPKwS3_PN2ox5video14ISpritePackageEPKc",
-          "percent": 99.92308
+          "percent": 100.0
         },
         {
           "address": "0x469850",
@@ -106641,7 +106641,7 @@
           "address": "0x4699f0",
           "size": 379,
           "symbol": "_ZN7harvest3gui13CGuiInfoLines11addInfoLineEPKw",
-          "percent": 99.95238
+          "percent": 100.0
         },
         {
           "address": "0x469b70",
@@ -108260,7 +108260,7 @@
         "system_headers": 117,
         "object_sha256": "a65e5be9cfbfb8fc024bea1ec4d2d06d7fc8615082916cc83789825128c0e997"
       },
-      "fuzzy_target_sha256": "2b0b3103907649f3655a7de9b0e1010d4536a20d86e598b98d6a699b625c5ba7",
+      "fuzzy_target_sha256": "c64fe81a9ced649480d8eba3de195b678d22a5c141259884a1dd34586e2fd78f",
       "fuzzy_functions": [
         {
           "address": "0x4668e0",
@@ -108314,19 +108314,19 @@
           "address": "0x466de0",
           "size": 2500,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen13getAwardPopupEii",
-          "percent": 99.87387
+          "percent": 100.0
         },
         {
           "address": "0x4677b0",
           "size": 2195,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen10setVisibleEb",
-          "percent": 99.65839
+          "percent": 100.0
         },
         {
           "address": "0x468050",
           "size": 3778,
           "symbol": "_ZN7harvest3gui19CAchievementsScreen7OnEventERKN2ox5event6SEventE",
-          "percent": 99.828896
+          "percent": 100.0
         },
         {
           "address": "0x4643e0",
@@ -109183,13 +109183,13 @@
         "system_headers": 131,
         "object_sha256": "2a5f6a71b14bcb68053c630b09f42883f35d9f2e11cbb84fb658fe6650949e44"
       },
-      "fuzzy_target_sha256": "0947b90ce9f8c40bf42b523b8deed985e74aaf95b0cacf8b9ebe9bc43d5385cd",
+      "fuzzy_target_sha256": "0e456e7e6030c1f9ed5cd3fe5700d6718ec5e33b3510c8625322a6dbdfd1abcf",
       "fuzzy_functions": [
         {
           "address": "0x475fc0",
           "size": 457,
           "symbol": "_ZN7harvest3gui15CPriorityScreen26updatePriorityBoxPositionsEv",
-          "percent": 96.63866
+          "percent": 97.64706
         },
         {
           "address": "0x475fa0",
@@ -109243,7 +109243,7 @@
           "address": "0x476d40",
           "size": 2010,
           "symbol": "_ZN7harvest3gui15CPriorityScreen10setVisibleEbPNS_4game12CThreatLevelE",
-          "percent": 99.83452
+          "percent": 100.0
         },
         {
           "address": "0x477520",
@@ -111380,7 +111380,7 @@
         "system_headers": 129,
         "object_sha256": "89416e0c1bb8e455d3e8d02cc54ca63d0538ead0da5f3f18ace56b3b13036c64"
       },
-      "fuzzy_target_sha256": "f385b5beb25f4158343b785888ccce22d0d2b2c9b2b94ee019b38df0bb25b055",
+      "fuzzy_target_sha256": "4247a5e65dc19546252ef3ac70e001e8e849cbf104f3b2d957c1b5b1a7fb6f03",
       "fuzzy_functions": [
         {
           "address": "0x4b75b0",
@@ -111482,7 +111482,7 @@
           "address": "0x4b88b0",
           "size": 1610,
           "symbol": "_ZN7harvest6states17CShuttleRaceState11updateStateEf",
-          "percent": 96.3511
+          "percent": 96.460815
         },
         {
           "address": "0x4b8f00",
@@ -111518,7 +111518,7 @@
           "address": "0x4b9320",
           "size": 6516,
           "symbol": "_ZN7harvest6states17CShuttleRaceState6renderEv",
-          "percent": 98.50249
+          "percent": 98.59475
         },
         {
           "address": "0x42a2e0",
@@ -112740,7 +112740,7 @@
         "system_headers": 134,
         "object_sha256": "4dc1c18ab3084db170dd48665d259764cc1656ab67aad322d8406832b72e2695"
       },
-      "fuzzy_target_sha256": "606782cbfb31ec56d8292221a07d7c8c26f5645938480b85248cf0d5e3426dca",
+      "fuzzy_target_sha256": "705353b65c80847f728b0c834352c566f6c580812da3ca853cb2d3590eb325f6",
       "fuzzy_functions": [
         {
           "address": "0x416a20",
@@ -112878,7 +112878,7 @@
           "address": "0x4174e0",
           "size": 4815,
           "symbol": "_ZN7harvest6entity15CBuildableItems11addBuildingEPN2ox5video12IVideoDriverEPKcS7_biS7_S7_PKwS9_iifS7_S7_",
-          "percent": 99.971725
+          "percent": 100.0
         },
         {
           "address": "0x4187b0",
@@ -112902,7 +112902,7 @@
           "address": "0x41a220",
           "size": 1682,
           "symbol": "_ZN7harvest6entity15CBuildableItems21loadStandardBuildingsEPN2ox5video12IVideoDriverE",
-          "percent": 99.96979
+          "percent": 100.0
         },
         {
           "address": "0x409c20",
@@ -113581,7 +113581,7 @@
         "system_headers": 117,
         "object_sha256": "c53f6e532dca4e308ec8696ef6b58fef4f5eb030891665843859e7e3a9c56805"
       },
-      "fuzzy_target_sha256": "c93e51fc67f2442f6538034e2ab68fb1358c7c9de87725303600c2283828f695",
+      "fuzzy_target_sha256": "146e3b295809a6f40e1afdafdc9c87e171d4ee5b194497fe0d8ad2e449961eac",
       "fuzzy_functions": [
         {
           "address": "0x478630",
@@ -113659,13 +113659,13 @@
           "address": "0x478fd0",
           "size": 2058,
           "symbol": "_ZN7harvest3gui14CProfileScreen23createEditProfileWindowEb",
-          "percent": 99.94173
+          "percent": 100.0
         },
         {
           "address": "0x4797e0",
           "size": 2087,
           "symbol": "_ZN7harvest3gui14CProfileScreen23createProfileListWindowEv",
-          "percent": 99.9424
+          "percent": 100.0
         },
         {
           "address": "0x47a010",
@@ -115359,7 +115359,7 @@
         "system_headers": 127,
         "object_sha256": "0683096b4764a3551de7da55ca35fdd62fddccb5d096baffdefae620ba1ee3e1"
       },
-      "fuzzy_target_sha256": "cd5a5e8a4599c051e62f9e483343eede33f4f1a369ef65ed6a71804027ca570e",
+      "fuzzy_target_sha256": "51feebd402a681381dfb21ad7ed92b9144ecb41699e82bef1ab0fd71a11995be",
       "fuzzy_functions": [
         {
           "address": "0x484f80",
@@ -115443,13 +115443,13 @@
           "address": "0x486650",
           "size": 442,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen11loadSpritesEv",
-          "percent": 99.44915
+          "percent": 100.0
         },
         {
           "address": "0x486810",
           "size": 4410,
           "symbol": "_ZN7harvest3gui17CStatisticsScreen10setVisibleEb",
-          "percent": 99.808586
+          "percent": 100.0
         },
         {
           "address": "0x487950",
@@ -116006,7 +116006,7 @@
         "system_headers": 117,
         "object_sha256": "5c31e8f3d2c5e2d408e51dac83b44c2f799d49b3f6cefc9899aeab0e068c04e4"
       },
-      "fuzzy_target_sha256": "88438028f9bc2ae4171f3115b31b5ac820320df49f8c908d6750923e0ed8db85",
+      "fuzzy_target_sha256": "c89b9f88dd667fe742f7fd698c7b216499bdabd8c798c4467953b7298a47b433",
       "fuzzy_functions": [
         {
           "address": "0x4893b0",
@@ -116024,7 +116024,7 @@
           "address": "0x489560",
           "size": 371,
           "symbol": "_ZN7harvest3gui12CStoryScreen16createBorderTextEiPN2ox3gui11IGUIElementE",
-          "percent": 99.939026
+          "percent": 100.0
         },
         {
           "address": "0x4896e0",
@@ -119617,7 +119617,7 @@
         "system_headers": 132,
         "object_sha256": "6ab29574436f1b82a3564ac1aa3be4184c6611bfc5abb3465f793f20ab3b0d87"
       },
-      "fuzzy_target_sha256": "f3ea45187b0f0d440d6b49686ed9ed9a22351f74d164379bff40973b31e2e8eb",
+      "fuzzy_target_sha256": "6b2e072898529205ad1d3e4895413e27373023d270c950fe6d78c685b00eb35e",
       "fuzzy_functions": [
         {
           "address": "0x4976c0",
@@ -119701,31 +119701,31 @@
           "address": "0x498320",
           "size": 467,
           "symbol": "_ZN7harvest6states14CMainMenuStateD2Ev",
-          "percent": 98.58268
+          "percent": 100.0
         },
         {
           "address": "0x498500",
           "size": 475,
           "symbol": "_ZN7harvest6states14CMainMenuStateD0Ev",
-          "percent": 98.60465
+          "percent": 100.0
         },
         {
           "address": "0x4986e0",
           "size": 467,
           "symbol": "_ZN7harvest6states14CMainMenuStateD1Ev",
-          "percent": 98.58268
+          "percent": 100.0
         },
         {
           "address": "0x4988c0",
           "size": 678,
           "symbol": "_ZN7harvest6states14CMainMenuState20createDemoMessageBoxEv",
-          "percent": 99.89436
+          "percent": 100.0
         },
         {
           "address": "0x498b70",
           "size": 775,
           "symbol": "_ZN7harvest6states14CMainMenuState24fillLayoutWithPlanetInfoEPN2ox3gui10IGUILayoutEib",
-          "percent": 99.888885
+          "percent": 100.0
         },
         {
           "address": "0x498e80",
@@ -119743,19 +119743,19 @@
           "address": "0x499c10",
           "size": 6565,
           "symbol": "_ZN7harvest6states14CMainMenuState10secondInitEv",
-          "percent": 59.197674
+          "percent": 59.48062
         },
         {
           "address": "0x49b5c0",
           "size": 6810,
           "symbol": "_ZN7harvest6states14CMainMenuState28createLockedPlanetMessageBoxEi",
-          "percent": 99.97434
+          "percent": 100.0
         },
         {
           "address": "0x49d060",
           "size": 1938,
           "symbol": "_ZN7harvest6states14CMainMenuState23enterGameModeSelectModeEi",
-          "percent": 97.02105
+          "percent": 97.1
         },
         {
           "address": "0x49d800",
@@ -119767,13 +119767,13 @@
           "address": "0x49d950",
           "size": 2049,
           "symbol": "_ZN7harvest6states14CMainMenuState24createLuaSelectionWindowEv",
-          "percent": 99.90566
+          "percent": 100.0
         },
         {
           "address": "0x49e160",
           "size": 5013,
           "symbol": "_ZN7harvest6states14CMainMenuState7OnEventERKN2ox5event6SEventE",
-          "percent": 52.786316
+          "percent": 52.809746
         },
         {
           "address": "0x49f500",
@@ -121458,7 +121458,7 @@
         "system_headers": 139,
         "object_sha256": "f1d289f47ad54b5feb2bc13e6594eeb377095063c58e50631e369d1778a24889"
       },
-      "fuzzy_target_sha256": "bef3a0490f3f404445704fc16ebcb9b6aed51fa92569a7447a746316f61b78cd",
+      "fuzzy_target_sha256": "246cacf7fba9586a80e9cd0576cf614650576a4322a2f5b3f05fa9d42a03bbba",
       "fuzzy_functions": [
         {
           "address": "0x47a8e0",
@@ -121494,7 +121494,7 @@
           "address": "0x47a960",
           "size": 736,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen17createSaveGameBoxEv",
-          "percent": 99.90854
+          "percent": 100.0
         },
         {
           "address": "0x47ad70",
@@ -121530,7 +121530,7 @@
           "address": "0x47b440",
           "size": 3368,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen16addSavestateSlotERKNS_8settings16SSavestateHeaderERKN2ox4core7CStringIwEE",
-          "percent": 99.992966
+          "percent": 100.0
         },
         {
           "address": "0x47c170",
@@ -121548,7 +121548,7 @@
           "address": "0x47d440",
           "size": 1930,
           "symbol": "_ZN7harvest3gui15CSaveGameScreen10setVisibleEbb",
-          "percent": 99.96231
+          "percent": 100.0
         },
         {
           "address": "0x47dbd0",
@@ -121674,7 +121674,7 @@
           "address": "0x480710",
           "size": 838,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN7harvest3gui13SSaveListItemESt6vectorIS4_SaIS4_EEEElNS3_15SSaveGameSorterEEvT_SB_T0_T1_",
-          "percent": 99.979256
+          "percent": 100.0
         }
       ]
     },
@@ -122603,7 +122603,7 @@
         "system_headers": 139,
         "object_sha256": "08cc1db91013c477a6fb6ac58bf3f6f2505d1354d611ad1ff54bc5aa40243184"
       },
-      "fuzzy_target_sha256": "254d010f262edc08dcba0e08cb997c55b9ceecf8f16f1fb50c3911deaa26a35e",
+      "fuzzy_target_sha256": "17f1c61a5c950560b82eea1157375993445c6713fa6d13c87547e6a90e18c6cf",
       "fuzzy_functions": [
         {
           "address": "0x59c3f0",
@@ -122771,7 +122771,7 @@
           "address": "0x59efa0",
           "size": 1037,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN5daisy5video17SParticleTypeInfoESt6vectorIS5_SaIS5_EEEElN2ox4algo19SPointerSortFunctorIS5_EEEvT_SF_T0_T1_",
-          "percent": 99.703125
+          "percent": 99.71875
         },
         {
           "address": "0x450c90",
@@ -123486,7 +123486,7 @@
         "system_headers": 114,
         "object_sha256": "5abb4e6c2eef0fbb3bb021201dce0580a82e498cc8defe5157616a746b18ed2f"
       },
-      "fuzzy_target_sha256": "df53250a68b3153b49044f5612c1310d21e8faf92909a50a6c32db73a0022b1a",
+      "fuzzy_target_sha256": "647089232d5c91f793a7b5abb19bd8a9921ce971f0c11516f64257252beb95e1",
       "fuzzy_functions": [
         {
           "address": "0x59f550",
@@ -125372,7 +125372,7 @@
         "system_headers": 124,
         "object_sha256": "93ec4b2712ea5c54d9172cfb78997330319f5fe8601f4118be69f865186c382c"
       },
-      "fuzzy_target_sha256": "a50abed83ba99a62185475ca7032059987370cfe78dc6dc2e51cdbcbc9fdecd8",
+      "fuzzy_target_sha256": "1de2fe6fb8099da6c072bd9a06ad020d93d7267acdd449c57b2ae6c5c55bcdde",
       "fuzzy_functions": [
         {
           "address": "0x5e6530",
@@ -125558,7 +125558,7 @@
           "address": "0x5e9110",
           "size": 666,
           "symbol": "_ZN2ox4game14CConfiguration14parseAttributeEPKwPNS0_12CConfigBlockE",
-          "percent": 98.41041
+          "percent": 98.49711
         },
         {
           "address": "0x5e8860",
@@ -125921,7 +125921,7 @@
         "system_headers": 121,
         "object_sha256": "45960046bb34c5b9170ae47ad7be1b030c7400e7e5aa9650916b5e9196bc69f1"
       },
-      "fuzzy_target_sha256": "e349de7221b39c25131a08976671155b2abe21ce246dbcf51a4aa024b4bdbf9e",
+      "fuzzy_target_sha256": "50160ab2d46f3e13a246e76ca4cc29309db96583574303570a825810f9243f98",
       "fuzzy_functions": [
         {
           "address": "0x5e9e60",
@@ -125963,7 +125963,7 @@
           "address": "0x5e9f30",
           "size": 78,
           "symbol": "_ZN2ox4game9CGameMain14getNewTimeStepEv",
-          "percent": 99.78261
+          "percent": 100.0
         },
         {
           "address": "0x5e9f80",
@@ -128210,7 +128210,7 @@
         "system_headers": 102,
         "object_sha256": "d359f075191af12a54bdd32cf426f6c69283beac27cfcf47ab9426233c6aa543"
       },
-      "fuzzy_target_sha256": "c5370de27b10122909cb9576b6d28a3b1590f06a50065770ceb947f117000960",
+      "fuzzy_target_sha256": "4fe2544eec256d2b0f5fc987b857ad6c93e235ff20b29c7124eb873e679e4d5b",
       "fuzzy_functions": [
         {
           "address": "0x5de250",
@@ -128258,13 +128258,13 @@
           "address": "0x5de3e0",
           "size": 55,
           "symbol": "_ZN2ox4core4CAes9applySBoxERj",
-          "percent": 81.53846
+          "percent": 100.0
         },
         {
           "address": "0x5de420",
           "size": 31,
           "symbol": "_ZN2ox4core4CAes8subBytesEPh",
-          "percent": 93.333336
+          "percent": 100.0
         },
         {
           "address": "0x5de440",
@@ -128282,7 +128282,7 @@
           "address": "0x5de540",
           "size": 31,
           "symbol": "_ZN2ox4core4CAes11invSubBytesEPh",
-          "percent": 93.333336
+          "percent": 100.0
         },
         {
           "address": "0x5de560",
@@ -128330,13 +128330,13 @@
           "address": "0x5de860",
           "size": 129,
           "symbol": "_ZN2ox4core4CAes12decryptBlockEPhPKh",
-          "percent": 98.60465
+          "percent": 100.0
         },
         {
           "address": "0x5de8f0",
           "size": 162,
           "symbol": "_ZN2ox4core4CAes12encryptBlockEPhPKh",
-          "percent": 98.84615
+          "percent": 100.0
         },
         {
           "address": "0x5de9a0",
@@ -128354,7 +128354,7 @@
           "address": "0x5de6b0",
           "size": 417,
           "symbol": "_ZN2ox4core4CAes9expandKeyEv",
-          "percent": 95.58559
+          "percent": 99.90991
         },
         {
           "address": "0x5ded50",
@@ -128663,7 +128663,7 @@
         "system_headers": 127,
         "object_sha256": "328a852630190162ee922ebcdbb914eee5dafe83ad682655ebf18fbc9aa1b6b5"
       },
-      "fuzzy_target_sha256": "7696b399ff644861d14248b174bba2c3e93d0e142d702d9d3e18ab679cadbc8d",
+      "fuzzy_target_sha256": "9910fc9f55b3dbabdd00d61d7a6ea688829868a59814f182f790bdccd285af50",
       "fuzzy_functions": [
         {
           "address": "0x5e0110",
@@ -129456,7 +129456,7 @@
         "system_headers": 115,
         "object_sha256": "1355966244fed8f8fbed033a6c3664e0a4fd9a1cbe7f6d7fea70ce5e1d0b83bd"
       },
-      "fuzzy_target_sha256": "706ba59bdcdd9b06d14f8c75706098d9abe261fed7eefca0478adff0411ab845",
+      "fuzzy_target_sha256": "1324d6ae6c7c9d98b1133735f47c1235cf79ffca3ccc1ed2d70d21de89d26db3",
       "fuzzy_functions": [
         {
           "address": "0x5e08a0",
@@ -129468,7 +129468,7 @@
           "address": "0x5e08d0",
           "size": 4325,
           "symbol": "_ZN2ox4core16CStringFunctions18millisecondsToWideEfb",
-          "percent": 99.926216
+          "percent": 99.93924
         }
       ]
     },
@@ -130012,13 +130012,13 @@
         "system_headers": 106,
         "object_sha256": "882d8cb5899ddd75f942cac294b264f965c769efa0904c59fb14270d879e3c6a"
       },
-      "fuzzy_target_sha256": "c4bd3dabfc48c4934ed1f944576cffea003ede1339a2e9d16badbe199ca1dbba",
+      "fuzzy_target_sha256": "3a6256388a03563c965f0493b068d9d34771706274ca6f5582040b019f323030",
       "fuzzy_functions": [
         {
           "address": "0x5db100",
           "size": 396,
           "symbol": "_ZN2ox4algo10CBase64url6decodeEPNS_2io10IWriteFileERKNS_4core7CStringIcEE",
-          "percent": 96.86957
+          "percent": 100.0
         },
         {
           "address": "0x5db290",
@@ -130030,13 +130030,13 @@
           "address": "0x5db2c0",
           "size": 2614,
           "symbol": "_ZN2ox4algo10CBase64url6encodeERNS_4core7CStringIcEEPNS_2io9IReadFileE",
-          "percent": 99.22659
+          "percent": 100.0
         },
         {
           "address": "0x5dbd00",
           "size": 5066,
           "symbol": "_ZN2ox4algo10CBase64url7encode2ERNS_4core7CStringIcEEPNS_2io9IReadFileE",
-          "percent": 99.871605
+          "percent": 99.89426
         },
         {
           "address": "0x409c20",
@@ -131530,7 +131530,7 @@
         "system_headers": 121,
         "object_sha256": "32405000563d03cc86acabf5397d3306283665a326363832457b78c27869b3c8"
       },
-      "fuzzy_target_sha256": "373b429ac3aebef51d3d9a4507f04e18a6078b69d9576afded4f31a2e8cdb2c0",
+      "fuzzy_target_sha256": "ab0754ebd292df02454b6e5c2a313d7cc40fa35fc06be9034033d71b8198ffec",
       "fuzzy_functions": [
         {
           "address": "0x5b14a0",
@@ -131836,7 +131836,7 @@
           "address": "0x5b3b50",
           "size": 53,
           "symbol": "_ZNSt8_Rb_treeIiSt4pairIKiPN5daisy5audio21CTrackedSoundInfoStubEESt10_Select1stIS6_ESt4lessIiESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
-          "percent": 99.7619
+          "percent": 100.0
         },
         {
           "address": "0x5b3b90",
@@ -131890,7 +131890,7 @@
           "address": "0x5b3ef0",
           "size": 67,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy5audio14CMusicInfoStubEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
-          "percent": 99.8
+          "percent": 100.0
         },
         {
           "address": "0x5b3f40",
@@ -131902,7 +131902,7 @@
           "address": "0x5b3f60",
           "size": 67,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy5audio14CSoundInfoStubEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
-          "percent": 99.8
+          "percent": 100.0
         },
         {
           "address": "0x5b3fb0",
@@ -132477,7 +132477,7 @@
         "system_headers": 114,
         "object_sha256": "d99020fad515f690e429ed2b65864a7e60913acd86480e6606ebffeca87c418f"
       },
-      "fuzzy_target_sha256": "5f7f313a1f09951bb57fa401680aeac758adaeff6b50fe1f4d2ecc19aa9d01da",
+      "fuzzy_target_sha256": "10c9d53445fb93df831eab82a94a8ddb3358e11bcb8701ba2964ebb163b55913",
       "fuzzy_functions": [
         {
           "address": "0x5081c0",
@@ -132507,19 +132507,19 @@
           "address": "0x508430",
           "size": 651,
           "symbol": "_ZN5daisy3gui8CGUIFont18readPositions16bitEPN2ox5video8ITextureERi",
-          "percent": 99.91477
+          "percent": 100.0
         },
         {
           "address": "0x5086c0",
           "size": 627,
           "symbol": "_ZN5daisy3gui8CGUIFont18readPositions32bitEPN2ox5video8ITextureERi",
-          "percent": 99.91279
+          "percent": 100.0
         },
         {
           "address": "0x508940",
           "size": 205,
           "symbol": "_ZN5daisy3gui8CGUIFont11loadTextureEPN2ox5video8ITextureE",
-          "percent": 99.916664
+          "percent": 100.0
         },
         {
           "address": "0x508a10",
@@ -133804,7 +133804,7 @@
         "system_headers": 114,
         "object_sha256": "3b32a03a1b9fd06b7666a52ad75592dd5f1739b51086d9897c24c713e910e27b"
       },
-      "fuzzy_target_sha256": "000f0cff06873a3b999d79d11b1dd8a77d5ecd93e84592395b3c435e96efd37f",
+      "fuzzy_target_sha256": "d19277f3c54e28c1970e37193ffd251643c4e8e61fd7b44815e05a09c5db0f03",
       "fuzzy_functions": [
         {
           "address": "0x5d8dc0",
@@ -135290,7 +135290,7 @@
         "system_headers": 122,
         "object_sha256": "f409312030db667fec4e023359cc717b181680957e274d6943851f26868d9b15"
       },
-      "fuzzy_target_sha256": "9eec82356dce46c63f448c93d2febd02641583207b67ccb5e1f1ce9ffa5a5d13",
+      "fuzzy_target_sha256": "4b8f2540cc0e4e86cc23b22aa0190cace00dc64b533c99997fbac2008410424d",
       "fuzzy_functions": [
         {
           "address": "0x5da7c0",
@@ -137483,7 +137483,7 @@
         "system_headers": 141,
         "object_sha256": "6602f747c5882eb6011df2c530f69a3c043b868467f0f0d175c69d33a8170bb5"
       },
-      "fuzzy_target_sha256": "34ec294904ba08ad70d48bfa65c74fb71c8c0ee120f90c94e93ebcef4bf01ce9",
+      "fuzzy_target_sha256": "db35d5a889dd3243f9a5441f5a980f3d083a585a3e54d21a78cb7375c9b6a83c",
       "fuzzy_functions": [
         {
           "address": "0x5a1390",
@@ -137615,7 +137615,7 @@
           "address": "0x5a30d0",
           "size": 4976,
           "symbol": "_ZN5daisy5video14CSpritePackage4loadEPN2ox2io9IReadFileEPKc",
-          "percent": 97.0758
+          "percent": 97.0895
         },
         {
           "address": "0x466870",
@@ -137657,7 +137657,7 @@
           "address": "0x5a48d0",
           "size": 371,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN2ox5video21ISpriteAnimationStateESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 99.953705
+          "percent": 100.0
         },
         {
           "address": "0x5a4ce0",
@@ -137693,7 +137693,7 @@
           "address": "0x5a4d30",
           "size": 500,
           "symbol": "_ZNSt6vectorIhSaIhEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPhS1_EEmRKh",
-          "percent": 99.96154
+          "percent": 100.0
         },
         {
           "address": "0x409c20",
@@ -137717,7 +137717,7 @@
           "address": "0x5a51a0",
           "size": 909,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video12SSpriteImageESt6vectorIS4_SaIS4_EEEElNS3_19SImageIdSortFunctorIS4_EEEvT_SC_T0_T1_",
-          "percent": 99.977066
+          "percent": 100.0
         },
         {
           "address": "0x450c90",
@@ -137771,7 +137771,7 @@
           "address": "0x5a59b0",
           "size": 579,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPPN2ox5video21ISpriteAnimationImageESt6vectorIS5_SaIS5_EEEElNS2_4algo19SPointerSortFunctorIS5_EEEvT_SE_T0_T1_",
-          "percent": 99.96795
+          "percent": 100.0
         },
         {
           "address": "0x5a5c00",
@@ -137903,7 +137903,7 @@
           "address": "0x5a7cb0",
           "size": 784,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video13SSpriteBundleESt6vectorIS4_SaIS4_EEEElNS3_19SImageIdSortFunctorIS4_EEEvT_SC_T0_T1_",
-          "percent": 99.97354
+          "percent": 100.0
         },
         {
           "address": "0x5a7fc0",
@@ -138631,7 +138631,7 @@
         "system_headers": 117,
         "object_sha256": "11027e3d2744fe59a3d0437abcb50ea474282e88b0d62cbe4793be1371d1dc68"
       },
-      "fuzzy_target_sha256": "07fce42e1b87d342a0d4405c14ceaecd283dca8347833fb0fcbe7d536cfafbf1",
+      "fuzzy_target_sha256": "0483c711568fac7f4746027a13b13d06573cf3d7afa7fa5b6c7af8bda92d3995",
       "fuzzy_functions": [
         {
           "address": "0x464740",
@@ -143513,7 +143513,7 @@
         "system_headers": 134,
         "object_sha256": "6e062175fb70c6d98e7a3c62ed6fdb485fb59336afcfc347b1eefcdf203447fd"
       },
-      "fuzzy_target_sha256": "d12a64aa52921309a3c7ee058c1fbca07a4ad776452afd11692e117490c35a81",
+      "fuzzy_target_sha256": "0b0e4dac27b9f622c352139d006a4d204c66aa12a1777be504609682a09688f1",
       "fuzzy_functions": [
         {
           "address": "0x5c0b00",
@@ -143591,13 +143591,13 @@
           "address": "0x5c1270",
           "size": 1370,
           "symbol": "_ZN5daisy3gui11CGUIEditBoxC1EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEEPNS4_11IOSOperatorE",
-          "percent": 99.98333
+          "percent": 100.0
         },
         {
           "address": "0x5c17d0",
           "size": 1370,
           "symbol": "_ZN5daisy3gui11CGUIEditBoxC2EPKwbPN2ox3gui15IGUIEnvironmentEPNS5_11IGUIElementEiRKNS4_4core5CRectIiEEPNS4_11IOSOperatorE",
-          "percent": 99.98333
+          "percent": 100.0
         },
         {
           "address": "0x5c1d30",
@@ -143651,7 +143651,7 @@
           "address": "0x5c2d20",
           "size": 7509,
           "symbol": "_ZN5daisy3gui11CGUIEditBox10processKeyERKN2ox5event6SEventE",
-          "percent": 98.79438
+          "percent": 98.79758
         },
         {
           "address": "0x5c4a80",
@@ -143669,7 +143669,7 @@
           "address": "0x5c4b70",
           "size": 5623,
           "symbol": "_ZN5daisy3gui11CGUIEditBox4drawEv",
-          "percent": 99.99138
+          "percent": 99.99569
         },
         {
           "address": "0x466870",
@@ -147624,7 +147624,7 @@
         "system_headers": 117,
         "object_sha256": "514bd582a528372a3bf4d51fc630b917814470c6d57be97db57f1174accbe5dd"
       },
-      "fuzzy_target_sha256": "0cd65d9efab8486a7de8f045a2c2550266e0fe5ccfcc178751f1080c443b6605",
+      "fuzzy_target_sha256": "2049710b26203809646d041282734810459b182e5673ccbf033a9c7aae7995a5",
       "fuzzy_functions": [
         {
           "address": "0x51a080",
@@ -151950,7 +151950,7 @@
         "system_headers": 117,
         "object_sha256": "ebe8200ad74092a674b571acc1705ed528dfb3bdab0fd51a42a53f22c1d119e4"
       },
-      "fuzzy_target_sha256": "3a35e8d257e42569e276583b002a67755f2c16011e2cb6ee8a912733c0ff4e06",
+      "fuzzy_target_sha256": "9665b25a68d3e41cc125d62c4ed577466055e1a0cfce2879ecd95fb5680b2a29",
       "fuzzy_functions": [
         {
           "address": "0x51d360",
@@ -152214,13 +152214,13 @@
           "address": "0x51f6f0",
           "size": 1448,
           "symbol": "_ZN5daisy3gui16CGUITabButtonRow13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 91.911934
+          "percent": 92.068184
         },
         {
           "address": "0x51f110",
           "size": 1504,
           "symbol": "_ZN5daisy3gui14CGUITabControl13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 92.1307
+          "percent": 92.1459
         },
         {
           "address": "0x51fca0",
@@ -152256,13 +152256,13 @@
           "address": "0x521100",
           "size": 1021,
           "symbol": "_ZN5daisy3gui16CGUITabButtonRowC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementERKNS2_4core5CRectIiEEi",
-          "percent": 99.97845
+          "percent": 100.0
         },
         {
           "address": "0x521500",
           "size": 1021,
           "symbol": "_ZN5daisy3gui16CGUITabButtonRowC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementERKNS2_4core5CRectIiEEi",
-          "percent": 99.97845
+          "percent": 100.0
         },
         {
           "address": "0x5221b0",
@@ -153351,7 +153351,7 @@
         "system_headers": 114,
         "object_sha256": "4f5c37ec54184f895124b8cd38b14e7e792b1ee05268a976ce6d0140f9115371"
       },
-      "fuzzy_target_sha256": "5d6af69d710196bb34754b7c3897795a0c78d38416e2194d66ccc81635b71c94",
+      "fuzzy_target_sha256": "c6231e24c2612c243b1294a5f241ef5ea3b6baf5ed5b83667a4bdd08e54bbd83",
       "fuzzy_functions": [
         {
           "address": "0x519110",
@@ -153417,7 +153417,7 @@
           "address": "0x519200",
           "size": 710,
           "symbol": "_ZN5daisy3gui8CGUISkin16setSpritePackageEPN2ox5video14ISpritePackageE",
-          "percent": 99.765625
+          "percent": 100.0
         },
         {
           "address": "0x519640",
@@ -153441,7 +153441,7 @@
           "address": "0x519c00",
           "size": 1029,
           "symbol": "_ZN5daisy3gui8CGUISkinC1EN2ox3gui14EGUI_SKIN_TYPEE",
-          "percent": 99.75
+          "percent": 100.0
         },
         {
           "address": "0x51a010",
@@ -153453,7 +153453,7 @@
           "address": "0x5197f0",
           "size": 1029,
           "symbol": "_ZN5daisy3gui8CGUISkinC2EN2ox3gui14EGUI_SKIN_TYPEE",
-          "percent": 99.75
+          "percent": 100.0
         },
         {
           "address": "0x466870",
@@ -158066,7 +158066,7 @@
         "system_headers": 142,
         "object_sha256": "dfa038b2a538b731fb31d9a366a10f911e00c93943b27447020c7e673d970130"
       },
-      "fuzzy_target_sha256": "b2eea7ba51df922f34492a1599834b858e7506772df701c1a6cbefc4f54b427a",
+      "fuzzy_target_sha256": "7cd49861208a360f8a960cb7752aaebb182a30523b123280d23e251974fd9440",
       "fuzzy_functions": [
         {
           "address": "0x4fa980",
@@ -158174,13 +158174,13 @@
           "address": "0x4fb5f0",
           "size": 1110,
           "symbol": "_ZN5daisy3gui15CGUIEnvironment7getFontEPKc",
-          "percent": 99.719475
+          "percent": 99.73598
         },
         {
           "address": "0x4fba50",
           "size": 522,
           "symbol": "_ZN5daisy3gui15CGUIEnvironment14loadBuidInFontEv",
-          "percent": 99.77612
+          "percent": 100.0
         },
         {
           "address": "0x4fb200",
@@ -158792,7 +158792,7 @@
           "address": "0x4ff860",
           "size": 1917,
           "symbol": "_ZN2ox3gui11IGUIElement19getElementFromPointERKNS_4core11CPosition2dIiEE",
-          "percent": 85.11287
+          "percent": 85.12415
         },
         {
           "address": "0x4fffe0",
@@ -158906,7 +158906,7 @@
           "address": "0x503e00",
           "size": 1331,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy3gui15CGUIEnvironment5SFontESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 99.604904
+          "percent": 99.61853
         },
         {
           "address": "0x504340",
@@ -161486,7 +161486,7 @@
         "system_headers": 117,
         "object_sha256": "76e12b112738c89f8a0d0310c5640d5b0a050a34ed7a663ca1802841c615cb89"
       },
-      "fuzzy_target_sha256": "0fd4f55a71fcbc4a7edd89a60c481e06f4e4312ed38b81b6c5fc4e305f53ed60",
+      "fuzzy_target_sha256": "441c829bfc7504ecc4d91ca69f67d09847eb41ebdb0a28249abfba7989c8d266",
       "fuzzy_functions": [
         {
           "address": "0x5119e0",
@@ -161900,7 +161900,7 @@
           "address": "0x501e20",
           "size": 4523,
           "symbol": "_ZN2ox3gui10IGUILayout9sortRiverEbiib",
-          "percent": 25.824976
+          "percent": 25.834436
         }
       ]
     },
@@ -163519,7 +163519,7 @@
         "system_headers": 117,
         "object_sha256": "82990d624f0ed5117726dbba654eb8dd608c3991459548b6e6919f5f9b53e34f"
       },
-      "fuzzy_target_sha256": "1056e12548e2bb45d47fb5f624e3567b8802f23feb6e097bce2afd2a1b4435bd",
+      "fuzzy_target_sha256": "7d7a00eaffd302f45270b332a6f7468de29c8e3759ff7c993dc84c6af4e5ca4a",
       "fuzzy_functions": [
         {
           "address": "0x515cb0",
@@ -163645,19 +163645,19 @@
           "address": "0x516fd0",
           "size": 3776,
           "symbol": "_ZN5daisy3gui13CGUIScrollBar13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 99.959015
+          "percent": 100.0
         },
         {
           "address": "0x517e90",
           "size": 1996,
           "symbol": "_ZN5daisy3gui13CGUIScrollBarC1EbPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEb",
-          "percent": 99.97664
+          "percent": 100.0
         },
         {
           "address": "0x518660",
           "size": 1996,
           "symbol": "_ZN5daisy3gui13CGUIScrollBarC2EbPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEb",
-          "percent": 99.97664
+          "percent": 100.0
         },
         {
           "address": "0x466870",
@@ -167011,7 +167011,7 @@
         "system_headers": 108,
         "object_sha256": "c4fc261d59f59dee1c6ecfffa6528e6ebde2056c26b8be78c7bf5029402924dc"
       },
-      "fuzzy_target_sha256": "a48d0b7ed5a7ed77576f335ce5037380fd1998fc9b636b153b74461a38f12d28",
+      "fuzzy_target_sha256": "c59a009d5a22bad0bd6e139f406169fe01ca372bd7581dc002d7a2f5db734fb8",
       "fuzzy_functions": [
         {
           "address": "0x514200",
@@ -167065,7 +167065,7 @@
           "address": "0x5144b0",
           "size": 841,
           "symbol": "_ZN5daisy3gui13CGUIRadioList14addRadioButtonEPKw",
-          "percent": 99.975845
+          "percent": 100.0
         },
         {
           "address": "0x514800",
@@ -174886,7 +174886,7 @@
         "system_headers": 135,
         "object_sha256": "333bb892d1a7dc5212302fe5e02bab8eb7728512602be5bff4a32ffc0e776efa"
       },
-      "fuzzy_target_sha256": "a821dd9dc16b4a1dcd4b62d817f3883d8eb8d99d3a41c6ca906d81a48ae9e7cd",
+      "fuzzy_target_sha256": "4a9536f7fed1fb5e8ebe692460a53e3243efacc91e08c498660cf7805179c0a9",
       "fuzzy_functions": [
         {
           "address": "0x50b4d0",
@@ -175294,7 +175294,7 @@
           "address": "0x4ff860",
           "size": 1917,
           "symbol": "_ZN2ox3gui11IGUIElement19getElementFromPointERKNS_4core11CPosition2dIiEE",
-          "percent": 85.11287
+          "percent": 85.12415
         },
         {
           "address": "0x4ff6f0",
@@ -177991,7 +177991,7 @@
         "system_headers": 125,
         "object_sha256": "dd269accfe2ad98e8803b45d6e9b10bc6f91dce219f8ce2304cecf3b146f8619"
       },
-      "fuzzy_target_sha256": "3ab720fe6b20c3ef14014b7dfa8c3a75aa98f89bce54b3458da325e2b6f6a4b6",
+      "fuzzy_target_sha256": "508488bb526028a1199854a9d9e06485854c4e4a68c1e24c5a58efe3035c2301",
       "fuzzy_functions": [
         {
           "address": "0x504c70",
@@ -178063,19 +178063,19 @@
           "address": "0x5054d0",
           "size": 4477,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialog11fillListBoxEPKc",
-          "percent": 99.98537
+          "percent": 100.0
         },
         {
           "address": "0x506650",
           "size": 1894,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialogC1EPN2ox2io11IFileSystemEPKwPNS2_3gui15IGUIEnvironmentEPNS8_11IGUIElementEiPKcSE_",
-          "percent": 99.96134
+          "percent": 100.0
         },
         {
           "address": "0x506dc0",
           "size": 2136,
           "symbol": "_ZN5daisy3gui18CGUIFileOpenDialogC2EPN2ox2io11IFileSystemEPKwPNS2_3gui15IGUIEnvironmentEPNS8_11IGUIElementEiPKcSE_",
-          "percent": 99.96703
+          "percent": 100.0
         },
         {
           "address": "0x507620",
@@ -180741,7 +180741,7 @@
         "system_headers": 117,
         "object_sha256": "c3155f511b6e0ac1504eb7d917443f58ade2a2fb8191ed5626ffae8fe590620d"
       },
-      "fuzzy_target_sha256": "6ebbd29fbc7a44f8aaa12e1e03ab0db0ecd7ee799684b3ee8309fbf0de53d40e",
+      "fuzzy_target_sha256": "e83f359098576267f57525f0dd109f6c79402dda9fcad9f01631f954b55dcb3e",
       "fuzzy_functions": [
         {
           "address": "0x5b4d40",
@@ -180831,13 +180831,13 @@
           "address": "0x5b5330",
           "size": 1046,
           "symbol": "_ZN5daisy3gui10CGUIButton13setAnimationsEPN2ox5video14ISpritePackageEPKcb",
-          "percent": 99.90458
+          "percent": 100.0
         },
         {
           "address": "0x5b5750",
           "size": 1238,
           "symbol": "_ZN5daisy3gui10CGUIButtonC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbPKw",
-          "percent": 99.966446
+          "percent": 100.0
         },
         {
           "address": "0x5b5c30",
@@ -180867,7 +180867,7 @@
           "address": "0x5b6b70",
           "size": 1238,
           "symbol": "_ZN5daisy3gui10CGUIButtonC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEbPKw",
-          "percent": 99.530205
+          "percent": 99.56376
         },
         {
           "address": "0x5b7850",
@@ -182499,7 +182499,7 @@
         "system_headers": 117,
         "object_sha256": "3184fa1dc5373aed7bb5d28a12029a0f0e6c6a10589e60136c34714bb02760da"
       },
-      "fuzzy_target_sha256": "08e25d362bb36f5be2c4406493f08dc92a81f9fffb79d9ae1c687cfaa1fbb2da",
+      "fuzzy_target_sha256": "7c34f697254af867b49521fc3051d9c37db1a2a2c5a66160d42b9ba3ec6d82ed",
       "fuzzy_functions": [
         {
           "address": "0x5b8a20",
@@ -182553,19 +182553,19 @@
           "address": "0x5b8ca0",
           "size": 1238,
           "symbol": "_ZN5daisy3gui12CGUICheckBox13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 99.90099
+          "percent": 100.0
         },
         {
           "address": "0x5b9180",
           "size": 908,
           "symbol": "_ZN5daisy3gui12CGUICheckBoxC1EbPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEE",
-          "percent": 99.97619
+          "percent": 100.0
         },
         {
           "address": "0x5b9510",
           "size": 908,
           "symbol": "_ZN5daisy3gui12CGUICheckBoxC2EbPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEE",
-          "percent": 99.97619
+          "percent": 100.0
         },
         {
           "address": "0x5b98a0",
@@ -185291,7 +185291,7 @@
         "system_headers": 108,
         "object_sha256": "af76fc8f2f012dad9bdd81545866f2a8a77cd020b0434b0538d4b732d3695098"
       },
-      "fuzzy_target_sha256": "c53ce9c2447601c5646abd9a638584df3c1f1502b96bc37f192eff46760c84d2",
+      "fuzzy_target_sha256": "376551e669365deaa8eb9dab5117f3f9446fe9e6befab19b5258e26875ff94a0",
       "fuzzy_functions": [
         {
           "address": "0x5ba6c0",
@@ -185687,7 +185687,7 @@
           "address": "0x501e20",
           "size": 4523,
           "symbol": "_ZN2ox3gui10IGUILayout9sortRiverEbiib",
-          "percent": 25.824976
+          "percent": 25.834436
         }
       ]
     },
@@ -187283,7 +187283,7 @@
         "system_headers": 117,
         "object_sha256": "49d1228d3589f65dec49083a10aabef492aa01cda5c7b9f97b9c8d92f1f1f999"
       },
-      "fuzzy_target_sha256": "abc58f295c208f825f409340978f8ce21160939a92c576ed6bf761bd7d100f23",
+      "fuzzy_target_sha256": "a870703e5b71b73866c0b5053268166c9d88ac1fe5d54f80bfae5a699c384dd5",
       "fuzzy_functions": [
         {
           "address": "0x5bb540",
@@ -187355,13 +187355,13 @@
           "address": "0x5bbff0",
           "size": 1048,
           "symbol": "_ZN5daisy3gui12CGUIComboBoxC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEE",
-          "percent": 99.95614
+          "percent": 100.0
         },
         {
           "address": "0x5bc410",
           "size": 1048,
           "symbol": "_ZN5daisy3gui12CGUIComboBoxC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEE",
-          "percent": 99.95614
+          "percent": 100.0
         },
         {
           "address": "0x5bc830",
@@ -191612,7 +191612,7 @@
         "system_headers": 117,
         "object_sha256": "f8358e5f603a69a23a47f95629aa6cf43b28a7c7754f686a4882d66dd8329b3f"
       },
-      "fuzzy_target_sha256": "cacb30b4c8cbc45235da298b0234f5cf8a13f5ea2d0da9ee4d8ed707cf017be8",
+      "fuzzy_target_sha256": "16fe51a5dcf2c7f76fe9d7f56d697f7d6b2b381a3329550605c26282c1813a68",
       "fuzzy_functions": [
         {
           "address": "0x524240",
@@ -191756,7 +191756,7 @@
           "address": "0x524970",
           "size": 1974,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrame7OnEventERKN2ox5event6SEventE",
-          "percent": 19.61259
+          "percent": 19.64891
         },
         {
           "address": "0x525220",
@@ -191822,25 +191822,25 @@
           "address": "0x527200",
           "size": 2724,
           "symbol": "_ZN5daisy3gui10CGUIWindow13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 99.95503
+          "percent": 100.0
         },
         {
           "address": "0x527cb0",
           "size": 1980,
           "symbol": "_ZN5daisy3gui10CGUIWindowC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEb",
-          "percent": 91.927765
+          "percent": 91.972916
         },
         {
           "address": "0x528470",
           "size": 1980,
           "symbol": "_ZN5daisy3gui10CGUIWindowC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEb",
-          "percent": 91.927765
+          "percent": 91.972916
         },
         {
           "address": "0x528c30",
           "size": 3786,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrame13setAnimationsEPN2ox5video14ISpritePackageEPKc",
-          "percent": 99.948715
+          "percent": 100.0
         },
         {
           "address": "0x529b00",
@@ -191876,13 +191876,13 @@
           "address": "0x529e00",
           "size": 1675,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrameC1EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEjbb",
-          "percent": 99.95627
+          "percent": 100.0
         },
         {
           "address": "0x52a490",
           "size": 1675,
           "symbol": "_ZN5daisy3gui19CGUIDetachableFrameC2EPN2ox3gui15IGUIEnvironmentEPNS3_11IGUIElementEiNS2_4core5CRectIiEEjbb",
-          "percent": 99.95627
+          "percent": 100.0
         },
         {
           "address": "0x466870",
@@ -192236,7 +192236,7 @@
           "address": "0x501e20",
           "size": 4523,
           "symbol": "_ZN2ox3gui10IGUILayout9sortRiverEbiib",
-          "percent": 25.824976
+          "percent": 25.834436
         },
         {
           "address": "0x52ab70",
@@ -197745,7 +197745,7 @@
         "system_headers": 151,
         "object_sha256": "16b7cdea9e2adea4c0676aa0bcf66c795295f3dc98e536ba337734d4b8433ac7"
       },
-      "fuzzy_target_sha256": "028e9d88465c060782a629bf512ac0084f0a525e978c5cbcb7e7958cfce864f8",
+      "fuzzy_target_sha256": "9b8f3d769746f5c1d756c170be5be068ab79a16b47176f88a9e2c4c27591e93e",
       "fuzzy_functions": [
         {
           "address": "0x4eaaa0",
@@ -197781,7 +197781,7 @@
           "address": "0x4eac40",
           "size": 6,
           "symbol": "_ZN5daisy5video12CVideoOpenGL7getNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x4eac50",
@@ -198165,7 +198165,7 @@
           "address": "0x4eb820",
           "size": 25,
           "symbol": "_ZN5daisy5video12CVideoOpenGL22setPixelShaderConstantEPKcPKfi",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4eb840",
@@ -198237,7 +198237,7 @@
           "address": "0x4ec980",
           "size": 233,
           "symbol": "_ZN5daisy5video12CVideoOpenGL10setTextureEiPN2ox5video8ITextureE",
-          "percent": 99.913795
+          "percent": 100.0
         },
         {
           "address": "0x4ed4f0",
@@ -198375,7 +198375,7 @@
           "address": "0x4eea50",
           "size": 3428,
           "symbol": "_ZN5daisy5video12CVideoOpenGL18saveJpegScreenshotEPKcS3_",
-          "percent": 93.98131
+          "percent": 94.022194
         },
         {
           "address": "0x4edbf0",
@@ -198411,13 +198411,13 @@
           "address": "0x4ef910",
           "size": 2747,
           "symbol": "_ZN5daisy5video12CVideoOpenGL14loadExtensionsEv",
-          "percent": 95.07053
+          "percent": 95.697495
         },
         {
           "address": "0x4f03d0",
           "size": 735,
           "symbol": "_ZN5daisy5video12CVideoOpenGLC1ERKN2ox4core12CDimension2dIiEEPNS_15CIrrDeviceLinuxEbbPNS2_2io11IFileSystemE",
-          "percent": 99.95727
+          "percent": 100.0
         },
         {
           "address": "0x4f06b0",
@@ -198429,7 +198429,7 @@
           "address": "0x4f0740",
           "size": 735,
           "symbol": "_ZN5daisy5video12CVideoOpenGLC2ERKN2ox4core12CDimension2dIiEEPNS_15CIrrDeviceLinuxEbbPNS2_2io11IFileSystemE",
-          "percent": 99.95727
+          "percent": 100.0
         },
         {
           "address": "0x4f0a20",
@@ -198795,7 +198795,7 @@
           "address": "0x4f3370",
           "size": 591,
           "symbol": "_ZNSt6vectorIiSaIiEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPiS1_EEmRKi",
-          "percent": 99.96732
+          "percent": 100.0
         },
         {
           "address": "0x451cc0",
@@ -199085,7 +199085,7 @@
         "system_headers": 108,
         "object_sha256": "33d729fd771368c348ebed96a20fa8f2a567b4356166d49c630d5ad873c7f5b7"
       },
-      "fuzzy_target_sha256": "f421841f04a797a1dc9c833d43efbce55906c7ce484d3b087dcadd3be61cbfac",
+      "fuzzy_target_sha256": "8410563be857c2612d5a8e2f1b605b758247f0d767a4db52e87fb2f8345879a0",
       "fuzzy_functions": [
         {
           "address": "0x5a8440",
@@ -199103,25 +199103,25 @@
           "address": "0x5a8490",
           "size": 186,
           "symbol": "_ZN5daisy5video25COpenGLCGMaterialRenderer19createCGPixelShaderEPKcS3_P10_CGcontextb",
-          "percent": 99.791664
+          "percent": 100.0
         },
         {
           "address": "0x5a8550",
           "size": 186,
           "symbol": "_ZN5daisy5video25COpenGLCGMaterialRenderer20createCGVertexShaderEPKcS3_P10_CGcontextb",
-          "percent": 99.791664
+          "percent": 100.0
         },
         {
           "address": "0x5a8610",
           "size": 130,
           "symbol": "_ZN5daisy5video25COpenGLCGMaterialRenderer15OnUnsetMaterialEv",
-          "percent": 99.73684
+          "percent": 100.0
         },
         {
           "address": "0x5a86a0",
           "size": 258,
           "symbol": "_ZN5daisy5video25COpenGLCGMaterialRenderer13OnSetMaterialERN2ox5video9SMaterialERKS4_bPNS3_25IMaterialRendererServicesE",
-          "percent": 99.85507
+          "percent": 100.0
         },
         {
           "address": "0x5a87b0",
@@ -204014,7 +204014,7 @@
         "system_headers": 125,
         "object_sha256": "05bbf510be9fa597098234c9a009d2f18e2e8a9036a388e80bcfd9850d7df863"
       },
-      "fuzzy_target_sha256": "a95d04871447c624dcdc8e73c69eec7fe2d3008d66f3055417b914ee68231f4e",
+      "fuzzy_target_sha256": "d4785e75da7cc279ae4340115f86855052cbec4f6d9d752ed985f4268dca1046",
       "fuzzy_functions": [
         {
           "address": "0x52c630",
@@ -204140,7 +204140,7 @@
           "address": "0x52e8c0",
           "size": 2837,
           "symbol": "_ZN5daisy2io11CFileSystem21intern_resolveAliasesEPKc",
-          "percent": 99.97869
+          "percent": 99.985794
         },
         {
           "address": "0x52f3e0",
@@ -204158,7 +204158,7 @@
           "address": "0x52f4c0",
           "size": 948,
           "symbol": "_ZN5daisy2io11CFileSystem9existFileEPKcb",
-          "percent": 99.978165
+          "percent": 100.0
         },
         {
           "address": "0x52f880",
@@ -204260,7 +204260,7 @@
           "address": "0x530fe0",
           "size": 67,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_PN5daisy2io10CZipReaderEESt10_Select1stISA_ESt4lessIS3_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E",
-          "percent": 99.8
+          "percent": 100.0
         },
         {
           "address": "0x531030",
@@ -204272,7 +204272,7 @@
           "address": "0x4bf930",
           "size": 67,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
-          "percent": 99.8
+          "percent": 100.0
         },
         {
           "address": "0x4bf980",
@@ -204302,7 +204302,7 @@
           "address": "0x5310e0",
           "size": 81,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_S3_ESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
-          "percent": 99.82758
+          "percent": 100.0
         },
         {
           "address": "0x531140",
@@ -205066,7 +205066,7 @@
         "system_headers": 107,
         "object_sha256": "f582e664eaeddaee6f9d7708f99ab530f6f3d6cebe8f322b6a0e3ccddef23963"
       },
-      "fuzzy_target_sha256": "b173552edddcb23ee31c05639aa34b7c758baf34446a7856832d663f456d86e5",
+      "fuzzy_target_sha256": "6f8f11cd4a52a24a6cd572d9d0063b65062eb8eb7f5a9e8f6d5529368444145c",
       "fuzzy_functions": [
         {
           "address": "0x5323d0",
@@ -205096,7 +205096,7 @@
           "address": "0x532450",
           "size": 90,
           "symbol": "_ZN5daisy2io9CReadFile8openFileEv",
-          "percent": 99.80769
+          "percent": 100.0
         },
         {
           "address": "0x5324b0",
@@ -205592,7 +205592,7 @@
         "system_headers": 106,
         "object_sha256": "6cfd90cbf3d308e393e1770e2c09ab1060badd2e83fa0e8366a7ca7af1e249cb"
       },
-      "fuzzy_target_sha256": "5475cf6ccb7c712d590c2ffe561888667daea2e8b45f9a054c5a2a4312bcada8",
+      "fuzzy_target_sha256": "f54d38efbd73d8e56858320bacf19465ffc96cb5745f92c2b26a50266169f47b",
       "fuzzy_functions": [
         {
           "address": "0x532d80",
@@ -205616,7 +205616,7 @@
           "address": "0x532df0",
           "size": 106,
           "symbol": "_ZN5daisy2io10CWriteFile8openFileEb",
-          "percent": 99.833336
+          "percent": 100.0
         },
         {
           "address": "0x532e60",
@@ -208658,7 +208658,7 @@
         "system_headers": 135,
         "object_sha256": "71fcb5a9d3417ca09e22425a590a48a2ba55e096470a04641a99803e07e9d8a9"
       },
-      "fuzzy_target_sha256": "9a663eef95830cf0bbe1984b4e0918da7ebea05ac534faa841a4a63a5862cfa3",
+      "fuzzy_target_sha256": "14c29f5be43e611caddb4cd35b664f6518ad2328aa8414f4d094efa45ae4fd4b",
       "fuzzy_functions": [
         {
           "address": "0x539840",
@@ -208682,7 +208682,7 @@
           "address": "0x5398b0",
           "size": 495,
           "symbol": "_ZN5daisy2io10CZipReader8openFileEi",
-          "percent": 99.871796
+          "percent": 100.0
         },
         {
           "address": "0x539aa0",
@@ -208832,7 +208832,7 @@
           "address": "0x53df00",
           "size": 2882,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy2io13SZipFileEntryESt6vectorIS4_SaIS4_EEEElEvT_SA_T0_",
-          "percent": 99.73799
+          "percent": 99.74527
         },
         {
           "address": "0x53ea50",
@@ -213091,7 +213091,7 @@
         "system_headers": 141,
         "object_sha256": "05514bc1b0bbb7c3b29345d1e7742786656d7407e63afc1319a8c5241fa00989"
       },
-      "fuzzy_target_sha256": "b9c4a67ea41b5f6686e14c17edc396fbbd05e028ba692c104955497e8c56c027",
+      "fuzzy_target_sha256": "4f7844ed5f115fe2389c76561e139fbe24f0716bb9c8d198d32f05656820fad0",
       "fuzzy_functions": [
         {
           "address": "0x4def60",
@@ -213289,7 +213289,7 @@
           "address": "0x4df9d0",
           "size": 6,
           "symbol": "_ZN5daisy5video10CVideoNull7getNameEv",
-          "percent": 97.5
+          "percent": 100.0
         },
         {
           "address": "0x4df9e0",
@@ -213469,7 +213469,7 @@
           "address": "0x4e0280",
           "size": 17,
           "symbol": "_ZN5daisy5video10CVideoNull19captureScreenBufferEjRKN2ox4core5CRectIiEE",
-          "percent": 98.75
+          "percent": 100.0
         },
         {
           "address": "0x4e02a0",
@@ -213481,13 +213481,13 @@
           "address": "0x4e02b0",
           "size": 28,
           "symbol": "_ZN5daisy5video10CVideoNull19addCgShaderMaterialEPKcS3_S3_S3_PN2ox5video26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEbi",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4e02d0",
           "size": 28,
           "symbol": "_ZN5daisy5video10CVideoNull19createScreenTextureERKN2ox4core12CDimension2dIiEE",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4e02f0",
@@ -213535,7 +213535,7 @@
           "address": "0x4e0760",
           "size": 28,
           "symbol": "_ZN5daisy5video10CVideoNull17addShaderMaterialEPKcS3_PN2ox5video26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEi",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4e0780",
@@ -213547,19 +213547,19 @@
           "address": "0x4e0790",
           "size": 28,
           "symbol": "_ZN5daisy5video10CVideoNull26addHighLevelShaderMaterialEPKcS3_N2ox5video20E_VERTEX_SHADER_TYPEES3_S3_NS5_19E_PIXEL_SHADER_TYPEEPNS5_26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEi",
-          "percent": 99.375
+          "percent": 100.0
         },
         {
           "address": "0x4e07b0",
           "size": 499,
           "symbol": "_ZN5daisy5video10CVideoNull19makeColorKeyTextureEPN2ox5video8ITextureENS2_4core11CPosition2dIiEE",
-          "percent": 99.9363
+          "percent": 100.0
         },
         {
           "address": "0x4e09b0",
           "size": 507,
           "symbol": "_ZN5daisy5video10CVideoNull19makeColorKeyTextureEPN2ox5video8ITextureENS3_6SColorE",
-          "percent": 93.2625
+          "percent": 93.325
         },
         {
           "address": "0x4e0bb0",
@@ -213577,7 +213577,7 @@
           "address": "0x4e0cc0",
           "size": 134,
           "symbol": "_ZN5daisy5video10CVideoNull19checkPrimitiveCountEi",
-          "percent": 99.85294
+          "percent": 100.0
         },
         {
           "address": "0x4e0d50",
@@ -213649,13 +213649,13 @@
           "address": "0x4e1400",
           "size": 142,
           "symbol": "_ZN5daisy5video10CVideoNull19createImageFromFileEPKc",
-          "percent": 99.86842
+          "percent": 100.0
         },
         {
           "address": "0x4e1490",
           "size": 143,
           "symbol": "_ZN5daisy5video10CVideoNull19loadTextureFromFileEPN2ox2io9IReadFileE",
-          "percent": 99.875
+          "percent": 100.0
         },
         {
           "address": "0x4e1520",
@@ -213673,7 +213673,7 @@
           "address": "0x4e1570",
           "size": 380,
           "symbol": "_ZN5daisy5video10CVideoNull26addShaderMaterialFromFilesEPKcS3_PN2ox5video26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEi",
-          "percent": 99.9
+          "percent": 100.0
         },
         {
           "address": "0x4e16f0",
@@ -213685,7 +213685,7 @@
           "address": "0x4e1700",
           "size": 476,
           "symbol": "_ZN5daisy5video10CVideoNull35addHighLevelShaderMaterialFromFilesEPKcS3_N2ox5video20E_VERTEX_SHADER_TYPEES3_S3_NS5_19E_PIXEL_SHADER_TYPEEPNS5_26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEi",
-          "percent": 99.913795
+          "percent": 100.0
         },
         {
           "address": "0x4e18e0",
@@ -213697,7 +213697,7 @@
           "address": "0x4e18f0",
           "size": 460,
           "symbol": "_ZN5daisy5video10CVideoNull28addCgShaderMaterialFromFilesEPKcS3_S3_S3_PN2ox5video26IShaderConstantSetCallBackENS5_15E_MATERIAL_TYPEEbi",
-          "percent": 99.91228
+          "percent": 100.0
         },
         {
           "address": "0x4e1ac0",
@@ -213709,7 +213709,7 @@
           "address": "0x4e1ad0",
           "size": 146,
           "symbol": "_ZN5daisy5video10CVideoNull15setInputTextureEiPN2ox5video8ITextureE",
-          "percent": 99.86842
+          "percent": 100.0
         },
         {
           "address": "0x4e1b70",
@@ -213721,7 +213721,7 @@
           "address": "0x4e1b80",
           "size": 265,
           "symbol": "_ZN5daisy5video10CVideoNull18allocatePPSurfacesEj",
-          "percent": 99.93056
+          "percent": 100.0
         },
         {
           "address": "0x4e1c90",
@@ -213841,25 +213841,25 @@
           "address": "0x4e4940",
           "size": 178,
           "symbol": "_ZN5daisy5video10CVideoNull10getTextureEPN2ox2io9IReadFileE",
-          "percent": 99.9
+          "percent": 100.0
         },
         {
           "address": "0x4e4a00",
           "size": 201,
           "symbol": "_ZN5daisy5video10CVideoNull10getTextureEPKc",
-          "percent": 99.81132
+          "percent": 100.0
         },
         {
           "address": "0x4e4ad0",
           "size": 778,
           "symbol": "_ZN5daisy5video10CVideoNull16getSpritePackageEPKcb",
-          "percent": 98.46154
+          "percent": 98.54395
         },
         {
           "address": "0x4e42c0",
           "size": 762,
           "symbol": "_ZN5daisy5video10CVideoNull18getParticlePackageEPKc",
-          "percent": 97.04918
+          "percent": 97.13115
         },
         {
           "address": "0x466870",
@@ -214147,7 +214147,7 @@
           "address": "0x4e93a0",
           "size": 1331,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSurfaceESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 98.9782
+          "percent": 98.99183
         },
         {
           "address": "0x4e9e30",
@@ -214183,7 +214183,7 @@
           "address": "0x4e7c80",
           "size": 1331,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull10SParticlesESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 99.14169
+          "percent": 99.15531
         },
         {
           "address": "0x4ea3e0",
@@ -214195,7 +214195,7 @@
           "address": "0x4ea560",
           "size": 1331,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video10CVideoNull8SSpritesESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 99.305176
+          "percent": 99.3188
         },
         {
           "address": "0x4e65d0",
@@ -214348,7 +214348,7 @@
         "system_headers": 108,
         "object_sha256": "155efedcde0a418035d15b4bcf2d5a7bb55079db93c757bba7ecd74a68769b7f"
       },
-      "fuzzy_target_sha256": "4b63ca7873c1c76d5322befca026dcc73954862bec25ad0c7456b74d7b09285f",
+      "fuzzy_target_sha256": "bd4d829f0fc0d4c9373a78f966a9b32fb3975cfbc19978cecad1b76fb9c8eebe",
       "fuzzy_functions": [
         {
           "address": "0x4c1e90",
@@ -214390,7 +214390,7 @@
           "address": "0x4c2110",
           "size": 51,
           "symbol": "_ZN5daisy2os5Timer12getFloatTimeEv",
-          "percent": 99.5
+          "percent": 100.0
         },
         {
           "address": "0x4c2150",
@@ -215587,7 +215587,7 @@
         "system_headers": 148,
         "object_sha256": "379afdfe491b7e284dd0b6eda312f37425095beea40120cbccced1ca9d9d636b"
       },
-      "fuzzy_target_sha256": "295f7a8cf4a4da9bf079b36c03384aff11be058c1cbedcb890b2202b263c35b2",
+      "fuzzy_target_sha256": "14cb4bd0d080de1bf6009dfc98712916517b348b3244b39acc0305a40e57ac03",
       "fuzzy_functions": [
         {
           "address": "0x4f82c0",
@@ -215719,7 +215719,7 @@
           "address": "0x4f88f0",
           "size": 430,
           "symbol": "_ZN5daisy5audio16COpenALMusicInfo4openEv",
-          "percent": 99.95
+          "percent": 100.0
         },
         {
           "address": "0x4f8aa0",
@@ -215833,7 +215833,7 @@
           "address": "0x4fa3d0",
           "size": 1081,
           "symbol": "_ZN5daisy5audio13COpenALDriver15deviceLoadSoundEPKc",
-          "percent": 99.966446
+          "percent": 100.0
         },
         {
           "address": "0x4fa810",
@@ -217288,7 +217288,7 @@
         "system_headers": 110,
         "object_sha256": "387c5c3eecb429806adba457239dc138875da2108bacbb59b9a0b4e5e678249c"
       },
-      "fuzzy_target_sha256": "65ffeefa7e288e079c87f707f125caf871cd2f90b78108d2aca6fff83505e9aa",
+      "fuzzy_target_sha256": "2aff88bd4c5259b8cdc4252b5f26db5b45a0f44e4eedff0790d6d93118282fc4",
       "fuzzy_functions": [
         {
           "address": "0x4c0620",
@@ -217384,7 +217384,7 @@
           "address": "0x4c0860",
           "size": 831,
           "symbol": "_ZN5daisy14CLinuxOperator25getApplicationSupportPathEPKc",
-          "percent": 99.934784
+          "percent": 100.0
         },
         {
           "address": "0x4c07e0",
@@ -217396,13 +217396,13 @@
           "address": "0x4c0ba0",
           "size": 482,
           "symbol": "_ZN5daisy14CLinuxOperator7openURLEPKw",
-          "percent": 99.92958
+          "percent": 100.0
         },
         {
           "address": "0x4c0d90",
           "size": 831,
           "symbol": "_ZN5daisy14CLinuxOperator16getDocumentsPathEPKc",
-          "percent": 99.978264
+          "percent": 100.0
         },
         {
           "address": "0x466870",
@@ -218813,7 +218813,7 @@
         "system_headers": 125,
         "object_sha256": "84fc36512a855b2cc75d2d1e704e752df5281761cae0de446ffb4261f6fba466"
       },
-      "fuzzy_target_sha256": "8192b7cb5e6102564c013015d5bacbf809aa22dd14f703764da26c29a901f543",
+      "fuzzy_target_sha256": "fd35447b10d313b108948f8971fadd68da4ec6fb2494998d6b0da54da39896f6",
       "fuzzy_functions": [
         {
           "address": "0x4bd0b0",
@@ -218933,7 +218933,7 @@
           "address": "0x4bd300",
           "size": 37,
           "symbol": "_ZN5daisy14CIrrDeviceStub13getThreadPoolEv",
-          "percent": 99.583336
+          "percent": 100.0
         },
         {
           "address": "0x4bd330",
@@ -218999,19 +218999,19 @@
           "address": "0x4be490",
           "size": 1970,
           "symbol": "_ZN5daisy14CIrrDeviceStub12checkVersionEPKw",
-          "percent": 99.90196
+          "percent": 100.0
         },
         {
           "address": "0x4bec50",
           "size": 1138,
           "symbol": "_ZN5daisy14CIrrDeviceStubC1EPKwPN2ox5event14IEventReceiverE",
-          "percent": 99.940475
+          "percent": 100.0
         },
         {
           "address": "0x4bf0d0",
           "size": 1138,
           "symbol": "_ZN5daisy14CIrrDeviceStubC2EPKwPN2ox5event14IEventReceiverE",
-          "percent": 99.940475
+          "percent": 100.0
         },
         {
           "address": "0x4bf550",
@@ -219161,7 +219161,7 @@
           "address": "0x4bf930",
           "size": 67,
           "symbol": "_ZNSt8_Rb_treeIN2ox4core7CStringIcEESt4pairIKS3_bESt10_Select1stIS6_ESt4lessIS3_ESaIS6_EE8_M_eraseEPSt13_Rb_tree_nodeIS6_E",
-          "percent": 99.8
+          "percent": 100.0
         },
         {
           "address": "0x4bf980",
@@ -219669,7 +219669,7 @@
         "system_headers": 121,
         "object_sha256": "a4557833960087b445ea65886aabb96152b0377d3b7c490a66b0c9a62d841a07"
       },
-      "fuzzy_target_sha256": "a936014a3144606a46de93ef236a3d2e42746a3fe0e14dcf97ffbed470778a1d",
+      "fuzzy_target_sha256": "4f57a2486f0abff43adcfc03bed56e06481c7912629d596b46591af7add8cb33",
       "fuzzy_functions": [
         {
           "address": "0x4c1170",
@@ -219699,7 +219699,7 @@
           "address": "0x4c11d0",
           "size": 477,
           "symbol": "_ZN5daisy7CLogger11logWithInfoEPKwS2_iN2ox5event10ELOG_LEVELEz",
-          "percent": 99.895836
+          "percent": 100.0
         },
         {
           "address": "0x4c13b0",
@@ -221103,7 +221103,7 @@
         "system_headers": 137,
         "object_sha256": "7c2bfbe649af4fe9b882f9d53af0fad1636814ad13ac2aa5ecddb46c40bf3b15"
       },
-      "fuzzy_target_sha256": "7daf34c35c1c306eca54d9cf6451eff8efea56199a62ccc5f734aaa9dda0c86b",
+      "fuzzy_target_sha256": "680ed3fdf7097b8e1118f6e3f38ea92eb789ae418300a889b0ab40843a627bbe",
       "fuzzy_functions": [
         {
           "address": "0x4bacc0",
@@ -221241,7 +221241,7 @@
           "address": "0x4bb530",
           "size": 354,
           "symbol": "_ZN5daisy15CIrrDeviceLinux9onResizedERKN2ox4core12CDimension2dIiEE",
-          "percent": 99.93827
+          "percent": 100.0
         },
         {
           "address": "0x4bb6a0",
@@ -221277,7 +221277,7 @@
           "address": "0x4bba50",
           "size": 482,
           "symbol": "_ZN5daisy15CIrrDeviceLinux30createUserSelectedDeviceWindowEPKN2ox6TArrayINS1_4core7CStringIwEEEEj",
-          "percent": 87.307144
+          "percent": 87.41428
         },
         {
           "address": "0x4bbc40",
@@ -221913,7 +221913,7 @@
         "system_headers": 123,
         "object_sha256": "7c7cc275480cea65a61cd0c372beea76869e7996ca15547da18760cefd35fe80"
       },
-      "fuzzy_target_sha256": "d4c87f877746817843050f7f14b35805400c07f68c75695d9d0e7551c73ca3f1",
+      "fuzzy_target_sha256": "031705da5b312a49e8e751931d38634bdbba66888c06fb1153a0789afeb6c72b",
       "fuzzy_functions": [
         {
           "address": "0x4dc600",
@@ -222039,7 +222039,7 @@
           "address": "0x4dcef0",
           "size": 949,
           "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5video14CVideoModeList10SVideoModeESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
-          "percent": 97.6779
+          "percent": 97.69663
         },
         {
           "address": "0x4dd2b0",
@@ -228927,7 +228927,7 @@
         "system_headers": 117,
         "object_sha256": "7d0e87cbd1134b8547f9e194b27dfa802c207b6421a5d3b72ef2f7e6a82529ab"
       },
-      "fuzzy_target_sha256": "44f7bd4aab67d40c1e48068cb4b949f745d8be1e1fd0e83e55380476c47fbc3e",
+      "fuzzy_target_sha256": "8fd37613b57c6253ca94c9fea50cc8397055ea23e836eab2796aa4c66e86f086",
       "fuzzy_functions": [
         {
           "address": "0x54a650",
@@ -229155,7 +229155,7 @@
           "address": "0x4c7320",
           "size": 1877,
           "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
-          "percent": 99.95665
+          "percent": 100.0
         },
         {
           "address": "0x4c7a80",
@@ -230265,7 +230265,7 @@
         "system_headers": 117,
         "object_sha256": "eafb91c5fe386eb477a8da31a685275e46b5f69d7d12e9ee65730e5db3d44235"
       },
-      "fuzzy_target_sha256": "cde8fbb41d5d02057524eede3d7ac8eb521797c9e1b5e63ff8adf6e709cc0f0d",
+      "fuzzy_target_sha256": "375969526e6a3fd7bd81a5999f1315d142e341cd132a431bface0c93cf268681",
       "fuzzy_functions": [
         {
           "address": "0x556bf0",
@@ -230481,7 +230481,7 @@
           "address": "0x4c7320",
           "size": 1877,
           "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
-          "percent": 99.95665
+          "percent": 100.0
         },
         {
           "address": "0x4c8930",
@@ -231498,7 +231498,7 @@
         "system_headers": 117,
         "object_sha256": "9425bff882fc05908d7be60562fca2f380166a188f97e9a9640f5627761f5f5c"
       },
-      "fuzzy_target_sha256": "cc77446d3c21519ad836b5bb983a6e068483229880143dcdaf12b672301bb9e5",
+      "fuzzy_target_sha256": "919910881911ee75238bff528b6e95844b45fd4763eec33e2792e72945fbd7a4",
       "fuzzy_functions": [
         {
           "address": "0x558480",
@@ -231684,7 +231684,7 @@
           "address": "0x4c7320",
           "size": 1877,
           "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
-          "percent": 99.95665
+          "percent": 100.0
         },
         {
           "address": "0x4c7a80",
@@ -232939,7 +232939,7 @@
         "system_headers": 117,
         "object_sha256": "e8a9181c09d2e507d7fe577d3dd8bd9efcdaade4eadb0dd8691f669a25121cad"
       },
-      "fuzzy_target_sha256": "b2f16f2aaaaced16907cc3c56c0d75586fbbc127be344c44b177ae306b97325d",
+      "fuzzy_target_sha256": "4251621cad46b9456e8717366cb44fee9d2f3cd0029f4572e305bde69759d204",
       "fuzzy_functions": [
         {
           "address": "0x55ba30",
@@ -233149,7 +233149,7 @@
           "address": "0x4c7320",
           "size": 1877,
           "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
-          "percent": 99.95665
+          "percent": 100.0
         },
         {
           "address": "0x4c7a80",
@@ -234766,7 +234766,7 @@
         "system_headers": 114,
         "object_sha256": "0f9619cb333dd2d3872c436bebc5ddfc78d996016a1dcec88e16cff35f70fd02"
       },
-      "fuzzy_target_sha256": "1b4571bd8b0735e07b00c9fd26abefff1409862c825147659d3a33e34d5e5171",
+      "fuzzy_target_sha256": "54d74690f9c26fc853e97249c5ddfdfbdf373adc2e252832b966c3f45f44dd60",
       "fuzzy_functions": [
         {
           "address": "0x55d530",
@@ -235679,7 +235679,7 @@
         "system_headers": 117,
         "object_sha256": "7769a187f7ef180d2d5272e3960827a2396db878c01f11b0ab1f0016db989031"
       },
-      "fuzzy_target_sha256": "1456f43263abd9b6564e19bbd7932d4946b20381209abed2c516fec8562acae7",
+      "fuzzy_target_sha256": "b43ac2b0d7f4b235c97398583ec3d036508a8dbd27a96650aceedd89a975d866",
       "fuzzy_functions": [
         {
           "address": "0x4caba0",
@@ -235757,7 +235757,7 @@
           "address": "0x4cad20",
           "size": 782,
           "symbol": "_ZN5daisy5scene35CSceneNodeAnimatorCollisionResponse11animateNodeEPN2ox5scene10ISceneNodeEj",
-          "percent": 99.96932
+          "percent": 100.0
         },
         {
           "address": "0x4cb030",
@@ -239441,7 +239441,7 @@
         "system_headers": 117,
         "object_sha256": "e36dc84a5082d006ab4d86067a9503cfd20f3a2e07bd754fb2f5391ebb654115"
       },
-      "fuzzy_target_sha256": "2465047cacb4f12e7e65e35f827b6f675cc4a3d11a9a8e04b8d03462c754c91a",
+      "fuzzy_target_sha256": "a098d27519405a255315d78472fb56eb4aea3bbf4fb355db65df0e107134be7a",
       "fuzzy_functions": [
         {
           "address": "0x4cc960",
@@ -239657,7 +239657,7 @@
           "address": "0x4c7320",
           "size": 1877,
           "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
-          "percent": 99.95665
+          "percent": 100.0
         },
         {
           "address": "0x4c7a80",
@@ -239716,7 +239716,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "9a16cec2026fd12cdc84587fb356886b7a42e764f008061200e7803db1575bc8"
+    "report_sha256": "f99b9c18ec862c5be22a74fe5308f6ae94c2df01144d8bed606adfeb1f44bdcc"
   },
   "link": {
     "status": "unavailable",
