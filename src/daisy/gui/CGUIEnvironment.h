@@ -22,7 +22,7 @@ namespace gui {
 
 //! The GUI root element and widget factory. Oxeye adds hover descriptions, layout groups and the
 //! extra widgets, and makes the root a layout.
-class CGUIEnvironment : public ox::gui::IGUIEnvironment, public ox::gui::IGUILayout
+class CGUIEnvironment : public ox::gui::IGUIEnvironment, ox::gui::IGUILayout
 {
 public:
     CGUIEnvironment(ox::io::IFileSystem* fs, ox::video::IVideoDriver* driver, ox::IOSOperator* op);

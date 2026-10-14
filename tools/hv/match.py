@@ -169,10 +169,14 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
     layout = Layout(base)
     fde_sizes, starts, ranges = fde_index(frozenset(fdes))
     known = {s.name: resolver.known[s.name] for s in functions if s.name in resolver.known}
-    if known:
-        low = min(known.values())
-        high = max(address + s["st_size"] for s in functions if (address := known.get(s.name)) is not None)
-        taken = set(known.values())
+    taken = set(known.values())
+    if known and functions:
+        low = min(base, *known.values())
+        end_offset = functions[-1]["st_value"] + functions[-1]["st_size"]
+        high = max(
+            base + end_offset,
+            *(address + s["st_size"] for s in functions if (address := known.get(s.name)) is not None),
+        )
         span = ranges[bisect.bisect_left(ranges, (low,)) : bisect.bisect_left(ranges, (high,))]
         free = [(a, n) for a, n in span if a not in taken]
     else:
@@ -192,14 +196,15 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
                     following = starts[after]
                 else:
                     following = previous_address + start - previous_start
-            if (following, size) in fdes:
+            if following not in taken and (following, size) in fdes:
                 address = following
-            elif (base + start, size) in fdes:
+            elif base + start not in taken and (base + start, size) in fdes:
                 address = base + start
             elif len(candidates) == 1:
                 address = candidates[0]
             else:
                 address = following
+            taken.add(address)
             free = [(a, n) for a, n in free if a != address]
         layout.segments.append((start, start + size, address))
     return layout
@@ -303,7 +308,8 @@ def infer_exception_tables(obj: Elf, target: Elf, placements: dict, sections: li
     data = sections[frames[0]].data()
     relocations = [(r["r_offset"], r, s) for r, s in obj.relocations(frames[0])]
     lsdas = target.fde_lsdas()
-    implied: dict[int, set[int]] = {}
+    own: dict[int, set[int]] = {}
+    group: dict[int, set[int]] = {}
     offset = 0
     while offset + 8 <= len(data):
         length = int.from_bytes(data[offset : offset + 4], "little")
@@ -323,9 +329,12 @@ def infer_exception_tables(obj: Elf, target: Elf, placements: dict, sections: li
                     lsda = where
             if code and lsda and code[0] in placements and lsda[0] not in placements:
                 pointer = lsdas.get(placements[code[0]][0].address_of(code[1]))
-                implied.setdefault(lsda[0], set()).add(None if pointer is None else pointer - lsda[1])
+                value = None if pointer is None else pointer - lsda[1]
+                table = group if sections[code[0]]["sh_flags"] & SHF_GROUP else own
+                table.setdefault(lsda[0], set()).add(value)
         offset = end
-    for shndx, bases in implied.items():
+    for shndx in own.keys() | group.keys():
+        bases = own.get(shndx) or group[shndx]
         if len(bases) == 1 and None not in bases:
             placements[shndx] = (Layout(bases.pop()), "exception frames", [])
 
@@ -663,5 +672,20 @@ def learnable(
             if function["exact"] and function["global"] and function["symbol"] not in known:
                 found.setdefault(function["symbol"], set()).add(int(function["address"], 16))
                 evidence.setdefault(function["symbol"], f"match:{source}")
-    learned = {name: (next(iter(a)), evidence[name]) for name, a in found.items() if len(a) == 1}
-    return learned, sorted(name for name, a in found.items() if len(a) > 1)
+    claimed = set(known.values())
+    address_counts: dict[int, int] = {}
+    for addresses in found.values():
+        if len(addresses) == 1:
+            addr = next(iter(addresses))
+            address_counts[addr] = address_counts.get(addr, 0) + 1
+    learned = {
+        name: (addr, evidence[name])
+        for name, a in found.items()
+        if len(a) == 1 and (addr := next(iter(a))) not in claimed and address_counts[addr] == 1
+    }
+    conflicts = sorted(
+        name
+        for name, a in found.items()
+        if len(a) > 1 or (len(a) == 1 and (next(iter(a)) in claimed or address_counts[next(iter(a))] > 1))
+    )
+    return learned, conflicts

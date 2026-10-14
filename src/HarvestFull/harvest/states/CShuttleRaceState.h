@@ -31,7 +31,7 @@ class CLoadingScreen;
 
 //! The hidden two-player shuttle race on a split screen.
 class CShuttleRaceState : public ox::game::CGameState, public game::IScenario,
-                          public ox::video::IParticleEngineCallback
+                          ox::video::IParticleEngineCallback
 {
 public:
     CShuttleRaceState();

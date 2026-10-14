@@ -18,7 +18,7 @@ namespace harvest {
 namespace gui {
 
 //! The settings window: audio, video and language settings on one tab, key bindings on another.
-class CSettingsScreen : public ox::event::IEventReceiver
+class CSettingsScreen : ox::event::IEventReceiver
 {
 public:
     //! With languageSelection set, the general tab also lists the language files.

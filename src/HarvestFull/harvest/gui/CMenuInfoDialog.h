@@ -20,7 +20,7 @@ namespace harvest {
 namespace gui {
 
 //! The briefing dialog of the first scenario, with the voiced welcome and debriefing calls.
-class CMenuInfoDialog : public ox::event::IEventReceiver
+class CMenuInfoDialog : ox::event::IEventReceiver
 {
 public:
     enum EInfoMode

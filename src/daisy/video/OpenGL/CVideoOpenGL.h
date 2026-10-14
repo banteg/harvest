@@ -24,7 +24,7 @@ class CIrrDeviceLinux;
 
 namespace video {
 
-class CVideoOpenGL : public CVideoNull, public ox::video::IMaterialRendererServices
+class CVideoOpenGL : public CVideoNull, ox::video::IMaterialRendererServices
 {
 public:
     //! device is the window device (CIrrDeviceLinux); endScene presents through it. The fullscreen
