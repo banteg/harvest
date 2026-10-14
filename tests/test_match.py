@@ -576,6 +576,31 @@ def test_pc_relative_merged_constant_with_trailing_immediate(tmp_path):
     ]
 
 
+def test_pc_relative_negative_symbol_offset_uses_instruction_bias(tmp_path):
+    """movss xmm0, [rip + .LC0 - 4] has addend -8 (a -4 symbol offset plus the -4 PC bias),
+    while its instruction bias is still 4."""
+    from test_delink import target_with_rodata
+
+    from hv.delink import R_X86_64_PC32, Section, Symbol, write_object
+
+    code = b"\xf3\x0f\x10\x05" + bytes(4) + b"\xc3"
+    sections = [
+        Section(".text", code, 0x6, relocations=[(4, R_X86_64_PC32, ".LC0", -8)]),
+        Section(".rodata.cst4", struct.pack("<fff", 0.0, 2.5, 7.5), 0x12, align=4, entsize=4),
+    ]
+    symbols = [
+        Symbol(NAME, ".text", 0, len(code), function=True),
+        Symbol(".LC0", ".rodata.cst4", 8, local=True),
+    ]
+    write_object(tmp_path / "load.o", sections, symbols)
+    obj = Elf.load(tmp_path / "load.o", "ET_REL")
+    linked = code[:4] + (DESTINATION - (ADDRESS + 8)).to_bytes(4, "little", signed=True) + code[8:]
+    wrong = target_with_rodata(tmp_path, linked, struct.pack("<ff", 1.0, 7.5))
+    assert not compare_object(obj, wrong, {NAME: ADDRESS}, {})["exact"]
+    right = target_with_rodata(tmp_path, linked, struct.pack("<ff", 2.5, 7.5))
+    assert compare_object(obj, right, {NAME: ADDRESS}, {})["exact"]
+
+
 def test_local_symbol_is_never_a_learning_candidate(tmp_path):
     from hv.delink import R_X86_64_PC32, Section, Symbol, write_object
 

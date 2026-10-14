@@ -10,7 +10,7 @@
     "tools/hv/elf.py": "aa50c2ed5bbdfee9539e9357c12befc2bd2f98567c04b11f4d6610374d3db063",
     "tools/hv/extents.py": "3c790ccc6c342a73d3278cd03269b899cca0bf57ff9a03c786378f6952f949f3",
     "tools/hv/rtti.py": "83cb630e01e62973f1f232d6d95ed483d4f7773d3b9b4817a22cc2135e3d1306",
-    "tools/hv/match.py": "dd8d5cdd3423452161db42d3cc8c2910024be4e6885656f7bd60819406303738",
+    "tools/hv/match.py": "38f1845761b17d2ac910d80b9bb02d7314793b090f0362f6461723eb73dfaf15",
     "tools/hv/symbols.py": "0d9150908ba72df692193dbeabb92d9dc3c43830bab42f029a098da5f5f9e76c",
     "tools/hv/toolchain.py": "6f8be7d498157b9b4c9dcf2b4f914f3876118074a0fed89682ef46c2603d2ab8",
     "tools/hv/units.py": "2f71fb16f1daffbc46e613e3cb0dd1995ae88f4d61eedc8560a15eb625e197d6",

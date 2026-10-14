@@ -478,13 +478,9 @@ def expected_bytes(target: Elf, layout: Layout, size: int) -> tuple[bytes, set[i
 DISASSEMBLER = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
 
 
-def pc_bias(
-    raw: bytes, offset: int, symbol, addend: int, biases: dict[int, int] | None
-) -> tuple[int, dict[int, int]]:
+def pc_bias(raw: bytes, offset: int, biases: dict[int, int] | None) -> tuple[int, dict[int, int]]:
     """Bytes from a PC-relative relocation field to the end of its instruction (more than 4 when
     an immediate operand follows the displacement)."""
-    if symbol["st_info"]["type"] != "STT_SECTION" and -8 <= addend < -4:
-        return -addend, biases
     if biases is None:
         biases = {
             at: addr + size - at
@@ -533,9 +529,7 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
         if target_section is not None and is_merged(target_section) and symbol["st_shndx"] not in placements:
             # S + A as the target encodes it; a rip-relative operand points to the end of its
             # instruction, which is past both the 4-byte displacement and any trailing immediate
-            bias, biases = (
-                pc_bias(raw, offset, symbol, ref.addend, biases) if rtype in PC_RELATIVE else (0, biases)
-            )
+            bias, biases = pc_bias(raw, offset, biases) if rtype in PC_RELATIVE else (0, biases)
             absolute = field_value + place if rtype in PC_RELATIVE else field_value
             ours = symbol["st_value"] + ref.addend + bias
             ref.resolved = True
@@ -559,7 +553,7 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
             and symbol["st_info"]["type"] == "STT_SECTION"
             and not placements[shndx][0].contiguous
         ):
-            bias, biases = pc_bias(raw, offset, symbol, ref.addend, biases)
+            bias, biases = pc_bias(raw, offset, biases)
         else:
             bias = 4 if rtype in PC_RELATIVE else 0
         destination = resolve(symbol, placements, resolver, ref.addend + bias)
@@ -590,9 +584,7 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
             ref.reason = "different destination"
             if section["sh_flags"] & SHF_GROUP and symbol["st_info"]["bind"] == "STB_LOCAL":
                 # an inline copy kept from another object reads that object's copy of a static
-                bias, biases = (
-                    pc_bias(raw, offset, symbol, ref.addend, biases) if rtype in PC_RELATIVE else (0, biases)
-                )
+                bias, biases = pc_bias(raw, offset, biases) if rtype in PC_RELATIVE else (0, biases)
                 pointed = field_value + place + bias if rtype in PC_RELATIVE else field_value
                 ours = symbol["st_value"] + ref.addend + bias
                 ref.matches, ref.reason = check_local_copy(
