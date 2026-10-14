@@ -135,8 +135,8 @@ def capture(build: str) -> dict:
     compiler = toolchain.Compiler(toolchain.load_flags(build), out)
     known = symbols.by_name(symbols.load(build))
     results = []
-    for unit in selected:
-        obj, metadata = compiler.compile(unit.path, unit.slug)
+    compiled = compiler.compile_each([(unit.path, unit.slug) for unit in selected])
+    for unit, (obj, metadata) in zip(selected, compiled, strict=True):
         if any(
             source_before.get(str((builds.ROOT / p).resolve().relative_to(builds.ROOT))) != h
             for p, h in metadata["inputs"].items()
