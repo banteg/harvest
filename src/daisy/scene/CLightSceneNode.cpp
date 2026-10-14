@@ -27,6 +27,7 @@ CLightSceneNode::CLightSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 	LightData.Radius = radius;
 	LightData.DiffuseColor = color;
 	LightData.Position = position;
+	LightData.SpecularColor = color;
 }
 
 CLightSceneNode::~CLightSceneNode()

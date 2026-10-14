@@ -51,11 +51,13 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
   data progress. Leave the site's default category as **All** to retain the full denominator.
 - **Port-relevance layers:** `config/<build>/layers.toml` puts every function into one more category, so
   the code a modern port keeps can be followed apart from code it would replace. **Game logic**
-  is the `harvest` objects; **Engine core** is the `ox` library plus the daisy pieces that define
-  data formats or game behaviour (sprite and particle packages, fonts, the sound logic in
-  `CAudioDriver`); **GUI toolkit** is the other `daisy::gui` widgets, whose interfaces the game uses
-  but whose drawing a port redoes; **Platform layer** is the rest of daisy (OpenGL and software
-  renderers, scene graph and mesh loaders, device, input, file system, network and OpenAL backends).
+  is the `harvest` objects; **Engine core** is the `ox` library plus the portable `daisy` pieces the
+  port keeps (sprite and particle packages, `CVideoNull`/`CColorConverter`/`CFPSCounter`/`CVideoModeList`,
+  the `daisy::io` VFS and zip reader, `CIrrDeviceStub`/`CLogger`/`os`, `CJoystickNullDriver`, the
+  recovered menu-scene nodes and rotation animator, fonts, and the sound logic in `CAudioDriver`);
+  **GUI toolkit** is the other `daisy::gui` widgets (kept by the port and drawn through `IVideoDriver`);
+  **Platform layer** is the rest of `daisy` (OpenGL and software renderers, replaced scene-graph and
+  mesh-loader units, X11/SFML device and input, XML/network stubs, and OpenAL backends).
   A rule matches a symbol name; unnamed functions take the layer of the closest earlier named function
   in their address range. Template and inline copies a unit emits beside its own code (STL
   instantiations, `ox` interface inlines) take the layer of the code around them unless a rule names

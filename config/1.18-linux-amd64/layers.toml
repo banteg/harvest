@@ -15,22 +15,22 @@ copies = ['^_ZN?K?(St|9__gnu_cxx)', '^_ZNK?2ox', '^T\.\d+$']
 name = "Game logic (harvest)"
 
 [layers.engine]
-name = "Engine core a port keeps (ox, sprite/particle packages, fonts, sound logic)"
+name = "Engine core a port keeps (ox, sprite/particle packages, fonts, sound, VFS, null driver)"
 
 [layers.toolkit]
 name = "GUI toolkit widgets (daisy::gui)"
 
 [layers.platform]
-name = "Platform layer a port replaces (renderers, scene graph, device, file and audio backends)"
+name = "Platform layer a port replaces (OpenGL/software renderers, scene graph, X11/OpenAL/SFML backends)"
 
 [[range]]
 layer = "game"
 start = 0x408740
-end = 0x4bad60
+end = 0x4bacc0
 
 [[range]]
 layer = "platform"
-start = 0x4bad60
+start = 0x4bacc0
 end = 0x5db100
 
 [[range]]
@@ -38,12 +38,29 @@ layer = "engine"
 start = 0x5db100
 end = 0x5eedd8
 
-# Data formats and behaviour the game depends on, inside the daisy range: the sprite and particle
-# packages with their records, the fonts, and the sound logic with its info stubs. A pattern may match
-# anywhere in a name, so templates over these records follow them.
+# Portable daisy subsystems and data formats the port keeps inside the daisy range: the sprite and
+# particle packages with their records, the null video driver/color converter/FPS counter/video-mode
+# list, the VFS and zip reader, the device stub/logger/timer/os helpers, the null joystick driver,
+# the menu scene's recovered nodes/rotation animator, the fonts, and CAudioDriver with its info stubs.
 [[rule]]
 layer = "engine"
-pattern = '5daisy5video\d+(CSprite|CParticle|SSprite|SAnimation|SImage|SParticle)'
+pattern = '5daisy5video\d+(CSprite|CParticle|SSprite|SAnimation|SImage|SParticle|CVideoNull|createNullDriver|CColorConverter|CFPSCounter|CVideoModeList)'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy2io\d+(CFileList|CFileSystem|createFileSystem|CFilePath|CLimitReadFile|createLimitReadFile|CMemoryReadFile|createMemoryReadFile|CReadFile|createReadFile|CWriteFile|createWriteFile|CZipFileList|CZipReader|SZipFileEntry)'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy(\d+(CIrrDeviceStub|IDaisyDevice|ITimer|CTimer|CLogger)|2os\d+(Printer|Timer|Byteswap))'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy5input19CJoystickNullDriver'
+
+[[rule]]
+layer = "engine"
+pattern = '5daisy5scene\d+(CBillboardSceneNode|CLightSceneNode|CSkyBoxSceneNode|CSceneNodeAnimatorRotation)'
 
 [[rule]]
 layer = "engine"
@@ -51,7 +68,7 @@ pattern = '5daisy3gui(8CGUIFont|12CUnicodeFont)'
 
 [[rule]]
 layer = "engine"
-pattern = '5daisy5audio\d+(CAudioDriver|C\w+InfoStub)'
+pattern = '5daisy5audio\d+(CAudioDriver|C[A-Za-z]+InfoStub)'
 
 [[rule]]
 layer = "toolkit"

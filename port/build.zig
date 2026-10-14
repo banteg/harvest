@@ -29,19 +29,26 @@ const replaced = [_][]const u8{
     // replaces them.
     "daisy/video/OpenGL/",
     "daisy/video/Null/CCGMaterialRenderer.cpp",
-    // The software renderer's z-buffer, never reached by the game.
+    // Software renderer and its z-buffer: the port provides an empty CSoftwareTexture stub.
     "daisy/video/Software/",
-    // The recovered PSD loader preserves uninitialized alpha and unchecked legacy reads.
-    // The port decodes PSD through stb_image, alongside JPEG and TGA.
-    "daisy/video/Null/CImageLoaderPSD.cpp",
+    // CImage and image loaders: port/src/video provides CImage, decodes JPEG, TGA and PSD through
+    // stb_image (the recovered PSD loader preserves uninitialized alpha and unchecked legacy
+    // reads), BMP in ImageLoaderBmp.cpp and PCX in ImageLoaderStubs.cpp.
+    "daisy/video/Null/CImage.cpp",
+    "daisy/video/Null/CImageLoader",
+    // Scene graph units replaced by port/src/scene (while keeping CBillboardSceneNode,
+    // CLightSceneNode, CSkyBoxSceneNode and CSceneNodeAnimatorRotation from src/daisy/scene).
+    "daisy/scene/CAnimatedMeshSceneNode.cpp",
+    "daisy/scene/CCameraSceneNode.cpp",
+    "daisy/scene/CSceneCollisionManager.cpp",
+    "daisy/scene/CSceneManager.cpp",
+    "daisy/scene/CStaticMeshOBJ.cpp",
+    // Unused XML readers/writer and Winsock TCP device, stubbed in port/src/io and port/src/net.
+    "daisy/io/CTextReader.cpp",
+    "daisy/io/CXML",
+    "daisy/net/",
     // The blocking main loop: the port runs the frame step from SDL3's main callbacks.
     "HarvestFull/main.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/scene/CBillboardSceneNode.cpp.
-    "daisy/scene/CBillboardSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/scene/CLightSceneNode.cpp.
-    "daisy/scene/CLightSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/scene/CSkyBoxSceneNode.cpp.
-    "daisy/scene/CSkyBoxSceneNode.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no

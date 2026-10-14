@@ -36,6 +36,7 @@ reached, not when compiled.
 | `HarvestFull/harvest/states` (5) | CIntroState, CLoadingScreen, CMainMenuState, CPlayState, CShuttleRaceState |
 | `daisy/audio` | CAudioDriver |
 | `daisy/gui` (25) | CGUIButton, CGUICheckBox, CGUIClickArea, CGUIComboBox, CGUIContextMenu, CGUIEditBox, CGUIEnvironment, CGUIFileOpenDialog, CGUIFont, CGUIImage, CGUIInOutFader, CGUIListBox, CGUIMenu, CGUIMeshViewer, CGUIMessageBox, CGUIModalScreen, CGUIPopupMenu, CGUIRadioList, CGUIScrollBar, CGUISkin, CGUIStaticText, CGUITabControl, CGUIToolBar, CGUIWindow, CUnicodeFont |
+| `daisy/scene` (16) | CBillboardSceneNode, CDummyTransformationSceneNode, CEmptySceneNode, CLightSceneNode, CMeshManipulator, CParticleFadeOutAffector, CSceneNodeAnimatorCollisionResponse, CSceneNodeAnimatorDelete, CSceneNodeAnimatorFlyCircle, CSceneNodeAnimatorFlyStraight, CSceneNodeAnimatorFollowSpline, CSceneNodeAnimatorRotation, CSceneNodeAnimatorTexture, CSkyBoxSceneNode, CTriangleBBSelector, CTriangleSelector |
 | `daisy/input` | CJoystickNullDriver |
 | `daisy/io` (8) | CFileList, CFileSystem, CLimitReadFile, CMemoryReadFile, CReadFile, CWriteFile, CZipFileList, CZipReader |
 | `daisy/other` (3) | CIrrDeviceStub, CLogger, os.cpp |
@@ -54,9 +55,9 @@ portable (`os.cpp`'s `gettimeofday` is in mingw-w64 too), and the SDL3 device de
 `CIrrDeviceStub` as `CIrrDeviceLinux` did, which keeps `os::Printer`, `os::Timer`, the logger and
 the null joystick driver as the original has them.
 
-### Replaced units (12)
+### Replaced units
 
-The `replaced` list in `build.zig`:
+The `replaced` list in `build.zig` (12 recovered units plus unrecovered prefixes that `port/src/` already replaces):
 
 | Unit | What it is | Replaced by |
 |---|---|---|
@@ -66,10 +67,11 @@ The `replaced` list in `build.zig`:
 | `daisy/audio/COpenALDriver` | OpenAL/ALUT and libvorbisfile backend of `CAudioDriver` | miniaudio |
 | `daisy/video/OpenGL/CVideoOpenGL`, `COpenGLTexture`, `COpenGLCGMaterialRenderer`, `COpenGLSLMaterialRenderer`, `COpenGLShaderMaterialRenderer` | OpenGL 1.x driver, textures, Cg/GLSL/ARB material renderers | GLES3 renderer |
 | `daisy/video/Null/CCGMaterialRenderer` | Cg material renderer base (Cg runtime calls) | GLES3 renderer |
-| `daisy/video/Software/CZBuffer` | software renderer z-buffer, never reached | dropped |
+| `daisy/video/Software/` (`CZBuffer`, `CSoftwareTexture`, `CVideoSoftware`, `CTR*`) | software renderer and z-buffer | `port/src/video/CSoftwareTexture.cpp` stub |
+| `daisy/video/Null/CImage.cpp`, `CImageLoader*` | image buffer and PSD/JPEG/TGA/BMP/PCX loaders | `port/src/video/CImage.cpp`, `ImageLoaderStb.cpp`, `ImageLoaderBmp.cpp`, `ImageLoaderStubs.cpp` |
+| `daisy/scene/CSceneManager.cpp`, `CCameraSceneNode.cpp`, `CAnimatedMeshSceneNode.cpp`, `CSceneCollisionManager.cpp`, `CStaticMeshOBJ.cpp` | scene manager, camera, animated mesh, picking and OBJ loader (while `CBillboardSceneNode`, `CLightSceneNode`, `CSkyBoxSceneNode` and `CSceneNodeAnimatorRotation` are kept from `src/daisy/scene/`) | `port/src/scene/` |
+| `daisy/io/CTextReader.cpp`, `CXML*`, `daisy/net/` | unused XML readers/writer and Winsock TCP device | `port/src/io/XMLStubs.cpp`, `port/src/net/CWinsockNetworkDevice.cpp` |
 | `HarvestFull/main.cpp` | the blocking `init`/`update` loop | SDL3 main callbacks (`port/src/main.cpp`) |
-| `daisy/scene/CBillboardSceneNode.cpp`, `CLightSceneNode.cpp`, `CSkyBoxSceneNode.cpp` | recovered billboard, light and sky-box nodes | the existing nodes in `port/src/scene/` |
-
 ## Port sources (`port/src/`)
 
 | File | Provides | Notes |
@@ -97,11 +99,11 @@ The `replaced` list in `build.zig`:
 | `video/ImageLoaderBmp.cpp` | `createImageLoaderBmp` | Irrlicht 0.7's BMP loader (uncompressed 1/4/8/24-bit), for the GUI's built-in font |
 | `video/ImageLoaderStubs.cpp` | `createImageLoaderPCX` | a loader that accepts nothing (they must not be null: `CVideoNull` calls and drops every loader) |
 | `video/CVideoGL.{h,cpp}`, `CFixedFunction.*`, `CTextureGL.*`, `MaterialRenderers.h`, `CCgMaterialRendererGL.*`, `GL.*`, `Shaders.*`, `shaders/` | `port::createVideoDriver` | the OpenGL ES 3.0 / OpenGL 3.3 core renderer, per [renderer.md](renderer.md#in-the-port); `port/tests/video.cpp` draws the 2D primitives, the scattering materials and the menu scene and saves screenshots |
-| `scene/` | `daisy::scene::createSceneManager`, using the recovered inline `ox::scene::ISceneNode` bodies | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, light, billboard and skybox nodes, rotation animator, bounding-box picking, OBJ loader; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
-| `thirdparty/stb_image.c`, `thirdparty/stb_image_write.c`, `thirdparty/miniaudio.c` | the libraries' implementations | stb_image: JPEG, TGA, PSD, PNG, from memory only; stb_image_write: JPEG to a callback (screenshots); miniaudio with stb_vorbis |
+| `scene/` | `daisy::scene::createSceneManager`, using the recovered inline `ox::scene::ISceneNode` bodies and recovered `CBillboardSceneNode`, `CLightSceneNode`, `CSkyBoxSceneNode` and `CSceneNodeAnimatorRotation` | the menu scene subset, per [menu-scene.md](menu-scene.md): scene manager, animated mesh, camera, bounding-box picking and OBJ loader in `port/src/scene/`, with billboard, light, skybox and rotation animator from `src/daisy/scene/`; the rest of `ISceneManager` returns null. `port/tests/menu_scene.cpp` dumps its draw calls |
 
-The camera, animated-mesh, light and billboard interfaces now share their recovered constructors
-forwarding to `ISceneNode` in both builds; the port nodes continue to derive from these interfaces.
+The camera, animated-mesh, light and billboard interfaces share their recovered constructors
+forwarding to `ISceneNode` in both builds, and `CBillboardSceneNode`, `CLightSceneNode`,
+`CSkyBoxSceneNode` and `CSceneNodeAnimatorRotation` use the recovered implementations directly.
 
 ## Source changes for the port
 

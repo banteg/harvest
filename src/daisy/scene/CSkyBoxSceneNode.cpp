@@ -14,7 +14,7 @@
 #include "ox/video/IVideoDriver.h"
 #include "ox/scene/ISceneManager.h"
 #include "ox/scene/ICameraSceneNode.h"
-#include "ox/video/S3DVertex.h"
+#include "ox/video/S3DVertexInline.h"
 #include "daisy/os.h"
 
 namespace ox { namespace scene {} }
@@ -85,45 +85,45 @@ CSkyBoxSceneNode::CSkyBoxSceneNode(ox::video::ITexture* top, ox::video::ITexture
 
 	Material[0] = mat;
 	Material[0].Texture1 = front;
-	Vertices[0] = ox::video::S3DVertex(-l,-l,-l, 0,0,1, ox::video::SColor(255,255,255,255), o, t);
-	Vertices[1] = ox::video::S3DVertex( l,-l,-l, 0,0,1, ox::video::SColor(255,255,255,255), t, t);
-	Vertices[2] = ox::video::S3DVertex( l, l,-l, 0,0,1, ox::video::SColor(255,255,255,255), t, o);
-	Vertices[3] = ox::video::S3DVertex(-l, l,-l, 0,0,1, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[0] = ox::video::S3DVertex(-l,-l,-l, 0,0,1, ox::video::SColor(255,255,255,255), t, t);
+	Vertices[1] = ox::video::S3DVertex( l,-l,-l, 0,0,1, ox::video::SColor(255,255,255,255), o, t);
+	Vertices[2] = ox::video::S3DVertex( l, l,-l, 0,0,1, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[3] = ox::video::S3DVertex(-l, l,-l, 0,0,1, ox::video::SColor(255,255,255,255), t, o);
 
 	// create left side
 
 	Material[1] = mat;
 	Material[1].Texture1 = left;
-	Vertices[4] = ox::video::S3DVertex( l,-l,-l, -1,0,0, ox::video::SColor(255,255,255,255), o, t);
-	Vertices[5] = ox::video::S3DVertex( l,-l, l, -1,0,0, ox::video::SColor(255,255,255,255), t, t);
-	Vertices[6] = ox::video::S3DVertex( l, l, l, -1,0,0, ox::video::SColor(255,255,255,255), t, o);
-	Vertices[7] = ox::video::S3DVertex( l, l,-l, -1,0,0, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[4] = ox::video::S3DVertex( l,-l,-l, -1,0,0, ox::video::SColor(255,255,255,255), t, t);
+	Vertices[5] = ox::video::S3DVertex( l,-l, l, -1,0,0, ox::video::SColor(255,255,255,255), o, t);
+	Vertices[6] = ox::video::S3DVertex( l, l, l, -1,0,0, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[7] = ox::video::S3DVertex( l, l,-l, -1,0,0, ox::video::SColor(255,255,255,255), t, o);
 
 	// create back side
 
 	Material[2] = mat;
 	Material[2].Texture1 = back;
-	Vertices[8]  = ox::video::S3DVertex( l,-l, l, 0,0,-1, ox::video::SColor(255,255,255,255), o, t);
-	Vertices[9]  = ox::video::S3DVertex(-l,-l, l, 0,0,-1, ox::video::SColor(255,255,255,255), t, t);
-	Vertices[10] = ox::video::S3DVertex(-l, l, l, 0,0,-1, ox::video::SColor(255,255,255,255), t, o);
-	Vertices[11] = ox::video::S3DVertex( l, l, l, 0,0,-1, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[8]  = ox::video::S3DVertex( l,-l, l, 0,0,-1, ox::video::SColor(255,255,255,255), t, t);
+	Vertices[9]  = ox::video::S3DVertex(-l,-l, l, 0,0,-1, ox::video::SColor(255,255,255,255), o, t);
+	Vertices[10] = ox::video::S3DVertex(-l, l, l, 0,0,-1, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[11] = ox::video::S3DVertex( l, l, l, 0,0,-1, ox::video::SColor(255,255,255,255), t, o);
 
 	// create right side
 
 	Material[3] = mat;
 	Material[3].Texture1 = right;
-	Vertices[12] = ox::video::S3DVertex(-l,-l, l, 1,0,0, ox::video::SColor(255,255,255,255), o, t);
-	Vertices[13] = ox::video::S3DVertex(-l,-l,-l, 1,0,0, ox::video::SColor(255,255,255,255), t, t);
-	Vertices[14] = ox::video::S3DVertex(-l, l,-l, 1,0,0, ox::video::SColor(255,255,255,255), t, o);
-	Vertices[15] = ox::video::S3DVertex(-l, l, l, 1,0,0, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[12] = ox::video::S3DVertex(-l,-l, l, 1,0,0, ox::video::SColor(255,255,255,255), t, t);
+	Vertices[13] = ox::video::S3DVertex(-l,-l,-l, 1,0,0, ox::video::SColor(255,255,255,255), o, t);
+	Vertices[14] = ox::video::S3DVertex(-l, l,-l, 1,0,0, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[15] = ox::video::S3DVertex(-l, l, l, 1,0,0, ox::video::SColor(255,255,255,255), t, o);
 
 	// create top side
 
 	Material[4] = mat;
 	Material[4].Texture1 = top;
-	Vertices[16] = ox::video::S3DVertex( l, l, l, 0,-1,0, ox::video::SColor(255,255,255,255), o, o);
+	Vertices[16] = ox::video::S3DVertex( l, l, l, 0,-1,0, ox::video::SColor(255,255,255,255), t, t);
 	Vertices[17] = ox::video::S3DVertex(-l, l, l, 0,-1,0, ox::video::SColor(255,255,255,255), o, t);
-	Vertices[18] = ox::video::S3DVertex(-l, l,-l, 0,-1,0, ox::video::SColor(255,255,255,255), t, t);
+	Vertices[18] = ox::video::S3DVertex(-l, l,-l, 0,-1,0, ox::video::SColor(255,255,255,255), o, o);
 	Vertices[19] = ox::video::S3DVertex( l, l,-l, 0,-1,0, ox::video::SColor(255,255,255,255), t, o);
 
 	// create bottom side
@@ -131,9 +131,9 @@ CSkyBoxSceneNode::CSkyBoxSceneNode(ox::video::ITexture* top, ox::video::ITexture
 	Material[5] = mat;
 	Material[5].Texture1 = bottom;
 	Vertices[20] = ox::video::S3DVertex(-l,-l, l, 0,1,0, ox::video::SColor(255,255,255,255), o, o);
-	Vertices[21] = ox::video::S3DVertex( l,-l, l, 0,1,0, ox::video::SColor(255,255,255,255), o, t);
+	Vertices[21] = ox::video::S3DVertex( l,-l, l, 0,1,0, ox::video::SColor(255,255,255,255), t, o);
 	Vertices[22] = ox::video::S3DVertex( l,-l,-l, 0,1,0, ox::video::SColor(255,255,255,255), t, t);
-	Vertices[23] = ox::video::S3DVertex(-l,-l,-l, 0,1,0, ox::video::SColor(255,255,255,255), t, o);
+	Vertices[23] = ox::video::S3DVertex(-l,-l,-l, 0,1,0, ox::video::SColor(255,255,255,255), o, t);
 }
 
 

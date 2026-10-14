@@ -40,6 +40,11 @@ public:
 //! A dynamic light.
 struct SLight
 {
+    SLight()
+        : AmbientColor(0.0f, 0.0f, 0.0f), DiffuseColor(1.0f, 1.0f, 1.0f),
+          SpecularColor(0.0f, 0.0f, 0.0f), Position(0.0f, 0.0f, 0.0f), Radius(100.0f),
+          CastShadows(true), Directional(false) {}
+
     SColorf AmbientColor;
     SColorf DiffuseColor;
     SColorf SpecularColor;
