@@ -68,7 +68,7 @@ The `replaced` list in `build.zig`:
 | `daisy/video/Null/CCGMaterialRenderer` | Cg material renderer base (Cg runtime calls) | GLES3 renderer |
 | `daisy/video/Software/CZBuffer` | software renderer z-buffer, never reached | dropped |
 | `HarvestFull/main.cpp` | the blocking `init`/`update` loop | SDL3 main callbacks (`port/src/main.cpp`) |
-| `daisy/scene/CBillboardSceneNode.cpp`, `CLightSceneNode.cpp` | recovered billboard and light nodes | the existing nodes in `port/src/scene/` |
+| `daisy/scene/CBillboardSceneNode.cpp`, `CLightSceneNode.cpp`, `CSkyBoxSceneNode.cpp` | recovered billboard, light and sky-box nodes | the existing nodes in `port/src/scene/` |
 
 ## Port sources (`port/src/`)
 
