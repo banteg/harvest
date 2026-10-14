@@ -27,8 +27,8 @@ jobs:
       - name: Test and lint tooling (no originals)
         run: |
           uv run pytest -q -m 'not originals and not toolchain'
-          uv run ruff check tools tests
-          uv run ruff format --check tools tests
+          uv run ruff check tools tests port/tools
+          uv run ruff format --check tools tests port/tools
       - name: Check evidence freshness and export objdiff report
         run: uv run python -m hv.progress report
       - name: Validate with objdiff v3.8.1
