@@ -355,6 +355,18 @@ def test_merged_constant_must_be_complete():
     assert not ok and "incomplete" in message
 
 
+@pytest.mark.parametrize(
+    ("data", "width", "flags"), [(b"ABC\0", 4, 0x10), (b"ABC\0", 1, 0x30), (b"A\0\0\0\0\0\0\0", 4, 0x30)]
+)
+@pytest.mark.parametrize("executable", [False, True])
+def test_merged_data_requires_non_executable_bytes(data, width, flags, executable):
+    target = Elf(elf_image(data, kind=2, flags=6 if executable else 2), "ET_EXEC")
+    ok, message = match.check_merged(target, FakeSection(data, width, flags=flags), 0, ADDRESS)
+    assert ok is not executable
+    if executable:
+        assert "in code" in message
+
+
 class FakeSymbol(dict):
     def __init__(self, name, value, size):
         super().__init__(st_shndx=1, st_info={"type": "STT_FUNC"}, st_value=value, st_size=size)

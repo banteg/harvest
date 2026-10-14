@@ -140,6 +140,7 @@ With these objects objdiff scores every function of the exact units at 100%, mat
 | `daisy/scene/CDummyTransformationSceneNode.cpp` | 45/45 | Irrlicht 0.7's node that only holds a transformation |
 | `daisy/scene/CEmptySceneNode.cpp` | 40/41 | Irrlicht 0.7's empty node; the static initializer differs |
 | `daisy/scene/CLightSceneNode.cpp` | 43/45 | Irrlicht 0.7's light node; both constructors differ; the port keeps its own light node |
+| `daisy/scene/CSkyBoxSceneNode.cpp` | 42/44 | Irrlicht 0.7's sky box node; both constructors differ; the port keeps its own sky box node |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
