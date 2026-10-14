@@ -18,7 +18,7 @@ namespace harvest {
 namespace gui {
 
 //! The menu opened with Escape during a game.
-class CIngameMenuScreen : public ox::event::IEventReceiver
+class CIngameMenuScreen : ox::event::IEventReceiver
 {
 public:
     CIngameMenuScreen(ox::IOxDevice* device);

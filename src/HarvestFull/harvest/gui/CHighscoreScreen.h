@@ -45,7 +45,7 @@ struct SSummaryPage
 };
 
 //! The online highscore screen: a summary page per category and the full highscore table.
-class CHighscoreScreen : public ox::event::IEventReceiver
+class CHighscoreScreen : ox::event::IEventReceiver
 {
 public:
     CHighscoreScreen(ox::IOxDevice* device);

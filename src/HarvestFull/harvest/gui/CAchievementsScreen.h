@@ -25,7 +25,7 @@ namespace gui {
 
 //! The award board: the main and mini achievements of the current profile with their tooltips
 //! and the Medusa dialog of an earned award.
-class CAchievementsScreen : public ox::event::IEventReceiver
+class CAchievementsScreen : ox::event::IEventReceiver
 {
 public:
     //! Every award on the board: the main achievements, then three per mini achievement.

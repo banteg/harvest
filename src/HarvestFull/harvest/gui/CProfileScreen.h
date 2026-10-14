@@ -20,7 +20,7 @@ namespace harvest {
 namespace gui {
 
 //! The profile list and the window that creates or edits a profile.
-class CProfileScreen : public ox::event::IEventReceiver
+class CProfileScreen : ox::event::IEventReceiver
 {
 public:
     CProfileScreen(ox::IOxDevice* device);

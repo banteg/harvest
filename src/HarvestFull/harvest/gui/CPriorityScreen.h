@@ -37,7 +37,7 @@ struct SPriorityBox
 };
 
 //! The screen where the player sets the alien priorities of the five weapon types.
-class CPriorityScreen : public ox::event::IEventReceiver
+class CPriorityScreen : ox::event::IEventReceiver
 {
 public:
     CPriorityScreen(ox::IOxDevice* device);

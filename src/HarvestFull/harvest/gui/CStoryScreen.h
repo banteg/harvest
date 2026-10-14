@@ -42,7 +42,7 @@ public:
 
 //! The letterbox borders that show campaign dialogue, one line at the top and one at the bottom,
 //! and the fade to black between scenes.
-class CStoryScreen : public ox::event::IEventReceiver
+class CStoryScreen : ox::event::IEventReceiver
 {
 public:
     CStoryScreen(ox::IOxDevice* device);
