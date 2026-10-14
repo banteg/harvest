@@ -1818,18 +1818,24 @@ void CPlayState::updatePlacementPosition()
     CursorMoved = false;
     PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
     PlacementOk = false;
-    if (HasLastPlacement && ox::core::CMath::getSquaredDistance(LastPlacement, PlacementPosition) > 22500.0f)
+    if (HasLastPlacement)
     {
-        float angle = ox::core::CMath::getAngleIY(LastPlacement, PlacementPosition);
-        PlacementPosition.X = LastPlacement.X + cos((double)angle) * 149.0;
-        PlacementPosition.Y = LastPlacement.Y + sin((double)angle) * 149.0;
+        if (ox::core::CMath::getSquaredDistance(LastPlacement, PlacementPosition) > 22500.0f)
+        {
+            float angle = ox::core::CMath::getAngleIY(LastPlacement, PlacementPosition);
+            double cosAngle = cos((double)angle);
+            PlacementPosition.X = LastPlacement.X + cosAngle * 149.0;
+            PlacementPosition.Y = LastPlacement.Y + sin((double)angle) * 149.0;
+        }
     }
-    if (game::gp_world->mayPlaceObjectHere(PlacementPosition, false) &&
-        entity::gp_entityManager->isBuildingPlacementOk(PlacementPosition,
-            BuildableItems.getEntityRadius(BuildSelection)))
+    if (game::gp_world->mayPlaceObjectHere(PlacementPosition, false))
     {
-        PlacementOk = true;
-        m_2a0 = true;
+        if (entity::gp_entityManager->isBuildingPlacementOk(PlacementPosition,
+                BuildableItems.getEntityRadius(BuildSelection)))
+        {
+            PlacementOk = true;
+            m_2a0 = true;
+        }
     }
     if (!PlacementOk)
         PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
