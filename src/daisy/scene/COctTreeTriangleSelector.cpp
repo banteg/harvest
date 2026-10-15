@@ -30,7 +30,7 @@ COctTreeTriangleSelector::COctTreeTriangleSelector(IMesh* mesh, ISceneNode* node
  MinimalPolysPerNode(minimalPolysPerNode)
 {
 
-	
+
 	if (!Triangles.empty())
 	{
 		unsigned int start = os::Timer::getTime();
@@ -42,7 +42,7 @@ COctTreeTriangleSelector::COctTreeTriangleSelector(IMesh* mesh, ISceneNode* node
 
 		unsigned int end = os::Timer::getTime();
 		char tmp[255];
-		sprintf(tmp, "Needed %dms to create OctTreeTriangleSelector.(%d nodes, %d polys)", 
+		sprintf(tmp, "Needed %dms to create OctTreeTriangleSelector.(%d nodes, %d polys)",
 			end - start, NodeCount, Triangles.size());
 		os::Printer::log(tmp, ox::event::ELL_INFORMATION);
 	}
@@ -67,8 +67,8 @@ void COctTreeTriangleSelector::constructOctTree(SOctTreeNode* node)
 
 
 //! Gets all triangles which lie within a specific bounding box.
-void COctTreeTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, 
-									 int arraySize, int& outTriangleCount, 
+void COctTreeTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles,
+									 int arraySize, int& outTriangleCount,
 									const ox::core::CAabbox3d<float>& box,
 									const ox::core::CMatrix4* transform)
 {
@@ -112,7 +112,7 @@ void COctTreeTriangleSelector::getTrianglesFromOctTree(
 		cnt -= cnt + trianglesWritten - maximumSize;
 
 	int i;
-	
+
 	for (i=0; i<cnt; ++i)
 	{
 		triangles[trianglesWritten] = node->Triangles[i];
@@ -131,7 +131,7 @@ void COctTreeTriangleSelector::getTrianglesFromOctTree(
 
 //! Gets all triangles which have or may have contact with a 3d line.
 void COctTreeTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-	int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+	int& outTriangleCount, const ox::core::CLine3d<float>& line,
 	const ox::core::CMatrix4* transform)
 {
 	ox::core::CAabbox3d<float> box(line.start);
@@ -145,4 +145,3 @@ void COctTreeTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triang
 
 } // end namespace scene
 } // end namespace daisy
-

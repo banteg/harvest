@@ -21,7 +21,7 @@ class ITextSceneNode : public ISceneNode
 public:
 
 	//! constructor
-	ITextSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+	ITextSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0))
 			: ISceneNode(parent, mgr, id, position) {}
 
@@ -37,4 +37,3 @@ public:
 
 
 #endif
-

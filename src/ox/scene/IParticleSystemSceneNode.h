@@ -28,7 +28,7 @@ You can for example easily a campfire by doing this:
 	ox::scene::IParticleSystemSceneNode* p = scenemgr->addParticleSystemSceneNode();
 	p->setParticleSize(ox::core::CDimension2d<float>(20.0f, 10.0f));
 	ox::scene::IParticleEmitter* em = p->createBoxEmitter(
-		ox::core::CAabbox3d<float>(-5,0,-5,5,1,5), 
+		ox::core::CAabbox3d<float>(-5,0,-5,5,1,5),
 		ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		40,80, ox::video::SColor(0,255,255,255),ox::video::SColor(0,255,255,255), 1100,2000);
 	p->setEmitter(em);
@@ -44,7 +44,7 @@ class IParticleSystemSceneNode : public ISceneNode
 public:
 
 	//! constructor
-	IParticleSystemSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+	IParticleSystemSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& rotation = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& scale = ox::core::CVector3d<float>(1.0f, 1.0f, 1.0f))
@@ -55,7 +55,7 @@ public:
 		const ox::core::CDimension2d<float> &size = ox::core::CDimension2d<float>(5.0f, 5.0f)) = 0;
 
 	//! Sets the particle emitter, which creates the particles.
-	//! ox::core::A particle emitter can be created using one of the 
+	//! ox::core::A particle emitter can be created using one of the
 	//! methods. For example to create and use a simple PointEmitter,
 	//! call IParticleEmitter* p = createPointEmitter(); setEmitter(p); p->drop();
 	//! \param emitter: Sets the particle emitter. You can set this to 0
@@ -82,10 +82,10 @@ public:
 	//! per second.
 	//! \param maxParticlesPerSecond: Maximal amount of particles emitted
 	//! per second.
-	//! \param minStartColor: Minimal initial start color of a particle. 
+	//! \param minStartColor: Minimal initial start color of a particle.
 	//! The real color of every particle is calculated as random interpolation
 	//! between minStartColor and maxStartColor.
-	//! \param maxStartColor: Maximal initial start color of a particle. 
+	//! \param maxStartColor: Maximal initial start color of a particle.
 	//! The real color of every particle is calculated as random interpolation
 	//! between minStartColor and maxStartColor.
 	//! \param lifetimeMin: Minimal lifetime of a particle, in milliseconds.
@@ -98,7 +98,7 @@ public:
 	//! returned pointer, after you don't need it any more, see
 	//! ox::IUnknown::drop() for more informations.
 	virtual IParticleEmitter* createPointEmitter(
-		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f), 
+		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		unsigned int minParticlesPerSecond = 5,
 		unsigned int maxParticlePerSecond = 10,
 		ox::video::SColor minStartColor = ox::video::SColor(255,0,0,0),
@@ -112,10 +112,10 @@ public:
 	//! per second.
 	//! \param maxParticlesPerSecond: Maximal amount of particles emitted
 	//! per second.
-	//! \param minStartColor: Minimal initial start color of a particle. 
+	//! \param minStartColor: Minimal initial start color of a particle.
 	//! The real color of every particle is calculated as random interpolation
 	//! between minStartColor and maxStartColor.
-	//! \param maxStartColor: Maximal initial start color of a particle. 
+	//! \param maxStartColor: Maximal initial start color of a particle.
 	//! The real color of every particle is calculated as random interpolation
 	//! between minStartColor and maxStartColor.
 	//! \param lifetimeMin: Minimal lifetime of a particle, in milliseconds.
@@ -129,7 +129,7 @@ public:
 	//! ox::IUnknown::drop() for more informations.
 	virtual IParticleEmitter* createBoxEmitter(
 		ox::core::CAabbox3d<float> box = ox::core::CAabbox3d<float>(-10,28,-10,10,30,10),
-		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f), 
+		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		unsigned int minParticlesPerSecond = 5,
 		unsigned int maxParticlePerSecond = 10,
 		ox::video::SColor minStartColor = ox::video::SColor(255,0,0,0),
@@ -144,8 +144,8 @@ public:
 	//! material is used and the targetColor is ox::video::SColor(0,0,0,0):
 	//! Particles are fading out into void with this setting.
 	//! \param targetColor: Color whereto the color of the particle is changed.
-	//! \param timeNeededToFadeOut: How much time in milli seconds 
-	//! should the affector need to change the color to the targetColor. 
+	//! \param timeNeededToFadeOut: How much time in milli seconds
+	//! should the affector need to change the color to the targetColor.
 	//! \return Returns a pointer to the created particle affector.
 	//! To add this affector as new affector of this particle system,
 	//! just call addAffector(). Note that you'll have to drop() the
@@ -161,7 +161,7 @@ public:
 	//! and is catched by the gravity then. This affector is ideal for
 	//! creating things like fountains.
 	//! \param gravity: Direction and force of gravity.
-    //! \param timeForceList: Time in milli seconds when the force 
+    //! \param timeForceList: Time in milli seconds when the force
 	//! of the emitter is totally lost and the particle does not move any more.
 	//! This is the time where gravity fully affects the particle.
 	//! \return Returns a pointer to the created particle affector.
@@ -179,4 +179,3 @@ public:
 
 
 #endif
-

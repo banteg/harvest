@@ -62,7 +62,7 @@ void CMetaTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles
 
 //! Gets all triangles which lie within a specific bounding box.
 void CMetaTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-	int& outTriangleCount, const ox::core::CAabbox3d<float>& box, 
+	int& outTriangleCount, const ox::core::CAabbox3d<float>& box,
 	const ox::core::CMatrix4* transform)
 {
 	int outWritten = 0;
@@ -82,7 +82,7 @@ void CMetaTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles
 
 //! Gets all triangles which have or may have contact with a 3d line.
 void CMetaTriangleSelector::getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-	int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+	int& outTriangleCount, const ox::core::CLine3d<float>& line,
 	const ox::core::CMatrix4* transform)
 {
 	int outWritten = 0;
@@ -135,4 +135,3 @@ void CMetaTriangleSelector::removeAllTriangleSelectors()
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -28,7 +28,7 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		CShadowVolumeSceneNode(ISceneNode* parent, ISceneManager* mgr, 
+		CShadowVolumeSceneNode(ISceneNode* parent, ISceneManager* mgr,
 			int id,  bool zfailmethod=true, float infinity=10000.0f);
 
 		//! destructor
@@ -48,7 +48,7 @@ using namespace ox::scene;
 
 		//! returns the material based on the zero based index i.
 		virtual ox::video::SMaterial& getMaterial(int i);
-		
+
 		//! returns amount of materials used by this scene node.
 		virtual int getMaterialCount();
 
@@ -80,7 +80,7 @@ using namespace ox::scene;
 		int IndexCountAllocated;
 		int VertexCountAllocated;
 		int IndexCount;
-		int VertexCount;	
+		int VertexCount;
 
 		ox::TArray<SShadowVolume> ShadowVolumes; // a shadow volume for every light
 		int ShadowVolumesUsed;
@@ -95,4 +95,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

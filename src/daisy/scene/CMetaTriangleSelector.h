@@ -40,17 +40,17 @@ public:
 
 	//! Gets all triangles which lie within a specific bounding box.
 	virtual void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-		int& outTriangleCount, const ox::core::CAabbox3d<float>& box, 
+		int& outTriangleCount, const ox::core::CAabbox3d<float>& box,
 		const ox::core::CMatrix4* transform=0);
 
 	//! Gets all triangles which have or may have contact with a 3d line.
 	virtual void getTriangles(ox::core::CTriangle3d<float>* triangles, int arraySize,
-		int& outTriangleCount, const ox::core::CLine3d<float>& line, 
+		int& outTriangleCount, const ox::core::CLine3d<float>& line,
 		const ox::core::CMatrix4* transform=0);
 
 	//! Adds a triangle selector to the collection of triangle selectors
 	//! in this metaTriangleSelector.
-	virtual void addTriangleSelector(ITriangleSelector* toAdd); 
+	virtual void addTriangleSelector(ITriangleSelector* toAdd);
 
 	//! Removes a specific triangle selector which was added before	from the collection.
 	virtual bool removeTriangleSelector(ITriangleSelector* toRemove);
@@ -68,4 +68,3 @@ private:
 
 
 #endif
-

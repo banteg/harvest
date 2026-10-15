@@ -84,4 +84,3 @@ void CTextSceneNode::setTextColor(ox::video::SColor color)
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -72,7 +72,7 @@ public:
 			SIndexChunk& tic = (*indexChunks)[i];
 
 			for (unsigned int t=0; t<meshes[i].Indices.size(); ++t)
-				tic.Indices.push_back(meshes[i].Indices[t]);			
+				tic.Indices.push_back(meshes[i].Indices[t]);
 		}
 
 		// create tree
@@ -80,7 +80,7 @@ public:
 		Root = new OctTreeNode(nodeCount, 0, meshes, indexChunks, minimalPolysPerNode);
 	}
 
-	//! returns all ids of polygons partially or full enclosed 
+	//! returns all ids of polygons partially or full enclosed
 	//! by this bounding box.
 	void calculatePolys(const ox::core::CAabbox3d<float>& box)
 	{
@@ -90,7 +90,7 @@ public:
 		Root->getPolys(box, IndexData);
 	}
 
-	//! returns all ids of polygons partially or full enclosed 
+	//! returns all ids of polygons partially or full enclosed
 	//! by a view frustrum.
 	void calculatePolys(const ox::scene::SViewFrustrum& frustrum)
 	{
@@ -112,7 +112,7 @@ public:
 	}
 
 	// for debug purposes only, renders the bounding boxes of the tree
-	void renderBoundingBoxes(const ox::core::CAabbox3d<float>& box, 
+	void renderBoundingBoxes(const ox::core::CAabbox3d<float>& box,
 		ox::TArray< ox::core::CAabbox3d<float> >&outBoxes)
 	{
 		Root->renderBoundingBoxes(box, outBoxes);
@@ -159,7 +159,7 @@ private:
 
 
 
-		// returns all ids of polygons partially or full enclosed 
+		// returns all ids of polygons partially or full enclosed
 		// by this bounding box.
 		void getPolys(const ox::core::CAabbox3d<float>& box, SIndexData* idxdata)
 		{
@@ -167,14 +167,14 @@ private:
 			{
 				int cnt = (*IndexData).size();
 				int i; // new ISO for scoping problem in some compilers
-				
+
 				for (i=0; i<cnt; ++i)
 				{
 					int idxcnt = (*IndexData)[i].Indices.size();
 
 					if (idxcnt)
 					{
-						memcpy(&idxdata[i].Indices[idxdata[i].CurrentSize], 
+						memcpy(&idxdata[i].Indices[idxdata[i].CurrentSize],
 							&(*IndexData)[i].Indices[0], idxcnt * sizeof(short));
 						idxdata[i].CurrentSize += idxcnt;
 					}
@@ -188,7 +188,7 @@ private:
 
 
 
-		// returns all ids of polygons partially or full enclosed 
+		// returns all ids of polygons partially or full enclosed
 		// by the view frustrum.
 		void getPolys(const ox::scene::SViewFrustrum& frustrum, SIndexData* idxdata)
 		{
@@ -220,14 +220,14 @@ private:
 			if (visible)
 			{
 				int cnt = (*IndexData).size();
-				
+
 				for (i=0; i<cnt; ++i)
 				{
 					int idxcnt = (*IndexData)[i].Indices.size();
 
 					if (idxcnt)
 					{
-						memcpy(&idxdata[i].Indices[idxdata[i].CurrentSize], 
+						memcpy(&idxdata[i].Indices[idxdata[i].CurrentSize],
 							&(*IndexData)[i].Indices[0], idxcnt * sizeof(short));
 						idxdata[i].CurrentSize += idxcnt;
 					}
@@ -247,7 +247,7 @@ private:
 			if (Box.intersectsWithBox(box))
 			{
 				outBoxes.push_back(Box);
-				
+
 				for (int i=0; i<8; ++i)
 					if (Children[i])
 						Children[i]->renderBoundingBoxes(box, outBoxes);
@@ -271,4 +271,3 @@ private:
 } // end namespace
 
 #endif
-

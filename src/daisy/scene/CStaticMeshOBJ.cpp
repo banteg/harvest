@@ -89,7 +89,7 @@ bool CStaticMeshOBJ::loadFile(ox::io::IReadFile* file)
 
 		if (wordBuffer[0] == 'v' && wordBuffer[1] == 0x0)
 		{
-			// vector 
+			// vector
 			char* p1 = getNextWord(word);
 			char* p2 = getNextWord(p1);
 			char* p3 = getNextWord(p2);
@@ -157,7 +157,7 @@ bool CStaticMeshOBJ::loadFile(ox::io::IReadFile* file)
 					z++;
 				}
 
-				++facePointCount;			
+				++facePointCount;
 
 				if (facePointCount>=MAX_FACE_POINT_COUNT)
 				{
@@ -219,8 +219,8 @@ bool CStaticMeshOBJ::loadFile(ox::io::IReadFile* file)
 			meshbuffer->Indices.push_back(0 + currentVertexCount);
 			meshbuffer->Indices.push_back(1 + currentVertexCount);
 			meshbuffer->Indices.push_back((facePointCount-1) + currentVertexCount);
-			
-			
+
+
 			for (unsigned int jk=0; jk<facePointCount-3; ++jk)
 			{
 				meshbuffer->Indices.push_back(1 + currentVertexCount);
@@ -335,7 +335,7 @@ char* CStaticMeshOBJ::getNextWord(char* word)
 {
 	if (!word)
 		return 0;
-	
+
 	int i = 0;
 	while(word[i])
 	{
@@ -367,4 +367,3 @@ E_ANIMATED_MESH_TYPE CStaticMeshOBJ::getMeshType() const
 
 } // end namespace scene
 } // end namespace daisy
-

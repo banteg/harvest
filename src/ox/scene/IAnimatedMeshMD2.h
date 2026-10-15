@@ -47,29 +47,28 @@ namespace scene
 	public:
 
 		//! Returns frame loop data for a default MD2 animation type.
-		//! \Returns Returns the beginframe, endframe and frames per 
+		//! \Returns Returns the beginframe, endframe and frames per
 		//! second for a default MD2 animation type.
 		virtual void getFrameLoop(EMD2_ANIMATION_TYPE l, int& outBegin,
 			int& outEnd, int& outFPS) const = 0;
 
 		//! Returns frame loop data for a special MD2 animation type, identified
 		//! by a string.
-		//! \Returns Returns the beginframe, endframe and frames per 
+		//! \Returns Returns the beginframe, endframe and frames per
 		//! second for a special MD2 animation type.
-		virtual bool getFrameLoop(const char* name, 
+		virtual bool getFrameLoop(const char* name,
 			int& outBegin, int& outEnd, int& outFps) const = 0;
 
 		//! Returns amount of md2 animations in this file.
 		virtual int getAnimationCount() const = 0;
 
-		//! Returns name of md2 animation. 
-		//! \param nr: Zero based index of animation. 
+		//! Returns name of md2 animation.
+		//! \param nr: Zero based index of animation.
 		virtual const char* getAnimationName(int nr) const = 0;
-        
+
 	};
 
 } // end namespace scene
 } // end namespace ox
 
 #endif
-

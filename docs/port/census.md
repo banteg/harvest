@@ -23,7 +23,7 @@ reached, not when compiled.
 | `zig build harvest` | the game, entered through SDL3's main callbacks (`port/src/main.cpp`) | links for all three targets; on macOS it runs the intro and the main menu with the null video driver (the renderer, audio backend and scene manager come from weak fallbacks until they land) |
 | `zig build census` | the same objects with the original's plain loop (`port/census/main.cpp`) | links (it receives no events: the SDL3 device gets them from `SDL_AppEvent`) |
 
-### Kept units (123)
+### Kept units (140)
 
 | Directory | Units |
 |---|---|
@@ -36,17 +36,18 @@ reached, not when compiled.
 | `HarvestFull/harvest/states` (5) | CIntroState, CLoadingScreen, CMainMenuState, CPlayState, CShuttleRaceState |
 | `daisy/audio` | CAudioDriver |
 | `daisy/gui` (25) | CGUIButton, CGUICheckBox, CGUIClickArea, CGUIComboBox, CGUIContextMenu, CGUIEditBox, CGUIEnvironment, CGUIFileOpenDialog, CGUIFont, CGUIImage, CGUIInOutFader, CGUIListBox, CGUIMenu, CGUIMeshViewer, CGUIMessageBox, CGUIModalScreen, CGUIPopupMenu, CGUIRadioList, CGUIScrollBar, CGUISkin, CGUIStaticText, CGUITabControl, CGUIToolBar, CGUIWindow, CUnicodeFont |
-| `daisy/scene` (16) | CBillboardSceneNode, CDummyTransformationSceneNode, CEmptySceneNode, CLightSceneNode, CMeshManipulator, CParticleFadeOutAffector, CSceneNodeAnimatorCollisionResponse, CSceneNodeAnimatorDelete, CSceneNodeAnimatorFlyCircle, CSceneNodeAnimatorFlyStraight, CSceneNodeAnimatorFollowSpline, CSceneNodeAnimatorRotation, CSceneNodeAnimatorTexture, CSkyBoxSceneNode, CTriangleBBSelector, CTriangleSelector |
 | `daisy/input` | CJoystickNullDriver |
 | `daisy/io` (8) | CFileList, CFileSystem, CLimitReadFile, CMemoryReadFile, CReadFile, CWriteFile, CZipFileList, CZipReader |
-| `daisy/other` (3) | CIrrDeviceStub, CLogger, os.cpp |
+| `daisy/other` (3) | CIrrDeviceStub, CLogger, os |
+| `daisy/scene` (17) | CBillboardSceneNode, CDummyTransformationSceneNode, CEmptySceneNode, CLightSceneNode, CMeshManipulator, CParticleFadeOutAffector, CSceneNodeAnimatorCollisionResponse, CSceneNodeAnimatorDelete, CSceneNodeAnimatorFlyCircle, CSceneNodeAnimatorFlyStraight, CSceneNodeAnimatorFollowSpline, CSceneNodeAnimatorRotation, CSceneNodeAnimatorTexture, CShadowVolumeSceneNode, CSkyBoxSceneNode, CTriangleBBSelector, CTriangleSelector |
 | `daisy/video` | CVideoModeList |
 | `daisy/video/Null` (9) | CColorConverter, CFPSCounter, CParticlePackage, CParticleState, CSpriteAnimationImage, CSpriteAnimationImageBundle, CSpriteAnimationState, CSpritePackage, CVideoNull |
 | `ox/algo` (5) | CBase64url, CRand, CRegulator, CSimplePress, CTimeCounter |
 | `ox/core` (10) | AlwaysAppendToFile, CAes, CBasic, CCipherKey, CCriticalSection, CHiddenFloat, CHiddenInt, CMath, CStringFunctions, CThread |
 | `ox/entity` (2) | COxEntity, COxEntityManager |
-| `ox/event`, `ox/gui` | IEventReceiver, IGUIElement |
+| `ox/event` | IEventReceiver |
 | `ox/game` (5) | CConfigBlock, CConfiguration, CGameMain, CGameState, CTextLocalization |
+| `ox/gui` | IGUIElement |
 | `ox/io` (3) | CHelpIO, CMemReadFile, CMemWriteFile |
 | `ox/net` (2) | CHTTPConnectionHandler, CVariablePacket |
 
@@ -57,7 +58,7 @@ the null joystick driver as the original has them.
 
 ### Replaced units
 
-The `replaced` list in `build.zig` (12 recovered units plus unrecovered prefixes that `port/src/` already replaces):
+The `replaced` list in `build.zig` (39 recovered units plus unrecovered prefixes that `port/src/` already replaces):
 
 | Unit | What it is | Replaced by |
 |---|---|---|
@@ -72,6 +73,20 @@ The `replaced` list in `build.zig` (12 recovered units plus unrecovered prefixes
 | `daisy/scene/CSceneManager.cpp`, `CCameraSceneNode.cpp`, `CAnimatedMeshSceneNode.cpp`, `CSceneCollisionManager.cpp`, `CStaticMeshOBJ.cpp` | scene manager, camera, animated mesh, picking and OBJ loader (while `CBillboardSceneNode`, `CLightSceneNode`, `CSkyBoxSceneNode` and `CSceneNodeAnimatorRotation` are kept from `src/daisy/scene/`) | `port/src/scene/` |
 | `daisy/io/CTextReader.cpp`, `CXML*`, `daisy/net/` | unused XML readers/writer and Winsock TCP device | `port/src/io/XMLStubs.cpp`, `port/src/net/CWinsockNetworkDevice.cpp` |
 | `HarvestFull/main.cpp` | the blocking `init`/`update` loop | SDL3 main callbacks (`port/src/main.cpp`) |
+
+The partially recovered Irrlicht scene batch keeps only `CShadowVolumeSceneNode` in the port.
+Its material getter uses the shared static fallback under `HARVEST_PORT`, avoiding the
+original null reference (see [original-bugs.md](original-bugs.md)).
+The camera and OBJ loader continue using their existing port implementations. The other scene
+units with trap stubs are excluded: `CAnimatedMeshMD2`, `CBspTreeSceneNode`, `CMeshSceneNode`,
+`CMetaTriangleSelector`, `COctTreeSceneNode`, `COctTreeTriangleSelector`, `CParticleBoxEmitter`,
+`CParticlePointEmitter`, `CParticleSystemSceneNode`, `CTestSceneNode`, `CTextSceneNode`,
+`CWaterSurfaceSceneNode` and `CXFileReader`. Their headers also contain traps in
+`CBspTree::BspPoly::operator==` and `OctTree<T>::OctTreeNode`'s constructor. These are incomplete
+matching sources awaiting recovery. `CDefaultMeshFormatLoader` and `CXMeshFileLoader`
+are excluded because they depend on these incomplete or unrecovered classes; PCX continues
+using `ImageLoaderStubs.cpp`. The batch has 24 out-of-line trap stubs and two header trap stubs.
+
 ## Port sources (`port/src/`)
 
 | File | Provides | Notes |

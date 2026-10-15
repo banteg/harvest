@@ -32,9 +32,9 @@ CShadowVolumeSceneNode::CShadowVolumeSceneNode(ISceneNode* parent,
 											   int id,
 											    bool zfailmethod,
 												float infinity)
-: IShadowVolumeSceneNode(parent, mgr, id), Edges(0), EdgeCount(0), 
+: IShadowVolumeSceneNode(parent, mgr, id), Edges(0), EdgeCount(0),
 	ShadowVolumesUsed(0), Indices(0), Vertices(0), IndexCount(0),
-	VertexCount(0),	IndexCountAllocated(0), 
+	VertexCount(0),	IndexCountAllocated(0),
 	VertexCountAllocated(0), UseZFailMethod(zfailmethod),
 	Adjacency(0), FaceData(0), Infinity(infinity)
 {
@@ -85,7 +85,7 @@ void CShadowVolumeSceneNode::createShadowVolume(const ox::core::CVector3d<float>
 	{
 		// add a buffer
 		SShadowVolume tmp;
-		ShadowVolumes.push_back(tmp);	
+		ShadowVolumes.push_back(tmp);
 		svp = &ShadowVolumes[ShadowVolumes.size()-1];
 		++ShadowVolumesUsed;
 
@@ -104,7 +104,7 @@ void CShadowVolumeSceneNode::createShadowVolume(const ox::core::CVector3d<float>
 		Edges = new unsigned short[EdgeCount];
 	}
 
-	
+
 
 	int numEdges = 0;
 	ox::core::CVector3d<float> ls = light * Infinity; // light scaled
@@ -118,8 +118,8 @@ void CShadowVolumeSceneNode::createShadowVolume(const ox::core::CVector3d<float>
 	// so we create createZPassVolume with caps if the zfail method
 	// is used
 	createZPassVolume(faceCount, numEdges, light, svp, UseZFailMethod);
-    
-	
+
+
 	for (int i=0; i<numEdges; ++i)
     {
 		ox::core::CVector3d<float> &v1 = Vertices[Edges[2*i+0]];
@@ -274,7 +274,7 @@ void CShadowVolumeSceneNode::createZPassVolume(int faceCount,
 void CShadowVolumeSceneNode::setMeshToRenderFrom(IMesh* mesh)
 {
 	ShadowVolumesUsed = 0;
-	
+
 	int oldIndexCount = IndexCount;
 	int oldVertexCount = VertexCount;
 
@@ -322,11 +322,11 @@ void CShadowVolumeSceneNode::setMeshToRenderFrom(IMesh* mesh)
 	}
 
 	// copy mesh
-	
+
 	for (i=0; i<bufcnt; ++i)
 	{
 		b = mesh->getMeshBuffer(i);
-		
+
 		int idxcnt = b->getIndexCount();
 		int vtxnow = VertexCount;
 
@@ -362,11 +362,11 @@ void CShadowVolumeSceneNode::setMeshToRenderFrom(IMesh* mesh)
 	}
 
 	// recalculate adjacency if neccessarry
-	if (oldVertexCount != VertexCount && 
+	if (oldVertexCount != VertexCount &&
 		oldIndexCount != IndexCount && UseZFailMethod)
 		calculateAdjacency();
 
-	// create as much shadow volumes as there are lights but 
+	// create as much shadow volumes as there are lights but
 	// do not ignore the max light settings.
 
 	int lights = SceneManager->getVideoDriver()->getDynamicLightCount();
@@ -379,7 +379,7 @@ void CShadowVolumeSceneNode::setMeshToRenderFrom(IMesh* mesh)
 	{
 		const ox::video::SLight& dl = SceneManager->getVideoDriver()->getDynamicLight(i);
 		lpos = dl.Position;
-		if (dl.CastShadows && 
+		if (dl.CastShadows &&
 			fabs((lpos - parentpos).getLengthSQ()) <= (dl.Radius*dl.Radius*4.0f))
 		{
 			mat.transformVect(lpos);
@@ -427,9 +427,14 @@ const ox::core::CAabbox3d<float>& CShadowVolumeSceneNode::getBoundingBox() const
 //! returns the material based on the zero based index i.
 ox::video::SMaterial& CShadowVolumeSceneNode::getMaterial(int i)
 {
+#ifdef HARVEST_PORT
+	// A material-less node still needs a valid reference for callers of the node interface.
+	return ISceneNode::getMaterial(i);
+#else
 	// this should never be called, because a shadow volume has got no
 	// material
 	return *((ox::video::SMaterial*)(0));
+#endif
 
 }
 
@@ -460,11 +465,11 @@ void CShadowVolumeSceneNode::calculateAdjacency(float epsilon)
 			ox::core::CVector3d<float> v1 = Vertices[Indices[f+edge]];
 			ox::core::CVector3d<float> v2 = Vertices[Indices[f+((edge+1)%3)]];
 
-			// now we search an_O_ther _F_ace with these two 
+			// now we search an_O_ther _F_ace with these two
 			// vertices, which is not the current face.
 
 			int of;
-			
+
 			for (of=0; of<IndexCount; of+=3)
 				if (of != f)
 				{

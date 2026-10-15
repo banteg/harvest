@@ -55,10 +55,10 @@ using namespace ox::scene;
         virtual ox::video::SMaterial& getMaterial();
 
 		//! returns pointer to vertices
-		virtual const void* getVertices() const; 
+		virtual const void* getVertices() const;
 
 		//! returns pointer to vertices
-		virtual void* getVertices(); 
+		virtual void* getVertices();
 
 		//! returns which type of vertex data is stored.
 		virtual ox::video::E_VERTEX_TYPE getVertexType() const;
@@ -88,18 +88,18 @@ using namespace ox::scene;
 		virtual E_ANIMATED_MESH_TYPE getMeshType() const;
 
 		//! Returns frame loop data for a special MD2 animation type.
-		virtual void getFrameLoop(EMD2_ANIMATION_TYPE, 
+		virtual void getFrameLoop(EMD2_ANIMATION_TYPE,
 			int& outBegin, int& outEnd, int& outFps) const;
 
 		//! Returns frame loop data for a special MD2 animation type.
-		virtual bool getFrameLoop(const char* name, 
+		virtual bool getFrameLoop(const char* name,
 			int& outBegin, int& outEnd, int& outFps) const;
 
 		//! Returns amount of md2 animations in this file.
 		virtual int getAnimationCount() const;
 
-		//! Returns name of md2 animation. 
-		//! \param nr: Zero based index of animation. 
+		//! Returns name of md2 animation.
+		//! \param nr: Zero based index of animation.
 		virtual const char* getAnimationName(int nr) const;
 
 	private:
@@ -141,4 +141,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

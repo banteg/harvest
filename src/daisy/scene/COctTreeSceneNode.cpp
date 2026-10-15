@@ -187,7 +187,7 @@ bool COctTreeSceneNode::createTree(IMesh* mesh)
 					chunk.MaterialId = i;
 					StdMeshes.push_back(chunk);
 					OctTree<ox::video::S3DVertex>::SMeshChunk &nchunk = StdMeshes[StdMeshes.size()-1];
-					
+
 					int v;
 
 					for (v=0; v<b->getVertexCount(); ++v)
@@ -213,9 +213,9 @@ bool COctTreeSceneNode::createTree(IMesh* mesh)
 					OctTree<ox::video::S3DVertex2TCoords>::SMeshChunk chunk;
 					chunk.MaterialId = i;
 					LightMapMeshes.push_back(chunk);
-					OctTree<ox::video::S3DVertex2TCoords>::SMeshChunk& nchunk = 
+					OctTree<ox::video::S3DVertex2TCoords>::SMeshChunk& nchunk =
 						LightMapMeshes[LightMapMeshes.size()-1];
-						
+
 					int v;
 
 					for (v=0; v<b->getVertexCount(); ++v)
@@ -236,7 +236,7 @@ bool COctTreeSceneNode::createTree(IMesh* mesh)
 
 	unsigned int endTime = os::Timer::getTime();
 	char tmp[255];
-	sprintf(tmp, "Needed %dms to create OctTree SceneNode.(%d nodes, %d polys)", 
+	sprintf(tmp, "Needed %dms to create OctTree SceneNode.(%d nodes, %d polys)",
 		endTime - beginTime, nodeCount, polyCount/3);
 	os::Printer::log(tmp, ox::event::ELL_INFORMATION);
 

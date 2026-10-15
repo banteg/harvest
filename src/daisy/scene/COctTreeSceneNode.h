@@ -27,7 +27,7 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		COctTreeSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+		COctTreeSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 			int minimalPolysPerNode=128);
 
 		//! destructor
@@ -50,7 +50,7 @@ using namespace ox::scene;
 		//! optimal position for minimizing renderstate changes, but can also be used
 		//! to directly modify the material of a scene node.
 		virtual ox::video::SMaterial& getMaterial(int i);
-		
+
 		//! returns amount of materials used by this scene node.
 		virtual int getMaterialCount();
 
@@ -74,4 +74,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

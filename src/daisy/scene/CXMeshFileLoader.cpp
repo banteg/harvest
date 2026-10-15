@@ -81,4 +81,3 @@ IAnimatedMesh* CXMeshFileLoader::createMesh(ox::io::IReadFile* file)
 
 } // end namespace scene
 } // end namespace daisy
-

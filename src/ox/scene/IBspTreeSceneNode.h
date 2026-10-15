@@ -41,4 +41,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

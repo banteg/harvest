@@ -42,7 +42,7 @@ CXFileReader::CXFileReader(ox::io::IReadFile* file)
 	{
 		ErrorHappened = true;
 		return;
-	}	
+	}
 
 	#ifdef _XREADER_DEBUG
 		validateMesh(&RootFrame);
@@ -106,7 +106,7 @@ bool CXFileReader::validateMesh(SXFrame* frame)
 					i, m, frame->Meshes[m].Indices[i], frame->Name.c_str());
 				os::Printer::log(tmp, ox::event::ELL_ERROR);
 				error = true;
-			} 
+			}
 		}
 
 		// validate normal indices
@@ -127,7 +127,7 @@ bool CXFileReader::validateMesh(SXFrame* frame)
 					i, m, frame->Meshes[m].NormalIndices[i], frame->Name.c_str());
 				os::Printer::log(tmp, ox::event::ELL_ERROR);
 				error = true;
-			} 
+			}
 		}
 	}
 
@@ -152,7 +152,7 @@ bool CXFileReader::readFileIntoMemory(ox::io::IReadFile* file)
 	}
 
 	Buffer = new char[Size];
-	
+
 	//! read all into memory
 	if (file->read(Buffer, Size) != Size)
 	{
@@ -195,7 +195,7 @@ bool CXFileReader::readFileIntoMemory(ox::io::IReadFile* file)
 		FloatSize = 32;
 	else
 		FloatSize = 64;
-	
+
 	P = &Buffer[16];
 
 	readUntilEndOfLine();
@@ -279,14 +279,14 @@ bool CXFileReader::parseDataObjectTemplate()
 	// ignore left delimiter
 	if (getNextToken() != "{")
 	{
-		os::Printer::log("Left delimiter in template data object missing.", 
+		os::Printer::log("Left delimiter in template data object missing.",
 			name.c_str(), ox::event::ELL_ERROR);
 		return false;
 	}
 
 	// read UUID
 	ox::core::CString<char> uuid = getNextToken();
-	
+
 	// read and ignore data members
 	while(true)
 	{
@@ -344,14 +344,14 @@ bool CXFileReader::getNextTokenAsString(ox::core::CString<char>& out)
 {
 	ox::core::CString<char> s = getNextToken();
 	int sl = s.size();
-	
+
 	if (sl < 3)
 		return false;
 
 	if (s[0] != '"' || s[sl-1] != ';' || s[sl-2] != '"')
 		return false;
 
-	out = s.subString(1, sl-3);	    
+	out = s.subString(1, sl-3);
 	return true;
 }
 
@@ -535,7 +535,7 @@ bool CXFileReader::parseDataObjectMeshTextureCoords(
 	{
 		findNextNoneWhiteSpaceNumber();
 		textureCoords[i].X = readFloat();
-		++P; 
+		++P;
 		textureCoords[i].Y = readFloat();
 	}
 
@@ -612,7 +612,7 @@ bool CXFileReader::checkForTwoFollowingSemicolons()
 
 
 //! reads header of dataobject including the opening brace.
-//! returns false if error happened, and writes name of object 
+//! returns false if error happened, and writes name of object
 //! if there is one
 bool CXFileReader::readHeadOfDataObject(ox::core::CString<char>* outname)
 {
@@ -622,7 +622,7 @@ bool CXFileReader::readHeadOfDataObject(ox::core::CString<char>* outname)
 		if (outname)
 			(*outname) = nameOrBrace;
 
-		if (nameOrBrace.size() != 0 && 
+		if (nameOrBrace.size() != 0 &&
 			nameOrBrace[nameOrBrace.size()-1] == '{')
 		{
 			(*outname) = nameOrBrace.subString(0, nameOrBrace.size()-1);
@@ -650,7 +650,7 @@ ox::core::CString<char> CXFileReader::getNextToken()
 	while(P < End && P[0]!=' ' && P[0]!='\n' && P[0]!='\r' && P[0]!='\t')
 	{
 		s.append(P[0]);
-		++P;		
+		++P;
 	}
 
 	return s;
@@ -723,7 +723,7 @@ bool CXFileReader::isStaticMesh()
 	return AnimationSets.empty();
 }
 
-//! returns count of animations 
+//! returns count of animations
 int CXFileReader::getAnimationSetCount()
 {
 	return AnimationSets.size();
@@ -757,8 +757,8 @@ void CXFileReader::computeGlobalFrameMatrizes(SXFrame& frame, SXFrame* parent)
 		os::Printer::log(tmp, ox::event::ELL_INFORMATION);
 		for (int i=0; i<4; ++i)
 		{
-			sprintf(tmp, "    %f, %f, %f, %f", 
-				frame.LocalMatrix(i,0), 
+			sprintf(tmp, "    %f, %f, %f, %f",
+				frame.LocalMatrix(i,0),
 				frame.LocalMatrix(i,1),
 				frame.LocalMatrix(i,2),
 				frame.LocalMatrix(i,3));
@@ -796,4 +796,3 @@ inline float CXFileReader::readFloat()
 
 } // end namespace scene
 } // end namespace daisy
-

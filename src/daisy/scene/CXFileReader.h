@@ -43,7 +43,7 @@ public:
 	//! Returns if the loaded mesh is static
 	bool isStaticMesh();
 
-	//! returns count of animations 
+	//! returns count of animations
 	int getAnimationSetCount();
 
 	//! returns a specific animation set
@@ -110,7 +110,7 @@ public:
 		// this mesh contains triangulated texture data.
 		// because in an .x file, faces can be made of more than 3
 		// vertices, the indices data structure is triangulated during the
-		// loading process. The IndexCountPerFace array is filled during 
+		// loading process. The IndexCountPerFace array is filled during
 		// this triangulation process and stores how much indices belong to
 		// every face. This data structure can be ignored, because all data
 		// in this structure is triangulated.
@@ -120,9 +120,9 @@ public:
 		ox::TArray< int > Indices; // triangle indices
 
 		// optional:
-		
-		ox::TArray<ox::core::CVector2d<float> > TextureCoords;	
-		ox::TArray<ox::core::CVector3d<float> > Normals; // normals 
+
+		ox::TArray<ox::core::CVector2d<float> > TextureCoords;
+		ox::TArray<ox::core::CVector3d<float> > Normals; // normals
 		ox::TArray<int> NormalIndices; // amount is equal to Indices amount
 
 		ox::TArray< int > IndexCountPerFace; // default 3, but could be more
@@ -157,7 +157,7 @@ public:
 			{
 			case -1: break;
 			case 0 : delete [] (ox::core::CQuaternion*)data; break;
-			case 1 : 
+			case 1 :
 			case 2 : delete [] (ox::core::CVector3d<float>*)data; break;
 			case 3 :
 			case 4 : delete [] (ox::core::CMatrix4*)data; break;
@@ -167,13 +167,13 @@ public:
 		void init()
 		{
 			time = new int[numberOfKeys];
-			
+
 			switch(keyType)
 			{
 			case 0 : data = new ox::core::CQuaternion[numberOfKeys]; break;
-			case 1 : 
+			case 1 :
 			case 2 : data = new ox::core::CVector3d<float>[numberOfKeys]; break;
-			case 3 : 
+			case 3 :
 			case 4 : data = new ox::core::CMatrix4[numberOfKeys]; break;
 			}
 
@@ -194,7 +194,7 @@ public:
 			return ((ox::core::CQuaternion*)data)[nr];
 		}
 
-		int keyType; // 0=rotation, 1=scale, 2=position, 3=matrix 
+		int keyType; // 0=rotation, 1=scale, 2=position, 3=matrix
 		int numberOfKeys;
 
 		int* time;
@@ -239,7 +239,7 @@ private:
 	ox::core::CString<char> getNextToken();
 
 	//! reads header of dataobject including the opening brace.
-	//! returns false if error happened, and writes name of object 
+	//! returns false if error happened, and writes name of object
 	//! if there is one
 	bool readHeadOfDataObject(ox::core::CString<char>* outname=0);
 
@@ -269,7 +269,7 @@ private:
 	bool parseDataObjectAnimationSet(SXAnimationSet& set);
 	bool parseDataObjectAnimation(SXAnimation& anim);
 	bool parseDataObjectAnimationKey(SXAnimationKey& animkey);
-	bool parseUnknownDataObject();	
+	bool parseUnknownDataObject();
 
 	bool ErrorHappened;
 
@@ -280,7 +280,7 @@ private:
 	bool validateMesh(SXFrame* frame);
 
 	int MajorVersion;
-	int MinorVersion;	
+	int MinorVersion;
 
 	char* Buffer;
 	int Size;
@@ -296,5 +296,3 @@ private:
 } // end namespace daisy
 
 #endif
-
-

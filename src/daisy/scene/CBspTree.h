@@ -15,7 +15,7 @@
 #include "ox/scene/IMeshBuffer.h"
 #include "ox/scene/ICameraSceneNode.h"
 
-// The Statistics are used to locate errors and to 
+// The Statistics are used to locate errors and to
 // find a good dimension for the renderbuffer.
 
 namespace ox { namespace scene {} }
@@ -49,7 +49,7 @@ using namespace ox::scene;
 
 	const float BSP_ROUND_ERROR = 0.00001f;
 
-	class CBspTree  
+	class CBspTree
 	{
 		struct BspPoly
 		{
@@ -123,12 +123,12 @@ using namespace ox::scene;
 		unsigned int getMaterialCount();
 
 		//! aabbRendering enables fast but inaccurate aabb-box rendering
-		void render(const SViewFrustrum* camArea, const ox::core::CVector3d<float>& camPos, bool aabbRendering = false); 
+		void render(const SViewFrustrum* camArea, const ox::core::CVector3d<float>& camPos, bool aabbRendering = false);
 
 		//! returns stats of the bsptree
 		const SBspTreeStats* getStats();
-		
-	 
+
+
 	private:
 
 		//! creates root of tree
@@ -165,12 +165,12 @@ using namespace ox::scene;
 		void debugOutputLeaf(const BspNode& node);
 		void debugValidateLeaf(const BspNode& node);
 		#endif
-		
+
 		inline int abs(int a)
 		{
 		  return a > 0 ? a : -a;
         }
-		
+
 		BspNode root;
 		SBspTreeStats stats;
 		RenderBuffer* renderBuffer;
@@ -178,8 +178,7 @@ using namespace ox::scene;
 
 
 } // end namespace
-} // end namespace 
+} // end namespace
 
 
 #endif // __BSPTREE_H_INCLUDED__
-

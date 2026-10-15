@@ -23,7 +23,7 @@ CParticlePointEmitter::CParticlePointEmitter(
 	ox::video::SColor maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
 	int maxAngleDegrees)
  : Direction(direction), MinParticlesPerSecond(minParticlesPerSecond),
-	MaxParticlesPerSecond(maxParticlePerSecond), 
+	MaxParticlesPerSecond(maxParticlePerSecond),
 	MinStartColor(minStartColor), MaxStartColor(maxStartColor),
 	MinLifeTime(lifeTimeMin), MaxLifeTime(lifeTimeMax), Time(0), Emitted(0),
 	MaxAngleDegrees(maxAngleDegrees)
@@ -43,4 +43,3 @@ int CParticlePointEmitter::emitt(unsigned int now, unsigned int timeSinceLastCal
 
 } // end namespace scene
 } // end namespace daisy
-

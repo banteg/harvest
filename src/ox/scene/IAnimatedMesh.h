@@ -24,7 +24,7 @@ enum E_ANIMATED_MESH_TYPE
     EAMT_UNKNOWN = 0,
 
     //! Quake 2 MD2 model file
-    EAMT_MD2, 
+    EAMT_MD2,
 
     //! Milkshape 3d skeletal animation file
     EAMT_MS3D,
@@ -38,8 +38,8 @@ enum E_ANIMATED_MESH_TYPE
     //! 3D Studio .3ds file
     EAMT_3DS,
 
-    //! Microsoft Direct3D .x-file. Can contain static and skeletal animated 
-    //! skinned meshes. This is the standard and best supported 
+    //! Microsoft Direct3D .x-file. Can contain static and skeletal animated
+    //! skinned meshes. This is the standard and best supported
     //! format of the Irrlicht Engine.
     EAMT_X
 };

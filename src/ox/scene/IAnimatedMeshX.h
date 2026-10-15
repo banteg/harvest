@@ -19,14 +19,14 @@ namespace scene
 	{
 	public:
 
-		//! Returns a pointer to a transformation matrix of a part of the 
+		//! Returns a pointer to a transformation matrix of a part of the
 		//! mesh based on a frame time. This is used for being able to attach
-		//! objects to parts of animated meshes. For example a weapon to an animated 
-		//! hand. 
+		//! objects to parts of animated meshes. For example a weapon to an animated
+		//! hand.
 		//! \param jointNumber: Zero based index of joint. The last joint has the number
 		//! getJointCount()-1;
 		//! \param frame: Frame of the animation.
-		//! \return Returns a pointer to the matrix of the mesh part or 
+		//! \return Returns a pointer to the matrix of the mesh part or
 		//! null if an error occured.
 		virtual ox::core::CMatrix4* getMatrixOfJoint(int jointNumber, int frame) = 0;
 
@@ -56,10 +56,10 @@ namespace scene
 		//! Returns amount of animations in .X-file.
 		virtual int getAnimationCount() const = 0;
 
-		//! Returns the name of an animation. 
+		//! Returns the name of an animation.
 		//! \param idx: Zero based Index of the animation. Must be a value between
 		//! 0 and getAnimationCount()-1;
-		//! \return Returns pointer to the string of the name of the animation. 
+		//! \return Returns pointer to the string of the name of the animation.
 		//! Returns 0 if an animation with this index does not exist.
 		virtual const char* getAnimationName(int idx) const = 0;
 
@@ -69,7 +69,7 @@ namespace scene
 		virtual void setCurrentAnimation(int idx) = 0;
 
 		//! Sets an animation as animation to play back.
-		//! \param name: Name of the animtion. 
+		//! \param name: Name of the animtion.
 		//! \return Returns true if successful, and false if the specified animation
 		//! does not exist.
 		virtual bool setCurrentAnimation(const char* name) = 0;
@@ -79,4 +79,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

@@ -46,7 +46,7 @@ void CBspTreeSceneNode::OnPreRender()
 //! renders the node.
 void CBspTreeSceneNode::render()
 {
-	
+
 }
 
 
@@ -80,4 +80,3 @@ bool CBspTreeSceneNode::createTree(IMesh* mesh)
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -37,7 +37,7 @@ public:
 
 	//! constructor
 	CParticleSystemSceneNode(bool createDefaultEmitter,
-		ISceneNode* parent, ISceneManager* mgr, int id, 
+		ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position,
 		const ox::core::CVector3d<float>& rotation,
 		const ox::core::CVector3d<float>& scale);
@@ -71,7 +71,7 @@ public:
 
 	//! Creates a point particle emitter.
 	virtual IParticleEmitter* createPointEmitter(
-		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f), 
+		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		unsigned int minParticlesPerSecond = 5,
 		unsigned int maxParticlePerSecond = 10,
 		ox::video::SColor minStartColor = ox::video::SColor(255,0,0,0),
@@ -82,7 +82,7 @@ public:
 	//! Creates a box particle emitter.
 	virtual IParticleEmitter* createBoxEmitter(
 		ox::core::CAabbox3d<float> box = ox::core::CAabbox3d<float>(-10,28,-10,10,30,10),
-		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f), 
+		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		unsigned int minParticlesPerSecond = 5,
 		unsigned int maxParticlePerSecond = 10,
 		ox::video::SColor minStartColor = ox::video::SColor(255,0,0,0),
@@ -126,4 +126,3 @@ private:
 
 
 #endif
-

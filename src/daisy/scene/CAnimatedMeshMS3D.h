@@ -57,7 +57,7 @@ using namespace ox::scene;
         virtual ox::video::SMaterial& getMaterial();
 
 		//! returns pointer to vertices
-		virtual const void* getVertices() const; 
+		virtual const void* getVertices() const;
 
 		//! returns pointer to vertices
 		virtual void* getVertices();
@@ -89,7 +89,7 @@ using namespace ox::scene;
 		//! Returns the type of the animated mesh.
 		virtual E_ANIMATED_MESH_TYPE getMeshType() const;
 
-		//! Returns a pointer to a transformation matrix of a part of the 
+		//! Returns a pointer to a transformation matrix of a part of the
 		//! mesh based on a frame time.
 		virtual ox::core::CMatrix4* getMatrixOfJoint(int jointNumber, int frame);
 
@@ -103,28 +103,28 @@ using namespace ox::scene;
 		virtual int getJointNumber(const char* name) const;
 
 	private:
-	
+
 		struct SKeyframe
 		{
 			float timeindex;
 			ox::core::CVector3d<float> data; // translation or rotation
 		};
-	
+
 		struct SJoint
 		{
 			ox::core::CString<char> Name;
 			int Index;
 			ox::core::CVector3d<float> Rotation;
 			ox::core::CVector3d<float> Translation;
-			
+
 			ox::core::CMatrix4 RelativeTransformation;
 			ox::core::CMatrix4 AbsoluteTransformation;
 			ox::core::CMatrix4 AbsoluteTransformationAnimated;
-			
+
 			ox::TArray<SKeyframe> TranslationKeys;
 			ox::TArray<SKeyframe> RotationKeys;
 			ox::TArray<unsigned short> VertexIds;
-			
+
 			int Parent;
 			ox::core::CString<char> ParentName;
 		};
@@ -138,9 +138,9 @@ using namespace ox::scene;
 		ox::TArray<ox::video::S3DVertex> Vertices;
 		ox::TArray<ox::video::S3DVertex> AnimatedVertices;
 		ox::TArray<unsigned short> Indices;
-		
+
 		ox::TArray<SJoint> Joints;
-		
+
 		float totalTime;
 		bool HasAnimation;
 		int lastCalculatedFrame;
@@ -150,4 +150,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

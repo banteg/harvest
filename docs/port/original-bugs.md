@@ -185,6 +185,12 @@ Port recommendation:
 
 ## Bugs without visible effects
 
+- **Shadow-node material reference**: `CShadowVolumeSceneNode::getMaterial` (`0x5796c0`,
+  [`CShadowVolumeSceneNode.cpp`](../../src/daisy/scene/CShadowVolumeSceneNode.cpp)) returns a null
+  reference. The node advertises zero materials, so normal indexed material iteration skips it,
+  but a direct call aborts under UBSan. Under `HARVEST_PORT` it uses `ISceneNode`'s static fallback;
+  `port/tests/scene_nodes.cpp` covers negative and zero indices and the node's destruction.
+
 - **`CFileSystem::renameFile`** (`0x52f3e0`) calls `rename(newName, filename)`, the reverse of its
   parameters. Nothing in the game calls it; a port should use the obvious order.
 - **Archive readers opened twice**: `createAndOpenFile` caches archive readers by the unresolved path,

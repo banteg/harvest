@@ -17,14 +17,14 @@ namespace scene
 	{
 	public:
 
-		//! Returns a pointer to a transformation matrix of a part of the 
+		//! Returns a pointer to a transformation matrix of a part of the
 		//! mesh based on a frame time. This is used for being able to attach
-		//! objects to parts of animated meshes. For example a weapon to an animated 
-		//! hand. 
+		//! objects to parts of animated meshes. For example a weapon to an animated
+		//! hand.
 		//! \param jointNumber: Zero based index of joint. The last joint has the number
 		//! getJointCount()-1;
 		//! \param frame: Frame of the animation.
-		//! \return Returns a pointer to the matrix of the mesh part or 
+		//! \return Returns a pointer to the matrix of the mesh part or
 		//! null if an error occured.
 		virtual ox::core::CMatrix4* getMatrixOfJoint(int jointNumber, int frame) = 0;
 
@@ -49,4 +49,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

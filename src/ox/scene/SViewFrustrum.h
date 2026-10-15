@@ -179,39 +179,39 @@ namespace scene
 		planes[SViewFrustrum::VF_LEFT_PLANE].Normal.Y = -(sw(1,3) + sw(1,0));
 		planes[SViewFrustrum::VF_LEFT_PLANE].Normal.Z = -(sw(2,3) + sw(2,0));
 		planes[SViewFrustrum::VF_LEFT_PLANE].D =		  -(sw(3,3) + sw(3,0));
-	                                                 
-		// right clipping plane                  
+
+		// right clipping plane
 		planes[SViewFrustrum::VF_RIGHT_PLANE].Normal.X = -(sw(0,3) - sw(0,0));
 		planes[SViewFrustrum::VF_RIGHT_PLANE].Normal.Y = -(sw(1,3) - sw(1,0));
 		planes[SViewFrustrum::VF_RIGHT_PLANE].Normal.Z = -(sw(2,3) - sw(2,0));
 		planes[SViewFrustrum::VF_RIGHT_PLANE].D =        -(sw(3,3) - sw(3,0));
-	    
-		// top clipping plane                  
+
+		// top clipping plane
 		planes[SViewFrustrum::VF_TOP_PLANE].Normal.X = -(sw(0,3) - sw(0,1));
 		planes[SViewFrustrum::VF_TOP_PLANE].Normal.Y = -(sw(1,3) - sw(1,1));
 		planes[SViewFrustrum::VF_TOP_PLANE].Normal.Z = -(sw(2,3) - sw(2,1));
 		planes[SViewFrustrum::VF_TOP_PLANE].D =        -(sw(3,3) - sw(3,1));
 
-		// bottom clipping plane                  
+		// bottom clipping plane
 		planes[SViewFrustrum::VF_BOTTOM_PLANE].Normal.X = -(sw(0,3) + sw(0,1));
 		planes[SViewFrustrum::VF_BOTTOM_PLANE].Normal.Y = -(sw(1,3) + sw(1,1));
 		planes[SViewFrustrum::VF_BOTTOM_PLANE].Normal.Z = -(sw(2,3) + sw(2,1));
 		planes[SViewFrustrum::VF_BOTTOM_PLANE].D =        -(sw(3,3) + sw(3,1));
-	 
-		// near clipping plane                   
+
+		// near clipping plane
 		planes[SViewFrustrum::VF_NEAR_PLANE].Normal.X = -sw(0,2);
 		planes[SViewFrustrum::VF_NEAR_PLANE].Normal.Y = -sw(1,2);
 		planes[SViewFrustrum::VF_NEAR_PLANE].Normal.Z = -sw(2,2);
 		planes[SViewFrustrum::VF_NEAR_PLANE].D =        -sw(3,2);
-	                                                 
-		// far clipping plane                    
+
+		// far clipping plane
 		planes[SViewFrustrum::VF_FAR_PLANE].Normal.X = -(sw(0,3) - sw(0,2));
 		planes[SViewFrustrum::VF_FAR_PLANE].Normal.Y = -(sw(1,3) - sw(1,2));
 		planes[SViewFrustrum::VF_FAR_PLANE].Normal.Z = -(sw(2,3) - sw(2,2));
 		planes[SViewFrustrum::VF_FAR_PLANE].D =        -(sw(3,3) - sw(3,2));
 
 		// normalize normals
-		
+
 		for (int i=0; i<6; ++i)
 		{
 			float len = (float)(1.0f / planes[i].Normal.getLength());
@@ -229,4 +229,3 @@ namespace scene
 } // end namespace ox
 
 #endif
-

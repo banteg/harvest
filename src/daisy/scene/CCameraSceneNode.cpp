@@ -25,7 +25,7 @@ using namespace ox::scene;
 
 
 //! constructor
-CCameraSceneNode::CCameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+CCameraSceneNode::CCameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 	const ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& lookat)
 	: ICameraSceneNode(parent, mgr, id, position, ox::core::CVector3d<float>(0.0f, 0.0f, 0.0f),
 			ox::core::CVector3d<float>(1.0f, 1.0f, 1.0f)), InputReceiverEnabled(true)
@@ -39,10 +39,10 @@ CCameraSceneNode::CCameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int i
 
 	// set default projection
 
-	fovy = ox::core::PI / 2.5f;	// Field of view, in radians. 
-	aspect = 4.0f / 3.0f;	// Aspect ratio. 
-	zn = 1.0f;				// value of the near view-plane. 
-	zf = 3000.0f;			// ox::core::Z-value of the far view-plane. 
+	fovy = ox::core::PI / 2.5f;	// Field of view, in radians.
+	aspect = 4.0f / 3.0f;	// Aspect ratio.
+	zn = 1.0f;				// value of the near view-plane.
+	zf = 3000.0f;			// ox::core::Z-value of the far view-plane.
 
 	ox::video::IVideoDriver* d = mgr->getVideoDriver();
 	if (d)
@@ -79,7 +79,7 @@ bool CCameraSceneNode::isInputReceiverEnabled()
 
 //! Sets the projection matrix of the camera. The ox::core::CMatrix4 class has some methods
 //! to build a projection matrix. e.g: ox::core::CMatrix4::buildProjectionMatrixPerspectiveFovLH
-//! \param projection: The new projection matrix of the camera. 
+//! \param projection: The new projection matrix of the camera.
 void CCameraSceneNode::setProjectionMatrix(const ox::core::CMatrix4& projection)
 {
 	Projection = projection;
@@ -106,10 +106,10 @@ const ox::core::CMatrix4& CCameraSceneNode::getViewMatrix()
 
 
 //! It is possible to send mouse and key events to the camera. Most cameras
-//! may ignore this input, but camera scene nodes which are created for 
+//! may ignore this input, but camera scene nodes which are created for
 //! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 //! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
-//! for changing their position, look at target or whatever. 
+//! for changing their position, look at target or whatever.
 bool CCameraSceneNode::OnEvent(ox::event::SEvent event)
 {
 	return false;
@@ -252,7 +252,7 @@ void CCameraSceneNode::OnPostRender()
 
 //! render
 void CCameraSceneNode::render()
-{	
+{
 	ox::video::IVideoDriver* driver = SceneManager->getVideoDriver();
 	if (!driver)
 		return;
@@ -289,4 +289,3 @@ void CCameraSceneNode::recalculateViewArea()
 
 } // end namespace
 } // end namespace
-

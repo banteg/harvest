@@ -73,7 +73,7 @@ inline char* fast_atof_move(char* c, float& out)
 
 	if (inv)
 		f *= -1.0f;
-	
+
 	out = f;
 	return c;
 }
@@ -118,7 +118,7 @@ inline const char* fast_atof_move_const(const char* c, float& out)
 
 	if (inv)
 		f *= -1.0f;
-	
+
 	out = f;
 	return c;
 }
@@ -135,4 +135,3 @@ inline float fast_atof(const char* c)
 }// end namespace daisy
 
 #endif
-

@@ -50,4 +50,3 @@ private:
 } // end namespace daisy
 
 #endif
-

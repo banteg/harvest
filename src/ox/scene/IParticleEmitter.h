@@ -27,7 +27,7 @@ public:
 	//! and returns how much new particles there are.
 	//! \param now: Current time.
 	//! \param timeSinceLastCall: Time elapsed since last call, in milliseconds.
-	//! \param outArray: Pointer which will point to the array with the new 
+	//! \param outArray: Pointer which will point to the array with the new
 	//! particles to add into the system.
 	//! \return Returns amount of new particles in the array. Can be 0.
 	virtual int emitt(unsigned int now, unsigned int timeSinceLastCall, SParticle*& outArray) = 0;
@@ -38,4 +38,3 @@ public:
 
 
 #endif
-

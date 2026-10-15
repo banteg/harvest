@@ -35,7 +35,7 @@ using namespace ox::scene;
 
 //! constructor
 CParticleSystemSceneNode::CParticleSystemSceneNode(bool createDefaultEmitter,
-	ISceneNode* parent, ISceneManager* mgr, int id, 
+	ISceneNode* parent, ISceneManager* mgr, int id,
 	const ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& rotation,
 	const ox::core::CVector3d<float>& scale)
 	: IParticleSystemSceneNode(parent, mgr, id, position, rotation, scale),
@@ -133,14 +133,14 @@ IParticleEmitter* CParticleSystemSceneNode::createPointEmitter(
 
 //! Creates a box particle emitter.
 IParticleEmitter* CParticleSystemSceneNode::createBoxEmitter(
-	ox::core::CAabbox3d<float> box,	ox::core::CVector3d<float> direction, 
+	ox::core::CAabbox3d<float> box,	ox::core::CVector3d<float> direction,
 	unsigned int minParticlesPerSecond,	unsigned int maxParticlePerSecond,
 	ox::video::SColor minStartColor,	ox::video::SColor maxStartColor,
 	unsigned int lifeTimeMin, unsigned int lifeTimeMax,
 	int maxAngleDegrees)
 {
 	return new CParticleBoxEmitter(box, direction, minParticlesPerSecond,
-		maxParticlePerSecond, minStartColor, maxStartColor, 
+		maxParticlePerSecond, minStartColor, maxStartColor,
 		lifeTimeMin, lifeTimeMax, maxAngleDegrees);
 }
 
@@ -205,7 +205,7 @@ void CParticleSystemSceneNode::render()
 	vertical.normalize();
 
 	horizontal *= 0.5f * ParticleSize.Width;
-	vertical *= 0.5f * ParticleSize.Height;	
+	vertical *= 0.5f * ParticleSize.Height;
 
 	view *= -1.0f;
 
@@ -236,7 +236,7 @@ void CParticleSystemSceneNode::render()
 		Vertices[3+idx].Normal = view;
 	}
 
-	// render all 
+	// render all
 	driver->setTransform(ox::video::ETS_WORLD, AbsoluteTransformation);
 	driver->setMaterial(Material);
 
@@ -301,7 +301,7 @@ void CParticleSystemSceneNode::reallocateBuffers()
 		int oldIdxSize = Indices.size();
 		int oldvertices = oldSize;
 		Indices.resize(Particles.size() * 6);
-		
+
 		for (i=oldIdxSize; i<Indices.size(); i+=6)
 		{
 			Indices[0+i] = 0+oldvertices;
@@ -318,4 +318,3 @@ void CParticleSystemSceneNode::reallocateBuffers()
 
 } // end namespace scene
 } // end namespace daisy
-

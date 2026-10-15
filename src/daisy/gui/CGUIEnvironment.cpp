@@ -305,8 +305,11 @@ bool CGUIEnvironment::postEventFromUser(SEvent event)
             return Hovered->OnEvent(event);
         break;
     case ox::event::EET_KEY_INPUT_EVENT:
-        if (Focus && Focus != this && Focus->OnEvent(event))
-            return true;
+        if (Focus && Focus != this)
+        {
+            if (Focus->OnEvent(event))
+                return true;
+        }
         return OnEventInNonFocusState(event);
     default:
         break;

@@ -46,7 +46,7 @@ CDefaultMeshFormatLoader::~CDefaultMeshFormatLoader()
 //! based on the file extension (e.g. ".bsp")
 bool CDefaultMeshFormatLoader::isALoadableFileExtension(const char* filename)
 {
-	return (strstr(filename, ".md2") || strstr(filename, ".obj") || 
+	return (strstr(filename, ".md2") || strstr(filename, ".obj") ||
 			strstr(filename, ".ms3d") || strstr(filename, ".bsp"));
 }
 
@@ -70,7 +70,7 @@ IAnimatedMesh* CDefaultMeshFormatLoader::createMesh(ox::io::IReadFile* file)
 	if (strstr(file->getFileName(), ".md2"))
 	{
 		file->seek(0);
-	
+
 		msh = new CAnimatedMeshMD2();
 		success = ((CAnimatedMeshMD2*)msh)->loadFile(file);
 		if (success)
@@ -123,4 +123,3 @@ IAnimatedMesh* CDefaultMeshFormatLoader::createMesh(ox::io::IReadFile* file)
 
 } // end namespace scene
 } // end namespace daisy
-

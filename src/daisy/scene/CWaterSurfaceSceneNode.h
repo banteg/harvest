@@ -23,7 +23,7 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		CWaterSurfaceSceneNode(float waveHeight, float waveSpeed, float waveLenght, 
+		CWaterSurfaceSceneNode(float waveHeight, float waveSpeed, float waveLenght,
 			IMesh* mesh, ISceneNode* parent, ISceneManager* mgr,	int id,
 			const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0),
 			const ox::core::CVector3d<float>& rotation = ox::core::CVector3d<float>(0,0,0),
@@ -48,4 +48,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

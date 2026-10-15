@@ -15,9 +15,9 @@ namespace scene
 {
 
 //!	Class which is able to load an animated mesh from a file.
-/** If you want the Irrlicht Engine be able to load meshes of 
+/** If you want the Irrlicht Engine be able to load meshes of
 currently unsupported file formats (e.g .cob), then implement
-this and add your new Surface loader with 
+this and add your new Surface loader with
 ISceneManager::addExternalMeshLoader() to the engine. */
 class IMeshLoader : public ox::IUnknown
 {
@@ -42,4 +42,3 @@ public:
 } // end namespace ox
 
 #endif
-

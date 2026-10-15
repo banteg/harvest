@@ -93,10 +93,10 @@ void CMeshSceneNode::render()
 	for (int i=0; i<Mesh->getMeshBufferCount(); ++i)
 	{
 		ox::scene::IMeshBuffer* mb = Mesh->getMeshBuffer(i);
-		
+
 		driver->setMaterial(Materials[i]);
 		driver->drawMeshBuffer(mb);
-	}			
+	}
 }
 
 
@@ -132,4 +132,3 @@ int CMeshSceneNode::getMaterialCount()
 
 } // end namespace scene
 } // end namespace daisy
-

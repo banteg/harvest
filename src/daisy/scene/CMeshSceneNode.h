@@ -48,7 +48,7 @@ using namespace ox::scene;
 		//! optimal position for minimizing renderstate changes, but can also be used
 		//! to directly modify the material of a scene node.
 		virtual ox::video::SMaterial& getMaterial(int i);
-		
+
 		//! returns amount of materials used by this scene node.
 		virtual int getMaterialCount();
 
@@ -63,4 +63,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

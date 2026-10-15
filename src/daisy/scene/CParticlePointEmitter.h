@@ -25,7 +25,7 @@ public:
 
 	//! constructor
 	CParticlePointEmitter(
-		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f), 
+		ox::core::CVector3d<float> direction = ox::core::CVector3d<float>(0.0f,0.03f,0.0f),
 		unsigned int minParticlesPerSecond = 5,
 		unsigned int maxParticlePerSecond = 10,
 		ox::video::SColor minStartColor = ox::video::SColor(255,0,0,0),
@@ -56,4 +56,3 @@ private:
 
 
 #endif
-

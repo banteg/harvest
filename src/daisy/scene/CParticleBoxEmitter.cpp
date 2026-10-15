@@ -26,7 +26,7 @@ CParticleBoxEmitter::CParticleBoxEmitter(
 	ox::video::SColor maxStartColor, unsigned int lifeTimeMin, unsigned int lifeTimeMax,
 	int maxAngleDegrees)
  : Box(box), Direction(direction), MinParticlesPerSecond(minParticlesPerSecond),
-	MaxParticlesPerSecond(maxParticlePerSecond), 
+	MaxParticlesPerSecond(maxParticlePerSecond),
 	MinStartColor(minStartColor), MaxStartColor(maxStartColor),
 	MinLifeTime(lifeTimeMin), MaxLifeTime(lifeTimeMax), Time(0), Emitted(0),
 	MaxAngleDegrees(maxAngleDegrees)
@@ -46,4 +46,3 @@ int CParticleBoxEmitter::emitt(unsigned int now, unsigned int timeSinceLastCall,
 
 } // end namespace scene
 } // end namespace daisy
-

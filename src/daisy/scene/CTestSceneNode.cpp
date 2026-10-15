@@ -27,7 +27,7 @@ CTestSceneNode::CTestSceneNode(float size, ISceneNode* parent, ISceneManager* mg
 : ISceneNode(parent, mgr, id, position, rotation, scale)
 {
 
-	unsigned short u[36] = {   0,2,1,   0,3,2,   1,5,4,   1,2,5,   4,6,7,   4,5,6, 
+	unsigned short u[36] = {   0,2,1,   0,3,2,   1,5,4,   1,2,5,   4,6,7,   4,5,6,
             7,3,0,   7,6,3,   9,5,2,   9,8,5,   0,11,10,   0,10,7};
 
 	int i; // new ISO for scoping problem with different compilers
@@ -37,22 +37,22 @@ CTestSceneNode::CTestSceneNode(float size, ISceneNode* parent, ISceneManager* mg
 	Material.Wireframe = false;
 	Material.Lighting = false;
 
-	// nicer texture mapping sent in by Dr Andros C Bragianos 
+	// nicer texture mapping sent in by Dr Andros C Bragianos
 	// .. and then improved by jox.
-	Vertices[0]  = ox::video::S3DVertex(0,0,0, -1,-1,-1, ox::video::SColor(255,255,255,255), 0, 1); 
-	Vertices[1]  = ox::video::S3DVertex(1,0,0,  1,-1,-1, ox::video::SColor(255,255,255,255), 1, 1); 
-	Vertices[2]  = ox::video::S3DVertex(1,1,0,  1, 1,-1, ox::video::SColor(255,255,255,255), 1, 0); 
-	Vertices[3]  = ox::video::S3DVertex(0,1,0, -1, 1,-1, ox::video::SColor(255,255,255,255), 0, 0); 
-	Vertices[4]  = ox::video::S3DVertex(1,0,1,  1,-1, 1, ox::video::SColor(255,255,255,255), 0, 1); 
-	Vertices[5]  = ox::video::S3DVertex(1,1,1,  1, 1, 1, ox::video::SColor(255,255,255,255), 0, 0); 
-	Vertices[6]  = ox::video::S3DVertex(0,1,1, -1, 1, 1, ox::video::SColor(255,255,255,255), 1, 0); 
-	Vertices[7]  = ox::video::S3DVertex(0,0,1, -1,-1, 1, ox::video::SColor(255,255,255,255), 1, 1); 
-	Vertices[8]  = ox::video::S3DVertex(0,1,1, -1, 1, 1, ox::video::SColor(255,255,255,255), 0, 1); 
-	Vertices[9]  = ox::video::S3DVertex(0,1,0, -1, 1,-1, ox::video::SColor(255,255,255,255), 1, 1); 
-	Vertices[10] = ox::video::S3DVertex(1,0,1,  1,-1, 1, ox::video::SColor(255,255,255,255), 1, 0); 
-	Vertices[11] = ox::video::S3DVertex(1,0,0,  1,-1,-1, ox::video::SColor(255,255,255,255), 0, 0); 
+	Vertices[0]  = ox::video::S3DVertex(0,0,0, -1,-1,-1, ox::video::SColor(255,255,255,255), 0, 1);
+	Vertices[1]  = ox::video::S3DVertex(1,0,0,  1,-1,-1, ox::video::SColor(255,255,255,255), 1, 1);
+	Vertices[2]  = ox::video::S3DVertex(1,1,0,  1, 1,-1, ox::video::SColor(255,255,255,255), 1, 0);
+	Vertices[3]  = ox::video::S3DVertex(0,1,0, -1, 1,-1, ox::video::SColor(255,255,255,255), 0, 0);
+	Vertices[4]  = ox::video::S3DVertex(1,0,1,  1,-1, 1, ox::video::SColor(255,255,255,255), 0, 1);
+	Vertices[5]  = ox::video::S3DVertex(1,1,1,  1, 1, 1, ox::video::SColor(255,255,255,255), 0, 0);
+	Vertices[6]  = ox::video::S3DVertex(0,1,1, -1, 1, 1, ox::video::SColor(255,255,255,255), 1, 0);
+	Vertices[7]  = ox::video::S3DVertex(0,0,1, -1,-1, 1, ox::video::SColor(255,255,255,255), 1, 1);
+	Vertices[8]  = ox::video::S3DVertex(0,1,1, -1, 1, 1, ox::video::SColor(255,255,255,255), 0, 1);
+	Vertices[9]  = ox::video::S3DVertex(0,1,0, -1, 1,-1, ox::video::SColor(255,255,255,255), 1, 1);
+	Vertices[10] = ox::video::S3DVertex(1,0,1,  1,-1, 1, ox::video::SColor(255,255,255,255), 1, 0);
+	Vertices[11] = ox::video::S3DVertex(1,0,0,  1,-1,-1, ox::video::SColor(255,255,255,255), 0, 0);
 
-	Box.reset(0,0,0); 
+	Box.reset(0,0,0);
 
 	for (i=0; i<12; ++i)
 	{
@@ -83,7 +83,7 @@ void CTestSceneNode::render()
         |  /      |  /
         |/        | /
         0---------1/
-       000       100       
+       000       100
 	*/
 
 	ox::video::IVideoDriver* driver = SceneManager->getVideoDriver();
@@ -91,7 +91,7 @@ void CTestSceneNode::render()
 	driver->setMaterial(Material);
 
 	driver->setTransform(ox::video::ETS_WORLD, AbsoluteTransformation);
-	
+
 	  driver->drawIndexedTriangleList(&Vertices[0], 12, &Indices[0], 12);
 }
 
@@ -133,4 +133,3 @@ int CTestSceneNode::getMaterialCount()
 
 } // end namespace scene
 } // end namespace daisy
-

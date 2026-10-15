@@ -27,7 +27,7 @@ using namespace ox::scene;
 
 
 //! constructor
-CWaterSurfaceSceneNode::CWaterSurfaceSceneNode(float waveHeight, float waveSpeed, float waveLength, 
+CWaterSurfaceSceneNode::CWaterSurfaceSceneNode(float waveHeight, float waveSpeed, float waveLength,
 		IMesh* mesh, ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& rotation,
 		const ox::core::CVector3d<float>& scale)
@@ -81,16 +81,16 @@ void CWaterSurfaceSceneNode::animateWaterSurface()
 		{
 		case ox::video::EVT_STANDARD:
 			{
-				ox::video::S3DVertex* v = 
+				ox::video::S3DVertex* v =
 					(ox::video::S3DVertex*)Mesh->getMeshBuffer(b)->getVertices();
 
-				ox::video::S3DVertex* v2 = 
+				ox::video::S3DVertex* v2 =
 					(ox::video::S3DVertex*)OriginalMesh->getMeshBuffer(b)->getVertices();
 
 				for (int i=0; i<vtxCnt; ++i)
 				{
-					v[i].Pos.Y = v2[i].Pos.Y + 
-					((float)sin(((v2[i].Pos.X/WaveLength) + time)) * WaveHeight) + 
+					v[i].Pos.Y = v2[i].Pos.Y +
+					((float)sin(((v2[i].Pos.X/WaveLength) + time)) * WaveHeight) +
 					((float)cos(((v2[i].Pos.Z/WaveLength) + time)) * WaveHeight);
 				}
 
@@ -98,16 +98,16 @@ void CWaterSurfaceSceneNode::animateWaterSurface()
 			break;
 		case ox::video::EVT_2TCOORDS:
 			{
-				ox::video::S3DVertex2TCoords* v = 
+				ox::video::S3DVertex2TCoords* v =
 					(ox::video::S3DVertex2TCoords*)Mesh->getMeshBuffer(b)->getVertices();
 
-				ox::video::S3DVertex2TCoords* v2 = 
+				ox::video::S3DVertex2TCoords* v2 =
 					(ox::video::S3DVertex2TCoords*)OriginalMesh->getMeshBuffer(b)->getVertices();
 
 				for (int i=0; i<vtxCnt; ++i)
 				{
-					v[i].Pos.Y = v2[i].Pos.Y + 
-					((float)sin(((v2[i].Pos.X/WaveLength) + time)) * WaveHeight) + 
+					v[i].Pos.Y = v2[i].Pos.Y +
+					((float)sin(((v2[i].Pos.X/WaveLength) + time)) * WaveHeight) +
 					((float)cos(((v2[i].Pos.Z/WaveLength) + time)) * WaveHeight);
 				}
 			}
@@ -123,4 +123,3 @@ void CWaterSurfaceSceneNode::animateWaterSurface()
 
 } // end namespace scene
 } // end namespace daisy
-
