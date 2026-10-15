@@ -5,6 +5,7 @@
 #include "scene/CAnimatedMeshSceneNode.h"
 #include "daisy/scene/CDummyTransformationSceneNode.h"
 #include "daisy/scene/CTriangleBBSelector.h"
+#include "daisy/scene/CShadowVolumeSceneNode.h"
 #include <cmath>
 #include <cstdio>
 
@@ -97,6 +98,11 @@ int main()
     CHECK(mesh->getMaterialCount() == 0);
     CHECK(&mesh->getMaterial(-1) == fallback && &mesh->getMaterial(0) == fallback);
     CHECK(mesh->drop());
+
+    daisy::scene::CShadowVolumeSceneNode* shadow = new daisy::scene::CShadowVolumeSceneNode(0, 0, -1);
+    CHECK(shadow->getMaterialCount() == 0);
+    CHECK(&shadow->getMaterial(-1) == fallback && &shadow->getMaterial(0) == fallback);
+    CHECK(shadow->drop());
 
     // The recovered dummy node's matrix overrides its ordinary position/scale/rotation.
     daisy::scene::CDummyTransformationSceneNode* dummy =

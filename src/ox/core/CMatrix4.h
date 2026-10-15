@@ -17,6 +17,9 @@ namespace core {
 class CMatrix4
 {
 public:
+    void buildProjectionMatrixPerspectiveFovLH(float fieldOfViewRadians, float aspectRatio, float zNear, float zFar);
+    void buildCameraLookAtMatrixLH(const CVector3d<float>& position, const CVector3d<float>& target, const CVector3d<float>& upVector);
+    bool makeInverse();
     void multiplyWith1x4Matrix(float* matrix) const;
     void transformPlane( CPlane3d<float> &plane) const;
     void transformPlane( const CPlane3d<float> &in, CPlane3d<float> &out) const;
@@ -304,6 +307,78 @@ inline void CMatrix4::multiplyWith1x4Matrix(float* matrix) const
     matrix[1] = M[1]*mat[0] + M[5]*mat[1] + M[9]*mat[2] + M[13]*mat[3];
     matrix[2] = M[2]*mat[0] + M[6]*mat[1] + M[10]*mat[2] + M[14]*mat[3];
     matrix[3] = M[3]*mat[0] + M[7]*mat[1] + M[11]*mat[2] + M[15]*mat[3];
+}
+
+inline bool CMatrix4::makeInverse()
+{
+    CMatrix4 temp;
+
+    if (getInverse(temp))
+    {
+        *this = temp;
+        return true;
+    }
+
+    return false;
+}
+
+inline void CMatrix4::buildCameraLookAtMatrixLH(    const CVector3d<float>& position,
+                                                const CVector3d<float>& target,
+                                                const CVector3d<float>& upVector)
+{
+    CVector3d<float> zaxis = target - position;
+    zaxis.normalize();
+
+    CVector3d<float> xaxis = upVector.crossProduct(zaxis);
+    xaxis.normalize();
+
+    CVector3d<float> yaxis = zaxis.crossProduct(xaxis);
+
+    (*this)(0,0) = xaxis.X;
+    (*this)(1,0) = yaxis.X;
+    (*this)(2,0) = zaxis.X;
+    (*this)(3,0) = 0;
+
+    (*this)(0,1) = xaxis.Y;
+    (*this)(1,1) = yaxis.Y;
+    (*this)(2,1) = zaxis.Y;
+    (*this)(3,1) = 0;
+
+    (*this)(0,2) = xaxis.Z;
+    (*this)(1,2) = yaxis.Z;
+    (*this)(2,2) = zaxis.Z;
+    (*this)(3,2) = 0;
+
+    (*this)(0,3) = -xaxis.dotProduct(position);
+    (*this)(1,3) = -yaxis.dotProduct(position);
+    (*this)(2,3) = -zaxis.dotProduct(position);
+    (*this)(3,3) = 1.0f;
+}
+
+inline void CMatrix4::buildProjectionMatrixPerspectiveFovLH(float fieldOfViewRadians, float aspectRatio, float zNear, float zFar)
+{
+    float h = (float)(cos(fieldOfViewRadians/2) / sin(fieldOfViewRadians/2));
+    float w = h / aspectRatio;
+
+    (*this)(0,0) = 2*zNear/w;
+    (*this)(1,0) = 0;
+    (*this)(2,0) = 0;
+    (*this)(3,0) = 0;
+
+    (*this)(0,1) = 0;
+    (*this)(1,1) = 2*zNear/h;
+    (*this)(2,1) = 0;
+    (*this)(3,1) = 0;
+
+    (*this)(0,2) = 0;
+    (*this)(1,2) = 0;
+    (*this)(2,2) = zFar/(zFar-zNear);
+    (*this)(3,2) = 1;
+
+    (*this)(0,3) = 0;
+    (*this)(1,3) = 0;
+    (*this)(2,3) = zNear*zFar/(zNear-zFar);
+    (*this)(3,3) = 0;
 }
 
 } // end namespace core

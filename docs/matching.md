@@ -144,6 +144,25 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CEmptySceneNode.cpp` | 40/41 | Irrlicht 0.7's empty node; the static initializer differs |
 | `daisy/scene/CLightSceneNode.cpp` | 45/45 | exact; Irrlicht 0.7's light node with `SLight`'s default constructor and `SpecularColor = color` |
 | `daisy/scene/CSkyBoxSceneNode.cpp` | 45/45 | exact; Irrlicht 0.7's sky box node with daisy's mirrored side UVs and transposed top/bottom UVs |
+| `daisy/scene/CAnimatedMeshMD2.cpp` | 59/62 | Irrlicht 0.7's Quake 2 MD2 animated mesh; `loadFile`, `calculateBoundingBox` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CBspTreeSceneNode.cpp` | 45/46 | Irrlicht 0.7's BSP tree scene node; `OnPreRender` and the header's `CBspTree::BspPoly::operator==` trap because their Irrlicht bodies do not compile against daisy's interfaces |
+| `daisy/scene/CCameraSceneNode.cpp` | 35/67 | Irrlicht 0.7's camera node; most of the unit is misplaced in the target, so its functions are counted inexact until placement is fixed |
+| `daisy/scene/CDefaultMeshFormatLoader.cpp` | 11/12 | Irrlicht 0.7's default mesh loader that picks a format loader |
+| `daisy/scene/CMeshSceneNode.cpp` | 44/46 | Irrlicht 0.7's static mesh node; `OnPreRender` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CMetaTriangleSelector.cpp` | 19/20 | Irrlicht 0.7's triangle selector that combines others; `removeTriangleSelector` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/COctTreeSceneNode.cpp` | 42/48 | Irrlicht 0.7's octree scene node; `OnPreRender` and the header's `OctTree<T>::OctTreeNode` constructor trap because their Irrlicht bodies do not compile against daisy's interfaces |
+| `daisy/scene/COctTreeTriangleSelector.cpp` | 5/11 | Irrlicht 0.7's octree triangle selector; `constructOctTree` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CParticleBoxEmitter.cpp` | 9/10 | Irrlicht 0.7's box particle emitter; `emitt` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CParticlePointEmitter.cpp` | 9/10 | Irrlicht 0.7's point particle emitter; `emitt` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CParticleSystemSceneNode.cpp` | 53/57 | Irrlicht 0.7's particle system node; `doParticleSystem` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CShadowVolumeSceneNode.cpp` | 50/52 | Irrlicht 0.7's shadow volume node |
+| `daisy/scene/CStaticMeshOBJ.cpp` | 43/44 | Irrlicht 0.7's Wavefront OBJ mesh loader |
+| `daisy/scene/CTestSceneNode.cpp` | 42/45 | Irrlicht 0.7's test cube and sphere node; `OnPreRender` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CTextSceneNode.cpp` | 45/49 | Irrlicht 0.7's text node; `render` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CWaterSurfaceSceneNode.cpp` | 31/34 | Irrlicht 0.7's water surface node; `OnPreRender` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CXFileReader.cpp` | 16/42 | Irrlicht 0.7's DirectX .x file reader; ten of the data-object parsers are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CXMeshFileLoader.cpp` | 12/12 | exact; Irrlicht 0.7's DirectX .x mesh loader |
+| `daisy/video/Null/CImageLoaderPCX.cpp` | 13/14 | Irrlicht 0.7's PCX image loader; `loadImage` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
