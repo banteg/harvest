@@ -36,8 +36,11 @@ int CPerimeterBombExplosion::updateLogic(float frameDelta)
 {
     Position.X += Speed.X * frameDelta;
     Position.Y += Speed.Y * frameDelta;
-    if (!Moved && Speed.getLength() > 10.0)
-        Moved = true;
+    if (!Moved)
+    {
+        if (Speed.getLength() > 10.0)
+            Moved = true;
+    }
     Speed *= ox::core::max_(0.0f, 1.0f - frameDelta);
     Fuse -= frameDelta;
 
