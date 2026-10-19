@@ -21,7 +21,7 @@
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
     "config/1.18-linux-amd64/symbols.tsv": "03980e638e5eb001f0c3adbf33665fdda31693cf4ece468637a098126ef8bf98",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
-    "config/1.18-linux-amd64/units.toml": "8ead6a04f55b61f729554d5539872d133821f452052fd7321ddd2b4672bdd9ae"
+    "config/1.18-linux-amd64/units.toml": "0ef019685c1e469e886cfc5ba4672d433c1b7d850cd431755daa94998e48100a"
   },
   "units": [
     {
@@ -253479,7 +253479,7 @@
     },
     {
       "unit": "daisy/scene/CCameraSceneNode.cpp",
-      "object_sha256": "2b296280f8c5e928a0a2932a6d4e536c13ca4ae9900f4abea174d473067e159a",
+      "object_sha256": "cd26f34e79f8e90635c1e9822e542ac13aa58c320dad3cab03ef8c331dd5836e",
       "exact": false,
       "sections": [
         {
@@ -253491,6 +253491,11 @@
           "first_difference": 3,
           "differing_bytes": 16910,
           "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventERKN2ox5event6SEventE",
+              "known": "0x551870",
+              "placed": "0x551860"
+            },
             {
               "symbol": "_ZN5daisy5scene16CCameraSceneNode9setTargetERKN2ox4core9CVector3dIfEE",
               "known": "0x551880",
@@ -254436,7 +254441,7 @@
               "exact": false
             },
             {
-              "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventEN2ox5event6SEventE",
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventERKN2ox5event6SEventE",
               "address": "0x551870",
               "size": 3,
               "extent": "fde",
@@ -255553,42 +255558,18 @@
         },
         {
           "name": ".rodata._ZTVN5daisy5scene16CCameraSceneNodeE",
-          "size": 448,
+          "size": 440,
           "placement": "symbol: _ZTVN5daisy5scene16CCameraSceneNodeE",
-          "exact": false,
+          "exact": true,
           "address": "0x619700",
-          "first_difference": 304,
-          "differing_bytes": 13,
-          "bad_references": [
+          "references": 54,
+          "data_ranges": [
             {
-              "offset": 304,
-              "type": 1,
-              "symbol": "__cxa_pure_virtual",
-              "addend": 0,
-              "destination": "0x408648",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 432,
-              "type": 1,
-              "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventEN2ox5event6SEventE",
-              "addend": 0,
-              "destination": "0x551870",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 440,
-              "type": 1,
-              "symbol": "_ZN5daisy5scene16CCameraSceneNode12OnPostRenderEv",
-              "addend": 0,
-              "destination": "0x551b30",
-              "reason": "different destination",
-              "matches": false
+              "address": "0x619700",
+              "size": 440,
+              "kind": "section"
             }
-          ],
-          "references": 55
+          ]
         },
         {
           "name": ".rodata._ZTSN5daisy5scene16CCameraSceneNodeE",
@@ -255795,7 +255776,7 @@
           "/out/daisy__scene__CCameraSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CCameraSceneNode.cpp": "a7349705d360dc00d2f147ee1e68e0dd8d92da7a428ebee1d7094aa4e0841e85",
+          "src/daisy/scene/CCameraSceneNode.cpp": "ab7e854af4a55a7c1832a0b1f0965aa6b598aaebd69c33295c47aa484fb43709",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -255820,7 +255801,7 @@
           "src/ox/scene/../event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
-          "src/daisy/scene/CCameraSceneNode.h": "02629ba82e92af8c753082377bc5fa3f5d27ef885f3f1787465d0d0f6e63b8e5",
+          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -255840,9 +255821,9 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
         },
         "system_headers": 117,
-        "object_sha256": "2b296280f8c5e928a0a2932a6d4e536c13ca4ae9900f4abea174d473067e159a"
+        "object_sha256": "cd26f34e79f8e90635c1e9822e542ac13aa58c320dad3cab03ef8c331dd5836e"
       },
-      "fuzzy_target_sha256": "0e71eb92efda9770ef31699a77099f14f130ca260307ab21b2f08498b5cb96ca",
+      "fuzzy_target_sha256": "051cd9fa94aca93b7454067f82002ff9644d76467f7bea960896052ac3ba27d2",
       "fuzzy_functions": [
         {
           "address": "0x551800",
@@ -255877,7 +255858,7 @@
         {
           "address": "0x551870",
           "size": 3,
-          "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventEN2ox5event6SEventE",
+          "symbol": "_ZN5daisy5scene16CCameraSceneNode7OnEventERKN2ox5event6SEventE",
           "percent": 100.0
         },
         {
@@ -275947,6 +275928,2921 @@
           "percent": 100.0
         }
       ]
+    },
+    {
+      "unit": "daisy/scene/CCameraMayaSceneNode.cpp",
+      "object_sha256": "448f0f9ed4e46316a70c3e0b3da023cb2cb046da579a962bf56b001a40ac612b",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 1261,
+          "placement": "symbol: _ZN5daisy5scene20CCameraMayaSceneNode7OnEventERKN2ox5event6SEventE",
+          "exact": false,
+          "address": "0x54fff0",
+          "first_difference": 50,
+          "differing_bytes": 410,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode12OnPostRenderEj",
+              "known": "0x5517c0",
+              "placed": "0x5501b0"
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD0Ev",
+              "known": "0x5501b0",
+              "placed": "0x5501c0"
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD1Ev",
+              "known": "0x5501f0",
+              "placed": "0x5501e0"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 476,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x12d8987",
+              "matches": false
+            },
+            {
+              "offset": 612,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEESC_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x555370",
+              "matches": false
+            },
+            {
+              "offset": 857,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode19recalculateViewAreaEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x39aafc83",
+              "matches": false
+            },
+            {
+              "offset": 876,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x76623915",
+              "matches": false
+            },
+            {
+              "offset": 889,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 980,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEESC_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x555370",
+              "matches": false
+            },
+            {
+              "offset": 1225,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode19recalculateViewAreaEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x39aafb03",
+              "matches": false
+            },
+            {
+              "offset": 1244,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x76623795",
+              "matches": false
+            },
+            {
+              "offset": 1257,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 485,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 504,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x12d89c3",
+              "matches": false
+            },
+            {
+              "offset": 520,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x12d89e3",
+              "matches": false
+            }
+          ],
+          "references": 24,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode7OnEventERKN2ox5event6SEventE",
+              "address": "0x54fff0",
+              "size": 321,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode14isMouseKeyDownEi",
+              "address": "0x550140",
+              "size": 12,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode9allKeysUpEv",
+              "address": "0x550150",
+              "size": 22,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5scene20CCameraMayaSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+              "address": "0x550170",
+              "size": 38,
+              "extent": "fde",
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode7animateEv",
+              "address": "0x5501a0",
+              "size": 2,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode12OnPostRenderEj",
+              "address": "0x5517c0",
+              "size": 2,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD0Ev",
+              "address": "0x5501b0",
+              "size": 25,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD1Ev",
+              "address": "0x5501f0",
+              "size": 12,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD2Ev",
+              "address": "0x550210",
+              "size": 12,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+              "address": "0x550230",
+              "size": 365,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+              "address": "0x5503b0",
+              "size": 365,
+              "extent": null,
+              "global": true,
+              "exact": false
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c114",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c114",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode7getNameEv",
+          "size": 5,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode7getNameEv",
+          "exact": true,
+          "address": "0x4c67b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode7getNameEv",
+              "address": "0x4c67b0",
+              "size": 5,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9isVisibleEv",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9isVisibleEv",
+          "exact": true,
+          "address": "0x4c67c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9isVisibleEv",
+              "address": "0x4c67c0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode10setVisibleEb",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode10setVisibleEb",
+          "exact": true,
+          "address": "0x4c67d0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode10setVisibleEb",
+              "address": "0x4c67d0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode5getIDEv",
+          "size": 7,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode5getIDEv",
+          "exact": true,
+          "address": "0x4c67e0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode5getIDEv",
+              "address": "0x4c67e0",
+              "size": 7,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode5setIDEi",
+          "size": 7,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode5setIDEi",
+          "exact": true,
+          "address": "0x4c67f0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode5setIDEi",
+              "address": "0x4c67f0",
+              "size": 7,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode6removeEv",
+          "size": 34,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode6removeEv",
+          "exact": true,
+          "address": "0x4c6800",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode6removeEv",
+              "address": "0x4c6800",
+              "size": 34,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11getMaterialEi",
+          "size": 3,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11getMaterialEi",
+          "exact": true,
+          "address": "0x4c6830",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11getMaterialEi",
+              "address": "0x4c6830",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "size": 3,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "exact": true,
+          "address": "0x4c6840",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode16getMaterialCountEv",
+              "address": "0x4c6840",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode8getScaleEv",
+          "size": 30,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode8getScaleEv",
+          "exact": true,
+          "address": "0x4c6850",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode8getScaleEv",
+              "address": "0x4c6850",
+              "size": 30,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "size": 27,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c6870",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+              "address": "0x4c6870",
+              "size": 27,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode11getRotationEv",
+          "size": 21,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode11getRotationEv",
+          "exact": true,
+          "address": "0x4c6890",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode11getRotationEv",
+              "address": "0x4c6890",
+              "size": 21,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "size": 18,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c68b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+              "address": "0x4c68b0",
+              "size": 18,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode11getPositionEv",
+          "size": 21,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode11getPositionEv",
+          "exact": true,
+          "address": "0x4c68d0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode11getPositionEv",
+              "address": "0x4c68d0",
+              "size": 21,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "size": 18,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c68f0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+              "address": "0x4c68f0",
+              "size": 18,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "size": 151,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "exact": true,
+          "address": "0x4c6910",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+              "address": "0x4c6910",
+              "size": 151,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "size": 8,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "exact": true,
+          "address": "0x4c69b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+              "address": "0x4c69b0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "size": 1540,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "exact": true,
+          "address": "0x4c69c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+              "address": "0x4c69c0",
+              "size": 1540,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata",
+          "size": 56,
+          "placement": "references",
+          "exact": true,
+          "address": "0x619478",
+          "references": 7,
+          "data_ranges": [
+            {
+              "address": "0x619478",
+              "size": 56,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "size": 98,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "exact": true,
+          "address": "0x4c92a0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+              "address": "0x4c92a0",
+              "size": 98,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "size": 79,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "exact": true,
+          "address": "0x4c7270",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+              "address": "0x4c7270",
+              "size": 79,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "size": 93,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "exact": true,
+          "address": "0x4c72c0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode8addChildEPS1_",
+              "address": "0x4c72c0",
+              "size": 93,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "size": 1877,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "exact": true,
+          "address": "0x4c7320",
+          "references": 12,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+              "address": "0x4c7320",
+              "size": 1877,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode7setNameEPKw",
+          "size": 216,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode7setNameEPKw",
+          "exact": true,
+          "address": "0x4c7a80",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode7setNameEPKw",
+              "address": "0x4c7a80",
+              "size": 216,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 38,
+          "placement": "exception frames",
+          "exact": false,
+          "address": "0x66338b",
+          "first_difference": 8,
+          "differing_bytes": 6,
+          "references": 0
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9removeAllEv",
+          "size": 123,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9removeAllEv",
+          "exact": true,
+          "address": "0x4c89b0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9removeAllEv",
+              "address": "0x4c89b0",
+              "size": 123,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "size": 123,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "exact": true,
+          "address": "0x4c8930",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+              "address": "0x4c8930",
+              "size": 123,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "size": 119,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "exact": true,
+          "address": "0x4c8a30",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9setParentEPS1_",
+              "address": "0x4c8a30",
+              "size": 119,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "size": 66,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "exact": true,
+          "address": "0x4c8ab0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+              "address": "0x4c8ab0",
+              "size": 66,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "size": 100,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "exact": true,
+          "address": "0x4c9310",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11removeChildEPS1_",
+              "address": "0x4c9310",
+              "size": 100,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy5scene20CCameraMayaSceneNodeE",
+          "size": 440,
+          "placement": "symbol: _ZTVN5daisy5scene20CCameraMayaSceneNodeE",
+          "exact": false,
+          "address": "0x6194c0",
+          "first_difference": 232,
+          "differing_bytes": 3,
+          "bad_references": [
+            {
+              "offset": 232,
+              "type": 1,
+              "symbol": "_ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+              "addend": 0,
+              "destination": "0x4c68f0",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 54
+        },
+        {
+          "name": ".rodata._ZTSN5daisy5scene20CCameraMayaSceneNodeE",
+          "size": 37,
+          "placement": "symbol: _ZTSN5daisy5scene20CCameraMayaSceneNodeE",
+          "exact": true,
+          "address": "0x6196a0",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6196a0",
+              "size": 37,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy5scene20CCameraMayaSceneNodeE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy5scene20CCameraMayaSceneNodeE",
+          "exact": true,
+          "address": "0x6196d0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x6196d0",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__scene__CCameraMayaSceneNode.d",
+          "-c",
+          "src/daisy/scene/CCameraMayaSceneNode.cpp",
+          "-o",
+          "/out/daisy__scene__CCameraMayaSceneNode.o"
+        ],
+        "inputs": {
+          "src/daisy/scene/CCameraMayaSceneNode.cpp": "d65491a5e22d727368cd0398dc283ebd8faae1f96e3d9d6f7cc82ed1df59ce2f",
+          "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
+          "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/scene/../core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
+          "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
+          "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
+          "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
+          "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
+          "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
+          "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
+          "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
+          "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
+          "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
+          "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
+          "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
+          "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
+          "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
+          "src/daisy/scene/CCameraMayaSceneNode.h": "c9519284dc852889ab90f666efda72f08df888ee2ff68eec73b272a10c075cf0",
+          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
+          "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
+          "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
+          "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
+          "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/scene/../video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
+          "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff"
+        },
+        "system_headers": 117,
+        "object_sha256": "448f0f9ed4e46316a70c3e0b3da023cb2cb046da579a962bf56b001a40ac612b"
+      },
+      "fuzzy_target_sha256": "f48cebea7d47c37ff8a15035429457fad2f67c3db021dc4584de54ecaa23e386",
+      "fuzzy_functions": [
+        {
+          "address": "0x54fff0",
+          "size": 321,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode7OnEventERKN2ox5event6SEventE",
+          "percent": 99.86957
+        },
+        {
+          "address": "0x550140",
+          "size": 12,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode14isMouseKeyDownEi",
+          "percent": 99.666664
+        },
+        {
+          "address": "0x550150",
+          "size": 22,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode9allKeysUpEv",
+          "percent": 99.25
+        },
+        {
+          "address": "0x550170",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5scene20CCameraMayaSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5501a0",
+          "size": 9,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode7animateEv",
+          "percent": 20.0
+        },
+        {
+          "address": "0x5517c0",
+          "size": 52,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNode12OnPostRenderEj",
+          "percent": 2.857143
+        },
+        {
+          "address": "0x5501b0",
+          "size": 36,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD0Ev",
+          "percent": 86.875
+        },
+        {
+          "address": "0x5501f0",
+          "size": 23,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD1Ev",
+          "percent": 65.0
+        },
+        {
+          "address": "0x550210",
+          "size": 23,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeD2Ev",
+          "percent": 65.0
+        },
+        {
+          "address": "0x550230",
+          "size": 376,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+          "percent": 96.09091
+        },
+        {
+          "address": "0x5503b0",
+          "size": 376,
+          "symbol": "_ZN5daisy5scene20CCameraMayaSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEifff",
+          "percent": 96.09091
+        },
+        {
+          "address": "0x4c67b0",
+          "size": 5,
+          "symbol": "_ZNK2ox5scene10ISceneNode7getNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67c0",
+          "size": 8,
+          "symbol": "_ZN2ox5scene10ISceneNode9isVisibleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67d0",
+          "size": 8,
+          "symbol": "_ZN2ox5scene10ISceneNode10setVisibleEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67e0",
+          "size": 7,
+          "symbol": "_ZN2ox5scene10ISceneNode5getIDEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67f0",
+          "size": 7,
+          "symbol": "_ZN2ox5scene10ISceneNode5setIDEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6800",
+          "size": 34,
+          "symbol": "_ZN2ox5scene10ISceneNode6removeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6830",
+          "size": 3,
+          "symbol": "_ZN2ox5scene10ISceneNode11getMaterialEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6840",
+          "size": 3,
+          "symbol": "_ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6850",
+          "size": 30,
+          "symbol": "_ZNK2ox5scene10ISceneNode8getScaleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6870",
+          "size": 27,
+          "symbol": "_ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6890",
+          "size": 21,
+          "symbol": "_ZNK2ox5scene10ISceneNode11getRotationEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68b0",
+          "size": 18,
+          "symbol": "_ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68d0",
+          "size": 21,
+          "symbol": "_ZNK2ox5scene10ISceneNode11getPositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68f0",
+          "size": 18,
+          "symbol": "_ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6910",
+          "size": 151,
+          "symbol": "_ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c69b0",
+          "size": 8,
+          "symbol": "_ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c69c0",
+          "size": 1540,
+          "symbol": "_ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c92a0",
+          "size": 98,
+          "symbol": "_ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7270",
+          "size": 79,
+          "symbol": "_ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c72c0",
+          "size": 93,
+          "symbol": "_ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7320",
+          "size": 1877,
+          "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7a80",
+          "size": 216,
+          "symbol": "_ZN2ox5scene10ISceneNode7setNameEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c89b0",
+          "size": 123,
+          "symbol": "_ZN2ox5scene10ISceneNode9removeAllEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8930",
+          "size": 123,
+          "symbol": "_ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8a30",
+          "size": 119,
+          "symbol": "_ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8ab0",
+          "size": 66,
+          "symbol": "_ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c9310",
+          "size": 100,
+          "symbol": "_ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/scene/CCameraFPSSceneNode.cpp",
+      "object_sha256": "3b199a4eabcb5b990a39e48ee9b934a798c46893f8386f10b09042c59a42140b",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 7148,
+          "placement": "symbol: _ZN5daisy5scene19CCameraFPSSceneNode12OnPostRenderEj",
+          "exact": false,
+          "address": "0x54e180",
+          "first_difference": 2,
+          "differing_bytes": 2610,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode7OnEventERKN2ox5event6SEventE",
+              "known": "0x54e0e0",
+              "placed": "0x54ecb0"
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode9setTargetERKN2ox4core9CVector3dIfEE",
+              "known": "0x54f1b0",
+              "placed": "0x54f1c0"
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD1Ev",
+              "known": "0x54f770",
+              "placed": "0x54f760"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 1148,
+              "type": 2,
+              "symbol": "_ZN2ox4core9CVector3dIfE9normalizeEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fd90",
+              "matches": false
+            },
+            {
+              "offset": 1536,
+              "type": 2,
+              "symbol": "_ZN2ox4core9CVector3dIfE9normalizeEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fd90",
+              "matches": false
+            },
+            {
+              "offset": 2987,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEESC_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x7cde2edf",
+              "matches": false
+            },
+            {
+              "offset": 3009,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5scene19CCameraFPSSceneNodeE",
+              "addend": 16,
+              "destination": "0x619220",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3116,
+              "type": 2,
+              "symbol": ".LC15",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x21c2f540+0x4",
+              "matches": false
+            },
+            {
+              "offset": 3132,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode19recalculateViewAreaEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54e4d4",
+              "matches": false
+            },
+            {
+              "offset": 3593,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0xf99d67d",
+              "matches": false
+            },
+            {
+              "offset": 3615,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x286429c9",
+              "matches": false
+            },
+            {
+              "offset": 3641,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x1064d77d",
+              "matches": false
+            },
+            {
+              "offset": 3665,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0xcc0c35c",
+              "matches": false
+            },
+            {
+              "offset": 3997,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54e6c1",
+              "matches": false
+            },
+            {
+              "offset": 4032,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x28aa184",
+              "matches": false
+            },
+            {
+              "offset": 4067,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x5722c2",
+              "matches": false
+            },
+            {
+              "offset": 4102,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x24d93e59",
+              "matches": false
+            },
+            {
+              "offset": 4127,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4135,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x1047e66b",
+              "matches": false
+            },
+            {
+              "offset": 4143,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5476,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5scene19CCameraFPSSceneNodeE",
+              "addend": 16,
+              "destination": "0x619220",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5524,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5532,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x51c22957",
+              "matches": false
+            },
+            {
+              "offset": 5574,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5582,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x5bc21925",
+              "matches": false
+            },
+            {
+              "offset": 5590,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5668,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5710,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5718,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x5c3cfd5e",
+              "matches": false
+            },
+            {
+              "offset": 5726,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5812,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5854,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5862,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x33c30212",
+              "matches": false
+            },
+            {
+              "offset": 5870,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5995,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEiRKNS2_4core9CVector3dIfEESC_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x555370",
+              "matches": false
+            },
+            {
+              "offset": 6124,
+              "type": 2,
+              "symbol": ".LC15",
+              "addend": -4,
+              "reason": "unmapped or truncated range: -0x7ca69280+0x4",
+              "matches": false
+            },
+            {
+              "offset": 6140,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNode19recalculateViewAreaEv",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x1048e919",
+              "matches": false
+            },
+            {
+              "offset": 6601,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x557f7c",
+              "matches": false
+            },
+            {
+              "offset": 6623,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x6754fb71",
+              "matches": false
+            },
+            {
+              "offset": 6649,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x557fac",
+              "matches": false
+            },
+            {
+              "offset": 6673,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fa0a",
+              "matches": false
+            },
+            {
+              "offset": 6998,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x6b1dba17",
+              "matches": false
+            },
+            {
+              "offset": 7033,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fc1f",
+              "matches": false
+            },
+            {
+              "offset": 7068,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fc60",
+              "matches": false
+            },
+            {
+              "offset": 7103,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x54fca1",
+              "matches": false
+            },
+            {
+              "offset": 7128,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7136,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x7a623f03",
+              "matches": false
+            },
+            {
+              "offset": 7144,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5554,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5690,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x5ce03fde",
+              "matches": false
+            },
+            {
+              "offset": 5834,
+              "type": 2,
+              "symbol": "_ZN5daisy5scene16CCameraSceneNodeD2Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x5ce0406e",
+              "matches": false
+            }
+          ],
+          "references": 126,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode9allKeysUpEv",
+              "address": "0x54e180",
+              "size": 29,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5scene19CCameraFPSSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+              "address": "0x54e1a0",
+              "size": 38,
+              "extent": "fde",
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode7animateEv",
+              "address": "0x54e1d0",
+              "size": 2557,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode12OnPostRenderEj",
+              "address": "0x54ebd0",
+              "size": 224,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode7OnEventERKN2ox5event6SEventE",
+              "address": "0x54e0e0",
+              "size": 2,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+              "address": "0x54e180",
+              "size": 1267,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode9setTargetERKN2ox4core9CVector3dIfEE",
+              "address": "0x54f1b0",
+              "size": 1296,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD0Ev",
+              "address": "0x54f6d0",
+              "size": 138,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD1Ev",
+              "address": "0x54f770",
+              "size": 130,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD2Ev",
+              "address": "0x54f800",
+              "size": 130,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+              "address": "0x54f890",
+              "size": 1260,
+              "extent": null,
+              "global": true,
+              "exact": false
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619448",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x61944c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619448",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x61944c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0464",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619450",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619460",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619468",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619454",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619460",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619470",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94b8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f2d3c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9508",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f2d3c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9508",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9500",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f2d3c",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f94f8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9500",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9500",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9500",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f9500",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x619458",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c110",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c110",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode7getNameEv",
+          "size": 5,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode7getNameEv",
+          "exact": true,
+          "address": "0x4c67b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode7getNameEv",
+              "address": "0x4c67b0",
+              "size": 5,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9isVisibleEv",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9isVisibleEv",
+          "exact": true,
+          "address": "0x4c67c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9isVisibleEv",
+              "address": "0x4c67c0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode10setVisibleEb",
+          "size": 8,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode10setVisibleEb",
+          "exact": true,
+          "address": "0x4c67d0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode10setVisibleEb",
+              "address": "0x4c67d0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode5getIDEv",
+          "size": 7,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode5getIDEv",
+          "exact": true,
+          "address": "0x4c67e0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode5getIDEv",
+              "address": "0x4c67e0",
+              "size": 7,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode5setIDEi",
+          "size": 7,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode5setIDEi",
+          "exact": true,
+          "address": "0x4c67f0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode5setIDEi",
+              "address": "0x4c67f0",
+              "size": 7,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode6removeEv",
+          "size": 34,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode6removeEv",
+          "exact": true,
+          "address": "0x4c6800",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode6removeEv",
+              "address": "0x4c6800",
+              "size": 34,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11getMaterialEi",
+          "size": 3,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11getMaterialEi",
+          "exact": true,
+          "address": "0x4c6830",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11getMaterialEi",
+              "address": "0x4c6830",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "size": 3,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "exact": true,
+          "address": "0x4c6840",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode16getMaterialCountEv",
+              "address": "0x4c6840",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode8getScaleEv",
+          "size": 30,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode8getScaleEv",
+          "exact": true,
+          "address": "0x4c6850",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode8getScaleEv",
+              "address": "0x4c6850",
+              "size": 30,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "size": 27,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c6870",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+              "address": "0x4c6870",
+              "size": 27,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode11getRotationEv",
+          "size": 21,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode11getRotationEv",
+          "exact": true,
+          "address": "0x4c6890",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode11getRotationEv",
+              "address": "0x4c6890",
+              "size": 21,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "size": 18,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c68b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+              "address": "0x4c68b0",
+              "size": 18,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode11getPositionEv",
+          "size": 21,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode11getPositionEv",
+          "exact": true,
+          "address": "0x4c68d0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode11getPositionEv",
+              "address": "0x4c68d0",
+              "size": 21,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "size": 18,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "exact": true,
+          "address": "0x4c68f0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+              "address": "0x4c68f0",
+              "size": 18,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "size": 151,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "exact": true,
+          "address": "0x4c6910",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+              "address": "0x4c6910",
+              "size": 151,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "size": 8,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "exact": true,
+          "address": "0x4c69b0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+              "address": "0x4c69b0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "size": 1540,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "exact": true,
+          "address": "0x4c69c0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+              "address": "0x4c69c0",
+              "size": 1540,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "size": 100,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "exact": true,
+          "address": "0x4c9310",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11removeChildEPS1_",
+              "address": "0x4c9310",
+              "size": 100,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "size": 79,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "exact": true,
+          "address": "0x4c7270",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+              "address": "0x4c7270",
+              "size": 79,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "size": 93,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "exact": true,
+          "address": "0x4c72c0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode8addChildEPS1_",
+              "address": "0x4c72c0",
+              "size": 93,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode7setNameEPKw",
+          "size": 216,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode7setNameEPKw",
+          "exact": true,
+          "address": "0x4c7a80",
+          "references": 3,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode7setNameEPKw",
+              "address": "0x4c7a80",
+              "size": 216,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "size": 123,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "exact": true,
+          "address": "0x4c8930",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+              "address": "0x4c8930",
+              "size": 123,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9removeAllEv",
+          "size": 123,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9removeAllEv",
+          "exact": true,
+          "address": "0x4c89b0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9removeAllEv",
+              "address": "0x4c89b0",
+              "size": 123,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "size": 119,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "exact": true,
+          "address": "0x4c8a30",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode9setParentEPS1_",
+              "address": "0x4c8a30",
+              "size": 119,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "size": 66,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "exact": true,
+          "address": "0x4c8ab0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+              "address": "0x4c8ab0",
+              "size": 66,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "size": 98,
+          "placement": "symbol: _ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "exact": true,
+          "address": "0x4c92a0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+              "address": "0x4c92a0",
+              "size": 98,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "size": 1877,
+          "placement": "symbol: _ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "exact": false,
+          "address": "0x4c7320",
+          "first_difference": 704,
+          "differing_bytes": 223,
+          "references": 12,
+          "functions": [
+            {
+              "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+              "address": "0x4c7320",
+              "size": 1877,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x5f0470",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x60d080",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy5scene19CCameraFPSSceneNodeE",
+          "size": 440,
+          "placement": "symbol: _ZTVN5daisy5scene19CCameraFPSSceneNodeE",
+          "exact": true,
+          "address": "0x619220",
+          "references": 54,
+          "data_ranges": [
+            {
+              "address": "0x619220",
+              "size": 440,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy5scene19CCameraFPSSceneNodeE",
+          "size": 36,
+          "placement": "symbol: _ZTSN5daisy5scene19CCameraFPSSceneNodeE",
+          "exact": true,
+          "address": "0x619400",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x619400",
+              "size": 36,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy5scene19CCameraFPSSceneNodeE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy5scene19CCameraFPSSceneNodeE",
+          "exact": true,
+          "address": "0x619430",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x619430",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [
+        ".text._ZN2ox4core9CVector3dIfE9normalizeEv",
+        ".text._ZNSt6vectorIN5daisy5scene19CCameraFPSSceneNode10SCamKeyMapESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+        ".gcc_except_table"
+      ],
+      "compilation": {
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__scene__CCameraFPSSceneNode.d",
+          "-c",
+          "src/daisy/scene/CCameraFPSSceneNode.cpp",
+          "-o",
+          "/out/daisy__scene__CCameraFPSSceneNode.o"
+        ],
+        "inputs": {
+          "src/daisy/scene/CCameraFPSSceneNode.cpp": "daf259a2b8dc8a0d2765d11be8fa0a8e814979cbf8383478e9d9c038be1da0a7",
+          "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
+          "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
+          "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/scene/../core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
+          "src/ox/scene/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
+          "src/ox/scene/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/scene/../video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
+          "src/ox/scene/../video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
+          "src/ox/scene/../TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
+          "src/ox/scene/ISceneNodeAnimator.h": "531ceb8ea5ca75efea4344e6b3d6e09fa46d5ef00e807c2c42c375dc0c8f69b0",
+          "src/ox/scene/ITriangleSelector.h": "bd821ca20d80f39a421db603830da97719d6f35e80797602d2d35cf1e0925dd0",
+          "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
+          "src/ox/gui/ICursorControl.h": "43df493621d7c8e1c49803e5f7095ff70d3a58422a8360cca98d09aa1a18a783",
+          "src/ox/gui/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
+          "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
+          "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
+          "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
+          "src/daisy/scene/CCameraFPSSceneNode.h": "82ac34a1c24b91d04b725dc4a662a54de1ec32b59defb4f2f4d54cd056139824",
+          "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
+          "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
+          "src/ox/scene/../video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
+          "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
+          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
+          "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
+          "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
+          "src/daisy/scene/SKeyMap.h": "b8a10cdfdee40e1606ff3ce466c6967c2d7a3922335c481fb6e52bcf0d83e6b0",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
+          "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
+          "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
+          "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
+        },
+        "system_headers": 123,
+        "object_sha256": "3b199a4eabcb5b990a39e48ee9b934a798c46893f8386f10b09042c59a42140b"
+      },
+      "fuzzy_target_sha256": "ca2456a46f25fae29f328a6a188f2a56e6568474cd1795069f968788ecc0aafb",
+      "fuzzy_functions": [
+        {
+          "address": "0x54e180",
+          "size": 29,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode9allKeysUpEv",
+          "percent": 99.2
+        },
+        {
+          "address": "0x54e1a0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5scene19CCameraFPSSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x54e1d0",
+          "size": 2557,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode7animateEv",
+          "percent": 99.845436
+        },
+        {
+          "address": "0x54ebd0",
+          "size": 224,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode12OnPostRenderEj",
+          "percent": 99.89091
+        },
+        {
+          "address": "0x54e0e0",
+          "size": 153,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode7OnEventERKN2ox5event6SEventE",
+          "percent": 0.90909094
+        },
+        {
+          "address": "0x54e180",
+          "size": 29,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeC2EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+          "percent": 0
+        },
+        {
+          "address": "0x54f1b0",
+          "size": 1296,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNode9setTargetERKN2ox4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x54f6d0",
+          "size": 133,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD0Ev",
+          "percent": 64.05556
+        },
+        {
+          "address": "0x54f770",
+          "size": 141,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD1Ev",
+          "percent": 94.94118
+        },
+        {
+          "address": "0x54f800",
+          "size": 141,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeD2Ev",
+          "percent": 94.94118
+        },
+        {
+          "address": "0x54f890",
+          "size": 1276,
+          "symbol": "_ZN5daisy5scene19CCameraFPSSceneNodeC1EPN2ox5scene10ISceneNodeEPNS3_13ISceneManagerEPNS2_3gui14ICursorControlEiffPNS_7SKeyMapEi",
+          "percent": 98.35223
+        },
+        {
+          "address": "0x4c67b0",
+          "size": 5,
+          "symbol": "_ZNK2ox5scene10ISceneNode7getNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67c0",
+          "size": 8,
+          "symbol": "_ZN2ox5scene10ISceneNode9isVisibleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67d0",
+          "size": 8,
+          "symbol": "_ZN2ox5scene10ISceneNode10setVisibleEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67e0",
+          "size": 7,
+          "symbol": "_ZN2ox5scene10ISceneNode5getIDEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c67f0",
+          "size": 7,
+          "symbol": "_ZN2ox5scene10ISceneNode5setIDEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6800",
+          "size": 34,
+          "symbol": "_ZN2ox5scene10ISceneNode6removeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6830",
+          "size": 3,
+          "symbol": "_ZN2ox5scene10ISceneNode11getMaterialEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6840",
+          "size": 3,
+          "symbol": "_ZN2ox5scene10ISceneNode16getMaterialCountEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6850",
+          "size": 30,
+          "symbol": "_ZNK2ox5scene10ISceneNode8getScaleEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6870",
+          "size": 27,
+          "symbol": "_ZN2ox5scene10ISceneNode8setScaleERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6890",
+          "size": 21,
+          "symbol": "_ZNK2ox5scene10ISceneNode11getRotationEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68b0",
+          "size": 18,
+          "symbol": "_ZN2ox5scene10ISceneNode11setRotationERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68d0",
+          "size": 21,
+          "symbol": "_ZNK2ox5scene10ISceneNode11getPositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c68f0",
+          "size": 18,
+          "symbol": "_ZN2ox5scene10ISceneNode11setPositionERKNS_4core9CVector3dIfEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c6910",
+          "size": 151,
+          "symbol": "_ZNK2ox5scene10ISceneNode19getAbsolutePositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c69b0",
+          "size": 8,
+          "symbol": "_ZNK2ox5scene10ISceneNode19getTriangleSelectorEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c69c0",
+          "size": 1540,
+          "symbol": "_ZN2ox5scene10ISceneNode22updateAbsolutePositionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c9310",
+          "size": 100,
+          "symbol": "_ZN2ox5scene10ISceneNode11removeChildEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7270",
+          "size": 79,
+          "symbol": "_ZN2ox5scene10ISceneNode11addAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c72c0",
+          "size": 93,
+          "symbol": "_ZN2ox5scene10ISceneNode8addChildEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7a80",
+          "size": 216,
+          "symbol": "_ZN2ox5scene10ISceneNode7setNameEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8930",
+          "size": 123,
+          "symbol": "_ZN2ox5scene10ISceneNode15removeAnimatorsEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c89b0",
+          "size": 123,
+          "symbol": "_ZN2ox5scene10ISceneNode9removeAllEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8a30",
+          "size": 119,
+          "symbol": "_ZN2ox5scene10ISceneNode9setParentEPS1_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c8ab0",
+          "size": 66,
+          "symbol": "_ZN2ox5scene10ISceneNode19setTriangleSelectorEPNS0_17ITriangleSelectorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c92a0",
+          "size": 98,
+          "symbol": "_ZN2ox5scene10ISceneNode14removeAnimatorEPNS0_18ISceneNodeAnimatorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4c7320",
+          "size": 1877,
+          "symbol": "_ZNK2ox5scene10ISceneNode25getRelativeTransformationEv",
+          "percent": 93.78035
+        }
+      ]
     }
   ],
   "fuzzy": {
@@ -275955,7 +278851,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "0ee247c4d758d96038f69c48d625b9f1036c975285161d6ed9d7496987d4359b"
+    "report_sha256": "3685a903c603ec2700a2a86d956f5c86b2a9adf181b7cd0c197aab6d58e83fd9"
   },
   "link": {
     "status": "unavailable",
