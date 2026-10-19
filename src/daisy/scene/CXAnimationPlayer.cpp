@@ -15,6 +15,7 @@
 #include "ox/scene/IMesh.h"
 #include "ox/event/ILogger.h"
 #include "ox/TArray.h"
+#include "ox/algo/CArrayFunctions.h"
 #include "CXAnimationPlayer.h"
 #include "ox/scene/ISceneNode.h"
 #include "ox/video/IVideoDriver.h"
@@ -136,8 +137,25 @@ void CXAnimationPlayer::createAnimationData()
 
 void CXAnimationPlayer::createMeshData()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	// create mesh
+	addFrameToMesh(&Reader->getRootFrame());
+
+	// recalulate box
+	OriginalMesh.recalculateBoundingBox();
+
+	// sort weights in joints
+	for (int j=0; j<(int)Joints.size(); ++j)
+		ox::algo::sort(Joints[j].Weights.begin(), Joints[j].Weights.end());
+
+	// copy mesh
+	AnimatedMesh = Manipulator->createMeshCopy(&OriginalMesh);
+
+	// create and link animation data
+	prepareAnimationData();
+
+	// first animation
+	animateSkeleton();
+	modifySkin();
 }
 
 
@@ -197,8 +215,21 @@ void CXAnimationPlayer::addVirtualWeight(int meshbuffernr, int vtxidx,
 										CXFileReader::SXMesh& mesh,
 										CXFileReader::SXFrame* frame)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	// find original joint of vertex
+
+	int jnr = getJointNumberFromName(frame->Name);
+	if (jnr == -1)
+		return;
+
+	// weight per joint
+	Joints[jnr].Weights.push_back(SWeightData(
+		meshbuffernr,
+		vtxidx,
+		1.0f));
+
+	// weight per vertex
+	SVertexWeight& weight = Weights[meshbuffernr][vtxidx];
+	weight.add(1.0f, jnr);
 }
 
 
@@ -346,16 +377,200 @@ void CXAnimationPlayer::animateSkeleton()
 //! modifies the skin based on the animated skeleton
 void CXAnimationPlayer::modifySkin()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	// set animated vertices to zero
+	for (int k=0; k<(int)Joints.size(); ++k)
+	{
+		for (int w=0; w<(int)Joints[k].Weights.size(); ++w)
+		{
+			SWeightData& wd = Joints[k].Weights[w];
+
+#ifdef _XREADER_DEBUG
+			if (wd.buffer >= AnimatedMesh->getMeshBufferCount() ||
+				wd.vertex >= AnimatedMesh->getMeshBuffer(wd.buffer)->getVertexCount())
+				os::Printer::log("CXAnimationPlayer: Invalid Weights", ox::event::ELL_INFORMATION);
+#endif
+			
+			ox::video::S3DVertex* nv = (ox::video::S3DVertex*)AnimatedMesh->getMeshBuffer(wd.buffer)->getVertices();
+            nv[wd.vertex].Pos.set(0,0,0);
+		}
+	}
+
+
+#ifdef _XREADER_DEBUG
+	bool somethingIsWrong = false;
+
+	// check if all vertices are set to zero
+	for (int mb=0; mb<AnimatedMesh->getMeshBufferCount(); ++mb)
+	{
+		ox::video::S3DVertex* v = (ox::video::S3DVertex*)AnimatedMesh->getMeshBuffer(mb)->getVertices();
+		int c = AnimatedMesh->getMeshBuffer(mb)->getVertexCount();
+		for (int vt=0; vt<c; ++vt)
+			if (v[vt].Pos != ox::core::CVector3d<float>(0,0,0))
+			{
+				char tmp[255];
+				sprintf(tmp, "CXAnimationPlayer: Vertex not null. Buf:%d Vtx:%d", mb, vt);
+				// this can happen if something is wrong with the vertex weights,
+				// not all vertices have a weight attached.
+				os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+				somethingIsWrong = true;
+			}
+	}
+
+	if (somethingIsWrong)
+	{
+		// write out mesh informations
+		char tmp[255];
+		sprintf(tmp, "CXAnimationPlayer: Meshbuffers:%d", AnimatedMesh->getMeshBufferCount());
+		os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+
+		for (int mb=0; mb<AnimatedMesh->getMeshBufferCount(); ++mb)
+		{
+			sprintf(tmp, "CXAnimationPlayer: Meshbuffer #%d: %d vertices", mb, AnimatedMesh->getMeshBuffer(mb)->getVertexCount());	
+			os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+		}
+	}
+#endif
+
+	// transform vertices
+	for (int mb=0; mb<AnimatedMesh->getMeshBufferCount(); ++mb)
+	{
+		ox::video::S3DVertex* av = (ox::video::S3DVertex*)AnimatedMesh->getMeshBuffer(mb)->getVertices();
+		ox::video::S3DVertex* ov = (ox::video::S3DVertex*)OriginalMesh.getMeshBuffer(mb)->getVertices();
+		int c = AnimatedMesh->getMeshBuffer(mb)->getVertexCount();
+		for (int vt=0; vt<c; ++vt)
+		{
+			ox::core::CVector3d<float> vtmp;
+			ox::core::CVector3d<float> orig = ov[vt].Pos;
+			SVertexWeight& weight = Weights[mb][vt];
+
+			av[vt].Pos = ox::core::CVector3d<float>(0,0,0);
+
+			/*if (weight.weightCount == 0)
+			{
+				av[vt].Pos = ov[vt].Pos;
+			}
+			else*/
+			for (int w=0; w<weight.weightCount; ++w)
+			{
+				Joints[weight.joint[w]].CombinedAnimationMatrix.transformVect(
+					orig, vtmp);
+
+				/*ox::core::CMatrix4 mat;
+				mat = Joints[weight.joint[w]].GlobalMatrix;
+				mat *= Joints[weight.joint[w]].MatrixOffset;
+				mat.transformVect(orig, vtmp);*/
+
+				vtmp *= weight.weight[w];
+				av[vt].Pos += vtmp;
+			}
+
+			
+		}
+	}
+
+	// transform vertices
+	/*ox::core::CVector3d<float> vtmp;
+	for (int k=0; k<(int)Joints.size(); ++k)
+	{
+
+		for (int w=0; w<(int)Joints[k].Weights.size(); ++w)
+		{
+			SWeightData& wd = Joints[k].Weights[w];
+			ox::video::S3DVertex* nv = (ox::video::S3DVertex*)AnimatedMesh->getMeshBuffer(wd.buffer)->getVertices();
+			ox::video::S3DVertex* ov = (ox::video::S3DVertex*)OriginalMesh.getMeshBuffer(	wd.buffer)->getVertices();
+
+			ox::core::CMatrix4 m = Joints[k].XFrame->GlobalMatrix;
+			m *= Joints[k].MatrixOffset;
+
+			m.transformVect(ov[wd.vertex].Pos, vtmp);
+
+			vtmp *= wd.weight;
+			nv[wd.vertex].Pos += vtmp;
+			
+		}
+	}*/
+
 }
 
 
 //! prepares animation data which was read in from the .x file
 void CXAnimationPlayer::prepareAnimationData()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+    int animationSetCount = Reader->getAnimationSetCount();
+	for (int i=0; i<animationSetCount; ++i)
+	{
+		AnimationSets.push_back(SXAnimationSet());
+		SXAnimationSet& mySet = AnimationSets.back();
+
+		CXFileReader::SXAnimationSet& readerSet = Reader->getAnimationSet(i);
+		mySet.AnimationName = readerSet.AnimationName;
+
+		// trough all animations
+		for (int a=0; a<(int)readerSet.Animations.size(); ++a)
+		{
+			// trough all keys
+			for (int k=0; k<(int)readerSet.Animations[a].Keys.size(); ++k)
+			{
+				// link with joint
+				int jntnr = getJointNumberFromName(readerSet.Animations[a].FrameName);
+
+				if (jntnr == -1)
+				{
+					os::Printer::log(
+						"CXAnimationPlayer: Animationtrack without corresponding joint found", 
+						readerSet.Animations[a].FrameName.c_str(), ox::event::ELL_INFORMATION);
+					continue;
+				}
+
+				// add new track
+				mySet.Animations.push_back(SXAnimationTrack());
+				SXAnimationTrack& myTrack = mySet.Animations.back();
+				myTrack.jointNr = jntnr;
+				IsAnimatedSkinnedMesh = true;
+
+				// copy track
+				int keyCount = (int)readerSet.Animations[a].Keys[k].numberOfKeys;
+				int type = readerSet.Animations[a].Keys[k].keyType;
+				int i;
+				myTrack.keyType = type;
+
+		#ifdef _XREADER_DEBUG
+				char tmp[255];
+				sprintf(tmp, "adding track %s with %d keys, type:%d", readerSet.Animations[a].FrameName.c_str(), keyCount, type);
+				os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+		#endif
+
+				switch(type)
+				{
+				case 0: // quaternion
+					for (i=0; i<keyCount; ++i)
+						myTrack.Quaternions.push_back(readerSet.Animations[a].Keys[k].getQuaternion(i));
+					break;
+				case 1: // scale
+				case 2: // position
+					for (i=0; i<keyCount; ++i)
+						myTrack.Vectors.push_back(readerSet.Animations[a].Keys[k].getVector(i));
+					break;
+				case 4:
+				case 3: // matrix
+					for (i=0; i<keyCount; ++i)
+						myTrack.Matrices.push_back(readerSet.Animations[a].Keys[k].getMatrix(i));
+					break;
+				}
+
+				// copy times
+				for (i=0; i<keyCount; ++i)
+					myTrack.Times.push_back((float)readerSet.Animations[a].Keys[k].time[i]);
+
+				if (myTrack.Times.back() > LastAnimationTime)
+					LastAnimationTime = myTrack.Times.back();
+			}
+			
+		}
+
+		// sort animation tracks
+		ox::algo::sort(mySet.Animations.begin(), mySet.Animations.end());
+	}
 }
 
 void CXAnimationPlayer::updateBoundingBoxFromAnimation()

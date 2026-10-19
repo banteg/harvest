@@ -81,12 +81,6 @@ const replaced = [_][]const u8{
     "daisy/scene/CDefaultMeshFormatLoader.cpp",
     // Recovered from Irrlicht 0.7; it needs daisy::scene::CXFileReader::CXFileReader(ox::io::IReadFile*), which nothing defines yet.
     "daisy/scene/CXMeshFileLoader.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderBmp.cpp.
-    "daisy/video/Null/CImageLoaderBmp.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStb.cpp.
-    "daisy/video/Null/CImageLoaderTGA.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStb.cpp.
-    "daisy/video/Null/CImageLoaderJPG.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
     "daisy/scene/CAnimatedMeshMS3D.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
@@ -103,12 +97,6 @@ const replaced = [_][]const u8{
     "daisy/scene/CCameraMayaSceneNode.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
     "daisy/scene/CCameraFPSSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/io/XMLStubs.cpp.
-    "daisy/io/CXMLReader.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/io/XMLStubs.cpp.
-    "daisy/io/CXMLWriter.cpp",
-    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/CSoftwareTexture.cpp.
-    "daisy/video/Software/CSoftwareTexture.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
     "daisy/scene/C3DSMeshFileLoader.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
