@@ -19,9 +19,9 @@
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
     "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "bc3cab837b4132c1f222dc8421c147dd3b7ff075af3efaf1e2fdc9859af98edb",
+    "config/1.18-linux-amd64/symbols.tsv": "b271610f5beef4352cf440c2292d85da98a2feba961296626e4498720e6672ef",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
-    "config/1.18-linux-amd64/units.toml": "56cd62772458e53abfb1ecdb64d61a8248a1367e818c2c1e3464412bfb93b7fd"
+    "config/1.18-linux-amd64/units.toml": "b52e9f66a38eb5a5a3572e7b23010614a7b8a0eb3a421f1d9c1f6517b5a6b5a0"
   },
   "units": [
     {
@@ -197684,7 +197684,7 @@
         "inputs": {
           "src/daisy/video/OpenGL/CVideoOpenGL.cpp": "8c803dcd591f488c3583d5a9fae67c360e605ba807a95f5ae7d46a5f7edf1215",
           "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
-          "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
+          "src/daisy/video/Null/CVideoNull.h": "41ac0435550d89795b7afb6cc60c0d93e57d06187f0aef48c037f5b986595ba3",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/video/IGPUProgrammingServices.h": "2a0ad94908e2855969a49d2cdf49bdf32e803f7c9c9ef62095e16680c94bcdb7",
@@ -199917,7 +199917,7 @@
           "src/daisy/video/OpenGL/COpenGLSLMaterialRenderer.cpp": "5a5da1036d3b1b0a8b995b3dce424d3ce8f2debc7938f3152c2c41e28f0a89d8",
           "src/daisy/video/OpenGL/COpenGLSLMaterialRenderer.h": "c1f5d61d859199a957ddc0d87b3ea19fbec00aa2e8c243fcad9947dff8a96c22",
           "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
-          "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
+          "src/daisy/video/Null/CVideoNull.h": "41ac0435550d89795b7afb6cc60c0d93e57d06187f0aef48c037f5b986595ba3",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/video/IGPUProgrammingServices.h": "2a0ad94908e2855969a49d2cdf49bdf32e803f7c9c9ef62095e16680c94bcdb7",
@@ -200653,7 +200653,7 @@
           "src/daisy/video/OpenGL/COpenGLShaderMaterialRenderer.cpp": "48908f8de0c71730ad648257af05e56b687e3f9674ee575d030ca37fadbabdb5",
           "src/daisy/video/OpenGL/COpenGLShaderMaterialRenderer.h": "11149e529254d50ca47a3044bd4edfd7e1dde927257518993e65a1ddb40f5d37",
           "src/daisy/video/OpenGL/CVideoOpenGL.h": "d52bfda7c30723e1cc39eb23a44245844febaedb6b184e290cfea34401523bf3",
-          "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
+          "src/daisy/video/Null/CVideoNull.h": "41ac0435550d89795b7afb6cc60c0d93e57d06187f0aef48c037f5b986595ba3",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/video/IGPUProgrammingServices.h": "2a0ad94908e2855969a49d2cdf49bdf32e803f7c9c9ef62095e16680c94bcdb7",
@@ -213049,7 +213049,7 @@
         ],
         "inputs": {
           "src/daisy/video/Null/CVideoNull.cpp": "093456729aea99e69b62770850ebf2ffc3314ce458cc1cee582bdffab61f5eb0",
-          "src/daisy/video/Null/CVideoNull.h": "31003215f12b255dd66f726dc093b42200a047d762237d69d89250660eac7866",
+          "src/daisy/video/Null/CVideoNull.h": "41ac0435550d89795b7afb6cc60c0d93e57d06187f0aef48c037f5b986595ba3",
           "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/video/IGPUProgrammingServices.h": "2a0ad94908e2855969a49d2cdf49bdf32e803f7c9c9ef62095e16680c94bcdb7",
@@ -291461,6 +291461,1732 @@
           "percent": 100.0
         }
       ]
+    },
+    {
+      "unit": "daisy/video/Software/CVideoSoftware.cpp",
+      "object_sha256": "d17bc64aa15b5b31ba93901ef09901368f4819ba136a91fd972ca63cd340fd6c",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 17586,
+          "placement": "symbol: _ZN5daisy5video14CVideoSoftware24switchToTriangleRendererENS0_17ETriangleRendererE",
+          "exact": false,
+          "address": "0x4f3a90",
+          "first_difference": 802,
+          "differing_bytes": 3422,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15draw2DRectangleEN2ox5video6SColorERKNS2_4core5CRectIiEEPS8_",
+              "known": "0x4f3da0",
+              "placed": "0x4f3d90"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEERKNS6_5CRectIiEEPSD_NS3_6SColorEb",
+              "known": "0x4f3e30",
+              "placed": "0x4f3e20"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10draw2DLineERKN2ox4core11CPosition2dIiEES7_NS2_5video6SColorE",
+              "known": "0x4f40b0",
+              "placed": "0x4f3fc0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEE",
+              "known": "0x4f3fd0",
+              "placed": "0x4f4010"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10beginSceneEbbN2ox5video6SColorE",
+              "known": "0x4f4100",
+              "placed": "0x4f40c0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware8endSceneEv",
+              "known": "0x4f4080",
+              "placed": "0x4f4160"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD1Ev",
+              "known": "0x4f4c10",
+              "placed": "0x4f4190"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+              "known": "0x4f41b0",
+              "placed": "0x4f42c0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPN2ox5video8ITextureE",
+              "known": "0x4f4290",
+              "placed": "0x4f43a0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10setTextureEPN2ox5video8ITextureE",
+              "known": "0x4f46e0",
+              "placed": "0x4f4430"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11setMaterialERKN2ox5video9SMaterialE",
+              "known": "0x4f4760",
+              "placed": "0x4f44b0"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+              "known": "0x4f47b0",
+              "placed": "0x4f4500"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video9S3DVertexEiPKti",
+              "known": "0x4f4940",
+              "placed": "0x4f4690"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD2Ev",
+              "known": "0x4f4d40",
+              "placed": "0x4f4820"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD0Ev",
+              "known": "0x4f4ad0",
+              "placed": "0x4f4950"
+            },
+            {
+              "symbol": "_ZN5daisy5video20createSoftwareDriverERKN2ox4core12CDimension2dIiEEbPNS1_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "known": "0x4f5230",
+              "placed": "0x4f5210"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12createPlanesERN2ox4core8CMatrix4E",
+              "known": "0x4f52b0",
+              "placed": "0x4f5290"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+              "known": "0x4f7250",
+              "placed": "0x4f6590"
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video9S3DVertexEiPKti",
+              "known": "0x4f65b0",
+              "placed": "0x4f7270"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 1186,
+              "type": 10,
+              "symbol": ".rodata.str1.8",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x8b480045+0x44",
+              "matches": false
+            },
+            {
+              "offset": 1689,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage4fillEs",
+              "addend": -4,
+              "destination": "0x4dd5a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2448,
+              "type": 10,
+              "symbol": ".rodata.str1.8",
+              "addend": 72,
+              "reason": "unmapped or truncated range: 0x6666c35d+0x3e",
+              "matches": false
+            },
+            {
+              "offset": 4122,
+              "type": 2,
+              "symbol": "_ZN5daisy5video10CVideoNullC2EPN2ox2io11IFileSystemERKNS2_4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4e21d0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4136,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 16,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4144,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 944,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4152,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 1032,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4732,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 23,
+              "reason": "unmapped or truncated range: 0x8d48fffe+0x1b",
+              "matches": false
+            },
+            {
+              "offset": 4739,
+              "type": 2,
+              "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
+              "addend": -4,
+              "destination": "0x4c2060",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4749,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4765,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4de240",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4782,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage4fillEs",
+              "addend": -4,
+              "destination": "0x4dd5a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4810,
+              "type": 2,
+              "symbol": "_ZN5daisy5video13createZBufferERKN2ox4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4f81f0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4825,
+              "type": 2,
+              "symbol": "_ZN5daisy5video26createTriangleRendererFlatEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5aaf20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4844,
+              "type": 2,
+              "symbol": "_ZN5daisy5video30createTriangleRendererFlatWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ab670",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4863,
+              "type": 2,
+              "symbol": "_ZN5daisy5video29createTriangleRendererGouraudEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5abdd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4882,
+              "type": 2,
+              "symbol": "_ZN5daisy5video33createTriangleRendererGouraudWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5acb40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4901,
+              "type": 2,
+              "symbol": "_ZN5daisy5video33createTriangleRendererTextureFlatEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ad820",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4920,
+              "type": 2,
+              "symbol": "_ZN5daisy5video37createTriangleRendererTextureFlatWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ae310",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4939,
+              "type": 2,
+              "symbol": "_ZN5daisy5video36createTriangleRendererTextureGouraudEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5b0050",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4958,
+              "type": 2,
+              "symbol": "_ZN5daisy5video40createTriangleRendererTextureGouraudWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5b0350",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4980,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+              "addend": -4,
+              "destination": "0x4f41b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4988,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftware27selectRightTriangleRendererEv",
+              "addend": -4,
+              "destination": "0x4f3b20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5019,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5027,
+              "type": 2,
+              "symbol": "_ZN5daisy5video10CVideoNullD2Ev",
+              "addend": -4,
+              "destination": "0x4e1f60",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5035,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5046,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5082,
+              "type": 2,
+              "symbol": "_ZN5daisy5video10CVideoNullC2EPN2ox2io11IFileSystemERKNS2_4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4e21d0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5096,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 16,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5104,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 944,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5112,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video14CVideoSoftwareE",
+              "addend": 1032,
+              "destination": "0x611120",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5692,
+              "type": 10,
+              "symbol": ".rodata.str1.1",
+              "addend": 23,
+              "reason": "unmapped or truncated range: 0x3f800000+0x1b",
+              "matches": false
+            },
+            {
+              "offset": 5699,
+              "type": 2,
+              "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
+              "addend": -4,
+              "destination": "0x4c2060",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5709,
+              "type": 2,
+              "symbol": "_Znwm",
+              "addend": -4,
+              "destination": "0x407bc8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5725,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4de240",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5742,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage4fillEs",
+              "addend": -4,
+              "destination": "0x4dd5a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5770,
+              "type": 2,
+              "symbol": "_ZN5daisy5video13createZBufferERKN2ox4core12CDimension2dIiEE",
+              "addend": -4,
+              "destination": "0x4f81f0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5785,
+              "type": 2,
+              "symbol": "_ZN5daisy5video26createTriangleRendererFlatEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5aaf20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5804,
+              "type": 2,
+              "symbol": "_ZN5daisy5video30createTriangleRendererFlatWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ab670",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5823,
+              "type": 2,
+              "symbol": "_ZN5daisy5video29createTriangleRendererGouraudEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5abdd0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5842,
+              "type": 2,
+              "symbol": "_ZN5daisy5video33createTriangleRendererGouraudWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5acb40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5861,
+              "type": 2,
+              "symbol": "_ZN5daisy5video33createTriangleRendererTextureFlatEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ad820",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5880,
+              "type": 2,
+              "symbol": "_ZN5daisy5video37createTriangleRendererTextureFlatWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5ae310",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5899,
+              "type": 2,
+              "symbol": "_ZN5daisy5video36createTriangleRendererTextureGouraudEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5b0050",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5918,
+              "type": 2,
+              "symbol": "_ZN5daisy5video40createTriangleRendererTextureGouraudWireEPNS0_8IZBufferE",
+              "addend": -4,
+              "destination": "0x5b0350",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5940,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+              "addend": -4,
+              "destination": "0x4f41b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5948,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftware27selectRightTriangleRendererEv",
+              "addend": -4,
+              "destination": "0x4f3b20",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5979,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5987,
+              "type": 2,
+              "symbol": "_ZN5daisy5video10CVideoNullD2Ev",
+              "addend": -4,
+              "destination": "0x4e1f60",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5995,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6006,
+              "type": 2,
+              "symbol": "_ZdlPv",
+              "addend": -4,
+              "destination": "0x407b48",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6087,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftwareC1ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "addend": -4,
+              "destination": "0x4f4d40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 14271,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE6resizeEmS2_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x55a3c068",
+              "matches": false
+            },
+            {
+              "offset": 17567,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE6resizeEmS2_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "-0x6f10a45",
+              "matches": false
+            },
+            {
+              "offset": 1149,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage15copyToWithAlphaEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEEsPSB_",
+              "addend": -4,
+              "destination": "0x4dd870",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1207,
+              "type": 2,
+              "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
+              "addend": -4,
+              "destination": "0x4c2060",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1323,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEEPSB_",
+              "addend": -4,
+              "destination": "0x4de480",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1397,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage8drawLineERKN2ox4core11CPosition2dIiEES7_s",
+              "addend": -4,
+              "destination": "0x4dd720",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2427,
+              "type": 2,
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+              "addend": -4,
+              "destination": "0x4f41b0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2459,
+              "type": 2,
+              "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
+              "addend": -4,
+              "destination": "0x4c2060",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 143,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware24switchToTriangleRendererENS0_17ETriangleRendererE",
+              "address": "0x4f3a90",
+              "size": 143,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware27selectRightTriangleRendererEv",
+              "address": "0x4f3b20",
+              "size": 105,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12queryFeatureEN2ox5video22E_VIDEO_DRIVER_FEATUREE",
+              "address": "0x4f3b90",
+              "size": 19,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12setTransformEN2ox5video22E_TRANSFORMATION_STATEERKNS2_4core8CMatrix4E",
+              "address": "0x4f3bb0",
+              "size": 45,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11setViewPortERKN2ox4core5CRectIiEE",
+              "address": "0x4f3be0",
+              "size": 234,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12clipTriangleEPf",
+              "address": "0x4f3cd0",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware7getNameEv",
+              "address": "0x4f3ce0",
+              "size": 6,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware13getDriverTypeEv",
+              "address": "0x4f3cf0",
+              "size": 6,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12getTransformEN2ox5video22E_TRANSFORMATION_STATEE",
+              "address": "0x4f3d00",
+              "size": 82,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy5video14CVideoSoftwareC2ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "address": "0x4f3d70",
+              "size": 38,
+              "extent": "fde",
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15draw2DRectangleEN2ox5video6SColorERKNS2_4core5CRectIiEEPS8_",
+              "address": "0x4f3da0",
+              "size": 139,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEERKNS6_5CRectIiEEPSD_NS3_6SColorEb",
+              "address": "0x4f3e30",
+              "size": 415,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10draw2DLineERKN2ox4core11CPosition2dIiEES7_NS2_5video6SColorE",
+              "address": "0x4f40b0",
+              "size": 73,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEE",
+              "address": "0x4f3fd0",
+              "size": 163,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10beginSceneEbbN2ox5video6SColorE",
+              "address": "0x4f4100",
+              "size": 151,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware8endSceneEv",
+              "address": "0x4f4080",
+              "size": 35,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD1Ev",
+              "address": "0x4f4c10",
+              "size": 297,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+              "address": "0x4f41b0",
+              "size": 210,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPN2ox5video8ITextureE",
+              "address": "0x4f4290",
+              "size": 143,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware10setTextureEPN2ox5video8ITextureE",
+              "address": "0x4f46e0",
+              "size": 125,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware11setMaterialERKN2ox5video9SMaterialE",
+              "address": "0x4f4760",
+              "size": 75,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+              "address": "0x4f47b0",
+              "size": 388,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video9S3DVertexEiPKti",
+              "address": "0x4f4940",
+              "size": 388,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD2Ev",
+              "address": "0x4f4d40",
+              "size": 297,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareD0Ev",
+              "address": "0x4f4ad0",
+              "size": 305,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareC2ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "address": "0x4f4c10",
+              "size": 956,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftwareC1ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "address": "0x4f4d40",
+              "size": 956,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video20createSoftwareDriverERKN2ox4core12CDimension2dIiEEbPNS1_2io11IFileSystemEPNS0_15IImagePresenterE",
+              "address": "0x4f5230",
+              "size": 126,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware12createPlanesERN2ox4core8CMatrix4E",
+              "address": "0x4f52b0",
+              "size": 4859,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+              "address": "0x4f7250",
+              "size": 3282,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video9S3DVertexEiPKti",
+              "address": "0x4f65b0",
+              "size": 3282,
+              "extent": null,
+              "global": true,
+              "exact": false
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x611038",
+              "size": 92,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x611098",
+              "size": 68,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x60fab0",
+              "size": 62,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f04e0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115c0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115d0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115c0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115d0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115c0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115d0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115c0",
+              "size": 16,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115d0",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5f5ff8",
+              "size": 8,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115b0",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x5ef0c8",
+              "size": 4,
+              "kind": "merged constant"
+            },
+            {
+              "address": "0x6115b0",
+              "size": 4,
+              "kind": "merged constant"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c074",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c074",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull11clearScreenEbN2ox5video6SColorE",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull11clearScreenEbN2ox5video6SColorE",
+          "exact": true,
+          "address": "0x4e4df0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull11clearScreenEbN2ox5video6SColorE",
+              "address": "0x4e4df0",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull22useMaterialShaderFor2DEb",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull22useMaterialShaderFor2DEb",
+          "exact": true,
+          "address": "0x4e4e00",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull22useMaterialShaderFor2DEb",
+              "address": "0x4e4e00",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull11flushRenderEv",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull11flushRenderEv",
+          "exact": true,
+          "address": "0x4e4e10",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull11flushRenderEv",
+              "address": "0x4e4e10",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull17drawScaled2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEERKNS6_5CRectIiEEfNS3_6SColorEb",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull17drawScaled2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEERKNS6_5CRectIiEEfNS3_6SColorEb",
+          "exact": true,
+          "address": "0x4e4e20",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull17drawScaled2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEERKNS6_5CRectIiEEfNS3_6SColorEb",
+              "address": "0x4e4e20",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEESA_SA_SA_RKNS6_5CRectIiEEPNS3_6SColorEb",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEESA_SA_SA_RKNS6_5CRectIiEEPNS3_6SColorEb",
+          "exact": true,
+          "address": "0x4e4e30",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEESA_SA_SA_RKNS6_5CRectIiEEPNS3_6SColorEb",
+              "address": "0x4e4e30",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEESA_SA_SA_RKNS6_5CRectIiEEPKNS3_11SColorArrayEb",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEESA_SA_SA_RKNS6_5CRectIiEEPKNS3_11SColorArrayEb",
+          "exact": true,
+          "address": "0x4e4e40",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEESA_SA_SA_RKNS6_5CRectIiEEPKNS3_11SColorArrayEb",
+              "address": "0x4e4e40",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull18draw2DTriangleListEPN2ox5video8ITextureEPNS2_4core11CPosition2dIfEES9_PNS3_6SColorEPiii",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull18draw2DTriangleListEPN2ox5video8ITextureEPNS2_4core11CPosition2dIfEES9_PNS3_6SColorEPiii",
+          "exact": true,
+          "address": "0x4e4e50",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull18draw2DTriangleListEPN2ox5video8ITextureEPNS2_4core11CPosition2dIfEES9_PNS3_6SColorEPiii",
+              "address": "0x4e4e50",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull12isFullscreenEv",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull12isFullscreenEv",
+          "exact": true,
+          "address": "0x4e4e70",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull12isFullscreenEv",
+              "address": "0x4e4e70",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull13setFullscreenEb",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull13setFullscreenEb",
+          "exact": true,
+          "address": "0x4e4e80",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull13setFullscreenEb",
+              "address": "0x4e4e80",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull14setScissorRectEPN2ox4core5CRectIiEE",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull14setScissorRectEPN2ox4core5CRectIiEE",
+          "exact": true,
+          "address": "0x4e4ec0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull14setScissorRectEPN2ox4core5CRectIiEE",
+              "address": "0x4e4ec0",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull13getFileSystemEv",
+          "size": 8,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull13getFileSystemEv",
+          "exact": true,
+          "address": "0x4e4e60",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull13getFileSystemEv",
+              "address": "0x4e4e60",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull18saveJpegScreenshotEPKcS3_",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull18saveJpegScreenshotEPKcS3_",
+          "exact": true,
+          "address": "0x4e4e90",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull18saveJpegScreenshotEPKcS3_",
+              "address": "0x4e4e90",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull19renderStatusChangedEPN2ox5video8ITextureEbbi",
+          "size": 3,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull19renderStatusChangedEPN2ox5video8ITextureEbbi",
+          "exact": true,
+          "address": "0x4e4ea0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull19renderStatusChangedEPN2ox5video8ITextureEbbi",
+              "address": "0x4e4ea0",
+              "size": 3,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN5daisy5video10CVideoNull16flush2dRenderingEv",
+          "size": 2,
+          "placement": "symbol: _ZN5daisy5video10CVideoNull16flush2dRenderingEv",
+          "exact": true,
+          "address": "0x4e4eb0",
+          "references": 0,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy5video10CVideoNull16flush2dRenderingEv",
+              "address": "0x4e4eb0",
+              "size": 2,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZNSt6vectorItSaItEE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPtS1_EERKt",
+          "size": 380,
+          "placement": "symbol: _ZNSt6vectorItSaItEE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPtS1_EERKt",
+          "exact": true,
+          "address": "0x4d4f10",
+          "references": 5,
+          "functions": [
+            {
+              "symbol": "_ZNSt6vectorItSaItEE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPtS1_EERKt",
+              "address": "0x4d4f10",
+              "size": 380,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy5video14CVideoSoftwareE",
+          "size": 1096,
+          "placement": "symbol: _ZTVN5daisy5video14CVideoSoftwareE",
+          "exact": false,
+          "address": "0x611120",
+          "first_difference": 88,
+          "differing_bytes": 6,
+          "bad_references": [
+            {
+              "offset": 88,
+              "type": 1,
+              "symbol": "_ZN5daisy5video10CVideoNull22useMaterialShaderFor2DEb",
+              "addend": 0,
+              "destination": "0x4e4e00",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 656,
+              "type": 1,
+              "symbol": "_ZN5daisy5video10CVideoNull12isFullscreenEv",
+              "addend": 0,
+              "destination": "0x4e4e70",
+              "reason": "different destination",
+              "matches": false
+            }
+          ],
+          "references": 134
+        },
+        {
+          "name": ".rodata._ZTSN5daisy5video14CVideoSoftwareE",
+          "size": 31,
+          "placement": "symbol: _ZTSN5daisy5video14CVideoSoftwareE",
+          "exact": true,
+          "address": "0x611570",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x611570",
+              "size": 31,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy5video14CVideoSoftwareE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy5video14CVideoSoftwareE",
+          "exact": true,
+          "address": "0x611590",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x611590",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata",
+          "size": 5,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x6115a8",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x6115a8",
+              "size": 5,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [
+        ".text._ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS2_S4_EEmRKS2_",
+        ".text._ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE6resizeEmS2_",
+        ".gcc_except_table"
+      ],
+      "compilation": {
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__video__Software__CVideoSoftware.d",
+          "-c",
+          "src/daisy/video/Software/CVideoSoftware.cpp",
+          "-o",
+          "/out/daisy__video__Software__CVideoSoftware.o"
+        ],
+        "inputs": {
+          "src/daisy/video/Software/CVideoSoftware.cpp": "863e7f5b8f9459a654d72dc4bfde6e53951f6816cf5cb54f17351d3ae4988949",
+          "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
+          "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
+          "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
+          "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
+          "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
+          "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
+          "src/ox/IOxDevice.h": "db2500bc125ca02ced51cf3ebd9e66ee4f6e14848a9a54372bf60eaecdb7d7a4",
+          "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
+          "src/ox/video/IImage.h": "972f0a52212fdc3c93ef24f9ce07d0180f0c56ff4c7ce18f6d8e9091a501372e",
+          "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
+          "src/ox/video/S3DVertex2TCoords.h": "f2383643ca59dffcf454ae83756ce2bc03383739250fb4761fb1ffccff110297",
+          "src/ox/video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
+          "src/ox/video/SMaterial.h": "a9a3a9a7c23fe227bbc441fc97ba36e7e33ff82d7256d0a3efe759d4183c8f3e",
+          "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
+          "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/io/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
+          "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
+          "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/daisy/video/Software/CVideoSoftware.h": "a99db3d71e602058e9499dceb7d43a487b587e1836a91e662c5a3a34da700169",
+          "src/daisy/video/Software/IK3DTriangleRenderer.h": "4fa2409c3cf57bf93bf547ef68007c61fc2c7efe05593fc7806ad93a2eb3114f",
+          "src/daisy/video/Software/S2DVertex.h": "3c38b92582d02e675d178ecc847f424bbec6eef04a7c4dea3c01de693549626b",
+          "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
+          "src/daisy/video/IImagePresenter.h": "637b159c9b1a1fdf1835b6dbb131cb24aa07f118581d629729bd520661b8e2d6",
+          "src/daisy/video/Null/CVideoNull.h": "41ac0435550d89795b7afb6cc60c0d93e57d06187f0aef48c037f5b986595ba3",
+          "src/daisy/video/Null/CFPSCounter.h": "80c53853500f4c88a7b563fba4db1a52e9430aaa304871de791c744c5904b82f",
+          "src/ox/video/IGPUProgrammingServices.h": "2a0ad94908e2855969a49d2cdf49bdf32e803f7c9c9ef62095e16680c94bcdb7",
+          "src/ox/video/IPostProcessingServices.h": "94d0c357ae6003751ab4bca20f904cab0701b421ca41d89ee1bdcb42e13013e9",
+          "src/ox/video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
+          "src/daisy/video/Null/CImage.h": "05e9e745fa42fc60ef192641787722fc9e89a7640244f4db86834b732523d62f",
+          "src/daisy/video/Software/CSoftwareTexture.h": "64c85715827e4608c672db085c6a998f75c7dbc0c8a17e609fc6144bcdafab95",
+          "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711"
+        },
+        "system_headers": 121,
+        "object_sha256": "d17bc64aa15b5b31ba93901ef09901368f4819ba136a91fd972ca63cd340fd6c"
+      },
+      "fuzzy_target_sha256": "ae61cac70a10e0070e711da77fdb5b03fa979861f398f1d9af65653c2d6b9115",
+      "fuzzy_functions": [
+        {
+          "address": "0x4f3a90",
+          "size": 143,
+          "symbol": "_ZN5daisy5video14CVideoSoftware24switchToTriangleRendererENS0_17ETriangleRendererE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3b20",
+          "size": 105,
+          "symbol": "_ZN5daisy5video14CVideoSoftware27selectRightTriangleRendererEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3b90",
+          "size": 19,
+          "symbol": "_ZN5daisy5video14CVideoSoftware12queryFeatureEN2ox5video22E_VIDEO_DRIVER_FEATUREE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3bb0",
+          "size": 45,
+          "symbol": "_ZN5daisy5video14CVideoSoftware12setTransformEN2ox5video22E_TRANSFORMATION_STATEERKNS2_4core8CMatrix4E",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3be0",
+          "size": 234,
+          "symbol": "_ZN5daisy5video14CVideoSoftware11setViewPortERKN2ox4core5CRectIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3cd0",
+          "size": 2,
+          "symbol": "_ZN5daisy5video14CVideoSoftware12clipTriangleEPf",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3ce0",
+          "size": 6,
+          "symbol": "_ZN5daisy5video14CVideoSoftware7getNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3cf0",
+          "size": 6,
+          "symbol": "_ZN5daisy5video14CVideoSoftware13getDriverTypeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3d00",
+          "size": 82,
+          "symbol": "_ZN5daisy5video14CVideoSoftware12getTransformEN2ox5video22E_TRANSFORMATION_STATEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3d70",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy5video14CVideoSoftwareC2ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f3da0",
+          "size": 139,
+          "symbol": "_ZN5daisy5video14CVideoSoftware15draw2DRectangleEN2ox5video6SColorERKNS2_4core5CRectIiEEPS8_",
+          "percent": 96.666664
+        },
+        {
+          "address": "0x4f3e30",
+          "size": 406,
+          "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEERKNS6_5CRectIiEEPSD_NS3_6SColorEb",
+          "percent": 0
+        },
+        {
+          "address": "0x4f40b0",
+          "size": 71,
+          "symbol": "_ZN5daisy5video14CVideoSoftware10draw2DLineERKN2ox4core11CPosition2dIiEES7_NS2_5video6SColorE",
+          "percent": 13.444445
+        },
+        {
+          "address": "0x4f3fd0",
+          "size": 163,
+          "symbol": "_ZN5daisy5video14CVideoSoftware11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4100",
+          "size": 163,
+          "symbol": "_ZN5daisy5video14CVideoSoftware10beginSceneEbbN2ox5video6SColorE",
+          "percent": 5.1136365
+        },
+        {
+          "address": "0x4f4080",
+          "size": 35,
+          "symbol": "_ZN5daisy5video14CVideoSoftware8endSceneEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4c10",
+          "size": 297,
+          "symbol": "_ZN5daisy5video14CVideoSoftwareD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f41b0",
+          "size": 210,
+          "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPNS0_6CImageE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4290",
+          "size": 130,
+          "symbol": "_ZN5daisy5video14CVideoSoftware15setRenderTargetEPN2ox5video8ITextureE",
+          "percent": 48.55814
+        },
+        {
+          "address": "0x4f46e0",
+          "size": 125,
+          "symbol": "_ZN5daisy5video14CVideoSoftware10setTextureEPN2ox5video8ITextureE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4760",
+          "size": 75,
+          "symbol": "_ZN5daisy5video14CVideoSoftware11setMaterialERKN2ox5video9SMaterialE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f47b0",
+          "size": 388,
+          "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4940",
+          "size": 388,
+          "symbol": "_ZN5daisy5video14CVideoSoftware22drawIndexedTriangleFanEPKN2ox5video9S3DVertexEiPKti",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4d40",
+          "size": 297,
+          "symbol": "_ZN5daisy5video14CVideoSoftwareD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4ad0",
+          "size": 305,
+          "symbol": "_ZN5daisy5video14CVideoSoftwareD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f4c10",
+          "size": 297,
+          "symbol": "_ZN5daisy5video14CVideoSoftwareC2ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+          "percent": 0
+        },
+        {
+          "address": "0x4f4d40",
+          "size": 297,
+          "symbol": "_ZN5daisy5video14CVideoSoftwareC1ERKN2ox4core12CDimension2dIiEEbPNS2_2io11IFileSystemEPNS0_15IImagePresenterE",
+          "percent": 0
+        },
+        {
+          "address": "0x4f5230",
+          "size": 126,
+          "symbol": "_ZN5daisy5video20createSoftwareDriverERKN2ox4core12CDimension2dIiEEbPNS1_2io11IFileSystemEPNS0_15IImagePresenterE",
+          "percent": 99.84375
+        },
+        {
+          "address": "0x4f52b0",
+          "size": 4859,
+          "symbol": "_ZN5daisy5video14CVideoSoftware12createPlanesERN2ox4core8CMatrix4E",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4f7250",
+          "size": 3230,
+          "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video17S3DVertex2TCoordsEiPKti",
+          "percent": 93.35831
+        },
+        {
+          "address": "0x4f65b0",
+          "size": 3230,
+          "symbol": "_ZN5daisy5video14CVideoSoftware23drawIndexedTriangleListEPKN2ox5video9S3DVertexEiPKti",
+          "percent": 93.35831
+        },
+        {
+          "address": "0x4e4df0",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull11clearScreenEbN2ox5video6SColorE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e00",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull22useMaterialShaderFor2DEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e10",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull11flushRenderEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e20",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull17drawScaled2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEERKNS6_5CRectIiEEfNS3_6SColorEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e30",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIiEESA_SA_SA_RKNS6_5CRectIiEEPNS3_6SColorEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e40",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull11draw2DImageEPN2ox5video8ITextureERKNS2_4core11CPosition2dIfEESA_SA_SA_RKNS6_5CRectIiEEPKNS3_11SColorArrayEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e50",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull18draw2DTriangleListEPN2ox5video8ITextureEPNS2_4core11CPosition2dIfEES9_PNS3_6SColorEPiii",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e70",
+          "size": 3,
+          "symbol": "_ZN5daisy5video10CVideoNull12isFullscreenEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e80",
+          "size": 3,
+          "symbol": "_ZN5daisy5video10CVideoNull13setFullscreenEb",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4ec0",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull14setScissorRectEPN2ox4core5CRectIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e60",
+          "size": 8,
+          "symbol": "_ZN5daisy5video10CVideoNull13getFileSystemEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4e90",
+          "size": 3,
+          "symbol": "_ZN5daisy5video10CVideoNull18saveJpegScreenshotEPKcS3_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4ea0",
+          "size": 3,
+          "symbol": "_ZN5daisy5video10CVideoNull19renderStatusChangedEPN2ox5video8ITextureEbbi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4e4eb0",
+          "size": 2,
+          "symbol": "_ZN5daisy5video10CVideoNull16flush2dRenderingEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4d4f10",
+          "size": 380,
+          "symbol": "_ZNSt6vectorItSaItEE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPtS1_EERKt",
+          "percent": 100.0
+        }
+      ]
     }
   ],
   "fuzzy": {
@@ -291469,7 +293195,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "312ea5d967bb06f200e2ed20b9a2554c9b5e5b5321556b12e33a2ed693a2a6b7"
+    "report_sha256": "daf126a9eb5dcda6de3c5a9534f9a6e96ee7f8c758b54f03974d17f023a77dab"
   },
   "link": {
     "status": "unavailable",
