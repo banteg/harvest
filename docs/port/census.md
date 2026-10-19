@@ -58,7 +58,7 @@ the null joystick driver as the original has them.
 
 ### Replaced units
 
-The `replaced` list in `build.zig` (39 recovered units plus unrecovered prefixes that `port/src/` already replaces):
+The `replaced` list in `build.zig` (58 of the 198 recovered units, plus unrecovered prefixes that `port/src/` already replaces):
 
 | Unit | What it is | Replaced by |
 |---|---|---|
@@ -85,7 +85,14 @@ units with trap stubs are excluded: `CAnimatedMeshMD2`, `CBspTreeSceneNode`, `CM
 `CBspTree::BspPoly::operator==` and `OctTree<T>::OctTreeNode`'s constructor. These are incomplete
 matching sources awaiting recovery. `CDefaultMeshFormatLoader` and `CXMeshFileLoader`
 are excluded because they depend on these incomplete or unrecovered classes; PCX continues
-using `ImageLoaderStubs.cpp`. The batch has 24 out-of-line trap stubs and two header trap stubs.
+using `ImageLoaderStubs.cpp`. The batch has 57 out-of-line trap stubs and two header trap stubs.
+
+Ten scene units from the newer batch are added to `replaced` because each has trap stubs, and the
+port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspTree`,
+`CCameraFPSSceneNode`, `CCameraMayaSceneNode`, `CGeometryCreator`, `CParticleGravityAffector`,
+`CQ3LevelMesh`, `CTerrainSceneNode` and `CXAnimationPlayer`. The recovered XML and text readers, the
+BMP, JPEG and TGA image loaders, `CSoftwareTexture`, `CAnimatedMeshSceneNode` and
+`CSceneCollisionManager` continue using their existing port replacements.
 
 ## Port sources (`port/src/`)
 

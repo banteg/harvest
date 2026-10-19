@@ -163,6 +163,25 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CXFileReader.cpp` | 16/42 | Irrlicht 0.7's DirectX .x file reader; ten of the data-object parsers are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CXMeshFileLoader.cpp` | 12/12 | exact; Irrlicht 0.7's DirectX .x mesh loader |
 | `daisy/video/Null/CImageLoaderPCX.cpp` | 13/14 | Irrlicht 0.7's PCX image loader; `loadImage` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/io/CTextReader.cpp` | 13/13 | exact; Irrlicht 0.7's text reader |
+| `daisy/io/CXMLWriter.cpp` | 17/17 | exact; Irrlicht 0.7's XML writer |
+| `daisy/io/CXMLReader.cpp` | 26/32 | Irrlicht 0.7's XML reader |
+| `daisy/video/Null/CImageLoaderBmp.cpp` | 15/16 | Irrlicht 0.7's BMP image loader; `loadImage` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/video/Null/CImageLoaderTGA.cpp` | 14/15 | Irrlicht 0.7's TGA image loader; `loadImage` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/video/Null/CImageLoaderJPG.cpp` | 11/14 | Irrlicht 0.7's JPEG image loader |
+| `daisy/video/Software/CSoftwareTexture.cpp` | 16/19 | Irrlicht 0.7's software texture; the constructor and `unlock` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CAnimatedMeshMS3D.cpp` | 57/60 | Irrlicht 0.7's MilkShape 3D animated mesh; `loadFile` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/C3DSMeshFileLoader.cpp` | 52/66 | Irrlicht 0.7's 3D Studio mesh loader; `readColorChunk` and `composeObject` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CXAnimationPlayer.cpp` | 59/72 | Irrlicht 0.7's DirectX `.x` animation player; `getMaterialFromXMaterial`, `addFacesToBuffer` and `animateSkeleton` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CAnimatedMeshSceneNode.cpp` | 51/58 | Irrlicht 0.7's animated mesh scene node; `OnPreRender`, `OnPostRender`, `render`, `getMS3DJointNode` and both `setMD2Animation` overloads are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CTerrainSceneNode.cpp` | 46/57 | Irrlicht 0.7's terrain scene node; `getIdealHeightMap`, `load`, `createIndexBuffers` and `OnPreRender` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CCameraMayaSceneNode.cpp` | 28/38 | Irrlicht 0.7's Maya-style camera node; `animate` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CCameraFPSSceneNode.cpp` | 28/38 | Irrlicht 0.7's first-person camera node; `OnEvent` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CQ3LevelMesh.cpp` | 33/44 | Irrlicht 0.7's Quake 3 BSP level mesh; `constructMesh`, `Blend`, `createCurvedSurface` and `loadTextures` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CSceneCollisionManager.cpp` | 17/23 | Irrlicht 0.7's scene collision manager; `getPickedNodeBB`, `getCollisionPoint` and `collideWithWorld` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CParticleGravityAffector.cpp` | 8/10 | Irrlicht 0.7's gravity particle affector; `affect` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CBspTree.cpp` | 8/30 | Irrlicht 0.7's BSP tree; `splitPoly` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CGeometryCreator.cpp` | 1/3 | Irrlicht 0.7's hill-plane and terrain mesh generator; `createHillPlaneMesh` and `createTerrainMesh` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
