@@ -204016,8 +204016,8 @@
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
           "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
-          "src/daisy/io/CXMLReader.h": "deb9e10799275f6cd50ef99bc69077c85411353eb17d7d4211917395d9cb7097",
-          "src/ox/io/IXMLReader.h": "fcb4c94952068b0203e183d5f971d1d81476d1039bd862f986ef1cb75c3f57c4",
+          "src/daisy/io/CXMLReader.h": "e40198a14c1f71cd4fac24db7e192b6374f7e9705f3ac2152b7d0bf8230b7c41",
+          "src/ox/io/IXMLReader.h": "21dc31ba8314eabf3d2aa3fb62cc94304ec34103c0beb0f3e0e7fcfd83188c9b",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
           "src/ox/io/IXMLWriter.h": "a63b13127e319ccd121f541c92fb7684b90eaf3fae1217a53b497e035ed25f1a",
@@ -213080,7 +213080,7 @@
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Software/CSoftwareTexture.h": "dbd7780cbf93c9d831241b2f41cd7594e7286582c12c5cd9642b42d8ed8e4fce",
+          "src/daisy/video/Software/CSoftwareTexture.h": "d98d84c4bffcfdc0b27201f031ddb8014ce03aa59cf75690ef77216a3573fddb",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
@@ -242863,7 +242863,7 @@
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/SAnimatedMesh.h": "152ba300cdf4ce6bbd30fdc1ccc4c41d60ad3c3a0191f24a807f06dc89a2221e",
-          "src/daisy/scene/CXAnimationPlayer.h": "d99b37a6ba6a4a16886e337b0f8082346be5e1b9e7f6a2583d358afb29b20490",
+          "src/daisy/scene/CXAnimationPlayer.h": "54d44ec255e1b888c28c1e0464d561ef11070bd0982ce7d2559b440d76c1a7d5",
           "src/ox/scene/IAnimatedMeshX.h": "bf752ac65aea7bdcd99c67a6983526f9aaec6def20feec17813cb45520f1408e"
         },
         "system_headers": 123,
@@ -255820,7 +255820,7 @@
           "/out/daisy__scene__CCameraSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CCameraSceneNode.cpp": "ab7e854af4a55a7c1832a0b1f0965aa6b598aaebd69c33295c47aa484fb43709",
+          "src/daisy/scene/CCameraSceneNode.cpp": "45fa54d288e518eee486682ce81511712aa960696cdf3626c22f592d4bf5f455",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -255845,7 +255845,7 @@
           "src/ox/scene/../event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
-          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
+          "src/daisy/scene/CCameraSceneNode.h": "833034f2c28dc6772d5285b72fbfb70ba353e2a3d89b2e014f1d93a7fadc82da",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -264959,7 +264959,7 @@
           "/out/daisy__video__Null__CImageLoaderBmp.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CImageLoaderBmp.cpp": "ddf805f09992368088a666dfb8cf5aa910bc4cce51f7955d34039b2b2ff9b784",
+          "src/daisy/video/Null/CImageLoaderBmp.cpp": "60f3e5b3f224fd249474ed3ca5d2f67c0418d0dba054400b2abab7e6d105a8ac",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -264975,7 +264975,7 @@
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Null/CImageLoaderBmp.h": "1fb95f007c92fe9cfb7e5c04d41b765f2e2a731a532b6f8fe20215a817dd7dec",
+          "src/daisy/video/Null/CImageLoaderBmp.h": "c6db5969418b6d131a269135f5977429e64e5057cf8e4cbe4e6e6f7e9517a4b1",
           "src/ox/video/ColorPacking.h": "1ed22375b26107fd2c857e04ddb8a3c8d467622d507d1e9946a709c47bd81c57",
           "src/daisy/video/Null/CColorConverter.h": "6101d0603c7c8e61bb3dcb4c7585f64b94250e2fe2bed8fed06c6b1d7b8c136c",
           "src/daisy/video/Null/CImage.h": "438365022a1f0a54256061c6b503dbf011f1114657dab3cdefa633dea017e8af",
@@ -265461,7 +265461,7 @@
           "/out/daisy__video__Null__CImageLoaderTGA.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CImageLoaderTGA.cpp": "338932ce5664c883abfd8199a3a6b1912bf4e5394042f4cb3d29e07a12e68de1",
+          "src/daisy/video/Null/CImageLoaderTGA.cpp": "1eef1e0a01f97d5e5aa3f5651330f2f5694b8984e605fa0805b64bb4710065e7",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -265477,7 +265477,7 @@
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Null/CImageLoaderTGA.h": "819f2b713dd2fbe132b58b40df461e10b8c2de1e6530cbdf9cbed5a8fadbde54",
+          "src/daisy/video/Null/CImageLoaderTGA.h": "56d1f52811d649b5f2facde0380c09132cf8fe36c8c2957f0b50b4b4683773f2",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/daisy/video/Null/CColorConverter.h": "6101d0603c7c8e61bb3dcb4c7585f64b94250e2fe2bed8fed06c6b1d7b8c136c",
           "src/daisy/video/Null/CImage.h": "438365022a1f0a54256061c6b503dbf011f1114657dab3cdefa633dea017e8af"
@@ -266810,7 +266810,7 @@
           "/out/daisy__scene__CAnimatedMeshSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CAnimatedMeshSceneNode.cpp": "0def8102b6a40e302b80681658033c760c9e5556e8f64a0627858460865cff5f",
+          "src/daisy/scene/CAnimatedMeshSceneNode.cpp": "d993af34d52a57b095b97be321cdd9b114abf4c5634b29227d293910665abd6f",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -266851,7 +266851,7 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
-          "src/daisy/scene/CAnimatedMeshSceneNode.h": "c66471bdac126b01c01a67e6d260bd8cbd97e9132a8152f5cd087f90f61d5b0d",
+          "src/daisy/scene/CAnimatedMeshSceneNode.h": "b045427a2758907b49771a2e41c2c6955e97cdc821de7380e88f42d932d8eb4e",
           "src/ox/scene/IDummyTransformationSceneNode.h": "40029015bff51d6ba030f3425bd69db014ccfb7f7132c7e0c9d53f15ff75807f",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -268360,7 +268360,7 @@
           "/out/daisy__scene__CAnimatedMeshMS3D.o"
         ],
         "inputs": {
-          "src/daisy/scene/CAnimatedMeshMS3D.cpp": "f9eb4f267d3112ebfb6d39e5b6c2e3acb1a1dc89268f7a257968361c837bec41",
+          "src/daisy/scene/CAnimatedMeshMS3D.cpp": "94b0c8a366c954fcd63d436c22df9c114217e2cb41303d8a7bfee32b9ceb6413",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -268832,7 +268832,7 @@
           "/out/daisy__scene__CGeometryCreator.o"
         ],
         "inputs": {
-          "src/daisy/scene/CGeometryCreator.cpp": "6480845e9a9ceb7354a63350c604b3d3c9761661610f781e2bbff481a46781a1",
+          "src/daisy/scene/CGeometryCreator.cpp": "ded6a849d186d7c721b8b7925c08e739eb1b1b10bcaec56fdb9dfdf535a41644",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -268851,7 +268851,7 @@
           "src/ox/scene/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/scene/CGeometryCreator.h": "e704c1211a8d1b2858293650f74c3fe0f84ccbc88d57e1fce49814b2935f79c5",
+          "src/daisy/scene/CGeometryCreator.h": "6cda91108306bf07c24800c8d7a02ec6d3abf9735b4f40c61116999daa81ae52",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
@@ -269981,7 +269981,7 @@
           "/out/daisy__scene__CQ3LevelMesh.o"
         ],
         "inputs": {
-          "src/daisy/scene/CQ3LevelMesh.cpp": "fe6d9856c9f30291f4a0ba294aef3a53a007d5531716c710ab688df2441987b7",
+          "src/daisy/scene/CQ3LevelMesh.cpp": "8cb6e1b3915486d6395d1128c0eab975bc797720aeb3b05fe94aecc5e9cc059a",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -272047,7 +272047,7 @@
           "/out/daisy__scene__CTerrainSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CTerrainSceneNode.cpp": "f17dd7eb72a818e46dd24f30531cd005cd78a48707cfc9d56ba06530a05da895",
+          "src/daisy/scene/CTerrainSceneNode.cpp": "3dd17d488c55f87b31364df1b01bb992ba6a79ba682affbd5757ca119eb59773",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -272078,7 +272078,7 @@
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CTriangle3d.h": "effc858549b1a703e1367bf50c4664a7ae03ec33ef1450871fddc9c4623811a8",
           "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
-          "src/ox/scene/ITerrainSceneNode.h": "1fee31f61d40fddbcd6410178bf8dc6a519dbcab56bb8f47164c3fe00f0a5ab8",
+          "src/ox/scene/ITerrainSceneNode.h": "a20dca562e0b2a7639ec172b568fd15496e1119bcc3c29e56169a962e98ecf76",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -272091,7 +272091,7 @@
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/daisy/scene/CTerrainSceneNode.h": "30a0a64c86600b562fc9848fb7efe1399f0ea92544b2ba381a869165aa4d868e",
+          "src/daisy/scene/CTerrainSceneNode.h": "4c6c6dfd356b64f104c99a2c4a61789e29981c883f6fbcff3c34195884ae7adf",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
@@ -273478,7 +273478,7 @@
           "/out/daisy__scene__CBspTree.o"
         ],
         "inputs": {
-          "src/daisy/scene/CBspTree.cpp": "af308111ad74bb32765946febc3d96a40c99e18ae20a248dbd6bb3676fc2c968",
+          "src/daisy/scene/CBspTree.cpp": "ad8102ab26fbc11234eead8e18312a653dbd8927ae42a341896dc443262a278f",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -274073,7 +274073,7 @@
           "/out/daisy__scene__CParticleGravityAffector.o"
         ],
         "inputs": {
-          "src/daisy/scene/CParticleGravityAffector.cpp": "3b9b7389a1817c6d56754d7724837a58567359563be9fa7d92c111961a66c68d",
+          "src/daisy/scene/CParticleGravityAffector.cpp": "5a27aa620393cd2c7248c371789a36dc2a736a383cdc8feafa20f76fc861f0bc",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
@@ -274921,7 +274921,7 @@
           "/out/daisy__scene__CSceneCollisionManager.o"
         ],
         "inputs": {
-          "src/daisy/scene/CSceneCollisionManager.cpp": "4871e806dfba13b0e724474065a0288534bc73b73c25f2f7527949afc1c8c885",
+          "src/daisy/scene/CSceneCollisionManager.cpp": "1bf032b849d4c91e14486736cee8cd64a27dcac0f8c11b68e322a2218fa9ec65",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -274952,7 +274952,7 @@
           "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
           "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
-          "src/daisy/scene/CSceneCollisionManager.h": "3be98bb4b74810c33d5b447af9de04b04335bd6a3c2b1a9c9b4918c2bfa931b4",
+          "src/daisy/scene/CSceneCollisionManager.h": "40fa70c5b4653e5eb22d18b9374b57c9b46dd69a2a0a3d59ae281a0f01e17258",
           "src/ox/scene/ISceneCollisionManager.h": "9a4d48a91dc0a15d10cd7be075bb6fd75bc5c32fdc1259a09602e5f1792fef0e",
           "src/ox/scene/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
@@ -275493,7 +275493,7 @@
           "/out/daisy__video__Null__CImageLoaderJPG.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CImageLoaderJPG.cpp": "69111969d0244122cfd16f2b9ef7d758690eafa9f5a9a0c956278a37887d2866",
+          "src/daisy/video/Null/CImageLoaderJPG.cpp": "3a9a3c05e89c1b84bdf69043f87ba4ee5236b96b40e8d08144805953c06fed72",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/IImage.h": "972f0a52212fdc3c93ef24f9ce07d0180f0c56ff4c7ce18f6d8e9091a501372e",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -275883,7 +275883,7 @@
           "/out/daisy__io__CTextReader.o"
         ],
         "inputs": {
-          "src/daisy/io/CTextReader.cpp": "ab27bb187af4e188827d0e79e9ea84b6f79607144f7cb1c4e8d69418d89e8a03",
+          "src/daisy/io/CTextReader.cpp": "e48f8ee4344bec1c6409259cd203b9a0755c93e4754a70bbbbd168797ec329e1",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214"
@@ -276850,7 +276850,7 @@
           "/out/daisy__scene__CCameraMayaSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CCameraMayaSceneNode.cpp": "d65491a5e22d727368cd0398dc283ebd8faae1f96e3d9d6f7cc82ed1df59ce2f",
+          "src/daisy/scene/CCameraMayaSceneNode.cpp": "2cc002c43e5884d75f80a42354f347bdaf930b73e620c0b240cadf17b17df354",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
@@ -276874,8 +276874,8 @@
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
-          "src/daisy/scene/CCameraMayaSceneNode.h": "c9519284dc852889ab90f666efda72f08df888ee2ff68eec73b272a10c075cf0",
-          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
+          "src/daisy/scene/CCameraMayaSceneNode.h": "e36b8f457a4f2bda8e0f352d05451a3d814449cf892bb5a1f27fb05eb719799a",
+          "src/daisy/scene/CCameraSceneNode.h": "833034f2c28dc6772d5285b72fbfb70ba353e2a3d89b2e014f1d93a7fadc82da",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
           "src/ox/scene/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
@@ -278599,7 +278599,7 @@
           "/out/daisy__scene__CCameraFPSSceneNode.o"
         ],
         "inputs": {
-          "src/daisy/scene/CCameraFPSSceneNode.cpp": "daf259a2b8dc8a0d2765d11be8fa0a8e814979cbf8383478e9d9c038be1da0a7",
+          "src/daisy/scene/CCameraFPSSceneNode.cpp": "fdd8a133f285e879e102b74c694c10295aa502b8597b3656d20eec57a6e726b8",
           "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -278627,7 +278627,7 @@
           "src/ox/event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
-          "src/daisy/scene/CCameraFPSSceneNode.h": "82ac34a1c24b91d04b725dc4a662a54de1ec32b59defb4f2f4d54cd056139824",
+          "src/daisy/scene/CCameraFPSSceneNode.h": "8bd4fe5a7f6909a44f393a98b42ed3cad1d9de73115e56b24529633ad9aae627",
           "src/ox/scene/ISceneManager.h": "dd44c56f50cbc40c37ddc2c11f078b9611badb277054078f0087197ab94cdda6",
           "src/ox/scene/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/scene/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
@@ -278635,11 +278635,11 @@
           "src/ox/scene/../video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
           "src/ox/scene/../video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
-          "src/daisy/scene/CCameraSceneNode.h": "3628aa19f6a620d815b4ebbf4a5a8ac697dcb2004644a0464193768c37a6b467",
+          "src/daisy/scene/CCameraSceneNode.h": "833034f2c28dc6772d5285b72fbfb70ba353e2a3d89b2e014f1d93a7fadc82da",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/scene/SViewFrustrum.h": "64dfb325aa90a10b6af2ccfa5fe88b4bbaa6662304fa38bb93ce824f844de63c",
-          "src/daisy/scene/SKeyMap.h": "b8a10cdfdee40e1606ff3ce466c6967c2d7a3922335c481fb6e52bcf0d83e6b0",
+          "src/daisy/scene/SKeyMap.h": "cfc05aab85907f368855aae1ecf97376e78ab4895c4076aa6c8975c9f8385122",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -279856,13 +279856,13 @@
           "/out/daisy__io__CXMLReader.o"
         ],
         "inputs": {
-          "src/daisy/io/CXMLReader.cpp": "498ad89068efbadd8e39ee020a81b30da6ac24a3da5996ad8bd0c3ef5caabb49",
+          "src/daisy/io/CXMLReader.cpp": "b0a6c3dee0626719140af9a2781b1e6cd100e9b20cb1de5654427dc7830cb7e4",
           "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
-          "src/ox/io/IXMLReader.h": "fcb4c94952068b0203e183d5f971d1d81476d1039bd862f986ef1cb75c3f57c4",
-          "src/daisy/io/CXMLReader.h": "deb9e10799275f6cd50ef99bc69077c85411353eb17d7d4211917395d9cb7097",
+          "src/ox/io/IXMLReader.h": "21dc31ba8314eabf3d2aa3fb62cc94304ec34103c0beb0f3e0e7fcfd83188c9b",
+          "src/daisy/io/CXMLReader.h": "e40198a14c1f71cd4fac24db7e192b6374f7e9705f3ac2152b7d0bf8230b7c41",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/daisy/other/fast_atof.h": "b50a6393d73c066be97c6713127e4b2cddd0f4408f989500d8b23b77aca0f9f2"
         },
@@ -280544,7 +280544,7 @@
           "/out/daisy__io__CXMLWriter.o"
         ],
         "inputs": {
-          "src/daisy/io/CXMLWriter.cpp": "eba2a3f612e59e5ecffcc271e587a1a867262c1417c9ebdf877abf85640e0c25",
+          "src/daisy/io/CXMLWriter.cpp": "d37dc3edeb2837a85a3dc08a67a5c9c023988cf8f6c923d97b92f1a59437c87a",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
@@ -282633,7 +282633,7 @@
           "/out/daisy__scene__C3DSMeshFileLoader.o"
         ],
         "inputs": {
-          "src/daisy/scene/C3DSMeshFileLoader.cpp": "f61240611f9e85cd1793bfbbb9b055988a202c7cfd1e129821647ffcb6ed80e7",
+          "src/daisy/scene/C3DSMeshFileLoader.cpp": "8b5cb3077ed1040e2a5a403f5d3410cc90dc3f8c6b1635bec030e65697511fab",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
           "src/ox/core/irrMath.h": "35a3835c081ac0701af04aab39117a2c7743a2769ed777698439b48e23c228c1",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
@@ -282665,7 +282665,7 @@
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/scene/C3DSMeshFileLoader.h": "fd8e539c24ff8142c8b64edfe5d174cc18cfa020f41c723b718693dbaa82b781",
+          "src/daisy/scene/C3DSMeshFileLoader.h": "d0aa79c747693487cad871c11b38427de23abc354b86522454cbdb70e1f2f5e0",
           "src/ox/scene/IMeshLoader.h": "595d064dd3ba9938ecf4cf6690694a259cbd3689cbf79a89f6637da3cb1ef05c",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
@@ -285313,7 +285313,7 @@
           "/out/daisy__scene__CXAnimationPlayer.o"
         ],
         "inputs": {
-          "src/daisy/scene/CXAnimationPlayer.cpp": "0b707e97556c8bca93cdc687b8100ae360b48eec511d6bd851da86511d6835c7",
+          "src/daisy/scene/CXAnimationPlayer.cpp": "15edb0a87a166bbd8cb05b733792016ce7ed12c9d62e94500832692ac634eb46",
           "src/ox/core/CAabbox3d.h": "3be9d1976a8a982ae40cd59e9d7913387a4b9b389b35f777c1e6ac405da5b28f",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/core/CPlane3d.h": "99dbac882183ad9a3060d6f4b37ead835ca4c22e891c75e250f8d81441e121c9",
@@ -285335,7 +285335,7 @@
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
-          "src/daisy/scene/CXAnimationPlayer.h": "d99b37a6ba6a4a16886e337b0f8082346be5e1b9e7f6a2583d358afb29b20490",
+          "src/daisy/scene/CXAnimationPlayer.h": "54d44ec255e1b888c28c1e0464d561ef11070bd0982ce7d2559b440d76c1a7d5",
           "src/ox/scene/IAnimatedMeshX.h": "bf752ac65aea7bdcd99c67a6983526f9aaec6def20feec17813cb45520f1408e",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -286242,7 +286242,7 @@
           "/out/daisy__video__Software__CSoftwareTexture.o"
         ],
         "inputs": {
-          "src/daisy/video/Software/CSoftwareTexture.cpp": "c7ce158a244b0f3e455970342b20b7a3c0e6dae745f32852d16961430f9b66e0",
+          "src/daisy/video/Software/CSoftwareTexture.cpp": "a8e853444e627307d7a1bdd207b2d6ab32413ad481deed2f5efe84ceb40e4c15",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
           "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -286259,7 +286259,7 @@
           "src/ox/video/IImage.h": "972f0a52212fdc3c93ef24f9ce07d0180f0c56ff4c7ce18f6d8e9091a501372e",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Software/CSoftwareTexture.h": "dbd7780cbf93c9d831241b2f41cd7594e7286582c12c5cd9642b42d8ed8e4fce",
+          "src/daisy/video/Software/CSoftwareTexture.h": "d98d84c4bffcfdc0b27201f031ddb8014ce03aa59cf75690ef77216a3573fddb",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/daisy/video/Null/CImage.h": "438365022a1f0a54256061c6b503dbf011f1114657dab3cdefa633dea017e8af",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711"
