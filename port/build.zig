@@ -103,6 +103,10 @@ const replaced = [_][]const u8{
     "daisy/scene/CCameraMayaSceneNode.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
     "daisy/scene/CCameraFPSSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/io/XMLStubs.cpp.
+    "daisy/io/CXMLReader.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/io/XMLStubs.cpp.
+    "daisy/io/CXMLWriter.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no

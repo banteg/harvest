@@ -789,3 +789,9 @@
 
 ["daisy/scene/CCameraFPSSceneNode.cpp"]
 ".bss" = 0x86c110
+
+["daisy/io/CXMLReader.cpp"]
+".bss" = 0x86c0e8
+
+["daisy/io/CXMLWriter.cpp"]
+".bss" = 0x86c0ec
