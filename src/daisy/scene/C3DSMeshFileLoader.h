@@ -96,13 +96,13 @@ private:
 			*this = o;
 		}
 
-		~SMaterialGroup() 
-		{ 
+		~SMaterialGroup()
+		{
 			clear();
 		}
 
-		void clear() 
-		{ 
+		void clear()
+		{
 			if (faces) delete [] faces;
 			faces = 0;
 			faceCount = 0;
@@ -161,4 +161,3 @@ private:
 } // end namespace daisy
 
 #endif
-

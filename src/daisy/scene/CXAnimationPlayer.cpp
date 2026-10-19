@@ -126,7 +126,7 @@ void CXAnimationPlayer::createAnimationData()
 	if (IsAnimatedSkinnedMesh && AnimatedMesh)
 	{
 		animateSkeleton();
-		modifySkin();	
+		modifySkin();
 		updateBoundingBoxFromAnimation();
 		DebugSkeletonCrossSize = AnimatedMesh->getBoundingBox().getExtent().X / 20.0f;
 	}
@@ -211,7 +211,7 @@ void CXAnimationPlayer::addFacesToBuffer(int meshbuffernr, CXFileReader::SXMesh&
 }
 
 
-void CXAnimationPlayer::addVirtualWeight(int meshbuffernr, int vtxidx, 
+void CXAnimationPlayer::addVirtualWeight(int meshbuffernr, int vtxidx,
 										CXFileReader::SXMesh& mesh,
 										CXFileReader::SXFrame* frame)
 {
@@ -329,10 +329,10 @@ int CXAnimationPlayer::getJointNumber(const char* name) const
 const ox::TArray<ox::core::CVector3d<float> >* CXAnimationPlayer::getDrawableSkeleton(int frame)
 {
 	DebugSkeleton.clear();
-	
+
 	float k = DebugSkeletonCrossSize;
 	float p = 0.0f;
-	
+
 	for (int i=0; i<(int)Joints.size(); ++i)
 	{
 		ox::core::CVector3d<float> start(p,p,p);
@@ -389,7 +389,7 @@ void CXAnimationPlayer::modifySkin()
 				wd.vertex >= AnimatedMesh->getMeshBuffer(wd.buffer)->getVertexCount())
 				os::Printer::log("CXAnimationPlayer: Invalid Weights", ox::event::ELL_INFORMATION);
 #endif
-			
+
 			ox::video::S3DVertex* nv = (ox::video::S3DVertex*)AnimatedMesh->getMeshBuffer(wd.buffer)->getVertices();
             nv[wd.vertex].Pos.set(0,0,0);
 		}
@@ -425,7 +425,7 @@ void CXAnimationPlayer::modifySkin()
 
 		for (int mb=0; mb<AnimatedMesh->getMeshBufferCount(); ++mb)
 		{
-			sprintf(tmp, "CXAnimationPlayer: Meshbuffer #%d: %d vertices", mb, AnimatedMesh->getMeshBuffer(mb)->getVertexCount());	
+			sprintf(tmp, "CXAnimationPlayer: Meshbuffer #%d: %d vertices", mb, AnimatedMesh->getMeshBuffer(mb)->getVertexCount());
 			os::Printer::log(tmp, ox::event::ELL_INFORMATION);
 		}
 	}
@@ -464,7 +464,7 @@ void CXAnimationPlayer::modifySkin()
 				av[vt].Pos += vtmp;
 			}
 
-			
+
 		}
 	}
 
@@ -486,7 +486,7 @@ void CXAnimationPlayer::modifySkin()
 
 			vtmp *= wd.weight;
 			nv[wd.vertex].Pos += vtmp;
-			
+
 		}
 	}*/
 
@@ -517,7 +517,7 @@ void CXAnimationPlayer::prepareAnimationData()
 				if (jntnr == -1)
 				{
 					os::Printer::log(
-						"CXAnimationPlayer: Animationtrack without corresponding joint found", 
+						"CXAnimationPlayer: Animationtrack without corresponding joint found",
 						readerSet.Animations[a].FrameName.c_str(), ox::event::ELL_INFORMATION);
 					continue;
 				}
@@ -565,7 +565,7 @@ void CXAnimationPlayer::prepareAnimationData()
 				if (myTrack.Times.back() > LastAnimationTime)
 					LastAnimationTime = myTrack.Times.back();
 			}
-			
+
 		}
 
 		// sort animation tracks
@@ -604,7 +604,7 @@ int CXAnimationPlayer::getAnimationCount() const
 	return AnimationSets.size();
 }
 
-//! Returns the name of an animation. 
+//! Returns the name of an animation.
 const char* CXAnimationPlayer::getAnimationName(int idx) const
 {
 	if (idx < 0 || idx >= (int)AnimationSets.size())
@@ -640,4 +640,3 @@ bool CXAnimationPlayer::setCurrentAnimation(const char* name)
 
 } // end namespace scene
 } // end namespace daisy
-

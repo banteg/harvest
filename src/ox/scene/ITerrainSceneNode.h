@@ -23,17 +23,17 @@ class ITerrainSceneNode : public ISceneNode
 public:
 
 	//! constructor
-	ITerrainSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+	ITerrainSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& rotation = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& scale = ox::core::CVector3d<float>(1.0f, 1.0f, 1.0f))
 			: ISceneNode(parent, mgr, id, position, rotation, scale) {}
 
 	//! Calculates height of a point in the terrain
-	//! \param pos: 2d position of the terrain. You could take the X and ox::core::Z 
-	//! component of a 3d vector for this. 
-	//! \param outHeight: the calculated height at the 2d position will be 
-	//! stored in this float if the 2d position is inside the terrain. 
+	//! \param pos: 2d position of the terrain. You could take the X and ox::core::Z
+	//! component of a 3d vector for this.
+	//! \param outHeight: the calculated height at the 2d position will be
+	//! stored in this float if the 2d position is inside the terrain.
 	//! \return Returns true, if the 2d position is insied the terrain and
 	//! a valid height value has been calculated. Otherwise, false is returned.
 	virtual bool getHeight(ox::core::CVector2d<float> pos, float& outHeight) = 0;
@@ -50,4 +50,3 @@ public:
 
 
 #endif
-

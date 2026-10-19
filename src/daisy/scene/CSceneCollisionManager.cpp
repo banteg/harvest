@@ -38,7 +38,7 @@ CSceneCollisionManager::CSceneCollisionManager(ISceneManager* smanager, ox::vide
 
 
 //! destructor
-CSceneCollisionManager::~CSceneCollisionManager() 
+CSceneCollisionManager::~CSceneCollisionManager()
 {
 	if (Driver)
 		Driver->drop();
@@ -46,13 +46,13 @@ CSceneCollisionManager::~CSceneCollisionManager()
 
 
 
-//! Returns the scene node, which is currently visible under the overgiven 
-//! screencoordinates, viewed from the currently active camera. 
+//! Returns the scene node, which is currently visible under the overgiven
+//! screencoordinates, viewed from the currently active camera.
 ISceneNode* CSceneCollisionManager::getSceneNodeFromScreenCoordinatesBB(
 	ox::core::CPosition2d<int> pos, int idBitMask)
 {
 	if (!SceneManager || !Driver)
-		return 0; 
+		return 0;
 
 	ICameraSceneNode* camera = SceneManager->getActiveCamera();
 	if (!camera)
@@ -70,14 +70,14 @@ ISceneNode* CSceneCollisionManager::getSceneNodeFromScreenCoordinatesBB(
 	float dy = pos.Y / (float)screenSize.Height;
 
 	ox::core::CVector3d<float> end = farLeftUp + (lefttoright * dx) + (uptodown * dy);
- 
+
 	return getSceneNodeFromRayBB(ox::core::CLine3d<float>(f->cameraPosition, end), idBitMask);
 }
 
 
 
-//! Returns the nearest scene node which collides with a 3d ray and 
-//! which id matches a bitmask. 
+//! Returns the nearest scene node which collides with a 3d ray and
+//! which id matches a bitmask.
 ISceneNode* CSceneCollisionManager::getSceneNodeFromRayBB(ox::core::CLine3d<float> ray,
 														int idBitMask)
 {
@@ -94,9 +94,9 @@ ISceneNode* CSceneCollisionManager::getSceneNodeFromRayBB(ox::core::CLine3d<floa
 
 //! recursive method for going through all scene nodes
 void CSceneCollisionManager::getPickedNodeBB(ISceneNode* root,
-									   const ox::core::CVector3d<float>& linemiddle, 
+									   const ox::core::CVector3d<float>& linemiddle,
 									   const ox::core::CVector3d<float>& linevect,
-									   const ox::core::CVector3d<float>& pos, 
+									   const ox::core::CVector3d<float>& pos,
 									   float halflength, int bits,
 									   float& outbestdistance,
 									   ISceneNode*& outbestnode)
@@ -138,10 +138,10 @@ bool CSceneCollisionManager::getCollisionPoint(const ox::core::CLine3d<float>& r
 
 
 //! Collides a moving ellipsoid with a 3d world with gravity and returns
-//! the resulting new position of the ellipsoid. 
+//! the resulting new position of the ellipsoid.
 ox::core::CVector3d<float> CSceneCollisionManager::getCollisionResultPosition(
 	ITriangleSelector* selector,
-	const ox::core::CVector3d<float> &position,	const ox::core::CVector3d<float>& radius, 
+	const ox::core::CVector3d<float> &position,	const ox::core::CVector3d<float>& radius,
 	const ox::core::CVector3d<float>& direction,
 	ox::core::CTriangle3d<float>& triout,
 	bool& outFalling,
@@ -156,7 +156,7 @@ ox::core::CVector3d<float> CSceneCollisionManager::getCollisionResultPosition(
 }
 
 
-void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData, 
+void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			const ox::core::CTriangle3d<float>& triangle)
 {
 	ox::core::CPlane3d<float> trianglePlane = triangle.getPlane();
@@ -172,7 +172,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 		// calculate signed distance from sphere position to triangle plane
 		double signedDistToTrianglePlane = trianglePlane.getDistanceTo(
 			colData->basePoint);
-			
+
 		float normalDotVelocity =
 			trianglePlane.Normal.dotProduct(colData->velocity);
 
@@ -237,9 +237,9 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 		}
 
 		// if we havent found a collision already we will have to sweep
-		// the sphere against points and edges of the triangle. Note: ox::core::A 
-		// collision inside the triangle will always happen before a 
-		// vertex or edge collision. 
+		// the sphere against points and edges of the triangle. Note: ox::core::A
+		// collision inside the triangle will always happen before a
+		// vertex or edge collision.
 
 		if (!foundCollision)
 		{
@@ -266,7 +266,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 				collisionPoint = triangle.pointA;
 			}
 
-			// p2 
+			// p2
 			if (!foundCollision)
 			{
 				b = 2.0f * (velocity.dotProduct(base - triangle.pointB));
@@ -302,7 +302,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			float edgeDotBaseToVertex = edge.dotProduct(baseToVertex);
 
 			// calculate parameters for equation
-			a = edgeSqaredLength* -velocitySqaredLength + 
+			a = edgeSqaredLength* -velocitySqaredLength +
 				edgeDotVelocity*edgeDotVelocity;
 			b = edgeSqaredLength* (2*velocity.dotProduct(baseToVertex)) -
 				2.0f*edgeDotVelocity*edgeDotBaseToVertex;
@@ -330,7 +330,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			edgeDotBaseToVertex = edge.dotProduct(baseToVertex);
 
 			// calculate parameters for equation
-			a = edgeSqaredLength* -velocitySqaredLength + 
+			a = edgeSqaredLength* -velocitySqaredLength +
 				edgeDotVelocity*edgeDotVelocity;
 			b = edgeSqaredLength* (2*velocity.dotProduct(baseToVertex)) -
 				2.0f*edgeDotVelocity*edgeDotBaseToVertex;
@@ -340,7 +340,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			// does the swept sphere collide against ininite edge?
 			if (getLowestRoot(a,b,c,t,&newT))
 			{
-				float f = (edgeDotVelocity*newT-edgeDotBaseToVertex) / 
+				float f = (edgeDotVelocity*newT-edgeDotBaseToVertex) /
 					edgeSqaredLength;
 				if (f >=0.0f && f <= 1.0f)
 				{
@@ -360,7 +360,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			edgeDotBaseToVertex = edge.dotProduct(baseToVertex);
 
 			// calculate parameters for equation
-			a = edgeSqaredLength* -velocitySqaredLength + 
+			a = edgeSqaredLength* -velocitySqaredLength +
 				edgeDotVelocity*edgeDotVelocity;
 			b = edgeSqaredLength* (2*velocity.dotProduct(baseToVertex)) -
 				2.0f*edgeDotVelocity*edgeDotBaseToVertex;
@@ -370,7 +370,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 			// does the swept sphere collide against ininite edge?
 			if (getLowestRoot(a,b,c,t,&newT))
 			{
-				float f = (edgeDotVelocity*newT-edgeDotBaseToVertex) / 
+				float f = (edgeDotVelocity*newT-edgeDotBaseToVertex) /
 					edgeSqaredLength;
 				if (f >=0.0f && f <= 1.0f)
 				{
@@ -390,7 +390,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 
 			// does this triangle qualify for closest hit?
 			if (!colData->foundCollision ||
-				distToCollision	< colData->nearestDistance) 
+				distToCollision	< colData->nearestDistance)
 			{
 				colData->nearestDistance = distToCollision;
 				colData->intersectionPoint = collisionPoint;
@@ -407,7 +407,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 
 
 //! Collides a moving ellipsoid with a 3d world with gravity and returns
-//! the resulting new position of the ellipsoid. 
+//! the resulting new position of the ellipsoid.
 ox::core::CVector3d<float> CSceneCollisionManager::collideEllipsoidWithWorld(
 	ITriangleSelector* selector, const ox::core::CVector3d<float> &position,
 	const ox::core::CVector3d<float>& radius,  const ox::core::CVector3d<float>& velocity,
@@ -483,7 +483,7 @@ ox::core::CLine3d<float> CSceneCollisionManager::getRayFromScreenCoordinates(
 	ox::core::CLine3d<float> ln;
 
 	if (!SceneManager)
-		return ln;	
+		return ln;
 
 	if (!camera)
 		camera = SceneManager->getActiveCamera();
@@ -517,7 +517,7 @@ ox::core::CPosition2d<int> CSceneCollisionManager::getScreenCoordinatesFrom3DPos
 	ox::core::CPosition2d<int> pos2d(-1000,-1000);
 
 	if (!SceneManager || !Driver)
-		return pos2d;	
+		return pos2d;
 
 	if (!camera)
 		camera = SceneManager->getActiveCamera();
@@ -556,4 +556,3 @@ ox::core::CPosition2d<int> CSceneCollisionManager::getScreenCoordinatesFrom3DPos
 
 } // end namespace scene
 } // end namespace daisy
-

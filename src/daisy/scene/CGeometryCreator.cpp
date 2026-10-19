@@ -41,9 +41,9 @@ IAnimatedMesh* CGeometryCreator::createHillPlaneMesh(const ox::core::CDimension2
 
 
 
-IAnimatedMesh* CGeometryCreator::createTerrainMesh(ox::video::IImage* texture, 
+IAnimatedMesh* CGeometryCreator::createTerrainMesh(ox::video::IImage* texture,
 		ox::video::IImage* heightmap, const ox::core::CDimension2d<float>& stretchSize,
-		float maxHeight, ox::video::IVideoDriver* driver, 
+		float maxHeight, ox::video::IVideoDriver* driver,
 		const ox::core::CDimension2d<int> maxVtxBlockSize,
 		bool debugBorders)
 {

@@ -19,8 +19,8 @@ namespace daisy
 		EKA_STRAFE_RIGHT,
 		EKA_COUNT,
 
-		//! This value is not used. It only forces this enumeration to compile in 32 bit. 
-		EKA_FORCE_32BIT = 0x7fffffff	
+		//! This value is not used. It only forces this enumeration to compile in 32 bit.
+		EKA_FORCE_32BIT = 0x7fffffff
 	};
 
 	//! Struct storing which key belongs to which action.
@@ -33,4 +33,3 @@ namespace daisy
 } // end namespace
 
 #endif
-

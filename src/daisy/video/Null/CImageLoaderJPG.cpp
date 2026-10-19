@@ -83,11 +83,11 @@ void CImageLoaderJPG::term_source (j_decompress_ptr cinfo)
 bool CImageLoaderJPG::isALoadableFileFormat(ox::io::IReadFile* file)
 {
     #ifndef _IRR_COMPILE_WITH_LIBJPEG_
-    
+
     return false;
-    
+
     #else
-    
+
 	if (!file)
 		return false;
 
@@ -95,7 +95,7 @@ bool CImageLoaderJPG::isALoadableFileFormat(ox::io::IReadFile* file)
 	file->seek(6);
 	file->read(&jfif, sizeof(int));
 	return (jfif == 0x4a464946 || jfif == 0x4649464a);
-	
+
 	#endif
 }
 
@@ -107,7 +107,7 @@ IImage* CImageLoaderJPG::loadImage(ox::io::IReadFile* file)
     #ifndef _IRR_COMPILE_WITH_LIBJPEG_
     return 0;
     #else
-    
+
 	file->seek(0);
 	unsigned char* input = new unsigned char[file->getSize()];
 	file->read(input, file->getSize());
@@ -121,9 +121,9 @@ IImage* CImageLoaderJPG::loadImage(ox::io::IReadFile* file)
 	//step fails.  (Unlikely, but it could happen if you are out of memory.)
 	//This routine fills in the contents of struct jerr, and returns jerr's
 	//address which we place into the link field in cinfo.
-	
+
 	cinfo.err = jpeg_std_error(&jerr);
-	// Now we can initialize the JPEG decompression object. 
+	// Now we can initialize the JPEG decompression object.
 	jpeg_create_decompress(&cinfo);
 
 	// specify data source
@@ -145,7 +145,7 @@ IImage* CImageLoaderJPG::loadImage(ox::io::IReadFile* file)
 	// and BEFORE jpeg_destroy_decompress
 	// Caller is responsible for arranging these + setting up cinfo
 
-	// read file parameters with jpeg_read_header() 
+	// read file parameters with jpeg_read_header()
 	(void) jpeg_read_header(&cinfo, TRUE);
 
 	// Start decompressor
@@ -192,13 +192,13 @@ IImage* CImageLoaderJPG::loadImage(ox::io::IReadFile* file)
 
 
 	// convert image
-	IImage* image = new CImage(ECF_R8G8B8, 
+	IImage* image = new CImage(ECF_R8G8B8,
 		ox::core::CDimension2d<int>(width, height), output);
-	
+
 	delete [] input;
-	
+
 	return image;
-	
+
 	#endif
 }
 
@@ -212,4 +212,3 @@ IImageLoader* createImageLoaderJPG()
 
 } // end namespace video
 } // end namespace daisy
-

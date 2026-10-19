@@ -41,7 +41,7 @@ CQ3LevelMesh::CQ3LevelMesh(ox::io::IFileSystem* fs, ox::video::IVideoDriver* dri
 {
 	#ifdef _DEBUG
 	ox::IUnknown::setDebugName("CQ3LevelMesh");
-	#endif	
+	#endif
 
 	if (Driver)
 		Driver->grab();
@@ -59,7 +59,7 @@ CQ3LevelMesh::~CQ3LevelMesh()
 
 	if (LightMaps)
 		delete [] LightMaps;
-	
+
 	if (Vertices)
 		delete [] Vertices;
 
@@ -77,7 +77,7 @@ CQ3LevelMesh::~CQ3LevelMesh()
 
 	if (LeafFaces)
 		delete [] LeafFaces;
-	
+
 	if (MeshVerts)
 		delete [] MeshVerts;
 
@@ -312,4 +312,3 @@ E_ANIMATED_MESH_TYPE CQ3LevelMesh::getMeshType() const
 
 } // end namespace scene
 } // end namespace daisy
-

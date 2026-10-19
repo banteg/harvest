@@ -36,13 +36,13 @@ using namespace ox::scene;
 		//! destructor
 		virtual ~CSceneCollisionManager();
 
-		//! Returns the scene node, which is currently visible under the overgiven 
-		//! screencoordinates, viewed from the currently active camera. 
+		//! Returns the scene node, which is currently visible under the overgiven
+		//! screencoordinates, viewed from the currently active camera.
 		virtual ISceneNode* getSceneNodeFromScreenCoordinatesBB(ox::core::CPosition2d<int> pos,
 			int idBitMask=0);
 
-		//! Returns the nearest scene node which collides with a 3d ray and 
-		//! which id matches a bitmask. 
+		//! Returns the nearest scene node which collides with a 3d ray and
+		//! which id matches a bitmask.
 		virtual ISceneNode* getSceneNodeFromRayBB(ox::core::CLine3d<float> ray, int idBitMask=0);
 
 		//! Returns the scene node, at which the overgiven camera is looking at and
@@ -55,10 +55,10 @@ using namespace ox::scene;
 			ox::core::CTriangle3d<float>& outTriangle);
 
 		//! Collides a moving ellipsoid with a 3d world with gravity and returns
-		//! the resulting new position of the ellipsoid. 
+		//! the resulting new position of the ellipsoid.
 		virtual ox::core::CVector3d<float> getCollisionResultPosition(
 			ITriangleSelector* selector,
-			const ox::core::CVector3d<float> &ellipsoidPosition,	const ox::core::CVector3d<float>& ellipsoidRadius, 
+			const ox::core::CVector3d<float> &ellipsoidPosition,	const ox::core::CVector3d<float>& ellipsoidRadius,
 			const ox::core::CVector3d<float>& ellipsoidDirectionAndSpeed,
 			ox::core::CTriangle3d<float>& triout,
 			bool& outFalling,
@@ -76,9 +76,9 @@ using namespace ox::scene;
 	private:
 
 		//! recursive method for going through all scene nodes
-		void getPickedNodeBB(ISceneNode* root, const ox::core::CVector3d<float>& linemiddle, 
+		void getPickedNodeBB(ISceneNode* root, const ox::core::CVector3d<float>& linemiddle,
 				const ox::core::CVector3d<float>& linevect,
-				const ox::core::CVector3d<float>& pos, 
+				const ox::core::CVector3d<float>& pos,
 				float halflength, int bits, float& outdist,
 				ISceneNode*& outbest);
 
@@ -86,7 +86,7 @@ using namespace ox::scene;
 		{
 			ox::core::CVector3d<float> eRadius;
 
-			ox::core::CVector3d<float> R3Velocity; 
+			ox::core::CVector3d<float> R3Velocity;
 			ox::core::CVector3d<float> R3Position;
 
 			ox::core::CVector3d<float> velocity;
@@ -105,11 +105,11 @@ using namespace ox::scene;
 			ITriangleSelector* selector;
 		};
 
-		void testTriangleIntersection(SCollisionData* colData, 
+		void testTriangleIntersection(SCollisionData* colData,
 			const ox::core::CTriangle3d<float>& triangle);
 
 		//! recursive method for doing collision response
-		ox::core::CVector3d<float> collideEllipsoidWithWorld(ITriangleSelector* selector, 
+		ox::core::CVector3d<float> collideEllipsoidWithWorld(ITriangleSelector* selector,
 			const ox::core::CVector3d<float> &position,
 			const ox::core::CVector3d<float>& radius,  const ox::core::CVector3d<float>& velocity,
 			float slidingSpeed,
@@ -156,7 +156,7 @@ using namespace ox::scene;
 
 		ISceneManager* SceneManager;
 		ox::video::IVideoDriver* Driver;
-		ox::TArray<ox::core::CTriangle3d<float> > Triangles; // triangle buffer 
+		ox::TArray<ox::core::CTriangle3d<float> > Triangles; // triangle buffer
 	};
 
 
@@ -164,4 +164,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

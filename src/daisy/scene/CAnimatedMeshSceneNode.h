@@ -65,16 +65,16 @@ using namespace ox::scene;
 		//! optimal position for minimizing renderstate changes, but can also be used
 		//! to directly modify the material of a scene node.
 		virtual ox::video::SMaterial& getMaterial(int i);
-		
+
 		//! returns amount of materials used by this scene node.
 		virtual int getMaterialCount();
 
 		//! Creates shadow volume scene node as child of this node
-		//! and returns a pointer to it. 
+		//! and returns a pointer to it.
 		virtual IShadowVolumeSceneNode* addShadowVolumeSceneNode(int id,
 			bool zfailmethod=true, float infinity=10000.0f);
 
-		//! Returns a pointer to a child node, wich has the same transformation as 
+		//! Returns a pointer to a child node, wich has the same transformation as
 		//! the corrsesponding joint, if the mesh in this scene node is a ms3d mesh.
 		virtual ISceneNode* getMS3DJointNode(const char* jointName);
 
@@ -83,10 +83,10 @@ using namespace ox::scene;
 		//! or to remove attached childs.
 		virtual bool removeChild(ISceneNode* child);
 
-		//! Starts a MD2 animation. 
+		//! Starts a MD2 animation.
 		virtual bool setMD2Animation(EMD2_ANIMATION_TYPE anim);
 
-		//! Starts a special MD2 animation. 
+		//! Starts a special MD2 animation.
 		virtual bool setMD2Animation(const char* animationName);
 
 		//! Returns the current displayed frame number.
@@ -110,4 +110,3 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
-

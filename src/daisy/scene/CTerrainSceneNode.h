@@ -32,7 +32,7 @@ class CTerrainSceneNode : public ITerrainSceneNode
 public:
 
 	//! constructor
-	CTerrainSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+	CTerrainSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 		const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& rotation = ox::core::CVector3d<float>(0,0,0),
 		const ox::core::CVector3d<float>& scale = ox::core::CVector3d<float>(1.0f, 1.0f, 1.0f));
@@ -42,7 +42,7 @@ public:
 
 	//! loads the terrain
 	bool load(ox::video::IImage* texture, ox::video::IImage* heightmap,
-		ox::video::ITexture* detailmap, 
+		ox::video::ITexture* detailmap,
 		const ox::core::CDimension2d<float>& stretchSize,
 		const ox::core::CDimension2d<int>& defaultVertexBlockSize,
 		float maxHeight);
@@ -87,7 +87,7 @@ private:
 		bool operator <(const SIndexBuffer& other) const
 		{
 			return WidthOfUpperBlock < other.WidthOfUpperBlock ||
-				(WidthOfUpperBlock == other.WidthOfUpperBlock && 
+				(WidthOfUpperBlock == other.WidthOfUpperBlock &&
 				HeightOfLeftBlock < other.HeightOfLeftBlock);
 		}
 	};
@@ -106,7 +106,7 @@ private:
 		ox::TArray<SLoD> LoDs; // index buffers for every level of detail
 	};
 
-	// Vertex block 
+	// Vertex block
     struct SVertexBlock
 	{
 		SVertexBlock()
@@ -139,7 +139,7 @@ private:
 	void calculateBoundingBox();
 
 	//! returns corresponding index buffer for vertex block
-	SIndexBuffer* getIndexBuffer(SVertexBlock& block);	
+	SIndexBuffer* getIndexBuffer(SVertexBlock& block);
 
 	ox::TArray<SVertexBlock> VertexBlocks;
 	ox::TArray<SIndexArray*> IndexArrayList;
@@ -154,4 +154,3 @@ private:
 
 
 #endif
-

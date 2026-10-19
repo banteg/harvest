@@ -77,7 +77,7 @@ const ox::core::CDimension2d<int> CTerrainSceneNode::getBestBlockSize(
 }
 
 
-ox::video::IImage* CTerrainSceneNode::getIdealHeightMap(ox::video::IImage* heightmap, 
+ox::video::IImage* CTerrainSceneNode::getIdealHeightMap(ox::video::IImage* heightmap,
 													const ox::core::CDimension2d<int> maxVtxSize)
 {
     // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
@@ -136,7 +136,7 @@ void CTerrainSceneNode::calculateBoundingBox(SVertexBlock& block)
 	block.Box.reset(block.Vertices[0].Pos);
 
 	for (int i=1; i<(int)block.Vertices.size(); ++i)
-		block.Box.addInternalPoint(block.Vertices[i].Pos);		
+		block.Box.addInternalPoint(block.Vertices[i].Pos);
 }
 
 
@@ -250,4 +250,3 @@ void CTerrainSceneNode::setDebugLOD(int i)
 
 } // end namespace scene
 } // end namespace daisy
-

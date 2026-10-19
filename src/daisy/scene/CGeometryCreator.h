@@ -36,9 +36,9 @@ public:
 		ox::video::SMaterial* material,	float hillHeight, const ox::core::CDimension2d<float>& countHills,
 		const ox::core::CDimension2d<float>& textureRepeatCount);
 
-	static IAnimatedMesh* createTerrainMesh(ox::video::IImage* texture, 
+	static IAnimatedMesh* createTerrainMesh(ox::video::IImage* texture,
 		ox::video::IImage* heightmap, const ox::core::CDimension2d<float>& stretchSize, float maxHeight,
-		ox::video::IVideoDriver* driver, 
+		ox::video::IVideoDriver* driver,
 		const ox::core::CDimension2d<int> defaultVertexBlockSize,
 		bool debugBorders=false);
 };
@@ -48,4 +48,3 @@ public:
 } // end namespace daisy
 
 #endif
-

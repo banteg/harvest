@@ -78,20 +78,20 @@ void CTextReader::readFile(IReadFile* file)
 //! converts the read text data to utf16 text.
 void CTextReader::convertToUTF16()
 {
-	// only worked with 16 bit, doen't work on some unixes. corrected 
+	// only worked with 16 bit, doen't work on some unixes. corrected
 	// version thanks to G.o.D:
 
 	wchar_t* header = (wchar_t*)CData;
 	int firstoffset=3,secondoffset=2;
 
-	if (CDataSize>=2 && 
+	if (CDataSize>=2 &&
 		((header[0]&0xffff) == 0xFFFE || (header[0]&0xffff) == 0xFEFF))
 	{
 		// We've got UTF-16
 
 		if ((header[0]&0xffff) == 0xFFFE)
 		{
-			// This is Big Endian, 
+			// This is Big Endian,
 			// switch endianess
 			firstoffset = 2;
 			secondoffset = 3;
@@ -100,7 +100,7 @@ void CTextReader::convertToUTF16()
 		TextDataSize=(CDataSize-1)/2;
 		TextData= new wchar_t[TextDataSize];
 
-		for (unsigned int i=0; i<TextDataSize; i++) 
+		for (unsigned int i=0; i<TextDataSize; i++)
 			TextData[i]=(wchar_t)(CData[i*2+firstoffset]<<8)|CData[i*2+secondoffset];
 
 		delete [] CData;
@@ -112,7 +112,7 @@ void CTextReader::convertToUTF16()
 
 		TextDataSize = CDataSize;
 		convertASCIIToUTF16(CData, CDataSize, &TextData);
-		delete [] CData; 
+		delete [] CData;
 		CData = (char*)TextData;
 		return;
 	}
@@ -126,8 +126,7 @@ void CTextReader::convertASCIIToUTF16(const char* characters, unsigned int len, 
 	for (unsigned int i=0; i<len; ++i)
 		(*out)[i] = characters[i];
 }
-	
+
 
 } // end namespace daisy
 } // end namespace io
-

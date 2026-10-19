@@ -80,17 +80,17 @@ void CImageLoaderBmp::decompress8BitRLE(char*& BmpData, int size, int width, int
 			switch(*p)
 			{
 			case 0: // end of line
-				++p; 
+				++p;
 				++line;
 				d = newBmp + (line*(width+pitch));
-				break; 
+				break;
 			case 1: // end of bmp
 				delete [] BmpData;
 				BmpData = newBmp;
-				return; 
+				return;
 			case 2:
 				++p; d +=(unsigned char)*p;  // delta
-				++p; d += ((unsigned char)*p)*(width+pitch); 
+				++p; d += ((unsigned char)*p)*(width+pitch);
 				++p;
 				break;
 			default:
@@ -114,7 +114,7 @@ void CImageLoaderBmp::decompress8BitRLE(char*& BmpData, int size, int width, int
 		}
 		else
 		{
-			int count = (unsigned char)*p; ++p;			
+			int count = (unsigned char)*p; ++p;
 			int color = (unsigned char)*p; ++p;
 			for (int i=0; i<count; ++i)
 			{
@@ -148,18 +148,18 @@ void CImageLoaderBmp::decompress4BitRLE(char*& BmpData, int size, int width, int
 			switch(*p)
 			{
 			case 0: // end of line
-				++p; 
+				++p;
 				++line;
 				d = newBmp + (line*lineWidth);
 				shift = 4;
-				break; 
+				break;
 			case 1: // end of bmp
 				delete [] BmpData;
 				BmpData = newBmp;
-				return; 
+				return;
 			case 2:
 				{
-					++p; 
+					++p;
 					int x = (unsigned char)*p; ++p;
 					int y = (unsigned char)*p; ++p;
 					d += x/2 + y*lineWidth;
@@ -203,7 +203,7 @@ void CImageLoaderBmp::decompress4BitRLE(char*& BmpData, int size, int width, int
 		}
 		else
 		{
-			int count = (unsigned char)*p; ++p;			
+			int count = (unsigned char)*p; ++p;
 			int color1 = (unsigned char)*p; color1 = color1 & 0x0f;
 			int color2 = (unsigned char)*p; color2 = (color2 >> 4) & 0x0f;
 			++p;

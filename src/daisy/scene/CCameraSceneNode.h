@@ -27,7 +27,7 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		CCameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int id, 
+		CCameraSceneNode(ISceneNode* parent, ISceneManager* mgr, int id,
 			const ox::core::CVector3d<float>& position = ox::core::CVector3d<float>(0,0,0),
 			const ox::core::CVector3d<float>& lookat = ox::core::CVector3d<float>(0,0,100));
 
@@ -36,7 +36,7 @@ using namespace ox::scene;
 
 		//! Sets the projection matrix of the camera. The ox::core::CMatrix4 class has some methods
 		//! to build a projection matrix. e.g: ox::core::CMatrix4::buildProjectionMatrixPerspectiveFovLH
-		//! \param projection: The new projection matrix of the camera. 
+		//! \param projection: The new projection matrix of the camera.
 		virtual void setProjectionMatrix(const ox::core::CMatrix4& projection);
 
 		//! Gets the current projection matrix of the camera
@@ -48,10 +48,10 @@ using namespace ox::scene;
 		virtual const ox::core::CMatrix4& getViewMatrix();
 
 		//! It is possible to send mouse and key events to the camera. Most cameras
-		//! may ignore this input, but camera scene nodes which are created for 
+		//! may ignore this input, but camera scene nodes which are created for
 		//! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 		//! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
-		//! for changing their position, look at target or whatever. 
+		//! for changing their position, look at target or whatever.
 		virtual bool OnEvent(const ox::event::SEvent& event);
 
 		//! sets the look at target of the camera
@@ -131,9 +131,9 @@ using namespace ox::scene;
 
 		ox::core::CAabbox3d<float> BBox;
 
-		float fovy;		// Field of view, in radians. 
-		float aspect;	// Aspect ratio. 
-		float zn;		// value of the near view-plane. 
+		float fovy;		// Field of view, in radians.
+		float aspect;	// Aspect ratio.
+		float zn;		// value of the near view-plane.
 		float zf;		// ox::core::Z-value of the far view-plane.
 
 		ox::core::CDimension2d<float> screenDim;
@@ -147,4 +147,3 @@ using namespace ox::scene;
 } // end namespace
 
 #endif
-

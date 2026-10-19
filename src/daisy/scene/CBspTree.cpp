@@ -83,7 +83,7 @@ void CBspTree::createBspTree(BspNode& node)
 
 	if (vertexCount < 50) // stoppt den vorgang bei 50 vertizen.
 		found = false;
-	
+
 	if (found)
 		found = findSplitter(&node.polys[0], node.polys.size(), node.plane);
 
@@ -139,7 +139,7 @@ void CBspTree::sortPolys(const BspNode& node)
 		case ox::core::ISREL3D_SPANNING: // muss geteilt werden
 			{
 				BspPoly newFront, newBack;
-				
+
 				splitPoly(node.polys[i], node.plane, newFront, newBack);
 
 				node.front->polys.push_back(newFront);
@@ -219,7 +219,7 @@ bool CBspTree::findSplitter(BspPoly* poly, unsigned int polyCount, ox::core::CPl
 				{
 					bestScore = score;
 					bestSplitter = &poly[i];
-				} 
+				}
 			}
 		}
 	}
@@ -323,7 +323,7 @@ void CBspTree::renderLeaf(BspNode& node)
 		// add indices
 
 		int idxCount = node.polys[i].indices.size();
-		
+
 		for (int j=0; j<idxCount; ++j)
 			buffer->indices.push_back(node.polys[i].indices[j] + start);
 
@@ -378,13 +378,13 @@ ox::core::EIntersectionRelation3D CBspTree::classifyPoly(const ox::core::CPlane3
 	}
 
 	if (countPlanar == poly.vertices.size()) // Alle Verts des Polys sind planar
-		return ox::core::ISREL3D_PLANAR; 
+		return ox::core::ISREL3D_PLANAR;
 
 	if (countFront == poly.vertices.size()) // Alle Verts des Polys liegen vor der Ebene
-		return ox::core::ISREL3D_FRONT; 
+		return ox::core::ISREL3D_FRONT;
 
 	if (countBack == poly.vertices.size()) // Alle Verts des Polys liegen hinter der Ebene
-		return ox::core::ISREL3D_BACK; 
+		return ox::core::ISREL3D_BACK;
 
 	return ox::core::ISREL3D_SPANNING;
 }
@@ -416,7 +416,7 @@ void CBspTree::deleteTree(BspNode *pNode)
 		delete pNode->back;
 	}
 }
- 
+
 
 
 
@@ -430,7 +430,7 @@ void CBspTree::createRoot(const ox::scene::IMeshBuffer* array, unsigned int arra
 
 	//for (unsigned int i=0; i<arraySize; ++i)
 	//	root.countPolys += array[i].getIndexCount() / 3;
-	
+
 	//root.polys.resize(root.countPolys);
 
 	root.front = 0;
@@ -454,7 +454,7 @@ void CBspTree::createRoot(const ox::scene::IMeshBuffer* array, unsigned int arra
 			poly.indices.push_back( 0 );
 			poly.indices.push_back( 1 );
 			poly.indices.push_back( 2 );
-			
+
 			poly.wasSplitter = false;
 			poly.plane = planeFromPoly(poly);
 
@@ -475,7 +475,7 @@ bool CBspTree::polyExistsInNode(BspPoly* poly, BspNode* node, unsigned int polys
 		if (node->polys[i] == *poly)
 			return true;
 	}
-	return false;	
+	return false;
 }
 
 
@@ -504,7 +504,7 @@ void CBspTree::createStats(const ox::scene::IMeshBuffer* array, unsigned int mat
 	stats.indexCount = new unsigned int[materialCount];
 	for (i=0; i<materialCount; ++i)
 		stats.indexCount[i] = 0;
-	
+
 	stats.vertexCount = new unsigned int[materialCount];
 	for (i=0; i<materialCount; ++i)
 		stats.vertexCount[i] = 0;
@@ -604,7 +604,7 @@ void CBspTree::debugValidateLeaf(const BspNode& node)
 
 			if (node.polys[i].countVertices >= BSP_MAX_POLY_VERTICES)
 				logString("[CBspTree] Error validating leaf: too much vertices in poly.\n");
-			
+
 			for (unsigned int j=0; j<node.polys[i].countIndices; ++j)
 				if (node.polys[i].indices[j] >= node.polys[i].countVertices)
 					logString("[CBspTree] Error validating leaf: index pointing to invalid vertex.\n");
@@ -643,5 +643,4 @@ const CBspTree::RenderBuffer* CBspTree::getRenderBuffer(unsigned int materialNr)
 
 
 } // end namespace
-} // end namespace 
-
+} // end namespace

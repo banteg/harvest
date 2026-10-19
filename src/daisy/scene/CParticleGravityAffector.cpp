@@ -34,4 +34,3 @@ void CParticleGravityAffector::affect(unsigned int now, SParticle* particlearray
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -31,7 +31,7 @@ CCameraFPSSceneNode::CCameraFPSSceneNode(ISceneNode* parent, ISceneManager* mgr,
 		ox::gui::ICursorControl* cursorControl, int id, float rotateSpeed , float moveSpeed,
 		SKeyMap* keyMapArray, int keyMapSize)
 : CCameraSceneNode(parent, mgr, id), CursorControl(cursorControl),
-	MoveSpeed(moveSpeed), RotateSpeed(rotateSpeed), /*RotationX(0.0f), 
+	MoveSpeed(moveSpeed), RotateSpeed(rotateSpeed), /*RotationX(0.0f),
 	RotationY(0.0f),*/ firstUpdate(true)
 {
 	if (CursorControl)
@@ -83,10 +83,10 @@ CCameraFPSSceneNode::~CCameraFPSSceneNode()
 
 
 //! It is possible to send mouse and key events to the camera. Most cameras
-//! may ignore this input, but camera scene nodes which are created for 
+//! may ignore this input, but camera scene nodes which are created for
 //! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 //! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
-//! for changing their position, look at target or whatever. 
+//! for changing their position, look at target or whatever.
 bool CCameraFPSSceneNode::OnEvent(const ox::event::SEvent& event)
 {
     // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
@@ -172,7 +172,7 @@ void CCameraFPSSceneNode::animate()
 
 	// update position
 
-	ox::core::CVector3d<float> pos = getPosition();	
+	ox::core::CVector3d<float> pos = getPosition();
 
 	ox::core::CVector3d<float> movedir = Target;
 	movedir.normalize();
@@ -222,7 +222,7 @@ void CCameraFPSSceneNode::setTarget(const ox::core::CVector3d<float>& wtgt)
 {
 	// calculate rotation to fit new target
 	ox::core::CVector3d<float> cpos = getAbsolutePosition();
-	
+
 	ox::core::CVector2d<float> wline(cpos.Z-wtgt.Z, cpos.X-wtgt.X);
 	wline.normalize();
 	float wangle = (float)wline.getAngle();
@@ -237,7 +237,7 @@ void CCameraFPSSceneNode::setTarget(const ox::core::CVector3d<float>& wtgt)
 
 	// I don't remember why I wrote this, but
 	// it works partially. There is absolutely
-	// no need for a while loop. I'll rewrite it 
+	// no need for a while loop. I'll rewrite it
 	// when I am in the mood...
 
 	int cnt = 0;
@@ -255,4 +255,3 @@ void CCameraFPSSceneNode::setTarget(const ox::core::CVector3d<float>& wtgt)
 
 } // end namespace
 } // end namespace
-

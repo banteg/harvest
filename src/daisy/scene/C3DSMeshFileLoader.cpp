@@ -38,7 +38,7 @@ const unsigned short C3DS_EDIT_MATERIAL = 0xAFFF;
 const unsigned short C3DS_EDIT_OBJECT	= 0x4000;
 
 // sub chunks of C3DS_EDIT_MATERIAL
-const unsigned short C3DS_MATNAME       = 0xA000; 
+const unsigned short C3DS_MATNAME       = 0xA000;
 const unsigned short C3DS_MATLUMINANCE  = 0xA010;
 const unsigned short C3DS_MATDIFFUSE    = 0xA020;
 const unsigned short C3DS_MATSPECULAR   = 0xA030;
@@ -286,7 +286,7 @@ bool C3DSMeshFileLoader::readChunk(ox::io::IReadFile* file, ChunkData* parent)
 					os::Printer::log("Cannot read 3ds meshes of versions other than 3.", ox::event::ELL_ERROR);
 					return false;
 				}*/
-				
+
 				readChunk(file, &data);
 			}
 			break;
@@ -326,16 +326,16 @@ bool C3DSMeshFileLoader::readObjectChunk(ox::io::IReadFile* file, ChunkData* par
 			composeObject(file);
 			break;
 
-		case C3DS_TRIVERT: 
+		case C3DS_TRIVERT:
 			readVertices(file, data);
 			break;
 
-		case C3DS_TRIFACE: 
+		case C3DS_TRIFACE:
 			readIndices(file, data);
 			readObjectChunk(file, &data); // read smooth and material groups
 			break;
 
-		case C3DS_TRIFACEMAT: 
+		case C3DS_TRIFACEMAT:
 			readMaterialGroup(file, data);
 			break;
 
@@ -365,7 +365,7 @@ void C3DSMeshFileLoader::composeObject(ox::io::IReadFile* file)
 }
 
 
-ox::core::CString<char> C3DSMeshFileLoader::getTextureFileName(ox::core::CString<char> texture, 
+ox::core::CString<char> C3DSMeshFileLoader::getTextureFileName(ox::core::CString<char> texture,
 													 ox::core::CString<char> model)
 {
 	int idx = -1;
@@ -404,9 +404,9 @@ void C3DSMeshFileLoader::loadMaterials(ox::io::IReadFile* file)
 				Materials[i].Filename, modelFilename);
 
 			m->Material.Texture1 = Driver->getTexture(Materials[i].Filename.c_str());
-			
+
 			if (!m->Material.Texture1)
-				m->Material.Texture1 = Driver->getTexture(fname.c_str());				
+				m->Material.Texture1 = Driver->getTexture(fname.c_str());
 
 			if (!m->Material.Texture1)
 				os::Printer::log("Could not find a texture for entry in 3ds file",
@@ -547,4 +547,3 @@ void C3DSMeshFileLoader::readString(ox::io::IReadFile* file, ChunkData& data, ox
 
 } // end namespace scene
 } // end namespace daisy
-

@@ -43,7 +43,7 @@ using namespace ox::scene;
 //! constructor
 CAnimatedMeshSceneNode::CAnimatedMeshSceneNode(IAnimatedMesh* mesh, ISceneNode* parent, ISceneManager* mgr, int id,
 			const ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& rotation,	const ox::core::CVector3d<float>& scale)
-: IAnimatedMeshSceneNode(parent, mgr, id, position, rotation, scale), Mesh(mesh), 
+: IAnimatedMeshSceneNode(parent, mgr, id, position, rotation, scale), Mesh(mesh),
 	BeginFrameTime(0), StartFrame(0), EndFrame(0), FramesPerSecond(100),
 	Shadow(0)
 {
@@ -203,7 +203,7 @@ int CAnimatedMeshSceneNode::getMaterialCount()
 
 
 //! Creates shadow volume scene node as child of this node
-//! and returns a pointer to it. 
+//! and returns a pointer to it.
 IShadowVolumeSceneNode* CAnimatedMeshSceneNode::addShadowVolumeSceneNode(int id,
 																		 bool zfailmethod,
 																		 float infinity)
@@ -223,7 +223,7 @@ IShadowVolumeSceneNode* CAnimatedMeshSceneNode::addShadowVolumeSceneNode(int id,
 
 
 
-//! Returns a pointer to a child node, wich has the same transformation as 
+//! Returns a pointer to a child node, wich has the same transformation as
 //! the corrsesponding joint, if the mesh in this scene node is a ms3d mesh.
 ISceneNode* CAnimatedMeshSceneNode::getMS3DJointNode(const char* jointName)
 {
@@ -262,7 +262,7 @@ bool CAnimatedMeshSceneNode::removeChild(ISceneNode* child)
 }
 
 
-//! Starts a MD2 animation. 
+//! Starts a MD2 animation.
 bool CAnimatedMeshSceneNode::setMD2Animation(EMD2_ANIMATION_TYPE anim)
 {
     // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
@@ -270,7 +270,7 @@ bool CAnimatedMeshSceneNode::setMD2Animation(EMD2_ANIMATION_TYPE anim)
 }
 
 
-//! Starts a special MD2 animation. 
+//! Starts a special MD2 animation.
 bool CAnimatedMeshSceneNode::setMD2Animation(const char* animationName)
 {
     // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
@@ -280,4 +280,3 @@ bool CAnimatedMeshSceneNode::setMD2Animation(const char* animationName)
 
 } // end namespace scene
 } // end namespace daisy
-

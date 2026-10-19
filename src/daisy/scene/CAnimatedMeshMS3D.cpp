@@ -161,7 +161,7 @@ void CAnimatedMeshMS3D::getKeyframeData(ox::TArray<SKeyframe>& keys, float time,
 }
 
 
-//! Returns a pointer to a transformation matrix of a part of the 
+//! Returns a pointer to a transformation matrix of a part of the
 //! mesh based on a frame time.
 ox::core::CMatrix4* CAnimatedMeshMS3D::getMatrixOfJoint(int jointNumber, int frame)
 {
@@ -214,7 +214,7 @@ void CAnimatedMeshMS3D::animate(int frame)
 	{
 		ox::core::CVector3d<float> translation = Joints[i].Translation;
 		ox::core::CVector3d<float> rotation = Joints[i].Rotation;
-		
+
 		// find keyframe translation and roation
 		getKeyframeData(Joints[i].TranslationKeys, time, translation);
 		getKeyframeData(Joints[i].RotationKeys, time, rotation);
@@ -238,10 +238,10 @@ void CAnimatedMeshMS3D::animate(int frame)
 		for (int j=0; j<(int)Joints[i].VertexIds.size(); ++j)
 		{
 			Joints[i].AbsoluteTransformationAnimated.transformVect(
-			Vertices[Joints[i].VertexIds[j]].Pos, 
+			Vertices[Joints[i].VertexIds[j]].Pos,
 				AnimatedVertices[Joints[i].VertexIds[j]].Pos);
 
-			// TODO: this could be done much more faster by 
+			// TODO: this could be done much more faster by
 			// first getting 8 extreme points and putting them in.
 			BoundingBox.addInternalPoint(AnimatedVertices[Joints[i].VertexIds[j]].Pos);
 		}
@@ -366,4 +366,3 @@ E_ANIMATED_MESH_TYPE CAnimatedMeshMS3D::getMeshType() const
 
 } // end namespace scene
 } // end namespace daisy
-

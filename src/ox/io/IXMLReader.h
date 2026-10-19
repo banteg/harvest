@@ -37,8 +37,8 @@ class IXMLReader : public ox::IUnknown
         //! Destructor
         virtual ~IXMLReader() {};
 
-        //! Reads forward to the next xml node. 
-        //! \return Returns false, if there was no further node. 
+        //! Reads forward to the next xml node.
+        //! \return Returns false, if there was no further node.
         virtual bool read() = 0;
 
         //! Returns the type of the current XML node.
@@ -49,34 +49,34 @@ class IXMLReader : public ox::IUnknown
         //! \return Returns amount of attributes of this xml node.
         virtual int getAttributeCount() = 0;
 
-        //! Returns name of an attribute. 
+        //! Returns name of an attribute.
         //! \param idx: Zero based index, should be something between 0 and getAttributeCount()-1.
         //! \return Name of the attribute, 0 if an attribute with this index does not exist.
         virtual const wchar_t* getAttributeName(int idx) = 0;
 
-        //! Returns the value of an attribute. 
+        //! Returns the value of an attribute.
         //! \param idx: Zero based index, should be something between 0 and getAttributeCount()-1.
         //! \return Value of the attribute, 0 if an attribute with this index does not exist.
         virtual const wchar_t* getAttributeValue(int idx) = 0;
 
-        //! Returns the value of an attribute. 
+        //! Returns the value of an attribute.
         //! \param name: Name of the attribute.
         //! \return Value of the attribute, 0 if an attribute with this name does not exist.
         virtual const wchar_t* getAttributeValue(const wchar_t* name) = 0;
 
-        //! Returns the value of an attribute, like getAttributeValue(), but does not 
+        //! Returns the value of an attribute, like getAttributeValue(), but does not
         //! return 0 if the attribute does not exist. An empty string ("") is returned then.
         //! \param name: Name of the attribute.
         //! \return Value of the attribute, and "" if an attribute with this name does not exist
         virtual const wchar_t* getAttributeValueSafe(const wchar_t* name) = 0;
 
-        //! Returns the value of an attribute as integer. 
+        //! Returns the value of an attribute as integer.
         //! \param name: Name of the attribute.
         //! \return Value of the attribute as integer, and 0 if an attribute with this name does not exist or
         //! the value could not be interpreted as integer.
         virtual int getAttributeValueAsInt(const wchar_t* name) = 0;
 
-        //! Returns the value of an attribute as float. 
+        //! Returns the value of an attribute as float.
         //! \param name: Name of the attribute.
         //! \return Value of the attribute as float, and 0 if an attribute with this name does not exist or
         //! the value could not be interpreted as float.

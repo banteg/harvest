@@ -62,7 +62,7 @@ void CXMLWriter::writeElement(const wchar_t* name, bool empty,
 {
 	if (!File || !name)
 		return;
-	
+
 	// write name
 
 	File->write(L"<", 2);
@@ -122,7 +122,7 @@ void CXMLWriter::writeClosingTag(const wchar_t* name)
 
 
 
-const CXMLWriter::XMLSpecialCharacters XMLWSChar[] = 
+const CXMLWriter::XMLSpecialCharacters XMLWSChar[] =
 {
 	{ L'&', L"&amp;" },
 	{ L'<', L"&lt;" },
@@ -176,4 +176,3 @@ void CXMLWriter::writeLineBreak()
 
 } // end namespace daisy
 } // end namespace io
-

@@ -41,7 +41,7 @@ bool CImageLoaderTGA::isALoadableFileExtension(const char* fileName)
 }
 
 
-//! loads a compressed tga. 
+//! loads a compressed tga.
 char *CImageLoaderTGA::loadCompressedImage(ox::io::IReadFile *file, STGAHeader *header)
 {
 	// This was written and sent in by Jon Pry, thank you very much!
@@ -52,7 +52,7 @@ char *CImageLoaderTGA::loadCompressedImage(ox::io::IReadFile *file, STGAHeader *
 	char* data = new char[imageSize];
 	int currentByte = 0;
 
-	while(currentByte < imageSize)					
+	while(currentByte < imageSize)
 	{
 		unsigned char chunkheader = 0;
 		file->read(&chunkheader, sizeof(char)); // Read The Chunk's Header
@@ -118,4 +118,3 @@ IImageLoader* createImageLoaderTGA()
 
 } // end namespace video
 } // end namespace daisy
-

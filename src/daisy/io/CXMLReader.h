@@ -25,8 +25,8 @@ class CXMLReader : public IXMLReader
         //! Destructor
         virtual ~CXMLReader();
 
-        //! Reads forward to the next xml node. 
-        //! \return Returns false, if there was no further node. 
+        //! Reads forward to the next xml node.
+        //! \return Returns false, if there was no further node.
         virtual bool read();
 
         //! Returns the type of the current XML node.
@@ -38,19 +38,19 @@ class CXMLReader : public IXMLReader
         //! Returns name of an attribute.
         virtual const wchar_t* getAttributeName(int idx);
 
-        //! Returns the value of an attribute. 
+        //! Returns the value of an attribute.
         virtual const wchar_t* getAttributeValue(int idx);
 
-        //! Returns the value of an attribute. 
+        //! Returns the value of an attribute.
         virtual const wchar_t* getAttributeValue(const wchar_t* name);
 
         //! Returns the value of an attribute
         virtual const wchar_t* getAttributeValueSafe(const wchar_t* name);
 
-        //! Returns the value of an attribute as integer. 
+        //! Returns the value of an attribute as integer.
         virtual int getAttributeValueAsInt(const wchar_t* name);
 
-        //! Returns the value of an attribute as float. 
+        //! Returns the value of an attribute as float.
         virtual float getAttributeValueAsFloat(const wchar_t* name);
 
         //! Returns the name of the current node.

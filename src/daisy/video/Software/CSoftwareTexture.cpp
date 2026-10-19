@@ -14,7 +14,7 @@
 namespace ox { namespace video {} }
 namespace daisy
 {
-namespace video  
+namespace video
 {
 using namespace ox::video;
 

@@ -31,10 +31,10 @@ using namespace ox::scene;
 		virtual ~CCameraMayaSceneNode();
 
 		//! It is possible to send mouse and key events to the camera. Most cameras
-		//! may ignore this input, but camera scene nodes which are created for 
+		//! may ignore this input, but camera scene nodes which are created for
 		//! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 		//! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
-		//! for changing their position, look at target or whatever. 
+		//! for changing their position, look at target or whatever.
 		virtual bool OnEvent(const ox::event::SEvent& event);
 
 		//! onPostRender is called just after rendering the whole scene.
@@ -69,4 +69,3 @@ using namespace ox::scene;
 } // end namespace
 
 #endif
-

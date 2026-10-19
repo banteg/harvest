@@ -41,8 +41,8 @@ CXMLReader::~CXMLReader()
 }
 
 
-//! Reads forward to the next xml node. 
-//! \return Returns false, if there was no further node. 
+//! Reads forward to the next xml node.
+//! \return Returns false, if there was no further node.
 bool CXMLReader::read()
 {
 	if ((unsigned int)(P - TextBegin) < TextSize - 1 && *P != 0)
@@ -181,7 +181,7 @@ void CXMLReader::parseOpeningXMLElement()
 
 				++P;
 				const wchar_t* attributeValueBegin = P;
-				
+
 				while(*P != L'\"')
 					++P;
 
@@ -253,7 +253,7 @@ const wchar_t* CXMLReader::getAttributeName(int idx)
 }
 
 
-//! Returns the value of an attribute. 
+//! Returns the value of an attribute.
 const wchar_t* CXMLReader::getAttributeValue(int idx)
 {
 	if (idx < 0 || idx >= (int)Attributes.size())
@@ -263,7 +263,7 @@ const wchar_t* CXMLReader::getAttributeValue(int idx)
 }
 
 
-//! Returns the value of an attribute. 
+//! Returns the value of an attribute.
 const wchar_t* CXMLReader::getAttributeValue(const wchar_t* name)
 {
 	SAttribute* attr = getAttributeByName(name);
@@ -286,14 +286,14 @@ const wchar_t* CXMLReader::getAttributeValueSafe(const wchar_t* name)
 
 
 
-//! Returns the value of an attribute as integer. 
+//! Returns the value of an attribute as integer.
 int CXMLReader::getAttributeValueAsInt(const wchar_t* name)
 {
 	return (int)getAttributeValueAsFloat(name);
 }
 
 
-//! Returns the value of an attribute as float. 
+//! Returns the value of an attribute as float.
 float CXMLReader::getAttributeValueAsFloat(const wchar_t* name)
 {
 	SAttribute* attr = getAttributeByName(name);
@@ -340,7 +340,7 @@ CXMLReader::SAttribute* CXMLReader::getAttributeByName(const wchar_t* name)
 	return 0;
 }
 
-const CXMLReader::XMLSpecialCharacters XMLRSChar[] = 
+const CXMLReader::XMLSpecialCharacters XMLRSChar[] =
 {
 	// all start with &
 	{ L'&', L"amp;" },
@@ -389,7 +389,7 @@ ox::core::CString<wchar_t> CXMLReader::replaceSpecialCharacters(ox::core::CStrin
 
 		// find next &
 		oldPos = pos;
-		pos = origstr.findNext(L'&', pos);		
+		pos = origstr.findNext(L'&', pos);
 	}
 
 	if (oldPos < origstr.size()-1)
@@ -400,4 +400,3 @@ ox::core::CString<wchar_t> CXMLReader::replaceSpecialCharacters(ox::core::CStrin
 
 } // end namespace daisy
 } // end namespace io
-
