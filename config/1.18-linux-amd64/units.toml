@@ -728,6 +728,7 @@
 ".bss" = 0x86c134
 
 ["daisy/scene/COctTreeTriangleSelector.cpp"]
+".bss" = 0x86c140
 
 ["daisy/scene/CMetaTriangleSelector.cpp"]
 ".bss" = 0x86c138
@@ -803,3 +804,5 @@
 
 ["daisy/video/Software/CSoftwareTexture.cpp"]
 ".bss" = 0x86c070
+
+["daisy/scene/CSceneManager.cpp"]

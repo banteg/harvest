@@ -116,8 +116,15 @@ void CMetaTriangleSelector::addTriangleSelector(ITriangleSelector* toAdd)
 //! Removes a specific triangle selector which was added before	from the collection.
 bool CMetaTriangleSelector::removeTriangleSelector(ITriangleSelector* toRemove)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	for (int i=0; i<(int)TriangleSelectors.size(); ++i)
+		if (toRemove == TriangleSelectors[i])
+		{
+			TriangleSelectors[i]->drop();
+			TriangleSelectors.erase(TriangleSelectors.begin() + i);
+			return true;
+		}
+
+    return false;
 }
 
 
