@@ -9,12 +9,19 @@
 #define DAISY_VIDEO_NULL_CIMAGE_H
 
 #include "ox/video/IImage.h"
+#include "ox/core/CDimension2d.h"
+#include "ox/core/CPosition2d.h"
+#include "ox/core/CRect.h"
+#include "ox/video/SColor.h"
 #include "ox/video/IVideoDriver.h"
 
+namespace ox { namespace video {} }
 namespace daisy {
 namespace video {
+using namespace ox::video;
 
-//! A software image.
+//! ox::core::A software image.
+#ifdef HARVEST_PORT
 class CImage : public ox::video::IImage
 {
 public:
@@ -59,6 +66,135 @@ private:
     char Unrecovered[0x48 - sizeof(ox::video::IImage)];
 #endif
 };
+#else
+class CImage : public IImage
+{
+public:
+
+    //! constructor
+    CImage(ECOLOR_FORMAT format, IImage* imageToCopy);
+
+    //! constructor
+    CImage(ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size,
+        void* data);
+
+    //! constructor
+    CImage(ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size);
+
+    //! constructor
+    CImage(IImage* imageToCopy,
+        const ox::core::CPosition2d<int>& pos, const ox::core::CDimension2d<int>& size);
+
+    //! destructor
+    virtual ~CImage();
+
+    //! Lock function.
+    virtual void* lock();
+
+    //! Unlock function.
+    virtual void unlock();
+
+    //! Returns width and height of image data.
+    virtual const ox::core::CDimension2d<int>& getDimension();
+
+    //! Returns bits per pixel.
+    virtual int getBitsPerPixel();
+
+    //! Returns bytes per pixel
+    virtual int getBytesPerPixel();
+
+    //! Returns image data size in bytes
+    virtual int getImageDataSizeInBytes();
+
+    //! Returns image data size in pixels
+    virtual int getImageDataSizeInPixels();
+
+    //! returns mask for red value of a pixel
+    virtual unsigned int getRedMask();
+
+    //! returns mask for green value of a pixel
+    virtual unsigned int getGreenMask();
+
+    //! returns mask for blue value of a pixel
+    virtual unsigned int getBlueMask();
+
+    //! returns mask for alpha value of a pixel
+    virtual unsigned int getAlphaMask();
+
+    //! returns a pixel
+    virtual SColor getPixel(int x, int y);
+
+    //! returns the color format
+    virtual int getColorFormat();
+
+    //! draws a rectangle
+    void drawRectangle(const ox::core::CRect<int>& rect, SColor color);
+
+    //! draws a rectangle
+    void drawRectangle(int x, int y, int x2, int y2, SColor color);
+
+    //! copies this surface into another
+    void copyTo(CImage* target, int x, int y);
+
+    //! copies this surface into another
+    void copyTo(CImage* target, const ox::core::CPosition2d<int>& pos);
+
+    //! copies this surface into another
+    void copyTo(CImage* target, const ox::core::CPosition2d<int>& pos, const ox::core::CRect<int>& sourceRect, const ox::core::CRect<int>* clipRect=0);
+
+    //! copies this surface into another, using the alpha mask
+    void copyToWithAlpha(CImage* target, const ox::core::CPosition2d<int>& pos, const ox::core::CRect<int>& sourceRect);
+
+    //! copies this surface into another, using the alpha mask, an cliprect and a color to add with
+    void copyToWithAlpha(CImage* target, const ox::core::CPosition2d<int>& pos, const ox::core::CRect<int>& sourceRect, short color, const ox::core::CRect<int>* clipRect = 0);
+
+    //! copies this surface into another, scaling it to fit it.
+    void copyToScaling(CImage* target);
+
+    //! draws a line from to
+    void drawLine(const ox::core::CPosition2d<int>& from, const ox::core::CPosition2d<int>& to, short color);
+
+    //! resizes the surface to a new size
+    void resizeTo(const ox::core::CDimension2d<int>& size);
+
+    //! fills the surface with black or white
+    void fill(short color);
+
+private:
+
+    //! assumes format and size has been set and creates the rest
+    void initData();
+
+    //! clips a x coordinate into the screen
+    inline void clipX(int &x);
+
+    //! clips a y coordinate into the screen
+    inline void clipY(int &y);
+
+    //! exchanges two ints
+    inline void exchange(int& a, int& b);
+
+    //! clips coordinates into the rect. returns false if the rects is completely outside
+    //! and does not need to be drawn.
+    inline bool clipRect(const int targetWidth, const int targetHeight, int& targetX, int& targetY, int& xInSource, int& yInSource, int& sourceWidth, int& soureHeight);
+
+    //! sets a pixel very fast and inline
+    inline void setPixelFast(int x, int y, short color);
+
+    int getBitsPerPixelFromFormat();
+
+    void* Data;
+    ox::core::CDimension2d<int> Size;
+    int BitsPerPixel;
+    int BytesPerPixel;
+    ECOLOR_FORMAT Format;
+
+    int RedMask;
+    int GreenMask;
+    int BlueMask;
+    int AlphaMask;
+};
+#endif
 
 } // end namespace video
 } // end namespace daisy

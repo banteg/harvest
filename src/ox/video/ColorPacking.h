@@ -33,6 +33,11 @@ inline int getRed(short color)
     return ((color >> 10)&0x1F);
 }
 
+inline short toA1R5G5B5(unsigned int c)
+{
+    return (short)(((c & 0xff000000) ? 0x8000 : 0) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | ((c >> 3) & 0x1f));
+}
+
 } // end namespace video
 } // end namespace ox
 

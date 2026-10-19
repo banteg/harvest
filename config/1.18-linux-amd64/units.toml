@@ -806,3 +806,5 @@
 ".bss" = 0x86c070
 
 ["daisy/scene/CSceneManager.cpp"]
+
+["daisy/video/Null/CImage.cpp"]
