@@ -808,3 +808,7 @@
 ["daisy/scene/CSceneManager.cpp"]
 
 ["daisy/video/Null/CImage.cpp"]
+
+["daisy/video/Software/CVideoSoftware.cpp"]
+".bss" = 0x86c074
+".rodata" = 0x6115a8
