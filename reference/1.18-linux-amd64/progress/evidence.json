@@ -19,7 +19,7 @@
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
     "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "df3d1be08f61844e7aae25e18d40a04fcd9e8bf20c341232e245519904eea77c",
+    "config/1.18-linux-amd64/symbols.tsv": "bc3cab837b4132c1f222dc8421c147dd3b7ff075af3efaf1e2fdc9859af98edb",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
     "config/1.18-linux-amd64/units.toml": "56cd62772458e53abfb1ecdb64d61a8248a1367e818c2c1e3464412bfb93b7fd"
   },
@@ -213,7 +213,7 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a"
         },
         "system_headers": 108,
         "object_sha256": "33a9ec1ca0fdaf46737f0d3cd05a2c51597de31c7d60184bb743ad156fdaa368"
@@ -222461,7 +222461,12 @@
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "2a9ead8aaef250b5142f67cc50840a87673fc92fbef106a9f2157ba3f819993e"
@@ -222767,7 +222772,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "6afe13b57c9f03ca0a0eb5e8a88a615a9a8a2570480232637833c005863ea45a"
@@ -223013,7 +223023,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "5b9175ab59629d77227ad9f0ab0c5a120242424564cb6ab0dfdda930d1998edc"
@@ -223259,7 +223274,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "d324e2cb26c1b33bfaf83dec1eff5eb3306c51bc3200ff8003e165ff37d014db"
@@ -223505,7 +223525,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "479b89e570f3af9710454e7814196ca2ab16c508a5ea2c6935f32a02a0192108"
@@ -223751,7 +223776,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "f16301d9e884e9e686a529124e975f07788afc14b45ae24c5b84b4a8e023569a"
@@ -223997,7 +224027,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "40f7fd944762d2b80955c83348db607d9046b6972aea929d0a70eb2ce422d84c"
@@ -224245,7 +224280,12 @@
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/video/Software/IZBuffer.h": "d68ed8e46901bfc55010c36ea67f2ab50d7de2eeede0d1f6a355dd4b753ac1a8",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393"
         },
         "system_headers": 108,
         "object_sha256": "c28efbc5b607ecade97ee3991f0fcbd34c7fe5cb888cbb2e46509d961d2d3302"
@@ -224634,7 +224674,14 @@
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
@@ -238391,7 +238438,14 @@
           "src/ox/core/CLine3d.h": "0164055989d7897b79be781b568582ec5161a8024bcaf3a9eabc3c6720e91831",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/daisy/scene/CParticleBoxEmitter.h": "2e4c7cf8ccccb2def5e9a2af1b7918969c60751915ff438416678767712be1b5",
           "src/ox/scene/IParticleEmitter.h": "a13ba740ac406d60fac8c1cd6d3d0b22138973bb4449aebfd29286dde3058caf",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -238799,7 +238853,14 @@
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/daisy/scene/CParticlePointEmitter.h": "27a6346cefd6aa5cb824d797ee7a9b4542f7e97e95dbf141bfbfd65401b18d5c",
           "src/ox/scene/IParticleEmitter.h": "a13ba740ac406d60fac8c1cd6d3d0b22138973bb4449aebfd29286dde3058caf",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -240334,7 +240395,7 @@
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/video/Null/CImageLoaderPCX.h": "4b88f233684d4740a0351f89b339768c7ffee4f2aa9122ec9808d69966235b18",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
           "src/daisy/video/Null/CColorConverter.h": "6101d0603c7c8e61bb3dcb4c7585f64b94250e2fe2bed8fed06c6b1d7b8c136c",
           "src/daisy/video/Null/CImage.h": "05e9e745fa42fc60ef192641787722fc9e89a7640244f4db86834b732523d62f",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -242854,7 +242915,7 @@
           "src/daisy/scene/CXFileReader.h": "4fe4761d6617489f4f74c887afdcfa365e4e059dc6318514e1fa663725ecc0c5",
           "src/ox/video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
           "src/ox/core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CQuaternion.h": "1879fa429e18868340a982b75381cd9d43c2ef2641d25281444bcbc4a4c7df85",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
@@ -253026,7 +253087,14 @@
           "src/ox/scene/IParticleAffector.h": "67b5628a289e5ff7eb59f3c1aacc2e5cde9998af5b5d8a5d94cb82795e0e544e",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/IParticleEmitter.h": "a13ba740ac406d60fac8c1cd6d3d0b22138973bb4449aebfd29286dde3058caf",
           "src/ox/scene/IParticleSystemSceneNode.h": "ddc65c3a9706b58cecf41095a476c0d9617340e8744f8919d6cadd66cd605f98",
           "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
@@ -253053,17 +253121,10 @@
           "src/daisy/scene/CParticleSystemSceneNode.h": "1bb532c4e2c198ef081af8914e481cd1fbb1d638975c04b2d7027e79bbbd4f98",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/video/S3DVertex.h": "96cd548320ee007c480619303c02cf1f3cba55d255767620f3cd88408186bf37",
-          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
-          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/scene/ICameraSceneNode.h": "e084af27a5adecd2e0dde103db2cdc5cd2a7f0fec9f567b00127f06ba834d650",
-          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
-          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
-          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
-          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/daisy/scene/CParticlePointEmitter.h": "27a6346cefd6aa5cb824d797ee7a9b4542f7e97e95dbf141bfbfd65401b18d5c",
           "src/daisy/scene/CParticleBoxEmitter.h": "2e4c7cf8ccccb2def5e9a2af1b7918969c60751915ff438416678767712be1b5",
           "src/daisy/scene/CParticleFadeOutAffector.h": "713656cef48a6b2447289c1ff3faeabc16c4e62ea5a0e2398f56884508b1fd6c",
@@ -257444,7 +257505,12 @@
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600"
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df"
         },
         "system_headers": 114,
         "object_sha256": "8867501ed9212a8ab58a90e4f39efeb760e9a9a58ad799d31b074778a890423e"
@@ -260914,7 +260980,7 @@
     },
     {
       "unit": "daisy/scene/CXFileReader.cpp",
-      "object_sha256": "772380db578d06ea979441003e825a91d7acdaeeb9d35905e3e5852e6415e3da",
+      "object_sha256": "254dac6ca4f08975ed313e04275974f9c63aded6fc58d60ff90238a8f8eff35d",
       "exact": false,
       "sections": [
         {
@@ -264188,13 +264254,19 @@
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/core/CQuaternion.h": "1879fa429e18868340a982b75381cd9d43c2ef2641d25281444bcbc4a4c7df85",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/daisy/other/fast_atof.h": "b50a6393d73c066be97c6713127e4b2cddd0f4408f989500d8b23b77aca0f9f2"
         },
         "system_headers": 129,
-        "object_sha256": "772380db578d06ea979441003e825a91d7acdaeeb9d35905e3e5852e6415e3da"
+        "object_sha256": "254dac6ca4f08975ed313e04275974f9c63aded6fc58d60ff90238a8f8eff35d"
       },
       "fuzzy_target_sha256": "505d439ee853ad2f50ab93d2c45c7ea940f713db3c0feadb1b0c981cb28c348f",
       "fuzzy_functions": [
@@ -264869,7 +264941,7 @@
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/video/Null/CImageLoaderBmp.h": "c6db5969418b6d131a269135f5977429e64e5057cf8e4cbe4e6e6f7e9517a4b1",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
           "src/daisy/video/Null/CColorConverter.h": "6101d0603c7c8e61bb3dcb4c7585f64b94250e2fe2bed8fed06c6b1d7b8c136c",
           "src/daisy/video/Null/CImage.h": "05e9e745fa42fc60ef192641787722fc9e89a7640244f4db86834b732523d62f",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -273976,7 +274048,14 @@
           "src/ox/core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/video/../core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
+          "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
+          "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/daisy/scene/CParticleGravityAffector.h": "c5e7b050423590a619a1e31ad5c3f6099354a0aa6a370d0170a0f673123393ec",
           "src/ox/scene/IParticleAffector.h": "67b5628a289e5ff7eb59f3c1aacc2e5cde9998af5b5d8a5d94cb82795e0e544e",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -285255,7 +285334,7 @@
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/video/SLight.h": "407fbede66e046c3d266742a1ec8de33e2a2f9efb6706f154aec8a879a72bba6",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
           "src/ox/core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/scene/ISceneNode.h": "35c30c908516eb7d51ae98fe387eda1fb55c10b79ae027fb4ad9926fc2541225",
           "src/ox/scene/../core/CMatrix4.h": "036c4a2e30a5ab2436472e6996964c7407e312d232d56323e7fdaa5fd68da32b",
@@ -289423,7 +289502,10 @@
           "src/ox/scene/IParticleSystemSceneNode.h": "ddc65c3a9706b58cecf41095a476c0d9617340e8744f8919d6cadd66cd605f98",
           "src/ox/scene/IParticleEmitter.h": "a13ba740ac406d60fac8c1cd6d3d0b22138973bb4449aebfd29286dde3058caf",
           "src/ox/scene/SParticle.h": "1b3378c00b1269d7b702348468b4dd30632967817a3fe134cc8417d61fabd8a7",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
+          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
+          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
+          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/scene/IParticleAffector.h": "67b5628a289e5ff7eb59f3c1aacc2e5cde9998af5b5d8a5d94cb82795e0e544e",
           "src/ox/scene/ISceneCollisionManager.h": "9a4d48a91dc0a15d10cd7be075bb6fd75bc5c32fdc1259a09602e5f1792fef0e",
           "src/ox/scene/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
@@ -289436,16 +289518,12 @@
           "src/ox/gui/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/gui/IGUIFont.h": "3c1ca380bdbd970f3cf78066e061d2040395b0be12ee6355a0f6996844305e62",
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
-          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/TList.h": "a45553e4f2cad236a713e1085790e780c975ea5d46c7ca25b046d9add5eea5c9",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
           "src/daisy/scene/CSceneManager.h": "598d2f5beb80ea9626ca5b0b371b3a9bbb921d036cf793f5861b833d0f3d53fa",
-          "src/ox/video/IVideoDriver.h": "e6915f5d6c4f5dc79e6d72c4325cc311c141e6c71734f5254af688cc94cd9e61",
-          "src/ox/video/../core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
-          "src/ox/video/../core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
           "src/ox/io/IFileSystem.h": "3ecd0b103a841ec3d6b58825c9984162da937cd039500cb1e037f300d8117ead",
           "src/ox/io/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
@@ -289479,6 +289557,7 @@
           "src/daisy/scene/CEmptySceneNode.h": "05ef1ebec2fad1b89d74061a18ea0ee91c1dacdd70af03bdb03699ffa83261be",
           "src/daisy/scene/CTextSceneNode.h": "7c8c1f742b64ecb61f39bdc88d7c125115efb9fec14055cd30a0b895c52f886e",
           "src/daisy/scene/CSceneCollisionManager.h": "40fa70c5b4653e5eb22d18b9374b57c9b46dd69a2a0a3d59ae281a0f01e17258",
+          "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/daisy/scene/CMeshManipulator.h": "fb5a48d843f5a871f72115df5bea20d59cf01f82dce256af65afd7b339607ed5",
           "src/daisy/scene/CTriangleSelector.h": "e44dcaeb3e0e4c648b5e0d6c0ed71500840f9d261058ae4a00d7811b07976c00",
           "src/daisy/scene/COctTreeTriangleSelector.h": "2e3ec6876a89fcca066688be560a2f3b566b098f1e5f7a9a3c649e8166bc125c",
@@ -290167,87 +290246,127 @@
     },
     {
       "unit": "daisy/video/Null/CImage.cpp",
-      "object_sha256": "43162dc3e3bf6d83617d4f2f695f025c69819eed67a29fae8f08d17520472b97",
+      "object_sha256": "87013ab772b71a46741371c93979822b73a5df71692e33ae837d82b795ede092",
       "exact": false,
       "sections": [
         {
           "name": ".text",
-          "size": 5401,
+          "size": 7097,
           "placement": "symbol: _ZN5daisy5video6CImage4lockEv",
           "exact": false,
           "address": "0x4dd3b0",
-          "first_difference": 197,
-          "differing_bytes": 1504,
+          "first_difference": 331,
+          "differing_bytes": 1236,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy5video6CImage14getColorFormatEv",
               "known": "0x4dd560",
-              "placed": "0x4dd460"
+              "placed": "0x4dd530"
             },
             {
               "symbol": "_ZN5daisy5video6CImage4fillEs",
               "known": "0x4dd5a0",
-              "placed": "0x4dd4a0"
+              "placed": "0x4dd570"
             },
             {
               "symbol": "_ZN5daisy5video6CImage13copyToScalingEPS1_",
               "known": "0x4dd600",
-              "placed": "0x4dd500"
+              "placed": "0x4dd5d0"
             },
             {
               "symbol": "_ZN5daisy5video6CImage8drawLineERKN2ox4core11CPosition2dIiEES7_s",
               "known": "0x4dd720",
-              "placed": "0x4dd620"
+              "placed": "0x4dd6f0"
             },
             {
               "symbol": "_ZN5daisy5video6CImage15copyToWithAlphaEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEEsPSB_",
               "known": "0x4dd870",
-              "placed": "0x4dd770"
+              "placed": "0x4dd840"
             },
             {
               "symbol": "_ZN5daisy5video6CImage15copyToWithAlphaEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEE",
               "known": "0x4ddb90",
-              "placed": "0x4dda90"
+              "placed": "0x4ddb60"
             },
             {
-              "symbol": "_ZN5daisy5video6CImageD1Ev",
-              "known": "0x4de420",
-              "placed": "0x4de070"
+              "symbol": "_ZN5daisy5video6CImage13drawRectangleERKN2ox4core5CRectIiEENS2_5video6SColorE",
+              "known": "0x4def20",
+              "placed": "0x4ddfe0"
             },
             {
-              "symbol": "_ZN5daisy5video6CImageD2Ev",
-              "known": "0x4de450",
-              "placed": "0x4de0a0"
+              "symbol": "_ZN5daisy5video6CImage25getBitsPerPixelFromFormatEv",
+              "known": "0x4ddda0",
+              "placed": "0x4de000"
             },
             {
-              "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEE",
-              "known": "0x4de970",
-              "placed": "0x4de5c0"
+              "symbol": "_ZN5daisy5video6CImage8initDataEv",
+              "known": "0x4ddea0",
+              "placed": "0x4de100"
             },
             {
-              "symbol": "_ZN5daisy5video6CImage8getPixelEii",
-              "known": "0x4dd460",
-              "placed": "0x4de5d0"
+              "symbol": "_ZN5daisy5video6CImageC1EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+              "known": "0x4ddee0",
+              "placed": "0x4de140"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+              "known": "0x4de040",
+              "placed": "0x4de2a0"
             },
             {
               "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
               "known": "0x4de1a0",
-              "placed": "0x4de7e0"
+              "placed": "0x4de400"
             },
             {
               "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
               "known": "0x4de240",
-              "placed": "0x4de840"
+              "placed": "0x4de4e0"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+              "known": "0x4de290",
+              "placed": "0x4de530"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage8resizeToERKN2ox4core12CDimension2dIiEE",
+              "known": "0x4de2e0",
+              "placed": "0x4de580"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageD1Ev",
+              "known": "0x4de420",
+              "placed": "0x4de6c0"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageD2Ev",
+              "known": "0x4de450",
+              "placed": "0x4de6f0"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEEPSB_",
+              "known": "0x4de480",
+              "placed": "0x4de720"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage6copyToEPS1_ii",
+              "known": "0x4de780",
+              "placed": "0x4dea20"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEE",
+              "known": "0x4de970",
+              "placed": "0x4dec10"
             },
             {
               "symbol": "_ZN5daisy5video6CImageD0Ev",
               "known": "0x4de980",
-              "placed": "0x4de8a0"
+              "placed": "0x4def40"
             }
           ],
           "bad_references": [
             {
-              "offset": 197,
+              "offset": 405,
               "type": 10,
               "symbol": ".bss",
               "addend": 0,
@@ -290255,7 +290374,7 @@
               "matches": false
             },
             {
-              "offset": 212,
+              "offset": 420,
               "type": 10,
               "symbol": ".bss",
               "addend": 0,
@@ -290263,175 +290382,105 @@
               "matches": false
             },
             {
-              "offset": 2897,
+              "offset": 4213,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video6CImageE",
+              "addend": 16,
+              "destination": "0x60e6a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4241,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage8initDataEv",
+              "addend": -4,
+              "destination": "0x4ddea0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4267,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4275,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4325,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video6CImageE",
+              "addend": 16,
+              "destination": "0x60e6a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4353,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage8initDataEv",
+              "addend": -4,
+              "destination": "0x4ddea0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4379,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4387,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6291,
+              "type": 11,
+              "symbol": "_ZTVN5daisy5video6CImageE",
+              "addend": 16,
+              "destination": "0x60e6a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6354,
+              "type": 2,
+              "symbol": "_ZN5daisy5video6CImage8initDataEv",
+              "addend": -4,
+              "destination": "0x4ddea0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6568,
               "type": 10,
-              "symbol": ".rodata.str1.1",
+              "symbol": ".rodata.str1.8",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0x1c08341+0x17",
+              "reason": "unmapped or truncated range: 0x6624245c+0x29",
               "matches": false
             },
             {
-              "offset": 3435,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x8b4c0060+0x17",
-              "matches": false
-            },
-            {
-              "offset": 4209,
-              "type": 10,
-              "symbol": ".rodata.str1.1",
-              "addend": 0,
-              "reason": "unmapped or truncated range: 0x8b4c0060+0x17",
-              "matches": false
-            },
-            {
-              "offset": 4729,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4802,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4810,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4857,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4930,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4938,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 4969,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5029,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5037,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5081,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5141,
-              "type": 11,
-              "symbol": "_ZTVN2ox8IUnknownE",
-              "addend": 16,
-              "destination": "0x5f99c0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5149,
-              "type": 2,
-              "symbol": "_Unwind_Resume",
-              "addend": -4,
-              "destination": "0x4084f8",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5188,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5236,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5284,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 5332,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 2904,
+              "offset": 6575,
               "type": 2,
               "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
               "addend": -4,
@@ -290440,16 +290489,42 @@
               "matches": false
             },
             {
-              "offset": 2931,
+              "offset": 6616,
               "type": 2,
-              "symbol": "_ZN5daisy5video6CImage13drawRectangleEiiiiN2ox5video6SColorE",
+              "symbol": "memcpy",
               "addend": -4,
-              "destination": "0x4ddda0",
+              "destination": "0x408498",
               "reason": "different destination",
               "matches": false
             },
             {
-              "offset": 3456,
+              "offset": 6636,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6644,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6968,
+              "type": 10,
+              "symbol": ".rodata.str1.8",
+              "addend": 0,
+              "reason": "unmapped or truncated range: 0x49e4ebff+0x29",
+              "matches": false
+            },
+            {
+              "offset": 6975,
               "type": 2,
               "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
               "addend": -4,
@@ -290458,16 +290533,34 @@
               "matches": false
             },
             {
-              "offset": 4230,
+              "offset": 7016,
               "type": 2,
-              "symbol": "_ZN5daisy2os7Printer3logEPKcN2ox5event10ELOG_LEVELEz",
+              "symbol": "memcpy",
               "addend": -4,
-              "destination": "0x4c2060",
+              "destination": "0x408498",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7036,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7044,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
               "reason": "different destination",
               "matches": false
             }
           ],
-          "references": 56,
+          "references": 82,
           "functions": [
             {
               "symbol": "_ZN5daisy5video6CImage4lockEv",
@@ -290558,6 +290651,14 @@
               "exact": true
             },
             {
+              "symbol": "_ZN5daisy5video6CImage8getPixelEii",
+              "address": "0x4dd460",
+              "size": 205,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
               "symbol": "_ZN5daisy5video6CImage14getColorFormatEv",
               "address": "0x4dd560",
               "size": 4,
@@ -290615,19 +290716,83 @@
             },
             {
               "symbol": "_ZN5daisy5video6CImage13drawRectangleEiiiiN2ox5video6SColorE",
-              "address": "0x4ddda0",
+              "address": "0x4decb0",
               "size": 620,
-              "extent": null,
+              "extent": "fde",
               "global": true,
               "exact": false
             },
             {
               "symbol": "_ZN5daisy5video6CImage13drawRectangleERKN2ox4core5CRectIiEENS2_5video6SColorE",
-              "address": "0x4ddea0",
+              "address": "0x4def20",
               "size": 23,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage25getBitsPerPixelFromFormatEv",
+              "address": "0x4ddda0",
+              "size": 254,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImage8initDataEv",
+              "address": "0x4ddea0",
+              "size": 64,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC1EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+              "address": "0x4ddee0",
+              "size": 347,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+              "address": "0x4de040",
+              "size": 347,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
+              "address": "0x4de1a0",
+              "size": 103,
               "extent": null,
               "global": true,
               "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
+              "address": "0x4de1f0",
+              "size": 103,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+              "address": "0x4de240",
+              "size": 70,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+              "address": "0x4de290",
+              "size": 70,
+              "extent": "fde",
+              "global": true,
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy5video6CImage8resizeToERKN2ox4core12CDimension2dIiEE",
@@ -290635,7 +290800,7 @@
               "size": 311,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy5video6CImageD1Ev",
@@ -290659,7 +290824,7 @@
               "size": 758,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy5video6CImage6copyToEPS1_ii",
@@ -290667,7 +290832,7 @@
               "size": 485,
               "extent": "fde",
               "global": true,
-              "exact": false
+              "exact": true
             },
             {
               "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEE",
@@ -290678,89 +290843,17 @@
               "exact": true
             },
             {
-              "symbol": "_ZN5daisy5video6CImage8getPixelEii",
-              "address": "0x4dd460",
-              "size": 2,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImage25getBitsPerPixelFromFormatEv",
-              "address": "0x4dd560",
-              "size": 2,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImage8initDataEv",
-              "address": "0x4dd570",
-              "size": 2,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC1EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
-              "address": "0x4dd5a0",
-              "size": 126,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC2EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
-              "address": "0x4dd600",
-              "size": 126,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
               "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-              "address": "0x4dd720",
-              "size": 97,
+              "address": "0x4de980",
+              "size": 392,
               "extent": null,
               "global": true,
               "exact": false
             },
             {
               "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-              "address": "0x4dd870",
-              "size": 97,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
-              "address": "0x4de1a0",
-              "size": 46,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
-              "address": "0x4de1f0",
-              "size": 46,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
-              "address": "0x4de240",
-              "size": 46,
-              "extent": null,
-              "global": true,
-              "exact": false
-            },
-            {
-              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
-              "address": "0x4de290",
-              "size": 46,
+              "address": "0x4de9b0",
+              "size": 392,
               "extent": null,
               "global": true,
               "exact": false
@@ -290788,6 +290881,26 @@
             {
               "address": "0x60e628",
               "size": 23,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x60e628",
+              "size": 23,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x60e628",
+              "size": 23,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x60e628",
+              "size": 23,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x60e63f",
+              "size": 30,
               "kind": "merged string"
             },
             {
@@ -291071,7 +291184,7 @@
           "/out/daisy__video__Null__CImage.o"
         ],
         "inputs": {
-          "src/daisy/video/Null/CImage.cpp": "39ede086cdceb8018b4b0b2bd1c1511c4ca95ead55b84c2a9e76b3fddb976852",
+          "src/daisy/video/Null/CImage.cpp": "97024a17cc2b04f154bd5579b99244e3dee90213d42c80242af314dbb8c5d411",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/core/CPosition2d.h": "2c21728e70f5b8b6051a9336bd34be433dd7d93c31b53510fb4eed4dbd359ba4",
           "src/ox/core/CRect.h": "dc28c4a09cf6dd0f55e240c33ee8cc391271bb36d37231b60b8db6201788e5df",
@@ -291083,17 +291196,17 @@
           "src/ox/video/../core/CVector2d.h": "3f38dd2413c649b909302cad6454b81d0e71d1690e18b08fd089beb9620d0fa3",
           "src/ox/video/../core/CVector3d.h": "65b36a6dbf77658e1517a5c7bc39a59d683a873b8404a6252f71ff8eca2fc393",
           "src/ox/video/SColor.h": "d83cd30fef33af0f36f4d7bf4398509445a964e93526043df08a9ca0556e01ff",
+          "src/ox/video/ColorPacking.h": "96f75b4784678a3a1bb67aedb79d1fcfa0a50508b101237fde463a314230441a",
           "src/ox/video/IImage.h": "972f0a52212fdc3c93ef24f9ce07d0180f0c56ff4c7ce18f6d8e9091a501372e",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/ox/video/ColorPacking.h": "faa8c912d1c0915b2ed8e4e80dbdb932a94f407997b0502fa4566bc89c9eb600",
           "src/daisy/video/Null/CImage.h": "05e9e745fa42fc60ef192641787722fc9e89a7640244f4db86834b732523d62f",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711"
         },
         "system_headers": 111,
-        "object_sha256": "43162dc3e3bf6d83617d4f2f695f025c69819eed67a29fae8f08d17520472b97"
+        "object_sha256": "87013ab772b71a46741371c93979822b73a5df71692e33ae837d82b795ede092"
       },
-      "fuzzy_target_sha256": "7a5fefc254ff739c61d338bf4967aa5074659d1948caf1ff411c879470c8aaa3",
+      "fuzzy_target_sha256": "31dabb65937da24560a90c374c16a78642387525ff4bcc0822ff0120f65e6d29",
       "fuzzy_functions": [
         {
           "address": "0x4dd3b0",
@@ -291162,6 +291275,12 @@
           "percent": 100.0
         },
         {
+          "address": "0x4dd460",
+          "size": 250,
+          "symbol": "_ZN5daisy5video6CImage8getPixelEii",
+          "percent": 81.5
+        },
+        {
           "address": "0x4dd560",
           "size": 4,
           "symbol": "_ZN5daisy5video6CImage14getColorFormatEv",
@@ -291204,22 +291323,70 @@
           "percent": 100.0
         },
         {
+          "address": "0x4decb0",
+          "size": 620,
+          "symbol": "_ZN5daisy5video6CImage13drawRectangleEiiiiN2ox5video6SColorE",
+          "percent": 80.19072
+        },
+        {
+          "address": "0x4def20",
+          "size": 23,
+          "symbol": "_ZN5daisy5video6CImage13drawRectangleERKN2ox4core5CRectIiEENS2_5video6SColorE",
+          "percent": 100.0
+        },
+        {
           "address": "0x4ddda0",
           "size": 254,
-          "symbol": "_ZN5daisy5video6CImage13drawRectangleEiiiiN2ox5video6SColorE",
-          "percent": 0
+          "symbol": "_ZN5daisy5video6CImage25getBitsPerPixelFromFormatEv",
+          "percent": 100.0
         },
         {
           "address": "0x4ddea0",
           "size": 64,
-          "symbol": "_ZN5daisy5video6CImage13drawRectangleERKN2ox4core5CRectIiEENS2_5video6SColorE",
-          "percent": 21.227272
+          "symbol": "_ZN5daisy5video6CImage8initDataEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4ddee0",
+          "size": 347,
+          "symbol": "_ZN5daisy5video6CImageC1EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4de040",
+          "size": 347,
+          "symbol": "_ZN5daisy5video6CImageC2EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4de1a0",
+          "size": 66,
+          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
+          "percent": 28.235294
+        },
+        {
+          "address": "0x4de1f0",
+          "size": 66,
+          "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
+          "percent": 28.235294
+        },
+        {
+          "address": "0x4de240",
+          "size": 70,
+          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4de290",
+          "size": 70,
+          "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
+          "percent": 100.0
         },
         {
           "address": "0x4de2e0",
           "size": 311,
           "symbol": "_ZN5daisy5video6CImage8resizeToERKN2ox4core12CDimension2dIiEE",
-          "percent": 99.78723
+          "percent": 100.0
         },
         {
           "address": "0x4de420",
@@ -291237,13 +291404,13 @@
           "address": "0x4de480",
           "size": 758,
           "symbol": "_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEERKNS4_5CRectIiEEPSB_",
-          "percent": 99.17085
+          "percent": 100.0
         },
         {
           "address": "0x4de780",
           "size": 485,
           "symbol": "_ZN5daisy5video6CImage6copyToEPS1_ii",
-          "percent": 99.84496
+          "percent": 100.0
         },
         {
           "address": "0x4de970",
@@ -291252,70 +291419,16 @@
           "percent": 100.0
         },
         {
-          "address": "0x4dd460",
-          "size": 250,
-          "symbol": "_ZN5daisy5video6CImage8getPixelEii",
-          "percent": 0.51282054
-        },
-        {
-          "address": "0x4dd560",
-          "size": 4,
-          "symbol": "_ZN5daisy5video6CImage25getBitsPerPixelFromFormatEv",
-          "percent": 20.0
-        },
-        {
-          "address": "0x4dd570",
-          "size": 38,
-          "symbol": "_ZN5daisy5video6CImage8initDataEv",
-          "percent": 5.0
-        },
-        {
-          "address": "0x4dd5a0",
-          "size": 81,
-          "symbol": "_ZN5daisy5video6CImageC1EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
+          "address": "0x4de980",
+          "size": 41,
+          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
           "percent": 0
         },
         {
-          "address": "0x4dd600",
-          "size": 280,
-          "symbol": "_ZN5daisy5video6CImageC2EPN2ox5video6IImageERKNS2_4core11CPosition2dIiEERKNS6_12CDimension2dIiEE",
-          "percent": 2.0860214
-        },
-        {
-          "address": "0x4dd720",
-          "size": 335,
-          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-          "percent": 13.116072
-        },
-        {
-          "address": "0x4dd870",
-          "size": 800,
+          "address": "0x4de9b0",
+          "size": 382,
           "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-          "percent": 4.9391303
-        },
-        {
-          "address": "0x4de1a0",
-          "size": 66,
-          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
-          "percent": 48.235294
-        },
-        {
-          "address": "0x4de1f0",
-          "size": 66,
-          "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEEPv",
-          "percent": 48.235294
-        },
-        {
-          "address": "0x4de240",
-          "size": 70,
-          "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
-          "percent": 51.764706
-        },
-        {
-          "address": "0x4de290",
-          "size": 70,
-          "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATERKNS2_4core12CDimension2dIiEE",
-          "percent": 51.764706
+          "percent": 87.37037
         },
         {
           "address": "0x4de980",
@@ -291356,7 +291469,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "930be6d921ba5acefbe3ec191b59d1682eaac023d09c54dbacd8b4d6952a8ae0"
+    "report_sha256": "312ea5d967bb06f200e2ed20b9a2554c9b5e5b5321556b12e33a2ed693a2a6b7"
   },
   "link": {
     "status": "unavailable",
