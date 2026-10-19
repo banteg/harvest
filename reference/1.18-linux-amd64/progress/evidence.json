@@ -204015,12 +204015,12 @@
           "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
-          "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
-          "src/daisy/io/CXMLReader.h": "e40198a14c1f71cd4fac24db7e192b6374f7e9705f3ac2152b7d0bf8230b7c41",
-          "src/ox/io/IXMLReader.h": "21dc31ba8314eabf3d2aa3fb62cc94304ec34103c0beb0f3e0e7fcfd83188c9b",
+          "src/daisy/io/CTextReader.h": "12f0f3ca0bca4bf4805d08e823ba46a8570685da3ae03003368f856c2e7303e5",
+          "src/daisy/io/CXMLReader.h": "cfe52f1daeab90ad3a0ad37701642bd235461b21494e08f25794c01255885b39",
+          "src/ox/io/IXMLReader.h": "a647cf14d4901997c37e8cdcf0d633d8879cc0e9392359d19419019d855dcf13",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
-          "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
-          "src/ox/io/IXMLWriter.h": "a63b13127e319ccd121f541c92fb7684b90eaf3fae1217a53b497e035ed25f1a",
+          "src/daisy/io/CXMLWriter.h": "9688550c40dc430e53182545f2b8dc0d1f750eef16400a2922e228a87de110bc",
+          "src/ox/io/IXMLWriter.h": "a7027578d1886ba993f4081506e6d4628cb336b5d468ec76ef87c2f032b70b3a",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
@@ -213080,7 +213080,7 @@
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Software/CSoftwareTexture.h": "d98d84c4bffcfdc0b27201f031ddb8014ce03aa59cf75690ef77216a3573fddb",
+          "src/daisy/video/Software/CSoftwareTexture.h": "64c85715827e4608c672db085c6a998f75c7dbc0c8a17e609fc6144bcdafab95",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/ox/core/CDimension2d.h": "a5678aabedf3d095fb1114a9386f16d8683117b09cc749db579b8fd678ad2a83",
           "src/ox/algo/CArrayFunctions.h": "73733ca73a2493447b9949ed7b7ed477c9f3a486052f909aa6e9cd1bf6cf59d5",
@@ -275886,7 +275886,7 @@
           "src/daisy/io/CTextReader.cpp": "e48f8ee4344bec1c6409259cd203b9a0755c93e4754a70bbbbd168797ec329e1",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214"
+          "src/daisy/io/CTextReader.h": "12f0f3ca0bca4bf4805d08e823ba46a8570685da3ae03003368f856c2e7303e5"
         },
         "system_headers": 99,
         "object_sha256": "5907d1f0c8a865651c5a4ea1fe6c2c4b9dae2fa61a77311eaae9e4342d951376"
@@ -279857,12 +279857,12 @@
         ],
         "inputs": {
           "src/daisy/io/CXMLReader.cpp": "b0a6c3dee0626719140af9a2781b1e6cd100e9b20cb1de5654427dc7830cb7e4",
-          "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
+          "src/daisy/io/CTextReader.h": "12f0f3ca0bca4bf4805d08e823ba46a8570685da3ae03003368f856c2e7303e5",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
-          "src/ox/io/IXMLReader.h": "21dc31ba8314eabf3d2aa3fb62cc94304ec34103c0beb0f3e0e7fcfd83188c9b",
-          "src/daisy/io/CXMLReader.h": "e40198a14c1f71cd4fac24db7e192b6374f7e9705f3ac2152b7d0bf8230b7c41",
+          "src/ox/io/IXMLReader.h": "a647cf14d4901997c37e8cdcf0d633d8879cc0e9392359d19419019d855dcf13",
+          "src/daisy/io/CXMLReader.h": "cfe52f1daeab90ad3a0ad37701642bd235461b21494e08f25794c01255885b39",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/daisy/other/fast_atof.h": "b50a6393d73c066be97c6713127e4b2cddd0f4408f989500d8b23b77aca0f9f2"
         },
@@ -280547,8 +280547,8 @@
           "src/daisy/io/CXMLWriter.cpp": "d37dc3edeb2837a85a3dc08a67a5c9c023988cf8f6c923d97b92f1a59437c87a",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
-          "src/ox/io/IXMLWriter.h": "a63b13127e319ccd121f541c92fb7684b90eaf3fae1217a53b497e035ed25f1a",
+          "src/daisy/io/CXMLWriter.h": "9688550c40dc430e53182545f2b8dc0d1f750eef16400a2922e228a87de110bc",
+          "src/ox/io/IXMLWriter.h": "a7027578d1886ba993f4081506e6d4628cb336b5d468ec76ef87c2f032b70b3a",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee"
         },
         "system_headers": 106,
@@ -286259,7 +286259,7 @@
           "src/ox/video/IImage.h": "972f0a52212fdc3c93ef24f9ce07d0180f0c56ff4c7ce18f6d8e9091a501372e",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/video/Software/CSoftwareTexture.h": "d98d84c4bffcfdc0b27201f031ddb8014ce03aa59cf75690ef77216a3573fddb",
+          "src/daisy/video/Software/CSoftwareTexture.h": "64c85715827e4608c672db085c6a998f75c7dbc0c8a17e609fc6144bcdafab95",
           "src/ox/video/ITexture.h": "8eb533b8e005816600ee5abab9ad3a9d38159734535fa9884771866c38cddfe2",
           "src/daisy/video/Null/CImage.h": "438365022a1f0a54256061c6b503dbf011f1114657dab3cdefa633dea017e8af",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711"
