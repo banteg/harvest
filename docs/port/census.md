@@ -85,7 +85,7 @@ units with trap stubs are excluded: `CAnimatedMeshMD2`, `CBspTreeSceneNode`, `CM
 `CBspTree::BspPoly::operator==` and `OctTree<T>::OctTreeNode`'s constructor. These are incomplete
 matching sources awaiting recovery. `CDefaultMeshFormatLoader` and `CXMeshFileLoader`
 are excluded because they depend on these incomplete or unrecovered classes; PCX continues
-using `ImageLoaderStubs.cpp`. The batch has 58 out-of-line trap stubs and three header trap stubs.
+using `ImageLoaderStubs.cpp`. The batch has 60 out-of-line trap stubs and three header trap stubs.
 
 Ten scene units from the newer batch are added to `replaced` because each has trap stubs, and the
 port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspTree`,
