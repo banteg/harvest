@@ -58,7 +58,7 @@ the null joystick driver as the original has them.
 
 ### Replaced units
 
-The `replaced` list in `build.zig` (59 of the 199 recovered units, plus unrecovered prefixes that `port/src/` already replaces):
+The `replaced` list in `build.zig` (61 of the 201 recovered units, plus unrecovered prefixes that `port/src/` already replaces):
 
 | Unit | What it is | Replaced by |
 |---|---|---|
@@ -92,7 +92,7 @@ port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspT
 `CCameraFPSSceneNode`, `CCameraMayaSceneNode`, `CGeometryCreator`, `CParticleGravityAffector`,
 `CQ3LevelMesh`, `CTerrainSceneNode` and `CXAnimationPlayer`. The recovered XML and text readers, the
 BMP, JPEG and TGA image loaders, `CSoftwareTexture`, `CAnimatedMeshSceneNode` and
-`CSceneCollisionManager` continue using their existing port replacements.
+`CSceneCollisionManager`, `CImage`, `CVideoSoftware` and `CSceneManager` continue using their existing port replacements.
 
 ## Port sources (`port/src/`)
 
@@ -152,6 +152,7 @@ objects byte-identical.
 | [`daisy/gui/CGUIEnvironment.cpp`](../../src/daisy/gui/CGUIEnvironment.cpp) | includes `ox/gui/IGUIStaticTextInline.h` (port only) | `IGUIStaticText::breakText` is defined only in that header and the original emits it in this object (`0x500ca0`). Including it in the matching build too takes the unit from 95/145 to 116/155 exact functions (the constructors, `loadBuidInFont`, `addWindow`, `addMessageBox` and more line up) but `std::__insertion_sort<SFont>` stops matching (`r11d` instead of `r12d` in one load), at every include position tried, so it stays port-only for now |
 | [`ox/io/IXMLReader.h`](../../src/ox/io/IXMLReader.h), [`IXMLWriter.h`](../../src/ox/io/IXMLWriter.h) | master's class under `HARVEST_PORT`, Irrlicht's full interface otherwise | the port's XML stubs implement master's declaration. Web CI links them with `--whole-archive`, which fails on a missing virtual |
 | [`daisy/io/CTextReader.h`](../../src/daisy/io/CTextReader.h), [`CXMLReader.h`](../../src/daisy/io/CXMLReader.h), [`CXMLWriter.h`](../../src/daisy/io/CXMLWriter.h) | master's sized placeholder under `HARVEST_PORT`, Irrlicht's full class otherwise | as above; the stubs in `port/src/io/XMLStubs.cpp` define the placeholder's members |
+| [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | master's stand-in under `HARVEST_PORT`, Irrlicht's full class otherwise | the port implements `CImage`, using the stand-in's declarations |
 | [`daisy/video/Software/CSoftwareTexture.h`](../../src/daisy/video/Software/CSoftwareTexture.h) | master's class under `HARVEST_PORT`, Irrlicht's full class otherwise | `port/src/video/CSoftwareTexture.cpp` defines `getImage` and `getTexture`, which the full class declares |
 
 ## Compiler diagnostics worth knowing

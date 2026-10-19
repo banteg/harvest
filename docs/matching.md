@@ -149,9 +149,9 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CCameraSceneNode.cpp` | 35/67 | Irrlicht 0.7's camera node; most of the unit is misplaced in the target, so its functions are counted inexact until placement is fixed |
 | `daisy/scene/CDefaultMeshFormatLoader.cpp` | 11/12 | Irrlicht 0.7's default mesh loader that picks a format loader |
 | `daisy/scene/CMeshSceneNode.cpp` | 44/46 | Irrlicht 0.7's static mesh node; `OnPreRender` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/CMetaTriangleSelector.cpp` | 19/20 | Irrlicht 0.7's triangle selector that combines others; `removeTriangleSelector` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CMetaTriangleSelector.cpp` | 20/20 | exact; Irrlicht 0.7's triangle selector that combines others |
 | `daisy/scene/COctTreeSceneNode.cpp` | 42/48 | Irrlicht 0.7's octree scene node; `OnPreRender` and the header's `OctTree<T>::OctTreeNode` constructor trap because their Irrlicht bodies do not compile against daisy's interfaces |
-| `daisy/scene/COctTreeTriangleSelector.cpp` | 5/11 | Irrlicht 0.7's octree triangle selector; `constructOctTree` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/COctTreeTriangleSelector.cpp` | 13/13 | exact; Irrlicht 0.7's octree triangle selector |
 | `daisy/scene/CParticleBoxEmitter.cpp` | 9/10 | Irrlicht 0.7's box particle emitter; `emitt` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CParticlePointEmitter.cpp` | 9/10 | Irrlicht 0.7's point particle emitter; `emitt` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CParticleSystemSceneNode.cpp` | 53/57 | Irrlicht 0.7's particle system node; `doParticleSystem` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
@@ -182,8 +182,6 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CParticleGravityAffector.cpp` | 8/10 | Irrlicht 0.7's gravity particle affector; `affect` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CBspTree.cpp` | 8/30 | Irrlicht 0.7's BSP tree; `splitPoly` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/scene/CGeometryCreator.cpp` | 1/3 | Irrlicht 0.7's hill-plane and terrain mesh generator; `createHillPlaneMesh` and `createTerrainMesh` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/COctTreeTriangleSelector.cpp` | 13/13 | exact; Irrlicht 0.7's octree triangle selector |
-| `daisy/scene/CMetaTriangleSelector.cpp` | 20/20 | exact; Irrlicht 0.7's meta triangle selector |
 | `daisy/scene/CSceneManager.cpp` | 89/111 | Irrlicht 0.7's scene manager; `findMesh`, `getSceneNodeFromId` and `createSceneManager` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/video/Null/CImage.cpp` | 35/42 | Irrlicht 0.7's image buffer; no stubs |
 | `daisy/video/Software/CVideoSoftware.cpp` | 36/46 | Irrlicht 0.7's software renderer; no stubs |
