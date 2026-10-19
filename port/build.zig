@@ -99,6 +99,10 @@ const replaced = [_][]const u8{
     "daisy/scene/CBspTree.cpp",
     // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
     "daisy/scene/CParticleGravityAffector.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CCameraMayaSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CCameraFPSSceneNode.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no

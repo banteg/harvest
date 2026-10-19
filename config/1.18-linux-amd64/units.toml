@@ -783,3 +783,9 @@
 
 ["daisy/io/CTextReader.cpp"]
 ".bss" = 0x86c0e0
+
+["daisy/scene/CCameraMayaSceneNode.cpp"]
+".bss" = 0x86c114
+
+["daisy/scene/CCameraFPSSceneNode.cpp"]
+".bss" = 0x86c110
