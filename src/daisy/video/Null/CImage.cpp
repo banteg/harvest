@@ -7,10 +7,10 @@
 #include "ox/core/CPosition2d.h"
 #include "ox/core/CRect.h"
 #include "ox/video/IVideoDriver.h"
+#include "ox/video/ColorPacking.h"
 #include "ox/video/IImage.h"
 #include "ox/video/SColor.h"
 #include "ox/event/ILogger.h"
-#include "ox/video/ColorPacking.h"
 #include "CImage.h"
 #include "daisy/os.h"
 #include <memory.h>
@@ -212,16 +212,61 @@ unsigned int CImage::getAlphaMask()
 
 int CImage::getBitsPerPixelFromFormat()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	switch(Format)
+	{
+	case ECF_A1R5G5B5:
+		AlphaMask = 0x1<<15;
+		RedMask = 0x1F<<10;
+		GreenMask = 0x1F<<5;
+		BlueMask = 0x1F;
+		return 16;
+	case ECF_R5G6B5:
+		AlphaMask = 0x0;
+		RedMask = 0x1F<<11;
+		GreenMask = 0x3F<<5;
+		BlueMask = 0x1F;
+		return 16;
+	case ECF_R8G8B8:
+		AlphaMask = 0x0;
+		RedMask = 0xFF<<16;
+		GreenMask = 0xFF<<8;
+		BlueMask = 0xFF;
+		return 24;
+	case ECF_A8R8G8B8:
+		AlphaMask = 0xFF<<24;
+		RedMask = 0xFF<<16;
+		GreenMask = 0xFF<<8;
+		BlueMask = 0xFF;
+		return 32;
+	}
+
+	os::Printer::log("CImage: Unknown color format.", ox::event::ELL_ERROR);
+	return 0;
 }
 
 
 //! returns a pixel
 SColor CImage::getPixel(int x, int y)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (x < 0 || y < 0 || x >= Size.Width || y >= Size.Height)
+		return SColor(0);
+
+	switch(Format)
+	{
+	case ECF_A1R5G5B5:
+		return A1R5G5B5toA8R8G8B8(((short*)Data)[y*Size.Width + x]);
+	case ECF_R5G6B5:
+		return R5G6B5toA8R8G8B8(((short*)Data)[y*Size.Width + x]);
+	case ECF_A8R8G8B8:
+		return ((int*)Data)[y*Size.Width + x];
+	case ECF_R8G8B8:
+		{
+			unsigned char* p = &((unsigned char*)Data)[(y*3)*Size.Width + (x*3)];
+			return SColor(255,p[0],p[1],p[2]);
+		}
+	}
+
+	return SColor(0);
 }
 
 

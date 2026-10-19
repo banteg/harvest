@@ -1,3 +1,4 @@
+#include "ox/video/IVideoDriver.h"
 // Copyright (C) 2002-2004 Nikolaus Gebhardt
 // Adapted from Irrlicht 0.7 include/SColor.h (license: third_party/irrlicht-0.7/include/irrlicht.h).
 // Recovered for Harvest; the separate header avoids changing unrelated units' compiler context.
@@ -37,6 +38,24 @@ inline short toA1R5G5B5(unsigned int c)
 {
     return (short)(((c & 0xff000000) ? 0x8000 : 0) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | ((c >> 3) & 0x1f));
 }
+
+inline int A1R5G5B5toA8R8G8B8(short color)
+{
+    return (((color >> 15)&0x1)<<31) | (((color >> 10)&0x1F)<<19) | (((color >> 5)&0x1F)<<11) | (color&0x1F)<<3;
+}
+
+inline int R5G6B5toA8R8G8B8(short color)
+{
+    return 0xFF000000 & ((((color >> 11)&0x1F)<<19) | (((color >> 5)&0x3F)<<11) | (color&0x1F)<<3);
+}
+
+inline int getAlpha(short color)
+{
+    return ((color >> 11)&0x1);
+}
+
+const ECOLOR_FORMAT ECF_R5G6B5 = (ECOLOR_FORMAT)1;
+const ECOLOR_FORMAT ECF_R8G8B8 = (ECOLOR_FORMAT)2;
 
 } // end namespace video
 } // end namespace ox
