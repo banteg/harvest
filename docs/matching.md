@@ -186,6 +186,7 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CMetaTriangleSelector.cpp` | 20/20 | exact; Irrlicht 0.7's meta triangle selector |
 | `daisy/scene/CSceneManager.cpp` | 89/111 | Irrlicht 0.7's scene manager; `findMesh`, `getSceneNodeFromId` and `createSceneManager` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
 | `daisy/video/Null/CImage.cpp` | 35/42 | Irrlicht 0.7's image buffer; no stubs |
+| `daisy/video/Software/CVideoSoftware.cpp` | 36/46 | Irrlicht 0.7's software renderer; no stubs |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
