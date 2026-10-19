@@ -750,3 +750,33 @@
 
 ["daisy/scene/CXFileReader.cpp"]
 ".bss" = 0x86c15c
+
+["daisy/video/Null/CImageLoaderBmp.cpp"]
+".bss" = 0x86c164
+
+["daisy/video/Null/CImageLoaderTGA.cpp"]
+".bss" = 0x86c174
+
+["daisy/scene/CAnimatedMeshSceneNode.cpp"]
+
+["daisy/scene/CAnimatedMeshMS3D.cpp"]
+".bss" = 0x86c1dc
+
+["daisy/scene/CGeometryCreator.cpp"]
+".text" = 0x408830
+".bss" = 0x86b4c8
+
+["daisy/scene/CQ3LevelMesh.cpp"]
+".bss" = 0x86c148
+
+["daisy/scene/CTerrainSceneNode.cpp"]
+".bss" = 0x86c044
+
+["daisy/scene/CBspTree.cpp"]
+
+["daisy/scene/CParticleGravityAffector.cpp"]
+
+["daisy/scene/CSceneCollisionManager.cpp"]
+".bss" = 0x86c14c
+
+["daisy/video/Null/CImageLoaderJPG.cpp"]

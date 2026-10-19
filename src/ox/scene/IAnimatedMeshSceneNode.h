@@ -7,16 +7,12 @@
 #define OX_SCENE_IANIMATEDMESHSCENENODE_H
 
 #include "ISceneNode.h"
+#include "IAnimatedMeshMD2.h"
 
 namespace ox {
 namespace scene {
 
 class IShadowVolumeSceneNode;
-
-//! Animation types of MD2 meshes; the enumerators are not recovered.
-enum EMD2_ANIMATION_TYPE
-{
-};
 
 //! A scene node that displays an animated mesh.
 class IAnimatedMeshSceneNode : public ISceneNode

@@ -81,6 +81,24 @@ const replaced = [_][]const u8{
     "daisy/scene/CDefaultMeshFormatLoader.cpp",
     // Recovered from Irrlicht 0.7; it needs daisy::scene::CXFileReader::CXFileReader(ox::io::IReadFile*), which nothing defines yet.
     "daisy/scene/CXMeshFileLoader.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderBmp.cpp.
+    "daisy/video/Null/CImageLoaderBmp.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStb.cpp.
+    "daisy/video/Null/CImageLoaderTGA.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStb.cpp.
+    "daisy/video/Null/CImageLoaderJPG.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CAnimatedMeshMS3D.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CGeometryCreator.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CQ3LevelMesh.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CTerrainSceneNode.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CBspTree.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CParticleGravityAffector.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no
