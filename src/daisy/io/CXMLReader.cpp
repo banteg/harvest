@@ -3,7 +3,9 @@
 // Recovered for Harvest's daisy namespace; not the original source.
 
 #include <iostream>
+#include "daisy/io/CTextReader.h"
 #include "ox/core/CString.h"
+#include "ox/io/IXMLReader.h"
 #include "CXMLReader.h"
 #include <math.h>
 #include "daisy/other/fast_atof.h"
@@ -21,16 +23,21 @@ using namespace ox::io;
 CXMLReader::CXMLReader(CTextReader* reader)
 : Reader(reader), P(0), TextBegin(0), TextSize(0), CurrentNodeType(EXN_NONE)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (Reader)
+	{
+		Reader->grab();
+		P = Reader->getText();
+		TextBegin = P;
+		TextSize = Reader->getTextSize();
+	}
 }
 
 
 //! Destructor
 CXMLReader::~CXMLReader()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (Reader)
+		Reader->drop();
 }
 
 

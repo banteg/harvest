@@ -107,6 +107,12 @@ const replaced = [_][]const u8{
     "daisy/io/CXMLReader.cpp",
     // Recovered from Irrlicht 0.7; the port keeps its own port/src/io/XMLStubs.cpp.
     "daisy/io/CXMLWriter.cpp",
+    // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/CSoftwareTexture.cpp.
+    "daisy/video/Software/CSoftwareTexture.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/C3DSMeshFileLoader.cpp",
+    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    "daisy/scene/CXAnimationPlayer.cpp",
 };
 
 /// Flags for the recovered C++ and the port's C++. GCC 4.4 defaulted to gnu++98, which needs no

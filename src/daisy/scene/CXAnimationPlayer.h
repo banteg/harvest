@@ -13,6 +13,7 @@
 #include "ox/core/CVector3d.h"
 #include "ox/video/IVideoDriver.h"
 #include "ox/video/SMaterial.h"
+#include "ox/scene/IAnimatedMesh.h"
 #include "ox/scene/IMesh.h"
 #include "ox/scene/IMeshManipulator.h"
 #include "ox/TArray.h"
@@ -37,8 +38,8 @@ using namespace ox::scene;
 	public:
 
 		//! constructor
-		CXAnimationPlayer(CXFileReader* reader,
-			ox::video::IVideoDriver* driver,
+		CXAnimationPlayer(CXFileReader* reader, 
+			ox::video::IVideoDriver* driver, 
 			IMeshManipulator* manip,
 			const char* filename);
 
@@ -75,7 +76,7 @@ using namespace ox::scene;
 		//! Returns amount of animations in .X-file.
 		virtual int getAnimationCount() const;
 
-		//! Returns the name of an animation.
+		//! Returns the name of an animation. 
 		virtual const char* getAnimationName(int idx) const;
 
 		//! Sets an animation as animation to play back.
@@ -90,8 +91,8 @@ using namespace ox::scene;
 		{
 			SWeightData() {};
 
-			SWeightData(SWeightData& other)
-				: buffer(other.buffer), vertex(other.vertex), weight(other.weight)
+			SWeightData(const SWeightData& other)
+				: buffer(other.buffer), vertex(other.vertex), weight(other.weight) 
 			{}
 
 			SWeightData(int b, int v, float w)
@@ -105,9 +106,9 @@ using namespace ox::scene;
 			bool operator <(const SWeightData& other) const
 			{
 				return (buffer < other.buffer ||
-						(buffer == other.buffer &&
+						(buffer == other.buffer && 
 						vertex < other.vertex) ||
-						(buffer == other.buffer &&
+						(buffer == other.buffer && 
 						vertex == other.vertex &&
 						weight < other.weight));
 			}
@@ -183,7 +184,7 @@ using namespace ox::scene;
 		IMeshManipulator* Manipulator;
 		ox::TArray<ox::core::CVector3d<float> > DebugSkeleton;
 		bool IsAnimatedSkinnedMesh;
-
+		
 		ox::TArray<SJoint> Joints;
 
 		float CurrentAnimationTime;
@@ -192,7 +193,7 @@ using namespace ox::scene;
 		float DebugSkeletonCrossSize;
 
 		// one array of weights per mesh buffer
-		ox::TArray< ox::TArray<SVertexWeight> > Weights;
+		ox::TArray< ox::TArray<SVertexWeight> > Weights; 
 
 		// data for animations
 
@@ -206,7 +207,7 @@ using namespace ox::scene;
 			ox::TArray<ox::core::CMatrix4> Matrices;
 			ox::TArray<float> Times;
 
-			bool operator <(SXAnimationTrack& other) const
+			bool operator <(const SXAnimationTrack& other) const
 			{
 				if (jointNr != other.jointNr)
 					return (jointNr < other.jointNr);
@@ -234,3 +235,4 @@ using namespace ox::scene;
 } // end namespace daisy
 
 #endif
+

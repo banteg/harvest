@@ -795,3 +795,10 @@
 
 ["daisy/io/CXMLWriter.cpp"]
 ".bss" = 0x86c0ec
+
+["daisy/scene/C3DSMeshFileLoader.cpp"]
+
+["daisy/scene/CXAnimationPlayer.cpp"]
+
+["daisy/video/Software/CSoftwareTexture.cpp"]
+".bss" = 0x86c070
