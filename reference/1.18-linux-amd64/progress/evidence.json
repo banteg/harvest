@@ -19,9 +19,9 @@
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
     "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "03980e638e5eb001f0c3adbf33665fdda31693cf4ece468637a098126ef8bf98",
+    "config/1.18-linux-amd64/symbols.tsv": "d49cde85e522bbad8d14ae6d4f665431d894d73b58ad6df1d2f9a1276e047b35",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
-    "config/1.18-linux-amd64/units.toml": "0ef019685c1e469e886cfc5ba4672d433c1b7d850cd431755daa94998e48100a"
+    "config/1.18-linux-amd64/units.toml": "217d15e2e4a35d36c5b8e3bb434fab9c24fcf90ffcb4961c6cc13658ae40eb4e"
   },
   "units": [
     {
@@ -204016,10 +204016,11 @@
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
           "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
-          "src/daisy/io/CXMLReader.h": "4f32ab6447283a345d4c137d4584da2b09d190648161319b20cc3b6acd5543b0",
-          "src/ox/io/IXMLReader.h": "73eeeb68ae5236f72ccc2f5b433fb022bb99bf921639253be3822a52d0295b6f",
-          "src/daisy/io/CXMLWriter.h": "77d4072b146d5e8d132d4c56b231c13e428421f3e1ea0c7aa4ae200a8a2edb84",
-          "src/ox/io/IXMLWriter.h": "6199093ef732d78d86679d49a31cf470d2bab275b3c42f1ce5cc12ee90de655b",
+          "src/daisy/io/CXMLReader.h": "deb9e10799275f6cd50ef99bc69077c85411353eb17d7d4211917395d9cb7097",
+          "src/ox/io/IXMLReader.h": "fcb4c94952068b0203e183d5f971d1d81476d1039bd862f986ef1cb75c3f57c4",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
+          "src/ox/io/IXMLWriter.h": "a63b13127e319ccd121f541c92fb7684b90eaf3fae1217a53b497e035ed25f1a",
           "src/daisy/os.h": "1b7da1ec90e325f920746fba54bd835e5ffa8792543f06ae917209451ffa6711",
           "src/ox/event/ILogger.h": "8332b2ea3400f97511ddae97a7898f61b850775addf6c1e469b79ae4811bd77f",
           "src/ox/event/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
@@ -278843,6 +278844,2052 @@
           "percent": 93.78035
         }
       ]
+    },
+    {
+      "unit": "daisy/io/CXMLReader.cpp",
+      "object_sha256": "bb694aade7fafa0e7519283443857497da4cfd7cc72ff83de0e01f1c3c30d445",
+      "exact": false,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 7711,
+          "placement": "symbol: _ZN5daisy2io10CXMLReader16ignoreDefinitionEv",
+          "exact": false,
+          "address": "0x533360",
+          "first_difference": 304,
+          "differing_bytes": 4019,
+          "misplaced_symbols": [
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderD0Ev",
+              "known": "0x533e10",
+              "placed": "0x533490"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderD1Ev",
+              "known": "0x533ed0",
+              "placed": "0x5334a0"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderC1EPNS0_11CTextReaderE",
+              "known": "0x533930",
+              "placed": "0x533550"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader21getAttributeValueSafeEPKw",
+              "known": "0x5335a0",
+              "placed": "0x533700"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader17getAttributeValueEPKw",
+              "known": "0x5335c0",
+              "placed": "0x533720"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader24getAttributeValueAsFloatEPKw",
+              "known": "0x5335e0",
+              "placed": "0x533740"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader12parseCommentEv",
+              "known": "0x533ca0",
+              "placed": "0x5338e0"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader16parseCurrentNodeEv",
+              "known": "0x5354b0",
+              "placed": "0x535070"
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader4readEv",
+              "known": "0x535580",
+              "placed": "0x535140"
+            }
+          ],
+          "bad_references": [
+            {
+              "offset": 307,
+              "type": 11,
+              "symbol": "_ZTVN5daisy2io10CXMLReaderE",
+              "addend": 16,
+              "destination": "0x6179a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 323,
+              "type": 11,
+              "symbol": "_ZTVN5daisy2io10CXMLReaderE",
+              "addend": 16,
+              "destination": "0x6179a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 339,
+              "type": 11,
+              "symbol": "_ZTVN5daisy2io10CXMLReaderE",
+              "addend": 16,
+              "destination": "0x6179a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 374,
+              "type": 11,
+              "symbol": "_ZTVN5daisy2io10CXMLReaderE",
+              "addend": 16,
+              "destination": "0x6179a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 440,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 483,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 491,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 518,
+              "type": 11,
+              "symbol": "_ZTVN5daisy2io10CXMLReaderE",
+              "addend": 16,
+              "destination": "0x6179a0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 584,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 627,
+              "type": 11,
+              "symbol": "_ZTVN2ox8IUnknownE",
+              "addend": 16,
+              "destination": "0x5f99c0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 635,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 715,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 870,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 933,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader18getAttributeByNameEPKw",
+              "addend": -4,
+              "destination": "0x533a10",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 965,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader18getAttributeByNameEPKw",
+              "addend": -4,
+              "destination": "0x533a10",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1003,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader18getAttributeByNameEPKw",
+              "addend": -4,
+              "destination": "0x533a10",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1076,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1134,
+              "type": 2,
+              "symbol": "strtol",
+              "addend": -4,
+              "destination": "0x408168",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1169,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1204,
+              "type": 2,
+              "symbol": ".LC3",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0xce08178+0x10",
+              "matches": false
+            },
+            {
+              "offset": 1240,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1285,
+              "type": 2,
+              "symbol": "strtol",
+              "addend": -4,
+              "destination": "0x408168",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1318,
+              "type": 11,
+              "symbol": ".rodata",
+              "addend": 96,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 1350,
+              "type": 2,
+              "symbol": "strtol",
+              "addend": -4,
+              "destination": "0x408168",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1363,
+              "type": 2,
+              "symbol": ".LC2",
+              "addend": -4,
+              "reason": "unmapped or truncated range: 0x4d53249f+0x8",
+              "matches": false
+            },
+            {
+              "offset": 1374,
+              "type": 2,
+              "symbol": "pow",
+              "addend": -4,
+              "destination": "0x407b08",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 1950,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2330,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2429,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2528,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2659,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2708,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2819,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2902,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2971,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 2987,
+              "type": 2,
+              "symbol": ".rodata",
+              "addend": 3,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 3003,
+              "type": 10,
+              "symbol": ".rodata",
+              "addend": 24,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 3010,
+              "type": 2,
+              "symbol": ".rodata",
+              "addend": 4,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 3061,
+              "type": 2,
+              "symbol": "wcslen",
+              "addend": -4,
+              "destination": "0x407988",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3077,
+              "type": 2,
+              "symbol": "wcsncmp",
+              "addend": -4,
+              "destination": "0x4075e8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3141,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3285,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3344,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3466,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3493,
+              "type": 11,
+              "symbol": ".rodata",
+              "addend": 0,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 3520,
+              "type": 11,
+              "symbol": ".rodata",
+              "addend": 8,
+              "reason": "no target address for symbol",
+              "matches": false
+            },
+            {
+              "offset": 3547,
+              "type": 2,
+              "symbol": "wcslen",
+              "addend": -4,
+              "destination": "0x407988",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3691,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3827,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 3879,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4006,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4089,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4140,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4242,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4299,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4395,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4457,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4496,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4578,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4612,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4699,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4735,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4813,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4871,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 4912,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5000,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5041,
+              "type": 2,
+              "symbol": "_Znam",
+              "addend": -4,
+              "destination": "0x407128",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5110,
+              "type": 2,
+              "symbol": "_ZdaPv",
+              "addend": -4,
+              "destination": "0x407f58",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5136,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5156,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5164,
+              "type": 2,
+              "symbol": "_Unwind_Resume",
+              "addend": -4,
+              "destination": "0x4084f8",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5177,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5207,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5234,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5259,
+              "type": 2,
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "addend": -4,
+              "destination": "0x409c40",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 5439,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader24replaceSpecialCharactersERN2ox4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x533ca0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 6473,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader24replaceSpecialCharactersERN2ox4core7CStringIwEE",
+              "addend": -4,
+              "destination": "0x533ca0",
+              "reason": "different destination",
+              "matches": false
+            },
+            {
+              "offset": 7184,
+              "type": 2,
+              "symbol": "_ZNSt6vectorIN5daisy2io10CXMLReader10SAttributeESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x535670",
+              "matches": false
+            },
+            {
+              "offset": 7361,
+              "type": 2,
+              "symbol": "_ZN5daisy2io10CXMLReader10SAttributeD1Ev",
+              "addend": -4,
+              "reason": "no target address for symbol",
+              "candidate": "0x5355e0",
+              "matches": false
+            }
+          ],
+          "references": 143,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader16ignoreDefinitionEv",
+              "address": "0x533360",
+              "size": 38,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader11getNodeTypeEv",
+              "address": "0x533390",
+              "size": 4,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader17getAttributeCountEv",
+              "address": "0x5333a0",
+              "size": 13,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader16getAttributeNameEi",
+              "address": "0x5333b0",
+              "size": 44,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader17getAttributeValueEi",
+              "address": "0x5333e0",
+              "size": 45,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader22getAttributeValueAsIntEPKw",
+              "address": "0x533410",
+              "size": 19,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader11getNodeNameEv",
+              "address": "0x533430",
+              "size": 5,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader11getNodeDataEv",
+              "address": "0x533440",
+              "size": 5,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader14isEmptyElementEv",
+              "address": "0x533450",
+              "size": 5,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io10CXMLReaderC2EPNS0_11CTextReaderE",
+              "address": "0x533460",
+              "size": 38,
+              "extent": "fde",
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderD0Ev",
+              "address": "0x533e10",
+              "size": 9,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderD1Ev",
+              "address": "0x533ed0",
+              "size": 9,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderD2Ev",
+              "address": "0x533f90",
+              "size": 9,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderC2EPNS0_11CTextReaderE",
+              "address": "0x534050",
+              "size": 143,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReaderC1EPNS0_11CTextReaderE",
+              "address": "0x533930",
+              "size": 143,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader18getAttributeByNameEPKw",
+              "address": "0x533a10",
+              "size": 282,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader21getAttributeValueSafeEPKw",
+              "address": "0x5335a0",
+              "size": 31,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader17getAttributeValueEPKw",
+              "address": "0x5335c0",
+              "size": 28,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader24getAttributeValueAsFloatEPKw",
+              "address": "0x5335e0",
+              "size": 408,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader12parseCommentEv",
+              "address": "0x533ca0",
+              "size": 362,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader22parseClosingXMLElementEv",
+              "address": "0x533af0",
+              "size": 425,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader24replaceSpecialCharactersERN2ox4core7CStringIwEE",
+              "address": "0x533ca0",
+              "size": 3067,
+              "extent": null,
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader7setTextEPwS2_",
+              "address": "0x534c40",
+              "size": 350,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader22parseOpeningXMLElementEv",
+              "address": "0x534da0",
+              "size": 1801,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader16parseCurrentNodeEv",
+              "address": "0x5354b0",
+              "size": 200,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLReader4readEv",
+              "address": "0x535580",
+              "size": 63,
+              "extent": "fde",
+              "global": true,
+              "exact": false
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x622838",
+              "size": 4,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0e8",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0e8",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IXMLReaderD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io10IXMLReaderD1Ev",
+          "exact": true,
+          "address": "0x5355c0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IXMLReaderD1Ev",
+              "address": "0x5355c0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox4core7CStringIwED1Ev",
+          "size": 18,
+          "placement": "symbol: _ZN2ox4core7CStringIwED1Ev",
+          "exact": true,
+          "address": "0x409c40",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox4core7CStringIwED1Ev",
+              "address": "0x409c40",
+              "size": 18,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IXMLReaderD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io10IXMLReaderD0Ev",
+          "exact": true,
+          "address": "0x5355d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IXMLReaderD0Ev",
+              "address": "0x5355d0",
+              "size": 12,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io10CXMLReaderE",
+          "size": 128,
+          "placement": "symbol: _ZTVN5daisy2io10CXMLReaderE",
+          "exact": true,
+          "address": "0x6179a0",
+          "references": 15,
+          "data_ranges": [
+            {
+              "address": "0x6179a0",
+              "size": 128,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io10CXMLReaderE",
+          "size": 24,
+          "placement": "symbol: _ZTSN5daisy2io10CXMLReaderE",
+          "exact": true,
+          "address": "0x617a20",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617a20",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io10CXMLReaderE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io10CXMLReaderE",
+          "exact": true,
+          "address": "0x617a40",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617a40",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io10IXMLReaderE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io10IXMLReaderE",
+          "exact": true,
+          "address": "0x617a60",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617a60",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io10IXMLReaderE",
+          "size": 21,
+          "placement": "symbol: _ZTSN2ox2io10IXMLReaderE",
+          "exact": true,
+          "address": "0x617a80",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617a80",
+              "size": 21,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io10IXMLReaderE",
+          "size": 128,
+          "placement": "symbol: _ZTVN2ox2io10IXMLReaderE",
+          "exact": true,
+          "address": "0x617b40",
+          "references": 15,
+          "data_ranges": [
+            {
+              "address": "0x617b40",
+              "size": 128,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [
+        ".gcc_except_table",
+        ".text._ZN5daisy2io10CXMLReader10SAttributeD1Ev",
+        ".text._ZNSt6vectorIN5daisy2io10CXMLReader10SAttributeESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
+        ".rodata"
+      ],
+      "compilation": {
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CXMLReader.d",
+          "-c",
+          "src/daisy/io/CXMLReader.cpp",
+          "-o",
+          "/out/daisy__io__CXMLReader.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CXMLReader.cpp": "ba49ceef9f2a87956cab86c5b2fe18c062d0bf144187734818eb7067047de838",
+          "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
+          "src/daisy/io/CXMLReader.h": "deb9e10799275f6cd50ef99bc69077c85411353eb17d7d4211917395d9cb7097",
+          "src/ox/io/IXMLReader.h": "fcb4c94952068b0203e183d5f971d1d81476d1039bd862f986ef1cb75c3f57c4",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
+          "src/daisy/other/fast_atof.h": "b50a6393d73c066be97c6713127e4b2cddd0f4408f989500d8b23b77aca0f9f2"
+        },
+        "system_headers": 125,
+        "object_sha256": "bb694aade7fafa0e7519283443857497da4cfd7cc72ff83de0e01f1c3c30d445"
+      },
+      "fuzzy_target_sha256": "1bb1742a07368eb4121e7aa9b427ae5744d72bd8491a11e98b52415e1af7f870",
+      "fuzzy_functions": [
+        {
+          "address": "0x533360",
+          "size": 38,
+          "symbol": "_ZN5daisy2io10CXMLReader16ignoreDefinitionEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533390",
+          "size": 4,
+          "symbol": "_ZN5daisy2io10CXMLReader11getNodeTypeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5333a0",
+          "size": 13,
+          "symbol": "_ZN5daisy2io10CXMLReader17getAttributeCountEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5333b0",
+          "size": 44,
+          "symbol": "_ZN5daisy2io10CXMLReader16getAttributeNameEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5333e0",
+          "size": 45,
+          "symbol": "_ZN5daisy2io10CXMLReader17getAttributeValueEi",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533410",
+          "size": 19,
+          "symbol": "_ZN5daisy2io10CXMLReader22getAttributeValueAsIntEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533430",
+          "size": 5,
+          "symbol": "_ZN5daisy2io10CXMLReader11getNodeNameEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533440",
+          "size": 5,
+          "symbol": "_ZN5daisy2io10CXMLReader11getNodeDataEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533450",
+          "size": 5,
+          "symbol": "_ZN5daisy2io10CXMLReader14isEmptyElementEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533460",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io10CXMLReaderC2EPNS0_11CTextReaderE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533e10",
+          "size": 184,
+          "symbol": "_ZN5daisy2io10CXMLReaderD0Ev",
+          "percent": 1.509434
+        },
+        {
+          "address": "0x533ed0",
+          "size": 177,
+          "symbol": "_ZN5daisy2io10CXMLReaderD1Ev",
+          "percent": 2.6923077
+        },
+        {
+          "address": "0x533f90",
+          "size": 177,
+          "symbol": "_ZN5daisy2io10CXMLReaderD2Ev",
+          "percent": 2.6923077
+        },
+        {
+          "address": "0x534050",
+          "size": 3051,
+          "symbol": "_ZN5daisy2io10CXMLReaderC2EPNS0_11CTextReaderE",
+          "percent": 1.7930107
+        },
+        {
+          "address": "0x533930",
+          "size": 219,
+          "symbol": "_ZN5daisy2io10CXMLReaderC1EPNS0_11CTextReaderE",
+          "percent": 46.5
+        },
+        {
+          "address": "0x533a10",
+          "size": 219,
+          "symbol": "_ZN5daisy2io10CXMLReader18getAttributeByNameEPKw",
+          "percent": 0
+        },
+        {
+          "address": "0x5335a0",
+          "size": 31,
+          "symbol": "_ZN5daisy2io10CXMLReader21getAttributeValueSafeEPKw",
+          "percent": 99.44444
+        },
+        {
+          "address": "0x5335c0",
+          "size": 28,
+          "symbol": "_ZN5daisy2io10CXMLReader17getAttributeValueEPKw",
+          "percent": 99.44444
+        },
+        {
+          "address": "0x5335e0",
+          "size": 847,
+          "symbol": "_ZN5daisy2io10CXMLReader24getAttributeValueAsFloatEPKw",
+          "percent": 45.6758
+        },
+        {
+          "address": "0x533ca0",
+          "size": 362,
+          "symbol": "_ZN5daisy2io10CXMLReader12parseCommentEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x533af0",
+          "size": 425,
+          "symbol": "_ZN5daisy2io10CXMLReader22parseClosingXMLElementEv",
+          "percent": 96.83036
+        },
+        {
+          "address": "0x533ca0",
+          "size": 362,
+          "symbol": "_ZN5daisy2io10CXMLReader24replaceSpecialCharactersERN2ox4core7CStringIwEE",
+          "percent": 0
+        },
+        {
+          "address": "0x534c40",
+          "size": 350,
+          "symbol": "_ZN5daisy2io10CXMLReader7setTextEPwS2_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x534da0",
+          "size": 1801,
+          "symbol": "_ZN5daisy2io10CXMLReader22parseOpeningXMLElementEv",
+          "percent": 99.8764
+        },
+        {
+          "address": "0x5354b0",
+          "size": 200,
+          "symbol": "_ZN5daisy2io10CXMLReader16parseCurrentNodeEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x535580",
+          "size": 63,
+          "symbol": "_ZN5daisy2io10CXMLReader4readEv",
+          "percent": 96.25
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5355c0",
+          "size": 8,
+          "symbol": "_ZN2ox2io10IXMLReaderD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x409c40",
+          "size": 18,
+          "symbol": "_ZN2ox4core7CStringIwED1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5355d0",
+          "size": 12,
+          "symbol": "_ZN2ox2io10IXMLReaderD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
+    },
+    {
+      "unit": "daisy/io/CXMLWriter.cpp",
+      "object_sha256": "e0718b8a2e4b84c4735dc5c785260d08c37f31ae4d2c3c0aac59377f2f3befd6",
+      "exact": true,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 2250,
+          "placement": "symbol: _ZN5daisy2io10CXMLWriterC2EPN2ox2io10IWriteFileE",
+          "exact": true,
+          "address": "0x535fd0",
+          "references": 59,
+          "functions": [
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriterC2EPN2ox2io10IWriteFileE",
+              "address": "0x535fd0",
+              "size": 37,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriterC1EPN2ox2io10IWriteFileE",
+              "address": "0x536000",
+              "size": 37,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriterD2Ev",
+              "address": "0x536030",
+              "size": 63,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter14writeLineBreakEv",
+              "address": "0x536070",
+              "size": 34,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_GLOBAL__I__ZN5daisy2io10CXMLWriterC2EPN2ox2io10IWriteFileE",
+              "address": "0x5360a0",
+              "size": 38,
+              "extent": "fde",
+              "global": false,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter15writeClosingTagEPKw",
+              "address": "0x5360d0",
+              "size": 146,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter12writeCommentEPKw",
+              "address": "0x536170",
+              "size": 146,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter14writeAttributeEPKwS3_",
+              "address": "0x536210",
+              "size": 212,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter12writeElementEPKwbS3_S3_S3_S3_S3_S3_S3_S3_S3_S3_",
+              "address": "0x5362f0",
+              "size": 423,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter14writeXMLHeaderEv",
+              "address": "0x5364a0",
+              "size": 105,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriterD0Ev",
+              "address": "0x536510",
+              "size": 70,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriterD1Ev",
+              "address": "0x536560",
+              "size": 63,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            },
+            {
+              "symbol": "_ZN5daisy2io10CXMLWriter9writeTextEPKw",
+              "address": "0x5365a0",
+              "size": 762,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ],
+          "data_ranges": [
+            {
+              "address": "0x622e30",
+              "size": 2,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617bc0",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617be8",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617bcc",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617be0",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x5f8648",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617bf0",
+              "size": 12,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617bf4",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x612500",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617be8",
+              "size": 8,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617bfc",
+              "size": 16,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617c68",
+              "size": 88,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617c68",
+              "size": 88,
+              "kind": "merged string"
+            }
+          ]
+        },
+        {
+          "name": ".bss",
+          "size": 1,
+          "placement": "explicit",
+          "exact": true,
+          "address": "0x86c0ec",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x86c0ec",
+              "size": 1,
+              "kind": "bss"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox8IUnknownD1Ev",
+          "exact": true,
+          "address": "0x466870",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD1Ev",
+              "address": "0x466870",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IXMLWriterD1Ev",
+          "size": 8,
+          "placement": "symbol: _ZN2ox2io10IXMLWriterD1Ev",
+          "exact": true,
+          "address": "0x5368a0",
+          "references": 1,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IXMLWriterD1Ev",
+              "address": "0x5368a0",
+              "size": 8,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".gcc_except_table",
+          "size": 68,
+          "placement": "exception frames",
+          "exact": true,
+          "address": "0x662807",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x662807",
+              "size": 68,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox2io10IXMLWriterD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox2io10IXMLWriterD0Ev",
+          "exact": true,
+          "address": "0x5368b0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox2io10IXMLWriterD0Ev",
+              "address": "0x5368b0",
+              "size": 12,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".text._ZN2ox8IUnknownD0Ev",
+          "size": 12,
+          "placement": "symbol: _ZN2ox8IUnknownD0Ev",
+          "exact": true,
+          "address": "0x4668d0",
+          "references": 2,
+          "functions": [
+            {
+              "symbol": "_ZN2ox8IUnknownD0Ev",
+              "address": "0x4668d0",
+              "size": 12,
+              "extent": "fde",
+              "global": true,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN5daisy2io10CXMLWriterE",
+          "size": 80,
+          "placement": "symbol: _ZTVN5daisy2io10CXMLWriterE",
+          "exact": true,
+          "address": "0x617cc0",
+          "references": 9,
+          "data_ranges": [
+            {
+              "address": "0x617cc0",
+              "size": 80,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN5daisy2io10CXMLWriterE",
+          "size": 24,
+          "placement": "symbol: _ZTSN5daisy2io10CXMLWriterE",
+          "exact": true,
+          "address": "0x617d10",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617d10",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN5daisy2io10CXMLWriterE",
+          "size": 24,
+          "placement": "symbol: _ZTIN5daisy2io10CXMLWriterE",
+          "exact": true,
+          "address": "0x617d30",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617d30",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox2io10IXMLWriterE",
+          "size": 24,
+          "placement": "symbol: _ZTIN2ox2io10IXMLWriterE",
+          "exact": true,
+          "address": "0x617d50",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x617d50",
+              "size": 24,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox2io10IXMLWriterE",
+          "size": 21,
+          "placement": "symbol: _ZTSN2ox2io10IXMLWriterE",
+          "exact": true,
+          "address": "0x617d70",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x617d70",
+              "size": 21,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTIN2ox8IUnknownE",
+          "size": 16,
+          "placement": "symbol: _ZTIN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9910",
+          "references": 2,
+          "data_ranges": [
+            {
+              "address": "0x5f9910",
+              "size": 16,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTSN2ox8IUnknownE",
+          "size": 15,
+          "placement": "symbol: _ZTSN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f9920",
+          "references": 0,
+          "data_ranges": [
+            {
+              "address": "0x5f9920",
+              "size": 15,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata",
+          "size": 80,
+          "placement": "references",
+          "exact": true,
+          "address": "0x617da0",
+          "references": 4,
+          "data_ranges": [
+            {
+              "address": "0x617c0c",
+              "size": 24,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617c24",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617c38",
+              "size": 20,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617c4c",
+              "size": 28,
+              "kind": "merged string"
+            },
+            {
+              "address": "0x617da0",
+              "size": 80,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox2io10IXMLWriterE",
+          "size": 80,
+          "placement": "symbol: _ZTVN2ox2io10IXMLWriterE",
+          "exact": true,
+          "address": "0x617e00",
+          "references": 9,
+          "data_ranges": [
+            {
+              "address": "0x617e00",
+              "size": 80,
+              "kind": "section"
+            }
+          ]
+        },
+        {
+          "name": ".rodata._ZTVN2ox8IUnknownE",
+          "size": 32,
+          "placement": "symbol: _ZTVN2ox8IUnknownE",
+          "exact": true,
+          "address": "0x5f99c0",
+          "references": 3,
+          "data_ranges": [
+            {
+              "address": "0x5f99c0",
+              "size": 32,
+              "kind": "section"
+            }
+          ]
+        }
+      ],
+      "unplaced_sections": [],
+      "compilation": {
+        "container_image_id": "108b5240b400ca2165345f10e2dbf66da04f55d0448c00509d9474f0adfffe17",
+        "compiler_version": "g++ (Ubuntu 4.4.3-4ubuntu5) 4.4.3",
+        "package_manifest_sha256": "e379f2252a8cdda9e94b71c872e83c863e7e7961180fa62ea95e8f763fafaf5e",
+        "command": [
+          "g++",
+          "-O2",
+          "-Isrc",
+          "-Isrc/HarvestFull",
+          "-Ithird_party/luajit-2.0.0-beta8/include",
+          "-MD",
+          "-MF",
+          "/out/daisy__io__CXMLWriter.d",
+          "-c",
+          "src/daisy/io/CXMLWriter.cpp",
+          "-o",
+          "/out/daisy__io__CXMLWriter.o"
+        ],
+        "inputs": {
+          "src/daisy/io/CXMLWriter.cpp": "eba2a3f612e59e5ecffcc271e587a1a867262c1417c9ebdf877abf85640e0c25",
+          "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
+          "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
+          "src/daisy/io/CXMLWriter.h": "36a66739217fb82fd5030a10ec58c3a7638b4f7e82669b4032bfcd835aac96d3",
+          "src/ox/io/IXMLWriter.h": "a63b13127e319ccd121f541c92fb7684b90eaf3fae1217a53b497e035ed25f1a",
+          "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee"
+        },
+        "system_headers": 106,
+        "object_sha256": "e0718b8a2e4b84c4735dc5c785260d08c37f31ae4d2c3c0aac59377f2f3befd6"
+      },
+      "fuzzy_target_sha256": "6fc16c624ed190d5c5669be3d835983bb4a0c24587902618d535f94cb86af7ac",
+      "fuzzy_functions": [
+        {
+          "address": "0x535fd0",
+          "size": 37,
+          "symbol": "_ZN5daisy2io10CXMLWriterC2EPN2ox2io10IWriteFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536000",
+          "size": 37,
+          "symbol": "_ZN5daisy2io10CXMLWriterC1EPN2ox2io10IWriteFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536030",
+          "size": 63,
+          "symbol": "_ZN5daisy2io10CXMLWriterD2Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536070",
+          "size": 34,
+          "symbol": "_ZN5daisy2io10CXMLWriter14writeLineBreakEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5360a0",
+          "size": 38,
+          "symbol": "_GLOBAL__I__ZN5daisy2io10CXMLWriterC2EPN2ox2io10IWriteFileE",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5360d0",
+          "size": 146,
+          "symbol": "_ZN5daisy2io10CXMLWriter15writeClosingTagEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536170",
+          "size": 146,
+          "symbol": "_ZN5daisy2io10CXMLWriter12writeCommentEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536210",
+          "size": 212,
+          "symbol": "_ZN5daisy2io10CXMLWriter14writeAttributeEPKwS3_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5362f0",
+          "size": 423,
+          "symbol": "_ZN5daisy2io10CXMLWriter12writeElementEPKwbS3_S3_S3_S3_S3_S3_S3_S3_S3_S3_",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5364a0",
+          "size": 105,
+          "symbol": "_ZN5daisy2io10CXMLWriter14writeXMLHeaderEv",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536510",
+          "size": 70,
+          "symbol": "_ZN5daisy2io10CXMLWriterD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x536560",
+          "size": 63,
+          "symbol": "_ZN5daisy2io10CXMLWriterD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5365a0",
+          "size": 762,
+          "symbol": "_ZN5daisy2io10CXMLWriter9writeTextEPKw",
+          "percent": 100.0
+        },
+        {
+          "address": "0x466870",
+          "size": 8,
+          "symbol": "_ZN2ox8IUnknownD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5368a0",
+          "size": 8,
+          "symbol": "_ZN2ox2io10IXMLWriterD1Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x5368b0",
+          "size": 12,
+          "symbol": "_ZN2ox2io10IXMLWriterD0Ev",
+          "percent": 100.0
+        },
+        {
+          "address": "0x4668d0",
+          "size": 12,
+          "symbol": "_ZN2ox8IUnknownD0Ev",
+          "percent": 100.0
+        }
+      ]
     }
   ],
   "fuzzy": {
@@ -278851,7 +280898,7 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "3685a903c603ec2700a2a86d956f5c86b2a9adf181b7cd0c197aab6d58e83fd9"
+    "report_sha256": "e3854da0f92f1fd0e2bdba9445019890d6576a0dd7b7847e0b4d35211460ce22"
   },
   "link": {
     "status": "unavailable",
