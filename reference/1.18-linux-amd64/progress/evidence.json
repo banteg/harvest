@@ -204015,7 +204015,7 @@
           "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
-          "src/daisy/io/CTextReader.h": "d58b482597b7afb85e4b8fac2dddadbccff3ce7612d367a3ea77ec0a51fe954c",
+          "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214",
           "src/daisy/io/CXMLReader.h": "4f32ab6447283a345d4c137d4584da2b09d190648161319b20cc3b6acd5543b0",
           "src/ox/io/IXMLReader.h": "73eeeb68ae5236f72ccc2f5b433fb022bb99bf921639253be3822a52d0295b6f",
           "src/daisy/io/CXMLWriter.h": "77d4072b146d5e8d132d4c56b231c13e428421f3e1ea0c7aa4ae200a8a2edb84",
@@ -275861,7 +275861,7 @@
           "src/daisy/io/CTextReader.cpp": "ab27bb187af4e188827d0e79e9ea84b6f79607144f7cb1c4e8d69418d89e8a03",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
-          "src/daisy/io/CTextReader.h": "d58b482597b7afb85e4b8fac2dddadbccff3ce7612d367a3ea77ec0a51fe954c"
+          "src/daisy/io/CTextReader.h": "c7869663d830b7ace7296504875349ef584018cbed867cd6f4c96d352bbe1214"
         },
         "system_headers": 99,
         "object_sha256": "5907d1f0c8a865651c5a4ea1fe6c2c4b9dae2fa61a77311eaae9e4342d951376"
