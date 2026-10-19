@@ -11,6 +11,16 @@ namespace daisy {
 namespace io {
 
 //! Reads a whole text file and converts it to wide characters for the XML reader.
+#ifdef HARVEST_PORT
+class CTextReader : public ox::IUnknown
+{
+public:
+    CTextReader(ox::io::IReadFile* file);
+
+private:
+    char Unrecovered[0x30 - sizeof(ox::IUnknown)];
+};
+#else
 class CTextReader : public ox::IUnknown
     {
     public:
@@ -48,6 +58,7 @@ class CTextReader : public ox::IUnknown
         unsigned int TextDataSize;  // size of wchat_t buffer without header
         unsigned int CDataSize;     // site of char buffer
     };
+#endif
 
 } // end namespace io
 } // end namespace daisy

@@ -30,6 +30,11 @@ enum EXML_NODE
     EXN_UNKNOWN
 };
 
+#ifdef HARVEST_PORT
+class IXMLReader : public IUnknown
+{
+};
+#else
 class IXMLReader : public ox::IUnknown
     {
     public:
@@ -94,6 +99,7 @@ class IXMLReader : public ox::IUnknown
         //! Returns if an element is an empty element, like <foo />
         virtual bool isEmptyElement() = 0;
     };
+#endif
 
 } // end namespace io
 } // end namespace ox

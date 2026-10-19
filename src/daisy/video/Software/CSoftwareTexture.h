@@ -20,6 +20,25 @@ using namespace ox::video;
 /*!
 	interface for a Video Driver dependent Texture.
 */
+#ifdef HARVEST_PORT
+class CSoftwareTexture : public ox::video::ITexture
+{
+public:
+    CSoftwareTexture(ox::video::IImage* surface);
+    virtual ~CSoftwareTexture();
+
+    virtual void* lock();
+    virtual void unlock();
+    virtual const ox::core::CDimension2d<int>& getOriginalSize();
+    virtual const ox::core::CDimension2d<int>& getSize();
+    virtual int getDriverType();
+    virtual int getColorFormat();
+    virtual int getPitch();
+
+private:
+    char Unrecovered[0x30 - sizeof(ox::video::ITexture)];
+};
+#else
 class CSoftwareTexture : public ITexture
 {
 public:
@@ -67,6 +86,7 @@ private:
 	ox::core::CDimension2d<int> OrigSize;
 
 };
+#endif
 
 
 } // end namespace video

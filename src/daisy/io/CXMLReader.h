@@ -16,6 +16,16 @@ using namespace ox::io;
 
 class CTextReader;
 
+#ifdef HARVEST_PORT
+class CXMLReader : public ox::io::IXMLReader
+{
+public:
+    CXMLReader(CTextReader* file);
+
+private:
+    char Unrecovered[0x68 - sizeof(ox::io::IXMLReader)];
+};
+#else
 class CXMLReader : public IXMLReader
     {
     public:
@@ -112,6 +122,7 @@ class CXMLReader : public IXMLReader
 
         ox::TArray<SAttribute> Attributes;
     };
+#endif
 
 } // end namespace io
 } // end namespace daisy

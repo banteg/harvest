@@ -9,6 +9,11 @@
 namespace ox {
 namespace io {
 
+#ifdef HARVEST_PORT
+class IXMLWriter : public IUnknown
+{
+};
+#else
 class IXMLWriter : public ox::IUnknown
     {
     public:
@@ -46,6 +51,7 @@ class IXMLWriter : public ox::IUnknown
         //! Writes a line break
         virtual void writeLineBreak() = 0;
     };
+#endif
 
 } // end namespace io
 } // end namespace ox

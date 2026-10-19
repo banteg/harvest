@@ -13,6 +13,16 @@ namespace daisy {
 namespace io {
 using namespace ox::io;
 
+#ifdef HARVEST_PORT
+class CXMLWriter : public ox::io::IXMLWriter
+{
+public:
+    CXMLWriter(ox::io::IWriteFile* file);
+
+private:
+    char Unrecovered[0x20 - sizeof(ox::io::IXMLWriter)];
+};
+#else
 class CXMLWriter : public IXMLWriter
     {
     public:
@@ -59,6 +69,7 @@ class CXMLWriter : public IXMLWriter
 
         IWriteFile* File;
     };
+#endif
 
 } // end namespace io
 } // end namespace daisy
