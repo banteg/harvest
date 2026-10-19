@@ -3005,8 +3005,15 @@ address	size	symbol	evidence
 0x532930	119	_ZN5daisy2io14createReadFileEPKc	native-calls:CFileSystem-createAndOpenFile
 0x5329b0	8	_ZN2ox2io9IReadFileD1Ev	mac-vtable:_ZTVN2ox2io9IReadFileE:2
 0x5329c0	12	_ZN2ox2io9IReadFileD0Ev	mac-vtable:_ZTVN2ox2io9IReadFileE:3
+0x5329d0	5	_ZN5daisy2io11CTextReader7getTextEv	match:daisy/io/CTextReader.cpp
+0x5329e0	4	_ZNK5daisy2io11CTextReader11getTextSizeEv	match:daisy/io/CTextReader.cpp
+0x532a20	76	_ZN5daisy2io11CTextReader19convertASCIIToUTF16EPKcjPPw	match:daisy/io/CTextReader.cpp
+0x532a70	257	_ZN5daisy2io11CTextReader14convertToUTF16Ev	match:daisy/io/CTextReader.cpp
+0x532b80	194	_ZN5daisy2io11CTextReader8readFileEPN2ox2io9IReadFileE	match:daisy/io/CTextReader.cpp
 0x532c50	78	_ZN5daisy2io11CTextReaderC1EPN2ox2io9IReadFileE	native-calls:CFileSystem-createXMLReader-new
+0x532ca0	78	_ZN5daisy2io11CTextReaderC2EPN2ox2io9IReadFileE	match:daisy/io/CTextReader.cpp
 0x532cf0	34	_ZN5daisy2io11CTextReaderD1Ev	mac-vtable:_ZTVN5daisy2io11CTextReaderE:2
+0x532d20	34	_ZN5daisy2io11CTextReaderD2Ev	match:daisy/io/CTextReader.cpp
 0x532d50	41	_ZN5daisy2io11CTextReaderD0Ev	mac-vtable:_ZTVN5daisy2io11CTextReaderE:3
 0x532d80	5	_ZN5daisy2io10CWriteFile11getFileNameEv	mac-vtable:_ZTVN5daisy2io10CWriteFileE:7
 0x532d90	38	_GLOBAL__I__ZN5daisy2io10CWriteFileC2EPKcb	manual:CWriteFile-iostream-initializer
