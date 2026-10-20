@@ -58,7 +58,7 @@ the null joystick driver as the original has them.
 
 ### Replaced units
 
-The `replaced` list in `build.zig` (39 recovered units plus unrecovered prefixes that `port/src/` already replaces):
+The `replaced` list in `build.zig` (61 of the 201 recovered units, plus unrecovered prefixes that `port/src/` already replaces):
 
 | Unit | What it is | Replaced by |
 |---|---|---|
@@ -79,13 +79,24 @@ Its material getter uses the shared static fallback under `HARVEST_PORT`, avoidi
 original null reference (see [original-bugs.md](original-bugs.md)).
 The camera and OBJ loader continue using their existing port implementations. The other scene
 units with trap stubs are excluded: `CAnimatedMeshMD2`, `CBspTreeSceneNode`, `CMeshSceneNode`,
-`CMetaTriangleSelector`, `COctTreeSceneNode`, `COctTreeTriangleSelector`, `CParticleBoxEmitter`,
+`COctTreeSceneNode`, `CParticleBoxEmitter`,
 `CParticlePointEmitter`, `CParticleSystemSceneNode`, `CTestSceneNode`, `CTextSceneNode`,
 `CWaterSurfaceSceneNode` and `CXFileReader`. Their headers also contain traps in
 `CBspTree::BspPoly::operator==` and `OctTree<T>::OctTreeNode`'s constructor. These are incomplete
 matching sources awaiting recovery. `CDefaultMeshFormatLoader` and `CXMeshFileLoader`
 are excluded because they depend on these incomplete or unrecovered classes; PCX continues
-using `ImageLoaderStubs.cpp`. The batch has 24 out-of-line trap stubs and two header trap stubs.
+using `ImageLoaderStubs.cpp`. `CMetaTriangleSelector` and `COctTreeTriangleSelector` now match
+completely and contain no trap stubs, but remain excluded from the port pending integration.
+
+Ten scene units from the newer batch are added to `replaced` because each has trap stubs, and the
+port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspTree`,
+`CCameraFPSSceneNode`, `CCameraMayaSceneNode`, `CGeometryCreator`, `CParticleGravityAffector`,
+`CQ3LevelMesh`, `CTerrainSceneNode` and `CXAnimationPlayer`. The recovered XML and text readers, the
+BMP, JPEG and TGA image loaders, `CSoftwareTexture`, `CAnimatedMeshSceneNode` and
+`CSceneCollisionManager`, `CImage`, `CVideoSoftware` and `CSceneManager` continue using their existing port replacements.
+Across the recovered sources there are 58 out-of-line trap stubs and three header trap stubs:
+`CBspTree::BspPoly::operator==`, `OctTree<T>::OctTreeNode`'s constructor and
+`CSceneManager::DefaultNodeEntry`'s constructor. All units depending on these stubs stay excluded.
 
 ## Port sources (`port/src/`)
 
@@ -136,13 +147,16 @@ objects byte-identical.
 | [`ox/entity/COxEntityManager.cpp`](../../src/ox/entity/COxEntityManager.cpp) | `ListChanged` is value-initialised | UBSan traps on the uninitialised bools on Windows when a game starts ([original-bugs.md](original-bugs.md)) |
 | [`daisy/io/CFileSystem.cpp`](../../src/daisy/io/CFileSystem.cpp) | `createDirectory` calls `mkdir(path)` on Windows | the Windows C library's `mkdir` takes no mode |
 | [`daisy/video/Null/CVideoNull.cpp`](../../src/daisy/video/Null/CVideoNull.cpp) | no `cgCreateContext`/`cgDestroyContext`; `CgContext` stays 0 | no Cg runtime in the port |
-| [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | Irrlicht's members instead of the sized placeholder | the port implements `CImage`. Declaring them for GCC changes `CVideoNull`'s code (one function stops matching), so the matching build keeps the placeholder |
+| [`daisy/video/Null/CImage.h`](../../src/daisy/video/Null/CImage.h) | the port's existing class under `HARVEST_PORT`, the full recovered class otherwise | the port implements `CImage` against its existing declaration. Earlier header expansion changed `CVideoNull`'s code and lost a match; this recovery preserves every prior exact function and data byte with the expanded canonical declaration |
 | [`ox/scene/ISceneNode.h`](../../src/ox/scene/ISceneNode.h) | a defined fallback material, null-child guard and selector retain-before-release/null clear under `HARVEST_PORT` | both builds share the recovered fields and inline bodies; the port retains its safe animated-mesh fallback and handles selector ownership |
 | [`ox/scene/ISceneManager.h`](../../src/ox/scene/ISceneManager.h) | the `E_SCENE_NODE_RENDER_TIME` enumerators (both builds) | recovered from the Mac `registerNodeForRendering`; the matching build is unchanged by them |
 | [`daisy/other/CIrrDeviceStub.cpp`](../../src/daisy/other/CIrrDeviceStub.cpp) | includes `net/CWinsockNetworkDevice.h` instead of declaring the sized placeholder | the port implements the network device against one declaration |
 | [`ox/game/CGameMain.h`](../../src/ox/game/CGameMain.h), [`CGameMain.cpp`](../../src/ox/game/CGameMain.cpp) | `setState` starts a load and `update` runs one `renderFirst`/`secondInit` step per call (`isLoading`, `loadStep`); a failed load logs the state's message; no 20 ms inactive sleep under Emscripten | a frame must not block for a whole load (the web build cannot block) |
 | [`HarvestFull/harvest/gui/CHighscoreScreen.cpp`](../../src/HarvestFull/harvest/gui/CHighscoreScreen.cpp) | the constructor clears only `PromoteButtons` | UBSan traps on the original's overrun when the main menu loads ([original-bugs.md](original-bugs.md)) |
 | [`daisy/gui/CGUIEnvironment.cpp`](../../src/daisy/gui/CGUIEnvironment.cpp) | includes `ox/gui/IGUIStaticTextInline.h` (port only) | `IGUIStaticText::breakText` is defined only in that header and the original emits it in this object (`0x500ca0`). Including it in the matching build too takes the unit from 95/145 to 116/155 exact functions (the constructors, `loadBuidInFont`, `addWindow`, `addMessageBox` and more line up) but `std::__insertion_sort<SFont>` stops matching (`r11d` instead of `r12d` in one load), at every include position tried, so it stays port-only for now |
+| [`ox/io/IXMLReader.h`](../../src/ox/io/IXMLReader.h), [`IXMLWriter.h`](../../src/ox/io/IXMLWriter.h) | master's class under `HARVEST_PORT`, Irrlicht's full interface otherwise | the port's XML stubs implement master's declaration. Web CI links them with `--whole-archive`, which fails on a missing virtual |
+| [`daisy/io/CTextReader.h`](../../src/daisy/io/CTextReader.h), [`CXMLReader.h`](../../src/daisy/io/CXMLReader.h), [`CXMLWriter.h`](../../src/daisy/io/CXMLWriter.h) | master's sized placeholder under `HARVEST_PORT`, Irrlicht's full class otherwise | as above; the stubs in `port/src/io/XMLStubs.cpp` define the placeholder's members |
+| [`daisy/video/Software/CSoftwareTexture.h`](../../src/daisy/video/Software/CSoftwareTexture.h) | master's class under `HARVEST_PORT`, Irrlicht's full class otherwise | `port/src/video/CSoftwareTexture.cpp` defines `getImage` and `getTexture`, which the full class declares |
 
 ## Compiler diagnostics worth knowing
 

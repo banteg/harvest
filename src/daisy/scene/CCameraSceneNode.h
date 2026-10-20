@@ -52,7 +52,7 @@ using namespace ox::scene;
 		//! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 		//! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
 		//! for changing their position, look at target or whatever.
-		virtual bool OnEvent(ox::event::SEvent event);
+		virtual bool OnEvent(const ox::event::SEvent& event);
 
 		//! sets the look at target of the camera
 		//! \param pos: Look at target of the camera.

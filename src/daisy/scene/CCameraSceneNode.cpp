@@ -110,7 +110,7 @@ const ox::core::CMatrix4& CCameraSceneNode::getViewMatrix()
 //! example with ox::scene::ISceneManager::addMayaCameraSceneNode or
 //! ox::scene::ISceneManager::addMeshViewerCameraSceneNode, may want to get this input
 //! for changing their position, look at target or whatever.
-bool CCameraSceneNode::OnEvent(ox::event::SEvent event)
+bool CCameraSceneNode::OnEvent(const ox::event::SEvent& event)
 {
 	return false;
 }

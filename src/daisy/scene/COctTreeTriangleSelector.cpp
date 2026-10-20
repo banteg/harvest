@@ -60,8 +60,52 @@ COctTreeTriangleSelector::~COctTreeTriangleSelector()
 
 void COctTreeTriangleSelector::constructOctTree(SOctTreeNode* node)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	++NodeCount;
+
+	node->Box.reset(node->Triangles[0].pointA);
+
+	// get bounding box
+	int cnt = node->Triangles.size();
+	for (int i=0; i<cnt; ++i)
+	{
+		node->Box.addInternalPoint(node->Triangles[i].pointA);
+		node->Box.addInternalPoint(node->Triangles[i].pointB);
+		node->Box.addInternalPoint(node->Triangles[i].pointC);
+	}
+
+	ox::core::CVector3d<float> middle = node->Box.getCenter();
+	ox::core::CVector3d<float> edges[8];
+	node->Box.getEdges(edges);
+
+	ox::core::CAabbox3d<float> box;
+
+	// calculate children
+
+	if (!node->Box.isEmpty() && (int)node->Triangles.size() > MinimalPolysPerNode)
+	for (int ch=0; ch<8; ++ch)
+	{
+		box.reset(middle);
+		box.addInternalPoint(edges[ch]);
+		node->Child[ch] = new SOctTreeNode();
+
+		for (int i=0; i<(int)node->Triangles.size(); ++i)
+		{
+			if (node->Triangles[i].isTotalInsideBox(box))
+			{
+				node->Child[ch]->Triangles.push_back(node->Triangles[i]);
+				node->Triangles.erase(node->Triangles.begin() + i);
+				--i;
+			}
+		}
+
+		if (node->Child[ch]->Triangles.empty())
+		{
+			delete node->Child[ch];
+			node->Child[ch] = 0;
+		}
+		else
+			constructOctTree(node->Child[ch]);
+	}
 }
 
 

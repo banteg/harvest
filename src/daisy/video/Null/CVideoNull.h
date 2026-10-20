@@ -25,7 +25,7 @@ namespace video {
 const int MAX_2D_QUADS = 1024;
 
 //! A vertex of the second, unused 2d vertex array (see CVideoNull::Unused2DVertices).
-struct S2DVertex
+struct S2DVertex_
 {
     ox::core::CVector3d<float> Pos;
     ox::video::SColor Color;
@@ -310,7 +310,7 @@ protected:
     //! Four vertices per quad, in screen pixels.
     ox::video::S3DVertex Vertices2D[MAX_2D_QUADS * 4];
     //! Constructed but never used by the recovered code.
-    S2DVertex Unused2DVertices[MAX_2D_QUADS * 4];
+    S2DVertex_ Unused2DVertices[MAX_2D_QUADS * 4];
     bool Current2DAlphaChannel;
     bool Current2DFlag2;
     //! Batches drawn in the current frame; NumStatusSwitches keeps the last frame's count.

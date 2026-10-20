@@ -13,6 +13,7 @@
 #include "ox/core/CVector3d.h"
 #include "ox/video/IVideoDriver.h"
 #include "ox/video/SMaterial.h"
+#include "ox/scene/IAnimatedMesh.h"
 #include "ox/scene/IMesh.h"
 #include "ox/scene/IMeshManipulator.h"
 #include "ox/TArray.h"
@@ -90,7 +91,7 @@ using namespace ox::scene;
 		{
 			SWeightData() {};
 
-			SWeightData(SWeightData& other)
+			SWeightData(const SWeightData& other)
 				: buffer(other.buffer), vertex(other.vertex), weight(other.weight)
 			{}
 
@@ -206,7 +207,7 @@ using namespace ox::scene;
 			ox::TArray<ox::core::CMatrix4> Matrices;
 			ox::TArray<float> Times;
 
-			bool operator <(SXAnimationTrack& other) const
+			bool operator <(const SXAnimationTrack& other) const
 			{
 				if (jointNr != other.jointNr)
 					return (jointNr < other.jointNr);
