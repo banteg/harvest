@@ -56,8 +56,10 @@ COctTreeSceneNode::~COctTreeSceneNode()
 
 void COctTreeSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	ISceneNode::OnPreRender();
 }
 
 
@@ -87,7 +89,7 @@ void COctTreeSceneNode::render()
 
     ox::core::CAabbox3d<float> box = frust.getBoundingBox();
 
-	switch(vertexType)
+	switch((int)vertexType)
 	{
 	case ox::video::EVT_STANDARD:
 		{
@@ -174,7 +176,7 @@ bool COctTreeSceneNode::createTree(IMesh* mesh)
 	{
 		vertexType = mesh->getMeshBuffer(0)->getVertexType();
 
-		switch(vertexType)
+		switch((int)vertexType)
 		{
 		case ox::video::EVT_STANDARD:
 			{

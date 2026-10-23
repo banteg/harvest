@@ -6,6 +6,7 @@
 #include "ox/core/CVector3d.h"
 #include "ox/video/SColor.h"
 #include "ox/scene/SParticle.h"
+#include "ox/algo/CRand.h"
 #include "CParticlePointEmitter.h"
 #include "daisy/os.h"
 
@@ -37,8 +38,41 @@ CParticlePointEmitter::CParticlePointEmitter(
 //! and returns how much new particles there are.
 int CParticlePointEmitter::emitt(unsigned int now, unsigned int timeSinceLastCall, SParticle*& outArray)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	Time += timeSinceLastCall;
+
+	unsigned int pps = (MaxParticlesPerSecond - MinParticlesPerSecond);
+	float perSecond = pps ? (float)MinParticlesPerSecond + (ox::algo::CRand::rand() % pps) : MinParticlesPerSecond;
+	float everyWhatMillisecond = 1000.0f / perSecond;
+
+	if (Time > everyWhatMillisecond)
+	{
+		Time = 0;
+		Particle.startTime = now;
+		Particle.vector = Direction;
+
+		if (MaxAngleDegrees)
+		{
+			ox::core::CVector3d<float> tgt = Direction;
+			{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.X -= (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X*cs - tgt.Y*sn, tgt.X*sn + tgt.Y*cs, tgt.Z); tgt.X += (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
+			{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.Z -= (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X, tgt.Y*cs - tgt.Z*sn, tgt.Y*sn + tgt.Z*cs); tgt.Z += (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
+			Particle.vector = tgt;
+		}
+
+		if (MaxLifeTime - MinLifeTime == 0)
+			Particle.endTime = now + MinLifeTime;
+		else
+			Particle.endTime = now + MinLifeTime + (ox::algo::CRand::rand() % (MaxLifeTime - MinLifeTime));
+
+		Particle.color = MinStartColor.getInterpolated(
+			MaxStartColor, (ox::algo::CRand::rand() % 100) / 100.0f);
+
+		Particle.startColor = Particle.color;
+		Particle.startVector = Particle.vector;
+		outArray = &Particle;
+		return 1;
+	}
+
+	return 0;
 }
 
 } // end namespace scene

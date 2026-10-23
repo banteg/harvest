@@ -89,8 +89,30 @@ CCameraFPSSceneNode::~CCameraFPSSceneNode()
 //! for changing their position, look at target or whatever.
 bool CCameraFPSSceneNode::OnEvent(const ox::event::SEvent& event)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (!InputReceiverEnabled)
+		return false;
+
+	if (event.EventType == ox::event::EET_KEY_INPUT_EVENT)
+	{
+		int cnt = (int)KeyMap.size();
+		for (int i=0; i<cnt; ++i)
+			if (KeyMap[i].keycode == event.KeyInput.Key)
+			{
+				if (event.KeyInput.Event == ox::event::EKIE_KEY_PRESSED_DOWN)
+				{
+					CursorKeys[KeyMap[i].action] = true;
+					return true;
+				}
+				else if (event.KeyInput.Event == ox::event::EKIE_KEY_LEFT_UP)
+				{
+					CursorKeys[KeyMap[i].action] = false;
+					return true;
+				}
+				return false;
+			}
+	}
+
+	return false;
 }
 
 

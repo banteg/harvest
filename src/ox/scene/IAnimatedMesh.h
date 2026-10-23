@@ -7,6 +7,7 @@
 #define OX_SCENE_IANIMATEDMESH_H
 
 #include "../IUnknown.h"
+#include "ox/core/CAabbox3d.h"
 
 namespace ox {
 namespace core {
@@ -51,7 +52,12 @@ public:
 
     virtual int getFrameCount() = 0;
     virtual IMesh* getMesh(int frame, int detailLevel = 255, int startFrameLoop = -1, int endFrameLoop = -1) = 0;
-    virtual const core::CAabbox3d<float>& getBoundingBox() const = 0;
+    virtual const ox::core::CAabbox3d<float>& getBoundingBox() const = 0;
+
+    virtual E_ANIMATED_MESH_TYPE getMeshType() const
+    {
+        return EAMT_UNKNOWN;
+    }
 };
 
 } // end namespace scene

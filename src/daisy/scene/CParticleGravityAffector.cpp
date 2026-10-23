@@ -27,8 +27,17 @@ CParticleGravityAffector::CParticleGravityAffector(
 //! Affects an array of particles.
 void CParticleGravityAffector::affect(unsigned int now, SParticle* particlearray, unsigned int count)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	float d;
+
+	for (unsigned int i=0; i<count; ++i)
+	{
+		d = (now - particlearray[i].startTime) / TimeForceLost;
+		if (d > 1.0f) d = 1.0f;
+		if (d < 0.0f) d = 0.0f;
+		d = 1.0f - d;
+
+		particlearray[i].vector = ox::core::CVector3d<float>((Gravity).X*(1.0f - (d)) + particlearray[i].startVector.X*(d), (Gravity).Y*(1.0f - (d)) + particlearray[i].startVector.Y*(d), (Gravity).Z*(1.0f - (d)) + particlearray[i].startVector.Z*(d));
+	}
 }
 
 

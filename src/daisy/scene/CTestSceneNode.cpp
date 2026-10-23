@@ -8,6 +8,7 @@
 #include "ox/video/SColor.h"
 #include "ox/video/SMaterial.h"
 #include "ox/scene/ISceneNode.h"
+#include "ox/video/S3DVertexInline.h"
 #include "CTestSceneNode.h"
 #include "ox/video/IVideoDriver.h"
 #include "ox/scene/ISceneManager.h"
@@ -106,8 +107,10 @@ const ox::core::CAabbox3d<float>& CTestSceneNode::getBoundingBox() const
 
 void CTestSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	ISceneNode::OnPreRender();
 }
 
 

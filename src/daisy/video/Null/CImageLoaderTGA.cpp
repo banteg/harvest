@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ox/core/CDimension2d.h"
 #include "ox/video/IVideoDriver.h"
+#include "ox/video/ColorPacking.h"
 #include "ox/video/IImage.h"
 #include "ox/video/IImageLoader.h"
 #include "ox/io/IReadFile.h"
@@ -103,8 +104,93 @@ bool CImageLoaderTGA::isALoadableFileFormat(ox::io::IReadFile* file)
 //! creates a surface from the file
 IImage* CImageLoaderTGA::loadImage(ox::io::IReadFile* file)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	STGAHeader header;
+
+	file->seek(0);
+	file->read(&header, sizeof(STGAHeader));
+
+	// skip image identifikation field
+	if (header.IdLength)
+		file->seek(header.IdLength, true);
+
+	if (header.ColorMapType != 0)
+	{
+		// skip color map
+		file->seek((header.ColorMapEntrySize/8 * header.ColorMapLength), true);
+	}
+
+	// read image
+
+	int bytesPerPixel = header.PixelDepth/8;
+	int imageSize = header.ImageHeight * header.ImageWidth * bytesPerPixel;
+	char* data = 0;
+
+	if (header.ImageType == 2)
+	{
+		data = new char[imageSize];
+	  	file->read(data, imageSize);
+	}
+	else
+	if(header.ImageType == 10)
+		data = loadCompressedImage(file, &header);
+	else
+	{
+		os::Printer::log("Unsupported TGA file type", file->getFileName(), ox::event::ELL_ERROR);
+		return 0;
+	}
+
+
+	IImage* image = 0;
+
+	switch(bytesPerPixel)
+	{
+	case 1:
+		os::Printer::log("Unsupported TGA format, 8 bit", file->getFileName(), ox::event::ELL_ERROR);
+		break;
+	case 2:
+		{
+			// 16 bit image
+
+			image = new CImage(ECF_A1R5G5B5,
+				ox::core::CDimension2d<int>(header.ImageWidth, header.ImageHeight));
+
+			CColorConverter::convert16BitTo16BitFlipMirror((short*)data,
+				(short*)image->lock(), header.ImageWidth,	header.ImageHeight, 0);
+
+			image->unlock();
+		}
+		break;
+	case 3:
+		{
+			// 24 bit image
+
+			image = new CImage(ECF_R8G8B8,
+				ox::core::CDimension2d<int>(header.ImageWidth, header.ImageHeight));
+
+			CColorConverter::convert24BitTo24BitFlipMirrorColorShuffle(
+				(char*)data, (char*)image->lock(), header.ImageWidth, header.ImageHeight, 0);
+
+			image->unlock();
+		}
+		break;
+	case 4:
+		{
+			// 32 bit image
+
+			image = new CImage(ECF_A8R8G8B8,
+				ox::core::CDimension2d<int>(header.ImageWidth, header.ImageHeight));
+
+			CColorConverter::convert32BitTo32BitFlipMirror((int*)data,
+				(int*)image->lock(), header.ImageWidth, header.ImageHeight, 0);
+
+			image->unlock();
+		}
+		break;
+	}
+
+	delete [] data;
+
+	return image;
 }
 
 

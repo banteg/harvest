@@ -52,8 +52,14 @@ void CTextSceneNode::OnPreRender()
 //! renders the node.
 void CTextSceneNode::render()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (!Font || !Coll)
+		return;
+
+	ox::core::CPosition2d<int> pos = Coll->getScreenCoordinatesFrom3DPosition(getAbsolutePosition(),
+		SceneManager->getActiveCamera());
+
+	ox::core::CRect<int> r(pos, ox::core::CDimension2d<int>(1,1));
+	Font->draw(Text.c_str(), r, Color, ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER, 0);
 }
 
 

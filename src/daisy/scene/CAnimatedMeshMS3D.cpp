@@ -8,6 +8,7 @@
 #include "ox/core/CVector3d.h"
 #include "ox/video/S3DVertex.h"
 #include "ox/video/SMaterial.h"
+#include "ox/video/SColor.h"
 #include "ox/scene/IAnimatedMesh.h"
 #include "ox/scene/IMesh.h"
 #include "ox/scene/IMeshBuffer.h"
@@ -124,8 +125,243 @@ CAnimatedMeshMS3D::~CAnimatedMeshMS3D()
 //! loads an md2 file
 bool CAnimatedMeshMS3D::loadFile(ox::io::IReadFile* file)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	int i=0;
+
+	if (!file)
+		return false;
+
+	HasAnimation = false;
+
+	// find file size
+
+	size_t fileSize = file->getSize();
+
+	// read whole file
+
+	unsigned char* buffer = new unsigned char[fileSize];
+	size_t read = (int)file->read(buffer, fileSize);
+	if (read != fileSize)
+	{
+		delete [] buffer;
+		os::Printer::log("Could not read full file. Loading failed", file->getFileName(), ox::event::ELL_ERROR);
+		return false;
+	}
+
+	// read header
+
+	const unsigned char *pPtr = (unsigned char*)((void*)buffer);
+	MS3DHeader *pHeader = (MS3DHeader*)pPtr;
+	pPtr += sizeof(MS3DHeader);
+
+	if ( strncmp( pHeader->ID, "MS3D000000", 10 ) != 0 )
+	{
+		delete [] buffer;
+		os::Printer::log("Not a valid Milkshape3D Model File. Loading failed", file->getFileName(), ox::event::ELL_ERROR);
+		return false;
+	}
+
+	if ( pHeader->Version < 3 || pHeader->Version > 4 )
+	{
+		delete [] buffer;
+		os::Printer::log("Only Milkshape3D version 1.3 and 1.4 is supported. Loading failed", file->getFileName(), ox::event::ELL_ERROR);
+		return false;
+	}
+
+	// get pointers to data
+
+	// vertices
+	unsigned short numVertices = *(unsigned short*)pPtr;
+	pPtr += sizeof(unsigned short);
+	MS3DVertex *vertices = (MS3DVertex*)pPtr;
+	pPtr += sizeof(MS3DVertex) * numVertices;
+
+	// triangles
+	unsigned short numTriangles = *(unsigned short*)pPtr;
+	pPtr += sizeof(unsigned short);
+	MS3DTriangle *triangles = (MS3DTriangle*)pPtr;
+	pPtr += sizeof(MS3DTriangle) * numTriangles;
+
+	// groups
+	unsigned short numGroups = *(unsigned short*)pPtr;
+	pPtr += sizeof(unsigned short);
+
+	//skip groups
+	for (i=0; i<numGroups; ++i)
+	{
+		pPtr += 33; // name and 1 byte flags
+		unsigned short triangleCount = *(unsigned short*)pPtr;
+		pPtr += sizeof(unsigned short);
+		pPtr += sizeof(unsigned short) * triangleCount; // triangle indices
+
+		pPtr += sizeof(char); // material index
+	}
+
+	// skip materials
+	unsigned short numMaterials = *(unsigned short*)pPtr;
+	pPtr += sizeof(unsigned short);
+	MS3DMaterial *materials = (MS3DMaterial*)pPtr;
+	pPtr += sizeof(MS3DMaterial) * numMaterials;
+
+	// animation time
+	float framesPerSecond = *(float*)pPtr;
+	pPtr += sizeof(float) * 2; // fps and current time
+
+	int frameCount = *(int*)pPtr;
+	pPtr += sizeof(int);
+
+	totalTime = (frameCount / framesPerSecond) * 1000.0f;
+
+	int jointCount = *(unsigned short*)pPtr;
+	pPtr += sizeof(unsigned short);
+
+	// load joints
+	SJoint t;
+
+	for (i=0; i<jointCount; ++i)
+	{
+		MS3DJoint *pJoint = (MS3DJoint*)pPtr;
+		pPtr += sizeof(MS3DJoint);
+		Joints.push_back(t);
+		SJoint& jnt = Joints[Joints.size()-1];
+
+		jnt.Name = pJoint->Name;
+		jnt.Index = i;
+		jnt.Rotation.X = pJoint->Rotation[0];
+		jnt.Rotation.Y = pJoint->Rotation[1];
+		jnt.Rotation.Z = pJoint->Rotation[2];
+		jnt.Translation.X = pJoint->Translation[0];
+		jnt.Translation.Y = pJoint->Translation[1];
+		jnt.Translation.Z = pJoint->Translation[2];
+		jnt.ParentName = pJoint->ParentName;
+		jnt.Parent = -1;
+
+		if (pJoint->NumRotationKeyframes ||
+			pJoint->NumTranslationKeyframes)
+			HasAnimation = true;
+
+		// get rotation keyframes
+		int j;
+		for	(j=0; j<pJoint->NumRotationKeyframes; ++j)
+		{
+			MS3DKeyframe* kf = (MS3DKeyframe*)pPtr;
+			pPtr += sizeof(MS3DKeyframe);
+
+			SKeyframe k;
+			k.timeindex = kf->Time * 1000.0f;
+			k.data.X = kf->Parameter[0];
+			k.data.Y = kf->Parameter[1];
+			k.data.Z = kf->Parameter[2];
+			jnt.RotationKeys.push_back(k);
+		}
+
+		// get translation keyframes
+		for	(j=0; j<pJoint->NumTranslationKeyframes; ++j)
+		{
+			MS3DKeyframe* kf = (MS3DKeyframe*)pPtr;
+			pPtr += sizeof(MS3DKeyframe);
+
+			SKeyframe k;
+			k.timeindex = kf->Time * 1000.0f;
+			k.data.X = kf->Parameter[0];
+			k.data.Y = kf->Parameter[1];
+			k.data.Z = kf->Parameter[2];
+			jnt.TranslationKeys.push_back(k);
+		}
+	}
+
+	//find parent of every joint
+	int j;
+	for (i=0; i<(int)Joints.size(); ++i)
+		if (Joints[i].ParentName.size() != 0)
+		{
+			for (j=0; j<(int)Joints.size(); ++j)
+				if (i != j && Joints[i].ParentName == Joints[j].Name)
+				{
+					Joints[i].Parent = j;
+					break;
+				}
+
+			if (Joints[i].Parent == -1)
+				os::Printer::log("Found joint in model without parent.", ox::event::ELL_WARNING);
+		}
+
+	// sets up all joints with initial rotation and translation
+	for (i=0; i<(int)Joints.size(); ++i)
+	{
+		SJoint& jnt = Joints[i];
+
+		jnt.RelativeTransformation.setRotationRadians(jnt.Rotation);
+		jnt.RelativeTransformation.setTranslation(jnt.Translation);
+
+		if (jnt.Parent == -1)
+			jnt.AbsoluteTransformation = jnt.RelativeTransformation;
+		else
+		{
+			jnt.AbsoluteTransformation = Joints[jnt.Parent].AbsoluteTransformation;
+			jnt.AbsoluteTransformation *= jnt.RelativeTransformation;
+		}
+	}
+
+	// create vertices and indices, attach them to the joints.
+	ox::video::S3DVertex v;
+
+	for (i=0; i<numTriangles; ++i)
+	{
+		int j;
+		for (j = 0; j<3; ++j)
+		{
+			v.TCoords.X = triangles[i].S[j];
+			v.TCoords.Y = triangles[i].T[j];
+			v.Normal.X = triangles[i].VertexNormals[j][0];
+			v.Normal.Y = triangles[i].VertexNormals[j][1];
+			v.Normal.Z = triangles[i].VertexNormals[j][2];
+			v.Color = ox::video::SColor(255, 255, 255, 255);
+			v.Pos.X = vertices[triangles[i].VertexIndices[j]].Vertex[0];
+			v.Pos.Y = vertices[triangles[i].VertexIndices[j]].Vertex[1];
+			v.Pos.Z = vertices[triangles[i].VertexIndices[j]].Vertex[2];
+
+			int boneid = vertices[triangles[i].VertexIndices[j]].BoneID;
+			if (boneid>=0 && boneid<(int)Joints.size())
+				Joints[boneid].VertexIds.push_back(Vertices.size());
+			//else
+			//{
+			//	os::Debuginfo::print("no bone for vertex, bone", boneid);
+			//}
+
+			Vertices.push_back(v);
+		}
+
+		Indices.push_back(Vertices.size()-3);
+		Indices.push_back(Vertices.size()-2);
+		Indices.push_back(Vertices.size()-1);
+	}
+
+	// calculate bounding box
+	if (!Vertices.empty())
+		BoundingBox.reset(Vertices[0].Pos);
+
+	for (i=0; i<(int)Vertices.size(); ++i)
+		BoundingBox.addInternalPoint(Vertices[i].Pos);
+
+	// inverse translate and rotate all vertices for making animation easier
+	if (HasAnimation)
+	for (i=0; i<(int)Joints.size(); ++i)
+		for (int j=0; j<(int)Joints[i].VertexIds.size(); ++j)
+		{
+			Joints[i].AbsoluteTransformation.inverseTranslateVect(
+				Vertices[Joints[i].VertexIds[j]].Pos);
+
+			Joints[i].AbsoluteTransformation.inverseRotateVect(
+				Vertices[Joints[i].VertexIds[j]].Pos);
+
+			Joints[i].AbsoluteTransformation.inverseRotateVect(
+				Vertices[Joints[i].VertexIds[j]].Normal);
+		}
+
+	AnimatedVertices = Vertices;
+
+	delete [] buffer;
+	return true;
 }
 
 

@@ -705,6 +705,7 @@
 ".bss" = 0x86c1f0
 
 ["daisy/scene/CWaterSurfaceSceneNode.cpp"]
+".bss" = 0x86c058
 
 ["daisy/video/Null/CImageLoaderPCX.cpp"]
 ".bss" = 0x86c16c
@@ -743,6 +744,7 @@
 ".bss" = 0x86c144
 
 ["daisy/scene/CCameraSceneNode.cpp"]
+".bss" = 0x86c118
 
 ["daisy/scene/CAnimatedMeshMD2.cpp"]
 
@@ -764,8 +766,8 @@
 ".bss" = 0x86c1dc
 
 ["daisy/scene/CGeometryCreator.cpp"]
-".text" = 0x408830
-".bss" = 0x86b4c8
+".text" = 0x559850
+".bss" = 0x86c128
 
 ["daisy/scene/CQ3LevelMesh.cpp"]
 ".bss" = 0x86c148
@@ -776,6 +778,7 @@
 ["daisy/scene/CBspTree.cpp"]
 
 ["daisy/scene/CParticleGravityAffector.cpp"]
+".bss" = 0x86c1ec
 
 ["daisy/scene/CSceneCollisionManager.cpp"]
 ".bss" = 0x86c14c
@@ -798,9 +801,10 @@
 ".bss" = 0x86c0ec
 
 ["daisy/scene/C3DSMeshFileLoader.cpp"]
+".bss" = 0x86c100
 
 ["daisy/scene/CXAnimationPlayer.cpp"]
-".rodata" = 0x61b760
+".bss" = 0x86c158
 
 ["daisy/video/Software/CSoftwareTexture.cpp"]
 ".bss" = 0x86c070

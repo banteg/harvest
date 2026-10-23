@@ -167,8 +167,45 @@ IAnimatedMesh* C3DSMeshFileLoader::createMesh(ox::io::IReadFile* file)
 bool C3DSMeshFileLoader::readColorChunk(ox::io::IReadFile* file, ChunkData* chunk,
 										ox::video::SColor& out)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	ChunkData data;
+	readChunkData(file, data);
+
+	unsigned char c[3];
+
+	if (sizeof(c) != data.header.length - data.read)
+	{
+		os::Printer::log("Unknown size of color chunk in 3Ds file.", ox::event::ELL_WARNING);
+		file->seek(data.header.length - data.read, true);
+		data.read += data.header.length - data.read;
+	}
+	else
+	{
+		file->read(c, data.header.length - data.read);
+		out = ox::video::SColor(255, c[0], c[1], c[2]);
+		data.read += data.header.length - data.read;
+	}
+
+	chunk->read += data.read;
+
+	return true;
+}
+
+
+void C3DSMeshFileLoader::readMaterialGroup(ox::io::IReadFile* file, ChunkData& data)
+{
+	SMaterialGroup group;
+
+	readString(file, data, group.MaterialName);
+
+	file->read(&group.faceCount, sizeof(group.faceCount));
+	data.read += sizeof(group.faceCount);
+
+	// read faces
+	group.faces = new short[group.faceCount];
+	file->read(group.faces, sizeof(short) * group.faceCount);
+	data.read += sizeof(short) * group.faceCount;
+
+	MaterialGroups.push_back(group);
 }
 
 
@@ -360,8 +397,96 @@ bool C3DSMeshFileLoader::readObjectChunk(ox::io::IReadFile* file, ChunkData* par
 
 void C3DSMeshFileLoader::composeObject(ox::io::IReadFile* file)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (Mesh->getMeshBufferCount() != (int)Materials.size())
+		loadMaterials(file);
+
+	if (MaterialGroups.empty())
+	{
+		// no material group, so add all
+		SMaterialGroup group;
+		group.faceCount = CountIndices / 3;
+		group.faces = new short[group.faceCount];
+		for (int i=0; i<group.faceCount; ++i)
+			group.faces[i] = i;
+		MaterialGroups.push_back(group);
+
+		// if we've got no material, add one without a texture
+		if (Materials.empty())
+		{
+			SCurrentMaterial m;
+			Materials.push_back(m);
+			SMeshBuffer* mb = new ox::scene::SMeshBuffer();
+			Mesh->addMeshBuffer(mb);
+			mb->Material = Materials[0].Material;
+			mb->drop();
+		}
+	}
+
+	for (unsigned int i=0; i<MaterialGroups.size(); ++i)
+	{
+		SMeshBuffer* mb = 0;
+
+		// find mesh buffer for this group
+		for (unsigned int j=0; j<Materials.size(); ++j)
+			if (MaterialGroups[i].MaterialName == Materials[j].Name)
+			{
+				mb = (SMeshBuffer*)Mesh->getMeshBuffer(j);
+				break;
+			}
+
+
+		if (mb != 0)
+		{
+			// add geometry to the buffer.
+
+			ox::video::S3DVertex vtx;
+			vtx.Color = ox::video::SColor(255, 255, 255, 255);
+			vtx.Normal.set(0,0,0);
+
+			for (int f=0; f<MaterialGroups[i].faceCount; ++f)
+			{
+				int vtxCount = mb->Vertices.size();
+
+				for (int v=0; v<3; ++v)
+				{
+					int idx = Indices[MaterialGroups[i].faces[f]*4 +v];
+
+					if (CountVertices > idx)
+					{
+						vtx.Pos.X = Vertices[idx*3 + 0];
+						vtx.Pos.Z = Vertices[idx*3 + 1];
+						vtx.Pos.Y = Vertices[idx*3 + 2];
+					}
+
+					if (CountTCoords > idx)
+					{
+						vtx.TCoords.X = TCoords[idx*2 + 0];
+						vtx.TCoords.Y = 1.0f -TCoords[idx*2 + 1];
+					}
+
+					mb->Vertices.push_back(vtx);
+				}
+
+				// compute normal
+				ox::core::CPlane3d<float> pl(mb->Vertices[vtxCount].Pos, mb->Vertices[vtxCount+2].Pos,
+						mb->Vertices[vtxCount+1].Pos);
+
+				mb->Vertices[vtxCount].Normal = pl.Normal;
+				mb->Vertices[vtxCount+1].Normal = pl.Normal;
+				mb->Vertices[vtxCount+2].Normal = pl.Normal;
+
+				// add indices
+
+				mb->Indices.push_back(vtxCount);
+				mb->Indices.push_back(vtxCount+2);
+				mb->Indices.push_back(vtxCount+1);
+			}
+		}
+		else
+			os::Printer::log("Found no matching material for Group in 3ds file.", ox::event::ELL_WARNING);
+	}
+
+	cleanUp();
 }
 
 
@@ -452,24 +577,6 @@ void C3DSMeshFileLoader::readTextureCoords(ox::io::IReadFile* file, ChunkData& d
 	TCoords = new float[CountTCoords * 3];
 	file->read(TCoords, tcoordsBufferByteSize);
 	data.read += tcoordsBufferByteSize;
-}
-
-
-void C3DSMeshFileLoader::readMaterialGroup(ox::io::IReadFile* file, ChunkData& data)
-{
-	SMaterialGroup group;
-
-	readString(file, data, group.MaterialName);
-
-	file->read(&group.faceCount, sizeof(group.faceCount));
-	data.read += sizeof(group.faceCount);
-
-	// read faces
-	group.faces = new short[group.faceCount];
-	file->read(group.faces, sizeof(short) * group.faceCount);
-	data.read += sizeof(short) * group.faceCount;
-
-	MaterialGroups.push_back(group);
 }
 
 

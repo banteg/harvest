@@ -26,6 +26,13 @@ using namespace ox::scene;
 
 
 
+//! destructor
+CMeshSceneNode::~CMeshSceneNode()
+{
+	if (Mesh)
+		Mesh->drop();
+}
+
 //! constructor
 CMeshSceneNode::CMeshSceneNode(IMesh* mesh, ISceneNode* parent, ISceneManager* mgr, int id,
 			const ox::core::CVector3d<float>& position, const ox::core::CVector3d<float>& rotation,	const ox::core::CVector3d<float>& scale)
@@ -52,20 +59,17 @@ CMeshSceneNode::CMeshSceneNode(IMesh* mesh, ISceneNode* parent, ISceneManager* m
 
 
 
-//! destructor
-CMeshSceneNode::~CMeshSceneNode()
-{
-	if (Mesh)
-		Mesh->drop();
-}
+
 
 
 
 //! frame
 void CMeshSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	ISceneNode::OnPreRender();
 }
 
 

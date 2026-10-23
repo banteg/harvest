@@ -37,8 +37,10 @@ CBspTreeSceneNode::~CBspTreeSceneNode()
 
 void CBspTreeSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	ISceneNode::OnPreRender();
 }
 
 
