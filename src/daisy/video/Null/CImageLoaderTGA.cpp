@@ -128,7 +128,7 @@ IImage* CImageLoaderTGA::loadImage(ox::io::IReadFile* file)
 	if (header.ImageType == 2)
 	{
 		data = new char[imageSize];
-	  	file->read(data, imageSize);
+		file->read(data, imageSize);
 	}
 	else
 	if(header.ImageType == 10)
