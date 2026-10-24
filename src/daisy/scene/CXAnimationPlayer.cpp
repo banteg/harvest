@@ -510,7 +510,7 @@ const ox::TArray<ox::core::CVector3d<float> >* CXAnimationPlayer::getDrawableSke
 
 
 //! animates the skeleton based on the animation data
-inline ox::core::CMatrix4 _concord_interpolate(const ox::core::CMatrix4& self, const ox::core::CMatrix4& b, float time, int pad = 0)
+inline ox::core::CMatrix4 interpolate(const ox::core::CMatrix4& self, const ox::core::CMatrix4& b, float time, int pad = 0)
 {
 	float ntime = 1.0f - time;
 	ox::core::CMatrix4 mat;
@@ -584,7 +584,7 @@ void CXAnimationPlayer::animateSkeleton()
 					mat1.setScale(currentSet.Animations[i].Vectors[idx1]);
 					mat2.setScale(currentSet.Animations[i].Vectors[idx2]);
 
-					joint.LocalAnimatedMatrix *= _concord_interpolate(mat1, mat2, factor);
+					joint.LocalAnimatedMatrix *= interpolate(mat1, mat2, factor);
 					joint.WasAnimatedThisFrame = true;
 				}
 				break;
@@ -594,14 +594,14 @@ void CXAnimationPlayer::animateSkeleton()
 					mat1.setTranslation(currentSet.Animations[i].Vectors[idx1]);
 					mat2.setTranslation(currentSet.Animations[i].Vectors[idx2]);
 
-					joint.LocalAnimatedMatrix *= _concord_interpolate(mat1, mat2, factor);
+					joint.LocalAnimatedMatrix *= interpolate(mat1, mat2, factor);
 					joint.WasAnimatedThisFrame = true;
 				}
 				break;
 			case 4:
 			case 3: // matrix
 				{
-					joint.LocalAnimatedMatrix = _concord_interpolate(currentSet.Animations[i].Matrices[idx1], currentSet.Animations[i].Matrices[idx2], factor);
+					joint.LocalAnimatedMatrix = interpolate(currentSet.Animations[i].Matrices[idx1], currentSet.Animations[i].Matrices[idx2], factor);
 
 					joint.WasAnimatedThisFrame = true;
 				}
