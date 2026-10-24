@@ -60,8 +60,12 @@ CWaterSurfaceSceneNode::~CWaterSurfaceSceneNode()
 //! frame
 void CWaterSurfaceSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	animateWaterSurface();
+
+	ISceneNode::OnPreRender();
 }
 
 
@@ -77,7 +81,7 @@ void CWaterSurfaceSceneNode::animateWaterSurface()
 	{
 		int vtxCnt = Mesh->getMeshBuffer(b)->getVertexCount();
 
-		switch(Mesh->getMeshBuffer(b)->getVertexType())
+		switch((int)Mesh->getMeshBuffer(b)->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{

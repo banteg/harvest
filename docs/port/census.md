@@ -77,26 +77,17 @@ The `replaced` list in `build.zig` (61 of the 201 recovered units, plus unrecove
 The partially recovered Irrlicht scene batch keeps only `CShadowVolumeSceneNode` in the port.
 Its material getter uses the shared static fallback under `HARVEST_PORT`, avoiding the
 original null reference (see [original-bugs.md](original-bugs.md)).
-The camera and OBJ loader continue using their existing port implementations. The other scene
-units with trap stubs are excluded: `CAnimatedMeshMD2`, `CBspTreeSceneNode`, `CMeshSceneNode`,
-`COctTreeSceneNode`, `CParticleBoxEmitter`,
-`CParticlePointEmitter`, `CParticleSystemSceneNode`, `CTestSceneNode`, `CTextSceneNode`,
-`CWaterSurfaceSceneNode` and `CXFileReader`. Their headers also contain traps in
-`CBspTree::BspPoly::operator==` and `OctTree<T>::OctTreeNode`'s constructor. These are incomplete
-matching sources awaiting recovery. `CDefaultMeshFormatLoader` and `CXMeshFileLoader`
-are excluded because they depend on these incomplete or unrecovered classes; PCX continues
-using `ImageLoaderStubs.cpp`. `CMetaTriangleSelector` and `COctTreeTriangleSelector` now match
-completely and contain no trap stubs, but remain excluded from the port pending integration.
+The camera and OBJ loader continue using their existing port implementations. `CAnimatedMeshMD2` and `CXFileReader` still contain trap stubs, and `CBspTreeSceneNode` includes `CBspTree.h`, whose `CBspTree::BspPoly::operator==` still traps; these are excluded. `CMeshSceneNode`, `COctTreeSceneNode`, `CParticleBoxEmitter`, `CParticlePointEmitter`, `CParticleSystemSceneNode`, `CTestSceneNode`, `CTextSceneNode`, `CWaterSurfaceSceneNode`, `CMetaTriangleSelector` and `COctTreeTriangleSelector` no longer contain trap stubs but remain excluded from the port pending integration. `CDefaultMeshFormatLoader` and `CXMeshFileLoader` are excluded because they depend on incomplete or unrecovered classes; PCX continues using `ImageLoaderStubs.cpp`.
 
-Ten scene units from the newer batch are added to `replaced` because each has trap stubs, and the
-port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspTree`,
+Ten scene units from the newer batch were added to `replaced` while they contained trap stubs;
+the port keeps the parts it needs: `C3DSMeshFileLoader`, `CAnimatedMeshMS3D`, `CBspTree`,
 `CCameraFPSSceneNode`, `CCameraMayaSceneNode`, `CGeometryCreator`, `CParticleGravityAffector`,
-`CQ3LevelMesh`, `CTerrainSceneNode` and `CXAnimationPlayer`. The recovered XML and text readers, the
+`CQ3LevelMesh`, `CTerrainSceneNode` and `CXAnimationPlayer`. Only `CBspTree`, `CQ3LevelMesh` and
+`CTerrainSceneNode` still contain trap stubs; the other seven remain excluded pending integration.
+The recovered XML and text readers, the
 BMP, JPEG and TGA image loaders, `CSoftwareTexture`, `CAnimatedMeshSceneNode` and
 `CSceneCollisionManager`, `CImage`, `CVideoSoftware` and `CSceneManager` continue using their existing port replacements.
-Across the recovered sources there are 58 out-of-line trap stubs and three header trap stubs:
-`CBspTree::BspPoly::operator==`, `OctTree<T>::OctTreeNode`'s constructor and
-`CSceneManager::DefaultNodeEntry`'s constructor. All units depending on these stubs stay excluded.
+Across the recovered sources there are 33 out-of-line trap stubs, in `CAnimatedMeshMD2`, `CAnimatedMeshSceneNode`, `CBspTree`, `CQ3LevelMesh`, `CSceneCollisionManager`, `CSceneManager`, `CTerrainSceneNode` and `CXFileReader`, and two header trap stubs: `CBspTree::BspPoly::operator==` and `CSceneManager::DefaultNodeEntry`'s constructor. All units depending on these stubs stay excluded.
 
 ## Port sources (`port/src/`)
 

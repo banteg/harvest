@@ -14,7 +14,7 @@ namespace core
 	const float ROUNDING_ERROR	= 0.0001f;
 
 	//! Constant for PI.
-	const float PI				= 3.14159f;
+	const float PI				= 3.14159274f;
 
 	//! Constant for converting bettween degrees and radiants.
 	const double GRAD_PI		= 180.0 / 3.1415926535897932384626433832795;

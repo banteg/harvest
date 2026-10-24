@@ -140,11 +140,105 @@ private:
 		OctTreeNode(int& nodeCount, int currentdepth,
 			const ox::TArray<SMeshChunk>& allmeshdata,
 			ox::TArray<SIndexChunk>* indices,
-			int minimalPolysPerNode)
-{
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
-}
+			int minimalPolysPerNode) : IndexData(0)
+		{
+			depth = currentdepth+1;
+			++nodeCount;
+
+			unsigned int i; // new ISO for scoping problem with different compilers
+
+			for (i=0; i<8; ++i)
+				Children[i] = 0;
+
+			if ((*indices).empty())
+			{
+				delete indices;
+				return;
+			}
+
+			bool found = false;
+
+			// find first point for bounding box
+
+			for (i=0; i<(*indices).size(); ++i)
+				if (!(*indices)[i].Indices.empty())
+				{
+					Box.reset(allmeshdata[i].Vertices[(*indices)[i].Indices[0]].Pos);
+					found = true;
+					break;
+				}
+
+			if (!found)
+			{
+				delete indices;
+				return;
+			}
+
+			int totalPrimitives = 0;
+
+			// now letz calculate our bounding box
+			for (i=0; i<(*indices).size(); ++i)
+			{
+				totalPrimitives += (*indices)[i].Indices.size();
+				for (unsigned int j=0; j<(*indices)[i].Indices.size(); ++j)
+					Box.addInternalPoint(allmeshdata[i].Vertices[(*indices)[i].Indices[j]].Pos);
+			}
+
+			ox::core::CVector3d<float> middle = Box.getCenter();
+			ox::core::CVector3d<float> edges[8];
+			Box.getEdges(edges);
+
+			// calculate all children
+			ox::core::CAabbox3d<float> box;
+
+			if (totalPrimitives > minimalPolysPerNode && !Box.isEmpty())
+			for (int ch=0; ch<8; ++ch)
+			{
+				box.reset(middle);
+				box.addInternalPoint(edges[ch]);
+
+				// create indices for child
+				ox::TArray<SIndexChunk>* cindexChunks = new ox::TArray<SIndexChunk>;
+
+				bool added = false;
+
+				for (unsigned int i=0; i<allmeshdata.size(); ++i)
+				{
+					SIndexChunk ic;
+					ic.MaterialId = allmeshdata[i].MaterialId;
+					(*cindexChunks).push_back(ic);
+
+					SIndexChunk& tic = (*cindexChunks)[i];
+
+					for (unsigned int t=0; t<(*indices)[i].Indices.size(); t+=3)
+					{
+						if (box.isPointInside(allmeshdata[i].Vertices[(*indices)[i].Indices[t]].Pos) &&
+							box.isPointInside(allmeshdata[i].Vertices[(*indices)[i].Indices[t+1]].Pos) &&
+							box.isPointInside(allmeshdata[i].Vertices[(*indices)[i].Indices[t+2]].Pos))
+						{
+							tic.Indices.push_back((*indices)[i].Indices[t]);
+							tic.Indices.push_back((*indices)[i].Indices[t+1]);
+							tic.Indices.push_back((*indices)[i].Indices[t+2]);
+
+							(*indices)[i].Indices.erase((*indices)[i].Indices.begin() + (int)t, (*indices)[i].Indices.begin() + (int)(t + 3));
+
+							t-=3;
+
+							added = true;
+						}
+					}
+				}
+
+				if (added)
+					Children[ch] = new OctTreeNode(nodeCount, depth,
+						allmeshdata, cindexChunks, minimalPolysPerNode);
+				else
+					delete cindexChunks;
+
+			} // end for all possible children
+
+			IndexData = indices;
+		}
 
 
 

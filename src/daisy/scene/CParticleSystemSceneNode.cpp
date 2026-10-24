@@ -263,28 +263,13 @@ const ox::core::CAabbox3d<float>& CParticleSystemSceneNode::getBoundingBox() con
 
 
 
-void CParticleSystemSceneNode::doParticleSystem(unsigned int time)
-{
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
-}
-
-
-
-//! Sets the size of all particles.
-void CParticleSystemSceneNode::setParticleSize(const ox::core::CDimension2d<float> &size)
-{
-	ParticleSize = size;
-}
-
-
 void CParticleSystemSceneNode::reallocateBuffers()
 {
 	if (Particles.size() * 4 > Vertices.size() ||
         Particles.size() * 6 > Indices.size())
 	{
 		int oldSize = Vertices.size();
-		Vertices.resize(Particles.size() * 4);
+		Vertices.reserve(Particles.size() * 4);
 
 		unsigned int i;
 
@@ -300,7 +285,7 @@ void CParticleSystemSceneNode::reallocateBuffers()
 		// fill remaining indices
 		int oldIdxSize = Indices.size();
 		int oldvertices = oldSize;
-		Indices.resize(Particles.size() * 6);
+		Indices.reserve(Particles.size() * 6);
 
 		for (i=oldIdxSize; i<Indices.size(); i+=6)
 		{
@@ -314,6 +299,72 @@ void CParticleSystemSceneNode::reallocateBuffers()
 		}
 	}
 }
+
+void CParticleSystemSceneNode::doParticleSystem(unsigned int time)
+{
+	unsigned int now = os::Timer::getTime();
+	unsigned int timediff = now - lastEmitTime;
+	lastEmitTime = now;
+
+	// run emitter
+	if (Emitter)
+	{
+		SParticle* array = 0;
+		int newParticles = Emitter->emitt(now, timediff, array);
+
+		if (newParticles && array)
+			for (int i=0; i<newParticles && Particles.size() < 16250; ++i)
+				Particles.push_back(array[i]);
+	}
+
+	// run affectors
+	ox::TList<IParticleAffector*>::iterator ait;
+	ait = AffectorList.begin();
+		while (ait != AffectorList.end())
+		{
+			(*ait)->affect(now, &Particles[0], Particles.size());
+			++ait;
+		}
+
+
+	Box.reset(ox::core::CVector3d<float>(0,0,0));
+
+	// animate all particles
+	float scale = (float)timediff;
+
+	for (int i=0; i<(int)Particles.size();)
+	{
+		if (now > Particles[i].endTime)
+			Particles.erase(Particles.begin() + i);
+		else
+		{
+			Particles[i].pos += (Particles[i].vector * scale);
+			Box.addInternalPoint(Particles[i].pos);
+			++i;
+		}
+	}
+
+	float m = ParticleSize.Width > ParticleSize.Height ? ParticleSize.Width : ParticleSize.Height;
+	m *= 0.5f;
+	Box.MaxEdge.X += m;
+	Box.MaxEdge.Y += m;
+	Box.MaxEdge.Z += m;
+
+	Box.MinEdge.X -= m;
+	Box.MinEdge.Y -= m;
+	Box.MinEdge.Z -= m;
+}
+
+
+
+//! Sets the size of all particles.
+void CParticleSystemSceneNode::setParticleSize(const ox::core::CDimension2d<float> &size)
+{
+	ParticleSize = size;
+}
+
+
+
 
 
 } // end namespace scene

@@ -10,6 +10,7 @@
 #include "ox/core/CString.h"
 #include "ox/core/CVector3d.h"
 #include "ox/video/S3DVertex.h"
+#include "ox/video/SColor.h"
 #include "ox/video/SMaterial.h"
 #include "ox/scene/IAnimatedMesh.h"
 #include "ox/scene/IMesh.h"
@@ -198,16 +199,158 @@ void CXAnimationPlayer::addFrameToMesh(CXFileReader::SXFrame* frame)
 
 ox::video::SMaterial CXAnimationPlayer::getMaterialFromXMaterial(CXFileReader::SXMaterial& xmat)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	ox::video::SMaterial mat;
+	mat.EmissiveColor = ox::video::SColor((int)(xmat.Emissive.a*255.0f), (int)(xmat.Emissive.r*255.0f), (int)(xmat.Emissive.g*255.0f), (int)(xmat.Emissive.b*255.0f));
+	mat.DiffuseColor = ox::video::SColor((int)(xmat.FaceColor.a*255.0f), (int)(xmat.FaceColor.r*255.0f), (int)(xmat.FaceColor.g*255.0f), (int)(xmat.FaceColor.b*255.0f));
+	mat.SpecularColor = ox::video::SColor((int)(xmat.Specular.a*255.0f), (int)(xmat.Specular.r*255.0f), (int)(xmat.Specular.g*255.0f), (int)(xmat.Specular.b*255.0f));
+	mat.Shininess = xmat.Power;
+
+	//if (mat.Shininess > ox::core::ROUNDING_ERROR)
+	//	mat. TODO: enable specular highlights
+
+	if (xmat.TextureFileName.size() != 0)
+	{
+		mat.Texture1 = Driver->getTexture(getTextureFileName(xmat.TextureFileName).c_str());
+		if (mat.Texture1 == 0)
+			mat.Texture1 = Driver->getTexture(xmat.TextureFileName.c_str());
+	}
+
+	return mat;
 }
 
 
 
+} }
+namespace ox { namespace video {
+inline bool operator == (const ox::video::S3DVertex& a, const ox::video::S3DVertex& b)
+{
+	return (a.Pos == b.Pos && a.Normal == b.Normal &&
+				b.Color.color == a.Color.color && a.TCoords == b.TCoords);
+}
+} }
+namespace daisy { namespace scene {
 void CXAnimationPlayer::addFacesToBuffer(int meshbuffernr, CXFileReader::SXMesh& mesh, int matnr, CXFileReader::SXFrame* frame)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	ox::scene::SMeshBuffer* buf = (SMeshBuffer*)OriginalMesh.MeshBuffers[meshbuffernr];
+
+	int vcnt = mesh.Vertices.size();
+	int tcnt = mesh.TextureCoords.size();
+	int ncnt = mesh.Normals.size();
+	int fcnt = mesh.Indices.size();
+
+	// precompute which joint belongs to which weight array
+	ox::TArray< int > jointNumberWeightNumberMap;
+	for (int w=0; w<(int)mesh.SkinWeights.size(); ++w)
+	{
+		int jnr = getJointNumberFromName(mesh.SkinWeights[w].TransformNodeName);
+		if (jnr == -1)
+			os::Printer::log("Unknown Joint referenced in x file",
+				mesh.SkinWeights[w].TransformNodeName.c_str(), ox::event::ELL_WARNING);
+		else
+		{
+			Joints[jnr].MatrixOffset = mesh.SkinWeights[w].MatrixOffset;
+			IsAnimatedSkinnedMesh = true;
+		}
+
+		jointNumberWeightNumberMap.push_back(jnr);
+	}
+
+
+	ox::video::S3DVertex v;
+	v.Color = 0xFFFFFFFF;
+
+	// add only those with material matnr
+	for (int i=0; i<(int)mesh.MaterialList.FaceIndices.size(); ++i)
+		if (mesh.MaterialList.FaceIndices[i] == matnr)
+		{
+			// add face number i
+			for (int f=0; f<3; ++f)
+			{
+				int idxidx = i*3+f;
+				int idx = mesh.Indices[idxidx];
+
+				v.Pos = mesh.Vertices[idx];
+
+				if (tcnt) v.TCoords = mesh.TextureCoords[idx];
+				if (ncnt) v.Normal = mesh.Normals[mesh.NormalIndices[idxidx]];
+
+				int nidx = ox::algo::linearSearchPos(buf->Vertices.begin(), buf->Vertices.end(), v);
+				bool alreadyIn = (nidx != -1);
+
+				if (!alreadyIn)
+				{
+					nidx = buf->Vertices.size();
+					buf->Indices.push_back(nidx);
+					buf->Vertices.push_back(v);
+					Weights[meshbuffernr].push_back(SVertexWeight());
+				}
+				else
+					buf->Indices.push_back(nidx);
+
+				bool isWeighted = alreadyIn;
+
+				// add weight data of this vertex to all joints
+				if (!alreadyIn)
+				for (int w=0; w<(int)mesh.SkinWeights.size(); ++w)
+				{
+					int vertexinweights = ox::algo::binarySearchPos(mesh.SkinWeights[w].Weights.begin(), mesh.SkinWeights[w].Weights.end(), CXFileReader::SXWeight(idx));
+
+					if (vertexinweights != -1)
+					{
+						int jnr = jointNumberWeightNumberMap[w];
+
+                        if (jnr != -1)
+						{
+							// weight per joint
+							Joints[jnr].Weights.push_back(SWeightData(
+								meshbuffernr,
+								nidx,
+								mesh.SkinWeights[w].Weights[vertexinweights].Weight));
+
+							// weight per vertex
+							SVertexWeight& weight = Weights[meshbuffernr][nidx];
+							weight.add(mesh.SkinWeights[w].Weights[vertexinweights].Weight, jnr);
+
+							isWeighted = true;
+						}
+					}
+				} // end for all weights
+
+				// if this vertex does not have a weight, create a virtual new
+				// joint and attach it to this one
+				if (!isWeighted)
+					addVirtualWeight(meshbuffernr, nidx, mesh, frame);
+
+			} // end for all faces
+
+		} // end for all materials
+
+	// generate missing normals
+	if (!ncnt)
+	{
+		ox::video::S3DVertex* v = &buf->Vertices[0];
+		fcnt = buf->Indices.size();
+		for (int u=0; u<fcnt; u+=3)
+		{
+			ox::core::CPlane3d<float> p(v[buf->Indices[u+0]].Pos,
+				v[buf->Indices[u+1]].Pos, v[buf->Indices[u+2]].Pos);
+			p.Normal.normalize();
+			v[buf->Indices[u+0]].Normal = p.Normal;
+			v[buf->Indices[u+1]].Normal = p.Normal;
+			v[buf->Indices[u+2]].Normal = p.Normal;
+		}
+	}
+
+	// transform vertices and normals
+	/*ox::core::CMatrix4 mat = frame->LocalMatrix;
+	mat.makeInverse();
+
+	vcnt = buf->Vertices.size();
+	for (int u=0; u<vcnt; ++u)
+	{
+		mat.transformVect(buf->Vertices[u].Pos);
+		mat.inverseRotateVect(buf->Vertices[u].Normal);
+	}*/
 }
 
 
@@ -367,10 +510,122 @@ const ox::TArray<ox::core::CVector3d<float> >* CXAnimationPlayer::getDrawableSke
 
 
 //! animates the skeleton based on the animation data
+inline ox::core::CMatrix4 interpolate(const ox::core::CMatrix4& self, const ox::core::CMatrix4& b, float time, int pad = 0)
+{
+	float ntime = 1.0f - time;
+	ox::core::CMatrix4 mat;
+	if (pad) { mat.M[0] = 0.0f; mat.M[1] = 0.0f; mat.M[2] = 0.0f; mat.M[3] = 0.0f; mat.M[4] = 0.0f; mat.M[5] = 0.0f; mat.M[6] = 0.0f; mat.M[7] = 0.0f; mat.M[8] = 0.0f; }
+	for (int i=0; i<16; ++i)
+		mat.M[i] = self.M[i]*ntime + b.M[i]*time;
+
+	return mat;
+}
+
 void CXAnimationPlayer::animateSkeleton()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	int i;
+
+	if (!AnimationSets.empty())
+	{
+
+		// reset joints
+		for (int jii=0; jii<(int)Joints.size(); ++jii)
+		{
+			Joints[jii].LocalAnimatedMatrix.makeIdentity();
+			Joints[jii].WasAnimatedThisFrame = false;
+		}
+
+		SXAnimationSet& currentSet = AnimationSets[CurrentAnimationSet];
+
+		// go through all animation tracks
+		for (i=0; i<(int)currentSet.Animations.size(); ++i)
+		{
+			SJoint& joint = Joints[currentSet.Animations[i].jointNr];
+
+			// find indexes to interpolate between
+			int idx1 = -1;
+			int idx2 = -1;
+
+			for (int t=0; t<(int)currentSet.Animations[i].Times.size()-1; ++t)
+				if (currentSet.Animations[i].Times[t] <= CurrentAnimationTime &&
+					currentSet.Animations[i].Times[t+1] >= CurrentAnimationTime)
+				{
+					idx1 = t;
+					idx2 = (t+1) % currentSet.Animations[i].Times.size();
+					break;
+				}
+
+			if (idx1 == -1 || idx2 == -1)
+				continue;
+
+			// calculate interpolation factor
+			float factor = (CurrentAnimationTime - currentSet.Animations[i].Times[idx1]) /
+				(currentSet.Animations[i].Times[idx2] - currentSet.Animations[i].Times[idx1]);
+
+			// animate it
+			switch(currentSet.Animations[i].keyType)
+			{
+			case 0: // rotation
+				{
+					// with this code, rotations are not 100% ok, they are
+					// mirrored.
+					ox::core::CQuaternion q;
+					q.slerp(currentSet.Animations[i].Quaternions[idx1],
+							currentSet.Animations[i].Quaternions[idx2],
+							factor);
+
+					joint.LocalAnimatedMatrix *= q.getMatrix();
+					joint.WasAnimatedThisFrame = true;
+				}
+				break;
+			case 1: // scale
+				{
+					ox::core::CMatrix4 mat1, mat2;
+					mat1.setScale(currentSet.Animations[i].Vectors[idx1]);
+					mat2.setScale(currentSet.Animations[i].Vectors[idx2]);
+
+					joint.LocalAnimatedMatrix *= interpolate(mat1, mat2, factor);
+					joint.WasAnimatedThisFrame = true;
+				}
+				break;
+			case 2: // position
+				{
+					ox::core::CMatrix4 mat1, mat2;
+					mat1.setTranslation(currentSet.Animations[i].Vectors[idx1]);
+					mat2.setTranslation(currentSet.Animations[i].Vectors[idx2]);
+
+					joint.LocalAnimatedMatrix *= interpolate(mat1, mat2, factor);
+					joint.WasAnimatedThisFrame = true;
+				}
+				break;
+			case 4:
+			case 3: // matrix
+				{
+					joint.LocalAnimatedMatrix = interpolate(currentSet.Animations[i].Matrices[idx1], currentSet.Animations[i].Matrices[idx2], factor);
+
+					joint.WasAnimatedThisFrame = true;
+				}
+				break;
+			}
+
+		}
+	}
+
+
+	// update all joints
+	for (int ji=0; ji<(int)Joints.size(); ++ji)
+	{
+		if (!Joints[ji].WasAnimatedThisFrame)
+			Joints[ji].LocalAnimatedMatrix = Joints[ji].LocalMatrix;
+
+        Joints[ji].AnimatedMatrix = Joints[ji].LocalAnimatedMatrix;
+
+		if (Joints[ji].Parent != -1)
+			Joints[ji].AnimatedMatrix = Joints[Joints[ji].Parent].AnimatedMatrix * Joints[ji].AnimatedMatrix;
+
+		Joints[ji].CombinedAnimationMatrix = Joints[ji].AnimatedMatrix *
+			Joints[ji].MatrixOffset;
+	}
 }
 
 

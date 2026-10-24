@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ox/core/CDimension2d.h"
 #include "ox/core/CVector3d.h"
+#include "ox/core/irrMath.h"
 #include "ox/scene/ISceneNode.h"
 #include "ox/scene/SViewFrustrum.h"
 #include "ox/event/IEventReceiver.h"
@@ -104,7 +105,7 @@ void CCameraMayaSceneNode::OnPostRender(unsigned int timeMs)
 {
 	animate();
 
-	setPosition(Pos);
+	ISceneNode::setPosition(Pos);
 	updateAbsolutePosition();
 
 	// This scene node cannot be animated by scene node animators.
@@ -120,8 +121,144 @@ bool CCameraMayaSceneNode::isMouseKeyDown(int key)
 
 void CCameraMayaSceneNode::animate()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	//Alt + LM = Rotieren um KameraDrehpunkt
+	//Alt + LM + MM = Dolly vor/zurück in Kamerablickrichtung (Geschwindigkeit % von Abstand Kamera zu Drehpunkt - Maximalweg zum Kameradrehpunkt)
+	//Alt + MM = Verschieben in Kameraebene (Bildmitte hängt vom Tempo ungefähr am Mauszeiger)
+
+	const SViewFrustrum* va = getViewFrustrum();
+
+	float nRotX = rotX;
+	float nRotY = rotY;
+	float nZoom = currentZoom;
+
+	if (isMouseKeyDown(0) && isMouseKeyDown(2))
+	{
+		if (!zooming)
+		{
+			zoomStartX = MousePos.X;
+			zoomStartY = MousePos.Y;
+			zooming = true;
+			nZoom = currentZoom;
+		}
+		else
+		{
+			float old = nZoom;
+			nZoom += (zoomStartX - MousePos.X) * zoomSpeed;
+
+			if (nZoom < 0)
+				nZoom = old;
+		}
+	}
+	else
+	{
+		if (zooming)
+		{
+			float old = currentZoom;
+			currentZoom = currentZoom + (zoomStartX - MousePos.X ) * zoomSpeed;
+			nZoom = currentZoom;
+
+			if (nZoom < 0)
+				nZoom = currentZoom = old;
+		}
+
+		zooming = false;
+	}
+
+	// Translation ---------------------------------
+
+	ox::core::CVector3d<float> translate(oldTargetX, oldTargetY, oldTargetZ);
+
+	ox::core::CVector3d<float> tvectX = Pos - Target;
+	tvectX = tvectX.crossProduct(UpVector);
+	tvectX.normalize();
+
+	ox::core::CVector3d<float> tvectY = (va->getFarLeftDown() - va->getFarRightDown());
+	tvectY = tvectY.crossProduct(UpVector.Y > 0 ? Pos - Target : Target - Pos);
+	tvectY.normalize();
+
+
+	if (isMouseKeyDown(2) && !zooming)
+	{
+		if (!translating)
+		{
+			translateStartX = MousePos.X;
+			translateStartY = MousePos.Y;
+			translating = true;
+		}
+		else
+		{
+			translate +=	tvectX * (translateStartX - MousePos.X)*translateSpeed +
+								tvectY * (translateStartY - MousePos.Y)*translateSpeed;
+		}
+	}
+	else
+	{
+		if (translating)
+		{
+			translate +=	tvectX * (translateStartX - MousePos.X)*translateSpeed +
+								tvectY * (translateStartY - MousePos.Y)*translateSpeed;
+			oldTargetX = translate.X;
+			oldTargetY = translate.Y;
+			oldTargetZ = translate.Z;
+		}
+
+		translating = false;
+	}
+
+	// Rotation ------------------------------------
+
+	if (isMouseKeyDown(0) && !zooming)
+	{
+		if (!rotating)
+		{
+			rotateStartX = MousePos.X;
+			rotateStartY = MousePos.Y;
+			rotating = true;
+			nRotX = rotX;
+			nRotY = rotY;
+		}
+		else
+		{
+			nRotX += (rotateStartX - MousePos.X) * rotateSpeed;
+			nRotY += (rotateStartY - MousePos.Y) * rotateSpeed;
+		}
+	}
+	else
+	{
+		if (rotating)
+		{
+			rotX = rotX + (rotateStartX - MousePos.X) * rotateSpeed;
+			rotY = rotY + (rotateStartY - MousePos.Y) * rotateSpeed;
+			nRotX = rotX;
+			nRotY = rotY;
+		}
+
+		rotating = false;
+	}
+
+	// Set Pos ------------------------------------
+
+	Target = translate;
+
+	Pos.X = nZoom + Target.X;
+	Pos.Y = Target.Y;
+	Pos.Z = Target.Z;
+
+	{ double deg = (nRotY) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Y -= (Target).Y; Pos.set(Pos.X*cs - Pos.Y*sn, Pos.X*sn + Pos.Y*cs, Pos.Z); Pos.X += (Target).X; Pos.Y += (Target).Y; }
+	{ double deg = (-nRotX) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Z -= (Target).Z; Pos.set(Pos.X*cs - Pos.Z*sn, Pos.Y, Pos.X*sn + Pos.Z*cs); Pos.X += (Target).X; Pos.Z += (Target).Z; }
+
+	// Rotation Error ----------------------------
+
+	if (nRotY < 0.0f)
+		nRotY *= -1.0f;
+
+	nRotY = (float)fmod(nRotY, 360.0f);
+
+
+	if (nRotY >= 90.0f && nRotY <= 270.0f)
+		UpVector.set(0, -1, 0);
+	else
+		UpVector.set(0, 1, 0);
 }
 
 

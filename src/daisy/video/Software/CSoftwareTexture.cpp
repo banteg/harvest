@@ -22,8 +22,29 @@ using namespace ox::video;
 CSoftwareTexture::CSoftwareTexture(IImage* image)
 : Texture(0)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+
+	if (image)
+	{
+		ox::core::CDimension2d<int> optSize;
+		ox::core::CDimension2d<int> origSize = image->getDimension();
+		OrigSize = origSize;
+
+		optSize.Width = getTextureSizeFromSurfaceSize(origSize.Width);
+		optSize.Height = getTextureSizeFromSurfaceSize(origSize.Height);
+
+		Image = new CImage(ECF_A1R5G5B5, image);
+
+		if (optSize == origSize)
+		{
+			Texture = Image;
+			Texture->grab();
+		}
+		else
+		{
+			Texture = new CImage(ECF_A1R5G5B5, optSize);
+			Image->copyToScaling(Texture);
+		}
+	}
 }
 
 
@@ -51,8 +72,13 @@ void* CSoftwareTexture::lock()
 //! unlock function
 void CSoftwareTexture::unlock()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (Image != Texture)
+	{
+		os::Printer::log("Performance warning, slow unlock of non power of 2 texture.", ox::event::ELL_WARNING);
+		Image->copyToScaling(Texture);
+	}
+
+	Image->unlock();
 }
 
 

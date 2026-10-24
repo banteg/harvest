@@ -233,8 +233,120 @@ void CImageLoaderBmp::decompress4BitRLE(char*& BmpData, int size, int width, int
 //! creates a surface from the file
 IImage* CImageLoaderBmp::loadImage(ox::io::IReadFile* file)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	SBMPHeader header;
+
+	file->seek(0);
+	file->read(&header, sizeof(header));
+
+	int pitch = 0;
+
+	//! return if the header is false
+
+	if (header.Id != 0x4d42 && header.Id != 0x424d)
+		return 0;
+
+	// return if ther is a compression uses
+
+	//if (header.Compression > 2) // we'll only handle RLE-Compression
+	//	return 0;
+
+	if (header.Compression != 0)
+	{
+		os::Printer::log("Compressed BMPs are currently not supported.", ox::event::ELL_ERROR);
+		return 0;
+	}
+
+	// adjust bitmap data size to dword boundary
+	header.BitmapDataSize += (4-(header.BitmapDataSize%4))%4;
+
+	// read palette
+
+	int pos = file->getPos();
+	int paletteSize = (header.BitmapDataOffset - pos) / 4;
+
+	if (paletteSize)
+	{
+		PaletteData = new int[paletteSize];
+		file->read(PaletteData, paletteSize * sizeof(int));
+	}
+
+	// read image data
+
+	if (!header.BitmapDataSize)
+	{
+		// okay, wir dürfen raten wie gross die bitmap ist.
+		// manche Ar*******er speichern das nicht ab.
+		header.BitmapDataSize = file->getSize() - header.BitmapDataOffset;
+	}
+
+
+	file->seek(header.BitmapDataOffset);
+
+	float t = (header.Width) * (header.BPP / 8.0f);
+	int widthInBytes = (int)t;
+	t -= widthInBytes;
+	if (t!=0.0f)
+		++widthInBytes;
+
+	int lineData = widthInBytes + ((4-(widthInBytes%4)))%4;
+	pitch = lineData - widthInBytes;
+
+	BmpData = new char[header.BitmapDataSize];
+	file->read(BmpData, header.BitmapDataSize);
+
+
+	// decompress data if needed
+	switch(header.Compression)
+	{
+	case 1: // 8 bit rle
+		decompress8BitRLE(BmpData, header.BitmapDataSize, header.Width, header.Height, pitch);
+		break;
+	case 2: // 4 bit rle
+		decompress4BitRLE(BmpData, header.BitmapDataSize, header.Width, header.Height, pitch);
+		break;
+	}
+
+	// create surface
+
+	IImage* image = 0;
+
+	switch(header.BPP)
+	{
+	case 1:
+		image = new CImage(ECF_A1R5G5B5, ox::core::CDimension2d<int>(header.Width, header.Height));
+		CColorConverter::convert1BitTo16BitFlipMirror(BmpData, (short*)image->lock(), header.Width, header.Height, pitch);
+		image->unlock();
+		break;
+	case 4:
+		image = new CImage(ECF_A1R5G5B5, ox::core::CDimension2d<int>(header.Width, header.Height));
+		CColorConverter::convert4BitTo16BitFlipMirror(BmpData, (short*)image->lock(), header.Width, header.Height, pitch, PaletteData);
+		image->unlock();
+		break;
+	case 8:
+		image = new CImage(ECF_A1R5G5B5, ox::core::CDimension2d<int>(header.Width, header.Height));
+		CColorConverter::convert8BitTo16BitFlipMirror(BmpData, (short*)image->lock(), header.Width, header.Height, pitch, PaletteData);
+		image->unlock();
+		break;
+	case 16:
+		break;
+	case 24:
+		image = new CImage(ECF_R8G8B8, ox::core::CDimension2d<int>(header.Width, header.Height));
+		CColorConverter::convert24BitTo24BitFlipMirrorColorShuffle(BmpData, (char*)image->lock(), header.Width, header.Height, pitch);
+		image->unlock();
+		break;
+	case 32:
+		break;
+	};
+
+	// clean up
+
+	delete [] PaletteData;
+	PaletteData = 0;
+
+	delete [] BmpData;
+	BmpData = 0;
+
+	return image;
 }
 
 

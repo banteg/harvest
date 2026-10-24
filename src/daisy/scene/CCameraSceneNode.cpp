@@ -210,12 +210,12 @@ void CCameraSceneNode::OnPreRender()
 	if (!driver)
 		return;
 
+	updateAbsolutePosition();
+
 	if (SceneManager->getActiveCamera() == this)
 	{
 		screenDim.Width = (float)driver->getScreenSize().Width;
 		screenDim.Height = (float)driver->getScreenSize().Height;
-
-		driver->setTransform(ox::video::ETS_PROJECTION, Projection);
 
 		// if upvector and vector to the target are the same, we have a
 		// problem. so solve this problem:
@@ -234,6 +234,7 @@ void CCameraSceneNode::OnPreRender()
 
 		View.buildCameraLookAtMatrixLH(pos, Target, up);
 		recalculateViewArea();
+		driver->setTransform(ox::video::ETS_PROJECTION, Projection);
 
 		SceneManager->registerNodeForRendering(this, SNRT_LIGHT_AND_CAMERA);
 	}
