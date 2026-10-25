@@ -274,10 +274,16 @@ void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
 		idxbfr2.IndexedVertexBlockSize.Height = (block.Size.Height - lodfactor - 1) / lodfactor;
 
 		if (ox::algo::binarySearchPos(widths.begin(), widths.end(), idxbfr2.IndexedVertexBlockSize.Width)==-1)
-			widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
+			{
+				widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
+				ox::algo::sort(widths.begin(), widths.end());
+			}
 
 		if (ox::algo::binarySearchPos(heights.begin(), heights.end(), idxbfr2.IndexedVertexBlockSize.Height)==-1)
-			heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
+			{
+				heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
+				ox::algo::sort(heights.begin(), heights.end());
+			}
 
 		// generate indices
 		for (y=0; y<(int)((block.Size.Height-lodfactor-1)/lodfactor); ++y)
