@@ -46,6 +46,122 @@ CTerrainSceneNode::CTerrainSceneNode(ISceneNode* parent,
 }
 
 
+void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
+{
+	// search if we already have a fitting indexbuffer
+	for (int i=0; i<(int)IndexArrayList.size(); ++i)
+		if (IndexArrayList[i]->VertexBlockSize == block.Size)
+		{
+			block.IndexArray = IndexArrayList[i];
+			return;
+		}
+
+	// add new index array
+	IndexArrayList.push_back(new SIndexArray());
+	SIndexArray& idxarray = *IndexArrayList[IndexArrayList.size()-1];
+    idxarray.VertexBlockSize = block.Size;
+	block.IndexArray = IndexArrayList[IndexArrayList.size()-1];
+
+	int x,y;
+
+	// create levels of detail without borders
+
+	ox::TArray<int> widths;
+	ox::TArray<int> heights;
+
+	for (int lodfactor=1;
+		(block.Size.Height/lodfactor)>2 &&
+		(block.Size.Width/lodfactor)>2; lodfactor*=2)
+	{
+		idxarray.LoDs.push_back(SLoD());
+		int lodnr = idxarray.LoDs.size()-1;
+		idxarray.LoDs[lodnr].Buffer.push_back(SIndexBuffer());
+		SIndexBuffer& idxbfr2 = idxarray.LoDs[lodnr].Buffer[0];
+
+		idxbfr2.OrigVertexBlockSize = block.Size;
+		idxbfr2.IndexedVertexBlockSize.Width = (block.Size.Width - lodfactor - 1) / lodfactor;
+		idxbfr2.IndexedVertexBlockSize.Height = (block.Size.Height - lodfactor - 1) / lodfactor;
+
+		if (ox::algo::binarySearchPos(widths.begin(), widths.end(), idxbfr2.IndexedVertexBlockSize.Width)==-1)
+			{
+				widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
+				ox::algo::sort(widths.begin(), widths.end());
+			}
+
+		if (ox::algo::binarySearchPos(heights.begin(), heights.end(), idxbfr2.IndexedVertexBlockSize.Height)==-1)
+			{
+				heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
+				ox::algo::sort(heights.begin(), heights.end());
+			}
+
+		// generate indices
+		for (y=0; y<(int)((block.Size.Height-lodfactor-1)/lodfactor); ++y)
+			for (x=0; x<(int)((block.Size.Width-lodfactor-1)/lodfactor); ++x)
+		{
+			int c = ((y*lodfactor)*block.Size.Width) + (x*lodfactor);
+
+			idxbfr2.Indices.push_back(c);
+			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
+			idxbfr2.Indices.push_back(c + lodfactor);
+
+			idxbfr2.Indices.push_back(c + lodfactor);
+			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
+			idxbfr2.Indices.push_back(c + lodfactor + (block.Size.Width*lodfactor));
+		}
+	}
+
+	// now every LOD has got its default indices. The indices to fit
+	// the different borders are still missing. We create them now.
+
+	for (int l=0; l<(int)idxarray.LoDs.size(); ++l)
+	{
+		// copy already created indices
+		SLoD& lod = idxarray.LoDs[l];
+		SIndexBuffer virginBuffer = lod.Buffer[0];
+		lod.Buffer.clear();
+
+		for (int w=0; w<(int)widths.size(); ++w)
+			for (int h=0; h<(int)heights.size(); ++h)
+			{
+				lod.Buffer.push_back(virginBuffer);
+				SIndexBuffer& buf = lod.Buffer[lod.Buffer.size()-1];
+
+				int wVertexStep = buf.OrigVertexBlockSize.Width / buf.IndexedVertexBlockSize.Width;
+				int hVertexStep = buf.OrigVertexBlockSize.Height / buf.IndexedVertexBlockSize.Height;
+
+				// add %width% indices on top
+				//if (widths[w] <= buf.IndexedVertexBlockSize.Width)
+				{
+					// this block has more details
+
+					//buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*hVertexStep);
+					//buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Width*wVertexStep));
+					//buf.Indices.push_back(buf.OrigVertexBlockSize.Width+(buf.OrigVertexBlockSize.Width*wVertexStep)-1);
+
+					// add first basic triangle
+					// |------
+					// |    /
+					// |  /
+					// |/
+					//
+					buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*wVertexStep);
+					buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Height*hVertexStep));
+					buf.Indices.push_back(buf.OrigVertexBlockSize.Height+(buf.OrigVertexBlockSize.Height*wVertexStep)-1);
+
+				}
+				/*else
+				{
+					// this block has smaller or similar details
+
+					int vpb = widths[w] / buf.IndexedVertexBlockSize.Width;
+					buf.Indices.clear();
+				}*/
+
+			}
+	}
+}
+
+
 //! destructor
 CTerrainSceneNode::~CTerrainSceneNode()
 {
@@ -237,122 +353,6 @@ bool CTerrainSceneNode::load(ox::video::IImage* texture, ox::video::IImage* inpu
 
 
 //! creates index buffers for all level of details for a vertex block
-void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
-{
-	// search if we already have a fitting indexbuffer
-	for (int i=0; i<(int)IndexArrayList.size(); ++i)
-		if (IndexArrayList[i]->VertexBlockSize == block.Size)
-		{
-			block.IndexArray = IndexArrayList[i];
-			return;
-		}
-
-	// add new index array
-	IndexArrayList.push_back(new SIndexArray());
-	SIndexArray& idxarray = *IndexArrayList[IndexArrayList.size()-1];
-    idxarray.VertexBlockSize = block.Size;
-	block.IndexArray = IndexArrayList[IndexArrayList.size()-1];
-
-	int x,y;
-
-	// create levels of detail without borders
-
-	ox::TArray<int> widths;
-	ox::TArray<int> heights;
-
-	for (int lodfactor=1;
-		(block.Size.Height/lodfactor)>2 &&
-		(block.Size.Width/lodfactor)>2; lodfactor*=2)
-	{
-		idxarray.LoDs.push_back(SLoD());
-		int lodnr = idxarray.LoDs.size()-1;
-		idxarray.LoDs[lodnr].Buffer.push_back(SIndexBuffer());
-		SIndexBuffer& idxbfr2 = idxarray.LoDs[lodnr].Buffer[0];
-
-		idxbfr2.OrigVertexBlockSize = block.Size;
-		idxbfr2.IndexedVertexBlockSize.Width = (block.Size.Width - lodfactor - 1) / lodfactor;
-		idxbfr2.IndexedVertexBlockSize.Height = (block.Size.Height - lodfactor - 1) / lodfactor;
-
-		if (ox::algo::binarySearchPos(widths.begin(), widths.end(), idxbfr2.IndexedVertexBlockSize.Width)==-1)
-			{
-				widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
-				ox::algo::sort(widths.begin(), widths.end());
-			}
-
-		if (ox::algo::binarySearchPos(heights.begin(), heights.end(), idxbfr2.IndexedVertexBlockSize.Height)==-1)
-			{
-				heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
-				ox::algo::sort(heights.begin(), heights.end());
-			}
-
-		// generate indices
-		for (y=0; y<(int)((block.Size.Height-lodfactor-1)/lodfactor); ++y)
-			for (x=0; x<(int)((block.Size.Width-lodfactor-1)/lodfactor); ++x)
-		{
-			int c = ((y*lodfactor)*block.Size.Width) + (x*lodfactor);
-
-			idxbfr2.Indices.push_back(c);
-			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
-			idxbfr2.Indices.push_back(c + lodfactor);
-
-			idxbfr2.Indices.push_back(c + lodfactor);
-			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
-			idxbfr2.Indices.push_back(c + lodfactor + (block.Size.Width*lodfactor));
-		}
-	}
-
-	// now every LOD has got its default indices. The indices to fit
-	// the different borders are still missing. We create them now.
-
-	for (int l=0; l<(int)idxarray.LoDs.size(); ++l)
-	{
-		// copy already created indices
-		SLoD& lod = idxarray.LoDs[l];
-		SIndexBuffer virginBuffer = lod.Buffer[0];
-		lod.Buffer.clear();
-
-		for (int w=0; w<(int)widths.size(); ++w)
-			for (int h=0; h<(int)heights.size(); ++h)
-			{
-				lod.Buffer.push_back(virginBuffer);
-				SIndexBuffer& buf = lod.Buffer[lod.Buffer.size()-1];
-
-				int wVertexStep = buf.OrigVertexBlockSize.Width / buf.IndexedVertexBlockSize.Width;
-				int hVertexStep = buf.OrigVertexBlockSize.Height / buf.IndexedVertexBlockSize.Height;
-
-				// add %width% indices on top
-				//if (widths[w] <= buf.IndexedVertexBlockSize.Width)
-				{
-					// this block has more details
-
-					//buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*hVertexStep);
-					//buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Width*wVertexStep));
-					//buf.Indices.push_back(buf.OrigVertexBlockSize.Width+(buf.OrigVertexBlockSize.Width*wVertexStep)-1);
-
-					// add first basic triangle
-					// |------
-					// |    /
-					// |  /
-					// |/
-					//
-					buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*wVertexStep);
-					buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Height*hVertexStep));
-					buf.Indices.push_back(buf.OrigVertexBlockSize.Height+(buf.OrigVertexBlockSize.Height*wVertexStep)-1);
-
-				}
-				/*else
-				{
-					// this block has smaller or similar details
-
-					int vpb = widths[w] / buf.IndexedVertexBlockSize.Width;
-					buf.Indices.clear();
-				}*/
-
-			}
-	}
-}
-
-
 //! calculates all normals of the vertex block
 void CTerrainSceneNode::calculateNormals(SVertexBlock& block)
 {
