@@ -75,10 +75,28 @@ using namespace ox::scene;
 			unsigned int material;      // number of material index
 
 			bool operator==(const BspPoly& other) const
-{
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
-}
+			{
+				if (vertices.size()  != other.vertices.size() ||
+					indices.size() != other.indices.size() ||
+					plane != other.plane)
+				return false;
+
+				// compare indices
+
+				unsigned int i; // new ISO for scoping not liked by some compilers
+
+				for (i=0; i<indices.size(); ++i)
+					if (indices[i] != other.indices[i])
+						return false;
+
+				// compare vertices
+
+				for (i=0; i<vertices.size(); ++i)
+					if (!(vertices[i].Pos == other.vertices[i].Pos && vertices[i].Normal == other.vertices[i].Normal && vertices[i].Color.color == other.vertices[i].Color.color && vertices[i].TCoords == other.vertices[i].TCoords))
+						return false;
+
+				return true;
+			}
 		};
 
 		struct BspNode

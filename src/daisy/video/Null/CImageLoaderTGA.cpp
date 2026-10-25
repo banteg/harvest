@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ox/io/CHelpIO.h"
 #include "ox/core/CDimension2d.h"
 #include "ox/video/IVideoDriver.h"
 #include "ox/video/ColorPacking.h"
@@ -107,7 +108,18 @@ IImage* CImageLoaderTGA::loadImage(ox::io::IReadFile* file)
 	STGAHeader header;
 
 	file->seek(0);
-	file->read(&header, sizeof(STGAHeader));
+	file->read(&header.IdLength, 1);
+	file->read(&header.ColorMapType, 1);
+	file->read(&header.ImageType, 1);
+	file->read(header.FirstEntryIndex, 2);
+	header.ColorMapLength = ox::io::CHelpIO::readShort(file);
+	file->read(&header.ColorMapEntrySize, 1);
+	file->read(header.XOrigin, 2);
+	file->read(header.YOrigin, 2);
+	header.ImageWidth = ox::io::CHelpIO::readShort(file);
+	header.ImageHeight = ox::io::CHelpIO::readShort(file);
+	file->read(&header.PixelDepth, 1);
+	file->read(&header.ImageDescriptor, 1);
 
 	// skip image identifikation field
 	if (header.IdLength)

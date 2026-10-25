@@ -269,5 +269,11 @@ void CCameraMayaSceneNode::allKeysUp()
 }
 
 
+//! sets the position of the node
+void CCameraMayaSceneNode::setPosition(const ox::core::CVector3d<float>& newpos)
+{
+	currentZoom = newpos.getLength();
+}
+
 } // end namespace
 } // end namespace

@@ -576,7 +576,8 @@ int CAlienEntity::updateLogic(float frameDelta)
             float angle = Id * 10.0f * .0174532905f;
             double targetXOffset = cos((double)angle) * 450.0;
             target.X = targetXOffset + center.X;
-            target.Y = sin((double)angle) * 450.0 + center.Y;
+            double targetYOffset = sin((double)angle) * 450.0;
+            target.Y = targetYOffset + center.Y;
         }
     }
     else

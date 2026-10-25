@@ -15,8 +15,13 @@
 #include "../video/SColor.h"
 #include "../video/SLight.h"
 
+namespace daisy { struct SKeyMap; }
+
 namespace ox {
-struct SKeyMap;
+#ifdef HARVEST_PORT
+using daisy::SKeyMap;
+#endif
+
 namespace core { template <class T> class CAabbox3d; }
 namespace gui { class IGUIFont; }
 namespace video {
@@ -86,7 +91,7 @@ public:
     virtual ICameraSceneNode* addCameraSceneNodeMaya(ISceneNode* parent, float rotateSpeed, float zoomSpeed,
         float translationSpeed, int id) = 0;
     virtual ICameraSceneNode* addCameraSceneNodeFPS(ISceneNode* parent, float rotateSpeed, float moveSpeed,
-        int id, SKeyMap* keyMapArray, int keyMapSize) = 0;
+        int id, daisy::SKeyMap* keyMapArray, int keyMapSize) = 0;
     virtual ILightSceneNode* addLightSceneNode(ISceneNode* parent = 0,
         const core::CVector3d<float>& position = core::CVector3d<float>(0, 0, 0),
         video::SColorf color = video::SColorf(1.0f, 1.0f, 1.0f), float radius = 100.0f, int id = -1) = 0;

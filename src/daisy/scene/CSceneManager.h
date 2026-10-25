@@ -306,6 +306,8 @@ using namespace ox::scene;
 		//! Removes all children of this scene node
 		virtual void removeAll();
 
+		virtual void removeAllMeshes();
+
 	private:
 
 		//! adds a mesh to the list
@@ -341,9 +343,13 @@ using namespace ox::scene;
 
 			DefaultNodeEntry(ISceneNode* n)
 			{
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
-}
+				textureValue = 0;
+
+				if (n->getMaterialCount())
+					textureValue = (int)(long)(n->getMaterial(0).Texture1);
+
+				node = n;
+			}
 
 			ISceneNode* node;
 			int textureValue;

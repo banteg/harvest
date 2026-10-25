@@ -3,6 +3,7 @@
 // Recovered for Harvest's daisy namespace; not the original source.
 
 #include <iostream>
+#include "ox/core/CStringFunctions.h"
 #include "ox/core/CAabbox3d.h"
 #include "ox/core/CDimension2d.h"
 #include "ox/core/CString.h"
@@ -171,7 +172,7 @@ void CSceneManager::addMesh(const char* filename, IAnimatedMesh* mesh)
 	MeshEntry e;
 	e.Mesh = mesh;
 	e.Name = filename;
-	e.Name.make_lower();
+	ox::core::CStringFunctions::ansiMakeLower(e.Name);
 
 	Meshes.push_back(e);
 }
@@ -181,7 +182,7 @@ void CSceneManager::addMesh(const char* filename, IAnimatedMesh* mesh)
 bool CSceneManager::wasMeshLoaded(const char* filename)
 {
 	ox::core::CString<char> name = filename;
-	name.make_lower();
+	ox::core::CStringFunctions::ansiMakeLower(name);
 	return findMesh(name.c_str()) != 0;
 }
 
@@ -189,8 +190,10 @@ bool CSceneManager::wasMeshLoaded(const char* filename)
 //! returns an already loaded mesh
 IAnimatedMesh* CSceneManager::findMesh(const char* lowerMadeFilename)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	MeshEntry e;
+	e.Name = lowerMadeFilename;
+	int id = ox::algo::binarySearchPos(Meshes.begin(), Meshes.end(), e);
+	return (id != -1) ? Meshes[id].Mesh : 0;
 }
 
 
@@ -200,7 +203,7 @@ IAnimatedMesh* CSceneManager::getMesh(const char* filename)
 	IAnimatedMesh* msh = 0;
 
 	ox::core::CString<char> name = filename;
-	name.make_lower();
+	ox::core::CStringFunctions::ansiMakeLower(name);
 
 	msh = findMesh(name.c_str());
 	if (msh)
@@ -1004,8 +1007,24 @@ void CSceneManager::clearDeletionList()
 //! Returns the first scene node with the specified id.
 ISceneNode* CSceneManager::getSceneNodeFromId(int id, ISceneNode* start)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (start == 0)
+		start = getRootSceneNode();
+
+	if (start->getID() == id)
+		return start;
+
+	ISceneNode* node = 0;
+
+	const ox::TList<ISceneNode*>& list = start->getChildren();
+	ox::TList<ISceneNode*>::const_iterator it = list.begin();
+	for (; it!=list.end(); ++it)
+	{
+		node = getSceneNodeFromId(id, *it);
+		if (node)
+			return node;
+	}
+
+	return 0;
 }
 
 
@@ -1040,10 +1059,16 @@ void CSceneManager::clear()
 ISceneManager* createSceneManager(ox::video::IVideoDriver* driver, ox::io::IFileSystem* fs,
 								  ox::gui::ICursorControl* cursorcontrol)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	return new CSceneManager(driver, fs, cursorcontrol);
 }
 
+
+void CSceneManager::removeAllMeshes()
+{
+    for (unsigned int it = 0; it < Meshes.size(); ++it)
+        Meshes[it].Mesh->drop();
+    Meshes.clear();
+}
 
 } // end namespace scene
 } // end namespace daisy

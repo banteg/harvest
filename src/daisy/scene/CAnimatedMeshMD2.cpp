@@ -501,8 +501,189 @@ inline int CAnimatedMeshMD2::max(int a, int b)
 //! loads an md3 file
 bool CAnimatedMeshMD2::loadFile(ox::io::IReadFile* file)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (!file)
+		return false;
+
+	SMD2Header header;
+	char* frames = 0;
+
+	file->read(&header, sizeof(SMD2Header));
+
+	if (header.magic != MD2_MAGIC_NUMBER || header.version != MD2_VERSION)
+	{
+		os::Printer::log("MD2 Loader: Wrong file header", file->getFileName(), ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// create Memory for indices and frames
+
+	Indices.reserve(header.numTriangles);
+	FrameList = new ox::TArray<ox::video::S3DVertex>[header.numFrames];
+	FrameCount = header.numFrames;
+
+	int i;
+
+	for (i=0; i<header.numFrames; ++i)
+		FrameList[i].reserve(header.numVertices);
+
+	// read TextureCoords
+
+	file->seek(header.offsetTexcoords, false);
+	SMD2TextureCoordinate* textureCoords = new SMD2TextureCoordinate[header.numTexcoords];
+
+	if (!file->read(textureCoords, sizeof(SMD2TextureCoordinate)*header.numTexcoords))
+	{
+		os::Printer::log("MD2 Loader: Error reading TextureCoords.", file->getFileName(), ox::event::ELL_ERROR);
+		return false;
+	}
+
+	// read Triangles
+
+	file->seek(header.offsetTriangles, false);
+
+	SMD2Triangle *triangles = new SMD2Triangle[header.numTriangles];
+	if (!file->read(triangles, header.numTriangles *sizeof(SMD2Triangle)))
+	{
+		os::Printer::log("MD2 Loader: Error reading triangles.", file->getFileName(), ox::event::ELL_ERROR);
+		return false;
+	}
+
+	// read Vertices
+
+	char buffer[MD2_MAX_VERTS*4+128];
+	SMD2Frame* frame = (SMD2Frame*)buffer;
+
+	ox::TArray< ox::core::CVector3d<float> >* vertices = new ox::TArray< ox::core::CVector3d<float> >[header.numFrames];
+	ox::TArray< ox::core::CVector3d<float> >* normals = new ox::TArray< ox::core::CVector3d<float> >[header.numFrames];
+
+	file->seek(header.offsetFrames, false);
+
+	for (i = 0; i<header.numFrames; ++i)
+	{
+		// read vertices
+
+		vertices[i].reserve(header.numVertices);
+		file->read(frame, header.frameSize);
+
+		// store frame data
+
+		SFrameData fdata;
+		fdata.begin = i;
+		fdata.end = i;
+		fdata.fps = 7;
+
+		if (frame->name[0])
+		{
+			for (int s = 0; frame->name[s]!=0 && (frame->name[s] < '0' ||
+				frame->name[s] > '9'); ++s)
+				fdata.name += frame->name[s];
+
+			if (!FrameData.empty() && FrameData[FrameData.size()-1].name == fdata.name)
+				++FrameData[FrameData.size()-1].end;
+			else
+				FrameData.push_back(fdata);
+		}
+
+		// add vertices
+
+		for (int j=0; j<header.numVertices; ++j)
+		{
+			ox::core::CVector3d<float> v;
+			v.X = (float)frame->vertices[j].vertex[0] * frame->scale[0] + frame->translate[0];
+			v.Z = (float)frame->vertices[j].vertex[1] * frame->scale[1] + frame->translate[1];
+			v.Y = (float)frame->vertices[j].vertex[2] * frame->scale[2] + frame->translate[2];
+
+			vertices[i].push_back(v);
+
+			int normalidx = frame->vertices[j].lightNormalIndex;
+			if (normalidx > 0 && normalidx < Q2_VERTEX_NORMAL_TABLE_SIZE)
+			{
+				v.X = Q2_VERTEX_NORMAL_TABLE[normalidx][0];
+				v.Y = Q2_VERTEX_NORMAL_TABLE[normalidx][1];
+				v.Z = Q2_VERTEX_NORMAL_TABLE[normalidx][2];
+			}
+
+			normals[i].push_back(v);
+		}
+
+		// calculate bounding boxes
+		if (header.numVertices)
+		{
+			ox::core::CAabbox3d<float> box;
+			box.reset(vertices[i][0]);
+
+			for (int j=1; j<header.numVertices; ++j)
+				box.addInternalPoint(vertices[i][j]);
+
+			BoxList.push_back(box);
+		}
+
+	}
+
+	// put triangles into frame list
+
+	float dmaxs = 1.0f/(header.skinWidth);
+	float dmaxt = 1.0f/(header.skinHeight);
+
+	ox::video::S3DVertex vtx;
+	vtx.Color = ox::video::SColor(255,255,255,255);
+
+	for (int f = 0; f<header.numFrames; ++f)
+	{
+		ox::TArray< ox::core::CVector3d<float> >& vert = vertices[f];
+
+		for (int t=0; t<header.numTriangles; ++t)
+		{
+			for (int n=0; n<3; ++n)
+			{
+				vtx.Pos = vert[triangles[t].vertexIndices[n]];
+				vtx.TCoords.X = (textureCoords[triangles[t].textureIndices[n]].s + 0.5f) * dmaxs;
+				vtx.TCoords.Y = (textureCoords[triangles[t].textureIndices[n]].t + 0.5f) * dmaxt;
+				vtx.Normal = normals[f][triangles[t].vertexIndices[n]];
+				FrameList[f].push_back(vtx);
+			}
+		}
+	}
+
+	// create indices
+
+	Indices.reserve(header.numVertices);
+	int count = header.numTriangles*3;
+	for (int n=0; n<count; n+=3)
+	{
+		Indices.push_back(n);
+		Indices.push_back(n+1);
+		Indices.push_back(n+2);
+	}
+
+	//calculateNormals();
+
+	// reallocate interpolate buffer
+	if (header.numFrames)
+	{
+		InterpolateBuffer.resize(FrameList[0].size());
+
+		int count = FrameList[0].size();
+		for (i=0; i<count; ++i)
+		{
+			InterpolateBuffer[i].TCoords = FrameList[0][i].TCoords;
+			InterpolateBuffer[i].Color = vtx.Color;
+		}
+	}
+
+	// clean up
+
+	delete [] normals;
+	delete [] vertices;
+	delete [] triangles;
+	delete [] textureCoords;
+	TriangleCount = Indices.size() / 3;
+
+	// return
+
+	calculateBoundingBox();
+
+	return true;
 }
 
 
@@ -510,8 +691,18 @@ bool CAnimatedMeshMD2::loadFile(ox::io::IReadFile* file)
 //! calculates the bounding box
 void CAnimatedMeshMD2::calculateBoundingBox()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	BoundingBox.reset(0,0,0);
+
+	if (FrameCount)
+	{
+		unsigned int defaultFrame = 1;
+
+		if (defaultFrame>=FrameCount)
+			defaultFrame = 0;
+
+			for (unsigned int j=0; j<FrameList[defaultFrame].size(); ++j)
+				BoundingBox.addInternalPoint(FrameList[defaultFrame][j].Pos);
+	}
 }
 
 

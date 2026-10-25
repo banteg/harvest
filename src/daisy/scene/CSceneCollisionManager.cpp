@@ -19,6 +19,31 @@
 #include "daisy/os.h"
 #include <stdio.h>
 
+inline bool isOnSameSide(const ox::core::CVector3d<float>& p1, const ox::core::CVector3d<float>& p2,
+		const ox::core::CVector3d<float>& a, const ox::core::CVector3d<float>& b)
+{
+	ox::core::CVector3d<float> bminusa = b - a;
+	ox::core::CVector3d<float> cp1 = bminusa.crossProduct(p1 - a);
+	ox::core::CVector3d<float> cp2 = bminusa.crossProduct(p2 - a);
+	return (cp1.dotProduct(cp2) > 0.0f);
+}
+
+inline bool getIntersectionWithLine(const ox::core::CTriangle3d<float>& triangle,
+		const ox::core::CVector3d<float>& linePoint, const ox::core::CVector3d<float>& lineVect,
+		ox::core::CVector3d<float>& outIntersection)
+{
+	ox::core::CVector3d<float> normal = (triangle.pointB - triangle.pointA).crossProduct(triangle.pointC - triangle.pointA);
+	float t2 = normal.dotProduct(lineVect);
+	if (t2 == 0.0f)
+		return false;
+	float d = triangle.pointA.dotProduct(normal);
+	float t = -(normal.dotProduct(linePoint) - d) / t2;
+	outIntersection = linePoint + (lineVect * t);
+	return (isOnSameSide(outIntersection, triangle.pointA, triangle.pointB, triangle.pointC) &&
+		isOnSameSide(outIntersection, triangle.pointB, triangle.pointA, triangle.pointC) &&
+		isOnSameSide(outIntersection, triangle.pointC, triangle.pointA, triangle.pointB));
+}
+
 namespace ox { namespace scene {} }
 namespace daisy
 {
@@ -101,8 +126,32 @@ void CSceneCollisionManager::getPickedNodeBB(ISceneNode* root,
 									   float& outbestdistance,
 									   ISceneNode*& outbestnode)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	const ox::TList<ISceneNode*>& children = root->getChildren();
+
+	ox::TList<ISceneNode*>::const_iterator it = children.begin();
+
+	for (; it != children.end(); ++it)
+	{
+		ISceneNode* current = *it;
+
+		if (current->isVisible() &&
+			(bits==0 || (bits != 0 && (current->getID() & bits))))
+		{
+			if (current->getTransformedBoundingBox().intersectsWithLine(
+				linemiddle, linevect, halflength))
+			{
+				float dist = 	(float)current->getAbsolutePosition().getDistanceFrom(pos);
+				if (dist < outbestdistance)
+				{
+					outbestnode = current;
+					outbestdistance = dist;
+				}
+			}
+		}
+
+		getPickedNodeBB(current, linemiddle, linevect, pos,
+			halflength, bits, outbestdistance, outbestnode);
+	}
 }
 
 
@@ -131,8 +180,41 @@ bool CSceneCollisionManager::getCollisionPoint(const ox::core::CLine3d<float>& r
 	ITriangleSelector* selector, ox::core::CVector3d<float>& outIntersection,
 	ox::core::CTriangle3d<float>& outTriangle)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (!selector)
+		return false;
+
+	int totalcnt = selector->getTriangleCount();
+	Triangles.resize(totalcnt);
+
+	int cnt = 0;
+	selector->getTriangles(&Triangles[0], totalcnt, cnt, ray);
+
+	ox::core::CVector3d<float> linevect = ray.getVector();
+	ox::core::CVector3d<float> intersection;
+	float nearest = 9999999999999.0f;
+	bool found = false;
+	float tmp, tmp2;
+	float raylenght = (float)ray.getLengthSQ();
+
+	for (int i=0; i<cnt; ++i)
+	{
+		if (getIntersectionWithLine(Triangles[i], ray.start, linevect, intersection))
+		{
+			tmp = (float)intersection.getDistanceFromSQ(ray.start);
+			tmp2 = (float)intersection.getDistanceFromSQ(ray.end);
+
+            if (tmp < raylenght && tmp2 < raylenght &&
+				tmp < nearest)
+			{
+				nearest = tmp;
+				outTriangle = Triangles[i];
+				outIntersection = intersection;
+				found = true;
+			}
+		}
+	}
+
+	return found;
 }
 
 
@@ -237,7 +319,7 @@ void CSceneCollisionManager::testTriangleIntersection(SCollisionData* colData,
 		}
 
 		// if we havent found a collision already we will have to sweep
-		// the sphere against points and edges of the triangle. Note: ox::core::A
+		// the sphere against points and edges of the triangle. Note: A
 		// collision inside the triangle will always happen before a
 		// vertex or edge collision.
 
@@ -471,8 +553,83 @@ ox::core::CVector3d<float> CSceneCollisionManager::collideEllipsoidWithWorld(
 ox::core::CVector3d<float> CSceneCollisionManager::collideWithWorld(int recursionDepth,
 	SCollisionData &colData, ox::core::CVector3d<float> pos, ox::core::CVector3d<float> vel)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	float veryCloseDistance = colData.slidingSpeed;
+
+	if (recursionDepth > 5)
+		return pos;
+
+	colData.velocity = vel;
+	colData.normalizedVelocity = vel;
+	colData.normalizedVelocity.normalize();
+	colData.basePoint = pos;
+	colData.foundCollision = false;
+	colData.nearestDistance = 9999999999999.0f;
+
+	//------------------ collide with world
+
+	// get all triangles with which we might collide
+	ox::core::CAabbox3d<float> box(colData.R3Position);
+	box.addInternalPoint(colData.R3Position + colData.R3Velocity);
+	box.MinEdge -= colData.eRadius;
+	box.MaxEdge += colData.eRadius;
+
+	int totalTriangleCnt = colData.selector->getTriangleCount();
+	Triangles.resize(totalTriangleCnt);
+
+	ox::core::CMatrix4 scaleMatrix;
+	scaleMatrix.setScale(
+		ox::core::CVector3d<float>(1.0f / colData.eRadius.X, 1.0f / colData.eRadius.Y, 1.0f / colData.eRadius.Z));
+
+	int triangleCnt = 0;
+	colData.selector->getTriangles(&Triangles[0], totalTriangleCnt, triangleCnt, box, &scaleMatrix);
+	//colData.selector->getTriangles(&Triangles[0], totalTriangleCnt, triangleCnt, &scaleMatrix);
+
+	for (int i=0; i<triangleCnt; ++i)
+		testTriangleIntersection(&colData, Triangles[i]);
+
+	//---------------- end collide with world
+
+	if (!colData.foundCollision)
+		return pos + vel;
+
+	// original destination point
+	ox::core::CVector3d<float> destinationPoint = pos + vel;
+	ox::core::CVector3d<float> newBasePoint = pos;
+
+	// only update if we are not already very close
+	// and if so only move very close to intersection, not to the
+	// exact point
+	if (colData.nearestDistance >= veryCloseDistance)
+	{
+		ox::core::CVector3d<float> v = vel;
+		{ v.normalize(); v *= ((float)(colData.nearestDistance - veryCloseDistance)); }
+		newBasePoint = colData.basePoint + v;
+
+		v.normalize();
+		colData.intersectionPoint -= (v * veryCloseDistance);
+    }
+
+	// calculate sliding plane
+
+	ox::core::CVector3d<float> slidePlaneOrigin = colData.intersectionPoint;
+	ox::core::CVector3d<float> slidePlaneNormal = newBasePoint - colData.intersectionPoint;
+	slidePlaneNormal.normalize();
+	ox::core::CPlane3d<float> slidingPlane(slidePlaneOrigin, slidePlaneNormal);
+
+	ox::core::CVector3d<float> newDestinationPoint =
+		destinationPoint -
+		(slidePlaneNormal * slidingPlane.getDistanceTo(destinationPoint));
+
+	// generate slide vector
+
+	ox::core::CVector3d<float> newVelocityVector = newDestinationPoint -
+		colData.intersectionPoint;
+
+	if (newVelocityVector.getLength() < veryCloseDistance)
+		return newBasePoint;
+
+	return collideWithWorld(recursionDepth+1, colData,
+		newBasePoint, newVelocityVector);
 }
 
 

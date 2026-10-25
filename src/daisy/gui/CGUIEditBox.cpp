@@ -569,7 +569,30 @@ void CGUIEditBox::draw()
 
     if (Border)
     {
-        if (Animations[EEBA_BACKGROUND])
+        if (!Animations[EEBA_BACKGROUND])
+        {
+            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
+
+            frameRect.LowerRightCorner.Y = frameRect.UpperLeftCorner.Y + 1;
+            driver->draw2DRectangle(skin->getColor(EGDC_3D_SHADOW), frameRect, &AbsoluteClippingRect);
+
+            frameRect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+            frameRect.LowerRightCorner.X = frameRect.UpperLeftCorner.X + 1;
+            driver->draw2DRectangle(skin->getColor(EGDC_3D_SHADOW), frameRect, &AbsoluteClippingRect);
+
+            frameRect = AbsoluteRect;
+            frameRect.UpperLeftCorner.X = frameRect.LowerRightCorner.X - 1;
+            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
+
+            frameRect = AbsoluteRect;
+            frameRect.UpperLeftCorner.Y = AbsoluteRect.LowerRightCorner.Y - 1;
+            frameRect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
+            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
+
+            frameRect = AbsoluteRect;
+            frameRect.UpperLeftCorner.X += AnimationRects[EEBA_LEFT].LowerRightCorner.X;
+        }
+        else
         {
             // the background is tiled between the left and right animations
             core::CRect<int> rect = AnimationRects[EEBA_BACKGROUND];
@@ -594,29 +617,6 @@ void CGUIEditBox::draw()
             clipAgainst(rect, AbsoluteClippingRect);
             Animations[EEBA_RIGHT]->draw(rect.UpperLeftCorner, &rect, video::SColor(0xffffffff));
 
-            frameRect.UpperLeftCorner.X += AnimationRects[EEBA_LEFT].LowerRightCorner.X;
-        }
-        else
-        {
-            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
-
-            frameRect.LowerRightCorner.Y = frameRect.UpperLeftCorner.Y + 1;
-            driver->draw2DRectangle(skin->getColor(EGDC_3D_SHADOW), frameRect, &AbsoluteClippingRect);
-
-            frameRect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
-            frameRect.LowerRightCorner.X = frameRect.UpperLeftCorner.X + 1;
-            driver->draw2DRectangle(skin->getColor(EGDC_3D_SHADOW), frameRect, &AbsoluteClippingRect);
-
-            frameRect = AbsoluteRect;
-            frameRect.UpperLeftCorner.X = frameRect.LowerRightCorner.X - 1;
-            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
-
-            frameRect = AbsoluteRect;
-            frameRect.UpperLeftCorner.Y = AbsoluteRect.LowerRightCorner.Y - 1;
-            frameRect.LowerRightCorner.Y = AbsoluteRect.LowerRightCorner.Y;
-            driver->draw2DRectangle(skin->getColor(EGDC_3D_HIGH_LIGHT), frameRect, &AbsoluteClippingRect);
-
-            frameRect = AbsoluteRect;
             frameRect.UpperLeftCorner.X += AnimationRects[EEBA_LEFT].LowerRightCorner.X;
         }
     }

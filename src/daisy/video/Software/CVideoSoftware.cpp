@@ -106,20 +106,6 @@ CVideoSoftware::~CVideoSoftware()
 
 
 
-//! switches to a triangle renderer
-void CVideoSoftware::switchToTriangleRenderer(ETriangleRenderer renderer)
-{
-	ox::video::IImage* s = 0;
-	if (Texture)
-		s = ((CSoftwareTexture*)Texture)->getTexture();
-
-	CurrentTriangleRenderer = TriangleRenderers[renderer];
-	CurrentTriangleRenderer->setBackfaceCulling(Material.BackfaceCulling == true);
-	CurrentTriangleRenderer->setTexture(s);
-	CurrentTriangleRenderer->setRenderTarget(RenderTargetSurface, ViewPort);
-}
-
-
 //! void selects the right triangle renderer based on the render states.
 void CVideoSoftware::selectRightTriangleRenderer()
 {
@@ -144,8 +130,6 @@ void CVideoSoftware::selectRightTriangleRenderer()
 }
 
 
-
-
 //! presents the rendered scene on the screen, returns false if failed
 bool CVideoSoftware::endScene()
 {
@@ -154,6 +138,7 @@ bool CVideoSoftware::endScene()
 	Presenter->present(BackBuffer);
 	return true;
 }
+
 
 
 
@@ -185,7 +170,6 @@ void CVideoSoftware::setTransform(E_TRANSFORMATION_STATE state, const ox::core::
 
 
 
-
 //! sets the current Texture
 void CVideoSoftware::setTexture(ox::video::ITexture* texture)
 {
@@ -210,12 +194,14 @@ void CVideoSoftware::setTexture(ox::video::ITexture* texture)
 
 
 
+
 //! sets a material
 void CVideoSoftware::setMaterial(const SMaterial& material)
 {
 	Material = material;
 	setTexture(Material.Texture1);
 }
+
 
 
 //! clears the zbuffer
@@ -282,7 +268,6 @@ void CVideoSoftware::setRenderTarget(video::CImage* image)
 }
 
 
-
 //! sets a viewport
 void CVideoSoftware::setViewPort(const ox::core::CRect<int>& area)
 {
@@ -301,6 +286,7 @@ void CVideoSoftware::setViewPort(const ox::core::CRect<int>& area)
 	if (CurrentTriangleRenderer)
 		CurrentTriangleRenderer->setRenderTarget(RenderTargetSurface, ViewPort);
 }
+
 
 
 //! draws an indexed triangle list
@@ -366,7 +352,6 @@ void CVideoSoftware::drawIndexedTriangleList(const S3DVertex* vertices, int vert
 }
 
 
-
 //! draws an indexed triangle list
 void CVideoSoftware::drawIndexedTriangleList(const S3DVertex2TCoords* vertices, int vertexCount, const unsigned short* indexList, int triangleCount)
 {
@@ -430,6 +415,7 @@ void CVideoSoftware::drawIndexedTriangleList(const S3DVertex2TCoords* vertices, 
 }
 
 
+
 //! draws an indexed triangle fan
 void CVideoSoftware::drawIndexedTriangleFan(const S3DVertex* vertices, int vertexCount, const unsigned short* indexList, int triangleCount)
 {
@@ -446,7 +432,6 @@ void CVideoSoftware::drawIndexedTriangleFan(const S3DVertex* vertices, int verte
 
 	drawIndexedTriangleList( vertices, vertexCount, &newBuffer[0], triangleCount );
 }
-
 
 
 //! draws an indexed triangle fan
@@ -467,6 +452,7 @@ void CVideoSoftware::drawIndexedTriangleFan(const S3DVertex2TCoords* vertices, i
 }
 
 
+
 //! clips a triangle agains the viewing frustrum
 void CVideoSoftware::clipTriangle(float* transformedPos)
 {
@@ -478,6 +464,22 @@ void CVideoSoftware::clipTriangle(float* transformedPos)
 void CVideoSoftware::createPlanes(ox::core::CMatrix4& mat)
 {
 	Frustrum = ox::scene::SViewFrustrum(mat);
+}
+
+
+//! draws an 2d image
+void CVideoSoftware::draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& destPos)
+{
+	if (texture)
+	{
+		if (texture->getDriverType() != EDT_SOFTWARE)
+		{
+			os::Printer::log("Fatal Error: Tried to copy from a surface not owned by this driver.", ox::event::ELL_ERROR);
+			return;
+		}
+
+		((CSoftwareTexture*)texture)->getImage()->copyTo(BackBuffer, destPos);
+	}
 }
 
 /*
@@ -570,22 +572,6 @@ void CVideoSoftware::drawIndexedTriangleList(const S3DVertex2TCoords* vertices, 
 
 
 
-//! draws an 2d image
-void CVideoSoftware::draw2DImage(ox::video::ITexture* texture, const ox::core::CPosition2d<int>& destPos)
-{
-	if (texture)
-	{
-		if (texture->getDriverType() != EDT_SOFTWARE)
-		{
-			os::Printer::log("Fatal Error: Tried to copy from a surface not owned by this driver.", ox::event::ELL_ERROR);
-			return;
-		}
-
-		((CSoftwareTexture*)texture)->getImage()->copyTo(BackBuffer, destPos);
-	}
-}
-
-
 //! Draws a 2d line.
 void CVideoSoftware::draw2DLine(const ox::core::CPosition2d<int>& start,
 								const ox::core::CPosition2d<int>& end,
@@ -593,8 +579,6 @@ void CVideoSoftware::draw2DLine(const ox::core::CPosition2d<int>& start,
 {
 	((CImage*)BackBuffer)->drawLine(start, end, ox::video::toA1R5G5B5(color.color));
 }
-
-
 
 
 //! draws an 2d image, using a color (if color is other then Color(255,255,255,255)) and the alpha channel of the texture if wanted.
@@ -620,6 +604,7 @@ void CVideoSoftware::draw2DImage(ox::video::ITexture* texture, const ox::core::C
 
 
 
+
 //! draw an 2d rectangle
 void CVideoSoftware::draw2DRectangle(SColor color, const ox::core::CRect<int>& pos, const ox::core::CRect<int>* clip)
 {
@@ -634,11 +619,26 @@ void CVideoSoftware::draw2DRectangle(SColor color, const ox::core::CRect<int>& p
 }
 
 
+
 //! \return Returns the name of the video driver. Example: In case of the DirectX8
 //! driver, it would return "Direct3D8.1".
 const wchar_t* CVideoSoftware::getName()
 {
 	return L"IrrlichtSoftwareDevice";
+}
+
+
+//! switches to a triangle renderer
+void CVideoSoftware::switchToTriangleRenderer(ETriangleRenderer renderer)
+{
+	ox::video::IImage* s = 0;
+	if (Texture)
+		s = ((CSoftwareTexture*)Texture)->getTexture();
+
+	CurrentTriangleRenderer = TriangleRenderers[renderer];
+	CurrentTriangleRenderer->setBackfaceCulling(Material.BackfaceCulling == true);
+	CurrentTriangleRenderer->setTexture(s);
+	CurrentTriangleRenderer->setRenderTarget(RenderTargetSurface, ViewPort);
 }
 
 //! Returns type of video driver
