@@ -1518,7 +1518,8 @@ void CAlienEntity::render(const ox::core::CPosition2d<float>& camera, const ox::
         position.X = Position.X - camera.X + viewPort.UpperLeftCorner.X;
         position.Y = Position.Y - camera.Y + viewPort.UpperLeftCorner.Y;
         ox::core::CPosition2d<int> corner((int)position.X - size.Width / 2, (int)position.Y - 30);
-        gp_alienChantFont->draw(text.c_str(), ox::core::CRect<int>(corner, size),
+        ox::core::CRect<int> rect(corner, size);
+        gp_alienChantFont->draw(text.c_str(), rect,
             ox::video::SColor(0xffffffff), ox::gui::EFHA_LEFT, ox::gui::EFVA_TOP, 0);
     }
 }
