@@ -121,6 +121,9 @@ def test_data_union_preserves_unclaimed_bytes_and_blends_fuzzy_by_size():
     assert sum(int(u["measures"]["matched_data"]) for u in report["units"]) == 36
     assert sum(int(c["measures"]["total_data"]) for c in report["categories"]) == 100
     assert m["complete_data"] == "0"
+    # Two grouped display units cover three intervals; the unit denominator still counts intervals.
+    categories = {c["id"]: c["measures"] for c in report["categories"]}
+    assert categories["data"]["total_units"] == 3 and m["total_units"] == 7
 
 
 @pytest.mark.parametrize("address,size", [("0x2fff", 2), ("0x3060", 8), ("0x3010", 0)])

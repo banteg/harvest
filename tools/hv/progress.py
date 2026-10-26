@@ -506,6 +506,16 @@ def make_report(
     owners_by_target = collections.defaultdict(list)
     for record in data_owners:
         owners_by_target[record["target"]].append(record)
+    # The unit denominator stays one per matched or unclaimed data interval, as before the
+    # owner grouping below; grouping intervals into stable display units must not rewrite it.
+    data_intervals = 0
+    for section in inv.get("data_sections", []):
+        cursor = section["address"]
+        for start, end in data[section["name"]]:
+            data_intervals += int(start > cursor) + 1
+            cursor = end
+        if cursor < section["address"] + section["size"]:
+            data_intervals += 1
     data_units = []
     for section in inv.get("data_sections", []):
         owners = sorted(owners_by_target[section["name"]], key=lambda r: (r["address"], data_unit_name(r)))
@@ -547,7 +557,7 @@ def make_report(
             matched_code,
             len(functions),
             len(matched),
-            len(report_units) + len(gaps) + len(data_units),
+            len(report_units) + len(gaps) + data_intervals,
             fuzzy_code=fuzzy_code,
             data=total_data,
             matched_data=matched_data,
@@ -581,7 +591,7 @@ def make_report(
             {
                 "id": "data",
                 "name": "Allocated data (including BSS and linker metadata)",
-                "measures": measures(0, 0, 0, 0, len(data_units), data=total_data, matched_data=matched_data),
+                "measures": measures(0, 0, 0, 0, data_intervals, data=total_data, matched_data=matched_data),
             },
             {
                 "id": "unclaimed",
