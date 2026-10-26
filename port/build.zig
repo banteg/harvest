@@ -51,55 +51,55 @@ const replaced = [_][]const u8{
     "HarvestFull/main.cpp",
     // Recovered from Irrlicht 0.7; the port keeps its own port/src/video/ImageLoaderStubs.cpp.
     "daisy/video/Null/CImageLoaderPCX.cpp",
-    // Recovered from Irrlicht 0.7; it needs daisy::scene::CMeshSceneNode::render(), which nothing defines yet.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CWaterSurfaceSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; it needs ox::video::S3DVertex::S3DVertex(float, float, float, float, float, float, ox::video::SColor, float, float), which nothing defines yet.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CTestSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CAnimatedMeshMD2.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CBspTreeSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CMeshSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CMetaTriangleSelector.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/COctTreeSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/COctTreeTriangleSelector.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CParticleBoxEmitter.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CParticlePointEmitter.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CParticleSystemSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CTextSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Seven parsers still trap; callers remain excluded too.
     "daisy/scene/CXFileReader.cpp",
-    // Recovered from Irrlicht 0.7; it needs daisy::scene::CAnimatedMeshMD2::CAnimatedMeshMD2(), which nothing defines yet.
+    // Depends on MD2 and other mesh formats not integrated into the port.
     "daisy/scene/CDefaultMeshFormatLoader.cpp",
-    // Recovered from Irrlicht 0.7; it needs daisy::scene::CXFileReader::CXFileReader(ox::io::IReadFile*), which nothing defines yet.
+    // Depends on the incomplete X-file reader.
     "daisy/scene/CXMeshFileLoader.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CAnimatedMeshMS3D.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CGeometryCreator.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CQ3LevelMesh.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CTerrainSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CBspTree.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CParticleGravityAffector.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CCameraMayaSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CCameraFPSSceneNode.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/C3DSMeshFileLoader.cpp",
-    // Recovered from Irrlicht 0.7; some of its methods are stubs that trap.
+    // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CXAnimationPlayer.cpp",
 };
 

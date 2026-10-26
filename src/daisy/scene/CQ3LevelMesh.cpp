@@ -372,6 +372,7 @@ void CQ3LevelMesh::constructMesh()
 // helper method for creating curved surfaces, sent in by Dean P. Macri.
 inline float CQ3LevelMesh::Blend( float s[3], float t[3], tBSPVertex *v[9], int offset)
 {
+	// The original 1.18 body ignores offset; see docs/port/original-bugs.md.
 	float res = 0.0f;
 	float *ptr;
 
