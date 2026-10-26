@@ -162,7 +162,7 @@ bool CStaticMeshOBJ::loadFile(ox::io::IReadFile* file)
 				if (facePointCount>=MAX_FACE_POINT_COUNT)
 				{
 					meshbuffer->drop();
-					os::Printer::log("Face with more than 40 face points found int file. Not loading.", file->getFileName(), ox::event::ELL_ERROR);
+					os::Printer::log("Face with more than 40 face points found s32 file. Not loading.", file->getFileName(), ox::event::ELL_ERROR);
 					delete [] buf;
 					return false;
 				}

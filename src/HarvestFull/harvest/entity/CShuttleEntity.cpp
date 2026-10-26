@@ -294,28 +294,7 @@ void CShuttleEntity::resetAllAiByMe(bool copyMine)
         if ((*it)->getEntityType() != 19) continue;
         CShuttleEntity* shuttle = (CShuttleEntity*)*it;
         if (shuttle->Ai < 0 || shuttle->getId() == getId()) continue;
-        if (!copyMine)
-        {
-            // every other AI mutates its own targets
-            for (int i = 0; i < 14; ++i)
-            {
-                shuttle->EndTargets[i].X = ox::core::clamp(shuttle->EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5),
-                    LAP_CHECKPOINTS[i].X - 125.0f, LAP_CHECKPOINTS[i].X + 125.0f);
-                shuttle->EndTargets[i].Y = ox::core::clamp(shuttle->EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5),
-                    LAP_CHECKPOINTS[i].Y - 125.0f, LAP_CHECKPOINTS[i].Y + 125.0f);
-                if (ox::algo::CRand::rand() % 150 == 0)
-                {
-                    shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
-                    shuttle->MiddleTargets[i].Y = (LAP_CHECKPOINTS[i].Y + LAP_CHECKPOINTS[(i - 1) % 14].Y) * .5f;
-                }
-                else
-                {
-                    shuttle->MiddleTargets[i].X += ox::algo::CRand::rand() % 51 - 25;
-                    shuttle->MiddleTargets[i].Y += ox::algo::CRand::rand() % 51 - 25;
-                }
-            }
-        }
-        else
+        if (copyMine)
         {
             // every other AI starts from a jittered copy of this shuttle's targets
             for (int i = 0; i < 14; ++i)
@@ -333,6 +312,27 @@ void CShuttleEntity::resetAllAiByMe(bool copyMine)
                 {
                     shuttle->MiddleTargets[i].X = MiddleTargets[i].X + (ox::algo::CRand::rand() % 51 - 25);
                     shuttle->MiddleTargets[i].Y = MiddleTargets[i].Y + (ox::algo::CRand::rand() % 51 - 25);
+                }
+            }
+        }
+        else
+        {
+            // every other AI mutates its own targets
+            for (int i = 0; i < 14; ++i)
+            {
+                shuttle->EndTargets[i].X = ox::core::clamp(shuttle->EndTargets[i].X + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].X - 125.0f, LAP_CHECKPOINTS[i].X + 125.0f);
+                shuttle->EndTargets[i].Y = ox::core::clamp(shuttle->EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5),
+                    LAP_CHECKPOINTS[i].Y - 125.0f, LAP_CHECKPOINTS[i].Y + 125.0f);
+                if (ox::algo::CRand::rand() % 150 != 0)
+                {
+                    shuttle->MiddleTargets[i].X += ox::algo::CRand::rand() % 51 - 25;
+                    shuttle->MiddleTargets[i].Y += ox::algo::CRand::rand() % 51 - 25;
+                }
+                else
+                {
+                    shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
+                    shuttle->MiddleTargets[i].Y = (LAP_CHECKPOINTS[i].Y + LAP_CHECKPOINTS[(i - 1) % 14].Y) * .5f;
                 }
             }
         }    }

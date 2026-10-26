@@ -1113,8 +1113,9 @@ void CHighscoreScreen::createStatusString(const wchar_t* text)
         StatusText = GUIEnvironment->addStaticText(text, STATUS_LABEL_AREA, false, true, ListFrame, -1, L"");
         StatusText->packSize();
         ox::core::CRect<int> rect = StatusText->getRelativePosition();
+        int width = STATUS_LABEL_AREA.getWidth() - rect.getWidth();
         StatusText->moveTo(ox::core::CPosition2d<int>(
-            (STATUS_LABEL_AREA.getWidth() - rect.getWidth()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.X,
+            (width) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.X,
             (STATUS_LABEL_AREA.getHeight() - rect.getHeight()) / 2 + STATUS_LABEL_AREA.UpperLeftCorner.Y));
     }
 }

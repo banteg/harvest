@@ -103,7 +103,7 @@ bytes. Nothing is copied from our relocations, so a wrong target stays visible.
 Indexed and base-register absolute operands also get relocations. Binary merge elements are checked by
 the memory operand's access width and content (including scalar float loads of 16-byte SSE constants),
 separately from strings; non-allocated metadata such as `.comment` cannot supply literals.
-With these objects objdiff scores every exact function across all 160 units at 100%, matching `hv match`.
+With these objects objdiff scores every exact function across all 201 recovered units at 100%, matching `hv match`.
 
 ## Tests
 
@@ -144,10 +144,10 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CEmptySceneNode.cpp` | 40/41 | Irrlicht 0.7's empty node; the static initializer differs |
 | `daisy/scene/CLightSceneNode.cpp` | 45/45 | exact; Irrlicht 0.7's light node with `SLight`'s default constructor and `SpecularColor = color` |
 | `daisy/scene/CSkyBoxSceneNode.cpp` | 45/45 | exact; Irrlicht 0.7's sky box node with daisy's mirrored side UVs and transposed top/bottom UVs |
-| `daisy/scene/CAnimatedMeshMD2.cpp` | 59/62 | Irrlicht 0.7's Quake 2 MD2 animated mesh; `loadFile`, `calculateBoundingBox` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/CBspTreeSceneNode.cpp` | 46/46 | exact; Irrlicht 0.7's BSP tree scene node; the header's `CBspTree::BspPoly::operator==` still traps |
+| `daisy/scene/CAnimatedMeshMD2.cpp` | 64/69 | Irrlicht 0.7's Quake 2 MD2 animated mesh; `loadFile`, the static initializer and emitted vector helpers differ; no trap stubs |
+| `daisy/scene/CBspTreeSceneNode.cpp` | 46/46 | exact; Irrlicht 0.7's BSP tree scene node; the header's `CBspTree::BspPoly::operator==` is restored |
 | `daisy/scene/CCameraSceneNode.cpp` | 73/74 | Irrlicht 0.7's camera node; `updateAbsolutePosition` differs |
-| `daisy/scene/CDefaultMeshFormatLoader.cpp` | 11/12 | Irrlicht 0.7's default mesh loader that picks a format loader |
+| `daisy/scene/CDefaultMeshFormatLoader.cpp` | 12/12 | exact; Irrlicht 0.7's default mesh loader that picks a format loader |
 | `daisy/scene/CMeshSceneNode.cpp` | 45/46 | Irrlicht 0.7's static mesh node; `render` differs |
 | `daisy/scene/CMetaTriangleSelector.cpp` | 20/20 | exact; Irrlicht 0.7's triangle selector that combines others |
 | `daisy/scene/COctTreeSceneNode.cpp` | 82/86 | Irrlicht 0.7's octree scene node; `_M_insert_aux`, `createTree`, `operator=`, `render` differ |
@@ -156,35 +156,35 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/scene/CParticlePointEmitter.cpp` | 9/10 | Irrlicht 0.7's point particle emitter; `emitt` differs |
 | `daisy/scene/CParticleSystemSceneNode.cpp` | 59/60 | Irrlicht 0.7's particle system node; `render` differs |
 | `daisy/scene/CShadowVolumeSceneNode.cpp` | 50/52 | Irrlicht 0.7's shadow volume node |
-| `daisy/scene/CStaticMeshOBJ.cpp` | 43/44 | Irrlicht 0.7's Wavefront OBJ mesh loader |
+| `daisy/scene/CStaticMeshOBJ.cpp` | 50/50 | exact; Irrlicht 0.7's Wavefront OBJ mesh loader; retains the original unchecked parsing (see [original-bugs.md](port/original-bugs.md)) |
 | `daisy/scene/CTestSceneNode.cpp` | 44/44 | exact; Irrlicht 0.7's test cube and sphere node |
 | `daisy/scene/CTextSceneNode.cpp` | 46/49 | Irrlicht 0.7's text node; `~ISceneNode` differs |
 | `daisy/scene/CWaterSurfaceSceneNode.cpp` | 34/34 | exact; Irrlicht 0.7's water surface node |
-| `daisy/scene/CXFileReader.cpp` | 16/42 | Irrlicht 0.7's DirectX .x file reader; ten of the data-object parsers are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CXFileReader.cpp` | 28/52 | Irrlicht 0.7's DirectX .x file reader; seven parsers remain trap stubs: `parseDataObjectMaterial`, `parseDataObjectMeshMaterialList`, `parseDataObjectSkinMeshHeader`, `parseDataObjectSkinWeights`, `parseDataObjectMesh`, `parseDataObjectFrame` and `parseDataObject`; animation set/key bodies are restored but still differ |
 | `daisy/scene/CXMeshFileLoader.cpp` | 12/12 | exact; Irrlicht 0.7's DirectX .x mesh loader |
 | `daisy/video/Null/CImageLoaderPCX.cpp` | 13/14 | Irrlicht 0.7's PCX image loader; `loadImage` differs |
 | `daisy/io/CTextReader.cpp` | 13/13 | exact; Irrlicht 0.7's text reader |
 | `daisy/io/CXMLWriter.cpp` | 17/17 | exact; Irrlicht 0.7's XML writer |
-| `daisy/io/CXMLReader.cpp` | 26/32 | Irrlicht 0.7's XML reader |
+| `daisy/io/CXMLReader.cpp` | 27/34 | Irrlicht 0.7's XML reader |
 | `daisy/video/Null/CImageLoaderBmp.cpp` | 16/16 | exact; Irrlicht 0.7's BMP image loader |
-| `daisy/video/Null/CImageLoaderTGA.cpp` | 13/14 | Irrlicht 0.7's TGA image loader; `loadImage` differs |
+| `daisy/video/Null/CImageLoaderTGA.cpp` | 15/15 | exact; Irrlicht 0.7's TGA image loader, with the target's field-by-field header reads |
 | `daisy/video/Null/CImageLoaderJPG.cpp` | 11/14 | Irrlicht 0.7's JPEG image loader |
-| `daisy/video/Software/CSoftwareTexture.cpp` | 17/19 | Irrlicht 0.7's software texture; `CSoftwareTexture` differs |
+| `daisy/video/Software/CSoftwareTexture.cpp` | 19/19 | exact; Irrlicht 0.7's software texture |
 | `daisy/scene/CAnimatedMeshMS3D.cpp` | 70/70 | exact; Irrlicht 0.7's MilkShape 3D animated mesh |
 | `daisy/scene/C3DSMeshFileLoader.cpp` | 71/71 | exact; Irrlicht 0.7's 3D Studio mesh loader |
 | `daisy/scene/CXAnimationPlayer.cpp` | 113/116 | Irrlicht 0.7's DirectX `.x` animation player; `addFacesToBuffer`, `getMaterialFromXMaterial`, `prepareAnimationData` differ |
-| `daisy/scene/CAnimatedMeshSceneNode.cpp` | 51/58 | Irrlicht 0.7's animated mesh scene node; `OnPreRender`, `OnPostRender`, `render`, `getMS3DJointNode` and both `setMD2Animation` overloads are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/CTerrainSceneNode.cpp` | 46/57 | Irrlicht 0.7's terrain scene node; `getIdealHeightMap`, `load`, `createIndexBuffers` and `OnPreRender` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/CCameraMayaSceneNode.cpp` | 40/41 | Irrlicht 0.7's Maya-style camera node; `animate` differs |
+| `daisy/scene/CAnimatedMeshSceneNode.cpp` | 58/59 | Irrlicht 0.7's animated mesh scene node; only `render` differs; no trap stubs |
+| `daisy/scene/CTerrainSceneNode.cpp` | 71/76 | Irrlicht 0.7's terrain scene node; `calculateNormals`, `createIndexBuffers` and emitted destructors differ; no trap stubs |
+| `daisy/scene/CCameraMayaSceneNode.cpp` | 40/41 | Irrlicht 0.7's Maya-style camera node; `animate` differs; its `setPosition` override updates the zoom and matches |
 | `daisy/scene/CCameraFPSSceneNode.cpp` | 41/43 | Irrlicht 0.7's first-person camera node; `CCameraFPSSceneNode`, `getRelativeTransformation` differ |
-| `daisy/scene/CQ3LevelMesh.cpp` | 33/44 | Irrlicht 0.7's Quake 3 BSP level mesh; `constructMesh`, `Blend`, `createCurvedSurface` and `loadTextures` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
-| `daisy/scene/CSceneCollisionManager.cpp` | 17/23 | Irrlicht 0.7's scene collision manager; `getPickedNodeBB`, `getCollisionPoint` and `collideWithWorld` are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CQ3LevelMesh.cpp` | 62/63 | Irrlicht 0.7's Quake 3 BSP level mesh; only `loadTextures` differs; the exact curved-surface body preserves the original field-offset bug (see [original-bugs.md](port/original-bugs.md)) |
+| `daisy/scene/CSceneCollisionManager.cpp` | 22/24 | Irrlicht 0.7's scene collision manager; `getCollisionPoint` and `collideWithWorld` differ; no trap stubs |
 | `daisy/scene/CParticleGravityAffector.cpp` | 10/10 | exact; Irrlicht 0.7's gravity particle affector |
-| `daisy/scene/CBspTree.cpp` | 8/30 | Irrlicht 0.7's BSP tree; `splitPoly` is a stub that traps, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CBspTree.cpp` | 33/36 | Irrlicht 0.7's BSP tree; `findSplitter`, `polyExistsInNode` and restored `splitPoly` differ; no trap stubs |
 | `daisy/scene/CGeometryCreator.cpp` | 42/42 | exact; Irrlicht 0.7's hill-plane and terrain mesh generator |
-| `daisy/scene/CSceneManager.cpp` | 89/111 | Irrlicht 0.7's scene manager; `findMesh`, `getSceneNodeFromId`, `createSceneManager` and the header's `DefaultNodeEntry` constructor are stubs that trap, since Irrlicht's body does not compile against daisy's interfaces |
+| `daisy/scene/CSceneManager.cpp` | 110/116 | Irrlicht 0.7's scene manager; `findMesh`, `addMesh`, `addTerrainSceneNode`, `registerNodeForRendering`, the default-node sorting helper and static initializer differ; no trap stubs |
 | `daisy/video/Null/CImage.cpp` | 35/42 | Irrlicht 0.7's image buffer; no stubs |
-| `daisy/video/Software/CVideoSoftware.cpp` | 36/46 | Irrlicht 0.7's software renderer; no stubs |
+| `daisy/video/Software/CVideoSoftware.cpp` | 38/46 | Irrlicht 0.7's software renderer; no stubs |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
@@ -242,7 +242,7 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `HarvestFull/harvest/gui/CProfileScreen.cpp` | 17/18 | the profile list and create/edit windows, name validation and trimming; only `saveProfile` remains, with its two cold null-string blocks in a different order; audited against the target |
 | `HarvestFull/harvest/gui/CStatisticsScreen.cpp` | 21/24 | the post-game statistics screen: wave graphs with fade-in, event log and totals with paging, local bests, highscore upload over HTTP and the window/graph draw handlers; `OnEvent` (the target inlines the `CString` assignment and peels the hover loop), `createGraphs` and `renderGraph` (scheduling, a register-held width) remain; all match the target's behaviour; audited against the target |
 | `HarvestFull/harvest/gui/CStoryScreen.cpp` | 15/16 | the campaign dialogue letterbox: two bordered lines with portrait, name and progressively revealed text, fades, voice playback and the skip key; in `OnEvent`, GCC compares `id` before `EventType`, the reverse of the target; audited against the target |
-| `HarvestFull/harvest/gui/CHighscoreScreen.cpp` | 26/33 | the online highscore screen: summary pages with promote buttons, highscore table parsing, HTTP requests, Base64/UTF-8 name coding and filter popups, plus the `splitString<char>` and `CString<wchar_t>` assignment COMDATs; `parseHighscoreString` (continue layout, tied to the unit's inline budget), `OnEvent`, `setVisible`, `createStatusString`, `update`, `parseSummaryPage` (registers and scheduling only) and the `_M_insert_aux` copy remain; audited against the target |
+| `HarvestFull/harvest/gui/CHighscoreScreen.cpp` | 27/33 | the online highscore screen: summary pages with promote buttons, highscore table parsing, HTTP requests, Base64/UTF-8 name coding and filter popups, plus the `splitString<char>` and `CString<wchar_t>` assignment COMDATs; `parseHighscoreString` (continue layout, tied to the unit's inline budget), `OnEvent`, `setVisible`, `update`, `parseSummaryPage` (registers and scheduling only) and the `_M_insert_aux` copy remain; audited against the target |
 | `HarvestFull/harvest/gui/CSaveGameScreen.cpp` | 31/36 | the save/load screen: the profile's save games sorted with `std::sort`, delete/overwrite message boxes, description box and mode/planet icons (`SSaveListItem`, `SSavestateHeader`); only template copies remain: the `SSaveListItem` sort helpers (copy-constructor inlining) and a `CString<char>::operator=` copy (one register); audited against the target |
 | `HarvestFull/harvest/states/CMainMenuState.cpp` | 28/32 | the main menu state: planet scene, camera fly-over, console buttons, planet and game-mode selection, mod and demo dialogs; the heading reset builds `CString<wchar_t>("")`, whose IPA-CP clone `T.548` matches; `OnEvent` and `secondInit` differ by block layout and registers, `enterGameModeSelectMode` by where the inlined heading string stores its array, and the `CString<char>::operator+=` copy by one swapped compare |
 | `HarvestFull/harvest/states/CPlayState.cpp` | 75/98 | the in-game state: GUI setup, input, rendering, minimap, save/load, wave and creative lists and the game loop. `OnEvent`, `updateState`, `renderMinimap` and `newSelectedEntity` were checked against the target and do what it does, but differ in block layout, register allocation, stack slots and float scheduling; `readStateFromFile` is exact, and `displayWelcomeMessage` matches with the no-record branch first. `updatePlacementPosition` matches with both conditions as nested ifs and `cos(angle)` in a named local. `buyBuildingAtPlacementPos`, `secondInit`, `initializeNewGame`, `writeStateToFile` and `setWaveListToggle` differ only in operand order, loop rotation or registers, and three `CConditionalHarvestEvent` copies come from `CScenario.h` declaring `runEvent` out of line but defining it `inline`, which makes it the key function in every includer. The `.rodata` pin is where the unit's jump tables start |
@@ -263,7 +263,7 @@ With these objects objdiff scores every exact function across all 160 units at 1
 | `daisy/gui/CGUIEnvironment.cpp` | 130/155 | the GUI root (a layout) and widget factory: focus, hover with hover descriptions, mouse and key dispatch, fonts in a sorted vector (`.fnt` files load as `CUnicodeFont`), the built-in font and the skin. The object also holds the first copies of the inline ox code (`IGUIElement` methods, the `IGUILayout` sorters from `IGUILayoutInline.h`, `IGUIStaticText::breakText` (from `IGUIStaticTextInline.h`, which this unit includes), `IGUIHoverParent`). Remaining: register and operand order in `CString` loops and sort helpers, destructor inlining that follows the unit budget, and block layout in `sortRiver`, `breakText` and `sortFlow` (`postEventFromUser` matches with the focus's `OnEvent` call in an if nested inside the focus test); including `breakText` here costs one `std::__insertion_sort<SFont>` copy (one register) but gains 21 functions |
 | `daisy/gui/CGUISkin.cpp` | 21/21 | exact; the default skin: Irrlicht colours made opaque plus Oxeye's modal shade and list highlight fill and border, radio-button sizes, message box texts, and a sprite package that sets the button, scroll bar and check box sizes |
 | `daisy/gui/CGUIContextMenu.cpp` | 64/74 | Irrlicht's context menu with items in a `std::vector<SItem>` and its vector copies; `sendClick`, `highlight` and `removeItem` differ by compare operand order, the cleanup-path `~IGUIElement` inline sits in C2 instead of D2, and the destructors keep `Items` in registers where the build reloads it |
-| `daisy/gui/CGUIEditBox.cpp` | 69/76 | Oxeye's edit box: sprite background and caps, hidden text, Tab to the next edit box, Enter clicks the associated button, change events, paste through an `EKIE_PASTE` key event, no shift selection or copy/cut; the constructor, destructor and `ansiToWide` copy match with `getCursorPos` defined right after the constructor, as `hv search` found, and `processKey` (98.7%) and `draw` (99.99%) differ by registers, operand order and landing-pad layout only |
+| `daisy/gui/CGUIEditBox.cpp` | 70/76 | Oxeye's edit box: sprite background and caps, hidden text, Tab to the next edit box, Enter clicks the associated button, change events, paste through an `EKIE_PASTE` key event, no shift selection or copy/cut; the constructor, destructor and `ansiToWide` copy match with `getCursorPos` defined right after the constructor, as `hv search` found, and `processKey` (98.7%) differs by registers, operand order and landing-pad layout only; `draw` now matches |
 | `daisy/gui/CGUIStaticText.cpp` | 55/69 | Irrlicht's static text with Oxeye's alignment, paragraph icon (`"\|right"` suffix), progressive reveal at 300 px/s and scrolling of overflowing centred text; the destructor matches in the definition order `hv search` found; remaining: constructor cleanup inlining (unit budget), registers and block order in `draw`, `breakText` and `getPreferredSize` |
 | `daisy/gui/CGUITabControl.cpp` | 99/122 | `CGUITab`, `CGUITabControl` (Irrlicht drawing plus a 10-piece sprite skin) and Oxeye's `CGUITabButtonRow` (overlapping tabs, close button) share this object; the `IGUITabControl` and `IGUITabButtonRow` destructors match in the definition order `hv search` found; remaining: destructor and constructor cleanup inlining that follows the inline layout bodies, and register/layout differences in both draws, `setAnimations` and the row's `OnEvent` |
 | `daisy/gui/CGUIToolBar.cpp` | 45/53 | Irrlicht's toolbar without button images; `updateAbsolutePosition` differs by a hoisted load, the constructors by one register swap |

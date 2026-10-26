@@ -42,6 +42,9 @@ using namespace ox::scene;
 		//! dependent on what they are.
 		virtual void OnPostRender(unsigned int timeMs);
 
+		//! sets the position of the node; the maya camera reads it as its zoom
+		virtual void setPosition(const ox::core::CVector3d<float>& newpos);
+
 	private:
 
 		void allKeysUp();

@@ -1594,10 +1594,10 @@ void CLuaManager::includeMod(const SLuaMod& mod)
         ox::core::CString<char> content;
         ox::io::CHelpIO::readString(file, content);
         script.append(content);
-        if (luaL_loadstring(L, script.c_str()) == 0 && lua_pcall(L, 0, LUA_MULTRET, 0) == 0)
-            RunningMods.push_back(mod);
-        else
+        if (luaL_loadstring(L, script.c_str()) != 0 || lua_pcall(L, 0, LUA_MULTRET, 0) != 0)
             CompilerErrors.push_back(ox::core::CString<char>(lua_tostring(L, -1)));
+        else
+            RunningMods.push_back(mod);
         file->drop();
     }
 }

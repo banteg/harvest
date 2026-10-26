@@ -761,6 +761,7 @@
 ".bss" = 0x86c174
 
 ["daisy/scene/CAnimatedMeshSceneNode.cpp"]
+".bss" = 0x86c104
 
 ["daisy/scene/CAnimatedMeshMS3D.cpp"]
 ".bss" = 0x86c1dc
@@ -776,6 +777,7 @@
 ".bss" = 0x86c044
 
 ["daisy/scene/CBspTree.cpp"]
+".bss" = 0x86c1e0
 
 ["daisy/scene/CParticleGravityAffector.cpp"]
 ".bss" = 0x86c1ec

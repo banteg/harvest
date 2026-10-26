@@ -3,6 +3,8 @@
 // Recovered for Harvest's daisy namespace; not the original source.
 
 #include <iostream>
+#include "ox/video/ColorPacking.h"
+#include "ox/algo/CArrayFunctions.h"
 #include "ox/core/CAabbox3d.h"
 #include "ox/core/CDimension2d.h"
 #include "ox/core/CPlane3d.h"
@@ -80,8 +82,39 @@ const ox::core::CDimension2d<int> CTerrainSceneNode::getBestBlockSize(
 ox::video::IImage* CTerrainSceneNode::getIdealHeightMap(ox::video::IImage* heightmap,
 													const ox::core::CDimension2d<int> maxVtxSize)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	ox::video::IImage* ret = 0;
+
+	ox::core::CDimension2d<int> hmapsize = heightmap->getDimension();
+	ox::core::CDimension2d<int> idealsize(1,1);
+
+	while(idealsize.Width < maxVtxSize.Width || idealsize.Width < hmapsize.Width)
+		idealsize.Width <<= 1;
+
+	while(idealsize.Height < maxVtxSize.Height || idealsize.Height < hmapsize.Height)
+		idealsize.Height <<= 1;
+
+	idealsize.Height+=1;
+	idealsize.Width+=1;
+
+	if (idealsize == hmapsize)
+	{
+		heightmap->grab();
+		ret = heightmap;
+	}
+	else
+	{
+		char tmp[255];
+		sprintf(tmp, "Resized heightmap to ideal size %dx%d (vtxblock size was: %dx%d)",
+			idealsize.Width, idealsize.Height,
+			maxVtxSize.Width, maxVtxSize.Height);
+		os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+
+		video::CImage* h = new video::CImage((ox::video::ECOLOR_FORMAT)heightmap->getColorFormat(), heightmap);
+		h->resizeTo(idealsize);
+		ret = h;
+	}
+
+	return ret;
 }
 
 
@@ -90,16 +123,227 @@ bool CTerrainSceneNode::load(ox::video::IImage* texture, ox::video::IImage* inpu
 	ox::video::ITexture* detailmap, const ox::core::CDimension2d<float>& stretchSize,
 	const ox::core::CDimension2d<int>& vtxBlockSize, float maxHeight)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	unsigned int tm = os::Timer::getTime()/1000;
+
+	if (!texture || !inputheightmap)
+		return false;
+
+	// get ideal size of vertex blocks
+	ox::core::CDimension2d<int> maxVtxBlockSize =
+		getBestBlockSize(vtxBlockSize);
+
+	// resize heightmap to ideal size if necessary
+	ox::video::IImage* heightmap = getIdealHeightMap(
+		inputheightmap, maxVtxBlockSize);
+
+	// store some variables
+
+	char textureName[64];
+	char tmp[255];
+
+	ox::video::S3DVertex2TCoords vtx;
+	vtx.Color = ox::video::SColor(255, 255, 255, 255);
+
+	ox::core::CDimension2d<int> hMapSize= heightmap->getDimension();
+	ox::core::CDimension2d<int> tMapSize= texture->getDimension();
+	ox::core::CPosition2d<float> thRel((float)tMapSize.Width / (int)hMapSize.Width, (float)tMapSize.Height / (int)hMapSize.Height);
+	ox::core::CPosition2d<int> processed(0,0);
+
+	// create all vertex blocks
+
+	while (processed.Y<hMapSize.Height)
+	{
+		while(processed.X<hMapSize.Width)
+		{
+			ox::core::CDimension2d<int> blockSize = maxVtxBlockSize;
+			if (processed.X + blockSize.Width > hMapSize.Width)
+				blockSize.Width = hMapSize.Width - processed.X;
+			if (processed.Y + blockSize.Height > hMapSize.Height)
+				blockSize.Height = hMapSize.Height - processed.Y;
+
+			VertexBlocks.push_back(SVertexBlock());
+			SVertexBlock& cvb = VertexBlocks[VertexBlocks.size()-1];
+			cvb.Size = blockSize;
+
+			int x,y;
+
+			// add vertices of vertex block
+			for (y=0; y<blockSize.Height; ++y)
+				for (x=0; x<blockSize.Width; ++x)
+				{
+					ox::video::SColor clr = heightmap->getPixel(x+processed.X, y+processed.Y);
+					float height = ((clr.getRed() + clr.getGreen() + clr.getBlue()) / 3.0f)/255.0f * maxHeight;
+
+					vtx.Pos.set((float)(x+processed.X) * stretchSize.Width,
+						height, (float)(y+processed.Y) * stretchSize.Height);
+
+					vtx.TCoords.set((float)(x+0.5f) / ((float)blockSize.Width),
+						(float)(y+0.5f) / ((float)blockSize.Height));
+
+					cvb.Vertices.push_back(vtx);
+				}
+
+			// create all indices
+			createIndexBuffers(cvb);
+
+			// calculate bounding box
+			calculateBoundingBox(cvb);
+
+			// calculate all normals
+			calculateNormals(cvb);
+
+			// create texture for the block
+			if (cvb.Vertices.size())
+			{
+				// create texture for this block
+				ox::video::IImage* img = new video::CImage(texture,
+					ox::core::CPosition2d<int>((int)(processed.X*thRel.X), (int)(processed.Y*thRel.Y)),
+					ox::core::CDimension2d<int>((int)(blockSize.Width*thRel.X), (int)(blockSize.Height*thRel.Y)));
+
+				sprintf(textureName, "terrain%d_%d", tm, VertexBlocks.size());
+
+				cvb.Material.Lighting = false;
+				cvb.Material.Texture1 =
+					SceneManager->getVideoDriver()->addTexture(textureName, img);
+
+				if (cvb.Material.Texture1)
+				{
+					sprintf(tmp, "Generated terrain texture (%dx%d): %s",
+						cvb.Material.Texture1->getSize().Width,
+						cvb.Material.Texture1->getSize().Height,
+						textureName);
+					os::Printer::log(tmp, ox::event::ELL_INFORMATION);
+				}
+				else
+					os::Printer::log("Could not create terrain texture.", textureName, ox::event::ELL_ERROR);
+
+				img->drop();
+			}
+
+            // keep on processing
+			processed.X += maxVtxBlockSize.Width-1;
+		}
+
+		// keep on processing
+		processed.X = 0;
+		processed.Y += maxVtxBlockSize.Height-1;
+	}
+
+	calculateBoundingBox();
+	heightmap->drop();
+
+	return true;
 }
 
 
 //! creates index buffers for all level of details for a vertex block
 void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	// search if we already have a fitting indexbuffer
+	for (int i=0; i<(int)IndexArrayList.size(); ++i)
+		if (IndexArrayList[i]->VertexBlockSize == block.Size)
+		{
+			block.IndexArray = IndexArrayList[i];
+			return;
+		}
+
+	// add new index array
+	IndexArrayList.push_back(new SIndexArray());
+	SIndexArray& idxarray = *IndexArrayList[IndexArrayList.size()-1];
+    idxarray.VertexBlockSize = block.Size;
+	block.IndexArray = IndexArrayList[IndexArrayList.size()-1];
+
+	int x,y;
+
+	// create levels of detail without borders
+
+	ox::TArray<int> widths;
+	ox::TArray<int> heights;
+
+	for (int lodfactor=1;
+		(block.Size.Height/lodfactor)>2 &&
+		(block.Size.Width/lodfactor)>2; lodfactor*=2)
+	{
+		idxarray.LoDs.push_back(SLoD());
+		int lodnr = idxarray.LoDs.size()-1;
+		idxarray.LoDs[lodnr].Buffer.push_back(SIndexBuffer());
+		SIndexBuffer& idxbfr2 = idxarray.LoDs[lodnr].Buffer[0];
+
+		idxbfr2.OrigVertexBlockSize = block.Size;
+		idxbfr2.IndexedVertexBlockSize.Width = (block.Size.Width - lodfactor - 1) / lodfactor;
+		idxbfr2.IndexedVertexBlockSize.Height = (block.Size.Height - lodfactor - 1) / lodfactor;
+
+		if (ox::algo::binarySearchPos(widths.begin(), widths.end(), idxbfr2.IndexedVertexBlockSize.Width)==-1)
+			widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
+
+		if (ox::algo::binarySearchPos(heights.begin(), heights.end(), idxbfr2.IndexedVertexBlockSize.Height)==-1)
+			heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
+
+		// generate indices
+		for (y=0; y<(int)((block.Size.Height-lodfactor-1)/lodfactor); ++y)
+			for (x=0; x<(int)((block.Size.Width-lodfactor-1)/lodfactor); ++x)
+		{
+			int c = ((y*lodfactor)*block.Size.Width) + (x*lodfactor);
+
+			idxbfr2.Indices.push_back(c);
+			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
+			idxbfr2.Indices.push_back(c + lodfactor);
+
+			idxbfr2.Indices.push_back(c + lodfactor);
+			idxbfr2.Indices.push_back(c + (block.Size.Width*lodfactor));
+			idxbfr2.Indices.push_back(c + lodfactor + (block.Size.Width*lodfactor));
+		}
+	}
+
+	// now every LOD has got its default indices. The indices to fit
+	// the different borders are still missing. We create them now.
+
+	for (int l=0; l<(int)idxarray.LoDs.size(); ++l)
+	{
+		// copy already created indices
+		SLoD& lod = idxarray.LoDs[l];
+		SIndexBuffer virginBuffer = lod.Buffer[0];
+		lod.Buffer.clear();
+
+		for (int w=0; w<(int)widths.size(); ++w)
+			for (int h=0; h<(int)heights.size(); ++h)
+			{
+				lod.Buffer.push_back(virginBuffer);
+				SIndexBuffer& buf = lod.Buffer[lod.Buffer.size()-1];
+
+				int wVertexStep = buf.OrigVertexBlockSize.Width / buf.IndexedVertexBlockSize.Width;
+				int hVertexStep = buf.OrigVertexBlockSize.Height / buf.IndexedVertexBlockSize.Height;
+
+				// add %width% indices on top
+				//if (widths[w] <= buf.IndexedVertexBlockSize.Width)
+				{
+					// this block has more details
+
+					//buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*hVertexStep);
+					//buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Width*wVertexStep));
+					//buf.Indices.push_back(buf.OrigVertexBlockSize.Width+(buf.OrigVertexBlockSize.Width*wVertexStep)-1);
+
+					// add first basic triangle
+					// |------
+					// |    /
+					// |  /
+					// |/
+					//
+					buf.Indices.push_back(buf.IndexedVertexBlockSize.Height*wVertexStep);
+					buf.Indices.push_back((buf.IndexedVertexBlockSize.Height*hVertexStep)+(buf.OrigVertexBlockSize.Height*hVertexStep));
+					buf.Indices.push_back(buf.OrigVertexBlockSize.Height+(buf.OrigVertexBlockSize.Height*wVertexStep)-1);
+
+				}
+				/*else
+				{
+					// this block has smaller or similar details
+
+					int vpb = widths[w] / buf.IndexedVertexBlockSize.Width;
+					buf.Indices.clear();
+				}*/
+
+			}
+	}
 }
 
 
@@ -214,8 +458,10 @@ CTerrainSceneNode::SIndexBuffer* CTerrainSceneNode::getIndexBuffer(SVertexBlock&
 
 void CTerrainSceneNode::OnPreRender()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	if (IsVisible)
+		SceneManager->registerNodeForRendering(this, SNRT_DEFAULT);
+
+	ISceneNode::OnPreRender();
 }
 
 

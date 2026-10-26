@@ -58,7 +58,8 @@ void CDropshipEntity::loadSprite(bool takeoff)
             Sprites[15] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0015"));
             Sprites[16] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0016"));
             Sprites[17] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0017"));
-            Sprites[18] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0018"));
+            ox::video::ISpriteAnimationState* addNewAnimationState2 = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0018"));
+            Sprites[18] = addNewAnimationState2;
             Sprites[19] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0019"));
             Sprites[20] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0020"));
             Sprites[21] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("DragonFly0021"));

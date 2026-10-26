@@ -109,9 +109,9 @@ void COctTreeSceneNode::render()
 			// for debug purposes only
 			if (DebugDataVisible && !Materials.empty())
 			{
-				ox::TArray< ox::core::CAabbox3d<float> > boxes;
 				ox::video::SMaterial m;
 				m.Lighting = false;
+				ox::TArray< ox::core::CAabbox3d<float> > boxes;
 				driver->setMaterial(m);
 				StdOctTree->renderBoundingBoxes(box, boxes);
 				for (unsigned int b=0; b<boxes.size(); ++b)
@@ -136,15 +136,18 @@ void COctTreeSceneNode::render()
 			}
 
 			// for debug purposes only
-			if (DebugDataVisible && !Materials.empty())
+			if (DebugDataVisible)
 			{
-				ox::TArray< ox::core::CAabbox3d<float> > boxes;
-				ox::video::SMaterial m;
-				m.Lighting = false;
-				driver->setMaterial(m);
-				LightMapOctTree->renderBoundingBoxes(box, boxes);
-				for (unsigned int b=0; b<boxes.size(); ++b)
-					driver->draw3DBox(boxes[b], ox::video::SColor(0,255,255,255));
+				if (!Materials.empty())
+				{
+					ox::video::SMaterial m;
+					m.Lighting = false;
+					ox::TArray< ox::core::CAabbox3d<float> > boxes;
+					driver->setMaterial(m);
+					LightMapOctTree->renderBoundingBoxes(box, boxes);
+					for (unsigned int b=0; b<boxes.size(); ++b)
+						driver->draw3DBox(boxes[b], ox::video::SColor(0,255,255,255));
+				}
 			}
 		}
 		break;

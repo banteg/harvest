@@ -159,7 +159,8 @@ bool CParticleState::update(float frameDelta, ox::core::CVector3d<float>& positi
 
             float t = Age / LifeTime;
             Scale = (Info->EndScale - Info->StartScale) * t + Info->StartScale;
-            const ox::video::SColor& start = Info->StartColor;
+            ox::video::SColor startColor = Info->StartColor;
+            const ox::video::SColor& start = startColor;
             const ox::video::SColor& end = Info->EndColor;
             Color = ox::video::SColor(
                 (int)(start.getAlpha() + (end.getAlpha() - start.getAlpha()) * t),

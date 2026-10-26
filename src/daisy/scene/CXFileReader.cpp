@@ -3,6 +3,7 @@
 // Recovered for Harvest's daisy namespace; not the original source.
 
 #include <iostream>
+#include "ox/algo/CArrayFunctions.h"
 #include "ox/core/CMatrix4.h"
 #include "ox/core/CString.h"
 #include "ox/core/CVector2d.h"
@@ -358,22 +359,280 @@ bool CXFileReader::getNextTokenAsString(ox::core::CString<char>& out)
 
 bool CXFileReader::parseDataObjectAnimationSet(SXAnimationSet& set)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+	os::Printer::log("CXFileReader: Reading animation set", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject(&set.AnimationName))
+	{
+		os::Printer::log("No opening brace in Animation Set found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Animation set in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // animation set finished
+		}
+		else
+		if (objectName == "Animation")
+		{
+			set.Animations.push_back(SXAnimation());
+			if (!parseDataObjectAnimation(set.Animations[set.Animations.size()-1]))
+				return false;
+		}
+		else
+		{
+			os::Printer::log("Unknown data object in animation set in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+			if (!parseUnknownDataObject())
+				return false;
+		}
+
+	}
+
+	return true;
 }
 
 
 bool CXFileReader::parseDataObjectAnimation(SXAnimation& anim)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+	os::Printer::log("CXFileReader: reading animation", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Animation found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	anim.closed = true;
+	anim.linearPositionQuality = true;
+
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Animation in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // animation finished
+		}
+		else
+		if (objectName == "AnimationKey")
+		{
+			anim.Keys.push_back(SXAnimationKey());
+			if (!parseDataObjectAnimationKey(anim.Keys[anim.Keys.size()-1]))
+				return false;
+		}
+		else
+		if (objectName == "AnimationOptions")
+		{
+			//TODO: parse options.
+			if (!parseUnknownDataObject())
+				return false;
+		}
+		else
+		if (objectName == "{")
+		{
+			// read frame name
+			anim.FrameName = getNextToken();
+			ox::core::CString<char> end = getNextToken();
+			if (end.size() == 0 || end != "}")
+			{
+				os::Printer::log("Unexpected ending found in Animation in x file.", ox::event::ELL_WARNING);
+				return false;
+			}
+		}
+		else
+		{
+			if (objectName.size()>2 && objectName[0] == '{' &&
+				objectName[objectName.size()-1] == '}')
+			{
+				anim.FrameName = objectName.subString(1,objectName.size()-2);
+			}
+			else
+			{
+				os::Printer::log("Unknown data object in animation in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+				if (!parseUnknownDataObject())
+					return false;
+			}
+		}
+
+	}
+
+	return true;
 }
 
 
 bool CXFileReader::parseDataObjectAnimationKey(SXAnimationKey& animkey)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+	os::Printer::log("CXFileReader: reading animation key", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Animation Key found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read key type
+	findNextNoneWhiteSpaceNumber();
+	animkey.keyType = strtol(P, &P, 10);
+
+	if (!(animkey.keyType == 0 || animkey.keyType == 1 ||
+		animkey.keyType == 2 || animkey.keyType == 3 ||
+		animkey.keyType == 4))
+	{
+		os::Printer::log("Unknown key type found in Animation Key in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read number of keys
+	findNextNoneWhiteSpaceNumber();
+	animkey.numberOfKeys = strtol(P, &P, 10);
+
+	animkey.init();
+
+	// read keys
+	switch(animkey.keyType)
+	{
+	case 0:
+		{
+			//read quaternions
+			for (int i=0; i<animkey.numberOfKeys; ++i)
+			{
+				// read time
+				findNextNoneWhiteSpaceNumber();
+				animkey.time[i] = strtol(P, &P, 10);
+
+				// read count
+				++P;
+				if (strtol(P, &P, 10) != 4)
+				{
+					os::Printer::log("Expected 4 numbers in animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				++P;
+				animkey.getQuaternion(i).W = -readFloat();
+				++P;
+				animkey.getQuaternion(i).X = -readFloat();
+				++P;
+				animkey.getQuaternion(i).Y = -readFloat();
+				++P;
+				animkey.getQuaternion(i).Z = -readFloat();
+
+
+				if (P[0] != ';' || P[1] != ';')
+				{
+					os::Printer::log("No following two semicolons missing after quaternion animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				P+=3;
+			}
+		}
+		break;
+	case 1:
+	case 2:
+		{
+			// read vectors
+			for (int i=0; i<animkey.numberOfKeys; ++i)
+			{
+				// read time
+				findNextNoneWhiteSpaceNumber();
+				animkey.time[i] = strtol(P, &P, 10);
+
+				// read count
+				++P;
+				if (strtol(P, &P, 10) != 3)
+				{
+					os::Printer::log("Expected 3 numbers in animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				++P;
+				animkey.getVector(i).X = readFloat();
+				++P;
+				animkey.getVector(i).Y = readFloat();
+				++P;
+				animkey.getVector(i).Z = readFloat();
+
+				if (P[0] != ';' || P[1] != ';')
+				{
+					os::Printer::log("No following two semicolons missing after vector animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				P+=3;
+			}
+		}
+		break;
+	case 3:
+	case 4:
+		{
+			// read matrix
+
+			for (int i=0; i<animkey.numberOfKeys; ++i)
+			{
+				// read time
+				findNextNoneWhiteSpaceNumber();
+				animkey.time[i] = strtol(P, &P, 10);
+
+				// read count
+				++P;
+				if (strtol(P, &P, 10) != 16)
+				{
+					os::Printer::log("Expected 16 numbers in animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				// read matrix
+				for (int n=0; n<4; ++n)
+					for (int m=0; m<4; ++m)
+					{
+						findNextNoneWhiteSpaceNumber();
+						animkey.getMatrix(i)(m,n) = readFloat();
+					}
+
+				if (P[0] != ';' || P[1] != ';')
+				{
+					os::Printer::log("No following two semicolons missing after matrix animation key in x file", ox::event::ELL_WARNING);
+					return false;
+				}
+
+				P+=3;
+			}
+		}
+		break;
+	} // end switch
+
+
+	ox::core::CString<char> objectName = getNextToken();
+
+	if (objectName != "}")
+	{
+		os::Printer::log("No closing brace in animation key in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+		return false;
+	}
+
+	return true;
 }
 
 

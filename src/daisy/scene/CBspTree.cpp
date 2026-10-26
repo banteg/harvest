@@ -12,6 +12,8 @@
 #include "ox/scene/IMeshBuffer.h"
 #include "ox/scene/SViewFrustrum.h"
 #include "ox/event/ILogger.h"
+#include "ox/video/ColorPacking.h"
+#include "ox/video/S3DVertexInline.h"
 #include "ox/video/S3DVertex.h"
 #include <stdio.h>
 #include "daisy/os.h"
@@ -631,8 +633,216 @@ void CBspTree::debugValidateLeaf(const BspNode& node)
 void CBspTree::splitPoly(const BspPoly& poly, const ox::core::CPlane3d<float>& plane,
 						 BspPoly& frontSplit, BspPoly& backSplit)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _DEBUG
+	assert(frontSplit.indices.size() == 0 && frontSplit.vertices.size() == 0);
+	#endif
+
+	++stats.polySplits;
+
+	const int LIST_BUFFER_SIZE = 40;
+
+	ox::video::S3DVertex frontList[LIST_BUFFER_SIZE];
+	ox::video::S3DVertex backList[LIST_BUFFER_SIZE];
+	unsigned int countFront = 0;
+	unsigned int countBack = 0;
+
+	//memset(&frontList, 0, sizeof(SStdVertex)*LIST_BUFFER_SIZE); // todo: weg damit
+	//memset(&backList, 0, sizeof(SStdVertex)*LIST_BUFFER_SIZE); // todo: weg damit
+	//memset(&frontSplit, 0, sizeof(BspPoly)); // todo: weg damit
+	//memset(&backSplit, 0, sizeof(BspPoly)); // todo: weg damit
+
+	// Die Beiden Schnittpunkte müssen gesucht werden.
+	// Dazu gehe ich im uhrzeigersinn die Punkte einzeln ab
+	// und ordne in front und BackList ein. Wenn dann auch noch
+	// ein Schnittpunkt zwischen diesem eingeornetem Punkt und
+	// dem nächstem Punkt existiert, dann wird der auch noch
+	// eingeordnet.
+
+	unsigned int currentIdx = poly.vertices.size() - 1;
+
+	//assert(currentIdx < BSP_MAX_POLY_VERTICES);
+
+	switch (plane.classifyPointRelation(poly.vertices[currentIdx].Pos))
+	{
+	case ox::core::ISREL3D_FRONT:
+		frontList[countFront] = poly.vertices[currentIdx];
+		countFront++;
+		break;
+	case ox::core::ISREL3D_BACK:
+		backList[countBack] = poly.vertices[currentIdx];
+		countBack++;
+		break;
+	case ox::core::ISREL3D_PLANAR:
+		backList[countBack]   = poly.vertices[currentIdx];
+		frontList[countFront] = poly.vertices[currentIdx];
+		countBack++;
+		countFront++;
+		break;
+	}
+
+	for (unsigned int currentIdx2=0; currentIdx2<poly.vertices.size(); ++currentIdx2)
+	{
+		const ox::core::CVector3d<float> &pointA = poly.vertices[currentIdx].Pos;
+		const ox::core::CVector3d<float> &pointB = poly.vertices[currentIdx2].Pos;
+		ox::core::CVector3d<float> intersection;
+
+		ox::core::EIntersectionRelation3D i3d = plane.classifyPointRelation(pointB);
+
+		if (i3d != ox::core::ISREL3D_PLANAR &&
+			(plane.getIntersectionWithLine(pointA, (pointB) - (pointA), intersection) && (float)(intersection).getDistanceFromSQ(pointA) < (float)((pointB) - (pointA)).getLengthSQ() && (float)(intersection).getDistanceFromSQ(pointB) < (float)((pointB) - (pointA)).getLengthSQ()))
+		{
+			// TODO: Kann beschleunigt werden, indem statt getIntersectionWithLimitedLine eine Funktion
+			// verwendet wird, die nicht überprüft, ob sich der schnittpunkt auch zwischen den punkten
+			// befindet, das macht schon die percent-Abfrage.
+
+			ox::core::CLine3d<float> l(pointB, pointA);
+			ox::core::CLine3d<float> l2(pointB, intersection);
+			float percent = (float)(l2.getLength() / l.getLength());
+
+			if (!(percent < 0.0f || percent > 1.0f))
+			{
+				// Hier gibt's eine intersection, den schnittpunkt als vertex in beide listen einfügen
+				unsigned int red = (unsigned int)(
+					poly.vertices[currentIdx2].Color.getRed() +
+					(poly.vertices[currentIdx].Color.getRed() -
+					poly.vertices[currentIdx2].Color.getRed()) * percent );
+
+				unsigned int green = (unsigned int)(
+					poly.vertices[currentIdx2].Color.getGreen() +
+					(poly.vertices[currentIdx].Color.getGreen() -
+					poly.vertices[currentIdx2].Color.getGreen()) * percent );
+
+				unsigned int blue = (unsigned int)(
+					poly.vertices[currentIdx2].Color.getBlue() +
+					(poly.vertices[currentIdx].Color.getBlue() -
+					poly.vertices[currentIdx2].Color.getBlue()) * percent );
+
+				ox::core::CVector2d<float> tcoords =
+					(poly.vertices[currentIdx].TCoords - poly.vertices[currentIdx2].TCoords) * percent;
+
+				//assert(poly.vertices[currentIdx].nx == poly.vertices[currentIdx2].nx);
+				//assert(poly.vertices[currentIdx].ny == poly.vertices[currentIdx2].ny);
+				//assert(poly.vertices[currentIdx].nz == poly.vertices[currentIdx2].nz);
+
+				ox::video::SColor tmpcolor(0, red, green, blue);
+
+				ox::video::S3DVertex newVertex(intersection.X, intersection.Y, intersection.Z, poly.vertices[currentIdx].Normal.X, poly.vertices[currentIdx].Normal.Y, poly.vertices[currentIdx].Normal.Z, tmpcolor, tcoords.X, tcoords.Y);
+
+				frontList[countFront] = newVertex;
+				countFront++;
+				backList[countBack] = newVertex;
+				countBack++;
+			}
+		}
+
+		#ifdef _DEBUG
+		assert(countBack <= LIST_BUFFER_SIZE && countFront <= LIST_BUFFER_SIZE); // listbuffer ist zu klein
+		#endif
+
+		if (currentIdx2 != poly.vertices.size() - 1)
+		{
+			switch (i3d)
+			{
+			case ox::core::ISREL3D_FRONT:
+				frontList[countFront] = poly.vertices[currentIdx2];
+				countFront++;
+				break;
+			case ox::core::ISREL3D_BACK:
+				backList[countBack] = poly.vertices[currentIdx2];
+				countBack++;
+				break;
+			case ox::core::ISREL3D_PLANAR:
+				backList[countBack]   = poly.vertices[currentIdx2];
+				frontList[countFront] = poly.vertices[currentIdx2];
+				countBack++;
+				countFront++;
+				break;
+			}
+		}
+
+		// index höherzählen
+
+		++currentIdx;
+		if (currentIdx == poly.vertices.size())
+			currentIdx = 0;
+	}
+
+	// Die richtigen Vertizen wurden jetzt in die buffer geschrieben, jetzt müssen
+	// daraus polygone gemacht werden.
+
+	//frontSplit.countVertices = countFront;
+	//backSplit.countVertices = countBack;
+	frontSplit.wasSplitter = poly.wasSplitter;
+	backSplit.wasSplitter = poly.wasSplitter;
+	frontSplit.material = poly.material;
+	backSplit.material = poly.material;
+
+	//assert(countFront <= BSP_MAX_POLY_VERTICES && countBack <= BSP_MAX_POLY_VERTICES);
+
+	unsigned int i; // new ISO for scoping not liked by some compilers
+
+	for (i=0; i<countFront; ++i)
+		frontSplit.vertices.push_back(frontList[i]);
+
+	for (i=0; i<countBack; ++i)
+		backSplit.vertices.push_back(backList[i]);
+
+	int frontIndexCount = (frontSplit.vertices.size() - 2) * 3;
+	int backIndexCount = (backSplit.vertices.size() - 2) * 3;
+
+	#ifdef _DEBUG
+	assert((frontIndexCount >= 3 || frontIndexCount == 0) &&
+			(backIndexCount >= 3 || backIndexCount == 0));
+	assert (frontSplit.vertices.size() && backSplit.vertices.size());
+	#endif
+
+	int v0=0, v1=1, v2=2;
+
+	for (i=0; i<(unsigned int)frontIndexCount/3; ++i)
+	{
+		if (i) {	v1=v2; v2++; }
+
+		frontSplit.indices.push_back(v0);
+		frontSplit.indices.push_back(v1);
+		frontSplit.indices.push_back(v2);
+	}
+
+	frontSplit.plane = planeFromPoly(frontSplit);
+
+	#ifdef _DEBUG 	// falsche indizes suchen
+	for (i=0; i<(unsigned int)frontIndexCount; ++i)
+		if (frontSplit.indices[i] >= frontSplit.vertices.size())
+		{
+			os::Printer::log("[CBspTree] Error! Invalid index created during split.\n", ox::event::ELL_ERROR);
+			_asm int 3
+		}
+	#endif
+
+	v0=0; v1=1; v2=2;
+
+	for (i=0; i<(unsigned int)backIndexCount/3; ++i)
+	{
+		if (i)
+		{
+			v1=v2;
+			v2++;
+		}
+
+		backSplit.indices.push_back(v0);
+		backSplit.indices.push_back(v1);
+		backSplit.indices.push_back(v2);
+	}
+
+	backSplit.plane = planeFromPoly(backSplit);
+
+	#ifdef _DEBUG // falsche indizes suchen
+	for (i=0; i<(unsigned int)backIndexCount; ++i)
+		if (backSplit.indices[i] >= backSplit.vertices.size())
+		{
+			os::Printer::log("[CBspTree] Error! Invalid index created during split.\n", ox::event::ELL_ERROR);
+			_asm int 3
+		}
+	#endif
 }
 
 

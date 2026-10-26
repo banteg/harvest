@@ -320,6 +320,7 @@ ALuint COpenALDriver::_loadOggFromMemory(void* data, int size)
 {
     VorbisSource source;
     source.Data = (char*)data;
+    ALuint buffer;
     source.Position = 0;
     source.Size = size;
 
@@ -350,7 +351,6 @@ ALuint COpenALDriver::_loadOggFromMemory(void* data, int size)
         length += result;
     } while (length < capacity);
 
-    ALuint buffer;
     alGenBuffers(1, &buffer);
     alBufferData(buffer, format, pcm, length, info->rate);
     alGetError();

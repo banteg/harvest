@@ -90,7 +90,47 @@ CAlienEntity* CMissileTurretEntity::findPriorityAlien(const ox::core::CVector3d<
         return 0;
     float nearestDistance = squaredRange * 16.0f;
     CAlienEntity* best;
-    if (settings::g_attackPriorities[prioritySet].RangeIsImportant)
+    if (!settings::g_attackPriorities[prioritySet].RangeIsImportant)
+    {
+        int bestPriority = 1;
+        std::vector<ox::entity::COxEntity*> candidates;
+        for (int x = xMin; x <= xMax; ++x)
+            for (int y = yMin; y <= yMax; ++y)
+            {
+                std::list<CEntity*>& cell = gp_entityManager->Grid[1][y * 18 + x];
+                for (std::list<CEntity*>::iterator it = cell.begin(); it != cell.end(); ++it)
+                {
+                    if ((*it)->getEntityType() != 6)
+                        continue;
+                    CAlienEntity* alien = static_cast<CAlienEntity*>(*it);
+                    int type = alien->getAlienType();
+                    if (settings::g_attackPriorities[prioritySet].Priorities[type] < bestPriority)
+                        continue;
+                    float dx = position.X - (*it)->getPosition().X;
+                    float dy = position.Y - (*it)->getPosition().Y;
+                    float distance = dx * dx + dy * dy;
+                    if (distance <= squaredRange && distance >= minimumSquaredRange)
+                    {
+                        if (settings::g_attackPriorities[prioritySet].Priorities[type] > bestPriority)
+                        {
+                            candidates.clear();
+                            bestPriority = settings::g_attackPriorities[prioritySet].Priorities[type];
+                        }
+                        candidates.push_back(*it);
+                    }
+                    else if (distance < nearestDistance && nearest)
+                    {
+                        *nearest = (*it)->getPosition();
+                        nearestDistance = distance;
+                    }
+                }
+            }
+        if (!candidates.empty())
+            best = static_cast<CAlienEntity*>(candidates[ox::algo::CRand::rand() % candidates.size()]);
+        else
+            best = 0;
+    }
+    else
     {
         best = 0;
         int bestPriority = 1;
@@ -131,46 +171,6 @@ CAlienEntity* CMissileTurretEntity::findPriorityAlien(const ox::core::CVector3d<
                     }
                 }
             }
-    }
-    else
-    {
-        int bestPriority = 1;
-        std::vector<ox::entity::COxEntity*> candidates;
-        for (int x = xMin; x <= xMax; ++x)
-            for (int y = yMin; y <= yMax; ++y)
-            {
-                std::list<CEntity*>& cell = gp_entityManager->Grid[1][y * 18 + x];
-                for (std::list<CEntity*>::iterator it = cell.begin(); it != cell.end(); ++it)
-                {
-                    if ((*it)->getEntityType() != 6)
-                        continue;
-                    CAlienEntity* alien = static_cast<CAlienEntity*>(*it);
-                    int type = alien->getAlienType();
-                    if (settings::g_attackPriorities[prioritySet].Priorities[type] < bestPriority)
-                        continue;
-                    float dx = position.X - (*it)->getPosition().X;
-                    float dy = position.Y - (*it)->getPosition().Y;
-                    float distance = dx * dx + dy * dy;
-                    if (distance <= squaredRange && distance >= minimumSquaredRange)
-                    {
-                        if (settings::g_attackPriorities[prioritySet].Priorities[type] > bestPriority)
-                        {
-                            candidates.clear();
-                            bestPriority = settings::g_attackPriorities[prioritySet].Priorities[type];
-                        }
-                        candidates.push_back(*it);
-                    }
-                    else if (distance < nearestDistance && nearest)
-                    {
-                        *nearest = (*it)->getPosition();
-                        nearestDistance = distance;
-                    }
-                }
-            }
-        if (!candidates.empty())
-            best = static_cast<CAlienEntity*>(candidates[ox::algo::CRand::rand() % candidates.size()]);
-        else
-            best = 0;
     }
     return best;
 }
