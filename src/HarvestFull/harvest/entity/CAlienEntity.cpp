@@ -722,11 +722,14 @@ void CAlienEntity::locateTargetBuilding()
     const std::list<ox::entity::COxEntity*>& buildings = gp_entityManager->getEntityList(0);
     for (std::list<ox::entity::COxEntity*>::const_iterator it = buildings.begin(); it != buildings.end(); it++)
     {
-        if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()] && !((CEntity*)*it)->isKilled())
+        if (BUILDING_TARGET_TYPES[((CEntity*)*it)->getEntityType()])
         {
-            targets.push_back(*it);
-            if (((CEntity*)*it)->getEntityType() == 1 && !((CSparkMoverEntity*)*it)->isAlienWaypointed())
-                availableLink = true;
+            if (!((CEntity*)*it)->isKilled())
+            {
+                targets.push_back(*it);
+                if (((CEntity*)*it)->getEntityType() == 1 && !((CSparkMoverEntity*)*it)->isAlienWaypointed())
+                    availableLink = true;
+            }
         }
     }
     if (!targets.empty())
@@ -736,18 +739,20 @@ void CAlienEntity::locateTargetBuilding()
             float bestDistance = 1000000000.0f;
             for (unsigned int i = 0; i < targets.size(); ++i)
             {
-                if (((CEntity*)targets[i])->getEntityType() == 1 &&
-                    !((CSparkMoverEntity*)targets[i])->isAlienWaypointed())
+                if (((CEntity*)targets[i])->getEntityType() == 1)
                 {
-                    float x = targets[i]->getPosition().X - Position.X;
-                    float y = targets[i]->getPosition().Y - Position.Y;
-                    float distance = x * x + y * y;
-                    if (distance < bestDistance)
+                    if (!((CSparkMoverEntity*)targets[i])->isAlienWaypointed())
                     {
-                        Target.Entity = targets[i];
-                        Target.Id = Target.Entity->getId();
-                        Target.UpdateCounter = gp_entityManager->getUpdateCounter();
-                        bestDistance = distance;
+                        float x = targets[i]->getPosition().X - Position.X;
+                        float y = targets[i]->getPosition().Y - Position.Y;
+                        float distance = x * x + y * y;
+                        if (distance < bestDistance)
+                        {
+                            Target.Entity = targets[i];
+                            Target.Id = Target.Entity->getId();
+                            Target.UpdateCounter = gp_entityManager->getUpdateCounter();
+                            bestDistance = distance;
+                        }
                     }
                 }
             }
