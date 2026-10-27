@@ -46,7 +46,14 @@ It runs on default-branch pushes, pull requests, manual dispatch, and the setup 
 - **Linked code/data:** `complete_code`, `complete_data` and `complete_units` remain zero. Capture
   records an explicit unavailable link status because there is no executable link step. Compiling
   an object or matching a function does not establish that it is included in a rebuilt executable.
-- Display: one treemap unit per function extent, named for its symbol (readable Mac-derived names when available) rather than its address, plus four unclaimed-code units. Matched data gets one unit per owning source section in each target section, one unit per target section for matched merged strings and constants that no recovered section places, and one unclaimed-data unit per target section. The total_units measure keeps counting one per matched or unclaimed data interval, so grouping intervals into those display units does not rewrite the unit denominator. The Allocated data category isolates data progress. Leave the site's default category as All to retain the full denominator.
+- **Display:** one treemap unit per function extent, named for its symbol (readable Mac-derived
+  names when available) rather than its address, plus four unclaimed-code units. Matched data
+  gets one unit per owning source section in each target section, one unit per target section
+  for matched merged strings and constants that no recovered section places, and one unclaimed-data
+  unit per target section. The `total_units` measure still counts matched and unclaimed data
+  intervals, so grouping them into display units does not change that denominator. The
+  **Allocated data** category isolates data progress. Leave the default category as **All** to
+  retain the full denominator.
 - **Port-relevance layers:** `config/<build>/layers.toml` puts every function into one more category, so
   the code a modern port keeps can be followed apart from code it would replace. **Game logic**
   is the `harvest` objects; **Engine core** is the `ox` library plus the portable `daisy` pieces the
@@ -89,7 +96,16 @@ Local matching, searching and capture also regenerate `extents.tsv` from the exa
 before trusting thunk boundaries. RTTI slot discovery is part of the hashed measurement inputs.
 Without originals, report validation checks that every inventoried thunk agrees with that table.
 
-The workflow's report self-comparison only exercises the official objdiff parser; it is not a before/after measurement or a recompilation proof. The bot compares the reports associated with its displayed base and head commits, matching units and their items by name. Report names are therefore identities: functions are named by symbol and matched data by the source section that owns it, so matching adjacent bytes or learning a symbol's proven address does not rename something that was already matched. Its "new matches" count includes both function rows and matched-data units, so it can exceed the number of new code functions. Compare code/data byte deltas and the reported commit range, not an older PR body's pre-integration project totals.
+The workflow's report self-comparison only exercises the official objdiff parser;
+it is not a before/after measurement or a recompilation proof. The bot compares reports
+associated with its displayed base and head commits, matching units and their items by name.
+Report names are therefore identities: functions are named by symbol and matched data by its
+owning source section, so matching adjacent bytes or learning a symbol's proven address does
+not rename an existing match. The first report after this naming change includes a one-time
+rename of existing units; that transition does not change the measured code or data coverage.
+The bot's "new matches" count includes function rows and matched-data units, so it can exceed
+the number of new code functions. Compare byte deltas and the reported commit range, rather
+than an older PR body's pre-integration totals.
 
 After editing recovered code, headers, `units.toml`, `symbols.tsv`, compiler flags, dependencies,
 or measurement code, run:
