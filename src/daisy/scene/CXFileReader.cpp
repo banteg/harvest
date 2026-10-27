@@ -219,15 +219,103 @@ bool CXFileReader::parseFile()
 //! Parses the next Data object in the file
 bool CXFileReader::parseDataObject()
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	ox::core::CString<char> objectName = getNextToken();
+
+	if (objectName.size() == 0)
+		return false;
+
+	// parse specific object
+
+	if (objectName == "template")
+		return parseDataObjectTemplate();
+	else
+	if (objectName == "Frame")
+		return parseDataObjectFrame(RootFrame);
+	else
+	if (objectName == "Mesh")
+	{
+		RootFrame.Meshes.push_back(SXMesh());
+		return parseDataObjectMesh(RootFrame.Meshes[RootFrame.Meshes.size()-1]);
+	}
+	else
+	if (objectName == "AnimationSet")
+	{
+		AnimationSets.push_back(SXAnimationSet());
+		return parseDataObjectAnimationSet(AnimationSets[AnimationSets.size()-1]);
+	}
+
+	os::Printer::log("Unknown data object in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+
+	return parseUnknownDataObject();
 }
 
 
 bool CXFileReader::parseDataObjectFrame(SXFrame& frame)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading frame", ox::event::ELL_INFORMATION);
+	#endif
+
+
+	// A coordinate frame, or "frame of reference." The Frame template
+	// is open and can contain any object. The Direct3D extensions (D3DX)
+	// mesh-loading functions recognize Mesh, FrameTransformMatrix, and
+	// Frame template instances as child objects when loading a Frame
+	// instance.
+
+	if (!readHeadOfDataObject(&frame.Name))
+	{
+		os::Printer::log("No opening brace in Frame found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// jetzt sind wir im frame.
+	// solange tokens lesen, bis closing brace erreicht
+
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Frame in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // frame finished
+		}
+		else
+		if (objectName == "Frame")
+		{
+			frame.ChildFrames.push_back(SXFrame());
+			if (!parseDataObjectFrame(frame.ChildFrames[frame.ChildFrames.size()-1]))
+				return false;
+		}
+		else
+		if (objectName == "FrameTransformMatrix")
+		{
+			if (!parseDataObjectTransformationMatrix(frame.LocalMatrix))
+				return false;
+		}
+		else
+		if (objectName == "Mesh")
+		{
+			frame.Meshes.push_back(SXMesh());
+			if (!parseDataObjectMesh(frame.Meshes[frame.Meshes.size()-1]))
+				return false;
+		}
+		else
+		{
+			os::Printer::log("Unknown data object in frame in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+			if (!parseUnknownDataObject())
+				return false;
+		}
+
+	}
+
+	return true;
 }
 
 
@@ -263,6 +351,104 @@ bool CXFileReader::parseDataObjectTransformationMatrix(ox::core::CMatrix4 &mat)
 		return false;
 	}
 	++P;
+
+	return true;
+}
+
+
+bool CXFileReader::parseDataObjectMeshMaterialList(SXMeshMaterialList& mlist,
+												   int triangulatedIndexCount,
+												   ox::TArray< int >& indexCountPerFace)
+{
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading mesh material list", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Mesh Material List found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read material count
+
+	findNextNoneWhiteSpaceNumber();
+	int nMaterials = strtol(P, &P, 10);
+
+	// read non triangulated face material index count
+
+	findNextNoneWhiteSpaceNumber();
+	int nFaceIndices = strtol(P, &P, 10);
+
+	// read non triangulated face indices
+
+	ox::TArray<int> nonTriFaceIndices;
+	nonTriFaceIndices.resize(nFaceIndices);
+
+	for (int i=0; i<nFaceIndices; ++i)
+	{
+		findNextNoneWhiteSpaceNumber();
+		nonTriFaceIndices[i] = strtol(P, &P, 10);
+		++P;
+	}
+
+	// create triangulated face indices
+
+	if (nFaceIndices != (int)indexCountPerFace.size())
+	{
+		os::Printer::log("Index count per face not equal to face material index count in x file.", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	mlist.FaceIndices.resize(triangulatedIndexCount / 3);
+	int triangulatedindex = 0;
+	for (int tfi=0; tfi<nFaceIndices; ++tfi)
+		for (int k=0; k<indexCountPerFace[tfi]/3; ++k)
+			mlist.FaceIndices[triangulatedindex++] = nonTriFaceIndices[tfi];
+
+	// in version 03.02, the face indices end with two semicolons.
+	if (MajorVersion == 3 && MinorVersion <= 2)
+	{
+		if (P[0] == ';')
+			++P;
+	}
+
+	// read following data objects
+
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Mesh Material list in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // material list finished
+		}
+		else
+		if (objectName == "Material")
+		{
+			mlist.Materials.push_back(SXMaterial());
+			if (!parseDataObjectMaterial(mlist.Materials[mlist.Materials.size()-1]))
+				return false;
+		}
+		else
+		if (objectName == ";")
+		{
+			// ignore
+		}
+		else
+		{
+			os::Printer::log("Unknown data object in material list in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+			if (!parseUnknownDataObject())
+				return false;
+		}
+
+	}
 
 	return true;
 }
@@ -305,38 +491,364 @@ bool CXFileReader::parseDataObjectTemplate()
 
 bool CXFileReader::parseDataObjectMesh(SXMesh &mesh)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading mesh", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject(&mesh.Name))
+	{
+		os::Printer::log("No opening brace in Mesh found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read vertex count
+
+	findNextNoneWhiteSpaceNumber();
+	int nVertices = readInt();
+
+	// read vertices
+
+	mesh.Vertices.resize(nVertices);
+
+	for (int n=0; n<nVertices; ++n)
+	{
+		findNextNoneWhiteSpaceNumber();
+		mesh.Vertices[n].X = readFloat();
+		++P; //findNextNoneWhiteSpaceNumber();
+		mesh.Vertices[n].Y = readFloat();
+		++P; //findNextNoneWhiteSpaceNumber();
+		mesh.Vertices[n].Z = readFloat();
+	}
+
+	if (!checkForTwoFollowingSemicolons())
+	{
+		os::Printer::log("No finishing semicolon in Mesh Vertex Array found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read faces
+
+	findNextNoneWhiteSpaceNumber();
+	int nFaces = strtol(P, &P, 10);
+
+	mesh.Indices.resize(nFaces * 3);
+	mesh.IndexCountPerFace.resize(nFaces);
+
+	ox::TArray<int> polygonfaces;
+	int currentIndex = 0;
+
+	for (int k=0; k<nFaces; ++k)
+	{
+		findNextNoneWhiteSpaceNumber();
+		int fcnt = strtol(P, &P, 10);
+
+		if (fcnt != 3)
+		{
+			if (fcnt < 3)
+			{
+				os::Printer::log("Invalid face count (<3) found in Mesh x file reader.", ox::event::ELL_WARNING);
+				return false;
+			}
+
+			// read face indices
+			polygonfaces.resize(fcnt);
+			int triangles = (fcnt-2);
+			mesh.Indices.resize(mesh.Indices.size() + ((triangles*3)-3));
+			mesh.IndexCountPerFace[k] = triangles * 3;
+
+			for (int f=0; f<fcnt; ++f)
+			{
+				++P;
+				polygonfaces[f] = strtol(P, &P, 10);
+			}
+
+			for (int jk=0; jk<triangles; ++jk)
+			{
+				mesh.Indices[currentIndex++] = polygonfaces[0];
+				mesh.Indices[currentIndex++] = polygonfaces[jk+1];
+				mesh.Indices[currentIndex++] = polygonfaces[jk+2];
+			}
+
+			// TODO: change face indices in material list
+		}
+		else
+		{
+			++P;
+			mesh.Indices[currentIndex++] = strtol(P, &P, 10);
+			++P;
+			mesh.Indices[currentIndex++] = strtol(P, &P, 10);
+			++P;
+			mesh.Indices[currentIndex++] = strtol(P, &P, 10);
+
+			mesh.IndexCountPerFace[k] = 3;
+		}
+	}
+
+
+	if (!checkForTwoFollowingSemicolons())
+	{
+		os::Printer::log("No finishing semicolon in Mesh Face Array found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// here, other data objects may follow
+
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Mesh in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // mesh finished
+		}
+		else
+		if (objectName == "MeshNormals")
+		{
+			if (!parseDataObjectMeshNormals(mesh.Normals, mesh.NormalIndices,
+				mesh.Indices.size(), mesh.IndexCountPerFace))
+				return false;
+		}
+		else
+		if (objectName == "MeshTextureCoords")
+		{
+			if (!parseDataObjectMeshTextureCoords(mesh.TextureCoords))
+				return false;
+		}
+		else
+		if (objectName == "MeshMaterialList")
+		{
+			if (!parseDataObjectMeshMaterialList(mesh.MaterialList,
+				mesh.Indices.size(), mesh.IndexCountPerFace))
+                return false;
+		}
+		else
+		if (objectName == "VertexDuplicationIndices")
+		{
+			// we'll ignore vertex duplication indices
+			// TODO: read them
+			if (!parseUnknownDataObject())
+				return false;
+		}
+		else
+		if (objectName == "XSkinMeshHeader")
+		{
+			if (!parseDataObjectSkinMeshHeader(mesh.SkinMeshHeader))
+				return false;
+		}
+		else
+		if (objectName == "SkinWeights")
+		{
+			mesh.SkinWeights.push_back(SXSkinWeight());
+			if (!parseDataObjectSkinWeights(mesh.SkinWeights[mesh.SkinWeights.size()-1]))
+				return false;
+		}
+		else
+		{
+			os::Printer::log("Unknown data object in mesh in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+			if (!parseUnknownDataObject())
+				return false;
+		}
+
+	}
+
+	return true;
 }
 
 
 bool CXFileReader::parseDataObjectSkinWeights(SXSkinWeight& weights)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading mesh skin weights", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Skin Weights found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	if (!getNextTokenAsString(weights.TransformNodeName))
+	{
+		os::Printer::log("Unknown syntax while reading transfrom node name string in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read vertex weights
+
+	findNextNoneWhiteSpaceNumber();
+	int nWeights = strtol(P, &P, 10);
+
+	weights.Weights.resize(nWeights);
+
+	// read vertex indices
+
+	int i;
+	for (i=0; i<nWeights; ++i)
+	{
+		findNextNoneWhiteSpaceNumber();
+		weights.Weights[i].VertexIndex = strtol(P, &P, 10);
+	}
+
+	// read vertex weights
+
+	for (i=0; i<nWeights; ++i)
+	{
+		findNextNoneWhiteSpaceNumber();
+		weights.Weights[i].Weight = readFloat();
+	}
+
+	// sort weights
+	ox::algo::sort(weights.Weights.begin(), weights.Weights.end());
+
+	// read matrix offset
+
+	for (i=0; i<4; ++i)
+		for (int j=0; j<4; ++j)
+		{
+			findNextNoneWhiteSpaceNumber();
+			weights.MatrixOffset(j,i) = readFloat();
+		}
+
+	if (!checkForTwoFollowingSemicolons())
+	{
+		os::Printer::log("No finishing semicolon in Skin Weights found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	findNextNoneWhiteSpace();
+	if (P[0] != '}')
+	{
+		os::Printer::log("No closing brace in Skin Weights found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+	++P;
+
+    return true;
 }
 
 
 bool CXFileReader::parseDataObjectSkinMeshHeader(SXSkinMeshHeader& header)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
-}
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading skin mesh header", ox::event::ELL_INFORMATION);
+	#endif
 
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Skin Mesh header found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
 
-bool CXFileReader::parseDataObjectMeshMaterialList(SXMeshMaterialList& mlist,
-												   int triangulatedIndexCount,
-												   ox::TArray< int >& indexCountPerFace)
-{
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	findNextNoneWhiteSpaceNumber();
+	header.MaxSkinWeightsPerVertex = strtol(P, &P, 10);
+	findNextNoneWhiteSpaceNumber();
+	header.MaxSkinWeightsPerFace = strtol(P, &P, 10);
+	findNextNoneWhiteSpaceNumber();
+	header.BoneCount = strtol(P, &P, 10);
+	++P;
+
+	ox::core::CString<char> objectName = getNextToken();
+
+	if (objectName != "}")
+	{
+		os::Printer::log("No closing brace in skin mesh header in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+		return false;
+	}
+
+	return true;
 }
 
 
 bool CXFileReader::parseDataObjectMaterial(SXMaterial& material)
 {
-    // Not recovered: Irrlicht 0.7's body does not compile against daisy's interfaces.
-    __builtin_trap();
+	#ifdef _XREADER_DEBUG
+    os::Printer::log("CXFileReader: Reading mesh material", ox::event::ELL_INFORMATION);
+	#endif
+
+	if (!readHeadOfDataObject())
+	{
+		os::Printer::log("No opening brace in Mesh Material found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read RGBA
+
+	findNextNoneWhiteSpaceNumber();
+	material.FaceColor.a = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.FaceColor.r = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.FaceColor.g = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.FaceColor.b = readFloat();
+
+	// read power
+	findNextNoneWhiteSpaceNumber();
+	material.Power = readFloat();
+
+	// read specular
+	findNextNoneWhiteSpaceNumber();
+	material.Specular.r = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.Specular.g = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.Specular.b = readFloat();
+
+	// read emissive
+	findNextNoneWhiteSpaceNumber();
+	material.Emissive.r = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.Emissive.g = readFloat();
+	findNextNoneWhiteSpaceNumber();
+	material.Emissive.b = readFloat();
+
+	// read two closing semicolons
+
+	if (!checkForTwoFollowingSemicolons())
+	{
+		os::Printer::log("No finishing semicolon in Mesh Materials found in x file", ox::event::ELL_WARNING);
+		return false;
+	}
+
+	// read other data objects
+	while(true)
+	{
+		ox::core::CString<char> objectName = getNextToken();
+
+		if (objectName.size() == 0)
+		{
+			os::Printer::log("Unexpected ending found in Mesh Material in x file.", ox::event::ELL_WARNING);
+			return false;
+		}
+		else
+		if (objectName == "}")
+		{
+			break; // material finished
+		}
+		else
+		if (objectName == "TextureFilename")
+		{
+			// some exporters write "TextureFileName" instead.
+
+			if (!parseDataObjectTextureFilename(material.TextureFileName))
+				return false;
+		}
+		else
+		{
+			os::Printer::log("Unknown data object in material in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
+			if (!parseUnknownDataObject())
+				return false;
+		}
+
+	}
+
+	return true;
 }
 
 
