@@ -2,6 +2,7 @@
 
 import json
 import math
+import re
 import subprocess
 from pathlib import Path
 
@@ -114,10 +115,10 @@ def validate_fuzzy(functions: list[dict], evidence: dict) -> None:
     fuzzy_functions(functions, evidence)
 
 
-def data_ranges(inv: dict, evidence: dict) -> dict[str, list[tuple[int, int]]]:
-    """Union complete verified data extents, including shared/overlapping constants and strings."""
+def _data_claims(inv: dict, evidence: dict) -> list[dict]:
+    """Validated data ranges paired with the evidence unit section that recorded each one."""
     sections = inv.get("data_sections", [])
-    ranges = {s["name"]: [] for s in sections}
+    claims = []
     for unit in evidence["units"]:
         for section in unit["sections"]:
             for row in section.get("data_ranges", []):
@@ -144,7 +145,24 @@ def data_ranges(inv: dict, evidence: dict) -> dict[str, list[tuple[int, int]]]:
                     raise ValueError("matched section extent differs from its evidence")
                 if row["kind"] != "bss" and owner.get("type") == "SHT_NOBITS":
                     raise ValueError("file-backed data proof lies in BSS")
-                ranges[owner["name"]].append((start, start + size))
+                claims.append(
+                    {
+                        "unit": unit["unit"],
+                        "section": section["name"],
+                        "target": owner["name"],
+                        "kind": row["kind"],
+                        "start": start,
+                        "end": start + size,
+                    }
+                )
+    return claims
+
+
+def data_ranges(inv: dict, evidence: dict) -> dict[str, list[tuple[int, int]]]:
+    """Union complete verified data extents, including shared/overlapping constants and strings."""
+    ranges = {s["name"]: [] for s in inv.get("data_sections", [])}
+    for claim in _data_claims(inv, evidence):
+        ranges[claim["target"]].append((claim["start"], claim["end"]))
     for name, spans in ranges.items():
         merged = []
         for start, end in sorted(spans):
@@ -154,3 +172,91 @@ def data_ranges(inv: dict, evidence: dict) -> dict[str, list[tuple[int, int]]]:
                 merged.append((start, end))
         ranges[name] = merged
     return ranges
+
+
+# Object sections named for the symbol they define (COMDAT vtables, typeinfo and clones): every unit
+# that emits one places the same target bytes, so the section itself is the owner, not one unit.
+_SYMBOL_SECTION = re.compile(r"^\.(?:data\.rel\.ro|text|rodata|data|bss|gcc_except_table)\._")
+
+
+def data_owners(inv: dict, evidence: dict) -> list[dict]:
+    """Assign every unioned matched data byte to one stable owner for report grouping.
+
+    A placed section (kinds section and bss) owns the bytes it defines, ahead of units that only
+    reference a merged string or constant inside them; the unit and evidence section that placed it
+    are the owner, unless the section is named for a symbol, in which case the shared section owns
+    its bytes whichever unit emitted it. Merged strings, merged constants and local copies that no
+    placed section covers belong to no single referencing unit, so they form one group per target
+    section. Ties between placed sections go to the earliest claim in evidence order. Each record
+    aggregates one owner in one target section: total assigned size and its lowest address.
+    """
+    groups = {}
+    order = {}
+    for claim in _data_claims(inv, evidence):
+        if claim["kind"] in {"section", "bss"}:
+            group = (
+                ("section", claim["section"])
+                if _SYMBOL_SECTION.match(claim["section"])
+                else (
+                    "unit",
+                    claim["unit"],
+                    claim["section"],
+                )
+            )
+            placed = True
+        else:
+            group, placed = ("merged",), False
+        key = (group, claim["target"])
+        order.setdefault(key, len(order))
+        record = groups.setdefault(
+            key,
+            {
+                "owner": group,
+                "target": claim["target"],
+                "placed": placed,
+                "unit": claim["unit"] if group[0] != "merged" else None,
+                "spans": [],
+            },
+        )
+        record["spans"].append((claim["start"], claim["end"]))
+    spans = []
+    for key, record in groups.items():
+        merged = []
+        for start, end in sorted(record["spans"]):
+            if merged and start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(end, merged[-1][1]))
+            else:
+                merged.append((start, end))
+        spans.extend((record["target"], start, end, key) for start, end in merged)
+    assigned = {}
+    for section in inv.get("data_sections", []):
+        target = [(start, end, key) for name, start, end, key in spans if name == section["name"]]
+        if not target:
+            continue
+        target.sort()
+        bounds = sorted({point for start, end, _ in target for point in (start, end)})
+        active, index = [], 0
+        for start, end in zip(bounds, bounds[1:], strict=False):
+            while index < len(target) and target[index][0] <= start:
+                active.append(target[index])
+                index += 1
+            active = [span for span in active if span[1] >= end]
+            if not active:
+                continue
+            key = min(
+                (span[2] for span in active),
+                key=lambda k: (not groups[k]["placed"], order[k]),
+            )
+            record = assigned.setdefault(key, {"size": 0, "address": start})
+            record["size"] += end - start
+            record["address"] = min(record["address"], start)
+    return [
+        {
+            "owner": groups[key]["owner"],
+            "target": groups[key]["target"],
+            "unit": groups[key]["unit"],
+            "size": record["size"],
+            "address": record["address"],
+        }
+        for key, record in assigned.items()
+    ]

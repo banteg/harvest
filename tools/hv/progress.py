@@ -2,6 +2,7 @@
 
 import argparse
 import bisect
+import collections
 import csv
 import hashlib
 import io
@@ -369,6 +370,51 @@ def assign_layers(functions: list[dict], names: dict[int, str], config: dict) ->
     return result
 
 
+def function_unit_names(functions: list[dict], symbols: list[str], displays: list[str]) -> list[str]:
+    """Name each function unit for its symbol, keeping its address only as a last resort.
+
+    Unit names are the identity the decomp.dev bot diffs report items by, and inside a unit the
+    bot matches items by demangled name, so a unit name keyed on an address turns learning a
+    symbol's proven address into a reported regression at the old one. A display name shared by
+    constructor or destructor variants (they demangle alike) stays plain on the first of its
+    symbols in sorted order and carries the mangled symbol on the rest, so learning a sibling
+    variant that sorts after it does not rename the first, and correcting which variant a lone
+    extent is does not rename it either. The address stays for sub_ placeholders and for
+    symbols that name more than one inventoried extent, where it is the only distinction.
+    """
+    symbol_counts = collections.Counter(symbols)
+    display_counts = collections.Counter(displays)
+    first_symbol = {}
+    for symbol, display in zip(symbols, displays, strict=True):
+        first_symbol[display] = min(symbol, first_symbol.get(display, symbol))
+    result = []
+    for function, symbol, display in zip(functions, symbols, displays, strict=True):
+        address = function["address"]
+        if symbol == f"sub_{address:x}" or symbol_counts[symbol] > 1:
+            result.append(f"{display} @ {address:#x}")
+        elif display_counts[display] == 1 or first_symbol[display] == symbol or display == symbol:
+            result.append(display)
+        else:
+            result.append(f"{display} ({symbol})")
+    duplicates = {name for name, count in collections.Counter(result).items() if count > 1}
+    return [
+        f"{display} @ {function['address']:#x}" if name in duplicates else name
+        for function, display, name in zip(functions, displays, result, strict=True)
+    ]
+
+
+def data_unit_name(record: dict) -> str:
+    """Name one matched-data unit for its stable owner (see metrics.data_owners)."""
+    owner = record["owner"]
+    if owner[0] == "unit":
+        detail = f"{owner[1]} {owner[2]}"
+    elif owner[0] == "section":
+        detail = owner[1]
+    else:
+        detail = "merged strings and constants"
+    return f"Matched {record['target']} data: {detail}"
+
+
 def make_report(
     inv: dict,
     functions: list[dict],
@@ -380,22 +426,32 @@ def make_report(
     matched = measured_functions(functions, evidence)
     fuzzy = metrics.fuzzy_functions(functions, evidence)
     data = metrics.data_ranges(inv, evidence)
+    data_owners = metrics.data_owners(inv, evidence)
+    symbols = []
+    for function in functions:
+        proof = matched.get(function["address"])
+        score = fuzzy.get(function["address"])
+        symbols.append(
+            proof["symbol"]
+            if proof
+            else score["symbol"]
+            if score
+            else names.get(function["address"], f"sub_{function['address']:x}")
+        )
+    displays = [demangled.get(symbol, symbol) for symbol in symbols]
+    unit_names = function_unit_names(functions, symbols, displays)
     layer_of = assign_layers(functions, names, layers) if layers else {}
     layer_totals = {layer: [0, 0, 0, 0, 0.0] for layer in layers["layers"]} if layers else {}
     thunk_totals = [0, 0, 0, 0, 0.0]
     fuzzy_code = 0.0
     report_units = []
     covered = dict.fromkeys((s["name"] for s in inv["sections"]), 0)
-    for function in functions:
+    for function, symbol, display, unit_name in zip(functions, symbols, displays, unit_names, strict=True):
         address, size = function["address"], function["size"]
         proof = matched.get(address)
         score = fuzzy.get(address)
         percent = 100 if proof else score["percent"] if score else 0
         fuzzy_code += size * percent / 100
-        symbol = (
-            proof["symbol"] if proof else score["symbol"] if score else names.get(address, f"sub_{address:x}")
-        )
-        display = demangled.get(symbol, symbol)
         metadata = {"complete": False, "progress_categories": ["functions"]}
         if function["extent"] == "thunk":
             metadata["progress_categories"].append("thunks")
@@ -418,7 +474,7 @@ def make_report(
             metadata["source_path"] = f"src/{score['source']}"
         report_units.append(
             {
-                "name": f"{display} @ {address:#x}",
+                "name": unit_name,
                 "measures": measures(
                     size, size if proof else 0, 1, int(bool(proof)), 1, fuzzy_code=size * percent / 100
                 ),
@@ -447,38 +503,51 @@ def make_report(
             )
     matched_code = sum(f["size"] for f in functions if f["address"] in matched)
     function_code = sum(f["size"] for f in functions)
+    owners_by_target = collections.defaultdict(list)
+    for record in data_owners:
+        owners_by_target[record["target"]].append(record)
+    # The unit denominator stays one per matched or unclaimed data interval, as before the
+    # owner grouping below; grouping intervals into stable display units must not rewrite it.
+    data_intervals = 0
+    for section in inv.get("data_sections", []):
+        cursor = section["address"]
+        for start, end in data[section["name"]]:
+            data_intervals += int(start > cursor) + 1
+            cursor = end
+        if cursor < section["address"] + section["size"]:
+            data_intervals += 1
     data_units = []
     for section in inv.get("data_sections", []):
-        spans = data[section["name"]]
-        cursor = section["address"]
-        for start, end in [*spans, (cursor + section["size"], cursor + section["size"])]:
-            if start > cursor:
-                size = start - cursor
-                data_units.append(
-                    {
-                        "name": f"Unclaimed {section['name']} data @ {cursor:#x}",
-                        "measures": measures(0, 0, 0, 0, 1, data=size),
-                        "metadata": {"complete": False, "progress_categories": ["data"]},
-                    }
-                )
-            if end > start:
-                size = end - start
-                data_units.append(
-                    {
-                        "name": f"Matched {section['name']} data @ {start:#x}",
-                        "measures": measures(0, 0, 0, 0, 1, data=size, matched_data=size),
-                        "sections": [
-                            {
-                                "name": section["name"],
-                                "size": str(size),
-                                "fuzzy_match_percent": 100,
-                                "metadata": {"virtual_address": str(start)},
-                            }
-                        ],
-                        "metadata": {"complete": False, "progress_categories": ["data"]},
-                    }
-                )
-            cursor = end
+        owners = sorted(owners_by_target[section["name"]], key=lambda r: (r["address"], data_unit_name(r)))
+        for record in owners:
+            size = record["size"]
+            metadata = {"complete": False, "progress_categories": ["data"]}
+            if record["unit"]:
+                metadata["source_path"] = f"src/{record['unit']}"
+            data_units.append(
+                {
+                    "name": data_unit_name(record),
+                    "measures": measures(0, 0, 0, 0, 1, data=size, matched_data=size),
+                    "sections": [
+                        {
+                            "name": section["name"],
+                            "size": str(size),
+                            "fuzzy_match_percent": 100,
+                            "metadata": {"virtual_address": str(record["address"])},
+                        }
+                    ],
+                    "metadata": metadata,
+                }
+            )
+        unclaimed = section["size"] - sum(end - start for start, end in data[section["name"]])
+        if unclaimed:
+            data_units.append(
+                {
+                    "name": f"Unclaimed {section['name']} data",
+                    "measures": measures(0, 0, 0, 0, 1, data=unclaimed),
+                    "metadata": {"complete": False, "progress_categories": ["data"]},
+                }
+            )
     matched_data = sum(end - start for spans in data.values() for start, end in spans)
     total_data = inv.get("total_data", 0)
     return {
@@ -488,7 +557,7 @@ def make_report(
             matched_code,
             len(functions),
             len(matched),
-            len(report_units) + len(gaps) + len(data_units),
+            len(report_units) + len(gaps) + data_intervals,
             fuzzy_code=fuzzy_code,
             data=total_data,
             matched_data=matched_data,
@@ -522,7 +591,7 @@ def make_report(
             {
                 "id": "data",
                 "name": "Allocated data (including BSS and linker metadata)",
-                "measures": measures(0, 0, 0, 0, len(data_units), data=total_data, matched_data=matched_data),
+                "measures": measures(0, 0, 0, 0, data_intervals, data=total_data, matched_data=matched_data),
             },
             {
                 "id": "unclaimed",

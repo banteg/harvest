@@ -41,7 +41,7 @@ def test_full_denominator_keeps_gaps_and_stubs():
     assert m["complete_code"] == "0" and m["complete_units"] == 0
     assert sum(int(u["measures"]["total_code"]) for u in report["units"]) == 100
     assert sum(int(c["measures"]["total_code"]) for c in report["categories"]) == 100
-    assert report["units"][0]["name"] == "foo() @ 0x1000"
+    assert report["units"][0]["name"] == "foo()"
     assert report["units"][0]["functions"][0]["metadata"]["virtual_address"] == "4096"
     assert report["units"][0]["metadata"]["source_path"] == "src/a.cpp"
     assert report["units"][2]["measures"]["total_functions"] == 0
@@ -121,6 +121,9 @@ def test_data_union_preserves_unclaimed_bytes_and_blends_fuzzy_by_size():
     assert sum(int(u["measures"]["matched_data"]) for u in report["units"]) == 36
     assert sum(int(c["measures"]["total_data"]) for c in report["categories"]) == 100
     assert m["complete_data"] == "0"
+    # Two grouped display units cover three intervals; the unit denominator still counts intervals.
+    categories = {c["id"]: c["measures"] for c in report["categories"]}
+    assert categories["data"]["total_units"] == 3 and m["total_units"] == 7
 
 
 @pytest.mark.parametrize("address,size", [("0x2fff", 2), ("0x3060", 8), ("0x3010", 0)])
@@ -151,6 +154,102 @@ def test_bss_counts_memory_extent_and_requires_exact_placement():
     evidence["units"][0]["exact"] = False
     with pytest.raises(ValueError, match="inexact evidence"):
         progress.make_report(inv, functions, evidence, {}, {})
+
+
+def test_function_unit_names_follow_the_symbol_not_the_address():
+    functions = [{"address": 0x1000}]
+    at_1000 = progress.function_unit_names(functions, ["_Z3foov"], ["foo()"])
+    at_2000 = progress.function_unit_names([{"address": 0x2000}], ["_Z3foov"], ["foo()"])
+    assert at_1000 == at_2000 == ["foo()"]
+
+
+def test_function_unit_names_disambiguate_shared_display_names_by_symbol():
+    # C1/C2 variants share one demangled name. The first symbol keeps it plain, the rest carry
+    # their mangled symbol, and a lone variant is plain whichever variant it turns out to be.
+    functions = [{"address": 0x1000}, {"address": 0x1020}]
+    symbols = ["_ZN3FooC1Ev", "_ZN3FooC2Ev"]
+    displays = ["Foo::Foo()", "Foo::Foo()"]
+    assert progress.function_unit_names(functions, symbols, displays) == [
+        "Foo::Foo()",
+        "Foo::Foo() (_ZN3FooC2Ev)",
+    ]
+    assert progress.function_unit_names(functions[:1], symbols[:1], displays[:1]) == ["Foo::Foo()"]
+    assert progress.function_unit_names(functions[:1], symbols[1:], displays[:1]) == ["Foo::Foo()"]
+
+
+def test_function_unit_names_keep_the_address_for_placeholders_and_shared_symbols():
+    functions = [{"address": 0x1000}, {"address": 0x1020}, {"address": 0x1040}]
+    symbols = ["sub_1000", "__tcf_0", "__tcf_0"]
+    displays = list(symbols)
+    assert progress.function_unit_names(functions, symbols, displays) == [
+        "sub_1000 @ 0x1000",
+        "__tcf_0 @ 0x1020",
+        "__tcf_0 @ 0x1040",
+    ]
+
+
+def placed_rodata_section(address, size, name=".rodata"):
+    return {
+        "name": name,
+        "address": hex(address),
+        "size": size,
+        "exact": True,
+        "data_ranges": [{"address": hex(address), "size": size, "kind": "section"}],
+    }
+
+
+def data_units_by_name(report):
+    return {u["name"]: u for u in report["units"] if u["metadata"]["progress_categories"] == ["data"]}
+
+
+def test_matched_data_names_survive_an_adjacent_new_match():
+    inv, functions, evidence = sample()
+    inv["data_sections"] = [{"name": ".rodata", "address": 0x3000, "size": 100}]
+    inv["total_data"] = 100
+    evidence["units"][0]["sections"].append(placed_rodata_section(0x3020, 20))
+    before = data_units_by_name(progress.make_report(inv, functions, evidence, {}, {}))
+    other = {
+        "unit": "b.cpp",
+        "exact": True,
+        "unplaced_sections": [],
+        "sections": [placed_rodata_section(0x3000, 32)],
+    }
+    evidence["units"].append(other)
+    after_report = progress.make_report(inv, functions, evidence, {}, {})
+    after = data_units_by_name(after_report)
+    # The adjacent new section extends the matched run backwards; the old owner keeps name and size.
+    assert before["Matched .rodata data: a.cpp .rodata"]["measures"]["matched_data"] == "20"
+    assert after["Matched .rodata data: a.cpp .rodata"]["measures"]["matched_data"] == "20"
+    assert after["Matched .rodata data: b.cpp .rodata"]["measures"]["matched_data"] == "32"
+    assert after["Unclaimed .rodata data"]["measures"]["total_data"] == "48"
+    assert after_report["measures"]["matched_data"] == "52"
+
+
+def test_merged_strings_are_not_attributed_to_a_referencing_unit():
+    inv, functions, evidence = sample()
+    inv["data_sections"] = [{"name": ".rodata", "address": 0x3000, "size": 100}]
+    inv["total_data"] = 100
+    evidence["units"][0]["sections"][0]["data_ranges"] = [
+        {"address": "0x3010", "size": 5, "kind": "merged string"}
+    ]
+    report = progress.make_report(inv, functions, evidence, {}, {})
+    matched = data_units_by_name(report)["Matched .rodata data: merged strings and constants"]
+    assert matched["measures"]["matched_data"] == "5"
+    assert "source_path" not in matched["metadata"]
+
+
+def test_shared_symbol_section_is_credited_once_under_its_own_name():
+    inv, functions, evidence = sample()
+    inv["data_sections"] = [{"name": ".rodata", "address": 0x3000, "size": 100}]
+    inv["total_data"] = 100
+    evidence["units"][0]["sections"].append(placed_rodata_section(0x3010, 16, ".rodata._ZTV3Foo"))
+    other = copy.deepcopy(evidence["units"][0])
+    other["unit"] = "b.cpp"
+    evidence["units"].append(other)
+    report = progress.make_report(inv, functions, evidence, {}, {})
+    matched = data_units_by_name(report)["Matched .rodata data: .rodata._ZTV3Foo"]
+    assert matched["measures"]["matched_data"] == "16"
+    assert report["measures"]["matched_data"] == "16"
 
 
 def test_fuzzy_capture_rejects_unpinned_binary_before_execution(tmp_path, monkeypatch):
