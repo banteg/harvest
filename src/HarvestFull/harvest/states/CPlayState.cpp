@@ -74,6 +74,7 @@
 #include "ox/video/IVideoDriver.h"
 #ifdef HARVEST_PORT
 #include "game/SaveFile.h"
+#include <SDL3/SDL_log.h>
 #include "ox/io/IFilePath.h"
 #endif
 
@@ -853,7 +854,7 @@ bool CPlayState::readStateFromFile(const char* filename)
             ox::core::CDimension2d<float>(ScreenSize.Width + 200.0f, ScreenSize.Height + 200.0f)));
     GameSpeed = 0;
 #ifdef HARVEST_PORT
-    std::cout << "Loaded save game: " << filename << std::endl;
+    SDL_Log("Loaded save game: %s", filename);
 #endif
     result = true;
     return result;
