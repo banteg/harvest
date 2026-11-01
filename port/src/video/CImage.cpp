@@ -21,12 +21,11 @@ CImage::CImage(ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size)
     initData();
 }
 
-//! Takes ownership of data without allocating, even when data is null (as Irrlicht 0.7 does).
+//! Adopt supplied storage, or allocate it for callers such as the menu's AtrumBlack fallback.
 CImage::CImage(ECOLOR_FORMAT format, const ox::core::CDimension2d<int>& size, void* data)
     : Data(data), Size(size), Format(format)
 {
-    BitsPerPixel = getBitsPerPixelFromFormat();
-    BytesPerPixel = BitsPerPixel / 8;
+    initData();
 }
 
 CImage::~CImage()

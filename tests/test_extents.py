@@ -1,7 +1,7 @@
 import capstone
 import pytest
 
-from hv import builds, extents, symbols
+from hv import builds, cli, extents, symbols
 
 BUILD = "1.18-linux-amd64"
 ADDRESS = 0x1000
@@ -64,11 +64,18 @@ def test_committed_extents_agree_with_symbols_and_the_inventory():
 
 
 @pytest.mark.originals
-def test_regenerating_reproduces_the_committed_extents():
+@pytest.mark.parametrize("commands", [("port-symbols", "extents"), ("extents", "port-symbols")])
+def test_generators_preserve_both_committed_tables(tmp_path, monkeypatch, commands):
     (image,) = builds.load_builds()[BUILD].images.values()
     if builds.check_image(image) is not None:
         pytest.skip("pinned Linux image not present under orig/")
-    rows = extents.generate(BUILD)
-    assert extents.render(rows) == extents.path_for(BUILD).read_text()
-    named = {s.name: s.address for s in symbols.load(BUILD)}
-    assert all(named.get(e.symbol) == e.address for e in rows if e.symbol)
+    tables = {p.name: p.read_bytes() for p in (symbols.path_for(BUILD), extents.path_for(BUILD))}
+    dest = tmp_path / "config" / BUILD
+    dest.mkdir(parents=True)
+    for name, content in tables.items():
+        (dest / name).write_bytes(content)
+    monkeypatch.setattr(builds, "ROOT", tmp_path)
+    for command in commands:
+        assert cli.main([command, BUILD]) == 0
+        for name, content in tables.items():
+            assert (dest / name).read_bytes() == content

@@ -14,6 +14,9 @@
 #include "harvest/entity/CMineralsEntity.h"
 #include "harvest/entity/CMinerEntity.h"
 #include "harvest/entity/CMissileTurretEntity.h"
+#ifdef HARVEST_PORT
+#include "harvest/entity/CPerimeterBomb.h"
+#endif
 #include "harvest/entity/CSparkEntity.h"
 #include "harvest/entity/CSparkMoverEntity.h"
 #include "harvest/entity/CSparkProducerEntity.h"
@@ -385,6 +388,11 @@ CEntity* CEntity::readNextEntity(ox::io::IReadFile* file, int version)
     case 9:
         entity = new CMissileEntity(x, y, ox::core::CPosition2d<float>(0, 0), 0, 0, -1);
         break;
+#ifdef HARVEST_PORT
+    case 12:
+        entity = new CPerimeterBombExplosion(x, y);
+        break;
+#endif
     case 15:
         entity = new CTempestBlastEntity(ox::core::CVector3d<float>(x, y, 0), ox::core::CVector3d<float>(0, 0, 0),
             -1, -1);

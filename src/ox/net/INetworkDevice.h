@@ -40,6 +40,10 @@ public:
     virtual void decryptPacket(const void* data, int size) = 0;
     virtual void kickClient(int client) = 0;
     virtual void pollDevice() = 0;
+#ifdef HARVEST_PORT
+    //! Cancels this receiver's pending offline response before it disconnects or is destroyed.
+    virtual void cancelPending(event::IEventReceiver* receiver) = 0;
+#endif
 };
 
 } // end namespace net

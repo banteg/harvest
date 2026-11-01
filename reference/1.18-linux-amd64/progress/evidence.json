@@ -1,5 +1,5 @@
 {
-  "schema": 3,
+  "schema": 4,
   "build": "1.18-linux-amd64",
   "image_sha256": "ac381fa044f6009e09a29e1e221a51e72e65f0772edd164083857dda863a426a",
   "measurement_inputs": {
@@ -10,19 +10,20 @@
     "tools/hv/elf.py": "aa50c2ed5bbdfee9539e9357c12befc2bd2f98567c04b11f4d6610374d3db063",
     "tools/hv/extents.py": "3c790ccc6c342a73d3278cd03269b899cca0bf57ff9a03c786378f6952f949f3",
     "tools/hv/rtti.py": "83cb630e01e62973f1f232d6d95ed483d4f7773d3b9b4817a22cc2135e3d1306",
-    "tools/hv/match.py": "63090c531310268e9e734831420f054397d6d16eb1037f4d21d8dd47b9e38457",
+    "tools/hv/match.py": "cb0632dceac07aa947637d1249b98c6eadcfe572081f1d2dec9a4994a8bf9150",
     "tools/hv/symbols.py": "0d9150908ba72df692193dbeabb92d9dc3c43830bab42f029a098da5f5f9e76c",
     "tools/hv/toolchain.py": "6f8be7d498157b9b4c9dcf2b4f914f3876118074a0fed89682ef46c2603d2ab8",
     "tools/hv/units.py": "2f71fb16f1daffbc46e613e3cb0dd1995ae88f4d61eedc8560a15eb625e197d6",
-    "tools/hv/progress.py": "375f615fe89aa3b22868fa429d058182f2c529ceea0ebfd07935dfb4519ba318",
+    "tools/hv/progress.py": "2a2650ad868740b6b5bcd4437033b20bbc735505eeb086c411bf4c5bc838c83e",
     "tools/hv/metrics.py": "47c06a1d6c6361f0b91656fde293b59960a13c0437fb596ecd127f042a7fa5d7",
     "tools/hv/objdiff.py": "13fa221740693a00a37134a133ddf96297d3efa7421e0d5af57a8b96b0abfcb5",
     "tools/hv/delink.py": "973dd463d7e8d0ec81ddf5977cad3154501fe559559442515e50857e8ef9b9cf",
     "config/1.18-linux-amd64/flags.json": "9ebb8c16c904108ddb5cbaa50345a733d400ee2bd3994c72e5545e676fb03ad8",
-    "config/1.18-linux-amd64/symbols.tsv": "7fd02d8666e1627c4873ae27e9a85e045f73836bd897bcac944d53ffa247c456",
+    "config/1.18-linux-amd64/symbols.tsv": "0186d968b0443ff0a4a19b594fd135f6c1b0a1e207c8d63acd257de14bb33815",
     "config/1.18-linux-amd64/extents.tsv": "55dd5b29374ba204f2ddf66df2c6fbe9cf434a68cd559196f1a3331c4911a20b",
     "config/1.18-linux-amd64/units.toml": "9d23aa413394390c65d7b83e5cc5bc4ae20933a388484b9a4efb9f128609d0cf"
   },
+  "source_paths_sha256": "796baa7fbe202d9dcedac3d3e0c1c99f4f958fb99693c9807e10cd12f02794bb",
   "units": [
     {
       "unit": "daisy/video/Null/CColorConverter.cpp",
@@ -3772,14 +3773,14 @@
           "/out/ox__net__CHTTPConnectionHandler.o"
         ],
         "inputs": {
-          "src/ox/net/CHTTPConnectionHandler.cpp": "6fe52bd7f89097128ddadc279116ea87a8c88f519598d3de39a06ce4d7cf7c5c",
+          "src/ox/net/CHTTPConnectionHandler.cpp": "162841c141f943039f651ec0bfec0a145b37caaa87c667741f97aae33513265d",
           "src/ox/net/CHTTPConnectionHandler.h": "e2186dc016ece3cac85cac00699bfc6586a28c6d1fabdc0620b2c72216b6d9ca",
           "src/ox/net/../event/IEventReceiver.h": "c1e1ccab98fd4d61883bca01562128c424963baf34ae4d79fcf903029fcfa169",
           "src/ox/net/../event/../Keycodes.h": "e8a44e174d975741c5dfcccb9b0f436b1d673830914d8764c51c50d3c93485cb",
           "src/ox/net/../event/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
           "src/ox/net/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/net/../core/CCriticalSection.h": "f39fa1edf4d20b60b52728a5c7afa063f4994db48bc8696f0ee691b3288a8b09",
-          "src/ox/net/INetworkDevice.h": "2f29b75e1d69e6568a0c16c58feac3f348f9371c093a5fbf6904b9843111e0d4",
+          "src/ox/net/INetworkDevice.h": "5486babe72b15f0ef28879457bc2bdc095567fa0e80e3223ccb812253d656b17",
           "src/ox/net/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/net/../IOxDevice.h": "db2500bc125ca02ced51cf3ebd9e66ee4f6e14848a9a54372bf60eaecdb7d7a4",
           "src/ox/net/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
@@ -4421,7 +4422,7 @@
           "src/ox/net/CVariablePacket.cpp": "a9aedecae23ba03b2ffeb2128064e4164acd38af07231f6215be47c656ff6f96",
           "src/ox/net/CVariablePacket.h": "6cbd9d7aa0b01daf2ae4ff0cad6639d75f2397d6b861e280bbd997c65543462f",
           "src/ox/net/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
-          "src/ox/net/INetworkDevice.h": "2f29b75e1d69e6568a0c16c58feac3f348f9371c093a5fbf6904b9843111e0d4",
+          "src/ox/net/INetworkDevice.h": "5486babe72b15f0ef28879457bc2bdc095567fa0e80e3223ccb812253d656b17",
           "src/ox/net/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f"
         },
         "system_headers": 102,
@@ -11556,7 +11557,7 @@
           "/out/HarvestFull__harvest__entity__CHarvestEntity.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/entity/CHarvestEntity.cpp": "13ae5019894659e2e56ebb406c841551235ad0033f2a791f62cd4ba93af2bcb7",
+          "src/HarvestFull/harvest/entity/CHarvestEntity.cpp": "378bd48ebce04f49de9de884da3962f678e5ea73f33f25f3843cbe56de57144d",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -77433,7 +77434,7 @@
           "/out/HarvestFull__harvest__game__CLuaManager.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/game/CLuaManager.cpp": "5639b4fae3dfbed4eb41aef1b83a504931c893d98c323d622d80527d934dfe80",
+          "src/HarvestFull/harvest/game/CLuaManager.cpp": "81b7bec3fcb6c0cd8fe0d887c094c8bb0df0187b540a8a8618a2bed5bc7a73f1",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -96064,7 +96065,7 @@
           "/out/HarvestFull__harvest__states__CPlayState.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/states/CPlayState.cpp": "9e414e1d355e3f568fe3f212dadf797c6a4e3f51f129c92495a694b8a6d85f77",
+          "src/HarvestFull/harvest/states/CPlayState.cpp": "cd3ec3032d6b0b27aad04a6dc83c9c7c8b48e3f926cda93e2a64167e6d12b295",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -109999,7 +110000,7 @@
               "type": 2,
               "symbol": ".LC39",
               "addend": -4,
-              "reason": "unmapped or truncated range: 0x86b950+0x4",
+              "reason": "merged constant would lie in writable data",
               "matches": false
             },
             {
@@ -113369,7 +113370,7 @@
           "/out/HarvestFull__harvest__gui__CProfileScreen.o"
         ],
         "inputs": {
-          "src/HarvestFull/harvest/gui/CProfileScreen.cpp": "0768f75452ac10fbab37eb31d6b75e209631a5327281bf91d586fbd063af64d8",
+          "src/HarvestFull/harvest/gui/CProfileScreen.cpp": "03f6766feefbea960fdcc11bfcda565f6a86e001e075ef75b0b2d4a92764e665",
           "src/HarvestFull/harvest/game/CWorld.h": "dba52fb72246d3dbd79ca87306fd4ea5d936923674ac46daef14e2372c092eb7",
           "src/ox/TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/algo/CRand.h": "f39d4adf118622d1051b4a274c008fbd3f6dfa837b1b4b04cdfa30a6b8a5dd1e",
@@ -123964,7 +123965,7 @@
           "/out/ox__game__CConfigBlock.o"
         ],
         "inputs": {
-          "src/ox/game/CConfigBlock.cpp": "d2648a021f7bf3719dd1189049902a7234287a4ed9beb2adb54cad4e2e76cc3f",
+          "src/ox/game/CConfigBlock.cpp": "bba9a8a6952e9560bdd6badb09c65e3efcdee434439dd4c7323248beeb41d33f",
           "src/ox/game/CConfigBlock.h": "b844ea34289f3eab0a7febf1f0e7ca9778d55da9851b4c6f04cf2e62dc2c8a4e",
           "src/ox/game/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -125140,7 +125141,7 @@
           "/out/ox__game__CConfiguration.o"
         ],
         "inputs": {
-          "src/ox/game/CConfiguration.cpp": "a4ab7ef3db9863ddeb370942e60d21035e7f87c8d60a63543b5d33ce679605f2",
+          "src/ox/game/CConfiguration.cpp": "ccba6c9c19d875a7ef5684bb147936433b3c5e4f0eee034c46d9badd3a1708be",
           "src/ox/game/CConfiguration.h": "7b4c5d5c6e6e93411d781b6415f5d1399941c3e5b2734ae74ab332d2b5c62945",
           "src/ox/game/../TArray.h": "43fc9098e7be91c1ed85447c6343d484e105d29252e01c82c4de4f50555ffdaa",
           "src/ox/game/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
@@ -203851,7 +203852,7 @@
           "src/daisy/io/CWriteFile.h": "436f384fcb86d958b78dee1210578dba041b00e77ac472312f184235b080da62",
           "src/daisy/io/CMemoryReadFile.h": "182b4cbfb68f9912b9bb76f6abc310d8c99fac316cfe7cee77fab2e0ea1d8de1",
           "src/ox/io/CMemReadFile.h": "e8194dd9fdec761f011c4fdbbb9467709e11f295ea9f4b15df0280916877ac04",
-          "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
+          "src/daisy/io/CZipReader.h": "b4cd060710d64c5ff0a6e1441533f46d2e3e95387e6d32088ffcaf0470d3a418",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/daisy/io/CZipFileList.h": "150bf7a15b034748185b8c3fbc2482af9a76c6906652db7fbcfb0ab3f48b73b3",
           "src/daisy/io/CTextReader.h": "12f0f3ca0bca4bf4805d08e823ba46a8570685da3ae03003368f856c2e7303e5",
@@ -207112,7 +207113,7 @@
           "src/ox/io/IFileList.h": "4c99a44ce42bd6d45bc2b476e62483762c181d78fe8afbc205a246f82c83185c",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
-          "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
+          "src/daisy/io/CZipReader.h": "b4cd060710d64c5ff0a6e1441533f46d2e3e95387e6d32088ffcaf0470d3a418",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406"
         },
@@ -208488,8 +208489,8 @@
           "/out/daisy__io__CZipReader.o"
         ],
         "inputs": {
-          "src/daisy/io/CZipReader.cpp": "ddc6e8036f46a3222fa1b178ba05a24538be748dd2460bed27549a01b6c6898d",
-          "src/daisy/io/CZipReader.h": "4cd681853d2061bab8f3baf1057767e4c7d5a7df4fc7eb59af8aff69090f8946",
+          "src/daisy/io/CZipReader.cpp": "d1ef1ba5b59b9e38dd587a3ab55e7b40843336d73ee4faa0538542c750a04fbc",
+          "src/daisy/io/CZipReader.h": "b4cd060710d64c5ff0a6e1441533f46d2e3e95387e6d32088ffcaf0470d3a418",
           "src/ox/IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
@@ -211504,7 +211505,6 @@
               "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull8SSpritesES4_SaIS3_EET0_T_S7_S6_RT1_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x74644be4",
               "matches": false
             },
             {
@@ -212411,7 +212411,6 @@
               "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull10SParticlesES4_SaIS3_EET0_T_S7_S6_RT1_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x43d9b18c",
               "matches": false
             },
             {
@@ -212420,7 +212419,6 @@
               "symbol": "_ZSt22__uninitialized_move_aIPN5daisy5video10CVideoNull10SParticlesES4_SaIS3_EET0_T_S7_S6_RT1_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x48668ced",
               "matches": false
             },
             {
@@ -218647,7 +218645,7 @@
           "src/ox/io/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/io/IReadFile.h": "511199e47dbdb6fb8548dd64bdf098308b2add439cce1d7a1db7251ec9247406",
           "src/ox/io/IWriteFile.h": "e217871c7372e3db36a084986831e95b25afd47a7ed53577295db27a1e3b1d9d",
-          "src/ox/net/INetworkDevice.h": "2f29b75e1d69e6568a0c16c58feac3f348f9371c093a5fbf6904b9843111e0d4",
+          "src/ox/net/INetworkDevice.h": "5486babe72b15f0ef28879457bc2bdc095567fa0e80e3223ccb812253d656b17",
           "src/ox/net/../IUnknown.h": "2876425521d21d0ab1b35bc5e2a72ae62acee754c6785899771e48912b9b0a9f",
           "src/ox/net/../core/CString.h": "7cc2521534a1b7864708fdc416a25279f05507d6c045abeca04545f4a88b95ee",
           "src/ox/scene/ISceneManager.h": "74a853b031f12a80a26fcd96fe8ef841a1100cbdc1e324978d6dc6b1d2d4f0b6",
@@ -235745,7 +235743,6 @@
               "symbol": "_ZNSt6vectorIN2ox4core11CTriangle3dIfEESaIS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEmRKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x1a2f0f4e",
               "matches": false
             },
             {
@@ -238155,7 +238152,6 @@
               "symbol": "_ZNSt6vectorIN2ox5scene9SParticleESaIS2_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS2_S4_EEmRKS2_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x6f121918",
               "matches": false
             },
             {
@@ -254940,7 +254936,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene16CAnimatedMeshMD210SFrameDataESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x16cd209",
               "matches": false
             },
             {
@@ -255090,7 +255085,6 @@
               "symbol": "_ZNSt6vectorIN2ox5video9S3DVertexESaIS2_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS2_S4_EEmRKS2_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x16dbc320",
               "matches": false
             },
             {
@@ -257673,7 +257667,6 @@
               "symbol": "_ZNSt12_Vector_baseItSaItEE11_M_allocateEm",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x3b296654",
               "matches": false
             },
             {
@@ -260423,7 +260416,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x4d03a4a4",
               "matches": false
             },
             {
@@ -260450,7 +260442,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x4886fecf",
               "matches": false
             },
             {
@@ -260486,7 +260477,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x3a8205ed",
               "matches": false
             },
             {
@@ -260513,7 +260503,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x725c22c9",
               "matches": false
             },
             {
@@ -260540,7 +260529,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x18a0861d",
               "matches": false
             },
             {
@@ -260611,7 +260599,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x269ea5",
               "matches": false
             },
             {
@@ -260665,7 +260652,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x7be44541",
               "matches": false
             },
             {
@@ -260701,7 +260687,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0xc6edf19",
               "matches": false
             },
             {
@@ -260728,7 +260713,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0xc6e9fc9",
               "matches": false
             },
             {
@@ -260755,7 +260739,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x451f3550",
               "matches": false
             },
             {
@@ -260853,7 +260836,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x4d03a2a4",
               "matches": false
             },
             {
@@ -260880,7 +260862,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x4886fccf",
               "matches": false
             },
             {
@@ -260916,7 +260897,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x1f685e8a",
               "matches": false
             },
             {
@@ -260943,7 +260923,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x10d083fd",
               "matches": false
             },
             {
@@ -260970,7 +260949,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x54e3f9e4",
               "matches": false
             },
             {
@@ -261891,7 +261869,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader14SXAnimationKeyESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0xf9d7068",
               "matches": false
             },
             {
@@ -262324,7 +262301,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader11SXAnimationESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x15bb44fc",
               "matches": false
             },
             {
@@ -263356,7 +263332,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x45e4a370",
               "matches": false
             },
             {
@@ -263401,7 +263376,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x487957d4",
               "matches": false
             },
             {
@@ -263428,7 +263402,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene12CXFileReader6SXMeshESaIS3_EED2Ev",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x3d1d5fe4",
               "matches": false
             },
             {
@@ -269890,7 +269863,6 @@
               "symbol": "_ZNSt6vectorIPN2ox5video8ITextureESaIS3_EE7reserveEm",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x21d9a55",
               "matches": false
             },
             {
@@ -271933,7 +271905,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene17CTerrainSceneNode12SIndexBufferESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0xc5807a8",
               "matches": false
             },
             {
@@ -271987,7 +271958,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene17CTerrainSceneNode12SIndexBufferESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0xc58d6d8",
               "matches": false
             },
             {
@@ -275919,7 +275889,6 @@
               "symbol": "_ZNSt6vectorIN2ox4core11CTriangle3dIfEESaIS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEmRKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x424a72fd",
               "matches": false
             },
             {
@@ -275955,7 +275924,6 @@
               "symbol": "_ZNSt6vectorIN2ox4core11CTriangle3dIfEESaIS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEmRKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x1166c02e",
               "matches": false
             },
             {
@@ -288247,7 +288215,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene13CSceneManager16DefaultNodeEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x38cfcf3e",
               "matches": false
             },
             {
@@ -288382,7 +288349,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5scene13CSceneManager9MeshEntryESaIS3_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS3_S5_EERKS3_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x746b9da6",
               "matches": false
             },
             {
@@ -289652,7 +289618,6 @@
               "symbol": "_ZSt16__introsort_loopIN9__gnu_cxx17__normal_iteratorIPN5daisy5scene13CSceneManager16DefaultNodeEntryESt6vectorIS5_SaIS5_EEEElEvT_SB_T0_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x1ad93c7",
               "matches": false
             },
             {
@@ -289661,7 +289626,6 @@
               "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5scene13CSceneManager16DefaultNodeEntryESt6vectorIS5_SaIS5_EEEEEvT_SB_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x380f3d",
               "matches": false
             },
             {
@@ -289670,7 +289634,6 @@
               "symbol": "_ZSt25__unguarded_linear_insertIN9__gnu_cxx17__normal_iteratorIPN5daisy5scene13CSceneManager16DefaultNodeEntryESt6vectorIS5_SaIS5_EEEES5_EvT_T0_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x76675513",
               "matches": false
             },
             {
@@ -289679,7 +289642,6 @@
               "symbol": "_ZSt16__insertion_sortIN9__gnu_cxx17__normal_iteratorIPN5daisy5scene13CSceneManager16DefaultNodeEntryESt6vectorIS5_SaIS5_EEEEEvT_SB_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x485d4926",
               "matches": false
             }
           ],
@@ -291012,7 +290974,7 @@
           "exact": false,
           "address": "0x4dd3b0",
           "first_difference": 331,
-          "differing_bytes": 1236,
+          "differing_bytes": 1034,
           "misplaced_symbols": [
             {
               "symbol": "_ZN5daisy5video6CImage14getColorFormatEv",
@@ -291118,6 +291080,11 @@
               "symbol": "_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
               "known": "0x4deb30",
               "placed": "0x4dec20"
+            },
+            {
+              "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
+              "known": "0x4de9b0",
+              "placed": "0x4dedb0"
             },
             {
               "symbol": "_ZN5daisy5video6CImageD0Ev",
@@ -291259,29 +291226,11 @@
               "matches": false
             },
             {
-              "offset": 6691,
-              "type": 11,
-              "symbol": "_ZTVN5daisy5video6CImageE",
-              "addend": 16,
-              "destination": "0x60e6a0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
-              "offset": 6754,
-              "type": 2,
-              "symbol": "_ZN5daisy5video6CImage8initDataEv",
-              "addend": -4,
-              "destination": "0x4ddea0",
-              "reason": "different destination",
-              "matches": false
-            },
-            {
               "offset": 6968,
               "type": 10,
               "symbol": ".rodata.str1.8",
               "addend": 0,
-              "reason": "unmapped or truncated range: 0xf411fe2+0x29",
+              "reason": "unmapped or truncated range: 0x49e4ebff+0x29",
               "matches": false
             },
             {
@@ -291613,7 +291562,7 @@
             },
             {
               "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-              "address": "0x4decb0",
+              "address": "0x4de9b0",
               "size": 392,
               "extent": null,
               "global": true,
@@ -291967,7 +291916,7 @@
         "system_headers": 111,
         "object_sha256": "87013ab772b71a46741371c93979822b73a5df71692e33ae837d82b795ede092"
       },
-      "fuzzy_target_sha256": "499567d97afb7044e700c3c5825ae8a477a9c2fea2d5c90c546c071048f23ccd",
+      "fuzzy_target_sha256": "ca451a38af2d46078a44908ac07391d7219bef3dfbfd4b9c3263d11e3146ba84",
       "fuzzy_functions": [
         {
           "address": "0x4dd3b0",
@@ -292186,10 +292135,10 @@
           "percent": 87.37037
         },
         {
-          "address": "0x4decb0",
-          "size": 620,
+          "address": "0x4de9b0",
+          "size": 382,
           "symbol": "_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE",
-          "percent": 14.092784
+          "percent": 87.37037
         },
         {
           "address": "0x4de980",
@@ -292404,7 +292353,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE6resizeEmS2_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "0x55a3c068",
               "matches": false
             },
             {
@@ -292413,7 +292361,6 @@
               "symbol": "_ZNSt6vectorIN5daisy5video9S2DVertexESaIS2_EE6resizeEmS2_",
               "addend": -4,
               "reason": "no target address for symbol",
-              "candidate": "-0x6f10a45",
               "matches": false
             },
             {
@@ -293566,11 +293513,11 @@
     "config": {
       "functionRelocDiffs": "data_value"
     },
-    "report_sha256": "37d5da2c8c0f419b62eaa9698a3732a6e7f38a7c5828372e0f4d052d30ea6505"
+    "report_sha256": "3577c87888017ff140ef6245191a0e6465abcbba7a668e46b4ea916561859550"
   },
   "link": {
     "status": "unavailable",
     "reason": "no executable link step; compiled objects only"
   },
-  "inventory_sha256": "ba399bf7627d7734cc87d73bd673a9da092f1146bf24baaa7731ed14abe04273"
+  "inventory_sha256": "231228f04bbb5d214440e2140fe755c66265ffc612227cffcde69cd15af94877"
 }

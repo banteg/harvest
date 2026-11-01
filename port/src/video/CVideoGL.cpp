@@ -189,6 +189,8 @@ void CVideoGL::createMaterialRenderers()
 
 CVideoGL::~CVideoGL()
 {
+    // Shader material destructors use this driver's fixed-function state.
+    deleteMaterialRenders();
     deleteAllTextures();
 }
 

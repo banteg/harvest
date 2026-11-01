@@ -312,7 +312,8 @@ def test_learning_reports_disagreeing_references_in_one_function():
         "exact_but_unknown": True,
         "candidates": [["helper", "0x402000"], ["helper", "0x403000"], ["other", "0x404000"]],
     }
-    learned, conflicts = match.learnable({"sections": [{"functions": [function]}]}, "u.cpp", {})
+    resolver = match.Resolver(target_image(), {})
+    learned, conflicts = match.learnable({"sections": [{"functions": [function]}]}, "u.cpp", resolver)
     assert conflicts == ["helper"]
     assert learned == {"other": (0x404000, f"reloc:u.cpp:{NAME}")}
 
@@ -324,7 +325,8 @@ def test_learning_records_exact_global_functions():
         {"symbol": "g", "address": "0x401020", "exact": False, "global": True},
         {"symbol": "k", "address": "0x401030", "exact": True, "global": True},
     ]
-    learned, _ = match.learnable({"sections": [{"functions": functions}]}, "u.cpp", {"k": 0x401030})
+    resolver = match.Resolver(target_image(), {"k": 0x401030})
+    learned, _ = match.learnable({"sections": [{"functions": functions}]}, "u.cpp", resolver)
     assert learned == {"f": (0x401000, "match:u.cpp")}
 
 
@@ -358,13 +360,13 @@ def test_merged_constant_must_be_complete():
 @pytest.mark.parametrize(
     ("data", "width", "flags"), [(b"ABC\0", 4, 0x10), (b"ABC\0", 1, 0x30), (b"A\0\0\0\0\0\0\0", 4, 0x30)]
 )
-@pytest.mark.parametrize("executable", [False, True])
-def test_merged_data_requires_non_executable_bytes(data, width, flags, executable):
-    target = Elf(elf_image(data, kind=2, flags=6 if executable else 2), "ET_EXEC")
+@pytest.mark.parametrize(("target_flags", "reason"), [(2, None), (6, "in code"), (3, "writable")])
+def test_merged_data_requires_readonly_target_bytes(data, width, flags, target_flags, reason):
+    target = Elf(elf_image(data, kind=2, flags=target_flags), "ET_EXEC")
     ok, message = match.check_merged(target, FakeSection(data, width, flags=flags), 0, ADDRESS)
-    assert ok is not executable
-    if executable:
-        assert "in code" in message
+    assert ok == (reason is None)
+    if reason:
+        assert reason in message
 
 
 class FakeSymbol(dict):
@@ -510,6 +512,8 @@ def test_bss_placement_must_agree_with_known_symbols(tmp_path):
 def function_with_exception_table(tmp_path, target_lsda):
     """Our object: one function whose FDE points to its exception table (LSDA). Only the FDE
     references the table, so it is placed from the target FDE's LSDA pointer."""
+    from test_delink import target_with_rodata
+
     from hv.delink import Section, Symbol, write_object
 
     code, lsda = b"\x90\x90\x90\xc3", b"\xff\x03\x05\x01\x00\x00\x00\x00"
@@ -528,9 +532,8 @@ def function_with_exception_table(tmp_path, target_lsda):
     ]
     write_object(tmp_path / "unit.o", sections, [Symbol("f", ".text", 0, len(code), function=True)])
     obj = Elf.load(tmp_path / "unit.o", "ET_REL")
-    target = Elf(elf_image(code + bytes(0x1C) + target_lsda, kind=2), "ET_EXEC")
-    target.fde_ranges = lambda: {(ADDRESS, len(code))}
-    target.fde_lsdas = lambda: {ADDRESS: ADDRESS + 0x20}
+    target = target_with_rodata(tmp_path, code, target_lsda)
+    target.fde_lsdas = lambda: {ADDRESS: DESTINATION}
     result = compare_object(obj, target, {"f": ADDRESS}, {})
     return next(s for s in result["sections"] if s["name"] == ".gcc_except_table")
 
@@ -538,7 +541,7 @@ def function_with_exception_table(tmp_path, target_lsda):
 def test_exception_table_is_placed_from_the_target_fde(tmp_path):
     table = function_with_exception_table(tmp_path, b"\xff\x03\x05\x01\x00\x00\x00\x00")
     assert (table["address"], table["placement"], table["exact"]) == (
-        hex(ADDRESS + 0x20),
+        hex(DESTINATION),
         "exception frames",
         True,
     )
@@ -626,6 +629,8 @@ def test_unnamed_function_does_not_take_a_known_functions_address():
 
 
 def test_exception_table_ignores_discarded_comdat_lsda_when_own_functions_agree(tmp_path):
+    from test_delink import target_with_rodata
+
     from hv.delink import Section, Symbol, write_object
 
     code, lsda = b"\x90\x90\x90\xc3", bytes(16)
@@ -655,13 +660,13 @@ def test_exception_table_ignores_discarded_comdat_lsda_when_own_functions_agree(
     ]
     write_object(tmp_path / "unit.o", sections, symbols)
     obj = Elf.load(tmp_path / "unit.o", "ET_REL")
-    target = Elf(elf_image(code + bytes(0x1C) + lsda, kind=2), "ET_EXEC")
+    target = target_with_rodata(tmp_path, code, lsda)
     target.fde_ranges = lambda: {(ADDRESS, len(code)), (ADDRESS + 0x100, len(code))}
-    # f's FDE points to our table at ADDRESS + 0x20; g's kept copy points to another unit's table
-    target.fde_lsdas = lambda: {ADDRESS: ADDRESS + 0x20, ADDRESS + 0x100: ADDRESS + 0x900}
+    # f's FDE points to our table; g's kept copy points to another unit's table
+    target.fde_lsdas = lambda: {ADDRESS: DESTINATION, ADDRESS + 0x100: ADDRESS + 0x900}
     result = compare_object(obj, target, {"f": ADDRESS, "g": ADDRESS + 0x100}, {})
     table = next(s for s in result["sections"] if s["name"] == ".gcc_except_table")
-    assert (table["address"], table["exact"]) == (hex(ADDRESS + 0x20), True)
+    assert (table["address"], table["exact"]) == (hex(DESTINATION), True)
 
 
 def test_learning_rejects_two_symbols_claiming_the_same_address():
@@ -669,6 +674,79 @@ def test_learning_rejects_two_symbols_claiming_the_same_address():
         {"symbol": "C1", "address": "0x401000", "exact": True, "global": True},
         {"symbol": "C2", "address": "0x401000", "exact": True, "global": True},
     ]
-    learned, conflicts = match.learnable({"sections": [{"functions": functions}]}, "u.cpp", {})
+    resolver = match.Resolver(target_image(), {})
+    learned, conflicts = match.learnable({"sections": [{"functions": functions}]}, "u.cpp", resolver)
     assert learned == {}
     assert conflicts == ["C1", "C2"]
+
+
+@pytest.mark.parametrize("table", ["plt_symbols", "copy_symbols"])
+def test_learning_cannot_rename_an_import(tmp_path, table, monkeypatch):
+    from test_delink import target_with_rodata
+
+    linked = b"\xe8" + struct.pack("<i", DESTINATION - (ADDRESS + 5)) + b"\xc3"
+    target = target_with_rodata(tmp_path, linked, bytes(8))
+    monkeypatch.setattr(target, table, lambda: {"original": DESTINATION})
+    known = {NAME: ADDRESS}
+    result = compare(relocations=[(1, 2, -4, "renamed")], known=known, target=target)
+    assert not result["exact"]
+    assert text(result)["functions"][0]["candidates"] == [["renamed", hex(DESTINATION)]]
+    assert match.learnable(result, "u.cpp", match.Resolver(target, known)) == ({}, ["renamed"])
+
+
+@pytest.mark.parametrize("pointer", [0x3039, DESTINATION + 1, DESTINATION, ADDRESS])
+@pytest.mark.parametrize("referent", [".rodata", "table"])
+def test_inferred_data_requires_a_complete_mapped_noncode_range(tmp_path, pointer, referent):
+    from test_delink import target_with_rodata
+
+    from hv import delink
+
+    # Our mov eax, &table; ret can otherwise be made exact against a target returning any integer.
+    code = b"\xb8" + bytes(4) + b"\xc3"
+    table = b"ABCD"
+    target = target_with_rodata(tmp_path, code[:1] + struct.pack("<I", pointer) + code[5:], table)
+    obj = tmp_path / "pointer.o"
+    delink.write_object(
+        obj,
+        [
+            delink.Section(".text", code, 6, relocations=[(1, 10, referent, 0)]),
+            delink.Section(".rodata", table, 2),
+        ],
+        [delink.Symbol(NAME, ".text", 0, len(code), function=True), delink.Symbol("table", ".rodata", 0, 4)],
+    )
+    compiled = Elf.load(obj, "ET_REL")
+    result = compare_object(compiled, target, {NAME: ADDRESS}, {})
+    assert result["unplaced_sections"] == ([] if pointer == DESTINATION else [".rodata"])
+    assert function_section(result)["functions"][0]["exact"] == (pointer == DESTINATION)
+    assert match.learnable(result, "u.cpp", match.Resolver(target, {NAME: ADDRESS})) == ({}, [])
+    delink.delink_unit(target, compiled, result, [], {ADDRESS: len(code)})
+
+
+def test_fallback_leaves_a_function_unplaced_when_its_only_extent_is_taken(tmp_path):
+    from hv import delink
+
+    # The unknown function shares a body size with g, but g already owns this FDE in another section.
+    obj = tmp_path / "functions.o"
+    code = b"\x90\xc3"
+    delink.write_object(
+        obj,
+        [delink.Section(".text", code * 2, 6), delink.Section(".text.g", code, 6)],
+        [
+            delink.Symbol("f", ".text", 0, 2, function=True),
+            delink.Symbol("unknown", ".text", 2, 2, function=True),
+            delink.Symbol("g", ".text.g", 0, 2, function=True),
+        ],
+    )
+    target = target_image(code * 2)
+    target.fde_ranges = lambda: {(ADDRESS, 2), (ADDRESS + 2, 2)}
+    compiled = Elf.load(obj, "ET_REL")
+    result = compare_object(compiled, target, {"f": ADDRESS, "g": ADDRESS + 2}, {})
+    assert not result["exact"]
+    first, second = result["sections"]
+    assert first["unplaced_functions"] == ["unknown"]
+    assert [(f["symbol"], f["exact"]) for f in first["functions"] + second["functions"]] == [
+        ("f", True),
+        ("g", True),
+    ]
+    _, symbols = delink.delink_unit(target, compiled, result, [], {ADDRESS: 2, ADDRESS + 2: 2})
+    assert {s.name for s in symbols if s.function} == {"f", "g"}

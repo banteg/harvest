@@ -100,7 +100,14 @@ tc +cmd:
 
 # record the toolchain image's installed packages
 toolchain-manifest:
-    docker run --rm --platform linux/amd64 {{image}} dpkg-query -W -f '${Package}\t${Version}\n' > toolchain/manifest.tsv
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tmp="$(mktemp toolchain/manifest.tsv.XXXXXXXX)"
+    trap 'rm -f "$tmp"' EXIT
+    docker run --rm --platform linux/amd64 {{image}} dpkg-query -W -f '${Package}\t${Version}\n' > "$tmp"
+    test -s "$tmp"
+    chmod 644 "$tmp"
+    mv -f "$tmp" toolchain/manifest.tsv
 
 test:
     uv run pytest
@@ -123,13 +130,15 @@ build *args:
     cd port && zig build harvest {{args}}
 
 # build and run the debug port against the original data (extra args go to the game, e.g. --no-audio)
+[positional-arguments]
 run *args: build
-    port/zig-out/bin/harvest --data "{{data}}" {{args}}
+    port/zig-out/bin/harvest --data {{quote(data)}} "$@"
 
 # build and run an optimized port, without UBSan stops, for playing
+[positional-arguments]
 play *args:
     cd port && zig build harvest -Doptimize=ReleaseFast
-    port/zig-out/bin/harvest --data "{{data}}" {{args}}
+    port/zig-out/bin/harvest --data {{quote(data)}} "$@"
 
 # build the port for every target from this machine, plus an optimized host build
 # (optimized builds inline more, so they catch inline functions that are declared but never defined)

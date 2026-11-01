@@ -1,5 +1,5 @@
 {
-  "schema": 3,
+  "schema": 4,
   "build": "1.18-linux-amd64",
   "image": "Harvest",
   "image_sha256": "ac381fa044f6009e09a29e1e221a51e72e65f0772edd164083857dda863a426a",

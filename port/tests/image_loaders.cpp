@@ -1,5 +1,5 @@
-// Standalone PSD loader checks: zig build test-image_loaders.
-// Exercise the actual port factory with raw and PackBits fixtures; no window or game data needed.
+// Standalone image loader checks: zig build test-image_loaders.
+#include "daisy/gui/BuildInFont.h"
 #include "ox/io/CMemReadFile.h"
 #include "ox/video/IImageLoader.h"
 #include "ox/video/IImage.h"
@@ -12,6 +12,7 @@
 #include <stb_image_write.h>
 
 namespace daisy { namespace video {
+ox::video::IImageLoader* createImageLoaderBmp();
 ox::video::IImageLoader* createImageLoaderPSD();
 ox::video::IImageLoader* createImageLoaderJPG();
 ox::video::IImageLoader* createImageLoaderTGA();
@@ -70,8 +71,100 @@ static void encoded(void* context, void* data, int size)
     result.insert(result.end(), bytes, bytes + size);
 }
 
+static void littleDword(Bytes& data, int at, unsigned int value)
+{
+    for (int i = 0; i < 4; ++i)
+        data[at + i] = (unsigned char)(value >> (8 * i));
+}
+
+class ShortBmpFile : public ox::io::CMemReadFile
+{
+public:
+    ShortBmpFile(Bytes& bytes, int stop) : CMemReadFile(&bytes[0], (int)bytes.size(), false), Stop(stop) {}
+    int read(void* data, int count) { return CMemReadFile::read(data, getPos() == Stop ? count - 1 : count); }
+private:
+    int Stop;
+};
+
+static int checkBmp()
+{
+    ox::video::IImageLoader* bmp = daisy::video::createImageLoaderBmp();
+    Bytes rgb(62, 0); // Two bottom-up padded 24-bit rows, one pixel each.
+    rgb[0] = 'B'; rgb[1] = 'M'; rgb[2] = 62; rgb[10] = 54; rgb[14] = 40;
+    rgb[18] = 1; rgb[22] = 2; rgb[26] = 1; rgb[28] = 24;
+    rgb[54] = 255; rgb[60] = 255;
+    ox::video::IImage* image = load(bmp, rgb);
+    CHECK(image && (unsigned int)image->getPixel(0, 0).color == 0xffff0000u);
+    CHECK((unsigned int)image->getPixel(0, 1).color == 0xff0000ffu);
+    image->drop();
+
+    Bytes invalid = rgb; invalid[18] = 0;
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; littleDword(invalid, 22, 0xffffffffu); // Unsupported top-down image.
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; littleDword(invalid, 22, 0x40000000u); // CImage output size overflows.
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; invalid[34] = 4; // biSizeImage is shorter than both padded rows.
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; invalid[2] = 0; invalid.pop_back(); // Truncated file, both size fields omitted.
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; littleDword(invalid, 34, 0xfffffffdu);
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; invalid[10] = 20;
+    CHECK(!load(bmp, invalid));
+    invalid = rgb; littleDword(invalid, 10, 0xfffffffcu);
+    CHECK(!load(bmp, invalid));
+    ShortBmpFile shortPixels(rgb, 54);
+    CHECK(!bmp->loadImage(&shortPixels));
+
+    // A two-entry palette, followed by a row of three pixels and unused padding bits/bytes.
+    Bytes indexed = rgb;
+    indexed.resize(66, 0); indexed[2] = 66; indexed[10] = 62; indexed[18] = 3; indexed[22] = 1;
+    indexed[28] = 4; indexed[46] = 2; indexed[54] = 0; indexed[60] = 255;
+    indexed[62] = 0x10; indexed[63] = 0x1f; indexed[64] = 0xff;
+    image = load(bmp, indexed);
+    CHECK(image && (unsigned int)image->getPixel(0, 0).color == 0xfff80000u);
+    CHECK((unsigned int)image->getPixel(1, 0).color == 0xff000000u);
+    CHECK((unsigned int)image->getPixel(2, 0).color == 0xfff80000u);
+    image->drop();
+    Bytes eight = indexed; eight[28] = 8; eight[62] = 1; eight[63] = 0; eight[64] = 1;
+    image = load(bmp, eight);
+    CHECK(image && (unsigned int)image->getPixel(2, 0).color == 0xfff80000u);
+    image->drop();
+    Bytes one = indexed; one[28] = 1; one[62] = 0xa0;
+    image = load(bmp, one);
+    CHECK(image && (unsigned int)image->getPixel(2, 0).color == 0xfff8f8f8u);
+    CHECK(image->getPixel(1, 0).color == 0);
+    image->drop();
+    invalid = indexed; invalid[62] = 0x12;
+    CHECK(!load(bmp, invalid)); // The second nibble names a missing palette entry.
+    invalid = indexed; invalid[28] = 8; invalid[62] = 255;
+    CHECK(!load(bmp, invalid));
+    invalid = indexed; invalid[46] = 0;
+    CHECK(!load(bmp, invalid)); // No explicit color count means the full palette is required.
+    invalid = indexed; invalid[14] = 44;
+    CHECK(!load(bmp, invalid)); // The extended DIB header overlaps the claimed palette.
+    ShortBmpFile shortPalette(indexed, 54);
+    CHECK(!bmp->loadImage(&shortPalette));
+
+    ox::io::CMemReadFile font(daisy::gui::BuildInFontData, daisy::gui::BuildInFontDataSize, false);
+    CHECK(bmp->isALoadableFileFormat(&font));
+    image = bmp->loadImage(&font);
+    CHECK(image && image->getDimension().Width == 128 && image->getDimension().Height == 128);
+    const unsigned short* pixels = (const unsigned short*)image->lock();
+    unsigned int hash = 2166136261u;
+    for (int i = 0; i < 128 * 128; ++i)
+        hash = (hash ^ pixels[i]) * 16777619u;
+    image->unlock();
+    CHECK(hash == 0xa5ba448au);
+    image->drop();
+    bmp->drop();
+    return 0;
+}
+
 int main()
 {
+    CHECK(checkBmp() == 0);
     ox::video::IImageLoader* loader = daisy::video::createImageLoaderPSD();
     CHECK(loader != 0);
     CHECK(loader->isALoadableFileExtension("image.psd.backup"));
@@ -169,6 +262,6 @@ int main()
         CHECK(pixels[i * 4] == 80 && pixels[i * 4 + 1] == 120 && pixels[i * 4 + 2] == 160
             && pixels[i * 4 + 3] == 255);
     stbi_image_free(pixels);
-    std::puts("Image loader smoke passed: raw/RLE PSD, 128-pixel runs, alpha, bad headers, reuse and JPEG/TGA/PNG");
+    std::puts("Image loader smoke passed: BMP bounds, palettes and font, raw/RLE PSD, alpha, bad headers, reuse and JPEG/TGA/PNG");
     return 0;
 }

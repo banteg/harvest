@@ -33,6 +33,9 @@ CHTTPConnectionHandler::CHTTPConnectionHandler()
 
 CHTTPConnectionHandler::~CHTTPConnectionHandler()
 {
+#ifdef HARVEST_PORT
+    disconnect();
+#endif
     if (NetworkDevice)
         NetworkDevice->drop();
 
@@ -60,16 +63,29 @@ void CHTTPConnectionHandler::disconnect()
     Connected = false;
     State = EHS_IDLE;
     if (NetworkDevice)
+    {
+#ifdef HARVEST_PORT
+        NetworkDevice->cancelPending(this);
+#endif
         NetworkDevice->disconnect();
+    }
 }
 
 bool CHTTPConnectionHandler::doGet(const core::CString<char>& file, const core::CString<wchar_t>& host,
                                    unsigned int port)
 {
     Lock.enter();
+#ifdef HARVEST_PORT
+    if (State != EHS_IDLE)
+    {
+        Lock.leave();
+        return false;
+    }
+#else
     // returns without leaving the lock, as the original does
     if (State != EHS_IDLE)
         return false;
+#endif
 
     State = EHS_CONNECTING;
     delete Thread;
@@ -82,7 +98,13 @@ bool CHTTPConnectionHandler::doGet(const core::CString<char>& file, const core::
     Host = core::CStringFunctions::wideToAnsi(host);
     Port = port;
 
+#ifdef HARVEST_PORT
+    // The offline network device queues its failure for the main loop. No worker is needed
+    // (and the browser build has no worker threads).
+    joinThread(this);
+#else
     Thread = new core::CThread(joinThread, this);
+#endif
     Lock.leave();
     return true;
 }

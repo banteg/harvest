@@ -46,7 +46,10 @@ on `PATH`, 6.0.10 in CI) only provides the sysroot and links.
   inside `harvestClientData` are the game's mods and stay zipped. Only `harvestClientData` is copied.
 - The data and the user data folder (`/libsdl/Harvest`: settings, profiles, saves) live in IndexedDB
   through IDBFS. The data is kept for the next visit (the page asks the browser not to evict it), and
-  the user data is written back every 3 seconds and when the page is hidden. Eject forgets the data.
+  the user data is written back every 3 seconds and when the page is hidden. One tab at a time
+  owns the storage through a Web Lock. A second tab waits, then loads the latest saves before it
+  can write. A failed storage read requires a reload. Imports replace the cached installation in
+  one transaction after all the replacement files have been read. Eject forgets the game data.
 - With nothing stored, the page fetches `/harvestClientData.zip` from the same origin. The Worker
   streams the same object published at `https://reflexive.banteg.xyz/harvest/harvestClientData.zip`.
   Download progress is shown before the archive is extracted and cached. `?data=<url>` still

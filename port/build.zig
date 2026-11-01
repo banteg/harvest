@@ -130,7 +130,7 @@ const emscripten_link_flags = [_][]const u8{
     "-sFORCE_FILESYSTEM=1",
     "-sINVOKE_RUN=0",
     "-sEXIT_RUNTIME=0",
-    "-sEXPORTED_RUNTIME_METHODS=callMain,FS",
+    "-sEXPORTED_RUNTIME_METHODS=callMain,FS,IDBFS",
     // The page keeps the game data and the user data folder in IndexedDB.
     "-lidbfs.js",
 };
