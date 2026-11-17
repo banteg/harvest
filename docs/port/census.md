@@ -93,11 +93,10 @@ and remain excluded pending integration. The recovered XML and text readers, BMP
 image loaders, `CSoftwareTexture`, `CAnimatedMeshSceneNode`, `CSceneCollisionManager`, `CImage`,
 `CVideoSoftware` and `CSceneManager` continue using their existing port replacements.
 
-Across the recovered sources there are seven out-of-line trap stubs, all in `CXFileReader`:
-`parseDataObjectMaterial`, `parseDataObjectMeshMaterialList`, `parseDataObjectSkinMeshHeader`,
-`parseDataObjectSkinWeights`, `parseDataObjectMesh`, `parseDataObjectFrame` and `parseDataObject`.
-No header trap stubs remain: `CBspTree::BspPoly::operator==` and `CSceneManager::DefaultNodeEntry`'s
-constructor are restored. Units depending on the remaining stubs stay excluded.
+`CXFileReader` has restored parsers for frames, meshes, materials, and skinning. Its top-level
+`parseDataObject` is the remaining out-of-line trap stub. The DirectX .x reader and loader remain
+excluded from the port. `CBspTree::BspPoly::operator==` and the
+`CSceneManager::DefaultNodeEntry` constructor are restored, leaving no header trap stubs.
 
 ## Port sources (`port/src/`)
 

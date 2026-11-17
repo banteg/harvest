@@ -1477,6 +1477,7 @@ void CVideoNull::runPPShader(int materialType, core::CRect<int>& destRect, core:
     material.MaterialType = (E_MATERIAL_TYPE)materialType;
     material.ZBuffer = false;
     material.ZWriteEnable = false;
+    material.BilinearFilter = false;
     material.TrilinearFilter = false;
     material.Texture1 = InputTextures[0];
     material.Texture2 = InputTextures[1];

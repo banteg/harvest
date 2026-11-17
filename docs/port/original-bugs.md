@@ -195,6 +195,11 @@ Port recommendation:
   `makeColorKeyTexture(pos)` (`0x4e07b0`, inherited from Irrlicht) reads the key pixel at
   `y * width` instead of using the pitch.
 
+- **Software renderer vertex storage** ([`CVideoSoftware.cpp`](../../src/daisy/video/Software/CVideoSoftware.cpp)):
+  both `drawIndexedTriangleList` overloads (`0x4f65b0` and `0x4f7250`) reserve capacity for transformed
+  vertices and then index that storage past the vector's size. The `HARVEST_PORT` path resizes the
+  vector before accessing its elements. The modern renderer replaces both overloads.
+
 - **Renderer, latent or harmless** ([`src/daisy/video/OpenGL/`](../../src/daisy/video/OpenGL/)):
   `setScissorRect` (`0x4ec430`) computes y as `LRY − height` instead of `height − LRY` (the only caller
   passes full-height rectangles, so y is 0); `setBasicRenderStates` (`0x4ec4c0`, from Irrlicht 0.7)

@@ -160,7 +160,7 @@ With these objects objdiff scores every exact function across all 201 recovered 
 | `daisy/scene/CTestSceneNode.cpp` | 44/44 | exact; Irrlicht 0.7's test cube and sphere node |
 | `daisy/scene/CTextSceneNode.cpp` | 46/49 | Irrlicht 0.7's text node; `~ISceneNode` differs |
 | `daisy/scene/CWaterSurfaceSceneNode.cpp` | 34/34 | exact; Irrlicht 0.7's water surface node |
-| `daisy/scene/CXFileReader.cpp` | 28/52 | Irrlicht 0.7's DirectX .x file reader; seven parsers remain trap stubs: `parseDataObjectMaterial`, `parseDataObjectMeshMaterialList`, `parseDataObjectSkinMeshHeader`, `parseDataObjectSkinWeights`, `parseDataObjectMesh`, `parseDataObjectFrame` and `parseDataObject`; animation set/key bodies are restored but still differ |
+| `daisy/scene/CXFileReader.cpp` | 52/82 | Irrlicht 0.7's DirectX .x file reader with six restored parsers for frames, meshes, materials, and skinning. The top-level `parseDataObject` still traps. Restoring it changes register allocation in two previously exact functions. |
 | `daisy/scene/CXMeshFileLoader.cpp` | 12/12 | exact; Irrlicht 0.7's DirectX .x mesh loader |
 | `daisy/video/Null/CImageLoaderPCX.cpp` | 13/14 | Irrlicht 0.7's PCX image loader; `loadImage` differs |
 | `daisy/io/CTextReader.cpp` | 13/13 | exact; Irrlicht 0.7's text reader |
@@ -174,7 +174,7 @@ With these objects objdiff scores every exact function across all 201 recovered 
 | `daisy/scene/C3DSMeshFileLoader.cpp` | 71/71 | exact; Irrlicht 0.7's 3D Studio mesh loader |
 | `daisy/scene/CXAnimationPlayer.cpp` | 113/116 | Irrlicht 0.7's DirectX `.x` animation player; `addFacesToBuffer`, `getMaterialFromXMaterial`, `prepareAnimationData` differ |
 | `daisy/scene/CAnimatedMeshSceneNode.cpp` | 58/59 | Irrlicht 0.7's animated mesh scene node; only `render` differs; no trap stubs |
-| `daisy/scene/CTerrainSceneNode.cpp` | 71/76 | Irrlicht 0.7's terrain scene node; `calculateNormals`, `createIndexBuffers` and emitted destructors differ; no trap stubs |
+| `daisy/scene/CTerrainSceneNode.cpp` | 80/81 | Irrlicht 0.7's terrain scene node with Harvest's sorting of the deduplicated level-of-detail dimensions. Only `calculateNormals` differs. |
 | `daisy/scene/CCameraMayaSceneNode.cpp` | 40/41 | Irrlicht 0.7's Maya-style camera node; `animate` differs; its `setPosition` override updates the zoom and matches |
 | `daisy/scene/CCameraFPSSceneNode.cpp` | 41/43 | Irrlicht 0.7's first-person camera node; `CCameraFPSSceneNode`, `getRelativeTransformation` differ |
 | `daisy/scene/CQ3LevelMesh.cpp` | 62/63 | Irrlicht 0.7's Quake 3 BSP level mesh; only `loadTextures` differs; the exact curved-surface body preserves the original field-offset bug (see [original-bugs.md](port/original-bugs.md)) |
@@ -184,7 +184,7 @@ With these objects objdiff scores every exact function across all 201 recovered 
 | `daisy/scene/CGeometryCreator.cpp` | 42/42 | exact; Irrlicht 0.7's hill-plane and terrain mesh generator |
 | `daisy/scene/CSceneManager.cpp` | 110/116 | Irrlicht 0.7's scene manager; `findMesh`, `addMesh`, `addTerrainSceneNode`, `registerNodeForRendering`, the default-node sorting helper and static initializer differ; no trap stubs |
 | `daisy/video/Null/CImage.cpp` | 35/42 | Irrlicht 0.7's image buffer; no stubs |
-| `daisy/video/Software/CVideoSoftware.cpp` | 38/46 | Irrlicht 0.7's software renderer; no stubs |
+| `daisy/video/Software/CVideoSoftware.cpp` | 39/47 | Irrlicht 0.7's software renderer. The original reserves transformed vertex storage before indexing it. The port path resizes the vector. |
 | `daisy/scene/CMeshManipulator.cpp` | 49/56 | Irrlicht 0.7's mesh manipulator over `ox::scene::SMesh` and `SMeshBuffer`; `setVertexColorAlpha`, `recalculateBoundingBox`, `scaleMesh`, `recalculateNormals`, `makePlanarTextureMapping`, `createMeshCopy` and the static initializer differ |
 | `daisy/scene/CTriangleSelector.cpp` | 16/18 | Irrlicht 0.7's triangle selector; both constructors differ |
 | `daisy/scene/CTriangleBBSelector.cpp` | 4/6 | Irrlicht 0.7's bounding-box triangle selector; both constructors differ |
@@ -291,7 +291,7 @@ With these objects objdiff scores every exact function across all 201 recovered 
 | `daisy/input/CJoystickNullDriver.cpp` | 12/12 | exact; the null joystick driver |
 | `daisy/audio/COpenALDriver.cpp` | 53/54 | the OpenAL backend: 32-source pool, tracked sounds, Ogg/WAV effects, 10×4 KB Vorbis streaming; `_loadOggFromMemory` has two locals in swapped stack slots |
 | `daisy/video/CVideoModeList.cpp` | 21/22 | the sorted video mode list; `std::__introsort_loop` differs in registers only |
-| `daisy/video/Null/CVideoNull.cpp` | 154/185 | the driver base: texture, sprite-package, particle-package and material-renderer caches (sorted vectors keyed by lowercased name), image loading, render and physical screen size with the 2D view values, FPS and statistics, shader-from-file loading, post-processing surfaces, Irrlicht's 3D debug drawing and Oxeye's Bezier/Hermite helpers; remaining: std sort, heap and insert copies (GCC inlines `CString::operator=` differently across the unit; defining `setInputTexture` after `createDeviceDependentTexture` matches the `SSurface` `__final_insertion_sort`) and registers in `getSpritePackage`, `getParticlePackage` and `addTexture`; the unreached helpers differ only in scheduling (rules in `docs/port/renderer.md`) |
+| `daisy/video/Null/CVideoNull.cpp` | 155/185 | the driver base: texture, sprite-package, particle-package and material-renderer caches (sorted vectors keyed by lowercased name), image loading, render and physical screen size with the 2D view values, FPS and statistics, shader-from-file loading, post-processing surfaces, Irrlicht's 3D debug drawing and Oxeye's Bezier/Hermite helpers; remaining: std sort, heap and insert copies (GCC inlines `CString::operator=` differently across the unit; defining `setInputTexture` after `createDeviceDependentTexture` matches the `SSurface` `__final_insertion_sort`) and registers in `getSpritePackage`, `getParticlePackage` and `addTexture`; the unreached helpers differ only in scheduling (rules in `docs/port/renderer.md`) |
 | `daisy/video/OpenGL/CVideoOpenGL.cpp` | 165/177 | the Linux OpenGL driver: 2D batching (1024 quads), the four `draw2DImage` variants, lines and rectangles, the 2D/3D render-state switch, material renderers, lights, stencil shadows, scissor, extension loading and the JPEG screenshot; remaining: case order in `queryFeature`, scheduling in the `draw2DImage` variants, `switch2dRendering` and `loadExtensions`, block layout in `setRenderStates3DMode`, and `CString` inlining in `saveJpegScreenshot` (rules in `docs/port/renderer.md`) |
 | `daisy/video/OpenGL/COpenGLTexture.cpp` | 20/20 | exact; power-of-two RGBA8 upload, linear filters, mip maps only with flag `0x10` |
 | `daisy/video/OpenGL/COpenGLShaderMaterialRenderer.cpp` | 19/19 | exact; ARB vertex and fragment programs (the fragment program is bound with the vertex program's name, an original bug) |

@@ -753,6 +753,7 @@
 
 ["daisy/scene/CXFileReader.cpp"]
 ".bss" = 0x86c15c
+".rodata" = 0x61c800
 
 ["daisy/video/Null/CImageLoaderBmp.cpp"]
 ".bss" = 0x86c164
