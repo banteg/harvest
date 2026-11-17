@@ -72,6 +72,11 @@
 #include "ox/video/ISpritePackage.h"
 #include "ox/video/ITexture.h"
 #include "ox/video/IVideoDriver.h"
+#ifdef HARVEST_PORT
+#include "game/SaveFile.h"
+#include <SDL3/SDL_log.h>
+#include "ox/io/IFilePath.h"
+#endif
 
 namespace harvest {
 namespace game {
@@ -678,6 +683,12 @@ bool CPlayState::readStateFromFile(const char* filename)
         file->drop();
         return result;
     }
+#ifdef HARVEST_PORT
+    ox::io::CMemReadFile* memFile = port::readSavePayload(file);
+    file->drop();
+    if (!memFile)
+        return false;
+#endif
 
     if (settings::gp_profileManager && settings::gp_profileManager->getCurrentProfile())
         Profile = settings::gp_profileManager->getCurrentProfile();
@@ -695,6 +706,7 @@ bool CPlayState::readStateFromFile(const char* filename)
     entity::g_nextEntityId = 1;
     ThreatLevel = new game::CThreatLevel(g_gameMode);
 
+#ifndef HARVEST_PORT
     int compressedSize = ox::io::CHelpIO::readInt(file);
     int size = ox::io::CHelpIO::readInt(file);
     if (compressedSize <= 0)
@@ -766,6 +778,7 @@ bool CPlayState::readStateFromFile(const char* filename)
     }
 
     ox::io::CMemReadFile* memFile = new ox::io::CMemReadFile(unpacked, size, false);
+#endif
     StartTime = ox::io::CHelpIO::readInt(memFile);
     RandomValue = ox::io::CHelpIO::readInt(memFile);
     ox::io::CHelpIO::readWideString(memFile, PlayerName);
@@ -814,8 +827,10 @@ bool CPlayState::readStateFromFile(const char* filename)
     if (!game::gp_world->readAndInitialize(memFile, header.Version, Driver, getViewSize()))
     {
         delete memFile;
+#ifndef HARVEST_PORT
         delete[] data;
         delete[] unpacked;
+#endif
         return result;
     }
 
@@ -828,14 +843,19 @@ bool CPlayState::readStateFromFile(const char* filename)
     entity::gp_entityManager->readEntities(memFile, header.Version);
     entity::g_nextEntityId = nextEntityId;
     delete memFile;
+#ifndef HARVEST_PORT
     delete[] data;
     delete[] unpacked;
+#endif
 
     // Let the entities settle once before the first frame.
     entity::gp_entityManager->update(0.001f,
         ox::core::CRect<float>(ViewPosition + ox::core::CPosition2d<float>(-100.0f, -100.0f),
             ox::core::CDimension2d<float>(ScreenSize.Width + 200.0f, ScreenSize.Height + 200.0f)));
     GameSpeed = 0;
+#ifdef HARVEST_PORT
+    SDL_Log("Loaded save game: %s", filename);
+#endif
     result = true;
     return result;
 }
@@ -3955,6 +3975,7 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         settings::g_attackPriorities[i].write(file);
     entity::gp_entityManager->writeEntities(file);
 
+#ifndef HARVEST_PORT
     int size = file->getSize();
     unsigned char* compressed = new unsigned char[size];
     unsigned int compressedSize = 0;
@@ -3983,6 +4004,7 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
     }
     else
     {
+#endif
         settings::SSavestateHeader header;
         header.PlayerName = PlayerName;
         header.GameMode = GameMode;
@@ -3991,6 +4013,13 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         header.Planet = game::gp_world->getPlanet();
         header.Time = time(0);
         header.Description = description;
+#ifdef HARVEST_PORT
+        ox::io::IFilePath* path = Device->getFileSystem()->resolveAliases(filename);
+        bool saved = port::writeSaveFile(path->getPath(), header, *file);
+        path->drop();
+        delete file;
+        return saved;
+#else
         settings::CSavestateInfo::writeHeader(saveFile, header);
         ox::io::CHelpIO::writeInt(saveFile, compressedSize);
         ox::io::CHelpIO::writeInt(saveFile, size);
@@ -4001,6 +4030,7 @@ bool CPlayState::writeStateToFile(const char* filename, const wchar_t* descripti
         result = true;
     }
     return result;
+#endif
 }
 
 void CPlayState::addInfoLine(const ox::core::CString<wchar_t>& text)

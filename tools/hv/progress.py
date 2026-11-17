@@ -15,7 +15,7 @@ from pathlib import Path
 
 from hv import builds, metrics, units
 
-SCHEMA = 3
+SCHEMA = 4
 
 
 def sha(data: bytes) -> str:
@@ -60,6 +60,18 @@ def input_hashes(names: list[str]) -> dict[str, str]:
             raise ValueError(f"input outside repository: {name}")
         result[name] = builds.sha256_file(path)
     return result
+
+
+def source_paths() -> list[str]:
+    """Inventory disjoint source trees, including extensionless headers. Skip Finder metadata."""
+    names = []
+    for root in ("src", "third_party"):
+        for path in (builds.ROOT / root).rglob("*"):
+            if path.is_symlink() and path.is_dir():
+                raise ValueError(f"cannot inventory symlinked source directory: {path}")
+            if path.is_file() and path.name != ".DS_Store":
+                names.append(path.relative_to(builds.ROOT).as_posix())
+    return sorted(names)
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -122,12 +134,7 @@ def capture(build: str) -> dict:
     if problem := builds.check_image(image):
         raise ValueError(f"{image.path}: {problem}")
     before = input_hashes(measurement_paths(build))
-    source_names = [
-        str(p.relative_to(builds.ROOT))
-        for root in ("src", "third_party")
-        for p in (builds.ROOT / root).rglob("*")
-        if p.is_file()
-    ]
+    source_names = source_paths()
     source_before = input_hashes(source_names)
     target = extents.load_target(build)
     inv, table = inventory(target, image)
@@ -151,13 +158,14 @@ def capture(build: str) -> dict:
     fuzzy = metrics.fuzzy_capture(
         target, [(s.address, s.size, s.name) for s in symbols.load(build)], selected, results, out
     )
-    if input_hashes(measurement_paths(build)) != before or input_hashes(source_names) != source_before:
+    if input_hashes(measurement_paths(build)) != before or input_hashes(source_paths()) != source_before:
         raise ValueError("measurement inputs changed during capture")
     evidence = {
         "schema": SCHEMA,
         "build": build,
         "image_sha256": image.sha256,
         "measurement_inputs": before,
+        "source_paths_sha256": sha(json.dumps(source_names).encode()),
         "units": results,
         "fuzzy": fuzzy,
         "link": {"status": "unavailable", "reason": "no executable link step; compiled objects only"},
@@ -190,6 +198,9 @@ def validate(build: str) -> tuple[dict, list[dict], dict]:
     if expected != current:
         changed = sorted(k for k in expected.keys() | current.keys() if expected.get(k) != current.get(k))
         raise ValueError(f"stale measurement inputs: {', '.join(changed)}; run progress capture")
+    # A new header can take precedence over the file recorded by an earlier GCC depfile.
+    if evidence.get("source_paths_sha256") != sha(json.dumps(source_paths()).encode()):
+        raise ValueError("source/include file inventory changed; run progress capture")
     selected = {u.source for u in units.load(build)}
     measured = [u["unit"] for u in evidence["units"]]
     if len(set(measured)) != len(measured) or selected != set(measured):

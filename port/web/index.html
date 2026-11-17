@@ -151,8 +151,41 @@ function mountOf(path) { return Module.FS.lookupPath(path).node.mount; }
 
 // Syncs one IDBFS mount: populate=true loads IndexedDB into memory, false writes memory back.
 function sync(path, populate) {
-  return new Promise((ok, no) => Module.FS.filesystems.IDBFS.syncfs(mountOf(path), populate,
+  return new Promise((ok, no) => Module.IDBFS.syncfs(mountOf(path), populate,
     (err) => err ? no(err) : ok()));
+}
+
+// The /data database holds only the game installation. Replace it in one IndexedDB transaction,
+// leaving the previous cache intact if an entry cannot be written or the browser runs out of space.
+// Use the pinned IDBFS backend's own file encoding so existing installs still hydrate with syncfs.
+async function replaceCachedData(root) {
+  const FS = Module.FS;
+  const idb = Module.IDBFS;
+  const db = await new Promise((ok, no) => idb.getDB(DATA_ROOT, (err, db) => err ? no(err) : ok(db)));
+  await new Promise((ok, no) => {
+    const tx = db.transaction(idb.DB_STORE_NAME, "readwrite");
+    tx.oncomplete = ok;
+    tx.onabort = () => no(tx.error || new Error("Cache transaction aborted"));
+    try {
+      const store = tx.objectStore(idb.DB_STORE_NAME);
+      store.clear();
+      const paths = root ? [root] : [];
+      while (paths.length) {
+        const path = paths.pop();
+        idb.loadLocalEntry(path, (err, entry) => {
+          if (err) throw err;
+          store.put(entry, path);
+          if (FS.isDir(entry.mode)) {
+            for (const name of FS.readdir(path))
+              if (name !== "." && name !== "..") paths.push(path + "/" + name);
+          }
+        });
+      }
+    } catch (err) {
+      tx.abort();
+      no(err);
+    }
+  });
 }
 
 function exists(path) {
@@ -175,26 +208,37 @@ function removeTree(path) {
 let pending = null; // data given before the storage was open
 
 async function openStorage() {
-  const FS = Module.FS;
-  for (const root of [DATA_ROOT, USER_ROOT]) {
-    FS.mkdir(root);
-    FS.mount(FS.filesystems.IDBFS, {}, root);
-  }
+  setState("waiting");
+  note("Waiting for access to game storage. Close any other Harvest tab to continue.");
   try {
-    await Promise.all([sync(DATA_ROOT, true), sync(USER_ROOT, true)]);
+    if (!navigator.locks) throw new Error("Web Locks require a supported browser on HTTPS or localhost");
+    // IDBFS reconciles a whole mount, including deletions. Each writer must populate its own
+    // fresh snapshot under the same lock it holds throughout play. Closing the tab releases it.
+    await navigator.locks.request("harvest-storage", async () => {
+      const FS = Module.FS;
+      for (const root of [DATA_ROOT, USER_ROOT]) {
+        FS.mkdir(root);
+        FS.mount(Module.IDBFS, {}, root);
+      }
+      await Promise.all([sync(DATA_ROOT, true), sync(USER_ROOT, true)]);
+      storageReady = true;
+      note("");
+      if (pending) { const entries = pending; pending = null; accept(entries); }
+      else if (haveData()) setState("ready");
+      else loadData();
+      await new Promise(() => {}); // keep the writer lock for this document's lifetime
+    });
   } catch (err) {
-    console.warn("cannot read the browser's storage:", err);
+    spin(0);
+    setState("blocked");
+    note(`Cannot open game storage. Reload to retry. ${err.message || err}`);
   }
-  storageReady = true;
-  if (pending) { const entries = pending; pending = null; accept(entries); }
-  else if (haveData()) setState("ready");
-  else loadData();
 }
 
 // Writes the user data folder back now and then while the game runs, and when the page goes away.
 let userSync = null;
 function saveUserData() {
-  if (!started || userSync) return;
+  if (!storageReady || !started || userSync) return;
   userSync = sync(USER_ROOT, false).catch((err) => console.warn("cannot save the user data:", err))
     .finally(() => { userSync = null; });
 }
@@ -262,36 +306,54 @@ function zipEntries(buffer) {
   return entries;
 }
 
-async function accept(entries) {
-  // entries: [{ path, read: () => Promise<ArrayBuffer> }]
-  if (!storageReady) { pending = entries; setState("loading"); spin(240); return; }
-  try { entries = await expandZips(entries); }
-  catch (err) { return fail(`Cannot read that zip: ${err.message || err}`); }
-  const wanted = entries
-    .map((e) => ({ ...e, path: clientDataPath(e.path) }))
-    .filter((e) => e.path && !e.path.split("/").some((p) => p.startsWith(".")));
-  if (!wanted.length) return fail("No Harvest data in that.");
+let changingData = false;
 
-  note("");
+async function accept(getEntries) {
+  if (started || changingData || state() === "blocked") return;
+  if (!storageReady) { pending = getEntries; setState("loading"); spin(240); return; }
+  changingData = true;
   setState("loading");
+  note("");
   progress(0);
   spin(540);
   const begun = performance.now();
   const FS = Module.FS;
-  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
-  for (let i = 0; i < wanted.length; i++) {
-    const data = new Uint8Array(await wanted[i].read());
-    const path = `${DATA_ROOT}/${wanted[i].path}`;
-    FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
-    FS.writeFile(path, data);
-    progress((i + 1) / wanted.length);
+  const staging = DATA_ROOT + "/.import";
+  const live = DATA_ROOT + "/" + CLIENT_DATA;
+  const previous = staging + "/previous";
+  try {
+    const entries = await expandZips(await getEntries());
+    const wanted = entries
+      .map((e) => ({ ...e, path: clientDataPath(e.path) }))
+      .filter((e) => e.path?.startsWith(CLIENT_DATA + "/") && !e.path.split("/").some((p) => p.startsWith(".")));
+    if (!wanted.length) throw new Error("No Harvest data in that.");
+    for (let i = 0; i < wanted.length; i++) {
+      const data = new Uint8Array(await wanted[i].read());
+      const path = staging + "/" + wanted[i].path;
+      FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
+      FS.writeFile(path, data);
+      progress((i + 1) / wanted.length);
+    }
+    const replacement = staging + "/" + CLIENT_DATA;
+    if (exists(live)) FS.rename(live, previous);
+    try {
+      FS.rename(replacement, live);
+      await replaceCachedData(live);
+    } catch (err) {
+      if (exists(live)) FS.rename(live, replacement);
+      if (exists(previous)) FS.rename(previous, live);
+      throw err;
+    }
+    removeTree(staging);
+    navigator.storage?.persist?.().catch(() => {});
+    await new Promise((done) => setTimeout(done, Math.max(0, 1400 - (performance.now() - begun))));
+    play();
+  } catch (err) {
+    removeTree(staging);
+    fail(`Cannot install game data: ${err.message || err}`);
+  } finally {
+    changingData = false;
   }
-  // Keep it for next time, in the background, and ask the browser not to evict it.
-  if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
-  sync(DATA_ROOT, false).catch((err) => console.warn("cannot keep the game data:", err));
-
-  // Let the disc get up to speed before the game takes over.
-  setTimeout(play, Math.max(0, 1400 - (performance.now() - begun)));
 }
 
 function play() {
@@ -317,14 +379,23 @@ $("drive").onclick = (e) => {
 $("drive").onkeydown = (e) => {
   if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("drive").click(); }
 };
-$("picker").onchange = () => accept([...$("picker").files].map((f) => ({
+$("picker").onchange = () => accept(() => [...$("picker").files].map((f) => ({
   path: f.webkitRelativePath, read: () => f.arrayBuffer(),
 })));
 
-$("eject").onclick = () => {
-  removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
-  sync(DATA_ROOT, false);
-  setState("empty");
+$("eject").onclick = async () => {
+  if (!storageReady || changingData || started) return;
+  changingData = true;
+  setState("loading");
+  try {
+    await replaceCachedData(null);
+    removeTree(`${DATA_ROOT}/${CLIENT_DATA}`);
+    setState("empty");
+  } catch (err) {
+    fail(`Cannot eject game data: ${err.message || err}`);
+  } finally {
+    changingData = false;
+  }
 };
 
 // Drag and drop anywhere on the page, walking dropped directories (an .app is one).
@@ -359,11 +430,11 @@ addEventListener("drop", async (e) => {
   dragDepth = 0;
   // The entries have to be taken while the event lasts.
   const entries = [...e.dataTransfer.items].map((i) => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
-  setState("loading");
-  spin(240);
-  const out = [];
-  for (const entry of entries) await walk(entry, out);
-  accept(out);
+  accept(async () => {
+    const out = [];
+    for (const entry of entries) await walk(entry, out);
+    return out;
+  });
 });
 
 // With no data stored, load the public copy. ?data=<url> still overrides that on a local server
@@ -391,19 +462,20 @@ async function downloadData(url) {
 function loadData() {
   const query = new URLSearchParams(location.search).get("data");
   const dataUrl = query && LOCAL_HOSTS.includes(location.hostname) ? query : DEFAULT_DATA;
-  setState("loading");
-  progress(0);
-  spin(240);
-  note("Downloading game data…");
-  if (/\.zip$/i.test(dataUrl)) {
-    accept([{ path: dataUrl, read: () => downloadData(dataUrl) }])
-      .catch((err) => fail("Cannot fetch the data: " + (err.message || err)));
-    return;
-  }
-  const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
-  fetch(base + "manifest.json").then((r) => r.json()).then((paths) => accept(paths.map((p) => ({
-    path: p, read: () => fetch(base + p.split("/").map(encodeURIComponent).join("/")).then((r) => r.arrayBuffer()),
-  })))).catch((err) => fail("Cannot fetch the data: " + err));
+  accept(async () => {
+    note("Downloading game data…");
+    if (/\.zip$/i.test(dataUrl)) return [{ path: dataUrl, read: () => downloadData(dataUrl) }];
+    const base = dataUrl.endsWith("/") ? dataUrl : dataUrl + "/";
+    async function fetchFile(url) {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`${url}: ${r.status} ${r.statusText}`);
+      return r;
+    }
+    const paths = await (await fetchFile(base + "manifest.json")).json();
+    return paths.map((p) => ({
+      path: p, read: async () => (await fetchFile(base + p.split("/").map(encodeURIComponent).join("/"))).arrayBuffer(),
+    }));
+  });
 }
 </script>
 <script async src="harvest.js"></script>

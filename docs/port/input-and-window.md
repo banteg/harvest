@@ -347,9 +347,7 @@ macOS):
 
 ### Network
 
-`daisy::net::CWinsockNetworkDevice` ([`port/src/net/`](../../port/src/net/)) never connects: the only
-user is the online highscores, whose server is gone. `joinHost` (called from
-`CHTTPConnectionHandler`'s thread) fails at once, and the next `pollDevice`, on the main thread,
-sends `ENET_CONNECTION_FAILED`, so the highscore and statistics screens show their "Unable to
-connect" error. The port includes its declaration in `CIrrDeviceStub.cpp` instead of the matching
-build's sized placeholder.
+The highscore server is offline. The port's `joinHost` queues a failure on the calling thread.
+At the next `pollDevice`, the main loop delivers `ENET_CONNECTION_FAILED`, allowing the highscore
+and statistics screens to finish the request on desktop and web. Closing a handler cancels its
+pending response. [Network device](../../port/src/net/CWinsockNetworkDevice.cpp)

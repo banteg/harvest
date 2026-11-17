@@ -1554,17 +1554,17 @@ address	size	symbol	evidence
 0x4bf800	8	_ZN2ox5input15IJoystickDriverD1Ev	mac-vtable:_ZTVN2ox5input15IJoystickDriverE:2
 0x4bf810	8	_ZN2ox9IOxDeviceD1Ev	mac-vtable:_ZTVN2ox9IOxDeviceE:2
 0x4bf820	8	_ZN5daisy12IDaisyDeviceD1Ev	mac-vtable:_ZTVN5daisy12IDaisyDeviceE:2
-0x4bf830	6	_ZThn8_N5daisy6ITimerD1Ev	rtti:ITimer-vtable-thunk-D1
+0x4bf830	6	_ZThn8_N5daisy6ITimerD1Ev	manual:rtti-ITimer-vtable-thunk-D1
 0x4bf840	16	_ZN5daisy6ITimerD1Ev	mac-vtable:_ZTVN5daisy6ITimerE:4
 0x4bf850	3	_ZN5daisy14CIrrDeviceStub17setFullscreenModeEb	mac-vtable:_ZTVN5daisy14CIrrDeviceStubE:11
-0x4bf860	6	_ZThn8_N5daisy6CTimerD1Ev	rtti:CTimer-vtable-thunk-D1
+0x4bf860	6	_ZThn8_N5daisy6CTimerD1Ev	manual:rtti-CTimer-vtable-thunk-D1
 0x4bf870	16	_ZN5daisy6CTimerD1Ev	mac-vtable:_ZTVN5daisy6CTimerE:4
 0x4bf880	12	_ZN2ox5input15IJoystickDriverD0Ev	mac-vtable:_ZTVN2ox5input15IJoystickDriverE:3
 0x4bf890	12	_ZN5daisy12IDaisyDeviceD0Ev	mac-vtable:_ZTVN5daisy12IDaisyDeviceE:3
 0x4bf8a0	12	_ZN2ox9IOxDeviceD0Ev	mac-vtable:_ZTVN2ox9IOxDeviceE:3
-0x4bf8b0	6	_ZThn8_N5daisy6ITimerD0Ev	rtti:ITimer-vtable-thunk-D0
+0x4bf8b0	6	_ZThn8_N5daisy6ITimerD0Ev	manual:rtti-ITimer-vtable-thunk-D0
 0x4bf8c0	20	_ZN5daisy6ITimerD0Ev	mac-vtable:_ZTVN5daisy6ITimerE:5
-0x4bf8e0	6	_ZThn8_N5daisy6CTimerD0Ev	rtti:CTimer-vtable-thunk-D0
+0x4bf8e0	6	_ZThn8_N5daisy6CTimerD0Ev	manual:rtti-CTimer-vtable-thunk-D0
 0x4bf8f0	20	_ZN5daisy6CTimerD0Ev	mac-vtable:_ZTVN5daisy6CTimerE:5
 0x4bf910	5	_ZN5daisy6CTimer12getFloatTimeEv	mac-vtable:_ZTVN5daisy6CTimerE:3
 0x4bf920	5	_ZN5daisy6CTimer7getTimeEv	mac-vtable:_ZTVN5daisy6CTimerE:2
@@ -1958,6 +1958,7 @@ address	size	symbol	evidence
 0x4de780	485	_ZN5daisy5video6CImage6copyToEPS1_ii	match:daisy/video/Null/CImage.cpp
 0x4de970	10	_ZN5daisy5video6CImage6copyToEPS1_RKN2ox4core11CPosition2dIiEE	match:daisy/video/Null/CImage.cpp
 0x4de980	41	_ZN5daisy5video6CImageD0Ev	mac-vtable:_ZTVN5daisy5video6CImageE:3
+0x4de9b0	382	_ZN5daisy5video6CImageC2EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE	manual:CImage.cpp Mac C2; adjacent 382-byte Linux FDE shares 108 instruction mnemonics, calls and control flow with C1 at 0x4deb30
 0x4deb30	382	_ZN5daisy5video6CImageC1EN2ox5video13ECOLOR_FORMATEPNS3_6IImageE	reloc:daisy/video/Software/CSoftwareTexture.cpp:_ZN5daisy5video16CSoftwareTextureC1EPN2ox5video6IImageE
 0x4def20	23	_ZN5daisy5video6CImage13drawRectangleERKN2ox4core5CRectIiEENS2_5video6SColorE	match:daisy/video/Null/CImage.cpp
 0x4def40	8	_ZN2ox5video6IImageD1Ev	mac-vtable:_ZTVN2ox5video6IImageE:2

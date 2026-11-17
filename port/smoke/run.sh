@@ -178,8 +178,12 @@ if grep -qE '^[0-9]+ key ctrl\+t' "/smoke/$SCRIPT"; then
         fail "Ctrl+T saved no Screen-*.jpg"
     fi
 fi
-saves=$(cd ~/.Harvest/profiles && ls *.hsg 2> /dev/null | tr '\n' ' ')
-note "save games: ${saves:-none}"
+# Both scripted round trips must resume a real save. A rejected save silently starts a new game.
+if [ "$SCRIPT" = menu.script ] || [ "$SCRIPT" = original.script ]; then
+    save_args=(~/.Harvest/profiles /out/game.log)
+    [ "$SCRIPT" = original.script ] && save_args+=(/userdata/profiles)
+    if check=$(sh /smoke/check_save.sh "${save_args[@]}"); then note "$check"; else fail "$check"; fi
+fi
 
 # the renderer test (port/tests/video.cpp) in both profiles, without the GL override: its 2D, 3D and
 # menu scenes compare directly with `just port-test video --screenshot <dir>` on macOS

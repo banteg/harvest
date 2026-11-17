@@ -43,8 +43,13 @@ struct SZIPFileHeader
     short LastModFileTime;
     short LastModFileDate;
     SZIPFileDataDescriptor DataDescriptor;
+#ifdef HARVEST_PORT
+    unsigned short FilenameLength;
+    unsigned short ExtraFieldLength;
+#else
     short FilenameLength;
     short ExtraFieldLength;
+#endif
 } PACK_STRUCT;
 
 #undef PACK_STRUCT

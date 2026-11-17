@@ -27,9 +27,10 @@ const float fast_atof_table[] = { 0.f, 0.1f, 0.01f, 0.001f, 0.0001f, 0.00001f, 0
     0.000000001f, 0.0000000001f, 0.00000000001f, 0.000000000001f, 0.0000000000001f, 0.00000000000001f,
     0.000000000000001f };
 
-//! Irrlicht 0.7's fast_atof: integer part and fraction digits through strtol, scaled by the table.
+//! Keep Irrlicht's rounding for stock coordinates; longer fractions exceed its scale table.
 float fast_atof(const char* c)
 {
+    const char* number = c;
     bool inv = false;
     char* t;
     float f;
@@ -47,6 +48,8 @@ float fast_atof(const char* c)
     {
         c++;
         float pl = (float)strtol(c, &t, 10);
+        if ((size_t)(t - c) >= sizeof(fast_atof_table) / sizeof(fast_atof_table[0]))
+            return strtof(number, 0);
         pl *= fast_atof_table[t - c];
         f += pl;
         c = t;

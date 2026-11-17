@@ -3,6 +3,8 @@
 #include "ox/scene/ISceneNode.h"
 #include "ox/scene/ITriangleSelector.h"
 #include "scene/CAnimatedMeshSceneNode.h"
+#include "scene/CStaticMeshOBJ.h"
+#include "ox/io/CMemReadFile.h"
 #include "daisy/scene/CDummyTransformationSceneNode.h"
 #include "daisy/scene/CTriangleBBSelector.h"
 #include "daisy/scene/CShadowVolumeSceneNode.h"
@@ -47,6 +49,18 @@ static bool close(float a, float b) { return std::fabs(a - b) < 0.0001f; }
 
 int main()
 {
+    // The middle coordinate occurs in atmoSphere_48.obj and rounds differently through strtof.
+    char obj[] = "v 0.1234567890123456 0.580569 -0.000000000000000000125e+20\n"
+                 "v 1 0 0\nv 0 1 0\nvt 0.12345678901234567890 0.25\nf 1/1 2/1 3/1\n";
+    daisy::scene::CStaticMeshOBJ loaded;
+    ox::io::CMemReadFile file(obj, sizeof(obj) - 1, false);
+    CHECK(loaded.loadFile(&file));
+    ox::scene::IMeshBuffer* buffer = loaded.getMesh(0, 255, -1, -1)->getMeshBuffer(0);
+    CHECK(buffer->getVertexCount() == 3);
+    const ox::video::S3DVertex* vertices = (const ox::video::S3DVertex*)buffer->getVertices();
+    CHECK(vertices[0].Pos.X == 0.1234567890123456f && vertices[0].Pos.Y == 0.5805689692497253f);
+    CHECK(vertices[0].Pos.Z == -12.5f && vertices[0].TCoords.X == 0.12345678901234567890f);
+
     Node* root = new Node();
     root->addChild(0);
     CHECK(root->getChildren().begin() == root->getChildren().end());

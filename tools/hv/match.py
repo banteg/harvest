@@ -81,6 +81,7 @@ class SectionResult:
     misplaced: list[dict] = field(default_factory=list)
     references: list[Reference] = field(default_factory=list)
     functions: list[dict] = field(default_factory=list)
+    unplaced_functions: list[str] = field(default_factory=list)
     data_ranges: list[dict] = field(default_factory=list)
 
     def report(self) -> dict:
@@ -98,6 +99,8 @@ class SectionResult:
         row["references"] = len(self.references)
         if self.functions:
             row["functions"] = self.functions
+        if self.unplaced_functions:
+            row["unplaced_functions"] = self.unplaced_functions
         if self.data_ranges:
             row["data_ranges"] = self.data_ranges
         return row
@@ -127,12 +130,12 @@ class Layout:
     """Target addresses of a placed section: a base, plus functions placed on their own."""
 
     base: int
-    segments: list[tuple[int, int, int]] = field(default_factory=list)  # (start, end, address)
+    segments: list[tuple[int, int, int | None]] = field(default_factory=list)  # (start, end, address)
 
-    def address_of(self, offset: int) -> int:
+    def address_of(self, offset: int) -> int | None:
         for start, end, address in self.segments:
             if start <= offset < end:
-                return address + offset - start
+                return None if address is None else address + offset - start
         return self.base + offset
 
     def in_function(self, offset: int) -> bool:
@@ -150,15 +153,14 @@ def fde_index(fdes: frozenset) -> tuple[dict[int, int], list[int], list[tuple[in
     return sizes, sorted(sizes), sorted(fdes)
 
 
-def layout_functions(section_index: int, base: int, symbols, resolver: Resolver, fdes) -> Layout:
+def layout_functions(section_index: int, base: int, symbols, resolver: Resolver, fdes, taken=None) -> Layout:
     """Place each function of an executable section at its own target address.
 
     A function goes to its known address. One without a name in symbols.tsv (a static initializer,
     a compiler clone) goes to the target function right after the one before it when that has its
     size, or where an FDE of its size starts at the section base plus its offset, or else to the one
     unclaimed FDE of its size among the known functions' range. Failing all of those it still takes
-    the target function after the one before it, so a length difference earlier in the section does
-    not shift the rest. The section
+    the target function after the one before it if unclaimed, or remains unplaced. The section
     is contiguous when every function lands at base + offset: its order and lengths match the target's.
     `fdes` holds every proven function extent: the FDEs and the thunk extents from extents.tsv.
     """
@@ -169,7 +171,8 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
     layout = Layout(base)
     fde_sizes, starts, ranges = fde_index(frozenset(fdes))
     known = {s.name: resolver.known[s.name] for s in functions if s.name in resolver.known}
-    taken = set(known.values())
+    if taken is None:
+        taken = set(known.values())
     if known and functions:
         low = min(base, *known.values())
         end_offset = functions[-1]["st_value"] + functions[-1]["st_size"]
@@ -187,7 +190,7 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
         if address is None:
             candidates = [a for a, n in free if n == size]
             following = base + start
-            if layout.segments:
+            if layout.segments and layout.segments[-1][2] is not None:
                 # the target function that comes next after the one before it
                 previous_start, previous_end, previous_address = layout.segments[-1]
                 extent = fde_sizes.get(previous_address, previous_end - previous_start)
@@ -202,10 +205,11 @@ def layout_functions(section_index: int, base: int, symbols, resolver: Resolver,
                 address = base + start
             elif len(candidates) == 1:
                 address = candidates[0]
-            else:
+            elif following not in taken:
                 address = following
-            taken.add(address)
-            free = [(a, n) for a, n in free if a != address]
+            if address is not None:
+                taken.add(address)
+                free = [(a, n) for a, n in free if a != address]
         layout.segments.append((start, start + size, address))
     return layout
 
@@ -224,6 +228,13 @@ def place_sections(
         if isinstance(symbol["st_shndx"], int) and symbol.name and symbol["st_info"]["type"] != "STT_SECTION":
             by_section.setdefault(symbol["st_shndx"], []).append(symbol)
     placements = {}
+    # Reserve the known functions in every section before inferring addresses for any of them.
+    taken = {
+        resolver.known[s.name]
+        for group in by_section.values()
+        for s in group
+        if s["st_info"]["type"] == "STT_FUNC" and s.name in resolver.known
+    }
     names = {}
     for index, section in enumerate(obj.sections):
         names[section.name] = index
@@ -249,7 +260,7 @@ def place_sections(
             if base != address
         ]
         if section["sh_flags"] & SHF_EXECINSTR:
-            layout = layout_functions(index, address, section_symbols(obj), resolver, fdes)
+            layout = layout_functions(index, address, section_symbols(obj), resolver, fdes, taken)
         else:
             layout = Layout(address)
         placements[index] = (layout, how, misplaced)
@@ -283,6 +294,8 @@ def infer_placements(obj: Elf, target: Elf, placements: dict, sections: list) ->
             if referenced.name in SKIPPED or referenced["sh_type"] == "SHT_NOBITS":
                 continue
             place = layout.address_of(relocation["r_offset"])
+            if place is None:
+                continue
             try:
                 field = target.read(place, width)
             except ValueError:
@@ -294,8 +307,19 @@ def infer_placements(obj: Elf, target: Elf, placements: dict, sections: list) ->
     for shndx, bases in implied.items():
         if len(bases) == 1:
             base = bases.pop()
-            if not target.is_code(base):
+            if can_place_data(target, base, sections[shndx]):
                 placements[shndx] = (Layout(base), "references", [])
+
+
+def can_place_data(target: Elf, address: int, section) -> bool:
+    """An inferred input section must fit entirely in target data of the same storage kind."""
+    owner = target.section_at(address)
+    return (
+        owner is not None
+        and not owner["sh_flags"] & SHF_EXECINSTR
+        and (owner["sh_type"] == "SHT_NOBITS") == (section["sh_type"] == "SHT_NOBITS")
+        and address + section["sh_size"] <= owner["sh_addr"] + owner["sh_size"]
+    )
 
 
 def infer_exception_tables(obj: Elf, target: Elf, placements: dict, sections: list) -> None:
@@ -336,7 +360,9 @@ def infer_exception_tables(obj: Elf, target: Elf, placements: dict, sections: li
     for shndx in own.keys() | group.keys():
         bases = own.get(shndx) or group[shndx]
         if len(bases) == 1 and None not in bases:
-            placements[shndx] = (Layout(bases.pop()), "exception frames", [])
+            base = bases.pop()
+            if can_place_data(target, base, sections[shndx]):
+                placements[shndx] = (Layout(base), "exception frames", [])
 
 
 def is_merged(section) -> bool:
@@ -368,10 +394,13 @@ def check_merged(target: Elf, section, offset: int, address: int) -> tuple[bool,
     try:
         ours = merged_content(section, offset)
         kind = "merged string" if section["sh_flags"] & SHF_STRINGS else "merged constant"
-        if target.is_code(address):
+        owner = target.section_at(address)
+        if owner is not None and owner["sh_flags"] & SHF_EXECINSTR:
             # a reference in code that does not match yet can resolve into the middle of a
             # function, where a short constant's bytes may happen to occur
             return False, f"{kind} would lie in code"
+        if section["sh_flags"] & SHF_WRITE or (owner is not None and owner["sh_flags"] & SHF_WRITE):
+            return False, f"{kind} would lie in writable data"
         return target.read(address, len(ours)) == ours, kind
     except ValueError as error:
         return False, str(error)
@@ -479,6 +508,8 @@ def expected_bytes(target: Elf, layout: Layout, size: int) -> tuple[bytes, set[i
     expected = bytearray(size)
     ignored = set(range(size))
     for start, end, address in layout.segments:
+        if address is None:
+            continue
         expected[start:end] = target.read(address, end - start)
         ignored.difference_update(range(start, end))
     return bytes(expected), ignored
@@ -529,6 +560,9 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
         covered.update(range(offset, offset + width))
         ref.width = width
         place = layout.address_of(offset)
+        if place is None:
+            ref.reason = "relocation in unplaced function"
+            continue
         field_bytes = expected[offset : offset + width]
         field_value = int.from_bytes(
             field_bytes, "little", signed=rtype in PC_RELATIVE or rtype == R_X86_64_32S
@@ -573,9 +607,15 @@ def compare_section(obj, target, section, index, layout, placements, resolver, s
                 and symbol["st_info"]["type"] != "STT_SECTION"
                 and symbol["st_info"]["bind"] != "STB_LOCAL"
             ):
-                ref.candidate = (
+                candidate = (
                     field_value + place - ref.addend if rtype in PC_RELATIVE else field_value - ref.addend
                 )
+                if target_section is not None and not target_section["sh_flags"] & SHF_EXECINSTR:
+                    # Learning a defined symbol would anchor its whole section on the next pass.
+                    if not can_place_data(target, candidate - symbol["st_value"], target_section):
+                        continue
+                if target.section_at(candidate) is not None:
+                    ref.candidate = candidate
             continue
         ref.destination = destination
         value = destination + ref.addend - (place if rtype in PC_RELATIVE else 0)
@@ -613,7 +653,8 @@ def resolve(symbol, placements, resolver: Resolver, reach: int) -> int | None:
         if shndx in placements:
             layout = placements[shndx][0]
             if symbol["st_info"]["type"] == "STT_SECTION":
-                return layout.address_of(reach) - reach
+                address = layout.address_of(reach)
+                return None if address is None else address - reach
             return layout.address_of(symbol["st_value"])
         # defined here in a section placed elsewhere, such as an inline copy the linker discarded
         return resolver.known.get(symbol.name) if symbol.name else None
@@ -636,6 +677,9 @@ def function_results(symbols, index, layout: Layout, result: SectionResult, exte
     ):
         start, size = symbol["st_value"], symbol["st_size"]
         address = layout.address_of(start)
+        if address is None:
+            result.unplaced_functions.append(symbol.name)
+            continue
         span = range(start, start + size)
         known_size, source = extents.get(address, (None, None))
         extent = source if known_size == size else None
@@ -653,9 +697,7 @@ def function_results(symbols, index, layout: Layout, result: SectionResult, exte
     return rows
 
 
-def learnable(
-    result: dict, source: str, known: dict[str, int]
-) -> tuple[dict[str, tuple[int, str]], list[str]]:
+def learnable(result: dict, source: str, resolver: Resolver) -> tuple[dict[str, tuple[int, str]], list[str]]:
     """Symbol addresses a match proves: unknown symbols referenced by functions that match except
     for those references (evidence `reloc:<unit>:<function>`), and global functions of this unit
     that match exactly (evidence `match:<unit>`), so other units can reference them.
@@ -669,10 +711,10 @@ def learnable(
             for name, address in function.get("candidates", []):
                 found.setdefault(name, set()).add(int(address, 16))
                 evidence.setdefault(name, f"reloc:{source}:{function['symbol']}")
-            if function["exact"] and function["global"] and function["symbol"] not in known:
+            if function["exact"] and function["global"] and resolver.address(function["symbol"]) is None:
                 found.setdefault(function["symbol"], set()).add(int(function["address"], 16))
                 evidence.setdefault(function["symbol"], f"match:{source}")
-    claimed = set(known.values())
+    claimed = set(resolver.known.values()) | set(resolver.plt.values()) | set(resolver.copies.values())
     address_counts: dict[int, int] = {}
     for addresses in found.values():
         if len(addresses) == 1:

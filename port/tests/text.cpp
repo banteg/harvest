@@ -15,9 +15,11 @@
 #include <string>
 #include <SDL3/SDL.h>
 #include "daisy/io/CFileSystem.h"
+#include "harvest/settings/CHarvestProfile.h"
 #include "harvest/settings/CSystemConfig.h"
 #include "ox/core/CStringConversions.h"
 #include "ox/game/CConfiguration.h"
+#include "ox/io/CHelpIO.h"
 #include "ox/io/IFileList.h"
 #include "platform/locale.h"
 
@@ -140,6 +142,33 @@ void testFiles(ox::io::IFileSystem* fileSystem)
     }
     files->drop();
     check(fileSystem->deleteFile(path), "the profile is deleted");
+
+    harvest::settings::CHarvestProfile profile;
+    profile.createNewProfile(L"Ada\\", fileSystem, path);
+    const wchar_t* groups[] = { L"", L"Artists\\" };
+    for (unsigned int i = 0; i < SDL_arraysize(groups); ++i)
+    {
+        profile.setPlayerGroup(groups[i]);
+        profile.writeProfile();
+        harvest::settings::CHarvestProfile loaded;
+        check(loaded.openProfile(fileSystem, path), "the profile reopens");
+        checkText(loaded.getPlayerName(), L"Ada\\", "a trailing backslash survives in the name");
+        checkText(loaded.getPlayerGroup(), groups[i], "the group survives independently");
+    }
+    // The original writer placed a backslash directly before the field terminator.
+    ox::io::IWriteFile* legacy = fileSystem->createAndWriteFile(path, false);
+    check(legacy != 0, "the legacy fixture opens for writing");
+    if (legacy)
+    {
+        ox::io::CHelpIO::writeUShort(legacy, 0xfeff);
+        ox::io::CHelpIO::writeWideString(legacy, L"profile\r\n{\r\n\tname = Ada\\;\r\n\tgroup = Artists\\;\r\n}\r\n", false);
+        legacy->drop();
+    }
+    harvest::settings::CHarvestProfile loaded;
+    check(loaded.openProfile(fileSystem, path), "a legacy profile reopens");
+    checkText(loaded.getPlayerName(), L"Ada\\", "legacy name ends at its original delimiter");
+    checkText(loaded.getPlayerGroup(), L"Artists\\", "legacy group ends at its original delimiter");
+    check(fileSystem->deleteFile(path), "the round-trip profile is deleted");
 }
 
 } // end namespace
