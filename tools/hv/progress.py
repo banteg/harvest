@@ -449,7 +449,12 @@ def make_report(
             if score
             else names.get(function["address"], f"sub_{function['address']:x}")
         )
-    displays = [demangled.get(symbol, symbol) for symbol in symbols]
+    # GCC numbers its unnamed helpers (T.<n>) across the whole file, so editing earlier code renumbers
+    # them; name them by their fixed target address so the bot does not report a rename as a loss
+    displays = [
+        f"T @ {function['address']:#x}" if re.fullmatch(r"T\.\d+", symbol) else demangled.get(symbol, symbol)
+        for function, symbol in zip(functions, symbols, strict=True)
+    ]
     unit_names = function_unit_names(functions, symbols, displays)
     layer_of = assign_layers(functions, names, layers) if layers else {}
     layer_totals = {layer: [0, 0, 0, 0, 0.0] for layer in layers["layers"]} if layers else {}

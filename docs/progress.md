@@ -104,7 +104,8 @@ it is not a before/after measurement or a recompilation proof. The bot compares 
 associated with its displayed base and head commits, matching units and their items by name.
 Report names are therefore identities: functions are named by symbol and matched data by its
 owning source section, so matching adjacent bytes or learning a symbol's proven address does
-not rename an existing match. The first report after this naming change includes a one-time
+not rename an existing match. GCC's unnamed local helpers (`T.<n>`) are numbered across the whole
+source file, so they are named by target address instead (`T @ 0x476900`). The first report after this naming change includes a one-time
 rename of existing units; that transition does not change the measured code or data coverage.
 The bot's "new matches" count includes function rows and matched-data units, so it can exceed
 the number of new code functions. Compare byte deltas and the reported commit range, rather
