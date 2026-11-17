@@ -107,3 +107,17 @@ def test_compile_each_preserves_prior_result_and_compiler_error(monkeypatch):
         next(results)
     assert caught.value is error
     assert caught.value.stderr == "compile failed"
+
+
+def test_source_override_rejects_missing_source(tmp_path, monkeypatch):
+    from hv import toolchain
+
+    compiler = toolchain.Compiler.__new__(toolchain.Compiler)
+    compiler.out = tmp_path.resolve()
+    replacement = tmp_path / "candidate.cpp"
+    replacement.write_text("")
+    monkeypatch.setattr(toolchain, "run", lambda *args: pytest.fail("container started"))
+    missing = builds.ROOT / "src" / "missing-dir" / "missing.cpp"
+    with pytest.raises(FileNotFoundError):
+        compiler.command("true", source_override=(missing, replacement))
+    assert not missing.parent.exists()
