@@ -188,6 +188,16 @@ def test_function_unit_names_keep_the_address_for_placeholders_and_shared_symbol
     ]
 
 
+def test_gcc_local_helpers_are_named_by_address_not_number():
+    inv, functions, evidence = sample()
+    names = []
+    for symbol in ("T.358", "T.361"):
+        evidence["units"][0]["sections"][0]["functions"][0]["symbol"] = symbol
+        unit = progress.make_report(inv, functions, evidence, {}, {})["units"][0]
+        names.append((unit["name"], unit["functions"][0]["metadata"]["demangled_name"]))
+    assert names[0] == names[1] == ("T @ 0x1000", "T @ 0x1000")
+
+
 def placed_rodata_section(address, size, name=".rodata"):
     return {
         "name": name,
