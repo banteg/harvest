@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include "device/CIrrDeviceSDL.h"
+#include "device/HeldInput.h"
 #include "device/InputScript.h"
 #include "device/Options.h"
 #include "platform/locale.h"
@@ -27,7 +28,7 @@ struct SApp
 {
     harvest::CHarvestFullMain Game;
     //! Input that arrived while a state was loading.
-    std::vector<SDL_Event> HeldEvents;
+    std::vector<port::HeldInput> HeldEvents;
     //! --input-script's events.
     port::CInputScript InputScript;
 };
@@ -98,10 +99,10 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 
     if (!app->Game.isLoading() && !app->HeldEvents.empty())
     {
-        std::vector<SDL_Event> held;
+        std::vector<port::HeldInput> held;
         held.swap(app->HeldEvents);
         for (unsigned int i = 0; i < held.size(); ++i)
-            handleEvent(held[i]);
+            handleEvent(held[i].getEvent());
     }
 
     // the script's frames count while no state loads; its events arrive before the next frame
@@ -115,7 +116,7 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
 {
     SApp* app = static_cast<SApp*>(appstate);
     if (app->Game.isLoading() && isInput(*event))
-        app->HeldEvents.push_back(*event);
+        app->HeldEvents.push_back(port::HeldInput(*event));
     else
         handleEvent(*event);
     return SDL_APP_CONTINUE;

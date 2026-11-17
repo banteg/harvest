@@ -89,10 +89,7 @@ Impact:
 - A game saved during the three seconds of a charge-bomb explosion is misread from that record on:
   every following entity and the rest of the file are read 12 bytes out of step.
 
-Port recommendation:
-
-- Read the type 12 record and restore the explosion (or at least skip its three floats). Saves made by
-  the original in that window are already damaged; a port can detect them by the misread.
+The port now restores the type 12 record, including its fuse, from both original and port saves.
 
 ### 5) A mod section with no mods shifts the rest of the load
 
@@ -104,12 +101,8 @@ Native behaviour:
 
 Impact:
 
-- A save from a creative game with mods available but none ticked (they start unticked) would load
-  4 bytes out of step after the Lua section. Found in the code, not reproduced in the game.
-
-Port recommendation:
-
-- Read the value count even when the mod count is 0.
+- A Creative game with mods available but none ticked loads four bytes out of step in the original
+  reader. The port consumes the value count and restores the Lua state even with zero enabled mods.
 
 ### 6) A save that does not compress is silently truncated
 
@@ -124,10 +117,8 @@ Impact:
 - A payload that does not shrink would be written truncated with no error. Game states compress well,
   so this is latent.
 
-Port recommendation:
-
-- Size the output with `deflateBound` and require `Z_STREAM_END`. (The original also skips
-  `deflateEnd`/`inflateEnd` on its error paths, leaking the zlib stream.)
+The port sizes the output with `compressBound` and checks the complete zlib result before
+replacing a save. Its loader also checks the number of input and output bytes.
 
 ### 7) Every 2D line is 1 px wide
 

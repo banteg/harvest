@@ -215,7 +215,7 @@ platform:
 | `getcwd`, `chdir`, `mkdir` (unistd, `sys/stat`) | `CFileSystem` | resolve on all three targets (mingw-w64 has them; `mkdir` without a mode on Windows); the web needs a virtual file system. Paths are narrow strings, so Windows uses the ANSI code page unless the executable opts into UTF-8 |
 | `fileno`, `fstat` | `CReadFile` | resolve on all three targets |
 | `opendir`, `readdir`, `stat` / `FindFirstFileW` | `port/src/platform/glob.cpp` | the port's glob |
-| `pthread_create`, `pthread_join`, `usleep` | `CThread` | used by `CHTTPConnectionHandler` and by `CGameMain::update` (`CThread::sleep(20)` while the window is inactive); link on Windows through mingw-w64's winpthreads. The web needs another answer (no threads, or Emscripten pthreads) |
+| `pthread_create`, `pthread_join`, `usleep` | `CThread` | The original starts a worker for HTTP. The port queues offline highscore responses on the main thread. The desktop still uses `CThread::sleep(20)` while the window is inactive. |
 | `pthread_mutex_*` | `CCriticalSection` | same |
 | `gettimeofday` | `os.cpp` | links everywhere (mingw-w64 has it) |
 | `localtime`, `strftime`, `time` | `CBasic`, `CHighscoreScreen`, `CPlayState` | fine |
@@ -237,7 +237,5 @@ How the port resolved it is in [input-and-window.md](input-and-window.md#the-por
 - Events arrive in `SDL_AppEvent`, which SDL calls on the main thread before each `SDL_AppIterate`;
   the device's `run` only reports whether it is open. `CShuttleRaceState::updateState` and
   `CIntroState::updateState` call `run` again themselves, which is harmless.
-- Still blocking on the web: `CHTTPConnectionHandler::doGet` starts a thread (`CThread`) for each
-  request, and `CGameMain::checkFiles` shows a modal message box.
 - The Windows executable is a console program (`/SUBSYSTEM:CONSOLE`); set `exe.subsystem = .windows`
   in `build.zig` when the device lands if the console window is unwanted.

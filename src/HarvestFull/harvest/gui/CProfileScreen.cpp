@@ -380,6 +380,13 @@ void CProfileScreen::stripIllegalCharacters(ox::core::CString<wchar_t>& text)
     do
         ++start;
     while (chars[start] == L' ');
+#ifdef HARVEST_PORT
+    if (start == text.size())
+    {
+        text = L"";
+        return;
+    }
+#endif
     int end = text.size();
     do
         --end;

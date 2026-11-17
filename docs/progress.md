@@ -85,6 +85,9 @@ per-function scores, the scorer binary/configuration, delinked object hashes, ex
 link status. Capture uses its own local objdiff project; it does not change the root `objdiff.json`
 or reuse stale interactive objects. Capture checks for source and measurement changes during compilation.
 Schema 3 adds each function's extent source to `functions.tsv` and to the matcher's function rows.
+Schema 4 also hashes the sorted file paths under `src/` and `third_party/`, excluding Finder's
+`.DS_Store`. Adding or removing a file there requires a fresh capture because a new header can
+take precedence over a dependency recorded by an earlier compilation.
 
 CI verifies these identities, score extents, data bounds and the evidence's internal consistency.
 **It does not recompile or recheck the proprietary original.** It publishes the recorded local measurement

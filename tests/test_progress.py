@@ -312,12 +312,14 @@ def captured(tmp_path, monkeypatch):
         lambda: {"test": builds.Build("test", "1", "linux", "amd64", "target", "gcc", {"Game": image})},
     )
     monkeypatch.setattr(units, "load", lambda build: [units.Unit("a.cpp", {})])
-    for name in progress.measurement_paths("test") + ["src/a.cpp", "src/a.h"]:
+    for name in progress.measurement_paths("test") + ["src/a.cpp", "src/a.h", "src/nested/b.h"]:
         p = tmp_path / name
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("input")
+    (tmp_path / "src/a.cpp").write_text('#include "nested/b.h"\n')
+    (tmp_path / "src/nested/b.h").write_text('#include "a.h"\n')
     (tmp_path / "config/test/extents.tsv").write_text("address\tsize\tsymbol\tevidence\n")
-    (tmp_path / "config/test/flags.json").write_text('{"version":"gcc"}')
+    (tmp_path / "config/test/flags.json").write_text('{"version":"gcc","flags":["-Isrc"]}')
     inv, functions, evidence = sample()
     table = "address\tsize\tsection\textent\n0x1000\t20\t.text\tfde\n0x1020\t40\t.text\tfde\n"
     inv.update(
@@ -339,6 +341,7 @@ def captured(tmp_path, monkeypatch):
         image_sha256=image.sha256,
         inventory_sha256=builds.sha256_file(dest / "inventory.json"),
         measurement_inputs=inputs,
+        source_paths_sha256=progress.sha(json.dumps(progress.source_paths()).encode()),
         fuzzy={
             "version": "3.8.1",
             "sha256": sorted(progress.metrics.OBJDIFF_HASHES)[0],
@@ -354,7 +357,7 @@ def captured(tmp_path, monkeypatch):
         "object_sha256": unit["object_sha256"],
         "compiler_version": "gcc",
         "package_manifest_sha256": inputs["toolchain/manifest.tsv"],
-        "inputs": progress.input_hashes(["src/a.cpp", "src/a.h"]),
+        "inputs": progress.input_hashes(["src/a.cpp", "src/a.h", "src/nested/b.h"]),
     }
     progress.write_json(dest / "evidence.json", evidence)
     return tmp_path, dest
@@ -363,6 +366,14 @@ def captured(tmp_path, monkeypatch):
 def test_snapshot_validates_without_originals_or_objects(captured):
     inv, functions, evidence = progress.validate("test")
     assert inv["total_code"] == 100 and len(functions) == 2 and len(evidence["units"]) == 1
+
+
+def test_new_local_header_shadows_recorded_include(captured):
+    root, _ = captured
+    # b.h originally resolved "a.h" through -Isrc. Its own directory is searched first.
+    (root / "src/nested/a.h").write_text("#error shadowed header\n")
+    with pytest.raises(ValueError, match="source/include file inventory changed"):
+        progress.validate("test")
 
 
 @pytest.mark.parametrize(

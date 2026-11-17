@@ -9,8 +9,7 @@
 #
 # The data dir holds harvestClientData/ (default: orig/1.18-linux-amd64). Screenshots and logs go to
 # build/smoke/windows/. Wine: $WINE, else Wine Stable's app bundle, else wine on the PATH; it runs in
-# its own prefix, $WINEPREFIX or build/wine-prefix, created on first use. Each run starts with no user
-# data (%APPDATA%\Harvest).
+# a fresh temporary prefix for each run, with empty user data (%APPDATA%\Harvest).
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -27,7 +26,6 @@ else
 fi
 timeout="$(command -v timeout || command -v gtimeout)" || { echo "needs timeout (coreutils)" >&2; exit 1; }
 
-export WINEPREFIX="${WINEPREFIX:-$root/build/wine-prefix}"
 # no Wine debug channels; no Mono or Gecko install prompts when the prefix is created
 export WINEDEBUG=-all WINEDLLOVERRIDES="mscoree,mshtml="
 
@@ -35,15 +33,15 @@ echo "== build"
 (cd "$root/port" && zig build harvest tests -Dtarget=x86_64-windows-gnu)
 bin="$root/port/zig-out/bin"
 
-if [ ! -f "$WINEPREFIX/system.reg" ]; then
-    echo "== new Wine prefix in $WINEPREFIX"
-    "$wine" wineboot -i > /dev/null 2>&1
-fi
+WINEPREFIX="$(mktemp -d "${TMPDIR:-/tmp}/harvest-wine.XXXXXXXX")"
+export WINEPREFIX
+trap 'rm -rf "$WINEPREFIX"' EXIT
+echo "== new Wine prefix in $WINEPREFIX"
+"$wine" wineboot -i > /dev/null 2>&1
 
 rm -rf "$out"
 mkdir -p "$out"
 userdata="$WINEPREFIX/drive_c/users/$(id -un)/AppData/Roaming/Harvest"
-rm -rf "$userdata"
 
 # Wine maps / to Z:
 windows_path() { echo "Z:$1"; }

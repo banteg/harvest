@@ -5,7 +5,6 @@
 #define PORT_NET_CWINSOCKNETWORKDEVICE_H
 
 #include <vector>
-#include "ox/core/CCriticalSection.h"
 #include "ox/net/INetworkDevice.h"
 
 namespace daisy {
@@ -13,9 +12,8 @@ namespace net {
 
 //! A network device that never connects: the original's only use is the online highscores
 //! (CHTTPConnectionHandler), whose server is gone. joinHost and createHost fail at once, and the
-//! next pollDevice reports ENET_CONNECTION_FAILED to the receiver, on the main thread
-//! (CHTTPConnectionHandler calls joinHost from its own thread), so the highscore screens show their
-//! "Unable to connect" error. Sending does nothing.
+//! next pollDevice reports ENET_CONNECTION_FAILED to the receiver on the main thread, so the
+//! highscore screens show their "Unable to connect" error. Sending does nothing.
 class CWinsockNetworkDevice : public ox::net::INetworkDevice
 {
 public:
@@ -32,14 +30,14 @@ public:
     virtual void decryptPacket(const void* data, int size);
     virtual void kickClient(int client);
     virtual void pollDevice();
+    virtual void cancelPending(ox::event::IEventReceiver* receiver);
 
 private:
     //! Fails a connection attempt: the receiver hears about it on the next pollDevice.
     int fail(ox::event::IEventReceiver* receiver);
 
-    //! Receivers owed an ENET_CONNECTION_FAILED; written by any thread, read by pollDevice.
+    //! Receivers owed an ENET_CONNECTION_FAILED on the next main-loop poll.
     std::vector<ox::event::IEventReceiver*> FailedReceivers;
-    ox::core::CCriticalSection Lock;
 };
 
 } // end namespace net
