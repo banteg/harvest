@@ -30,6 +30,14 @@ jobs:
       - name: Build
         working-directory: port
         run: zig build harvest -Dtarget=wasm32-emscripten -Doptimize=ReleaseFast -p zig-out/web
+      - name: Test browser storage and game-data downloads
+        run: |
+          npm install --prefix "$RUNNER_TEMP/harvest-web-tests" --no-save --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.58.2
+          "$RUNNER_TEMP/harvest-web-tests/node_modules/.bin/playwright" install --with-deps --only-shell chromium
+          NODE_PATH="$RUNNER_TEMP/harvest-web-tests/node_modules" node --test port/smoke/web-storage.cjs port/smoke/web-worker.mjs
+      - name: Run native regressions with synthetic game data
+        working-directory: port
+        run: zig build test-save_file test-gameplay_save test-zip_reader test-image_loaders test-runtime test-scene_nodes test-video_lifetime
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: harvest-web

@@ -75,11 +75,11 @@ const replaced = [_][]const u8{
     "daisy/scene/CParticleSystemSceneNode.cpp",
     // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CTextSceneNode.cpp",
-    // Seven parsers still trap; callers remain excluded too.
+    // DirectX .x parsing is excluded from the port.
     "daisy/scene/CXFileReader.cpp",
     // Depends on MD2 and other mesh formats not integrated into the port.
     "daisy/scene/CDefaultMeshFormatLoader.cpp",
-    // Depends on the incomplete X-file reader.
+    // Depends on the excluded DirectX .x reader.
     "daisy/scene/CXMeshFileLoader.cpp",
     // Recovered from Irrlicht 0.7; excluded pending port integration.
     "daisy/scene/CAnimatedMeshMS3D.cpp",
@@ -130,7 +130,7 @@ const emscripten_link_flags = [_][]const u8{
     "-sFORCE_FILESYSTEM=1",
     "-sINVOKE_RUN=0",
     "-sEXIT_RUNTIME=0",
-    "-sEXPORTED_RUNTIME_METHODS=callMain,FS",
+    "-sEXPORTED_RUNTIME_METHODS=callMain,FS,IDBFS",
     // The page keeps the game data and the user data folder in IndexedDB.
     "-lidbfs.js",
 };

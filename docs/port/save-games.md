@@ -109,6 +109,11 @@ after every four bytes. That path is unreachable, because the header check rejec
   the save would therefore be silently truncated. Game state compresses well, so this should not
   happen in practice (inferred).
 
+The port writes the same format using zlib's compression bound. It closes a temporary file in
+the slot's directory before replacing the previous save. On load it validates the encrypted
+block length, compressed length and exact inflated length before replacing game state.
+The port accepts and writes payloads up to 128 MiB uncompressed.
+
 ### Payload
 
 The payload is a `CMemWriteFile` built in this order. The "read when" column gives the reader's
@@ -168,7 +173,8 @@ Other entity types need care:
 - **Charge-bomb explosions (12)** are a real bug. `CPerimeterBombExplosion` writes three more
   floats (speed x, speed y, fuse), but `readNextEntity` has no case 12 and skips only the header.
   A save made while an explosion is pending (they live 3 s, in layer 3) is therefore misread from
-  that record on.
+  that record on by the original reader. The port constructs the explosion and restores all three
+  floats, including from saves created by the original game.
 
 After loading, `readStateFromFile` runs one entity update of 0.001 s over the view rectangle and
 starts the game paused (`GameSpeed = 0`).
@@ -200,9 +206,8 @@ If n ≤ 0, the reader returns at once (`jle` at Linux `0x44fea0`) without readi
 continues without Lua. The writer always writes m, though, so such a file leaves 4 unread bytes in
 front of the world section. n = 0 happens in a creative game that has mods available but none
 enabled: `initializeNewGame` creates the Lua manager whenever any mod exists, the shipped mods start
-unchecked, and the manager writes this section even when it runs nothing. On paper, such a save
-loads shifted by 4 bytes. This follows from the code and was not tried in the game. A port that
-wants these saves to load should skip m when n is 0.
+unchecked, and the manager writes this section even when it runs nothing. The port reads m and
+the saved values when n is zero, leaving the stream aligned for the world section.
 
 ## Profile and settings files
 

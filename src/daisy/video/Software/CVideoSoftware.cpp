@@ -300,6 +300,7 @@ void CVideoSoftware::drawIndexedTriangleList(const S3DVertex* vertices, int vert
 
 	CVideoNull::drawIndexedTriangleList(vertices, vertexCount, indexList, triangleCount);
 
+	// The original reserves capacity and then indexes beyond the vector's size.
 	if ((int)TransformedPoints.size() < vertexCount)
 #ifdef HARVEST_PORT
 		TransformedPoints.resize(vertexCount);
@@ -367,6 +368,7 @@ void CVideoSoftware::drawIndexedTriangleList(const S3DVertex2TCoords* vertices, 
 
 	CVideoNull::drawIndexedTriangleList(vertices, vertexCount, indexList, triangleCount);
 
+	// The original reserves capacity and then indexes beyond the vector's size.
 	if ((int)TransformedPoints.size() < vertexCount)
 #ifdef HARVEST_PORT
 		TransformedPoints.resize(vertexCount);

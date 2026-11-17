@@ -42,6 +42,13 @@ while [ $# -gt 0 ]; do
     shift
 done
 
+# These values become part of the directory that clean() empties.
+if [[ ! $arch =~ ^(aarch64|x86_64)$ || ! $display =~ ^(x11|wayland)$ ||
+      ! $audio =~ ^(pulse|pipewire|alsa|none)$ || ! $gl =~ ^(es|core)$ ]]; then
+    echo "invalid smoke configuration: arch=$arch display=$display audio=$audio gl=$gl" >&2
+    exit 2
+fi
+
 # arch display audio gl: X11 and Wayland, each sound path, both OpenGL profiles, and the other
 # architecture once under emulation
 MATRIX="
@@ -63,16 +70,16 @@ built=""
 prepare() {
     local arch=$1
     case " $built " in *" $arch "*) return ;; esac
-    built="$built $arch"
     if [ "$build" = 1 ]; then
         echo "== building the port for $arch-linux-gnu ($optimize)"
         (cd "$root/port" && zig build harvest tests -Dtarget="$arch-linux-gnu" -Doptimize="$optimize" \
-            --prefix "zig-out/$arch-linux")
+            --prefix "zig-out/$arch-linux") || return 1
     fi
     local platform=linux/arm64
     [ "$arch" = x86_64 ] && platform=linux/amd64
     echo "== building the container image harvest-smoke-linux:$arch"
-    docker build --quiet --platform "$platform" -t "harvest-smoke-linux:$arch" "$root/port/smoke" > /dev/null
+    docker build --quiet --platform "$platform" -t "harvest-smoke-linux:$arch" "$root/port/smoke" > /dev/null || return 1
+    built="$built $arch"
 }
 
 # run <arch> <display> <audio> <gl> [<script> <user data directory>]
@@ -81,8 +88,8 @@ run() {
     local name="$arch-$display-$audio-$gl"
     [ -n "$userdata" ] && name="$name-original"
     local out="$root/build/smoke/linux/$name"
-    prepare "$arch"
-    clean "$out"
+    prepare "$arch" || return 1
+    clean "$out" || return 1
     echo "== $name"
     local platform=linux/arm64
     [ "$arch" = x86_64 ] && platform=linux/amd64
@@ -98,11 +105,11 @@ run() {
 play_original() {
     local out="$root/build/smoke/linux/original"
     echo "== building the container image harvest-original-linux"
-    docker build --quiet --platform linux/amd64 -t harvest-original-linux "$root/port/smoke/original" > /dev/null
-    clean "$out"
+    docker build --quiet --platform linux/amd64 -t harvest-original-linux "$root/port/smoke/original" > /dev/null || return 1
+    clean "$out" || return 1
     echo "== the original 1.18 Linux build"
     docker run --rm --platform linux/amd64 -v "$data:/orig:ro" -v "$root/port/smoke:/smoke:ro" -v "$out:/out" \
-        harvest-original-linux /smoke/original/run.sh
+        harvest-original-linux /smoke/original/run.sh || return 1
     ls "$out"/userdata/profiles/*.hsg > /dev/null 2>&1 || { echo "the original left no save game" >&2; return 1; }
 }
 

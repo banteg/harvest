@@ -135,6 +135,13 @@ void CConfigBlock::printBlock(io::IWriteFile* file)
         text += attribute->first->c_str();
         text += L" = ";
         text += attribute->second->c_str();
+#ifdef HARVEST_PORT
+        // A tab is ignored in a value. It keeps a final backslash from escaping
+        // the semicolon, including when this file is read by the original game.
+        int length = attribute->second->size();
+        if (length && (*attribute->second)[length - 1] == L'\\')
+            text.append(L'\t');
+#endif
         text += L";\n";
     }
     text += L"}\n";

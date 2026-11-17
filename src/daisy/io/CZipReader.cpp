@@ -52,7 +52,12 @@ CZipReader::CZipReader(ox::io::IReadFile* file, bool ignoreCase, bool ignorePath
 //! scans for a local header, returns false if there is no more local file header.
 bool CZipReader::scanLocalHeader()
 {
+#ifdef HARVEST_PORT
+    if (File->getSize() - File->getPos() < (int)sizeof(SZIPFileHeader))
+        return false;
+#else
     char tmp[1024];
+#endif
 
     SZipFileEntry entry;
     entry.fileDataPosition = 0;
@@ -75,10 +80,20 @@ bool CZipReader::scanLocalHeader()
         return false; // local file headers end here.
 
     // read filename
+#ifdef HARVEST_PORT
+    const int nameLength = entry.header.FilenameLength;
+    if (!nameLength || nameLength + entry.header.ExtraFieldLength > File->getSize() - File->getPos())
+        return false;
+    std::vector<char> name(nameLength + 1, 0);
+    if (File->read(&name[0], nameLength) != nameLength || memchr(&name[0], 0, nameLength))
+        return false;
+    entry.zipFileName = &name[0];
+#else
     entry.zipFileName.reserve(entry.header.FilenameLength + 2);
     File->read(tmp, entry.header.FilenameLength);
     tmp[entry.header.FilenameLength] = 0x0;
     entry.zipFileName = tmp;
+#endif
     entry.zipFileName.replace('\\', '/');
 
     extractFilename(&entry);
@@ -106,16 +121,36 @@ bool CZipReader::scanLocalHeader()
         }
         while (i < 4);
 
+#ifdef HARVEST_PORT
+        if (i != 4 || File->getSize() - File->getPos() < (int)sizeof(SZIPFileDataDescriptor))
+            return false;
+#endif
         entry.header.DataDescriptor.CRC32 = ox::io::CHelpIO::readInt(File);
         entry.header.DataDescriptor.CompressedSize = ox::io::CHelpIO::readInt(File);
         entry.header.DataDescriptor.UncompressedSize = ox::io::CHelpIO::readInt(File);
+#ifdef HARVEST_PORT
+        if (entry.header.DataDescriptor.CompressedSize !=
+            File->getPos() - entry.fileDataPosition - 4 - (int)sizeof(SZIPFileDataDescriptor))
+            return false;
+#endif
     }
     else
     {
         // move forward length of data
+#ifdef HARVEST_PORT
+        if (entry.header.DataDescriptor.CompressedSize < 0 ||
+            entry.header.DataDescriptor.CompressedSize > File->getSize() - File->getPos())
+            return false;
+#endif
         File->seek(entry.header.DataDescriptor.CompressedSize, true);
     }
 
+#ifdef HARVEST_PORT
+    if (entry.header.DataDescriptor.UncompressedSize < 0 ||
+        (entry.header.CompressionMethod == 0 &&
+         entry.header.DataDescriptor.CompressedSize != entry.header.DataDescriptor.UncompressedSize))
+        return false;
+#endif
     FileList.push_back(entry);
 
     return true;

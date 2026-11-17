@@ -46,6 +46,7 @@ CTerrainSceneNode::CTerrainSceneNode(ISceneNode* parent,
 }
 
 
+//! Creates index buffers for all levels of detail for a vertex block.
 void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
 {
 	// search if we already have a fitting indexbuffer
@@ -59,7 +60,7 @@ void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
 	// add new index array
 	IndexArrayList.push_back(new SIndexArray());
 	SIndexArray& idxarray = *IndexArrayList[IndexArrayList.size()-1];
-    idxarray.VertexBlockSize = block.Size;
+	idxarray.VertexBlockSize = block.Size;
 	block.IndexArray = IndexArrayList[IndexArrayList.size()-1];
 
 	int x,y;
@@ -83,16 +84,16 @@ void CTerrainSceneNode::createIndexBuffers(SVertexBlock& block)
 		idxbfr2.IndexedVertexBlockSize.Height = (block.Size.Height - lodfactor - 1) / lodfactor;
 
 		if (ox::algo::binarySearchPos(widths.begin(), widths.end(), idxbfr2.IndexedVertexBlockSize.Width)==-1)
-			{
-				widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
-				ox::algo::sort(widths.begin(), widths.end());
-			}
+		{
+			widths.push_back(idxbfr2.IndexedVertexBlockSize.Width);
+			ox::algo::sort(widths.begin(), widths.end());
+		}
 
 		if (ox::algo::binarySearchPos(heights.begin(), heights.end(), idxbfr2.IndexedVertexBlockSize.Height)==-1)
-			{
-				heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
-				ox::algo::sort(heights.begin(), heights.end());
-			}
+		{
+			heights.push_back(idxbfr2.IndexedVertexBlockSize.Height);
+			ox::algo::sort(heights.begin(), heights.end());
+		}
 
 		// generate indices
 		for (y=0; y<(int)((block.Size.Height-lodfactor-1)/lodfactor); ++y)
@@ -352,7 +353,6 @@ bool CTerrainSceneNode::load(ox::video::IImage* texture, ox::video::IImage* inpu
 }
 
 
-//! creates index buffers for all level of details for a vertex block
 //! calculates all normals of the vertex block
 void CTerrainSceneNode::calculateNormals(SVertexBlock& block)
 {

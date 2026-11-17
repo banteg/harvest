@@ -41,7 +41,7 @@ def cmd_match(args: argparse.Namespace) -> int:
             result = match.compare_object(compiled, target, known, unit.placements)
             # functions that match once their references are learned can prove more addresses
             while args.learn:
-                learned, conflicts = match.learnable(result, unit.source, known)
+                learned, conflicts = match.learnable(result, unit.source, match.Resolver(target, known))
                 if not learned:
                     break
                 add_learned(build.key, learned, target)
@@ -50,7 +50,7 @@ def cmd_match(args: argparse.Namespace) -> int:
                 print(f"learned    {len(learned)} symbol addresses from {unit.source}")
             if args.learn:
                 for name in conflicts:
-                    print(f"conflict   {name}: references imply different addresses", file=sys.stderr)
+                    print(f"conflict   {name}: ambiguous or already claimed address", file=sys.stderr)
             result = {"unit": unit.source, "image_sha256": image.sha256, **result, "compilation": metadata}
             report = out / f"{unit.slug}.json"
             report.parent.mkdir(parents=True, exist_ok=True)
@@ -58,10 +58,11 @@ def cmd_match(args: argparse.Namespace) -> int:
             objdiff.write_unit(build.key, unit, target, compiled, Path(obj), result)
             functions = [f for s in result["sections"] for f in s.get("functions", [])]
             exact_functions = sum(f["exact"] for f in functions)
+            total = len(functions) + sum(len(s.get("unplaced_functions", [])) for s in result["sections"])
             status = "exact" if result["exact"] else "different"
             thunks = sum(f["extent"] == "thunk" for f in functions)
             proven = f", {thunks} by thunk extent" if thunks else ""
-            print(f"{status:10} {unit.source}  functions {exact_functions}/{len(functions)}{proven}")
+            print(f"{status:10} {unit.source}  functions {exact_functions}/{total}{proven}")
             if args.verbose or not result["exact"]:
                 print_details(result)
             failed |= not result["exact"]
@@ -92,6 +93,8 @@ def print_details(result: dict) -> None:
         print(f"  {mark:4} {section['name']} @ {section.get('address', '?')} ({section['placement']})")
         for moved in section.get("misplaced_symbols", []):
             print(f"         {moved['symbol']} placed at {moved['placed']}, known at {moved['known']}")
+        for name in section.get("unplaced_functions", []):
+            print(f"         function {name}: no unclaimed target placement")
         for ref in section.get("bad_references", []):
             print(f"         reference +{ref['offset']:#x} {ref['symbol']}: {ref.get('reason', '')}")
         for function in section.get("functions", []):

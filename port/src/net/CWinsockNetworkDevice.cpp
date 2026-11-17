@@ -16,11 +16,7 @@ CWinsockNetworkDevice::~CWinsockNetworkDevice()
 int CWinsockNetworkDevice::fail(ox::event::IEventReceiver* receiver)
 {
     if (receiver)
-    {
-        Lock.enter();
         FailedReceivers.push_back(receiver);
-        Lock.leave();
-    }
     return -1;
 }
 
@@ -61,16 +57,21 @@ void CWinsockNetworkDevice::kickClient(int client)
 {
 }
 
-//! Reports the failed connections outside the lock: a receiver may connect again from its handler.
+void CWinsockNetworkDevice::cancelPending(ox::event::IEventReceiver* receiver)
+{
+    for (size_t i = 0; i < FailedReceivers.size(); ++i)
+        if (FailedReceivers[i] == receiver)
+            FailedReceivers[i] = 0;
+}
+
+//! A callback may cancel another receiver or queue a request for the next poll.
 void CWinsockNetworkDevice::pollDevice()
 {
-    Lock.enter();
-    std::vector<ox::event::IEventReceiver*> failed;
-    failed.swap(FailedReceivers);
-    Lock.leave();
-
-    for (unsigned int i = 0; i < failed.size(); ++i)
+    const size_t count = FailedReceivers.size();
+    for (size_t i = 0; i < count; ++i)
     {
+        if (!FailedReceivers[i])
+            continue;
         ox::event::SEvent event;
         event.EventType = ox::event::EET_NETWORK_EVENT;
         event.NetworkEvent.Type = ox::event::ENET_CONNECTION_FAILED;
@@ -78,8 +79,9 @@ void CWinsockNetworkDevice::pollDevice()
         event.NetworkEvent.Size = 0;
         event.NetworkEvent.Reserved = 0;
         event.NetworkEvent.Data = 0;
-        failed[i]->OnEvent(event);
+        FailedReceivers[i]->OnEvent(event);
     }
+    FailedReceivers.erase(FailedReceivers.begin(), FailedReceivers.begin() + count);
 }
 
 } // end namespace net

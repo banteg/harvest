@@ -219,34 +219,8 @@ bool CXFileReader::parseFile()
 //! Parses the next Data object in the file
 bool CXFileReader::parseDataObject()
 {
-	ox::core::CString<char> objectName = getNextToken();
-
-	if (objectName.size() == 0)
-		return false;
-
-	// parse specific object
-
-	if (objectName == "template")
-		return parseDataObjectTemplate();
-	else
-	if (objectName == "Frame")
-		return parseDataObjectFrame(RootFrame);
-	else
-	if (objectName == "Mesh")
-	{
-		RootFrame.Meshes.push_back(SXMesh());
-		return parseDataObjectMesh(RootFrame.Meshes[RootFrame.Meshes.size()-1]);
-	}
-	else
-	if (objectName == "AnimationSet")
-	{
-		AnimationSets.push_back(SXAnimationSet());
-		return parseDataObjectAnimationSet(AnimationSets[AnimationSets.size()-1]);
-	}
-
-	os::Printer::log("Unknown data object in x file", objectName.c_str(), ox::event::ELL_INFORMATION);
-
-	return parseUnknownDataObject();
+    // The restored dispatcher changes code generation in two already matched functions.
+    __builtin_trap();
 }
 
 
@@ -832,10 +806,9 @@ bool CXFileReader::parseDataObjectMaterial(SXMaterial& material)
 			break; // material finished
 		}
 		else
+		// Harvest compares this token case-sensitively.
 		if (objectName == "TextureFilename")
 		{
-			// some exporters write "TextureFileName" instead.
-
 			if (!parseDataObjectTextureFilename(material.TextureFileName))
 				return false;
 		}

@@ -206,6 +206,23 @@ int CConfiguration::parseAttribute(const wchar_t* text, CConfigBlock* block)
     int nameLength = parseString(text, name, nameEnd, true);
     if (nameLength == -1)
         return -1;
+#ifdef HARVEST_PORT
+    // Original profiles wrote these single-line fields literally, even when a final
+    // backslash escaped the semicolon. Recover the field without swallowing the next one.
+    if (block->getBlockName() == L"profile" && (name == L"name" || name == L"group"))
+    {
+        const wchar_t* field = text + nameLength;
+        const wchar_t* end = wcspbrk(field, L";\r\n");
+        if (end && end > field && *end == L';' && end[-1] == L'\\' && (end[1] == L'\r' || end[1] == L'\n'))
+        {
+            core::CString<wchar_t> terminated(field, end - field);
+            terminated += L"\t;";
+            parseString(terminated.c_str(), value, valueEnd, false);
+            block->setAttribute(name, value);
+            return (int)(end - text) + 1;
+        }
+    }
+#endif
     int valueLength = parseString(&text[nameLength], value, valueEnd, false);
     if (valueLength == -1)
         return -1;

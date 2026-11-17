@@ -1614,7 +1614,12 @@ bool CLuaManager::initLuaBySaveFile(ox::io::IReadFile* file, int version)
 {
     refreshAvailableLuaMods(Device);
     int numMods = ox::io::CHelpIO::readInt(file);
+#ifdef HARVEST_PORT
+    // Creative can save an active Lua manager with every mod disabled. Its values still follow.
+    if (numMods < 0)
+#else
     if (numMods <= 0)
+#endif
         return false;
 
     initCommonLuaStuff();
@@ -1645,7 +1650,12 @@ bool CLuaManager::initLuaBySaveFile(ox::io::IReadFile* file, int version)
     lua_newtable(L);
     int table = luaL_ref(L, LUA_REGISTRYINDEX);
     lua_rawgeti(L, LUA_REGISTRYINDEX, table);
+#ifdef HARVEST_PORT
+    // lua_settable needs the stack index of this table. Its registry reference can differ.
+    CLuaFileValues::getLuaTableVars(L, lua_gettop(L), ox::core::CString<char>(""), values);
+#else
     CLuaFileValues::getLuaTableVars(L, table, ox::core::CString<char>(""), values);
+#endif
     lua_pop(L, 1);
     lua_rawgeti(L, LUA_REGISTRYINDEX, HookFunction);
     lua_pushstring(L, "gameLoad");
