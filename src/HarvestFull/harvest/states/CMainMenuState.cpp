@@ -491,11 +491,8 @@ int CMainMenuState::secondInit()
             PlanetDistances[i] = (PLANET_POSITIONS[i] - CameraPosition).getLength();
         return 2;
     case 36:
-        if (g_scenarioResult == 1)
-        {
-            if (g_scenarioResultGameMode == 5)
-                InfoDialog->setVisible(true, gui::CMenuInfoDialog::EIM_DEBRIEFING);
-        }
+        if (g_scenarioResult == 1 && g_scenarioResultGameMode == 5)
+            InfoDialog->setVisible(true, gui::CMenuInfoDialog::EIM_DEBRIEFING);
         else if (g_scenarioResult == 3 || g_scenarioResult == 4)
             StatisticsScreen->setVisible(true);
         return 2;
@@ -508,9 +505,46 @@ int CMainMenuState::secondInit()
                 createProfileListWindow();
         }
         return 2;
-    // Idle steps, which give the loading screen time to show.
-    case 5: case 13: case 14: case 15: case 16: case 20: case 21: case 22: case 23: case 24: case 25:
-    case 26: case 27: case 28: case 29: case 30: case 31: case 32: case 33: case 34:
+    // Idle steps give the loading screen time to show.
+    case 5:
+        return 2;
+    case 13:
+        return 2;
+    case 14:
+        return 2;
+    case 15:
+        return 2;
+    case 16:
+        return 2;
+    case 20:
+        return 2;
+    case 21:
+        return 2;
+    case 22:
+        return 2;
+    case 23:
+        return 2;
+    case 24:
+        return 2;
+    case 25:
+        return 2;
+    case 26:
+        return 2;
+    case 27:
+        return 2;
+    case 28:
+        return 2;
+    case 29:
+        return 2;
+    case 30:
+        return 2;
+    case 31:
+        return 2;
+    case 32:
+        return 2;
+    case 33:
+        return 2;
+    case 34:
         return 2;
     }
 
@@ -1031,7 +1065,10 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
                         GameModeWindow->setVisible(false);
                     hidePopupPlanet();
                     if (HeadingText)
-                        HeadingText->setText(ox::core::CString<wchar_t>("").c_str());
+                    {
+                        ox::core::CString<wchar_t> emptyHeading("");
+                        HeadingText->setText(emptyHeading.c_str());
+                    }
                 }
             }
             else if (event.MouseInput.Event == ox::event::EMIE_MOUSE_MOVED)
@@ -1143,7 +1180,7 @@ bool CMainMenuState::OnEvent(const ox::event::SEvent& event)
             if (event.KeyInput.Key == ox::KEY_KEY_U && (event.KeyInput.Control || event.KeyInput.Shift))
                 NextState = EGS_SHUTTLE_RACE;
         }
-        else if (event.KeyInput.Event == ox::event::EKIE_KEY_LEFT_UP)
+        if (event.KeyInput.Event == ox::event::EKIE_KEY_LEFT_UP)
             Keys[event.KeyInput.Key] = false;
         break;
     case ox::event::EET_DEVICE_EVENT:

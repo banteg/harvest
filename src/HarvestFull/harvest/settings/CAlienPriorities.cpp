@@ -12,7 +12,13 @@ namespace settings {
 
 CAlienPriorities g_attackPriorities[5];
 
-inline CAlienPriorities::~CAlienPriorities()
+CAlienPriorities::CAlienPriorities() : RangeIsImportant(false), HoldFire(false)
+{
+    for (int i = 0; i < 14; ++i)
+        Priorities[i] = 2;
+}
+
+CAlienPriorities::~CAlienPriorities()
 {
 }
 

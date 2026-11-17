@@ -16,7 +16,7 @@ enum CGenum
 {
     CG_SOURCE = 4112,
     CG_OBJECT = 4113,
-    CG_PROGRAM = 4125
+    CG_PROGRAM = 4109
 };
 
 enum CGprofile

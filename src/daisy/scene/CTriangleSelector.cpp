@@ -43,7 +43,7 @@ CTriangleSelector::CTriangleSelector(IMesh* mesh, ISceneNode* node)
 		const unsigned short* indices = buf->getIndices();
 		ox::core::CTriangle3d<float> tri;
 
-		switch (buf->getVertexType())
+		switch ((int)buf->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{

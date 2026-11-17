@@ -157,7 +157,8 @@ void CGUIStaticText::draw()
                     if (textWidth > frameRect.getWidth())
                     {
                         unsigned int time = daisy::os::Timer::getTime();
-                        offset = frameRect.getWidth() - textWidth;
+                        int width = frameRect.getWidth() - textWidth;
+                        offset = width;
                         unsigned int phase = (time / SCROLL_PHASE_TIME) & 3;
                         if (phase != 0)
                         {
@@ -170,9 +171,10 @@ void CGUIStaticText::draw()
                         }
                     }
 
+                    int right = frameRect.LowerRightCorner.X;
                     font->draw(Text.c_str(),
                         ox::core::CRect<int>(frameRect.UpperLeftCorner.X + offset, frameRect.UpperLeftCorner.Y,
-                            frameRect.LowerRightCorner.X + offset, frameRect.LowerRightCorner.Y),
+                            right + offset, frameRect.LowerRightCorner.Y),
                         OverrideColorEnabled ? OverrideColor : skin->getColor(ox::gui::EGDC_BUTTON_TEXT),
                         HAlign, VAlign, &AbsoluteClippingRect);
                 }

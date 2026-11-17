@@ -179,9 +179,11 @@ bool CGUIScrollBar::OnEvent(const ox::event::SEvent& event)
             return false;
         }
         case ox::event::EMIE_LMOUSE_PRESSED_DOWN:
+        {
+            ox::core::CPosition2d<int> position(event.MouseInput.X, event.MouseInput.Y);
             if (Horizontal)
             {
-                int offset = event.MouseInput.X - AbsoluteRect.UpperLeftCorner.X - DrawPos;
+                int offset = position.X - AbsoluteRect.UpperLeftCorner.X - DrawPos;
                 if (offset < 0)
                 {
                     setPos(getPos() - LargeStep);
@@ -217,7 +219,7 @@ bool CGUIScrollBar::OnEvent(const ox::event::SEvent& event)
             else
             {
                 // the vertical bar does not report its page steps
-                int offset = event.MouseInput.Y - AbsoluteRect.UpperLeftCorner.Y - DrawPos;
+                int offset = position.Y - AbsoluteRect.UpperLeftCorner.Y - DrawPos;
                 if (offset < 0)
                 {
                     setPos(getPos() - LargeStep);
@@ -236,6 +238,7 @@ bool CGUIScrollBar::OnEvent(const ox::event::SEvent& event)
             }
             Environment->setFocus(this);
             return true;
+        }
         case ox::event::EMIE_LMOUSE_LEFT_UP:
             setNewThumbState(Dragging ? 1 : 0);
             Dragging = false;
@@ -260,13 +263,17 @@ bool CGUIScrollBar::OnEvent(const ox::event::SEvent& event)
             else
             {
                 // highlight the thumb under the mouse
+                ox::core::CPosition2d<int> position(event.MouseInput.X, event.MouseInput.Y);
                 int offset;
                 if (Horizontal)
-                    offset = event.MouseInput.X - AbsoluteRect.UpperLeftCorner.X;
+                    offset = position.X - AbsoluteRect.UpperLeftCorner.X;
                 else
-                    offset = event.MouseInput.Y - AbsoluteRect.UpperLeftCorner.Y;
+                    offset = position.Y - AbsoluteRect.UpperLeftCorner.Y;
                 offset -= DrawPos;
-                setNewThumbState(offset < 0 || offset >= DrawHeight ? 0 : 1);
+                if (offset < 0 || offset >= DrawHeight)
+                    setNewThumbState(0);
+                else
+                    setNewThumbState(1);
             }
             break;
         default:

@@ -184,7 +184,11 @@ bool CSceneCollisionManager::getCollisionPoint(const ox::core::CLine3d<float>& r
 		return false;
 
 	int totalcnt = selector->getTriangleCount();
+#ifdef HARVEST_PORT
 	Triangles.resize(totalcnt);
+#else
+	Triangles.reserve(totalcnt);
+#endif
 
 	int cnt = 0;
 	selector->getTriangles(&Triangles[0], totalcnt, cnt, ray);
@@ -574,7 +578,11 @@ ox::core::CVector3d<float> CSceneCollisionManager::collideWithWorld(int recursio
 	box.MaxEdge += colData.eRadius;
 
 	int totalTriangleCnt = colData.selector->getTriangleCount();
+#ifdef HARVEST_PORT
 	Triangles.resize(totalTriangleCnt);
+#else
+	Triangles.reserve(totalTriangleCnt);
+#endif
 
 	ox::core::CMatrix4 scaleMatrix;
 	scaleMatrix.setScale(

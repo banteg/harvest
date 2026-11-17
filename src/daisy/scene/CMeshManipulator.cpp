@@ -77,7 +77,7 @@ void CMeshManipulator::setVertexColorAlpha(ox::scene::IMesh* mesh, int alpha) co
 		void* v = buffer->getVertices();
 		int vtxcnt = buffer->getVertexCount();
 
-		switch(buffer->getVertexType())
+		switch((int)buffer->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			for (; i<vtxcnt; ++i)
@@ -108,7 +108,7 @@ void CMeshManipulator::recalculateNormals(ox::scene::IMesh* mesh) const
 		int idxcnt = buffer->getIndexCount();
 		unsigned short* idx = buffer->getIndices();
 
-		switch(buffer->getVertexType())
+		switch((int)buffer->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{
@@ -164,7 +164,7 @@ void CMeshManipulator::scaleMesh(ox::scene::IMesh* mesh, const ox::core::CVector
 		int vtxcnt = buffer->getVertexCount();
 		ox::core::CAabbox3d<float> bufferbox;
 
-		switch(buffer->getVertexType())
+		switch((int)buffer->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			if (vtxcnt != 0)
@@ -244,7 +244,7 @@ SMesh* CMeshManipulator::createMeshCopy(ox::scene::IMesh* mesh) const
 		int idxCnt = mesh->getMeshBuffer(b)->getIndexCount();
 		const unsigned short* idx = mesh->getMeshBuffer(b)->getIndices();
 
-		switch(mesh->getMeshBuffer(b)->getVertexType())
+		switch((int)mesh->getMeshBuffer(b)->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{
@@ -314,7 +314,7 @@ void CMeshManipulator::makePlanarTextureMapping(ox::scene::IMesh* mesh, float re
 		int idxcnt = buffer->getIndexCount();
 		unsigned short* idx = buffer->getIndices();
 
-		switch(buffer->getVertexType())
+		switch((int)buffer->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{

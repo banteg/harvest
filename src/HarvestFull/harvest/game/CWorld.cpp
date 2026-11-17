@@ -585,8 +585,10 @@ void CWorld::update(float frameDelta, const ox::core::CRect<float>& area)
                     {
                         float cs = cosf(angle + ANGLE_OFFS[i]);
                         float sn = sinf(angle + ANGLE_OFFS[i]);
-                        ox::core::CVector3d<float> position(puff->Position.X + cs * 180, puff->Position.Y - sn * 180, 0);
-                        puff->Particles[i]->setCurrentSpeed(ox::core::CVector3d<float>(cs * amount, sn * -amount, 0));
+                        float offsetY = sn * 180;
+                        ox::core::CVector3d<float> position(puff->Position.X + cs * 180, puff->Position.Y - offsetY, 0);
+                        ox::core::CVector3d<float> speed(cs * amount, sn * -amount, 0);
+                        puff->Particles[i]->setCurrentSpeed(speed);
                         puff->Particles[i]->update(amount * SPEED_SCALES[i], position);
                     }
                 ++it;

@@ -46,11 +46,14 @@ CGUIWindow::CGUIWindow(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIEleme
     : IGUIWindow(environment, parent, id, rectangle), Dragging(false), IsFrame(isFrame)
 {
     // a skin with a frame background but no window background draws every window as a frame
-    if (!IsFrame && Environment && Environment->getSkin() && Environment->getSkin()->getSpritePackage())
+    if (!IsFrame && Environment && Environment->getSkin())
     {
-        ox::video::ISpritePackage* package = Environment->getSkin()->getSpritePackage();
-        if (package->animationStateExists("FrameBackground") && !package->animationStateExists("WindowBackground"))
-            IsFrame = true;
+        if (Environment->getSkin()->getSpritePackage())
+        {
+            ox::video::ISpritePackage* package = Environment->getSkin()->getSpritePackage();
+            if (package->animationStateExists("FrameBackground") && !package->animationStateExists("WindowBackground"))
+                IsFrame = true;
+        }
     }
 
     if (IsFrame)

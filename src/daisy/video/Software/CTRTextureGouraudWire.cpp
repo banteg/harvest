@@ -280,7 +280,8 @@ public:
 
 				if (longest < 0.0f)
 				{
-					tmpDiv = 1.0f / (v3->Pos.Y - v2->Pos.Y);
+					const ox::core::CVector2d<int> pos = v2->Pos;
+					tmpDiv = 1.0f / (v3->Pos.Y - pos.Y);
 
 					rightdeltaxf = (v3->Pos.X - v2->Pos.X) * tmpDiv;
 					rightxf = (float)v2->Pos.X;
@@ -317,7 +318,8 @@ public:
 					leftStepG = (int)(((ox::video::getGreen(v3->Color)<<8) - leftG) * tmpDiv);
 					leftStepB = (int)(((ox::video::getBlue(v3->Color)<<8) - leftB) * tmpDiv);
 
-					leftTx = v2->TCoords.X;
+					const ox::core::CVector2d<int> tCoords = v2->TCoords;
+					leftTx = tCoords.X;
 					leftTy = v2->TCoords.Y;
 					leftTxStep = (int)((v3->TCoords.X - leftTx) * tmpDiv);
 					leftTyStep = (int)((v3->TCoords.Y - leftTy) * tmpDiv);

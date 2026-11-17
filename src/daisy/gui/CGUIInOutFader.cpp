@@ -25,6 +25,11 @@ CGUIInOutFader::CGUIInOutFader(ox::gui::IGUIEnvironment* environment, ox::gui::I
     setColor(ox::video::SColor(0, 0, 0, 0));
 }
 
+//! destructor
+CGUIInOutFader::~CGUIInOutFader()
+{
+}
+
 //! draws the element and its children
 void CGUIInOutFader::draw()
 {

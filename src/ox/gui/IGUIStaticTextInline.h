@@ -27,17 +27,22 @@ inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFo
         core::CString<wchar_t> whitespace;
         int length = 0;
 
-        // the terminating zero flushes the last word
-        for (int i = 0; i <= text.size(); ++i)
-        {
-            wchar_t c = text[i];
-            bool lineBreak = c == L'\n';
-            if (lineBreak)
-                c = L' ';
+        int textSize = text.size();
+        wchar_t character;
 
-            if (c == 0 || c == L' ')
+        for (int i = 0; i < textSize; ++i)
+        {
+            character = text[i];
+            bool lineBreak = false;
+            if (character == L'\n')
             {
-                if (word.size() != 0)
+                lineBreak = true;
+                character = L' ';
+            }
+
+            if (character == 0 || character == L' ')
+            {
+                if (word.size())
                 {
                     int whitespaceLength = font->getDimension(whitespace.c_str()).Width;
                     int wordLength = font->getDimension(word.c_str()).Width;
@@ -45,28 +50,28 @@ inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFo
 
                     if (length <= width || wordLength >= width)
                     {
-                        line.append(whitespace);
-                        line.append(word);
+                        line += whitespace;
+                        line += word;
                     }
                     else
                     {
                         lines.push_back(line);
                         length = font->getDimension(style).Width + wordLength;
                         line = style;
-                        line.append(word);
+                        line += word;
                     }
 
                     word = L"";
                     whitespace = L"";
                 }
 
-                if (c != 0)
-                    whitespace.append(c);
+                if (character != 0)
+                    whitespace += character;
 
                 if (lineBreak)
                 {
-                    line.append(whitespace);
-                    line.append(word);
+                    line += whitespace;
+                    line += word;
                     lines.push_back(line);
                     line = L"";
                     word = L"";
@@ -75,11 +80,11 @@ inline void IGUIStaticText::breakText(const core::CString<wchar_t>& text, IGUIFo
                 }
             }
             else
-                word.append(c);
+                word += character;
         }
 
-        line.append(whitespace);
-        line.append(word);
+        line += whitespace;
+        line += word;
         lines.push_back(line);
     }
     else

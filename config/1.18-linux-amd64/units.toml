@@ -144,12 +144,12 @@
 ".bss" = 0x86b6f0
 
 ["HarvestFull/harvest/settings/CAlienPriorities.cpp"]
-".text" = 0x48a4a0
+".text" = 0x48a420
 # g_attackPriorities[5], std::ios_base::Init, WORLD_GRID_OFFSET, ENERGY_PROGRESS_COLOR
 ".bss" = 0x86bae0
 
 ["HarvestFull/harvest/entity/CDefenseTowerEntity.cpp"]
-".text" = 0x41e4c0
+".text" = 0x41e490
 # std::ios_base::Init, WORLD_GRID_OFFSET, ENERGY_PROGRESS_COLOR
 ".bss" = 0x86b658
 
@@ -680,11 +680,13 @@
 ".bss" = 0x86c120
 
 ["daisy/scene/CEmptySceneNode.cpp"]
+".bss" = 0x86c124
 
 ["daisy/scene/CLightSceneNode.cpp"]
 ".bss" = 0x86c12c
 
 ["daisy/scene/CMeshManipulator.cpp"]
+".bss" = 0x86c130
 
 ["daisy/scene/CSceneNodeAnimatorCollisionResponse.cpp"]
 ".bss" = 0x86c024
@@ -747,6 +749,7 @@
 ".bss" = 0x86c118
 
 ["daisy/scene/CAnimatedMeshMD2.cpp"]
+".bss" = 0x86c1d8
 
 ["daisy/scene/COctTreeSceneNode.cpp"]
 ".bss" = 0x86c13c
@@ -787,6 +790,7 @@
 ".bss" = 0x86c14c
 
 ["daisy/video/Null/CImageLoaderJPG.cpp"]
+".bss" = 0x86c168
 
 ["daisy/io/CTextReader.cpp"]
 ".bss" = 0x86c0e0
@@ -799,6 +803,7 @@
 
 ["daisy/io/CXMLReader.cpp"]
 ".bss" = 0x86c0e8
+".rodata" = 0x617aa0
 
 ["daisy/io/CXMLWriter.cpp"]
 ".bss" = 0x86c0ec
@@ -813,9 +818,17 @@
 ".bss" = 0x86c070
 
 ["daisy/scene/CSceneManager.cpp"]
+".bss" = 0x86c020
 
 ["daisy/video/Null/CImage.cpp"]
+".bss" = 0x86c064
 
 ["daisy/video/Software/CVideoSoftware.cpp"]
 ".bss" = 0x86c074
 ".rodata" = 0x6115a8
+
+["daisy/net/CWinsockNetworkDevice.cpp"]
+".bss" = 0x86c0f8
+
+["daisy/net/SocketObject.cpp"]
+".bss" = 0x86c0fc

@@ -242,6 +242,76 @@ void CHighscoreScreen::parseSummaryPage(const ox::core::CString<char>& page)
     SummaryLoaded[SummaryCategory] = true;
 }
 
+void CHighscoreScreen::setVisible(bool visible)
+{
+    if (visible)
+    {
+        if (!Window)
+        {
+            loadSprites();
+            Window = GUIEnvironment->addModalScreen();
+            Window->setID(ID_SCREEN);
+            Background = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 800, 600), Window);
+            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].Width,
+                SpriteSizes[SPRITE_TOP_BACKGROUND].Height + 5), Background);
+            TypeFrame->setReportOnDraw(1);
+            TypeFrame->setID(ID_TYPE_FRAME);
+            TypeFrame->LayoutFlags = "br center";
+
+            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Height - SpriteSizes[SPRITE_TOP_SELECTOR].Height) / 2;
+            int width = SpriteSizes[SPRITE_TOP_SELECTOR].Width;
+            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].Width - width * 4) / 2;
+            for (int i = 0; i < 4; ++i)
+            {
+                TypeButtons[i] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(left, top,
+                    SpriteSizes[SPRITE_TOP_SELECTOR].Width + left, SpriteSizes[SPRITE_TOP_SELECTOR].Height + top), TypeFrame);
+                TypeButtons[i]->setID(ID_TYPE_BUTTON + i);
+                TypeButtons[i]->setReportOnDraw(2);
+                TypeNames[i] = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_TYPE_NAMES[i]);
+                left += width;
+            }
+
+            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].Width) / 2;
+            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height,
+                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].Width,
+                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height);
+            ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
+            ListFrame->setReportOnDraw(1);
+            ListFrame->setID(ID_LIST_FRAME);
+            ListFrame->LayoutFlags = "br center";
+            ListFrame->setVisible(false);
+
+            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height;
+            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].Width + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].Width;
+            int summaryLeft = (800 - summaryWidth) / 2;
+            ox::core::CRect<int> summaryArea;
+            summaryArea.UpperLeftCorner.X = summaryLeft;
+            summaryArea.UpperLeftCorner.Y = summaryTop;
+            summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
+            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Height;
+            SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
+            SummaryFrame->setReportOnDraw(1);
+            SummaryFrame->setID(ID_SUMMARY_FRAME);
+            SummaryFrame->LayoutFlags = "br center";
+            StatusText = 0;
+
+            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height + margin * 2 + 5;
+            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background,
+                ID_BACK, settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
+            back->LayoutFlags = "br";
+            back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
+            back->centerOnParent();
+            back->moveTo(ox::core::CPosition2d<int>(back->getRelativePosition().UpperLeftCorner.X,
+                backY));
+        }
+        Background->centerOnParent();
+        Window->setVisible(true);
+        loadSummaryPage(0);
+    }
+    else if (Window)
+        Window->setVisible(false);
+}
+
 void CHighscoreScreen::parseHighscoreString(const ox::core::CString<char>& page)
 {
     static ox::core::CString<char> rowDelimiter = "<br>";
@@ -822,76 +892,6 @@ bool CHighscoreScreen::OnEvent(const ox::event::SEvent& event)
         break;
     }
     return result;
-}
-
-void CHighscoreScreen::setVisible(bool visible)
-{
-    if (visible)
-    {
-        if (!Window)
-        {
-            loadSprites();
-            Window = GUIEnvironment->addModalScreen();
-            Window->setID(ID_SCREEN);
-            Background = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 0, 800, 600), Window);
-            TypeFrame = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(0, 5, SpriteSizes[SPRITE_TOP_BACKGROUND].Width,
-                SpriteSizes[SPRITE_TOP_BACKGROUND].Height + 5), Background);
-            TypeFrame->setReportOnDraw(1);
-            TypeFrame->setID(ID_TYPE_FRAME);
-            TypeFrame->LayoutFlags = "br center";
-
-            int top = (SpriteSizes[SPRITE_TOP_BACKGROUND].Height - SpriteSizes[SPRITE_TOP_SELECTOR].Height) / 2;
-            int width = SpriteSizes[SPRITE_TOP_SELECTOR].Width;
-            int left = (SpriteSizes[SPRITE_TOP_BACKGROUND].Width - width * 4) / 2;
-            for (int i = 0; i < 4; ++i)
-            {
-                TypeButtons[i] = GUIEnvironment->addLayoutGroup(ox::core::CRect<int>(left, top,
-                    SpriteSizes[SPRITE_TOP_SELECTOR].Width + left, SpriteSizes[SPRITE_TOP_SELECTOR].Height + top), TypeFrame);
-                TypeButtons[i]->setID(ID_TYPE_BUTTON + i);
-                TypeButtons[i]->setReportOnDraw(2);
-                TypeNames[i] = settings::gp_systemConfig->getLocalizedText(HIGHSCORE_TYPE_NAMES[i]);
-                left += width;
-            }
-
-            int margin = (800 - SpriteSizes[SPRITE_ALL_BACKGROUND].Width) / 2;
-            ox::core::CRect<int> listArea(margin, margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height,
-                margin + SpriteSizes[SPRITE_ALL_BACKGROUND].Width,
-                margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height);
-            ListFrame = GUIEnvironment->addLayoutGroup(listArea, Background);
-            ListFrame->setReportOnDraw(1);
-            ListFrame->setID(ID_LIST_FRAME);
-            ListFrame->LayoutFlags = "br center";
-            ListFrame->setVisible(false);
-
-            int summaryTop = margin + 5 + SpriteSizes[SPRITE_TOP_BACKGROUND].Height;
-            int summaryWidth = SpriteSizes[SPRITE_PROMOTE_SCORE].Width + SpriteSizes[SPRITE_PROMOTE_BACKGROUND].Width;
-            int summaryLeft = (800 - summaryWidth) / 2;
-            ox::core::CRect<int> summaryArea;
-            summaryArea.UpperLeftCorner.X = summaryLeft;
-            summaryArea.UpperLeftCorner.Y = summaryTop;
-            summaryArea.LowerRightCorner.X = summaryLeft + summaryWidth;
-            summaryArea.LowerRightCorner.Y = summaryTop + SpriteSizes[SPRITE_ALL_BACKGROUND].Height;
-            SummaryFrame = GUIEnvironment->addLayoutGroup(summaryArea, Background);
-            SummaryFrame->setReportOnDraw(1);
-            SummaryFrame->setID(ID_SUMMARY_FRAME);
-            SummaryFrame->LayoutFlags = "br center";
-            StatusText = 0;
-
-            int backY = SpriteSizes[SPRITE_TOP_BACKGROUND].Height + SpriteSizes[SPRITE_ALL_BACKGROUND].Height + margin * 2 + 5;
-            ox::gui::IGUIButton* back = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), Background,
-                ID_BACK, settings::gp_systemConfig->getLocalizedText(L"menu:back").c_str());
-            back->LayoutFlags = "br";
-            back->setOverrideFont(GUIEnvironment->getFont("$GAME_RESOURCES$/harvestClientData/gfx/boldFont.fnt"));
-            back->centerOnParent();
-            back->moveTo(ox::core::CPosition2d<int>(back->getRelativePosition().UpperLeftCorner.X,
-                backY));
-        }
-        Background->centerOnParent();
-        Window->setVisible(true);
-        loadSummaryPage(0);
-    }
-    else if (Window)
-        Window->setVisible(false);
 }
 
 ox::gui::IGUILayout* CHighscoreScreen::createNewPopupWindow()

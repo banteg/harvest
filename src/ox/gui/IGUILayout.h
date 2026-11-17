@@ -1,7 +1,7 @@
 // Recovered for Harvest from the Mac and Linux 1.18 builds; not the original source.
 // The virtual order follows the Mac 1.18 vtable of daisy::gui::CGUIWindow up to
 // updateChildrenForContentArea. The methods are inline; their copies are emitted in
-// daisy/gui/CGUIEnvironment.cpp. The sorters are defined in IGUILayoutInline.h.
+// daisy/gui/CGUIEnvironment.cpp. The other sorters are defined in IGUILayoutInline.h.
 
 #ifndef OX_GUI_IGUILAYOUT_H
 #define OX_GUI_IGUILAYOUT_H
@@ -81,6 +81,34 @@ public:
                 (*it)->move(offset);
     }
 };
+
+inline void IGUILayout::sortVertically(int spacing, bool center)
+{
+    core::CRect<int> area = getContentArea();
+    int width = area.getWidth();
+    int x = 0;
+    int y = spacing;
+    for (std::list<IGUIElement*>::iterator it = Children.begin(); it != Children.end(); ++it)
+    {
+        if ((*it)->isFixed())
+            continue;
+
+        core::CRect<int> rect = (*it)->getRelativePosition();
+        if (center)
+            x = (width - rect.getWidth()) / 2;
+
+        core::CRect<int> placed(core::CPosition2d<int>(x, y), core::CDimension2d<int>(rect.getWidth(), rect.getHeight()));
+        (*it)->setRelativePosition(placed);
+        y += placed.getHeight() + spacing;
+    }
+
+    int grow = y + area.UpperLeftCorner.Y - area.LowerRightCorner.Y;
+    if (grow > 0)
+        RelativeRect.LowerRightCorner.Y += grow;
+
+    setRelativePosition(RelativeRect);
+    updateChildrenForContentArea();
+}
 
 } // end namespace gui
 } // end namespace ox

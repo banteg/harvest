@@ -41,6 +41,7 @@ using namespace ox::video;
 
 		//! destructor
 		virtual ~CVideoSoftware();
+		virtual void useMaterialShaderFor2D(bool enabled);
 
 		//! presents the rendered scene on the screen, returns false if failed
 		virtual bool endScene();
@@ -55,7 +56,7 @@ using namespace ox::video;
 		virtual void setMaterial(const SMaterial& material);
 
 		//! sets a render target
-		virtual void setRenderTarget(ox::video::ITexture* texture);
+		virtual bool setRenderTarget(ox::video::ITexture* texture);
 
 		//! sets a viewport
 		virtual void setViewPort(const ox::core::CRect<int>& area);
@@ -100,6 +101,7 @@ using namespace ox::video;
 
 		//! Returns type of video driver
 		virtual int getDriverType();
+		virtual bool isFullscreen();
 
 		//! Returns the transformation set by setTransform
 		virtual ox::core::CMatrix4 getTransform(E_TRANSFORMATION_STATE state);

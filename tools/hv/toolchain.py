@@ -45,6 +45,9 @@ class Compiler:
             source, replacement = (p.resolve() for p in source_override)
             if not source.is_relative_to(builds.ROOT) or not replacement.is_relative_to(self.out):
                 raise ValueError("source override must map a repository file to a compiler output file")
+            # Mounting over a missing path makes the runtime create an empty file in the checkout
+            if not source.is_file():
+                raise FileNotFoundError(f"source override target does not exist: {source}")
             mounts = ["-v", f"{replacement}:/work/{source.relative_to(builds.ROOT)}:ro"]
         return run(
             "docker", "run", "--rm", "--network=none", "--platform", "linux/amd64",

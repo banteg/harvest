@@ -130,7 +130,7 @@ IImage* CImageLoaderPCX::loadImage(ox::io::IReadFile* file)
 	// read image data
 	int width, height, imagebytes;
 	width = header.XMax - header.XMin + 1;
-	height = header.YMax - header.YMin + 1;
+	height = header.XMax - header.XMin + 1;
 	imagebytes = header.BytesPerLine * height * header.Planes * header.BitsPerPixel / 8;
 	PCXData = new char[imagebytes];
 

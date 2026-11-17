@@ -689,7 +689,7 @@ void CBspTree::splitPoly(const BspPoly& poly, const ox::core::CPlane3d<float>& p
 		ox::core::EIntersectionRelation3D i3d = plane.classifyPointRelation(pointB);
 
 		if (i3d != ox::core::ISREL3D_PLANAR &&
-			(plane.getIntersectionWithLine(pointA, (pointB) - (pointA), intersection) && (float)(intersection).getDistanceFromSQ(pointA) < (float)((pointB) - (pointA)).getLengthSQ() && (float)(intersection).getDistanceFromSQ(pointB) < (float)((pointB) - (pointA)).getLengthSQ()))
+			(plane.getIntersectionWithLine(pointA, (pointB) - (pointA), intersection) && (float)((pointB) - (pointA)).getLengthSQ() > (float)(intersection).getDistanceFromSQ(pointA) && (float)(intersection).getDistanceFromSQ(pointB) < (float)((pointB) - (pointA)).getLengthSQ()))
 		{
 			// TODO: Kann beschleunigt werden, indem statt getIntersectionWithLimitedLine eine Funktion
 			// verwendet wird, die nicht überprüft, ob sich der schnittpunkt auch zwischen den punkten
@@ -726,7 +726,8 @@ void CBspTree::splitPoly(const BspPoly& poly, const ox::core::CPlane3d<float>& p
 
 				ox::video::SColor tmpcolor(0, red, green, blue);
 
-				ox::video::S3DVertex newVertex(intersection.X, intersection.Y, intersection.Z, poly.vertices[currentIdx].Normal.X, poly.vertices[currentIdx].Normal.Y, poly.vertices[currentIdx].Normal.Z, tmpcolor, tcoords.X, tcoords.Y);
+				const ox::video::S3DVertex currentVertex = poly.vertices[currentIdx];
+				ox::video::S3DVertex newVertex(intersection.X, intersection.Y, intersection.Z, currentVertex.Normal.X, currentVertex.Normal.Y, currentVertex.Normal.Z, tmpcolor, tcoords.X, tcoords.Y);
 
 				frontList[countFront] = newVertex;
 				countFront++;
@@ -788,7 +789,7 @@ void CBspTree::splitPoly(const BspPoly& poly, const ox::core::CPlane3d<float>& p
 		backSplit.vertices.push_back(backList[i]);
 
 	int frontIndexCount = (frontSplit.vertices.size() - 2) * 3;
-	int backIndexCount = (backSplit.vertices.size() - 2) * 3;
+	int backIndexCount = (int)backSplit.vertices.size() * 3 - 6;
 
 	#ifdef _DEBUG
 	assert((frontIndexCount >= 3 || frontIndexCount == 0) &&

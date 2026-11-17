@@ -346,13 +346,13 @@ using namespace ox::scene;
 				textureValue = 0;
 
 				if (n->getMaterialCount())
-					textureValue = (int)(long)(n->getMaterial(0).Texture1);
+					textureValue = n->getMaterial(0).Texture1;
 
 				node = n;
 			}
 
 			ISceneNode* node;
-			int textureValue;
+			void* textureValue;
 
 			bool operator < (const DefaultNodeEntry& other) const
 			{

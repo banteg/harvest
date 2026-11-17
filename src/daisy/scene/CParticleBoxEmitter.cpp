@@ -50,7 +50,7 @@ int CParticleBoxEmitter::emitt(unsigned int now, unsigned int timeSinceLastCall,
 
 	if (Time > everyWhatMillisecond)
 	{
-		Particles.resize(0);
+		Particles.clear();
 		int amount = (int)((Time / everyWhatMillisecond) + 0.5f);
         Time = 0;
 		SParticle p;
@@ -73,8 +73,8 @@ int CParticleBoxEmitter::emitt(unsigned int now, unsigned int timeSinceLastCall,
 			if (MaxAngleDegrees)
 			{
 				ox::core::CVector3d<float> tgt = Direction;
-				{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.X -= (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X*cs - tgt.Y*sn, tgt.X*sn + tgt.Y*cs, tgt.Z); tgt.X += (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
-				{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.Z -= (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X, tgt.Y*cs - tgt.Z*sn, tgt.Y*sn + tgt.Z*cs); tgt.Z += (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
+				{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.X -= (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X*cs - tgt.Y*sn, tgt.X*sn + tgt.Y*cs, tgt.Z); tgt.X += (ox::core::CVector3d<float>(0,0,0)).X; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
+				{ double deg = ((ox::algo::CRand::rand()%(MaxAngleDegrees*2)) - MaxAngleDegrees) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); tgt.Z -= (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y -= (ox::core::CVector3d<float>(0,0,0)).Y; tgt.set(tgt.X, tgt.Y*cs - tgt.Z*sn, tgt.Y*sn + tgt.Z*cs); tgt.Z += (ox::core::CVector3d<float>(0,0,0)).Z; tgt.Y += (ox::core::CVector3d<float>(0,0,0)).Y; }
 				p.vector = tgt;
 			}
 

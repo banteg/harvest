@@ -499,7 +499,10 @@ ox::core::CString<char> CHarvestProfile::getAchievementSpriteName(int achievemen
         int number = achievement + 1;
         ox::core::CString<char> name = "Achievement";
         if (number < 10)
-            name.append(ox::core::CString<char>("0"));
+        {
+            ox::core::CString<char> zero("0");
+            name.append(zero);
+        }
         name.append(number);
         return ox::core::CString<char>(name);
     }
@@ -507,7 +510,10 @@ ox::core::CString<char> CHarvestProfile::getAchievementSpriteName(int achievemen
     int number = achievement - (ACHIEVEMENT_MAIN_COUNT - 1);
     ox::core::CString<char> name = "MiniAchievement";
     if (number < 10)
-        name.append(ox::core::CString<char>("0"));
+    {
+        ox::core::CString<char> zero("0");
+        name.append(zero);
+    }
     name.append(number);
     switch (planet)
     {

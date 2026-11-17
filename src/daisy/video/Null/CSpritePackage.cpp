@@ -50,7 +50,7 @@ bool CSpritePackage::load(ox::io::IReadFile* file, const char* filename)
     }
     Filename = filename;
 
-    file->seek(TextureCount * TextureDataSize + HeaderSize);
+    file->seek(TextureDataSize * TextureCount + HeaderSize);
     for (int i = 0; i < SpriteCount; ++i)
     {
         SSpriteImage image;

@@ -97,7 +97,8 @@ void CVideoOpenGL::loadExtensions()
 
     // "major.minor..."
     int major = parts[0][0] - '0';
-    if (major > 1 || (parts[0][2] - '0' > 1 && major == 1))
+    int minor = parts[0][2] - '0';
+    if (major > 1 || (minor > 1 && major == 1))
         os::Printer::log("OpenGL driver version is 1.2 or better.", ox::event::ELL_INFORMATION);
     else
         os::Printer::log("OpenGL driver version is not 1.2 or better.", ox::event::ELL_WARNING);
@@ -204,8 +205,8 @@ void CVideoOpenGL::loadExtensions()
         // Original bug: openDisplay returns XOpenDisplay(0), a new X connection that is never
         // closed.
         Display* display = Device->openDisplay();
-        int major = 0;
-        int minor = 0;
+        int major;
+        int minor;
         glXQueryVersion(display, &major, &minor);
 
         __GLXextFuncPtr (*load)(const GLubyte*) = glXGetProcAddressARB;
@@ -818,16 +819,17 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = (float)(poss.LowerRightCorner.X + xPlus) * xFact;
     npos.LowerRightCorner.Y = (float)(yPlus - poss.LowerRightCorner.Y) * yFact;
 
-    Vertices2D[Current2DQuadCount * 4 + 0] =
+    const int index = Current2DQuadCount * 4;
+    Vertices2D[index + 0] =
         ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
             tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 1] =
+    Vertices2D[index + 1] =
         ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, color,
             tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 2] =
+    Vertices2D[index + 2] =
         ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
             tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 3] =
+    Vertices2D[index + 3] =
         ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, color,
             tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
@@ -852,7 +854,7 @@ void CVideoOpenGL::switch2dRendering(ox::video::ITexture* texture, bool useAlpha
 
             glBegin(GL_QUADS);
 
-            for (int i = 0; i < Current2DQuadCount * 4; i += 4)
+            for (int i = 0; i < (Current2DQuadCount << 2); i += 4)
             {
                 for (int j = 0; j < 4; ++j)
                 {
@@ -999,16 +1001,17 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
     npos.LowerRightCorner.X = ((float)(poss.LowerRightCorner.X + xPlus) + 0.5f) * xFact;
     npos.LowerRightCorner.Y = ((float)(yPlus - poss.LowerRightCorner.Y) + 0.5f) * yFact;
 
-    Vertices2D[Current2DQuadCount * 4 + 0] =
+    const int index = Current2DQuadCount * 4;
+    Vertices2D[index + 0] =
         ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[0],
             tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 1] =
+    Vertices2D[index + 1] =
         ox::video::S3DVertex(npos.LowerRightCorner.X, npos.UpperLeftCorner.Y, 0, 0, 0, 0, colors[3],
             tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 2] =
+    Vertices2D[index + 2] =
         ox::video::S3DVertex(npos.LowerRightCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[2],
             tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 3] =
+    Vertices2D[index + 3] =
         ox::video::S3DVertex(npos.UpperLeftCorner.X, npos.LowerRightCorner.Y, 0, 0, 0, 0, colors[1],
             tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
@@ -1026,10 +1029,10 @@ void CVideoOpenGL::drawScaled2DImage(ox::video::ITexture* texture, const ox::cor
         return;
 
     float width = sourceRect.getWidth() * scale;
-    float height = sourceRect.getHeight() * scale;
 
     ox::core::CPosition2d<float> upperLeft(destPos.X, destPos.Y);
     ox::core::CPosition2d<float> upperRight(destPos.X + width, destPos.Y);
+    float height = sourceRect.getHeight() * scale;
     ox::core::CPosition2d<float> lowerLeft(destPos.X, destPos.Y + height);
     ox::core::CPosition2d<float> lowerRight(destPos.X + width, destPos.Y + height);
 
@@ -1083,19 +1086,20 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    Vertices2D[Current2DQuadCount * 4 + 0] =
+    const int index = Current2DQuadCount * 4;
+    Vertices2D[index + 0] =
         ox::video::S3DVertex(((float)(upperLeft.X + xPlus) + 0.5f) * xFact,
             ((float)(yPlus - upperLeft.Y) + 0.5f) * yFact,
             0, 0, 0, 0, colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 1] =
+    Vertices2D[index + 1] =
         ox::video::S3DVertex(((float)(upperRight.X + xPlus) + 0.5f) * xFact,
             ((float)(yPlus - upperRight.Y) + 0.5f) * yFact,
             0, 0, 0, 0, colors[3], tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 2] =
+    Vertices2D[index + 2] =
         ox::video::S3DVertex(((float)(lowerRight.X + xPlus) + 0.5f) * xFact,
             ((float)(yPlus - lowerRight.Y) + 0.5f) * yFact,
             0, 0, 0, 0, colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 3] =
+    Vertices2D[index + 3] =
         ox::video::S3DVertex(((float)(lowerLeft.X + xPlus) + 0.5f) * xFact,
             ((float)(yPlus - lowerLeft.Y) + 0.5f) * yFact,
             0, 0, 0, 0, colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
@@ -1143,16 +1147,17 @@ void CVideoOpenGL::draw2DImage(ox::video::ITexture* texture, const ox::core::CPo
         tempColors = true;
     }
 
-    Vertices2D[Current2DQuadCount * 4 + 0] =
+    const int index = Current2DQuadCount * 4;
+    Vertices2D[index + 0] =
         ox::video::S3DVertex((upperLeft.X + xPlus) * xFact, (yPlus - upperLeft.Y) * yFact, 0, 0, 0, 0,
             colors->Colors[0], tcoords.UpperLeftCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 1] =
+    Vertices2D[index + 1] =
         ox::video::S3DVertex((upperRight.X + xPlus) * xFact, (yPlus - upperRight.Y) * yFact, 0, 0, 0, 0,
             colors->Colors[3], tcoords.LowerRightCorner.X, tcoords.UpperLeftCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 2] =
+    Vertices2D[index + 2] =
         ox::video::S3DVertex((lowerRight.X + xPlus) * xFact, (yPlus - lowerRight.Y) * yFact, 0, 0, 0, 0,
             colors->Colors[2], tcoords.LowerRightCorner.X, tcoords.LowerRightCorner.Y);
-    Vertices2D[Current2DQuadCount * 4 + 3] =
+    Vertices2D[index + 3] =
         ox::video::S3DVertex((lowerLeft.X + xPlus) * xFact, (yPlus - lowerLeft.Y) * yFact, 0, 0, 0, 0,
             colors->Colors[1], tcoords.UpperLeftCorner.X, tcoords.LowerRightCorner.Y);
     ++Current2DQuadCount;
@@ -2241,17 +2246,16 @@ bool CVideoOpenGL::saveJpegScreenshot(const char* directory, const char* name)
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
 
-    const int width = viewport[2];
-    const int height = viewport[3];
+    const int& width = viewport[2];
+    const int& height = viewport[3];
 
     unsigned char* pixels = new unsigned char[width * height * 3];
     glReadPixels(viewport[0], viewport[1], width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
     // OpenGL's rows run bottom up; flip them
-    const int pitch = width * 3;
-    unsigned char* flipped = new unsigned char[pitch * height];
+    unsigned char* flipped = new unsigned char[width * height * 3];
     for (int y = 0; y < height; ++y)
-        memcpy(flipped + (height - 1 - y) * pitch, pixels + y * pitch, pitch);
+        memcpy(flipped + (height - 1 - y) * (width * 3), pixels + y * (width * 3), width * 3);
 
     delete[] pixels;
 

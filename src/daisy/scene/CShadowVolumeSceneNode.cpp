@@ -338,7 +338,7 @@ void CShadowVolumeSceneNode::setMeshToRenderFrom(IMesh* mesh)
 
 		int vtxcnt = b->getVertexCount();
 
-		switch(b->getVertexType())
+		switch((int)b->getVertexType())
 		{
 		case ox::video::EVT_STANDARD:
 			{

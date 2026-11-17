@@ -2116,7 +2116,7 @@ void CLuaManager::hookWaveButton(int button)
 {
     if (pushHooker("waveButton", 20))
     {
-        lua_pushinteger(L, button + 1);
+        lua_pushinteger(L, (lua_Integer)button + 1);
         if (lua_pcall(L, 2, 1, 0) == 0)
             checkHooker(20);
     }

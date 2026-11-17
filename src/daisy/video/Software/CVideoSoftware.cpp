@@ -210,7 +210,13 @@ bool CVideoSoftware::beginScene(bool backBuffer, bool zBuffer, SColor color)
 	CVideoNull::beginScene(backBuffer, zBuffer, color);
 
 	if (backBuffer)
-		BackBuffer->fill(ox::video::toA1R5G5B5(color.color));
+	{
+		int r = color.color >> 16;
+		int g = color.color >> 8;
+		int b = color.color;
+		bool alpha = (color.color & 0xff000000) != 0;
+		BackBuffer->fill((alpha << 15) | (((r >> 3) & 0x1f) << 10) | (((g >> 3) & 0x1f) << 5) | ((b >> 3) & 0x1f));
+	}
 
 	if (ZBuffer)
 		ZBuffer->clear();
@@ -220,12 +226,12 @@ bool CVideoSoftware::beginScene(bool backBuffer, bool zBuffer, SColor color)
 
 
 //! sets a render target
-void CVideoSoftware::setRenderTarget(ox::video::ITexture* texture)
+bool CVideoSoftware::setRenderTarget(ox::video::ITexture* texture)
 {
 	if (texture->getDriverType() != EDT_SOFTWARE)
 	{
 		os::Printer::log("Fatal Error: Tried to set a texture not owned by this driver.", ox::event::ELL_ERROR);
-		return;
+		return false;
 	}
 
 	if (RenderTargetTexture)
@@ -240,6 +246,8 @@ void CVideoSoftware::setRenderTarget(ox::video::ITexture* texture)
 	}
 	else
 		setRenderTarget((video::CImage*)0);
+
+	return true;
 }
 
 
@@ -587,7 +595,11 @@ void CVideoSoftware::draw2DLine(const ox::core::CPosition2d<int>& start,
 								const ox::core::CPosition2d<int>& end,
 								SColor color)
 {
-	((CImage*)BackBuffer)->drawLine(start, end, ox::video::toA1R5G5B5(color.color));
+	int r = color.color >> 16;
+	int g = color.color >> 8;
+	int b = color.color;
+	bool alpha = (color.color & 0xff000000) != 0;
+	((CImage*)BackBuffer)->drawLine(start, end, (alpha << 15) | (((r >> 3) & 0x1f) << 10) | (((g >> 3) & 0x1f) << 5) | ((b >> 3) & 0x1f));
 }
 
 
@@ -606,7 +618,11 @@ void CVideoSoftware::draw2DImage(ox::video::ITexture* texture, const ox::core::C
 		}
 
 		if (useAlphaChannelOfTexture)
-			((CSoftwareTexture*)texture)->getImage()->copyToWithAlpha(BackBuffer, destPos, sourceRect, ox::video::toA1R5G5B5(color.color), clipRect);
+		{
+			unsigned int c = color.color;
+			unsigned int alpha = (c & 0xff000000) != 0;
+			((CSoftwareTexture*)texture)->getImage()->copyToWithAlpha(BackBuffer, destPos, sourceRect, (alpha << 15) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | (((int)c >> 3) & 0x1f), clipRect);
+		}
 		else
 			((CSoftwareTexture*)texture)->getImage()->copyTo(BackBuffer, destPos, sourceRect, clipRect);
 	}
@@ -670,6 +686,15 @@ IVideoDriver* createSoftwareDriver(const ox::core::CDimension2d<int>& windowSize
 	return new CVideoSoftware(windowSize, fullscreen, io, presenter);
 }
 
+
+void CVideoSoftware::useMaterialShaderFor2D(bool enabled)
+{
+}
+
+bool CVideoSoftware::isFullscreen()
+{
+    return false;
+}
 
 } // end namespace video
 } // end namespace daisy

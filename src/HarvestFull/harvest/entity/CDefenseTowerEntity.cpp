@@ -189,9 +189,9 @@ CDefenseTowerEntity::~CDefenseTowerEntity()
 int CDefenseTowerEntity::updateLogic(float frameDelta)
 {
     updateTowerLinks();
+    int alpha = 162;
     bool showLaser = false;
     bool noHitParticle = false;
-    int alpha = 162;
     if (Energy.getValue() > 0.0f)
     {
         if (ForwardTarget.Id > 0 && ForwardTarget.Entity)
@@ -333,13 +333,13 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
     else
         stopShootingAndClearTarget();
     Color = Energy.getValue() > 0.0f ? ox::video::SColor(0xffffffff) : ox::video::SColor(0xff80a280);
-    if (!Shooting)
+    if (Shooting)
     {
-        if (SpriteIndex >= 72)
-            SpriteIndex -= 72;
+        if (SpriteIndex < 72)
+            SpriteIndex += 72;
     }
-    else if (SpriteIndex < 72)
-        SpriteIndex += 72;
+    else if (SpriteIndex >= 72)
+        SpriteIndex -= 72;
     if (Shooting || showLaser)
     {
         DrawLaser = true;
@@ -355,7 +355,9 @@ int CDefenseTowerEntity::updateLogic(float frameDelta)
             Beam.End.Y = TargetPosition.Y;
         }
         int laserAlpha = int(sin(LaserPhase) * 60.0) + alpha;
-        Beam.Color = ox::video::SColor(ox::core::min_(laserAlpha, 255), 255, 255, 255);
+        if (laserAlpha >= 255)
+            laserAlpha = 255;
+        Beam.Color = ox::video::SColor(laserAlpha, 255, 255, 255);
         if (noHitParticle)
         {
             if (HitParticle)
@@ -472,9 +474,32 @@ bool CDefenseTowerEntity::rotateTowardsTarget(float frameDelta)
     return finished;
 }
 
-bool CDefenseTowerEntity::isForwardTargetShooting()
+int CDefenseTowerEntity::getAlienKillCount()
 {
-    return ForwardTargetShooting;
+    return Kills;
+}
+
+void CDefenseTowerEntity::stopShootingAndClearTarget()
+{
+    Target.Entity = 0;
+    Target.Id = -1;
+    Shooting = false;
+    TargetPosition.Z = -1;
+}
+
+void CDefenseTowerEntity::updateSprite(float frameDelta)
+{
+    if (Beam.Beam)
+        Beam.Beam->update(frameDelta);
+    if (Sprites[SpriteIndex])
+        Sprites[SpriteIndex]->update(frameDelta);
+}
+
+bool CDefenseTowerEntity::addToRenderList(const ox::core::CRect<float>& visibleArea)
+{
+    if (visibleArea.isPointInside(ox::core::CPosition2d<float>(Position.X, Position.Y)))
+        return true;
+    return visibleArea.isPointInside(ox::core::CPosition2d<float>(Beam.End.X, Beam.End.Y));
 }
 
 int CDefenseTowerEntity::getBackTargetCount(bool shooting)
@@ -482,12 +507,14 @@ int CDefenseTowerEntity::getBackTargetCount(bool shooting)
     return shooting ? ShootingBackTargetCount : BackTargetCount;
 }
 
-inline void CDefenseTowerEntity::stopShootingAndClearTarget()
+bool CDefenseTowerEntity::isForwardingToThis(CDefenseTowerEntity* tower)
 {
-    Target.Entity = 0;
-    Target.Id = -1;
-    Shooting = false;
-    TargetPosition.Z = -1;
+    if (this == tower)
+        return true;
+    if (ForwardTarget.Entity)
+        return ForwardTarget.Entity == tower
+            || ((CDefenseTowerEntity*)ForwardTarget.Entity)->isForwardingToThis(tower);
+    return false;
 }
 
 float CDefenseTowerEntity::getTotalRange()
@@ -503,6 +530,32 @@ float CDefenseTowerEntity::getTotalRange()
     return 200.0f;
 }
 
+bool CDefenseTowerEntity::isLinked()
+{
+    return ForwardTarget.Entity != 0;
+}
+
+bool CDefenseTowerEntity::isLinkedTo(CDefenseTowerEntity* tower)
+{
+    return ForwardTarget.Entity == tower;
+}
+
+void CDefenseTowerEntity::makeEndLaser(CDefenseTowerEntity* tower)
+{
+    CDefenseTowerEntity* next = (CDefenseTowerEntity*)ForwardTarget.Entity;
+    if (tower)
+        handleSelectionDraggedToEntity(tower);
+    else
+        handleSelectionDraggedToNothing();
+    if (next)
+        next->makeEndLaser(this);
+}
+
+int CDefenseTowerEntity::getNumBackTargets()
+{
+    return BackTargetCount - 1;
+}
+
 float CDefenseTowerEntity::getTotalDamage(bool shooting)
 {
     if (shooting && !Shooting)
@@ -512,9 +565,39 @@ float CDefenseTowerEntity::getTotalDamage(bool shooting)
     return (getBackTargetCount(shooting) - 1) * 5.5f + 11.0f;
 }
 
-inline int CDefenseTowerEntity::getAlienKillCount()
+bool CDefenseTowerEntity::isForwardTargetShooting()
 {
-    return Kills;
+    return ForwardTargetShooting;
+}
+
+ox::video::ISpriteAnimationState* CDefenseTowerEntity::getCurrentDisplaySprite()
+{
+    return Sprites[SpriteIndex];
+}
+
+bool CDefenseTowerEntity::wantsSpark()
+{
+    return Energy.getValue() + 2.75f <= 20.0f;
+}
+
+int CDefenseTowerEntity::onSpark(CSparkEntity* spark)
+{
+    if (Energy.getValue() <= 17.25f)
+    {
+        Energy.setValue(ox::core::min_(Energy.getValue() + 2.75f, 20.0f));
+        return 0;
+    }
+    return -1;
+}
+
+void CDefenseTowerEntity::updateForwardTargetShooting()
+{
+    if (Energy.getValue() <= 0.0f)
+        ForwardTargetShooting = false;
+    else if (ForwardTarget.Entity)
+        ForwardTargetShooting = ((CDefenseTowerEntity*)ForwardTarget.Entity)->Shooting;
+    else
+        ForwardTargetShooting = Shooting;
 }
 
 void CDefenseTowerEntity::updateBackTargetCount()
@@ -544,31 +627,6 @@ void CDefenseTowerEntity::updateBackTargetCount()
             ox::event::gp_subscriberList->OnEvent(event);
         }
     }
-}
-
-void CDefenseTowerEntity::updateForwardTargetShooting()
-{
-    if (Energy.getValue() <= 0.0f)
-        ForwardTargetShooting = false;
-    else if (ForwardTarget.Entity)
-        ForwardTargetShooting = ((CDefenseTowerEntity*)ForwardTarget.Entity)->Shooting;
-    else
-        ForwardTargetShooting = Shooting;
-}
-
-void CDefenseTowerEntity::updateSprite(float frameDelta)
-{
-    if (Beam.Beam)
-        Beam.Beam->update(frameDelta);
-    if (Sprites[SpriteIndex])
-        Sprites[SpriteIndex]->update(frameDelta);
-}
-
-bool CDefenseTowerEntity::addToRenderList(const ox::core::CRect<float>& visibleArea)
-{
-    if (visibleArea.isPointInside(ox::core::CPosition2d<float>(Position.X, Position.Y)))
-        return true;
-    return visibleArea.isPointInside(ox::core::CPosition2d<float>(Beam.End.X, Beam.End.Y));
 }
 
 void CDefenseTowerEntity::handleRightClickAction(const ox::core::CPosition2d<float>& position)
@@ -646,16 +704,6 @@ bool CDefenseTowerEntity::handleSelectionDraggedToEntity(CEntity* entity)
     return false;
 }
 
-bool CDefenseTowerEntity::isForwardingToThis(CDefenseTowerEntity* tower)
-{
-    if (this == tower)
-        return true;
-    if (ForwardTarget.Entity)
-        return ForwardTarget.Entity == tower
-            || ((CDefenseTowerEntity*)ForwardTarget.Entity)->isForwardingToThis(tower);
-    return false;
-}
-
 void CDefenseTowerEntity::notifyNewBackTarget(CDefenseTowerEntity* tower)
 {
     ox::entity::SEntityReference* reference = new ox::entity::SEntityReference;
@@ -663,32 +711,6 @@ void CDefenseTowerEntity::notifyNewBackTarget(CDefenseTowerEntity* tower)
     reference->Id = tower->getId();
     reference->UpdateCounter = gp_entityManager->getUpdateCounter();
     BackTargets.push_back(reference);
-}
-
-bool CDefenseTowerEntity::isLinked()
-{
-    return ForwardTarget.Entity != 0;
-}
-
-bool CDefenseTowerEntity::isLinkedTo(CDefenseTowerEntity* tower)
-{
-    return ForwardTarget.Entity == tower;
-}
-
-void CDefenseTowerEntity::makeEndLaser(CDefenseTowerEntity* tower)
-{
-    CDefenseTowerEntity* next = (CDefenseTowerEntity*)ForwardTarget.Entity;
-    if (tower)
-        handleSelectionDraggedToEntity(tower);
-    else
-        handleSelectionDraggedToNothing();
-    if (next)
-        next->makeEndLaser(this);
-}
-
-int CDefenseTowerEntity::getNumBackTargets()
-{
-    return BackTargetCount - 1;
 }
 
 ox::core::CString<wchar_t> CDefenseTowerEntity::getInfoString()
@@ -719,21 +741,6 @@ ox::core::CString<wchar_t> CDefenseTowerEntity::getOperatorString()
     return ox::core::CString<wchar_t>(L"");
 }
 
-int CDefenseTowerEntity::onSpark(CSparkEntity* spark)
-{
-    if (Energy.getValue() <= 17.25f)
-    {
-        Energy.setValue(ox::core::min_(Energy.getValue() + 2.75f, 20.0f));
-        return 0;
-    }
-    return -1;
-}
-
-bool CDefenseTowerEntity::wantsSpark()
-{
-    return Energy.getValue() + 2.75f <= 20.0f;
-}
-
 inline void CDefenseTowerEntity::renderGroundLayer(const ox::core::CPosition2d<float>& camera,
     const ox::core::CRect<int>& viewPort)
 {
@@ -756,11 +763,6 @@ void CDefenseTowerEntity::render(const ox::core::CPosition2d<float>& camera,
         float progress = Energy.getValue() / 20.0f;
         renderSelfProgress(camera, viewPort, progress, ENERGY_PROGRESS_COLOR);
     }
-}
-
-ox::video::ISpriteAnimationState* CDefenseTowerEntity::getCurrentDisplaySprite()
-{
-    return Sprites[SpriteIndex];
 }
 
 void CDefenseTowerEntity::writeEntityData(ox::io::IWriteFile* file)

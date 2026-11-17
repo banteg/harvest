@@ -661,7 +661,11 @@ bool CAnimatedMeshMD2::loadFile(ox::io::IReadFile* file)
 	// reallocate interpolate buffer
 	if (header.numFrames)
 	{
+#ifdef HARVEST_PORT
 		InterpolateBuffer.resize(FrameList[0].size());
+#else
+		InterpolateBuffer.reserve(FrameList[0].size());
+#endif
 
 		int count = FrameList[0].size();
 		for (i=0; i<count; ++i)

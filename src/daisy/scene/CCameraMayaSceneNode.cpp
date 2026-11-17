@@ -244,8 +244,8 @@ void CCameraMayaSceneNode::animate()
 	Pos.Y = Target.Y;
 	Pos.Z = Target.Z;
 
-	{ double deg = (nRotY) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Y -= (Target).Y; Pos.set(Pos.X*cs - Pos.Y*sn, Pos.X*sn + Pos.Y*cs, Pos.Z); Pos.X += (Target).X; Pos.Y += (Target).Y; }
-	{ double deg = (-nRotX) * ox::core::GRAD_PI2; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Z -= (Target).Z; Pos.set(Pos.X*cs - Pos.Z*sn, Pos.Y, Pos.X*sn + Pos.Z*cs); Pos.X += (Target).X; Pos.Z += (Target).Z; }
+	{ double deg = (nRotY) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Y -= (Target).Y; Pos.set(Pos.X*cs - Pos.Y*sn, Pos.X*sn + Pos.Y*cs, Pos.Z); Pos.X += (Target).X; Pos.Y += (Target).Y; }
+	{ double deg = (-nRotX) * 0.017453290522098541; float cs = (float)cos(deg); float sn = (float)sin(deg); Pos.X -= (Target).X; Pos.Z -= (Target).Z; Pos.set(Pos.X*cs - Pos.Z*sn, Pos.Y, Pos.X*sn + Pos.Z*cs); Pos.X += (Target).X; Pos.Z += (Target).Z; }
 
 	// Rotation Error ----------------------------
 

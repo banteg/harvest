@@ -223,7 +223,10 @@ void CAlienEntity::replaceWithLookerSprites()
     Sprites[46] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0046"));
     Sprites[47] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0047"));
     Sprites[48] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0048"));
-    Sprites[49] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0049"));
+    {
+        ox::core::CString<char> spriteName("AlienLooker0049");
+        Sprites[49] = gp_spritePackage->addNewAnimationState(spriteName);
+    }
     Sprites[50] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0050"));
     Sprites[51] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0051"));
     Sprites[52] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("AlienLooker0052"));
@@ -342,7 +345,10 @@ void CAlienEntity::replaceWithMagnetoSprites()
     Sprites[70] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("BrainBottom0070"));
     Sprites[71] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("BrainBottom0071"));
     Sprites[72] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("BrainRotor"));
-    Sprites[73] = gp_spritePackage->addNewAnimationState(ox::core::CString<char>("BrainWave"));
+    {
+        ox::core::CString<char> spriteName("BrainWave");
+        Sprites[73] = gp_spritePackage->addNewAnimationState(spriteName);
+    }
 }
 
 void CAlienEntity::replaceWithMegaSprites()

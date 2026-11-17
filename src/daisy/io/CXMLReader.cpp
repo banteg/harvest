@@ -4,9 +4,10 @@
 
 #include <iostream>
 #include "daisy/io/CTextReader.h"
-#include "ox/core/CString.h"
-#include "ox/io/IXMLReader.h"
 #include "CXMLReader.h"
+#include "ox/core/CString.h"
+#include "ox/core/CStringFunctions.h"
+#include "ox/io/IXMLReader.h"
 #include <math.h>
 #include "daisy/other/fast_atof.h"
 #include <string.h>
@@ -300,7 +301,7 @@ float CXMLReader::getAttributeValueAsFloat(const wchar_t* name)
 	if (!attr)
 		return 0;
 
-	ox::core::CString<char> c = attr->Value.c_str();
+	ox::core::CString<char> c = ox::core::CStringFunctions::wideToAnsi(attr->Value.c_str());
 	return core::fast_atof(c.c_str());
 }
 

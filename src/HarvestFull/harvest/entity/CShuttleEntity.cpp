@@ -303,15 +303,15 @@ void CShuttleEntity::resetAllAiByMe(bool copyMine)
                     LAP_CHECKPOINTS[i].X - 125.0f, LAP_CHECKPOINTS[i].X + 125.0f);
                 shuttle->EndTargets[i].Y = ox::core::clamp(EndTargets[i].Y + (ox::algo::CRand::rand() % 11 - 5),
                     LAP_CHECKPOINTS[i].Y - 125.0f, LAP_CHECKPOINTS[i].Y + 125.0f);
-                if (ox::algo::CRand::rand() % 15 == 0)
-                {
-                    shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
-                    shuttle->MiddleTargets[i].Y = (LAP_CHECKPOINTS[i].Y + LAP_CHECKPOINTS[(i - 1) % 14].Y) * .5f;
-                }
-                else
+                if (ox::algo::CRand::rand() % 15 != 0)
                 {
                     shuttle->MiddleTargets[i].X = MiddleTargets[i].X + (ox::algo::CRand::rand() % 51 - 25);
                     shuttle->MiddleTargets[i].Y = MiddleTargets[i].Y + (ox::algo::CRand::rand() % 51 - 25);
+                }
+                else
+                {
+                    shuttle->MiddleTargets[i].X = (LAP_CHECKPOINTS[i].X + LAP_CHECKPOINTS[(i - 1) % 14].X) * .5f;
+                    shuttle->MiddleTargets[i].Y = (LAP_CHECKPOINTS[i].Y + LAP_CHECKPOINTS[(i - 1) % 14].Y) * .5f;
                 }
             }
         }

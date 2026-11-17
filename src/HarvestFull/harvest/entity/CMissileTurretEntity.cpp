@@ -125,10 +125,9 @@ CAlienEntity* CMissileTurretEntity::findPriorityAlien(const ox::core::CVector3d<
                     }
                 }
             }
-        if (!candidates.empty())
-            best = static_cast<CAlienEntity*>(candidates[ox::algo::CRand::rand() % candidates.size()]);
-        else
-            best = 0;
+        if (candidates.empty())
+            return 0;
+        best = static_cast<CAlienEntity*>(candidates[ox::algo::CRand::rand() % candidates.size()]);
     }
     else
     {
@@ -177,7 +176,7 @@ CAlienEntity* CMissileTurretEntity::findPriorityAlien(const ox::core::CVector3d<
 
 int CMissileTurretEntity::updateLogic(float frameDelta)
 {
-    if (Sparks >= getRequiredSparks())
+    if (getRequiredSparks() <= Sparks)
     {
         if (!Launching && SpriteIndex != 1)
         {
@@ -191,17 +190,19 @@ int CMissileTurretEntity::updateLogic(float frameDelta)
                 {
                     if (Type == 14)
                     {
-                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        const ox::core::CVector3d<float> position = alien->getPosition();
+                        const ox::core::CVector3d<float>& target = position;
                         TargetPosition.X = target.X;
-                        TargetPosition.Y = target.Y;
                         BurstTime = 0;
+                        TargetPosition.Y = target.Y;
                         BurstCount = 4;
                         SpriteIndex = 1;
                         Sprites[1]->reset();
                     }
                     else if (Type == 13)
                     {
-                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        const ox::core::CVector3d<float> position2 = alien->getPosition();
+                        const ox::core::CVector3d<float>& target = position2;
                         TargetPosition.X = target.X;
                         TargetPosition.Y = target.Y;
                         TargetId = alien->getId();
@@ -217,7 +218,8 @@ int CMissileTurretEntity::updateLogic(float frameDelta)
                         ox::algo::CRand::rand();
                         ox::algo::CRand::rand();
                         ox::algo::CRand::rand();
-                        const ox::core::CVector3d<float>& target = alien->getPosition();
+                        const ox::core::CVector3d<float> position3 = alien->getPosition();
+                        const ox::core::CVector3d<float>& target = position3;
                         TargetPosition.X = target.X;
                         TargetPosition.Y = target.Y;
                         ox::core::CVector2d<float> direction(alien->getMovementTarget().X - TargetPosition.X,
@@ -532,18 +534,21 @@ int CMissileEntity::updateLogic(float frameDelta)
             float dx = TargetPosition.X - Position.X;
             float dy = TargetPosition.Y - Position.Y;
             TargetPosition.Z = ox::core::min_(ox::core::max_(target.Z,
-                sqrtf(dx * dx + dy * dy) * 0.5f), 300.0f);
+                sqrtf(dy * dy + dx * dx) * 0.5f), 300.0f);
             ox::core::CVector3d<float> direction(dx, dy, TargetPosition.Z - Position.Z);
             if (ox::core::abs_(direction.X) < 15.0f && ox::core::abs_(direction.Y) < 15.0f &&
                 ox::core::abs_(direction.Z) < 15.0f)
             {
                 float damage = 50.0f;
                 CAlienEntity* alien = static_cast<CAlienEntity*>(Target.Entity);
-                if (alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 5.0f, 2) && OwnerId > 0)
+                if (alien->dealDamage(damage, ox::core::CPosition2d<float>(Position.X, Position.Y), 5.0f, 2))
                 {
-                    ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
-                    if (owner && owner->getEntityType() == 13)
-                        static_cast<CMissileTurretEntity*>(owner)->addKillCount(1);
+                    if (OwnerId > 0)
+                    {
+                        ox::entity::COxEntity* owner = gp_entityManager->locateEntity(OwnerId, 0);
+                        if (owner && owner->getEntityType() == 13)
+                            static_cast<CMissileTurretEntity*>(owner)->addKillCount(1);
+                    }
                 }
                 gp_entityManager->appendEntity(new CParticleEntity(Position.X, Position.Y, Position.Z,
                     0, "EagleExplosion"), 4);

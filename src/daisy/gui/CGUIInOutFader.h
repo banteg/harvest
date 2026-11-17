@@ -17,6 +17,8 @@ public:
     CGUIInOutFader(ox::gui::IGUIEnvironment* environment, ox::gui::IGUIElement* parent, int id,
         ox::core::CRect<int> rectangle);
 
+    ~CGUIInOutFader();
+
     //! draws the element and its children
     virtual void draw();
 

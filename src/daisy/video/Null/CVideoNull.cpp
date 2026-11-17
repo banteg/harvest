@@ -825,7 +825,10 @@ void CVideoNull::makeColorKeyTexture(ITexture* texture, SColor color)
         core::CDimension2d<int> dim = texture->getSize();
         int pitch = texture->getPitch() / 2;
 
-        short ref = (0x0 << 15) | (~(0x1 << 15) & toA1R5G5B5(color));
+        unsigned int c = color.color;
+        unsigned int alpha = (c & 0xff000000) != 0;
+        short packed = (alpha << 15) | ((c >> 9) & 0x7c00) | ((c >> 6) & 0x3e0) | (((int)c >> 3) & 0x1f);
+        short ref = (0x0 << 15) | (~(0x1 << 15) & packed);
         short blackalpha = (0x0 << 15) | (~(0x1 << 15) & 0);
 
         for (int x = 0; x < pitch; ++x)

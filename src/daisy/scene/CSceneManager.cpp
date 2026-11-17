@@ -704,7 +704,7 @@ bool CSceneManager::isCulled(ISceneNode* node)
 //! registers a node for rendering it at a specific time.
 void CSceneManager::registerNodeForRendering(ISceneNode* node, E_SCENE_NODE_RENDER_TIME time)
 {
-	switch(time)
+	switch((int)time)
 	{
 	case SNRT_LIGHT_AND_CAMERA:
 		LightAndCameraList.push_back(node);

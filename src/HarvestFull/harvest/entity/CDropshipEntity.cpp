@@ -156,8 +156,10 @@ int CDropshipEntity::updateLogic(float frameDelta)
         ox::core::CVector2d<float> direction(TargetPosition.X - Position.X, TargetPosition.Y - Position.Y);
         ox::core::CVector2d<float> forward(cosf(Angle), sinf(Angle));
         direction.normalize();
-        if ((distance > 424.413147f || direction.X * forward.X + direction.Y * forward.Y > 0) &&
-            turnTowardsTarget(frameDelta))
+        bool aligned = false;
+        if (distance > 424.413147f || direction.X * forward.X + direction.Y * forward.Y > 0)
+            aligned = turnTowardsTarget(frameDelta);
+        if (aligned)
             Speed = ox::core::min_(Speed + 30.0f * frameDelta, 300.0f);
         else
             Speed = ox::core::max_(Speed + -40.0f * frameDelta, 160.0f);
@@ -205,8 +207,8 @@ int CDropshipEntity::updateLogic(float frameDelta)
                     ox::core::CPosition2d<float> aim1(targetPosition1.X, targetPosition1.Y);
                     int targetId1 = target->getId();
                     CMissileEntity* missile = new CMissileEntity(missileX, missileY, aim1, Id, 2, targetId1);
-                    float x1 = missileX + sideX;
                     float y1 = missileY + sideY;
+                    float x1 = missileX + sideX;
                     missile->setPosition(x1, y1, Position.Z - 5.0f);
                     missile->setSpeed(cos((double)Angle) * 300.0, sin((double)Angle) * 300.0, -100.0f);
                     missile->disableRetargeting();
@@ -218,8 +220,8 @@ int CDropshipEntity::updateLogic(float frameDelta)
                     ox::core::CPosition2d<float> aim2(targetPosition2.X, targetPosition2.Y);
                     int targetId2 = target->getId();
                     missile = new CMissileEntity(missileX, missileY, aim2, Id, 2, targetId2);
-                    float x2 = missileX - sideX;
                     float y2 = missileY - sideY;
+                    float x2 = missileX - sideX;
                     missile->setPosition(x2, y2, Position.Z - 5.0f);
                     missile->setSpeed(cos((double)Angle) * 300.0, sin((double)Angle) * 300.0, -100.0f);
                     missile->disableRetargeting();
@@ -258,9 +260,10 @@ int CDropshipEntity::updateLogic(float frameDelta)
                 {
                     float angle = (ox::algo::CRand::rand() % 1000) * .002f * 3.14159274f;
                     float radius = (ox::algo::CRand::rand() % 1000) * .001f * 25.0f;
+                    double sn = sin((double)angle);
                     ox::core::CVector3d<float> start = Position + ox::core::CVector3d<float>(0, 0, -5.0f);
                     gp_entityManager->appendEntity(new CDropshipBulletEntity(20.0f, start,
-                        BulletTarget.Entity->getPosition() + ox::core::CVector3d<float>(sin((double)angle) * radius, 0, 0)), 3);
+                        BulletTarget.Entity->getPosition() + ox::core::CVector3d<float>(sn * radius, 0, 0)), 3);
                     gp_entityManager->appendEntity(new CParticleEntity(start.X, start.Y, start.Z, 0, "DropShipGun"), 4);
                     if (LaughCooldown <= -5.0f)
                         LaughCooldown = (ox::algo::CRand::rand() % 1000) * .001f + 1.0f;
@@ -310,8 +313,10 @@ int CDropshipEntity::updateLogic(float frameDelta)
     {
         SpriteIndex = 72;
         if (Position.Z < 15.0f)
+        {
             SpriteIndex = 73;
-        SoundPitch = ox::core::max_(SoundPitch + -.05f * frameDelta, .75f);
+            SoundPitch = ox::core::max_(SoundPitch + -.05f * frameDelta, .75f);
+        }
         TargetPosition = ox::core::CVector3d<float>(500, 700, 0);
         turnTowardsTarget(frameDelta);
         float distance = ox::core::CMath::getEstimateDistance(ox::core::CPosition2d<float>(Position.X, Position.Y),

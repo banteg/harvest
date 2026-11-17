@@ -19,11 +19,7 @@ namespace settings {
 class CAlienPriorities
 {
 public:
-    CAlienPriorities() : RangeIsImportant(false), HoldFire(false)
-    {
-        for (int i = 0; i < 14; ++i)
-            Priorities[i] = 2;
-    }
+    CAlienPriorities();
     virtual ~CAlienPriorities();
 
     bool read(ox::io::IReadFile* file, int version);
@@ -33,6 +29,9 @@ public:
     void setAlienPriority(int alienType, int priority);
     void setIfRangeIsImportant(bool important);
     void setHoldFire(bool hold);
+    int getAlienPriority(int alienType) const { return Priorities[alienType]; }
+    bool getIfRangeIsImportant() const { return RangeIsImportant; }
+    bool getHoldFire() const { return HoldFire; }
 
     int Priorities[14];
     bool RangeIsImportant;

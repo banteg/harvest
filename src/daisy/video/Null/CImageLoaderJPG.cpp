@@ -1,9 +1,11 @@
 #include <iostream>
+#include "CImageLoaderJPG.h"
 #include "ox/core/CDimension2d.h"
+#include "ox/video/ColorPacking.h"
 #include "ox/video/IImage.h"
 #include "ox/video/IImageLoader.h"
 #include "ox/io/IReadFile.h"
-#include "CImageLoaderJPG.h"
+#include "ox/io/IWriteFile.h"
 #include <string.h>
 #include "CColorConverter.h"
 #include "CImage.h"
@@ -45,7 +47,7 @@ void CImageLoaderJPG::init_source (j_decompress_ptr cinfo)
 
 
 
-unsigned char CImageLoaderJPG::fill_input_buffer (j_decompress_ptr cinfo)
+boolean CImageLoaderJPG::fill_input_buffer (j_decompress_ptr cinfo)
 {
 	// DO NOTHING
 	return 1;
@@ -202,6 +204,39 @@ IImage* CImageLoaderJPG::loadImage(ox::io::IReadFile* file)
 	#endif
 }
 
+
+
+bool CImageLoaderJPG::saveImage(ox::io::IWriteFile* file, unsigned char* data, int width, int height, int channels)
+{
+    if (!data || !file || channels != 3)
+        return false;
+
+    jpeg_compress_struct compressionInfo;
+    jpeg_error_mgr errorManager;
+    JSAMPROW rowPointer[1];
+
+    compressionInfo.err = jpeg_std_error(&errorManager);
+    jpeg_create_compress(&compressionInfo);
+    compressionInfo.in_color_space = JCS_RGB;
+    jpeg_set_defaults(&compressionInfo);
+    jpeg_set_quality(&compressionInfo, 100, TRUE);
+    compressionInfo.image_width = width;
+    compressionInfo.image_height = height;
+    compressionInfo.input_components = 3;
+    jpeg_default_colorspace(&compressionInfo);
+    jpeg_stdio_dest(&compressionInfo, file->getStdioFile());
+    jpeg_start_compress(&compressionInfo, TRUE);
+
+    while (compressionInfo.next_scanline < compressionInfo.image_height)
+    {
+        rowPointer[0] = &data[compressionInfo.next_scanline * (width * 3)];
+        jpeg_write_scanlines(&compressionInfo, rowPointer, 1);
+    }
+
+    jpeg_finish_compress(&compressionInfo);
+    jpeg_destroy_compress(&compressionInfo);
+    return true;
+}
 
 
 //! creates a loader which is able to load jpeg images

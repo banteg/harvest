@@ -418,19 +418,19 @@ int CPlayState::secondInit()
         ActionPanel->setID(GUI_ID_ACTION_PANEL);
         ActionPanel->setReportOnDraw(1);
 
-        InfoText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        InfoText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, L"");
         InfoText->setOverrideColor(WHITE_TEXT_COLOR);
         InfoText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
         InfoText->setOverrideFont(BoldFont);
-        SelectedNameText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        SelectedNameText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, L"");
         SelectedNameText->setOverrideColor(WHITE_TEXT_COLOR);
         SelectedNameText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
         SelectedNameText->setOverrideFont(BoldFont);
-        OperatorText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        OperatorText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, L"");
         OperatorText->setOverrideColor(ox::video::SColor(0xffb1c7ff));
         OperatorText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
         OperatorText->setOverrideFont(SmallFont);
-        MiniStatText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, 0);
+        MiniStatText = GUIEnvironment->addStaticText(L"", ox::core::CRect<int>(0, 0, 90, 20), false, false, ActionPanel, -1, L"");
         MiniStatText->setOverrideColor(ox::video::SColor(0xffb1c7ff));
         MiniStatText->setTextAlignment(ox::gui::EFHA_CENTER, ox::gui::EFVA_CENTER);
         MiniStatText->setOverrideFont(SmallFont);
@@ -1233,7 +1233,10 @@ int CPlayState::updateState(float time)
     if (GameSpeed > 4)
         frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.5f);
     else
-        frameDelta = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.06f);
+    {
+        float clamped = ox::core::clamp(time * GAME_SPEED_MULTIPLIERS[GameSpeed], 0.0f, 0.06f);
+        frameDelta = clamped;
+    }
     switch (GameMode)
     {
     case game::EGM_WAVE:
@@ -1529,6 +1532,8 @@ int CPlayState::updateState(float time)
                 else
                     game::CHighscoreInfo::setNewHighscoreInfo(0);
             }
+            else
+                NextState = 3;
         }
     }
 
@@ -1669,238 +1674,6 @@ void CPlayState::clearSelectedEntity()
         ActionPanel->setVisible(false);
     if (LuaManager)
         LuaManager->updateSelectedBuilding(0);
-}
-
-void CPlayState::newSelectedEntity()
-{
-    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin(); it != MultiSelection.end(); ++it)
-        delete *it;
-    MultiSelection.clear();
-
-    if (!SelectedEntity)
-    {
-        clearSelectedEntity();
-        return;
-    }
-
-    SelectedEntityType = SelectedEntity->getEntityType();
-    if (SelectedNameText)
-    {
-        ox::core::CString<wchar_t> name;
-        if (SelectedEntity->getEntityType() != 16)
-            name = settings::gp_systemConfig->getLocalizedText(
-                entity::ENTITY_KEY_NAMES[SelectedEntity->getEntityType()]).c_str();
-        else
-            name = ((entity::CCreativeEntity*)SelectedEntity)->getBuildingName();
-        if (BoldFont->getDimension(name.c_str()).Width > 100)
-            SelectedNameText->setOverrideFont(SmallFont);
-        else
-            SelectedNameText->setOverrideFont(BoldFont);
-        SelectedNameText->setText(name.c_str());
-        SelectedNameText->activateOffsetScrollingToEnsureVisibleText();
-    }
-
-    if (ActionPanel)
-    {
-        ActionPanel->setVisible(true);
-        int type = SelectedEntity->getEntityType();
-        GuiElements[GUI_ID_DESELECT]->setVisible(true);
-        bool linker = type == 1;
-        bool tower = type == 7;
-        GuiElements[GUI_ID_UNLINK]->setVisible(tower | linker);
-        GuiElements[GUI_ID_OVERCHARGE]->setVisible(linker);
-        bool turret = type == 8;
-        GuiElements[GUI_ID_EAGLE]->setVisible(turret);
-        GuiElements[GUI_ID_TEMPEST]->setVisible(turret);
-        GuiElements[GUI_ID_DEATHSTAR]->setVisible(
-            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0);
-        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setVisible(
-            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0);
-        GuiElements[GUI_ID_END_LASER]->setVisible(tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->isLinked());
-        GuiElements[GUI_ID_SPEED_BUILD]->setVisible(
-            type == 3 && !((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
-        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setVisible(
-            type == 3 && ((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
-        GuiElements[GUI_ID_SELL_HARVESTERS]->setVisible(
-            type == 4 && !((entity::CMineralGatherEntity*)SelectedEntity)->hasMoreMinerals());
-        GuiElements[GUI_ID_REPLACE_PRODUCER]->setVisible(
-            type == 0 && ((entity::CSparkProducerEntity*)SelectedEntity)->isExpired());
-        if (linker)
-            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlink", true);
-        else if (tower)
-            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlinkLaser",
-                true);
-
-        for (int i = GUI_ID_FIRST_LUA_ACTION; i < GUI_ID_WAVE_SEND; ++i)
-        {
-            if (GuiElements[i])
-            {
-                GuiElements[i]->remove();
-                GuiElements[i] = 0;
-            }
-        }
-
-        if (LuaManager && SelectedEntity->getEntityType() != 5)
-        {
-            // The script buttons follow the building's own buttons in a grid of three columns.
-            int slot = 4;
-            if (!tower)
-            {
-                slot = 3;
-                if (!turret && !linker)
-                {
-                    slot = 1;
-                    if (type == 0 || type == 4)
-                        slot = 2;
-                }
-            }
-
-            const char* buildingType = ((entity::CBuildingEntity*)SelectedEntity)->getBuildingType();
-            game::SLuaEntityActionButton* action = 0;
-            for (int id = GUI_ID_FIRST_LUA_ACTION; id < GUI_ID_WAVE_SEND; ++id, ++slot)
-            {
-                action = LuaManager->getNextEntityActionButton(buildingType, action);
-                if (!action)
-                    break;
-
-                action->Id = id - GUI_ID_FIRST_LUA_ACTION;
-                GuiElements[id] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, id, 0);
-                ((ox::gui::IGUIButton*)GuiElements[id])->setAnimations(IngamePackage, "BtnActionDeselect", true);
-                GuiElements[id]->moveTo(ox::core::CPosition2d<int>(slot % 3 * 34 + 6, slot / 3 * 35 + 86));
-                if (action->Upgrade)
-                {
-                    entity::SBuildingInfoItem* info =
-                        entity::gp_buildableItems->getBuildingInfoByEntityId(action->Command.c_str());
-                    if (info)
-                        GuiElements[id]->setHoverItem(getPopupForBuildButton(info->Name.c_str(),
-                            info->Description.c_str(), info->SparkCost.getValue(), info->MineralCost.getValue()));
-                }
-                else
-                    GuiElements[id]->setHoverItem(
-                        getPopupForGuiButton(ox::core::CString<wchar_t>(action->Command.c_str()).c_str()));
-            }
-        }
-    }
-
-    if (LuaManager)
-        LuaManager->updateSelectedBuilding(SelectedEntity);
-}
-
-void CPlayState::updateMultiSelectionReferences()
-{
-    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin(); it != MultiSelection.end();)
-    {
-        entity::gp_entityManager->updateReference(**it, 0, true);
-        if ((*it)->Entity)
-            ++it;
-        else
-        {
-            delete *it;
-            it = MultiSelection.erase(it);
-        }
-    }
-
-    if (MultiSelection.size() == 1)
-    {
-        SelectedEntity = (entity::CEntity*)MultiSelection[0]->Entity;
-        newSelectedEntity();
-    }
-}
-
-void CPlayState::checkWaveReward()
-{
-    int reward = ThreatLevel->getWaveReward();
-    if (reward <= 0 || GameOver)
-        return;
-
-    game::SInfoLineMessage message;
-    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardTitle");
-    message.Portrait = "PortraitCommunications";
-    message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardMessage", reward);
-    addInfoLine(&message, false);
-
-    game::gp_mineralAmount->modifyValue(reward);
-    game::gp_negatedMineralAmount->modifyValue(-reward);
-    if (game::gp_statistics)
-        game::gp_statistics->addLog(GameTime, 0, reward);
-
-    sendCustomEvent(ECE_TUTORIAL_HINT, 31);
-    if (reward >= 16250)
-        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 19);
-    if (!BuildingAttacked)
-        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 23);
-    if (GameTime < 900.0f)
-        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 22);
-}
-
-void CPlayState::updatePlacementPosition()
-{
-    CursorMoved = false;
-    PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
-    PlacementOk = false;
-    if (HasLastPlacement)
-    {
-        if (ox::core::CMath::getSquaredDistance(LastPlacement, PlacementPosition) > 22500.0f)
-        {
-            float angle = ox::core::CMath::getAngleIY(LastPlacement, PlacementPosition);
-            double cosAngle = cos((double)angle);
-            PlacementPosition.X = LastPlacement.X + cosAngle * 149.0;
-            PlacementPosition.Y = LastPlacement.Y + sin((double)angle) * 149.0;
-        }
-    }
-    if (game::gp_world->mayPlaceObjectHere(PlacementPosition, false))
-    {
-        if (entity::gp_entityManager->isBuildingPlacementOk(PlacementPosition,
-                BuildableItems.getEntityRadius(BuildSelection)))
-        {
-            PlacementOk = true;
-            m_2a0 = true;
-        }
-    }
-    if (!PlacementOk)
-        PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
-}
-
-void CPlayState::buyBuildingAtPlacementPos()
-{
-    if (game::gp_mineralAmount->getValue() < BuildableItems.getEntityMineralCost(BuildSelection))
-    {
-        AudioDriver->playSound("BtnDenial.ogg", 1.0f, 0.0f, 1.0f);
-        DenialTime = 3.0f;
-    }
-    else if (PlacementOk)
-    {
-        int cost = BuildableItems.getEntityMineralCost(BuildSelection);
-        game::gp_mineralAmount->modifyValue(-cost);
-        game::gp_negatedMineralAmount->modifyValue(cost);
-        const char* entityId = BuildableItems.getEntityId(BuildSelection);
-        entity::CConstructionEntity* construction =
-            new entity::CConstructionEntity(PlacementPosition.X, PlacementPosition.Y, entityId);
-        entity::gp_entityManager->appendEntity(construction, 0);
-        PlacementOk = false;
-        m_2a0 = false;
-        HasLastPlacement = true;
-        LastPlacement = PlacementPosition;
-        AudioDriver->playSound("PlaceBuilding.ogg", 1.0f, 0.0f, 1.0f);
-        if (LuaManager)
-            LuaManager->hookBuildingPlaced(construction, entityId);
-    }
-}
-
-void CPlayState::updateRecycleBuilding()
-{
-    CursorMoved = false;
-    ox::core::CPosition2d<float> position = getWorldPos(GUIEnvironment->getMousePosition());
-    RecycleTarget = 0;
-    RecycleTarget = entity::gp_entityManager->findClickableEntity(position);
-    if (RecycleTarget)
-    {
-        // Minerals cannot be recycled.
-        if (RecycleTarget->getEntityType() == 5)
-            RecycleTarget = 0;
-        else if (RecycleTarget)
-            RecycleTargetId = RecycleTarget->getId();
-    }
 }
 
 bool CPlayState::OnEvent(const ox::event::SEvent& event)
@@ -3046,6 +2819,238 @@ bool CPlayState::OnEvent(const ox::event::SEvent& event)
     }
 }
 
+void CPlayState::updateMultiSelectionReferences()
+{
+    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin(); it != MultiSelection.end();)
+    {
+        entity::gp_entityManager->updateReference(**it, 0, true);
+        if ((*it)->Entity)
+            ++it;
+        else
+        {
+            delete *it;
+            it = MultiSelection.erase(it);
+        }
+    }
+
+    if (MultiSelection.size() == 1)
+    {
+        SelectedEntity = (entity::CEntity*)MultiSelection[0]->Entity;
+        newSelectedEntity();
+    }
+}
+
+void CPlayState::checkWaveReward()
+{
+    int reward = ThreatLevel->getWaveReward();
+    if (reward <= 0 || GameOver)
+        return;
+
+    game::SInfoLineMessage message;
+    message.Name = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardTitle");
+    message.Portrait = "PortraitCommunications";
+    message.Text = settings::gp_systemConfig->getLocalizedText(L"ingame:waveRewardMessage", reward);
+    addInfoLine(&message, false);
+
+    game::gp_mineralAmount->modifyValue(reward);
+    game::gp_negatedMineralAmount->modifyValue(-reward);
+    if (game::gp_statistics)
+        game::gp_statistics->addLog(GameTime, 0, reward);
+
+    sendCustomEvent(ECE_TUTORIAL_HINT, 31);
+    if (reward >= 16250)
+        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 19);
+    if (!BuildingAttacked)
+        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 23);
+    if (GameTime < 900.0f)
+        sendCustomEvent(ECE_MAIN_ACHIEVEMENT, 22);
+}
+
+void CPlayState::updatePlacementPosition()
+{
+    CursorMoved = false;
+    PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
+    PlacementOk = false;
+    if (HasLastPlacement)
+    {
+        if (ox::core::CMath::getSquaredDistance(LastPlacement, PlacementPosition) > 22500.0f)
+        {
+            float angle = ox::core::CMath::getAngleIY(LastPlacement, PlacementPosition);
+            double cosAngle = cos((double)angle);
+            PlacementPosition.X = LastPlacement.X + cosAngle * 149.0;
+            PlacementPosition.Y = LastPlacement.Y + sin((double)angle) * 149.0;
+        }
+    }
+    if (game::gp_world->mayPlaceObjectHere(PlacementPosition, false))
+    {
+        if (entity::gp_entityManager->isBuildingPlacementOk(PlacementPosition,
+                BuildableItems.getEntityRadius(BuildSelection)))
+        {
+            PlacementOk = true;
+            m_2a0 = true;
+        }
+    }
+    if (!PlacementOk)
+        PlacementPosition = getWorldPos(GUIEnvironment->getMousePosition());
+}
+
+void CPlayState::buyBuildingAtPlacementPos()
+{
+    if (game::gp_mineralAmount->getValue() < BuildableItems.getEntityMineralCost(BuildSelection))
+    {
+        AudioDriver->playSound("BtnDenial.ogg", 1.0f, 0.0f, 1.0f);
+        DenialTime = 3.0f;
+    }
+    else if (PlacementOk)
+    {
+        int cost = BuildableItems.getEntityMineralCost(BuildSelection);
+        game::gp_mineralAmount->modifyValue(-cost);
+        game::gp_negatedMineralAmount->modifyValue(cost);
+        const char* entityId = BuildableItems.getEntityId(BuildSelection);
+        entity::CConstructionEntity* construction =
+            new entity::CConstructionEntity(PlacementPosition.X, PlacementPosition.Y, entityId);
+        entity::gp_entityManager->appendEntity(construction, 0);
+        PlacementOk = false;
+        m_2a0 = false;
+        HasLastPlacement = true;
+        LastPlacement = PlacementPosition;
+        AudioDriver->playSound("PlaceBuilding.ogg", 1.0f, 0.0f, 1.0f);
+        if (LuaManager)
+            LuaManager->hookBuildingPlaced(construction, entityId);
+    }
+}
+
+void CPlayState::updateRecycleBuilding()
+{
+    CursorMoved = false;
+    ox::core::CPosition2d<float> position = getWorldPos(GUIEnvironment->getMousePosition());
+    RecycleTarget = 0;
+    RecycleTarget = entity::gp_entityManager->findClickableEntity(position);
+    if (RecycleTarget)
+    {
+        // Minerals cannot be recycled.
+        if (RecycleTarget->getEntityType() == 5)
+            RecycleTarget = 0;
+        else if (RecycleTarget)
+            RecycleTargetId = RecycleTarget->getId();
+    }
+}
+
+void CPlayState::newSelectedEntity()
+{
+    for (ox::TArray<ox::entity::SEntityReference*>::iterator it = MultiSelection.begin(); it != MultiSelection.end(); ++it)
+        delete *it;
+    MultiSelection.clear();
+
+    if (!SelectedEntity)
+    {
+        clearSelectedEntity();
+        return;
+    }
+
+    SelectedEntityType = SelectedEntity->getEntityType();
+    if (SelectedNameText)
+    {
+        ox::core::CString<wchar_t> name;
+        if (SelectedEntity->getEntityType() != 16)
+            name = settings::gp_systemConfig->getLocalizedText(
+                entity::ENTITY_KEY_NAMES[SelectedEntity->getEntityType()]).c_str();
+        else
+            name = ((entity::CCreativeEntity*)SelectedEntity)->getBuildingName();
+        if (BoldFont->getDimension(name.c_str()).Width > 100)
+            SelectedNameText->setOverrideFont(SmallFont);
+        else
+            SelectedNameText->setOverrideFont(BoldFont);
+        SelectedNameText->setText(name.c_str());
+        SelectedNameText->activateOffsetScrollingToEnsureVisibleText();
+    }
+
+    if (ActionPanel)
+    {
+        ActionPanel->setVisible(true);
+        int type = SelectedEntity->getEntityType();
+        GuiElements[GUI_ID_DESELECT]->setVisible(true);
+        bool linker = type == 1;
+        bool tower = type == 7;
+        GuiElements[GUI_ID_UNLINK]->setVisible(tower | linker);
+        GuiElements[GUI_ID_OVERCHARGE]->setVisible(linker);
+        bool turret = type == 8;
+        GuiElements[GUI_ID_EAGLE]->setVisible(turret);
+        GuiElements[GUI_ID_TEMPEST]->setVisible(turret);
+        GuiElements[GUI_ID_DEATHSTAR]->setVisible(
+            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() == 0);
+        GuiElements[GUI_ID_UNLINK_DEATHSTAR]->setVisible(
+            tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->getNumBackTargets() != 0);
+        GuiElements[GUI_ID_END_LASER]->setVisible(tower && ((entity::CDefenseTowerEntity*)SelectedEntity)->isLinked());
+        GuiElements[GUI_ID_SPEED_BUILD]->setVisible(
+            type == 3 && !((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_UNLINK_SPEED_BUILD]->setVisible(
+            type == 3 && ((entity::CConstructionEntity*)SelectedEntity)->haveMoversBeenCalled());
+        GuiElements[GUI_ID_SELL_HARVESTERS]->setVisible(
+            type == 4 && !((entity::CMineralGatherEntity*)SelectedEntity)->hasMoreMinerals());
+        GuiElements[GUI_ID_REPLACE_PRODUCER]->setVisible(
+            type == 0 && ((entity::CSparkProducerEntity*)SelectedEntity)->isExpired());
+        if (linker)
+            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlink", true);
+        else if (tower)
+            ((ox::gui::IGUIButton*)GuiElements[GUI_ID_UNLINK])->setAnimations(IngamePackage, "BtnActionUnlinkLaser",
+                true);
+
+        for (int i = GUI_ID_FIRST_LUA_ACTION; i < GUI_ID_WAVE_SEND; ++i)
+        {
+            if (GuiElements[i])
+            {
+                GuiElements[i]->remove();
+                GuiElements[i] = 0;
+            }
+        }
+
+        if (LuaManager && SelectedEntity->getEntityType() != 5)
+        {
+            // The script buttons follow the building's own buttons in a grid of three columns.
+            int slot = 4;
+            if (!tower)
+            {
+                slot = 3;
+                if (!turret && !linker)
+                {
+                    slot = 1;
+                    if (type == 0 || type == 4)
+                        slot = 2;
+                }
+            }
+
+            const char* buildingType = ((entity::CBuildingEntity*)SelectedEntity)->getBuildingType();
+            game::SLuaEntityActionButton* action = 0;
+            for (int id = GUI_ID_FIRST_LUA_ACTION; id < GUI_ID_WAVE_SEND; ++id, ++slot)
+            {
+                action = LuaManager->getNextEntityActionButton(buildingType, action);
+                if (!action)
+                    break;
+
+                action->Id = id - GUI_ID_FIRST_LUA_ACTION;
+                GuiElements[id] = GUIEnvironment->addButton(ox::core::CRect<int>(0, 0, 90, 20), ActionPanel, id, 0);
+                ((ox::gui::IGUIButton*)GuiElements[id])->setAnimations(IngamePackage, "BtnActionDeselect", true);
+                GuiElements[id]->moveTo(ox::core::CPosition2d<int>(slot % 3 * 34 + 6, slot / 3 * 35 + 86));
+                if (action->Upgrade)
+                {
+                    entity::SBuildingInfoItem* info =
+                        entity::gp_buildableItems->getBuildingInfoByEntityId(action->Command.c_str());
+                    if (info)
+                        GuiElements[id]->setHoverItem(getPopupForBuildButton(info->Name.c_str(),
+                            info->Description.c_str(), info->SparkCost.getValue(), info->MineralCost.getValue()));
+                }
+                else
+                    GuiElements[id]->setHoverItem(
+                        getPopupForGuiButton(ox::core::CString<wchar_t>(action->Command.c_str()).c_str()));
+            }
+        }
+    }
+
+    if (LuaManager)
+        LuaManager->updateSelectedBuilding(SelectedEntity);
+}
+
 void CPlayState::setBuildAction(int index)
 {
     entity::SBuildingInfoItem* info = entity::gp_buildableItems->getBuildingInfo(index);
@@ -3310,7 +3315,7 @@ void CPlayState::renderMinimap()
             ox::core::CPosition2d<int> position(top.UpperLeftCorner.X + TimerWidth + 13, top.UpperLeftCorner.Y + 4);
             size.Width = (int)(size.Width * progress + 0.5f);
             ox::core::CRect<int> clip(position, size);
-            GuiSprites[GS_PROGRESS_BAR]->draw(position, &clip, THREAT_TEXT_COLOR);
+            GuiSprites[GS_PROGRESS_BAR]->draw(position, &clip, ox::video::SColor(0x64fe8280));
         }
     }
 
@@ -3439,53 +3444,91 @@ void CPlayState::renderMinimap()
     {
         ox::core::CPosition2d<int> position((int)((it->X - field.UpperLeftCorner.X) * scaleX) + area.UpperLeftCorner.X,
             (int)((it->Y - field.UpperLeftCorner.Y) * scaleY) + area.UpperLeftCorner.Y);
-        ox::core::CRect<int> box;
         if (it->Time <= 4.0f)
-            box = ox::core::CRect<int>(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
+        {
+            ox::core::CRect<int> box(position.X - 3, position.Y - 3, position.X + 4, position.Y + 4);
+            // Clip the square to the minimap and skip the edges that were cut.
+            bool left = true;
+            if (box.UpperLeftCorner.X < area.UpperLeftCorner.X)
+            {
+                box.UpperLeftCorner.X = area.UpperLeftCorner.X;
+                left = false;
+            }
+            bool top = true;
+            if (box.UpperLeftCorner.Y < area.UpperLeftCorner.Y)
+            {
+                box.UpperLeftCorner.Y = area.UpperLeftCorner.Y;
+                top = false;
+            }
+            bool right = true;
+            if (box.LowerRightCorner.X >= area.LowerRightCorner.X)
+            {
+                box.LowerRightCorner.X = area.LowerRightCorner.X - 1;
+                right = false;
+            }
+            bool bottom = true;
+            if (box.LowerRightCorner.Y >= area.LowerRightCorner.Y)
+            {
+                box.LowerRightCorner.Y = area.LowerRightCorner.Y - 1;
+                bottom = false;
+            }
+            if (top)
+                Driver->draw2DLine(box.UpperLeftCorner,
+                    ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+            if (left)
+                Driver->draw2DLine(box.UpperLeftCorner,
+                    ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
+            if (right)
+                Driver->draw2DLine(box.LowerRightCorner,
+                    ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+            if (bottom)
+                Driver->draw2DLine(box.LowerRightCorner,
+                    ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
+        }
         else
         {
             int size = (int)((it->Time - 4.0f) * 100.0f) + 6;
+            ox::core::CRect<int> box;
             box.UpperLeftCorner = position - ox::core::CPosition2d<int>(size / 2, size / 2);
             box.LowerRightCorner = box.UpperLeftCorner + ox::core::CPosition2d<int>(size, size);
+            // Clip the square to the minimap and skip the edges that were cut.
+            bool left = true;
+            if (box.UpperLeftCorner.X < area.UpperLeftCorner.X)
+            {
+                box.UpperLeftCorner.X = area.UpperLeftCorner.X;
+                left = false;
+            }
+            bool top = true;
+            if (box.UpperLeftCorner.Y < area.UpperLeftCorner.Y)
+            {
+                box.UpperLeftCorner.Y = area.UpperLeftCorner.Y;
+                top = false;
+            }
+            bool right = true;
+            if (box.LowerRightCorner.X >= area.LowerRightCorner.X)
+            {
+                box.LowerRightCorner.X = area.LowerRightCorner.X - 1;
+                right = false;
+            }
+            bool bottom = true;
+            if (box.LowerRightCorner.Y >= area.LowerRightCorner.Y)
+            {
+                box.LowerRightCorner.Y = area.LowerRightCorner.Y - 1;
+                bottom = false;
+            }
+            if (top)
+                Driver->draw2DLine(box.UpperLeftCorner,
+                    ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+            if (left)
+                Driver->draw2DLine(box.UpperLeftCorner,
+                    ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
+            if (right)
+                Driver->draw2DLine(box.LowerRightCorner,
+                    ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
+            if (bottom)
+                Driver->draw2DLine(box.LowerRightCorner,
+                    ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
         }
-
-        // Clip the square to the minimap and skip the edges that were cut.
-        bool left = true;
-        if (box.UpperLeftCorner.X < area.UpperLeftCorner.X)
-        {
-            box.UpperLeftCorner.X = area.UpperLeftCorner.X;
-            left = false;
-        }
-        bool top = true;
-        if (box.UpperLeftCorner.Y < area.UpperLeftCorner.Y)
-        {
-            box.UpperLeftCorner.Y = area.UpperLeftCorner.Y;
-            top = false;
-        }
-        bool right = true;
-        if (box.LowerRightCorner.X >= area.LowerRightCorner.X)
-        {
-            box.LowerRightCorner.X = area.LowerRightCorner.X - 1;
-            right = false;
-        }
-        bool bottom = true;
-        if (box.LowerRightCorner.Y >= area.LowerRightCorner.Y)
-        {
-            box.LowerRightCorner.Y = area.LowerRightCorner.Y - 1;
-            bottom = false;
-        }
-        if (top)
-            Driver->draw2DLine(box.UpperLeftCorner,
-                ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
-        if (left)
-            Driver->draw2DLine(box.UpperLeftCorner,
-                ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
-        if (right)
-            Driver->draw2DLine(box.LowerRightCorner,
-                ox::core::CPosition2d<int>(box.LowerRightCorner.X, box.UpperLeftCorner.Y), MINIMAP_MARKER_COLOR);
-        if (bottom)
-            Driver->draw2DLine(box.LowerRightCorner,
-                ox::core::CPosition2d<int>(box.UpperLeftCorner.X, box.LowerRightCorner.Y), MINIMAP_MARKER_COLOR);
     }
 
     // The part of the world on screen.
@@ -3510,7 +3553,8 @@ void CPlayState::renderWaveButton(ox::gui::IGUIElement* button, int numAliens, i
         return;
 
     ox::core::CRect<int> rect = button->getAbsolutePosition();
-    ox::core::CPosition2d<int> center((rect.UpperLeftCorner.X + 20 + rect.LowerRightCorner.X) / 2,
+    int textRight = rect.UpperLeftCorner.X + 20;
+    ox::core::CPosition2d<int> center((textRight + rect.LowerRightCorner.X) / 2,
         (rect.UpperLeftCorner.Y + rect.LowerRightCorner.Y) / 2);
     if (numAliens == 1)
     {
@@ -3520,19 +3564,20 @@ void CPlayState::renderWaveButton(ox::gui::IGUIElement* button, int numAliens, i
     else
     {
         int x = rect.UpperLeftCorner.X + 40;
+        int step = 20 / (numAliens - 1);
         for (int i = firstAlien; i < WAVE_COUNT; ++i)
         {
             if (aliens[i] && WaveIcons[i])
             {
                 WaveIcons[i]->draw(ox::core::CPosition2d<int>(x, center.Y), 0, ox::video::SColor(0xffffffff));
-                x += 20 / (numAliens - 1);
+                x += step;
             }
         }
     }
 
     if (text.size() > 0 && NumberFont)
     {
-        rect.LowerRightCorner.X = rect.UpperLeftCorner.X + 20;
+        rect.LowerRightCorner.X = textRight;
         NumberFont->draw(text.c_str(), rect, ox::video::SColor(0xffc86464), ox::gui::EFHA_CENTER,
             ox::gui::EFVA_CENTER, 0);
     }
@@ -3580,8 +3625,8 @@ void CPlayState::performRectangleSelection(ox::core::CPosition2d<float> corner1,
         if (type != 5 && (type == entityType || entityType < 0))
         {
             const ox::core::CVector3d<float>& position = (*it)->getPosition();
-            if (position.X >= rect.UpperLeftCorner.X && position.X <= rect.LowerRightCorner.X &&
-                position.Y >= rect.UpperLeftCorner.Y && position.Y <= rect.LowerRightCorner.Y)
+            if (!(rect.UpperLeftCorner.X > position.X || position.X > rect.LowerRightCorner.X ||
+                rect.UpperLeftCorner.Y > position.Y || position.Y > rect.LowerRightCorner.Y))
             {
                 bool selected = false;
                 if (add)
@@ -3595,8 +3640,10 @@ void CPlayState::performRectangleSelection(ox::core::CPosition2d<float> corner1,
                             break;
                         }
                     }
+                    if (!selected)
+                        addToSelection((entity::CEntity*)*it);
                 }
-                if (!selected)
+                else
                     addToSelection((entity::CEntity*)*it);
                 selectedNothing = false;
             }
@@ -3613,8 +3660,8 @@ void CPlayState::performRectangleSelection(ox::core::CPosition2d<float> corner1,
                 continue;
 
             const ox::core::CVector3d<float>& position = (*it)->getPosition();
-            if (position.X >= rect.UpperLeftCorner.X && position.X <= rect.LowerRightCorner.X &&
-                position.Y >= rect.UpperLeftCorner.Y && position.Y <= rect.LowerRightCorner.Y)
+            if (!(rect.UpperLeftCorner.X > position.X || position.X > rect.LowerRightCorner.X ||
+                rect.UpperLeftCorner.Y > position.Y || position.Y > rect.LowerRightCorner.Y))
             {
                 bool selected = false;
                 if (add)
@@ -4063,8 +4110,8 @@ void CPlayState::render()
                 float left = field.UpperLeftCorner.X + 512.0f;
                 float top = field.UpperLeftCorner.Y + 512.0f;
                 float right = field.LowerRightCorner.X - 512.0f;
-                float bottom = field.LowerRightCorner.Y - 512.0f;
                 Beam180.Start = ox::core::CPosition2d<float>(left, top);
+                float bottom = field.LowerRightCorner.Y - 512.0f;
                 Beam180.End = ox::core::CPosition2d<float>(right, top);
                 entity::gp_entityManager->renderEnergyBeam(&Beam180, ViewPosition, viewPort);
                 Beam180.Start = Beam180.End;
@@ -4087,12 +4134,15 @@ void CPlayState::render()
             else if (entityType == 7)
                 renderRangeCircle(PlacementPosition, 200.0f, LASER_CIRCLE_COLOR, viewPort);
         }
-        if (PlacementOk && BuildableItems.getPreviewSprite(BuildSelection))
+        if (PlacementOk)
         {
-            ox::core::CPosition2d<float> position(PlacementPosition.X - ViewPosition.X + viewPort.UpperLeftCorner.X,
-                PlacementPosition.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y);
-            BuildableItems.getPreviewSprite(BuildSelection)->drawScaled(position, 1.0f,
-                ox::video::SColor(0x80ffffff));
+            if (BuildableItems.getPreviewSprite(BuildSelection))
+            {
+                ox::core::CPosition2d<float> position(PlacementPosition.X - ViewPosition.X + viewPort.UpperLeftCorner.X,
+                    PlacementPosition.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y);
+                BuildableItems.getPreviewSprite(BuildSelection)->drawScaled(position, 1.0f,
+                    ox::video::SColor(0x80ffffff));
+            }
         }
     }
     else if (Action == 3)
@@ -4156,14 +4206,15 @@ void CPlayState::render()
         float offsetX = viewPort.UpperLeftCorner.X - ViewPosition.X;
         float cornerX = LastPlacement.X + offsetX;
         ox::core::CPosition2d<float> mouse = getWorldPos(GUIEnvironment->getMousePosition());
+        float mouseY = mouse.Y + offsetY;
         Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)cornerY),
             ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)cornerY), RANGE_LINE_COLOR);
         Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)cornerY),
-            ox::core::CPosition2d<int>((int)cornerX, (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
-        Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)(mouse.Y + offsetY)),
-            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
+            ox::core::CPosition2d<int>((int)cornerX, (int)mouseY), RANGE_LINE_COLOR);
+        Driver->draw2DLine(ox::core::CPosition2d<int>((int)cornerX, (int)mouseY),
+            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)mouseY), RANGE_LINE_COLOR);
         Driver->draw2DLine(ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)cornerY),
-            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)(mouse.Y + offsetY)), RANGE_LINE_COLOR);
+            ox::core::CPosition2d<int>((int)(mouse.X + offsetX), (int)mouseY), RANGE_LINE_COLOR);
     }
 
     if (game::gp_world)
@@ -4293,29 +4344,48 @@ void CPlayState::renderRangeCircleForEntity(ox::entity::COxEntity* entity, const
     {
     case 0:
     case 1:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), 150.0f,
+    {
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y), 150.0f,
             RANGE_CIRCLE_COLOR, viewPort);
         break;
+    }
     case 4:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), 100.0f,
+    {
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y), 100.0f,
             MINING_CIRCLE_COLOR, viewPort);
         break;
+    }
     case 7:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y),
-            ((entity::CDefenseTowerEntity*)entity)->getTotalRange(), LASER_CIRCLE_COLOR, viewPort);
+    {
+        float range = ((entity::CDefenseTowerEntity*)entity)->getTotalRange();
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y),
+            range, LASER_CIRCLE_COLOR, viewPort);
         break;
+    }
     case 8:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), 500.0f,
+    {
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y), 500.0f,
             LASER_CIRCLE_COLOR, viewPort);
         break;
+    }
     case 14:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), 500.0f,
+    {
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y), 500.0f,
             LASER_CIRCLE_COLOR, viewPort);
         break;
+    }
     case 13:
-        renderRangeCircle(ox::core::CPosition2d<float>(entity->getPosition().X, entity->getPosition().Y), 1500.0f,
+    {
+        const ox::core::CVector3d<float>& position = entity->getPosition();
+        renderRangeCircle(ox::core::CPosition2d<float>(position.X, position.Y), 1500.0f,
             LASER_CIRCLE_COLOR, viewPort);
         break;
+    }
     }
 }
 
@@ -4325,9 +4395,10 @@ void CPlayState::renderRangeCircle(const ox::core::CPosition2d<float>& position,
     // Small circles are a scaled sprite, large ones a ring of beams.
     if (range < 250.0f && RangeCircle)
     {
-        RangeCircle->drawScaled(ox::core::CPosition2d<float>(position.X - ViewPosition.X + viewPort.UpperLeftCorner.X,
-                                    position.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y),
-            (range + range) / 255.0f, color);
+        ox::core::CPosition2d<float> screenPosition;
+        screenPosition.X = position.X - ViewPosition.X + viewPort.UpperLeftCorner.X;
+        screenPosition.Y = position.Y - ViewPosition.Y + viewPort.UpperLeftCorner.Y;
+        RangeCircle->drawScaled(screenPosition, (range + range) / 255.0f, color);
         return;
     }
 
@@ -4336,9 +4407,9 @@ void CPlayState::renderRangeCircle(const ox::core::CPosition2d<float>& position,
     Beam258.Start.Y = position.Y - range;
     for (int i = 1; i != 66; ++i)
     {
-        float angle = i * -2.0f * 0.0483321957f + 1.57079637f;
-        Beam258.End.X = position.X + cos((double)angle) * range;
-        Beam258.End.Y = position.Y - sin((double)angle) * range;
+        float angle = i * 2.0f * -0.0483321957f + 1.57079637f;
+        Beam258.End = ox::core::CPosition2d<float>(position.X + cos((double)angle) * range,
+            position.Y - sin((double)angle) * range);
         entity::gp_entityManager->renderEnergyBeam(&Beam258, ViewPosition, viewPort);
         Beam258.Start = Beam258.End;
     }
@@ -4349,14 +4420,16 @@ void CPlayState::addParticleEntity(ox::video::IParticleState* state, const ox::c
     if (!state)
         return;
 
-    if (state->getParticleImportance() > 0 &&
-        !VisibleArea.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y + position.Z)))
+    if (state->getParticleImportance() > 0)
     {
-        state->remove();
-        return;
+        if (!VisibleArea.isPointInside(ox::core::CPosition2d<float>(position.X, position.Y + position.Z)))
+        {
+            state->remove();
+            return;
+        }
     }
 
-    if (entity::gp_entityManager->getEntityList(4).size() >= 10000)
+    if ((int)entity::gp_entityManager->getEntityList(4).size() >= 10000)
         state->remove();
     else
         entity::gp_entityManager->appendEntity(new entity::CParticleEntity(state, position), 4);

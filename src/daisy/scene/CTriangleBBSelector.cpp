@@ -22,7 +22,12 @@ CTriangleBBSelector::CTriangleBBSelector(ISceneNode* node)
 : CTriangleSelector(node)
 {
 
-	Triangles.resize(12); // a box has 12 triangles.
+	// a box has 12 triangles.
+#ifdef HARVEST_PORT
+	Triangles.resize(12);
+#else
+	Triangles.reserve(12);
+#endif
 }
 
 

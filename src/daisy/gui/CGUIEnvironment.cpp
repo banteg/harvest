@@ -161,10 +161,13 @@ void CGUIEnvironment::drawAll()
 
     draw();
 
-    if (HoverParent && Hovered && Hovered->getHoverItem())
+    if (HoverParent && Hovered)
     {
-        IGUIHoverItem::placeHoverItem(Hovered, Hovered->getHoverItem());
-        HoverParent->draw();
+        if (Hovered->getHoverItem())
+        {
+            IGUIHoverItem::placeHoverItem(Hovered, Hovered->getHoverItem());
+            HoverParent->draw();
+        }
     }
 }
 
